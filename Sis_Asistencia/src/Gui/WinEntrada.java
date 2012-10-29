@@ -1,4 +1,4 @@
-
+//GEN-LINE:initComponents
 package Gui;
 
 import java.awt.event.*;
@@ -28,7 +28,10 @@ public class WinEntrada extends javax.swing.JFrame {
             if(cont==100){
                 timer.stop();   
                 esconder();
-                
+                WinUsuario objmdi = new WinUsuario();
+                objmdi.setVisible(true);
+                objmdi.show();
+                objmdi.setLocationRelativeTo(null);
                 }          
             }
     }
@@ -38,7 +41,7 @@ public class WinEntrada extends javax.swing.JFrame {
     }
 
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents() {
 
         pgbcargador = new javax.swing.JProgressBar();
@@ -59,7 +62,7 @@ public class WinEntrada extends javax.swing.JFrame {
         );
 
         pack();
-    }// </editor-fold>//GEN-END:initComponents
+    }// </editor-fold>                        
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -93,7 +96,7 @@ public class WinEntrada extends javax.swing.JFrame {
             }
         });
     }
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+    // Variables declaration - do not modify                     
     private javax.swing.JProgressBar pgbcargador;
-    // End of variables declaration//GEN-END:variables
+    // End of variables declaration                   
 }

@@ -90,7 +90,10 @@ public class WinUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_btnsalirActionPerformed
 
     private void btningresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btningresarActionPerformed
-        
+        WinMdi objmdi=new WinMdi();
+        objmdi.show();
+        objmdi.setLocationRelativeTo(this);
+        this.dispose();
     }//GEN-LAST:event_btningresarActionPerformed
 
     

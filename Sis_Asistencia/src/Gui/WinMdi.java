@@ -78,10 +78,14 @@ public class WinMdi extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void menusalMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menusalMousePressed
+    WinUsuario objusuario;
     int i;
     i= JOptionPane.showConfirmDialog(null,"¿Desea salir del sistema?","Aviso",JOptionPane.OK_CANCEL_OPTION,JOptionPane.WARNING_MESSAGE);
      if(i==0){
-                this.dispose();
+        objusuario=new WinUsuario();
+        objusuario.show();
+        objusuario.setLocationRelativeTo(this);
+        this.dispose();
         }  
     }//GEN-LAST:event_menusalMousePressed
 
