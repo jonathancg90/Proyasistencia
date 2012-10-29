@@ -6,7 +6,9 @@ import javax.swing.*;
 
 public class WinUsuario extends javax.swing.JFrame {
 
-    
+    /*
+     * Creacion del WinUsuario
+     */
     public WinUsuario() {
         initComponents();
     }

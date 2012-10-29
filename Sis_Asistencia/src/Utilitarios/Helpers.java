@@ -13,8 +13,7 @@ public class Helpers {
     BufferedReader entrada = new BufferedReader(new FileReader(lectura));
     String renglon;
     String Str_Texto="";
-        while ((renglon = entrada.readLine()) != null)
-        {
+        while ((renglon = entrada.readLine()) != null){
             for (int i = 0; i < renglon.length(); i++){
                Str_Texto += String.valueOf(renglon.charAt(i)); 
             }

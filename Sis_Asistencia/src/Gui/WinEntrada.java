@@ -9,7 +9,7 @@ public class WinEntrada extends javax.swing.JFrame {
     private Timer timer;
     int cont;
 
-    /**
+    /*
      * Creacion del WinEntrada
      */
     public WinEntrada() {
@@ -20,6 +20,10 @@ public class WinEntrada extends javax.swing.JFrame {
         timer = new Timer(50, new Timerlistener());
         timer.start();
     }
+    
+    /*
+     * Metodo para que el progress bar avance graficamente
+     */
     class Timerlistener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent evt) {
@@ -27,7 +31,7 @@ public class WinEntrada extends javax.swing.JFrame {
             pgbcargador.setValue(cont);
             if(cont==100){
                 timer.stop();   
-                esconder();
+                cerrar();
                 WinUsuario objmdi = new WinUsuario();
                 objmdi.setVisible(true);
                 objmdi.show();
@@ -35,9 +39,11 @@ public class WinEntrada extends javax.swing.JFrame {
                 }          
             }
     }
-    
-    public void esconder(){
-        this.setVisible(false);
+    /*
+     * Creacion del WinEntrada
+     */
+    public void cerrar(){
+        this.dispose();
     }
 
     @SuppressWarnings("unchecked")

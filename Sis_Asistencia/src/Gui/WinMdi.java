@@ -5,7 +5,9 @@ import javax.swing.*;
 
 public class WinMdi extends javax.swing.JFrame {
 
-    
+    /*
+     * Creacion del WinMdi
+     */
     public WinMdi() {
         initComponents();
     }
