@@ -36,8 +36,6 @@ public class Helpers extends ConexionBd{
             datos = new DefaultTableModel();
             getConexion();
             
-            System.out.println(args[1]);
-            
             Object[] fila; 
             
             s = conexion.createStatement();
@@ -46,9 +44,7 @@ public class Helpers extends ConexionBd{
                 qs =qs + args[i];
             }
             qs = qs +" from "+Table;
-            System.out.println(qs);
             rs = s.executeQuery(qs);
-            
             
             //Llenado Cabecera Jtable
             ResultSetMetaData meta = rs.getMetaData();
