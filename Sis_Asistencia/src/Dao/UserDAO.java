@@ -22,6 +22,10 @@ public class UserDAO extends ConexionBd{
             
             rs = s.executeQuery(qs);
             result = rs.next();
+            
+            closeConexion();
+            rs.close();
+            
             return result;
 
         }

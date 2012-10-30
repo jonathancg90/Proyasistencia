@@ -18,14 +18,13 @@ public class WinMdi extends javax.swing.JFrame {
     private void initComponents() {
 
         jDesktopPane1 = new javax.swing.JDesktopPane();
+        jdpContenedor = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         menuasi = new javax.swing.JMenu();
         menujus = new javax.swing.JMenu();
         menuemp = new javax.swing.JMenu();
         menuhor = new javax.swing.JMenu();
         menuvis = new javax.swing.JMenu();
-        menurep = new javax.swing.JMenu();
-        menusal = new javax.swing.JMenu();
         menudis = new javax.swing.JMenu();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -36,8 +35,13 @@ public class WinMdi extends javax.swing.JFrame {
         jMenuItem6 = new javax.swing.JMenuItem();
         jMenuItem7 = new javax.swing.JMenuItem();
         jMenuItem8 = new javax.swing.JMenuItem();
+        menurep = new javax.swing.JMenu();
+        menusal = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jdpContenedor.setBounds(0, 0, 760, 440);
+        jDesktopPane1.add(jdpContenedor, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         menuasi.setText("Asistencia");
         jMenuBar1.add(menuasi);
@@ -54,22 +58,16 @@ public class WinMdi extends javax.swing.JFrame {
         menuvis.setText("Consulta");
         jMenuBar1.add(menuvis);
 
-        menurep.setText("Reportes");
-        jMenuBar1.add(menurep);
-
-        menusal.setText("Salir");
-        menusal.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                menusalMousePressed(evt);
-            }
-        });
-        jMenuBar1.add(menusal);
-
         menudis.setText("Configuraciones");
 
         jMenu1.setText("Criterios");
 
         jMenuItem1.setText("Area");
+        jMenuItem1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jMenuItem1MousePressed(evt);
+            }
+        });
         jMenu1.add(jMenuItem1);
 
         jMenuItem2.setText("Empresa");
@@ -97,6 +95,17 @@ public class WinMdi extends javax.swing.JFrame {
 
         jMenuBar1.add(menudis);
 
+        menurep.setText("Reportes");
+        jMenuBar1.add(menurep);
+
+        menusal.setText("Salir");
+        menusal.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                menusalMousePressed(evt);
+            }
+        });
+        jMenuBar1.add(menusal);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -107,7 +116,7 @@ public class WinMdi extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 432, Short.MAX_VALUE)
+            .addComponent(jDesktopPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 440, Short.MAX_VALUE)
         );
 
         pack();
@@ -124,6 +133,24 @@ public class WinMdi extends javax.swing.JFrame {
         this.dispose();
         }  
     }//GEN-LAST:event_menusalMousePressed
+
+    private void jMenuItem1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem1MousePressed
+
+       WinArea objarea= new WinArea();
+    
+       objarea.setResizable(true);
+       objarea.setMaximizable(true);
+       objarea.setIconifiable(true);
+           
+       
+       //obj_Asis.setClosable(true);
+       
+
+       jdpContenedor.add(objarea);
+
+       objarea.setVisible(true);
+       
+    }//GEN-LAST:event_jMenuItem1MousePressed
 
     public static void main(String args[]) {
         
@@ -169,6 +196,7 @@ public class WinMdi extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
+    public static javax.swing.JDesktopPane jdpContenedor;
     private javax.swing.JMenu menuasi;
     private javax.swing.JMenu menudis;
     private javax.swing.JMenu menuemp;

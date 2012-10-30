@@ -1,12 +1,29 @@
 
 package Gui;
+import Dao.AreaDAO;
 
 
 public class WinArea extends javax.swing.JInternalFrame {
 
-
+    AreaDAO area;
+    
     public WinArea() {
         initComponents();
+        cargaForm();
+    }
+    
+    /*
+     * Construccion de formualrio
+     */
+    
+    public void cargaForm(){
+        try{
+            area = new AreaDAO();
+            area.getTableAll(tblEmpleados);
+        }
+        catch(Exception e){
+            System.out.println("Gui_WinMdi: "+e);
+        }
     }
 
 
@@ -34,7 +51,7 @@ public class WinArea extends javax.swing.JInternalFrame {
         txtFilter = new javax.swing.JTextField();
         btnFind = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblEmpleados = new javax.swing.JTable();
         btnNext = new javax.swing.JButton();
         btnPrevious = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
@@ -150,7 +167,7 @@ public class WinArea extends javax.swing.JInternalFrame {
 
         btnFind.setText("Ok");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblEmpleados.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
                 {},
@@ -161,7 +178,7 @@ public class WinArea extends javax.swing.JInternalFrame {
 
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tblEmpleados);
 
         btnNext.setText(">");
 
@@ -230,7 +247,7 @@ public class WinArea extends javax.swing.JInternalFrame {
                         .add(pnlMantenimiento, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                         .add(6, 6, 6)
                         .add(pnlOpciones, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         pack();
@@ -254,9 +271,9 @@ public class WinArea extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JPanel pnlMantenimiento;
     private javax.swing.JPanel pnlOpciones;
+    private javax.swing.JTable tblEmpleados;
     private javax.swing.JTextField txtFilter;
     private javax.swing.JTextField txtModified;
     private javax.swing.JTextField txtName;
