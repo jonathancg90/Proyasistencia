@@ -8,18 +8,22 @@ public class Empresa {
     private String ruc;
     private boolean estado;
     private int idemp;
+    private String created;
+    private String modified;
     
     /* Constructor final
      */
-    public Empresa(int idempr, String name, String ruc, boolean estado, int idemp) {
+    public Empresa(int idempr, String name, String ruc, boolean estado, int idemp, String created, String modified) {
         this.idempr = idempr;
         this.name = name;
         this.ruc = ruc;
         this.estado = estado;
         this.idemp = idemp;
+        this.created = created;
+        this.modified = modified;
     }
     
-    /* Constructor por omisión
+    /* Constructor por Omision
      */
     public Empresa() {
     }
@@ -93,5 +97,34 @@ public class Empresa {
     public void setIdemp(int idemp) {
         this.idemp = idemp;
     }
+
+    /**
+     * @return the created
+     */
+    public String getCreated() {
+        return created;
+    }
+
+    /**
+     * @param created the created to set
+     */
+    public void setCreated(String created) {
+        this.created = created;
+    }
+
+    /**
+     * @return the modified
+     */
+    public String getModified() {
+        return modified;
+    }
+
+    /**
+     * @param modified the modified to set
+     */
+    public void setModified(String modified) {
+        this.modified = modified;
+    }
+    
     
 }

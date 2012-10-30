@@ -2,7 +2,6 @@
 package Dao;
 import Utilitarios.ConexionBd;
 import java.sql.*;
-
 import javax.swing.table.DefaultTableModel;
 
 

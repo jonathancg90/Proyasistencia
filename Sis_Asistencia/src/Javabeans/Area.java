@@ -5,15 +5,21 @@ package Javabeans;
 public class Area {
     private int idare;
     private String name;
+    private String created;
+    private String modified;
+    private boolean estado;
     
     /* Constructor final
      */
-    public Area(int idare, String name) {
+    public Area(int idare, String name, String created, String modified, boolean estado) {
         this.idare = idare;
         this.name = name;
+        this.created = created;
+        this.modified = modified;
+        this.estado = estado;
     }
     
-    /* Constructor por omisión
+    /* Constructor por Omision
      */
     public Area() {
     }
@@ -44,6 +50,48 @@ public class Area {
      */
     public void setName(String name) {
         this.name = name;
+    }
+
+    /**
+     * @return the created
+     */
+    public String getCreated() {
+        return created;
+    }
+
+    /**
+     * @param created the created to set
+     */
+    public void setCreated(String created) {
+        this.created = created;
+    }
+
+    /**
+     * @return the modified
+     */
+    public String getModified() {
+        return modified;
+    }
+
+    /**
+     * @param modified the modified to set
+     */
+    public void setModified(String modified) {
+        this.modified = modified;
+    }
+
+    /**
+     * @return the estado
+     */
+    public boolean isEstado() {
+        return estado;
+    }
+
+    /**
+     * @param estado the estado to set
+     */
+    public void setEstado(boolean estado) {
+        this.estado = estado;
     }
     
 }

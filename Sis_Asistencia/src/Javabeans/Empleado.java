@@ -9,8 +9,8 @@ public class Empleado {
     private String telefono;
     private String retiro;
     private int huella;
-    private String fmodificacion;
-    private String fcreacion;
+    private String created;
+    private String modified;
     private int idare;
     private int idtip;
     private int idest;
@@ -19,7 +19,7 @@ public class Empleado {
     
     /* Constructor final
      */
-    public Empleado(int idemp, String nombres, String apellidos, String dni, String telefono, String retiro, int huella, String fmodificacion, String fcreacion, int idare, int idtip, int idest, int idcar, int idempr) {
+    public Empleado(int idemp, String nombres, String apellidos, String dni, String telefono, String retiro, int huella, String created, String modified, int idare, int idtip, int idest, int idcar, int idempr) {
         this.idemp = idemp;
         this.nombres = nombres;
         this.apellidos = apellidos;
@@ -27,18 +27,16 @@ public class Empleado {
         this.telefono = telefono;
         this.retiro = retiro;
         this.huella = huella;
-        this.fmodificacion = fmodificacion;
-        this.fcreacion = fcreacion;
+        this.created = created;
+        this.modified = modified;
         this.idare = idare;
         this.idtip = idtip;
         this.idest = idest;
         this.idcar = idcar;
         this.idempr = idempr;
-         
     }
     
-    
-    /* Constructor por omisión
+    /* Constructor fpor Omision
      */
     public Empleado() {
     }
@@ -142,31 +140,31 @@ public class Empleado {
     }
 
     /**
-     * @return the fmodificacion
+     * @return the created
      */
-    public String getFmodificacion() {
-        return fmodificacion;
+    public String getCreated() {
+        return created;
     }
 
     /**
-     * @param fmodificacion the fmodificacion to set
+     * @param created the created to set
      */
-    public void setFmodificacion(String fmodificacion) {
-        this.fmodificacion = fmodificacion;
+    public void setCreated(String created) {
+        this.created = created;
     }
 
     /**
-     * @return the fcreacion
+     * @return the modified
      */
-    public String getFcreacion() {
-        return fcreacion;
+    public String getModified() {
+        return modified;
     }
 
     /**
-     * @param fcreacion the fcreacion to set
+     * @param modified the modified to set
      */
-    public void setFcreacion(String fcreacion) {
-        this.fcreacion = fcreacion;
+    public void setModified(String modified) {
+        this.modified = modified;
     }
 
     /**
