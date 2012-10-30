@@ -26,17 +26,12 @@
         </Menu>
         <Menu class="javax.swing.JMenu" name="menuvis">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Vista Rapida"/>
-          </Properties>
-        </Menu>
-        <Menu class="javax.swing.JMenu" name="menudoc">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Documentos"/>
+            <Property name="text" type="java.lang.String" value="Consulta"/>
           </Properties>
         </Menu>
         <Menu class="javax.swing.JMenu" name="menurep">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Reportajes"/>
+            <Property name="text" type="java.lang.String" value="Reportes"/>
           </Properties>
         </Menu>
         <Menu class="javax.swing.JMenu" name="menusal">
@@ -49,8 +44,57 @@
         </Menu>
         <Menu class="javax.swing.JMenu" name="menudis">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Dise&#xf1;o"/>
+            <Property name="text" type="java.lang.String" value="Configuraciones"/>
           </Properties>
+          <SubComponents>
+            <Menu class="javax.swing.JMenu" name="jMenu1">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Criterios"/>
+              </Properties>
+              <SubComponents>
+                <MenuItem class="javax.swing.JMenuItem" name="jMenuItem1">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Area"/>
+                  </Properties>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="jMenuItem2">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Empresa"/>
+                  </Properties>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="jMenuItem3">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Tipo empleado"/>
+                  </Properties>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="jMenuItem4">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Sucursal"/>
+                  </Properties>
+                </MenuItem>
+              </SubComponents>
+            </Menu>
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem5">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Usuarios"/>
+              </Properties>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem6">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Dise&#xf1;o"/>
+              </Properties>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem7">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Backup"/>
+              </Properties>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem8">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Help"/>
+              </Properties>
+            </MenuItem>
+          </SubComponents>
         </Menu>
       </SubComponents>
     </Menu>
@@ -77,12 +121,12 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jDesktopPane1" alignment="0" pref="706" max="32767" attributes="0"/>
+          <Component id="jDesktopPane1" alignment="0" pref="725" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jDesktopPane1" alignment="0" pref="428" max="32767" attributes="0"/>
+          <Component id="jDesktopPane1" alignment="0" pref="432" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>

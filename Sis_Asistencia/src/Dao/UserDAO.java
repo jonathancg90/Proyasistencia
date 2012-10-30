@@ -29,7 +29,6 @@ public class UserDAO extends ConexionBd{
             System.out.println("Dao_userAuth: "+e);
             return false;
         }
-    }
-            
-    
+    }     
+
 }

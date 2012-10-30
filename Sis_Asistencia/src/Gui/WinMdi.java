@@ -24,10 +24,18 @@ public class WinMdi extends javax.swing.JFrame {
         menuemp = new javax.swing.JMenu();
         menuhor = new javax.swing.JMenu();
         menuvis = new javax.swing.JMenu();
-        menudoc = new javax.swing.JMenu();
         menurep = new javax.swing.JMenu();
         menusal = new javax.swing.JMenu();
         menudis = new javax.swing.JMenu();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
+        jMenuItem5 = new javax.swing.JMenuItem();
+        jMenuItem6 = new javax.swing.JMenuItem();
+        jMenuItem7 = new javax.swing.JMenuItem();
+        jMenuItem8 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -43,13 +51,10 @@ public class WinMdi extends javax.swing.JFrame {
         menuhor.setText("Horarios");
         jMenuBar1.add(menuhor);
 
-        menuvis.setText("Vista Rapida");
+        menuvis.setText("Consulta");
         jMenuBar1.add(menuvis);
 
-        menudoc.setText("Documentos");
-        jMenuBar1.add(menudoc);
-
-        menurep.setText("Reportajes");
+        menurep.setText("Reportes");
         jMenuBar1.add(menurep);
 
         menusal.setText("Salir");
@@ -60,7 +65,36 @@ public class WinMdi extends javax.swing.JFrame {
         });
         jMenuBar1.add(menusal);
 
-        menudis.setText("Diseño");
+        menudis.setText("Configuraciones");
+
+        jMenu1.setText("Criterios");
+
+        jMenuItem1.setText("Area");
+        jMenu1.add(jMenuItem1);
+
+        jMenuItem2.setText("Empresa");
+        jMenu1.add(jMenuItem2);
+
+        jMenuItem3.setText("Tipo empleado");
+        jMenu1.add(jMenuItem3);
+
+        jMenuItem4.setText("Sucursal");
+        jMenu1.add(jMenuItem4);
+
+        menudis.add(jMenu1);
+
+        jMenuItem5.setText("Usuarios");
+        menudis.add(jMenuItem5);
+
+        jMenuItem6.setText("Diseño");
+        menudis.add(jMenuItem6);
+
+        jMenuItem7.setText("Backup");
+        menudis.add(jMenuItem7);
+
+        jMenuItem8.setText("Help");
+        menudis.add(jMenuItem8);
+
         jMenuBar1.add(menudis);
 
         setJMenuBar(jMenuBar1);
@@ -69,22 +103,22 @@ public class WinMdi extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 706, Short.MAX_VALUE)
+            .addComponent(jDesktopPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 725, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 428, Short.MAX_VALUE)
+            .addComponent(jDesktopPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 432, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void menusalMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menusalMousePressed
-    WinUsuario objusuario;
+    WinLogin objusuario;
     int i;
     i= JOptionPane.showConfirmDialog(null,"¿Desea salir del sistema?","Aviso",JOptionPane.OK_CANCEL_OPTION,JOptionPane.WARNING_MESSAGE);
      if(i==0){
-        objusuario=new WinUsuario();
+        objusuario=new WinLogin();
         objusuario.show();
         objusuario.setLocationRelativeTo(this);
         this.dispose();
@@ -125,10 +159,18 @@ public class WinMdi extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane jDesktopPane1;
+    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItem6;
+    private javax.swing.JMenuItem jMenuItem7;
+    private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenu menuasi;
     private javax.swing.JMenu menudis;
-    private javax.swing.JMenu menudoc;
     private javax.swing.JMenu menuemp;
     private javax.swing.JMenu menuhor;
     private javax.swing.JMenu menujus;
