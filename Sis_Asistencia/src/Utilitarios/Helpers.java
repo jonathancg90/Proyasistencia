@@ -5,7 +5,6 @@ import java.io.*;
 import java.sql.*;
 import javax.swing.table.DefaultTableModel;
 
-
 public class Helpers extends ConexionBd{
     
     DefaultTableModel datos; 

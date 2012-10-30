@@ -6,16 +6,23 @@ public class Usuario {
     private String username;
     private String password;
     private int idemp;
+    private String created;
+    private String modified;
+    private boolean estado;
     
-    /* Constructor final
+    /*Constructor Final
      */
-    public Usuario(int idusu, String username, String password, int idemp) {
+    public Usuario(int idusu, String username, String password, int idemp, String created, String modified, boolean estado) {
         this.idusu = idusu;
         this.username = username;
         this.password = password;
         this.idemp = idemp;
+        this.created = created;
+        this.modified = modified;
+        this.estado = estado;
     }
-    /* Constructor por omisión
+    
+    /*Constructor por Omision
      */
     public Usuario() {
     }
@@ -75,5 +82,49 @@ public class Usuario {
     public void setIdemp(int idemp) {
         this.idemp = idemp;
     }
+
+    /**
+     * @return the created
+     */
+    public String getCreated() {
+        return created;
+    }
+
+    /**
+     * @param created the created to set
+     */
+    public void setCreated(String created) {
+        this.created = created;
+    }
+
+    /**
+     * @return the modified
+     */
+    public String getModified() {
+        return modified;
+    }
+
+    /**
+     * @param modified the modified to set
+     */
+    public void setModified(String modified) {
+        this.modified = modified;
+    }
+
+    /**
+     * @return the estado
+     */
+    public boolean isEstado() {
+        return estado;
+    }
+
+    /**
+     * @param estado the estado to set
+     */
+    public void setEstado(boolean estado) {
+        this.estado = estado;
+    }
     
+    
+   
 }

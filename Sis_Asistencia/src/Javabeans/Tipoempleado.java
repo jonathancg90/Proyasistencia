@@ -5,15 +5,21 @@ package Javabeans;
 public class Tipoempleado {
     private int idtip;
     private String name;
+    private boolean estado;
+    private String created;
+    private String modified;
     
     /* Constructor final
      */
-    public Tipoempleado(int idtip, String name) {
+    public Tipoempleado(int idtip, String name, boolean estado, String created, String modified) {
         this.idtip = idtip;
         this.name = name;
+        this.estado = estado;
+        this.created = created;
+        this.modified = modified;
     }
     
-    /* Constructor por omisión
+    /* Constructor por Omision
      */
     public Tipoempleado() {
     }
@@ -45,5 +51,48 @@ public class Tipoempleado {
     public void setName(String name) {
         this.name = name;
     }
+
+    /**
+     * @return the estado
+     */
+    public boolean isEstado() {
+        return estado;
+    }
+
+    /**
+     * @param estado the estado to set
+     */
+    public void setEstado(boolean estado) {
+        this.estado = estado;
+    }
+
+    /**
+     * @return the created
+     */
+    public String getCreated() {
+        return created;
+    }
+
+    /**
+     * @param created the created to set
+     */
+    public void setCreated(String created) {
+        this.created = created;
+    }
+
+    /**
+     * @return the modified
+     */
+    public String getModified() {
+        return modified;
+    }
+
+    /**
+     * @param modified the modified to set
+     */
+    public void setModified(String modified) {
+        this.modified = modified;
+    }
+   
     
 }

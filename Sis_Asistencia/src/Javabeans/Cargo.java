@@ -6,16 +6,20 @@ public class Cargo {
     private int idcar;
     private String name;
     private int idare;
+    private String created;
+    private String modified;
     
     /* Constructor final
      */
-    public Cargo(int idcar, String name, int idare) {
+    public Cargo(int idcar, String name, int idare, String created, String modified) {
         this.idcar = idcar;
         this.name = name;
         this.idare = idare;
+        this.created = created;
+        this.modified = modified;
     }
     
-    /* Constructor por omisión
+    /* Constructor por Omision
      */
     public Cargo() {
     }
@@ -61,5 +65,34 @@ public class Cargo {
     public void setIdare(int idare) {
         this.idare = idare;
     }
+
+    /**
+     * @return the created
+     */
+    public String getCreated() {
+        return created;
+    }
+
+    /**
+     * @param created the created to set
+     */
+    public void setCreated(String created) {
+        this.created = created;
+    }
+
+    /**
+     * @return the modified
+     */
+    public String getModified() {
+        return modified;
+    }
+
+    /**
+     * @param modified the modified to set
+     */
+    public void setModified(String modified) {
+        this.modified = modified;
+    }
+    
     
 }
