@@ -2,6 +2,7 @@
 package Utilitarios;
 
 import java.io.*;
+import javax.swing.table.DefaultTableModel;
 
 
 public class Helpers {
@@ -20,5 +21,11 @@ public class Helpers {
         }
     return Str_Texto;
     }
+    /*
+    public  DefaultTableModel  getAllEmpleados(){
+         
+         * Recibe la tabla y los campos a mostrar, retorna la tabla
+    }
+    * /
     
 }
