@@ -1,11 +1,18 @@
 
 package Gui;
 
+import Dao.UserDAO;
 import javax.swing.*;
 
 
 public class WinLogin extends javax.swing.JFrame {
-
+    UserDAO  us;
+    int i=0;
+    void limpiar(){
+        txtusername.setText("");
+        txtpassword.setText("");
+        txtusername.requestFocus();
+    }
     /*
      * Creacion del WinUsuario
      */
@@ -92,12 +99,26 @@ public class WinLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_btnsalirActionPerformed
 
     private void btningresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btningresarActionPerformed
-        WinMdi objmdi=new WinMdi();
-        objmdi.show();
-        objmdi.setLocationRelativeTo(this);
-        this.dispose();
+        String user=txtusername.getText();
+        String pas=txtpassword.getText();
+        us= new UserDAO();
+        if(us.userAuth(user, pas)==true){
+            WinMdi objmdi=new WinMdi();
+            objmdi.show();
+            objmdi.setLocationRelativeTo(this);
+            this.dispose();limpiar();
+        }
+        else {
+            JOptionPane.showMessageDialog(null,"Haz ingresado incorrectamente");
+            limpiar();
+        }
+        i++;
+        if(i==3){
+            JOptionPane.showMessageDialog(null, "Te equivocastes 3 veces","Alerta",1);
+            limpiar();this.dispose();
+        }
     }//GEN-LAST:event_btningresarActionPerformed
-
+    
     
     public static void main(String args[]) {
        
