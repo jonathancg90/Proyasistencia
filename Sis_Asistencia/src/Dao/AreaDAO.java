@@ -3,7 +3,7 @@ package Dao;
 
 import Utilitarios.ConexionBd;
 import Utilitarios.Helpers;
-import Utilitarios.Queryset;
+import Utilitarios.Query;
 import Javabeans.Area;
 import java.sql.PreparedStatement;
 import javax.swing.JTable;
@@ -12,8 +12,8 @@ import javax.swing.table.DefaultTableModel;
 
 public class AreaDAO extends ConexionBd{
 
-    Queryset qs;
-    Area area;
+    Query qs;
+    Area objArea;
     Helpers hp;
     
     
@@ -30,7 +30,7 @@ public class AreaDAO extends ConexionBd{
             campos[0]="idare";
             campos[1]="name";
             String Table = "area";
-            qs= new Queryset();
+            qs= new Query();
             datos = qs.getAll(campos,Table);
         
             tblDatos.setModel(datos);   
@@ -48,14 +48,17 @@ public class AreaDAO extends ConexionBd{
             //Preparando
             getConexion();
             hp = new Helpers();
-            qs= new Queryset();
+            qs= new Query();
             String Table = "area";
             String now = hp.getDateNow();
             
-            
-            area = new Area(name,now,now,false);
+            objArea = new Area(name,now,now,false);
 
             pt = qs.sqlRegister(Table);
+            pt.setString(1,objArea.getName());
+            pt.setString(2,objArea.getModified());
+            pt.setString(3,objArea.getCreated());
+            
             i= pt.executeUpdate();
 
             pt.close();

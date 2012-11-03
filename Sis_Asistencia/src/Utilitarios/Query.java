@@ -5,7 +5,7 @@ import java.sql.*;
 import javax.swing.table.DefaultTableModel;
 
 
-public class Queryset extends ConexionBd{
+public class Query extends ConexionBd{
     DefaultTableModel datos; 
     ResultSet rs = null;
     Statement s = null;
