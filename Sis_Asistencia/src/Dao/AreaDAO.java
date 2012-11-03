@@ -51,16 +51,15 @@ public class AreaDAO extends ConexionBd{
             qs= new Query();
             String Table = "area";
             String now = hp.getDateNow();
-            
-            objArea = new Area(name,now,now,false);
 
+            objArea = new Area(name,now,now,false);
+            //Iniciando consulta y asignando valores
             pt = qs.sqlRegister(Table);
             pt.setString(1,objArea.getName());
             pt.setString(2,objArea.getModified());
             pt.setString(3,objArea.getCreated());
-            
+            //Ejecucion y cierre
             i= pt.executeUpdate();
-
             pt.close();
             conexion.close();
             closeConexion();
