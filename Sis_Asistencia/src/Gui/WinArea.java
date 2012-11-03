@@ -1,6 +1,7 @@
 
 package Gui;
 import Dao.AreaDAO;
+import javax.swing.JOptionPane;
 
 
 public class WinArea extends javax.swing.JInternalFrame {
@@ -25,6 +26,14 @@ public class WinArea extends javax.swing.JInternalFrame {
             System.out.println("Gui_WinMdi: "+e);
         }
     }
+    public void cleanBox(){
+        lblId.setText("");
+        txtName.setText("");
+        lblModified.setText("");
+        txtFilter.setText("");
+        
+    }
+            
 
 
     @SuppressWarnings("unchecked")
@@ -36,11 +45,11 @@ public class WinArea extends javax.swing.JInternalFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         txtName = new javax.swing.JTextField();
-        cmbEstado = new javax.swing.JComboBox();
-        txtModified = new javax.swing.JTextField();
+        cmbEstate = new javax.swing.JComboBox();
         jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        lblId = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
+        lblModified = new javax.swing.JLabel();
         pnlOpciones = new javax.swing.JPanel();
         btnRegister = new javax.swing.JButton();
         btnUpdate = new javax.swing.JButton();
@@ -64,9 +73,11 @@ public class WinArea extends javax.swing.JInternalFrame {
 
         jLabel4.setText("Id");
 
-        jLabel5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        lblId.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jLabel8.setText("Añadir cargos");
+
+        lblModified.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         org.jdesktop.layout.GroupLayout pnlMantenimientoLayout = new org.jdesktop.layout.GroupLayout(pnlMantenimiento);
         pnlMantenimiento.setLayout(pnlMantenimientoLayout);
@@ -83,7 +94,7 @@ public class WinArea extends javax.swing.JInternalFrame {
                         .add(pnlMantenimientoLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                             .add(txtName)
                             .add(pnlMantenimientoLayout.createSequentialGroup()
-                                .add(jLabel5, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 50, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                .add(lblId, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 50, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .add(jLabel8)
                                 .add(27, 27, 27))))
@@ -92,12 +103,13 @@ public class WinArea extends javax.swing.JInternalFrame {
                             .add(jLabel3)
                             .add(jLabel2))
                         .add(22, 22, 22)
-                        .add(pnlMantenimientoLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
+                        .add(pnlMantenimientoLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                             .add(pnlMantenimientoLayout.createSequentialGroup()
-                                .add(cmbEstado, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 146, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                                .add(0, 0, Short.MAX_VALUE))
-                            .add(txtModified))
-                        .add(72, 72, 72)))
+                                .add(cmbEstate, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 146, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 84, Short.MAX_VALUE))
+                            .add(pnlMantenimientoLayout.createSequentialGroup()
+                                .add(lblModified, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 170, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                .add(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
         pnlMantenimientoLayout.setVerticalGroup(
@@ -107,7 +119,7 @@ public class WinArea extends javax.swing.JInternalFrame {
                     .add(pnlMantenimientoLayout.createSequentialGroup()
                         .addContainerGap()
                         .add(jLabel4, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .add(jLabel5, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .add(lblId, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .add(org.jdesktop.layout.GroupLayout.TRAILING, jLabel8))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 15, Short.MAX_VALUE)
                 .add(pnlMantenimientoLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
@@ -116,17 +128,22 @@ public class WinArea extends javax.swing.JInternalFrame {
                 .add(18, 18, 18)
                 .add(pnlMantenimientoLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(jLabel2)
-                    .add(cmbEstado, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                    .add(cmbEstate, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                 .add(18, 18, 18)
-                .add(pnlMantenimientoLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                .add(pnlMantenimientoLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(jLabel3)
-                    .add(txtModified, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                .add(32, 32, 32))
+                    .add(lblModified, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 32, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                .add(22, 22, 22))
         );
 
         pnlOpciones.setBorder(javax.swing.BorderFactory.createTitledBorder("Opciones"));
 
         btnRegister.setText("Registrar");
+        btnRegister.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegisterActionPerformed(evt);
+            }
+        });
 
         btnUpdate.setText("Actualizar");
 
@@ -247,11 +264,24 @@ public class WinArea extends javax.swing.JInternalFrame {
                         .add(pnlMantenimiento, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                         .add(6, 6, 6)
                         .add(pnlOpciones, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
+        String name = txtName.getText();
+        int estate = cmbEstate.getSelectedIndex();
+        
+        area = new AreaDAO();
+        int i = area.save(name,estate);
+        if(i==0)
+            JOptionPane.showInputDialog(null,"No se pudo grabar datos");
+        else
+            JOptionPane.showInputDialog(null,"Nueva area registrada");      
+    }//GEN-LAST:event_btnRegisterActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnClose;
     private javax.swing.JButton btnDelete;
@@ -260,22 +290,22 @@ public class WinArea extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnPrevious;
     private javax.swing.JButton btnRegister;
     private javax.swing.JButton btnUpdate;
-    private javax.swing.JComboBox cmbEstado;
+    private javax.swing.JComboBox cmbEstate;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblId;
+    private javax.swing.JLabel lblModified;
     private javax.swing.JPanel pnlMantenimiento;
     private javax.swing.JPanel pnlOpciones;
     private javax.swing.JTable tblEmpleados;
     private javax.swing.JTextField txtFilter;
-    private javax.swing.JTextField txtModified;
     private javax.swing.JTextField txtName;
     // End of variables declaration//GEN-END:variables
 }

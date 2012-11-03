@@ -8,7 +8,8 @@ public class UserDAO extends ConexionBd{
     ResultSet rs = null;
     Statement s = null;
     
-    /* Validacion de ingreso de usuarios al sistema
+    /* 
+     * Validacion de ingreso de usuarios al sistema
      */
     public boolean userAuth(String user, String pas){
         boolean result;

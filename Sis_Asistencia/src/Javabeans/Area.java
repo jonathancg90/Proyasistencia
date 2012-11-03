@@ -11,8 +11,7 @@ public class Area {
     
     /* Constructor final
      */
-    public Area(int idare, String name, String created, String modified, boolean estado) {
-        this.idare = idare;
+    public Area(String name, String created, String modified, boolean estado) {
         this.name = name;
         this.created = created;
         this.modified = modified;

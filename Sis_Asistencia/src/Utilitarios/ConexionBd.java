@@ -8,7 +8,8 @@ public class ConexionBd {
     public Connection conexion = null;
     Helpers hp;
     
-    /*Prueba de conexion
+    /*
+     * Test de conexion
      */
     public static void main(String[] args) throws SQLException {
         ConexionBd x = new ConexionBd() ;
@@ -17,7 +18,8 @@ public class ConexionBd {
 
     }
     
-    /*Metodo de conexion por Jdbc al motor de Bd
+    /*
+     * Metodo de conexion por Jdbc al motor de Bd
      */
     public void getConexion() throws SQLException{
         try{
@@ -27,7 +29,7 @@ public class ConexionBd {
            String user = "postgres";
            String password = "sp1r4ls4c";
            String bd = "asistencia"; 
-           String host= hp.leeArchivo(archivo);
+           String host= hp.readFiles(archivo);
            
            String url = "Jdbc:postgresql://"+host+"/"+bd;
            Class.forName("org.postgresql.Driver");
