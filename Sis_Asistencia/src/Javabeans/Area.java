@@ -7,15 +7,15 @@ public class Area {
     private String name;
     private String created;
     private String modified;
-    private boolean estado;
+    private boolean state;
     
     /* Constructor final
      */
-    public Area(String name, String created, String modified, boolean estado) {
+    public Area(String name, String created, String modified, boolean state) {
         this.name = name;
         this.created = created;
         this.modified = modified;
-        this.estado = estado;
+        this.state = state;
     }
     
     /* Constructor por Omision
@@ -82,15 +82,15 @@ public class Area {
     /**
      * @return the estado
      */
-    public boolean isEstado() {
-        return estado;
+    public boolean getState() {
+        return state;
     }
 
     /**
      * @param estado the estado to set
      */
     public void setEstado(boolean estado) {
-        this.estado = estado;
+        this.state = estado;
     }
     
 }

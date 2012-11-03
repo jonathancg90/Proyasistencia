@@ -4,8 +4,9 @@ package Utilitarios;
 import java.sql.*;
 import javax.swing.table.DefaultTableModel;
 
-
 public class Query extends ConexionBd{
+    
+    
     DefaultTableModel datos; 
     ResultSet rs = null;
     Statement s = null;
@@ -13,27 +14,40 @@ public class Query extends ConexionBd{
     /*
      * Arma registro
      */
-    public PreparedStatement sqlRegister(String Table){
+    public  PreparedStatement sqlRegister(String Table){
         
-        "insert into empleado values(?,?,?,?)"
         pt = null;
         try{
+            getConexion();
+            String query;
             String campos="";
             String values="";
-            for(int i=1;i<=args.length;i++){
-                campos = campos + args[i];
-                values = values + "?";
-                if(i<args.length){
-                    campos = campos + ",";
-                    values = values + ","; 
+            Statement s = null;
+            s = conexion.createStatement();
+            rs = s.executeQuery("select * from area");
+            //Llenado Cabecera Jtable
+            ResultSetMetaData meta = rs.getMetaData();
+            int nCols = meta.getColumnCount();
+            
+            for(int i=1;i<=nCols;i++){
+                if(!meta.isAutoIncrement(i)){
+                    campos = campos + meta.getColumnName(i);
+                    values = values + "?";
+                    if(i<nCols){
+                        campos = campos + ",";
+                        values = values + ","; 
+                    }
                 }
-                
             }
-            query= "insert into "+Table+" values("+values+")";
-            pt  = conexion.prepareStatement(sql);
+           
+            query= "insert into "+Table+" ("+campos+") values("+values+")";
+            pt  = conexion.prepareStatement(query);
+            rs.close();
             return pt;
+            
         }
         catch(Exception e){
+            System.out.println("Utilitarios_Query: "+e);
             return pt;
         }
         

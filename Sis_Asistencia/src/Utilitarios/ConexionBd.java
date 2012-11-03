@@ -47,6 +47,7 @@ public class ConexionBd {
     public void closeConexion(){
         try{
             conexion.close();
+            System.out.println("Conexion cerrada");
         }
         catch(Exception e){
             System.out.println("ConexionBd_closeConexion: "+e);

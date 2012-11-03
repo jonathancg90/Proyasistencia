@@ -33,8 +33,7 @@ public class Helpers{
         String dia = Integer.toString(c.get(Calendar.DATE));
         String mes = Integer.toString(c.get(Calendar.MONTH));
         String annio = Integer.toString(c.get(Calendar.YEAR));
-        
-        date = dia+"/"+mes+"/"+annio;
+        date = annio+"-"+mes+"-"+dia;
                 
         return date;
     }

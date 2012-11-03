@@ -277,9 +277,9 @@ public class WinArea extends javax.swing.JInternalFrame {
         area = new AreaDAO();
         int i = area.save(name,estate);
         if(i==0)
-            JOptionPane.showInputDialog(null,"No se pudo grabar datos");
+            JOptionPane.showMessageDialog(null,"No se pudo grabar datos");
         else
-            JOptionPane.showInputDialog(null,"Nueva area registrada");      
+            JOptionPane.showMessageDialog(null,"Nueva area registrada");      
     }//GEN-LAST:event_btnRegisterActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

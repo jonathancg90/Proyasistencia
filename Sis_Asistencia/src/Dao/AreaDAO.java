@@ -5,6 +5,7 @@ import Utilitarios.ConexionBd;
 import Utilitarios.Helpers;
 import Utilitarios.Query;
 import Javabeans.Area;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -51,21 +52,23 @@ public class AreaDAO extends ConexionBd{
             qs= new Query();
             String Table = "area";
             String now = hp.getDateNow();
-
+            Date date = new Date(0000-00-00);
+            
             objArea = new Area(name,now,now,false);
             //Iniciando consulta y asignando valores
             pt = qs.sqlRegister(Table);
             pt.setString(1,objArea.getName());
-            pt.setString(2,objArea.getModified());
-            pt.setString(3,objArea.getCreated());
+            pt.setBoolean(2,objArea.getState());
+            pt.setDate(3,date.valueOf(objArea.getCreated()));
+            pt.setDate(4,date.valueOf(objArea.getModified()));
             //Ejecucion y cierre
             i= pt.executeUpdate();
             pt.close();
-            conexion.close();
             closeConexion();
             return i;
         }
         catch(Exception e){
+            System.out.println("Dao_AreaDAO: "+e);
             return i;
         }
     }
