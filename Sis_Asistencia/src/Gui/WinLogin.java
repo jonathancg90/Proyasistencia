@@ -102,17 +102,18 @@ public class WinLogin extends javax.swing.JFrame {
         String user=txtusername.getText();
         String pas=txtpassword.getText();
         us= new UserDAO();
-        //if(us.userAuth(user, pas)==true){
-            WinArea objmdi=new WinArea();
+        if(us.userAuth(user, pas)==true){
+            WinMdi objmdi=new WinMdi();
             objmdi.show();
-            //objmdi.setLocationRelativeTo(this);
-            this.dispose();limpiar();
-       // }
-        //else {
-       //     JOptionPane.showMessageDialog(null,"Haz ingresado incorrectamente");
-       //     limpiar();
-       // }
-       // i++;
+            objmdi.setLocation(250, 250);
+            this.dispose();
+            limpiar();
+        }
+        else {
+            JOptionPane.showMessageDialog(null,"Haz ingresado incorrectamente");
+            limpiar();
+        }
+        i++;
         if(i==3){
             JOptionPane.showMessageDialog(null, "Te equivocastes 3 veces","Alerta",1);
             limpiar();this.dispose();

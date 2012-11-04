@@ -27,9 +27,9 @@ public class AreaDAO extends ConexionBd{
         try{
             DefaultTableModel datos;
             
-            String campos[] = new String[2];
-            campos[0]="idare";
-            campos[1]="name";
+            String campos[] = new String[1];
+            //campos[0]="idare";
+            campos[0]="name";
             String Table = "area";
             qs= new Query();
             datos = qs.getAll(campos,Table);

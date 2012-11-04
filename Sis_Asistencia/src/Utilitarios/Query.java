@@ -24,7 +24,7 @@ public class Query extends ConexionBd{
             String values="";
             Statement s = null;
             s = conexion.createStatement();
-            rs = s.executeQuery("select * from area");
+            rs = s.executeQuery("select * from "+Table);
             //Llenado Cabecera Jtable
             ResultSetMetaData meta = rs.getMetaData();
             int nCols = meta.getColumnCount();
