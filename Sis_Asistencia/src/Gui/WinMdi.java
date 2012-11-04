@@ -40,22 +40,42 @@ public class WinMdi extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jdpContenedor.setBounds(0, 0, 760, 440);
+        jdpContenedor.setBounds(0, 0, 730, 440);
         jDesktopPane1.add(jdpContenedor, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         menuasi.setText("Asistencia");
+        menuasi.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                menuasiMousePressed(evt);
+            }
+        });
         jMenuBar1.add(menuasi);
 
         menujus.setText("Justificaciones");
+        menujus.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                menujusMousePressed(evt);
+            }
+        });
         jMenuBar1.add(menujus);
 
         menuemp.setText("Empleados");
         jMenuBar1.add(menuemp);
 
         menuhor.setText("Horarios");
+        menuhor.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                menuhorMousePressed(evt);
+            }
+        });
         jMenuBar1.add(menuhor);
 
         menuvis.setText("Consulta");
+        menuvis.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                menuvisMousePressed(evt);
+            }
+        });
         jMenuBar1.add(menuvis);
 
         menudis.setText("Configuraciones");
@@ -96,6 +116,11 @@ public class WinMdi extends javax.swing.JFrame {
         jMenuBar1.add(menudis);
 
         menurep.setText("Reportes");
+        menurep.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                menurepMousePressed(evt);
+            }
+        });
         jMenuBar1.add(menurep);
 
         menusal.setText("Salir");
@@ -116,7 +141,7 @@ public class WinMdi extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 440, Short.MAX_VALUE)
+            .addComponent(jDesktopPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 444, Short.MAX_VALUE)
         );
 
         pack();
@@ -136,21 +161,81 @@ public class WinMdi extends javax.swing.JFrame {
 
     private void jMenuItem1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem1MousePressed
 
-       WinArea objarea= new WinArea();
+       WinArea objArea= new WinArea();
     
-       objarea.setResizable(true);
-       objarea.setMaximizable(true);
-       objarea.setIconifiable(true);
+       objArea.setResizable(true);
+       objArea.setMaximizable(true);
+       objArea.setIconifiable(true);
            
        
        //obj_Asis.setClosable(true);
        
 
-       jdpContenedor.add(objarea);
+       jdpContenedor.add(objArea);
 
-       objarea.setVisible(true);
+       objArea.setVisible(true);
        
     }//GEN-LAST:event_jMenuItem1MousePressed
+
+    private void menuasiMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuasiMousePressed
+        WinAsistencia objAsis = new WinAsistencia();
+        
+        objAsis.setResizable(true);
+        objAsis.setMaximizable(true);
+        objAsis.setIconifiable(true);
+        
+        jdpContenedor.add(objAsis);
+        
+        objAsis.setVisible(true);
+    }//GEN-LAST:event_menuasiMousePressed
+
+    private void menujusMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menujusMousePressed
+        WinJustificacion objJus = new WinJustificacion();
+        
+        objJus.setResizable(true);
+        objJus.setMaximizable(true);
+        objJus.setIconifiable(true);
+        
+        jdpContenedor.add(objJus);
+        
+        objJus.setVisible(true);
+    }//GEN-LAST:event_menujusMousePressed
+
+    private void menuhorMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuhorMousePressed
+        WinHorarios objHor = new WinHorarios();
+        
+        objHor.setResizable(true);
+        objHor.setMaximizable(true);
+        objHor.setIconifiable(true);
+        
+        jdpContenedor.add(objHor);
+        
+        objHor.setVisible(true);
+    }//GEN-LAST:event_menuhorMousePressed
+
+    private void menuvisMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuvisMousePressed
+        WinConsulta objCon = new WinConsulta();
+        
+        objCon.setResizable(true);
+        objCon.setMaximizable(true);
+        objCon.setIconifiable(true);
+        
+        jdpContenedor.add(objCon);
+        
+        objCon.setVisible(true);
+    }//GEN-LAST:event_menuvisMousePressed
+
+    private void menurepMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menurepMousePressed
+    WinReportes objRep = new WinReportes();
+        
+        objRep.setResizable(true);
+        objRep.setMaximizable(true);
+        objRep.setIconifiable(true);
+        
+        jdpContenedor.add(objRep);
+        
+        objRep.setVisible(true);  
+    }//GEN-LAST:event_menurepMousePressed
 
     public static void main(String args[]) {
         
