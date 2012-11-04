@@ -9,8 +9,10 @@ public class Area {
     private String modified;
     private boolean state;
     
-    /* Constructor final
+    /* 
+     * Constructor final
      */
+    
     public Area(String name, String created, String modified, boolean state) {
         this.name = name;
         this.created = created;
@@ -18,7 +20,8 @@ public class Area {
         this.state = state;
     }
     
-    /* Constructor por Omision
+    /* 
+     * Constructor por Omision
      */
     public Area() {
     }
