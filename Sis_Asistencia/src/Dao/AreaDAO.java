@@ -96,7 +96,6 @@ public class AreaDAO extends ConexionBd{
             pt.setDate(3,date.valueOf(objArea.getCreated()));
             pt.setDate(4,date.valueOf(objArea.getModified()));
             pt.setInt(5,objArea.getIdare());
-            System.out.println("Dao_AreaDAO: "+pt);
             //Ejecucion y cierre
             i= pt.executeUpdate();
             pt.close();
@@ -108,5 +107,30 @@ public class AreaDAO extends ConexionBd{
             return i;
         }
     }
-    
+     /*
+     * Eliminar 
+     */
+    public int delete(int id){
+       int i=0;
+        try{
+            //Preparando
+            getConexion();
+            objArea = new Area();
+            hp = new Helpers();
+            qs= new Query();
+            String Table = "area";
+            
+            objArea.setIdare(id);
+            pt = qs.sqlDelete(Table);
+            pt.setInt(1,objArea.getIdare());
+            i= pt.executeUpdate();
+            pt.close();
+            closeConexion();
+            return i;
+        }
+        catch(Exception e){
+            System.out.println("Dao_AreaDAO: "+e);
+            return i;
+        }
+    }
 }

@@ -161,6 +161,11 @@ public class WinArea extends javax.swing.JInternalFrame {
         });
 
         btnDelete.setText("Eliminar");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
 
         btnClose.setText("Cerrar");
 
@@ -336,6 +341,19 @@ public class WinArea extends javax.swing.JInternalFrame {
                 
             }
     }//GEN-LAST:event_tblAreaMouseClicked
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        int id = Integer.valueOf(lblId.getText());
+        
+        area = new AreaDAO();
+        int i = area.delete(id);
+        if(i==0) {
+            JOptionPane.showMessageDialog(null,"No se pudo eliminar el area");
+        }
+        else {
+            JOptionPane.showMessageDialog(null,"Area eliminada");
+        } 
+    }//GEN-LAST:event_btnDeleteActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnClose;

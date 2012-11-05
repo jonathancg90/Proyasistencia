@@ -51,7 +51,7 @@ public class Query extends ConexionBd{
             
         }
         catch(Exception e){
-            System.out.println("Utilitarios_Query: "+e);
+            System.out.println("Utilitarios_Query_sqlRegister: "+e);
             return pt;
         }
         
@@ -104,18 +104,44 @@ public class Query extends ConexionBd{
             
         }
         catch(Exception e){
-            System.out.println("Utilitarios_Query: "+e);
+            System.out.println("Utilitarios_Query_sqlUpdate: "+e);
             return pt;
         }
     }
      /*
      * Arma eliminacion
      */
-    public String sqlDelete(){
+    public PreparedStatement sqlDelete(String Table){
+        pt = null;
         
-        String query="";
-    
-        return query;
+        try{
+            getConexion();
+            String query;
+            String id = "id";
+            Statement s = null;
+            s = conexion.createStatement();
+            rs = s.executeQuery("select * from "+Table);
+            //Llenado Cabecera Jtable
+            ResultSetMetaData meta = rs.getMetaData();
+            int nCols = meta.getColumnCount();
+
+            query = "delete from  "+Table+" where  ";
+            
+            for(int i=1;i<=nCols;i++){
+                if(meta.isAutoIncrement(i)){
+                    id =  meta.getColumnName(i);
+                }
+            }
+            query = query + id + "=?";
+            pt  = conexion.prepareStatement(query);
+            rs.close();
+            return pt;
+            
+        }
+        catch(Exception e){
+            System.out.println("Utilitarios_Query_sqlDelete: "+e);
+            return pt;
+        }
     }
     
     /*
@@ -173,7 +199,7 @@ public class Query extends ConexionBd{
             
         }
         catch(Exception e){
-            System.out.println("Utilitarios_Query: "+e);
+            System.out.println("Utilitarios_Query_getAll: "+e);
         }
         
         return datos;
@@ -193,7 +219,7 @@ public class Query extends ConexionBd{
         }
         catch(Exception e)
         {
-            System.out.println("Utilitarios_Query: "+e);
+            System.out.println("Utilitarios_Query_loadState: "+e);
         }
         
     }
