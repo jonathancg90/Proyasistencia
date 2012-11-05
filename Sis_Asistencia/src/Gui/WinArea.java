@@ -1,12 +1,17 @@
 
 package Gui;
+
+import Utilitarios.Query;
+
 import Dao.AreaDAO;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 
 public class WinArea extends javax.swing.JInternalFrame {
 
     AreaDAO area;
+    Query qs;
     
     public WinArea() {
         initComponents();
@@ -19,8 +24,11 @@ public class WinArea extends javax.swing.JInternalFrame {
     
     public void cargaForm(){
         try{
+            qs = new Query();
             area = new AreaDAO();
-            area.getTableAll(tblEmpleados);
+            area.getTableAll(tblArea);
+            qs.loadState(this.cmbEstate);
+
         }
         catch(Exception e){
             System.out.println("Gui_WinMdi: "+e);
@@ -60,7 +68,7 @@ public class WinArea extends javax.swing.JInternalFrame {
         txtFilter = new javax.swing.JTextField();
         btnFind = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblEmpleados = new javax.swing.JTable();
+        tblArea = new javax.swing.JTable();
         btnNext = new javax.swing.JButton();
         btnPrevious = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
@@ -146,6 +154,11 @@ public class WinArea extends javax.swing.JInternalFrame {
         });
 
         btnUpdate.setText("Actualizar");
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
 
         btnDelete.setText("Eliminar");
 
@@ -184,7 +197,7 @@ public class WinArea extends javax.swing.JInternalFrame {
 
         btnFind.setText("Ok");
 
-        tblEmpleados.setModel(new javax.swing.table.DefaultTableModel(
+        tblArea.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
                 {},
@@ -195,7 +208,12 @@ public class WinArea extends javax.swing.JInternalFrame {
 
             }
         ));
-        jScrollPane1.setViewportView(tblEmpleados);
+        tblArea.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblAreaMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tblArea);
 
         btnNext.setText(">");
 
@@ -264,7 +282,7 @@ public class WinArea extends javax.swing.JInternalFrame {
                         .add(pnlMantenimiento, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                         .add(6, 6, 6)
                         .add(pnlOpciones, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -283,6 +301,41 @@ public class WinArea extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null,"Nueva area registrada");
         }      
     }//GEN-LAST:event_btnRegisterActionPerformed
+
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        int id = Integer.valueOf(lblId.getText());
+        String name = txtName.getText();
+        int estate = cmbEstate.getSelectedIndex();
+        
+        area = new AreaDAO();
+        System.out.println("ID: "+id);
+        int i = area.update(id,name,estate);
+        if(i==0) {
+            JOptionPane.showMessageDialog(null,"No se pudo actualizar datos");
+        }
+        else {
+            JOptionPane.showMessageDialog(null,"Nueva area registrada");
+        } 
+    }//GEN-LAST:event_btnUpdateActionPerformed
+
+    private void tblAreaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblAreaMouseClicked
+        int fsel;
+        fsel= this.tblArea.getSelectedRow();
+        if(fsel==-1){
+            
+        } 
+        else{
+            try{
+                DefaultTableModel m = new DefaultTableModel();
+                m=(DefaultTableModel) this.tblArea.getModel();
+                lblId.setText(String.valueOf(m.getValueAt(fsel, 0)));
+                }
+            catch(Exception e){
+                System.out.println("Gui_Win_area: "+e);
+            }
+                
+            }
+    }//GEN-LAST:event_tblAreaMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnClose;
@@ -306,7 +359,7 @@ public class WinArea extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lblModified;
     private javax.swing.JPanel pnlMantenimiento;
     private javax.swing.JPanel pnlOpciones;
-    private javax.swing.JTable tblEmpleados;
+    private javax.swing.JTable tblArea;
     private javax.swing.JTextField txtFilter;
     private javax.swing.JTextField txtName;
     // End of variables declaration//GEN-END:variables

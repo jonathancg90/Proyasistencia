@@ -1,7 +1,10 @@
 
 package Utilitarios;
 
+import Utilitarios.Config;
+
 import java.sql.*;
+import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
 public class Query extends ConexionBd{
@@ -11,11 +14,12 @@ public class Query extends ConexionBd{
     ResultSet rs = null;
     Statement s = null;
     PreparedStatement  pt = null;
+    DefaultComboBoxModel Mstate;
+    Config cf;
     /*
      * Arma registro
      */
     public  PreparedStatement sqlRegister(String Table){
-        
         pt = null;
         try{
             getConexion();
@@ -64,11 +68,45 @@ public class Query extends ConexionBd{
      /*
      * Arma actualizacion
      */
-    public String sqlUpdate(){
+    public PreparedStatement sqlUpdate(String Table){
+        pt = null;
         
-        String query="";
-    
-        return query;
+        try{
+            getConexion();
+            String query;
+            String condi="";
+            String id = "id";
+            Statement s = null;
+            s = conexion.createStatement();
+            rs = s.executeQuery("select * from "+Table);
+            //Llenado Cabecera Jtable
+            ResultSetMetaData meta = rs.getMetaData();
+            int nCols = meta.getColumnCount();
+            query = "update "+Table+" set ";
+            
+            for(int i=1;i<=nCols;i++){
+                if(!meta.isAutoIncrement(i)){
+                    query = query + meta.getColumnName(i)
+                    //+ ",";       
+                    + "=?,";
+                }
+                else{
+                    id =  meta.getColumnName(i);
+                }
+            }
+            //query = query + " where "+id;
+            query = query + " where "+id+"= ?";
+            query = query.replace(", "," ");
+            System.out.println(query);
+            pt  = conexion.prepareStatement(query);
+            rs.close();
+            return pt;
+            
+        }
+        catch(Exception e){
+            System.out.println("Utilitarios_Query: "+e);
+            return pt;
+        }
     }
      /*
      * Arma eliminacion
@@ -131,13 +169,32 @@ public class Query extends ConexionBd{
                 
            //Cerrando conexion
            rs.close();
-            closeConexion(); 
+           closeConexion(); 
             
         }
         catch(Exception e){
-            System.out.println("Utilitarios_Helpers: "+e);
+            System.out.println("Utilitarios_Query: "+e);
         }
         
         return datos;
         }
+    /*
+     * Autocarga de los estados activo, inactivo
+     */
+    public void loadState(JComboBox cmbState){
+        try{
+            cf = new Config();
+            Mstate = new DefaultComboBoxModel();
+            
+            Mstate.addElement(cf.G_STATES[0]);
+            Mstate.addElement(cf.G_STATES[1]);
+            
+            cmbState.setModel(Mstate);   
+        }
+        catch(Exception e)
+        {
+            System.out.println("Utilitarios_Query: "+e);
+        }
+        
+    }
 }

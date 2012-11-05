@@ -9,16 +9,19 @@ public class Area {
     private String modified;
     private boolean state;
     
-    /* Constructor final
+    /* 
+     * Constructor final
      */
-    public Area(String name, String created, String modified, boolean state) {
+    public Area(int idarea, String name, String created, String modified, boolean state) {
+        this.idare = idarea;
         this.name = name;
         this.created = created;
         this.modified = modified;
         this.state = state;
     }
     
-    /* Constructor por Omision
+    /* 
+     * Constructor por Omision
      */
     public Area() {
     }
