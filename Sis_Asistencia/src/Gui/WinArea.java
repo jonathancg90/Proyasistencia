@@ -12,18 +12,15 @@ public class WinArea extends javax.swing.JInternalFrame {
         initComponents();
         cargaForm();
     }
-    
     /*
      * Construccion de formualrio
      */
-    
     public void cargaForm(){
-        try{
+        try {
             area = new AreaDAO();
             area.getTableAll(tblEmpleados);
-        }
-        catch(Exception e){
-            System.out.println("Gui_WinMdi: "+e);
+        } catch (Exception e) {
+            System.out.println("Gui_WinMdi: " + e);
         }
     }
     public void cleanBox(){
@@ -31,10 +28,7 @@ public class WinArea extends javax.swing.JInternalFrame {
         txtName.setText("");
         lblModified.setText("");
         txtFilter.setText("");
-        
     }
-            
-
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -273,9 +267,8 @@ public class WinArea extends javax.swing.JInternalFrame {
     private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
         String name = txtName.getText();
         int estate = cmbEstate.getSelectedIndex();
-        
         area = new AreaDAO();
-        int i = area.save(name,estate);
+        int i = area.save(name, estate);
         if(i==0)
             JOptionPane.showInputDialog(null,"No se pudo grabar datos");
         else

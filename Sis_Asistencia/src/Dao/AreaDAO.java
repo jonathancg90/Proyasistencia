@@ -25,12 +25,13 @@ public class AreaDAO extends ConexionBd{
     public void getTableAll(JTable tblDatos){
         try{
             DefaultTableModel datos;
+            qs= new Query();
             
             String campos[] = new String[2];
             campos[0]="idare";
             campos[1]="name";
             String Table = "area";
-            qs= new Query();
+
             datos = qs.getAll(campos,Table);
         
             tblDatos.setModel(datos);   
@@ -48,7 +49,7 @@ public class AreaDAO extends ConexionBd{
             //Preparando
             getConexion();
             hp = new Helpers();
-            qs= new Query();
+            qs = new Query();
             String Table = "area";
             String now = hp.getDateNow();
 
