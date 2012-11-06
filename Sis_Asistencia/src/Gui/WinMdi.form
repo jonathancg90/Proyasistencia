@@ -8,11 +8,17 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Asistencia"/>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="menuasiMousePressed"/>
+          </Events>
         </Menu>
         <Menu class="javax.swing.JMenu" name="menujus">
           <Properties>
             <Property name="text" type="java.lang.String" value="Justificaciones"/>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="menujusMousePressed"/>
+          </Events>
         </Menu>
         <Menu class="javax.swing.JMenu" name="menuemp">
           <Properties>
@@ -23,63 +29,69 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Horarios"/>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="menuhorMousePressed"/>
+          </Events>
         </Menu>
         <Menu class="javax.swing.JMenu" name="menuvis">
           <Properties>
             <Property name="text" type="java.lang.String" value="Consulta"/>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="menuvisMousePressed"/>
+          </Events>
         </Menu>
         <Menu class="javax.swing.JMenu" name="menudis">
           <Properties>
             <Property name="text" type="java.lang.String" value="Configuraciones"/>
           </Properties>
           <SubComponents>
-            <Menu class="javax.swing.JMenu" name="jMenu1">
+            <Menu class="javax.swing.JMenu" name="SubmenuCrit">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Criterios"/>
               </Properties>
               <SubComponents>
-                <MenuItem class="javax.swing.JMenuItem" name="jMenuItem1">
+                <MenuItem class="javax.swing.JMenuItem" name="JmitemArea">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Area"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jMenuItem1MousePressed"/>
+                    <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="JmitemAreaMousePressed"/>
                   </Events>
                 </MenuItem>
-                <MenuItem class="javax.swing.JMenuItem" name="jMenuItem2">
+                <MenuItem class="javax.swing.JMenuItem" name="Jmitememp">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Empresa"/>
                   </Properties>
                 </MenuItem>
-                <MenuItem class="javax.swing.JMenuItem" name="jMenuItem3">
+                <MenuItem class="javax.swing.JMenuItem" name="JmitemTipo">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Tipo empleado"/>
                   </Properties>
                 </MenuItem>
-                <MenuItem class="javax.swing.JMenuItem" name="jMenuItem4">
+                <MenuItem class="javax.swing.JMenuItem" name="JmitemSucursal">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Sucursal"/>
                   </Properties>
                 </MenuItem>
               </SubComponents>
             </Menu>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem5">
+            <MenuItem class="javax.swing.JMenuItem" name="JmitemUsu">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Usuarios"/>
               </Properties>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem6">
+            <MenuItem class="javax.swing.JMenuItem" name="JmitemDis">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Dise&#xf1;o"/>
               </Properties>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem7">
+            <MenuItem class="javax.swing.JMenuItem" name="JmiBackup">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Backup"/>
               </Properties>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem8">
+            <MenuItem class="javax.swing.JMenuItem" name="Jmitemhelp">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Help"/>
               </Properties>
@@ -90,6 +102,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Reportes"/>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="menurepMousePressed"/>
+          </Events>
         </Menu>
         <Menu class="javax.swing.JMenu" name="menusal">
           <Properties>
@@ -129,7 +144,7 @@
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jDesktopPane1" alignment="0" pref="440" max="32767" attributes="0"/>
+          <Component id="jDesktopPane1" alignment="0" pref="452" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
@@ -144,7 +159,7 @@
           </AuxValues>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JLayeredPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JLayeredPaneSupportLayout$JLayeredPaneConstraintsDescription">
-              <JLayeredPaneConstraints x="0" y="0" width="760" height="440" layer="0" position="-1"/>
+              <JLayeredPaneConstraints x="0" y="0" width="730" height="440" layer="0" position="-1"/>
             </Constraint>
           </Constraints>
 

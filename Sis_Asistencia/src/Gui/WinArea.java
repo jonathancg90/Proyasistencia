@@ -1,28 +1,34 @@
 
 package Gui;
+
+import Utilitarios.Query;
+
 import Dao.AreaDAO;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
-
+    /**
+     * Formulario para el mantenimiento de las areas de la empresa.
+     */
 public class WinArea extends javax.swing.JInternalFrame {
-
-    AreaDAO area;
     
+    private AreaDAO area;
+    private Query qs;
     public WinArea() {
         initComponents();
         cargaForm();
     }
-    /*
-     * Construccion de formualrio
+    /**
+     * Formulario para el mantenimiento de las areas de la empresa.
      */
     public void cargaForm(){
         try {
             area = new AreaDAO();
-            area.getTableAll(tblEmpleados);
+            area.getTableAll(tblArea);
         } catch (Exception e) {
             System.out.println("Gui_WinMdi: " + e);
         }
-    }
+    }        
     public void cleanBox(){
         lblId.setText("");
         txtName.setText("");
@@ -54,7 +60,7 @@ public class WinArea extends javax.swing.JInternalFrame {
         txtFilter = new javax.swing.JTextField();
         btnFind = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblEmpleados = new javax.swing.JTable();
+        tblArea = new javax.swing.JTable();
         btnNext = new javax.swing.JButton();
         btnPrevious = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
@@ -70,6 +76,11 @@ public class WinArea extends javax.swing.JInternalFrame {
         lblId.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jLabel8.setText("Añadir cargos");
+        jLabel8.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel8MouseClicked(evt);
+            }
+        });
 
         lblModified.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -91,7 +102,7 @@ public class WinArea extends javax.swing.JInternalFrame {
                                 .add(lblId, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 50, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .add(jLabel8)
-                                .add(27, 27, 27))))
+                                .add(30, 30, 30))))
                     .add(org.jdesktop.layout.GroupLayout.TRAILING, pnlMantenimientoLayout.createSequentialGroup()
                         .add(pnlMantenimientoLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                             .add(jLabel3)
@@ -140,10 +151,25 @@ public class WinArea extends javax.swing.JInternalFrame {
         });
 
         btnUpdate.setText("Actualizar");
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
 
         btnDelete.setText("Eliminar");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
 
         btnClose.setText("Cerrar");
+        btnClose.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCloseActionPerformed(evt);
+            }
+        });
 
         org.jdesktop.layout.GroupLayout pnlOpcionesLayout = new org.jdesktop.layout.GroupLayout(pnlOpciones);
         pnlOpciones.setLayout(pnlOpcionesLayout);
@@ -177,8 +203,13 @@ public class WinArea extends javax.swing.JInternalFrame {
         jLabel6.setText("Nombre");
 
         btnFind.setText("Ok");
+        btnFind.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFindActionPerformed(evt);
+            }
+        });
 
-        tblEmpleados.setModel(new javax.swing.table.DefaultTableModel(
+        tblArea.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
                 {},
@@ -189,7 +220,12 @@ public class WinArea extends javax.swing.JInternalFrame {
 
             }
         ));
-        jScrollPane1.setViewportView(tblEmpleados);
+        tblArea.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblAreaMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tblArea);
 
         btnNext.setText(">");
 
@@ -258,7 +294,7 @@ public class WinArea extends javax.swing.JInternalFrame {
                         .add(pnlMantenimiento, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                         .add(6, 6, 6)
                         .add(pnlOpciones, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         pack();
@@ -269,11 +305,84 @@ public class WinArea extends javax.swing.JInternalFrame {
         int estate = cmbEstate.getSelectedIndex();
         area = new AreaDAO();
         int i = area.save(name, estate);
-        if(i==0)
+        if (i == 0) {
             JOptionPane.showInputDialog(null,"No se pudo grabar datos");
-        else
+        }
+        else {
+            area.getTableAll(tblArea);
             JOptionPane.showInputDialog(null,"Nueva area registrada");      
+        }
     }//GEN-LAST:event_btnRegisterActionPerformed
+
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        int id = Integer.valueOf(lblId.getText());
+        String name = txtName.getText();
+        int estate = cmbEstate.getSelectedIndex();
+        area = new AreaDAO();
+        System.out.println("ID: "+id);
+        int i = area.update(id,name,estate);
+        if (i == 0) {
+            
+            JOptionPane.showMessageDialog(null, "No se pudo actualizar datos");
+        }
+        else {
+            area.getTableAll(tblArea);
+            JOptionPane.showMessageDialog(null, "Area actualizada");
+        } 
+    }//GEN-LAST:event_btnUpdateActionPerformed
+
+    private void tblAreaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblAreaMouseClicked
+        int fsel;
+        fsel = this.tblArea.getSelectedRow();
+        if (fsel == -1) {
+            //No se ha seleccionado registo en Jtable
+        } 
+        else {
+            try {
+                DefaultTableModel m = new DefaultTableModel();
+                m = (DefaultTableModel) this.tblArea.getModel();
+                lblId.setText(String.valueOf(m.getValueAt(fsel, 0)));
+                }
+            catch (Exception e) {
+                System.out.println("Gui_Win_area: " + e);
+            }
+                
+            }
+    }//GEN-LAST:event_tblAreaMouseClicked
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        int id = Integer.valueOf(lblId.getText());
+        
+        area = new AreaDAO();
+        int i = area.delete(id);
+        if(i==0) {
+            JOptionPane.showMessageDialog(null,"No se pudo eliminar el area");
+        }
+        else {
+            area.getTableAll(tblArea);
+            JOptionPane.showMessageDialog(null,"Area eliminada");
+        } 
+    }//GEN-LAST:event_btnDeleteActionPerformed
+
+    private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
+
+    }//GEN-LAST:event_btnCloseActionPerformed
+
+    private void jLabel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseClicked
+       WinArea_Cargos objCargo= new WinArea_Cargos();
+    
+       objCargo.setResizable(true);
+       objCargo.setMaximizable(true);
+       objCargo.setIconifiable(true);
+       //obj_Asis.setClosable(true);
+       WinMdi.jdpContenedor.add(objCargo);
+
+       objCargo.setVisible(true);
+    }//GEN-LAST:event_jLabel8MouseClicked
+
+    private void btnFindActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFindActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnFindActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnClose;
@@ -297,7 +406,7 @@ public class WinArea extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lblModified;
     private javax.swing.JPanel pnlMantenimiento;
     private javax.swing.JPanel pnlOpciones;
-    private javax.swing.JTable tblEmpleados;
+    private javax.swing.JTable tblArea;
     private javax.swing.JTextField txtFilter;
     private javax.swing.JTextField txtName;
     // End of variables declaration//GEN-END:variables

@@ -14,8 +14,10 @@ public class Helpers{
     BufferedReader entrada = new BufferedReader(new FileReader(lectura));
     String renglon;
     String Str_Texto="";
-        while ((renglon = entrada.readLine()) != null){
-            for (int i = 0; i < renglon.length(); i++){
+        while ((renglon = entrada.readLine()) != null)
+        {
+            for (int i = 0; i < renglon.length(); i++)
+            {
                Str_Texto += String.valueOf(renglon.charAt(i)); 
             }
         }
@@ -33,8 +35,7 @@ public class Helpers{
         String dia = Integer.toString(c.get(Calendar.DATE));
         String mes = Integer.toString(c.get(Calendar.MONTH));
         String annio = Integer.toString(c.get(Calendar.YEAR));
-        
-        date = dia+"/"+mes+"/"+annio;
+        date = annio+"-"+mes+"-"+dia;
                 
         return date;
     }

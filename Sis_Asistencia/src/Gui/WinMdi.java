@@ -26,76 +26,101 @@ public class WinMdi extends javax.swing.JFrame {
         menuhor = new javax.swing.JMenu();
         menuvis = new javax.swing.JMenu();
         menudis = new javax.swing.JMenu();
-        jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
-        jMenuItem5 = new javax.swing.JMenuItem();
-        jMenuItem6 = new javax.swing.JMenuItem();
-        jMenuItem7 = new javax.swing.JMenuItem();
-        jMenuItem8 = new javax.swing.JMenuItem();
+        SubmenuCrit = new javax.swing.JMenu();
+        JmitemArea = new javax.swing.JMenuItem();
+        Jmitememp = new javax.swing.JMenuItem();
+        JmitemTipo = new javax.swing.JMenuItem();
+        JmitemSucursal = new javax.swing.JMenuItem();
+        JmitemUsu = new javax.swing.JMenuItem();
+        JmitemDis = new javax.swing.JMenuItem();
+        JmiBackup = new javax.swing.JMenuItem();
+        Jmitemhelp = new javax.swing.JMenuItem();
         menurep = new javax.swing.JMenu();
         menusal = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jdpContenedor.setBounds(0, 0, 760, 440);
+        jdpContenedor.setBounds(0, 0, 730, 440);
         jDesktopPane1.add(jdpContenedor, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         menuasi.setText("Asistencia");
+        menuasi.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                menuasiMousePressed(evt);
+            }
+        });
         jMenuBar1.add(menuasi);
 
         menujus.setText("Justificaciones");
+        menujus.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                menujusMousePressed(evt);
+            }
+        });
         jMenuBar1.add(menujus);
 
         menuemp.setText("Empleados");
         jMenuBar1.add(menuemp);
 
         menuhor.setText("Horarios");
+        menuhor.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                menuhorMousePressed(evt);
+            }
+        });
         jMenuBar1.add(menuhor);
 
         menuvis.setText("Consulta");
+        menuvis.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                menuvisMousePressed(evt);
+            }
+        });
         jMenuBar1.add(menuvis);
 
         menudis.setText("Configuraciones");
 
-        jMenu1.setText("Criterios");
+        SubmenuCrit.setText("Criterios");
 
-        jMenuItem1.setText("Area");
-        jMenuItem1.addMouseListener(new java.awt.event.MouseAdapter() {
+        JmitemArea.setText("Area");
+        JmitemArea.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                jMenuItem1MousePressed(evt);
+                JmitemAreaMousePressed(evt);
             }
         });
-        jMenu1.add(jMenuItem1);
+        SubmenuCrit.add(JmitemArea);
 
-        jMenuItem2.setText("Empresa");
-        jMenu1.add(jMenuItem2);
+        Jmitememp.setText("Empresa");
+        SubmenuCrit.add(Jmitememp);
 
-        jMenuItem3.setText("Tipo empleado");
-        jMenu1.add(jMenuItem3);
+        JmitemTipo.setText("Tipo empleado");
+        SubmenuCrit.add(JmitemTipo);
 
-        jMenuItem4.setText("Sucursal");
-        jMenu1.add(jMenuItem4);
+        JmitemSucursal.setText("Sucursal");
+        SubmenuCrit.add(JmitemSucursal);
 
-        menudis.add(jMenu1);
+        menudis.add(SubmenuCrit);
 
-        jMenuItem5.setText("Usuarios");
-        menudis.add(jMenuItem5);
+        JmitemUsu.setText("Usuarios");
+        menudis.add(JmitemUsu);
 
-        jMenuItem6.setText("Diseño");
-        menudis.add(jMenuItem6);
+        JmitemDis.setText("Diseño");
+        menudis.add(JmitemDis);
 
-        jMenuItem7.setText("Backup");
-        menudis.add(jMenuItem7);
+        JmiBackup.setText("Backup");
+        menudis.add(JmiBackup);
 
-        jMenuItem8.setText("Help");
-        menudis.add(jMenuItem8);
+        Jmitemhelp.setText("Help");
+        menudis.add(Jmitemhelp);
 
         jMenuBar1.add(menudis);
 
         menurep.setText("Reportes");
+        menurep.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                menurepMousePressed(evt);
+            }
+        });
         jMenuBar1.add(menurep);
 
         menusal.setText("Salir");
@@ -116,7 +141,7 @@ public class WinMdi extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 440, Short.MAX_VALUE)
+            .addComponent(jDesktopPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 448, Short.MAX_VALUE)
         );
 
         pack();
@@ -134,23 +159,75 @@ public class WinMdi extends javax.swing.JFrame {
         }  
     }//GEN-LAST:event_menusalMousePressed
 
-    private void jMenuItem1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem1MousePressed
+    private void JmitemAreaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JmitemAreaMousePressed
 
-       WinArea objarea= new WinArea();
+       WinArea objArea= new WinArea();
     
-       objarea.setResizable(true);
-       objarea.setMaximizable(true);
-       objarea.setIconifiable(true);
-           
-       
+       objArea.setResizable(true);
+       objArea.setMaximizable(true);
+       objArea.setIconifiable(true);
        //obj_Asis.setClosable(true);
-       
+       jdpContenedor.add(objArea);
 
-       jdpContenedor.add(objarea);
-
-       objarea.setVisible(true);
+       objArea.setVisible(true);
        
-    }//GEN-LAST:event_jMenuItem1MousePressed
+    }//GEN-LAST:event_JmitemAreaMousePressed
+
+    private void menuasiMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuasiMousePressed
+        WinAsistencia objAsis = new WinAsistencia();
+        
+        objAsis.setResizable(true);
+        objAsis.setMaximizable(true);
+        objAsis.setIconifiable(true);
+        jdpContenedor.add(objAsis);
+        
+        objAsis.setVisible(true);
+    }//GEN-LAST:event_menuasiMousePressed
+
+    private void menujusMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menujusMousePressed
+        WinJustificacion objJus = new WinJustificacion();
+        
+        objJus.setResizable(true);
+        objJus.setMaximizable(true);
+        objJus.setIconifiable(true);
+        
+        jdpContenedor.add(objJus);
+        
+        objJus.setVisible(true);
+    }//GEN-LAST:event_menujusMousePressed
+
+    private void menuhorMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuhorMousePressed
+        WinHorarios objHor = new WinHorarios();
+        
+        objHor.setResizable(true);
+        objHor.setMaximizable(true);
+        objHor.setIconifiable(true);
+        jdpContenedor.add(objHor);
+        
+        objHor.setVisible(true);
+    }//GEN-LAST:event_menuhorMousePressed
+
+    private void menuvisMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuvisMousePressed
+        WinConsulta objCon = new WinConsulta();
+        
+        objCon.setResizable(true);
+        objCon.setMaximizable(true);
+        objCon.setIconifiable(true);
+        jdpContenedor.add(objCon);
+        
+        objCon.setVisible(true);
+    }//GEN-LAST:event_menuvisMousePressed
+
+    private void menurepMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menurepMousePressed
+    WinReportes objRep = new WinReportes();
+        
+        objRep.setResizable(true);
+        objRep.setMaximizable(true);
+        objRep.setIconifiable(true);
+        jdpContenedor.add(objRep);
+        
+        objRep.setVisible(true);  
+    }//GEN-LAST:event_menurepMousePressed
 
     public static void main(String args[]) {
         
@@ -185,17 +262,17 @@ public class WinMdi extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem JmiBackup;
+    private javax.swing.JMenuItem JmitemArea;
+    private javax.swing.JMenuItem JmitemDis;
+    private javax.swing.JMenuItem JmitemSucursal;
+    private javax.swing.JMenuItem JmitemTipo;
+    private javax.swing.JMenuItem JmitemUsu;
+    private javax.swing.JMenuItem Jmitememp;
+    private javax.swing.JMenuItem Jmitemhelp;
+    private javax.swing.JMenu SubmenuCrit;
     private javax.swing.JDesktopPane jDesktopPane1;
-    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem5;
-    private javax.swing.JMenuItem jMenuItem6;
-    private javax.swing.JMenuItem jMenuItem7;
-    private javax.swing.JMenuItem jMenuItem8;
     public static javax.swing.JDesktopPane jdpContenedor;
     private javax.swing.JMenu menuasi;
     private javax.swing.JMenu menudis;

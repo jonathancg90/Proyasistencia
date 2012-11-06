@@ -22,7 +22,8 @@ public class ConexionBd {
      * Metodo de conexion por Jdbc al motor de Bd
      */
     public void getConexion() throws SQLException{
-        try{
+        try
+        {
            hp = new Helpers(); 
            
            File archivo = new File("Host.txt");
@@ -47,6 +48,7 @@ public class ConexionBd {
     public void closeConexion(){
         try{
             conexion.close();
+            System.out.println("Conexion cerrada");
         }
         catch(Exception e){
             System.out.println("ConexionBd_closeConexion: "+e);

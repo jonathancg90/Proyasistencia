@@ -3,21 +3,27 @@ package Utilitarios;
 
 public class Config {
     //Generales
-    String TITLE;
-    String BUSINESS;
-    String VERSION;
+    public String G_TITLE;
+    public String G_BUSINESS;
+    public String G_VERSION;
     //MDI
-    String MAIN_WIDTH;
-    String MAIN_HEIGHT;
+    public String G_MAIN_WIDTH;
+    public String G_MAIN_HEIGHT;
+    //Forms
+    public String G_STATES[] = new String[2];
+           
     
     public Config()
     {
-        TITLE = "Sistema de asistencias";
-        BUSINESS = "(Spiral producciones S.a.c)";
-        VERSION = "0.1";
+        G_TITLE = "Sistema de asistencias";
+        G_BUSINESS = "(Spiral producciones S.a.c)";
+        G_VERSION = "0.1";
         
-        MAIN_WIDTH = "";
-        MAIN_HEIGHT = "";
+        G_MAIN_WIDTH = "";
+        G_MAIN_HEIGHT = "";
+        
+        G_STATES[0]="Activo";
+        G_STATES[1]="Inactivo";
         
     }
     

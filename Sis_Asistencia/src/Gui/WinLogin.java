@@ -105,8 +105,9 @@ public class WinLogin extends javax.swing.JFrame {
         if(us.userAuth(user, pas)==true){
             WinMdi objmdi=new WinMdi();
             objmdi.show();
-            objmdi.setLocationRelativeTo(this);
-            this.dispose();limpiar();
+            objmdi.setLocation(250, 250);
+            this.dispose();
+            limpiar();
         }
         else {
             JOptionPane.showMessageDialog(null,"Haz ingresado incorrectamente");
