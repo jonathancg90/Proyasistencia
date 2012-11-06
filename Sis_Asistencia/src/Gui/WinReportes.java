@@ -26,7 +26,7 @@ public class WinReportes extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton2 = new javax.swing.JButton();
+        BtnSalir = new javax.swing.JButton();
         Panel_datos = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -36,12 +36,12 @@ public class WinReportes extends javax.swing.JInternalFrame {
         CmbAnho = new javax.swing.JComboBox();
         CmbMes = new javax.swing.JComboBox();
         CmbEmpleado = new javax.swing.JComboBox();
-        jButton1 = new javax.swing.JButton();
+        BtnVer = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         CmbTipo = new javax.swing.JComboBox();
 
-        jButton2.setText("Salir");
+        BtnSalir.setText("Salir");
 
         Panel_datos.setBorder(javax.swing.BorderFactory.createTitledBorder("Datos del reporte"));
 
@@ -98,7 +98,7 @@ public class WinReportes extends javax.swing.JInternalFrame {
                 .addContainerGap())
         );
 
-        jButton1.setText("Ver");
+        BtnVer.setText("Ver");
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Reportes"));
 
@@ -131,9 +131,9 @@ public class WinReportes extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(44, 44, 44)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(BtnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(70, 70, 70)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(BtnVer, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -149,14 +149,16 @@ public class WinReportes extends javax.swing.JInternalFrame {
                 .addComponent(Panel_datos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton2)
-                    .addComponent(jButton1))
+                    .addComponent(BtnSalir)
+                    .addComponent(BtnVer))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BtnSalir;
+    private javax.swing.JButton BtnVer;
     private javax.swing.JComboBox CmbAnho;
     private javax.swing.JComboBox CmbEmpleado;
     private datechooser.beans.DateChooserCombo CmbF_De;
@@ -164,8 +166,6 @@ public class WinReportes extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox CmbMes;
     private javax.swing.JComboBox CmbTipo;
     private javax.swing.JPanel Panel_datos;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

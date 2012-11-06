@@ -22,7 +22,8 @@ public class ConexionBd {
      * Metodo de conexion por Jdbc al motor de Bd
      */
     public void getConexion() throws SQLException{
-        try{
+        try
+        {
            hp = new Helpers(); 
            
            File archivo = new File("Host.txt");

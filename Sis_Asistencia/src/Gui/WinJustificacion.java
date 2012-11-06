@@ -47,7 +47,7 @@ public class WinJustificacion extends javax.swing.JInternalFrame {
         jLabel12 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        Txtaobservacion = new javax.swing.JTextArea();
         Calen_Fecha = new datechooser.beans.DateChooserCombo();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -85,9 +85,9 @@ public class WinJustificacion extends javax.swing.JInternalFrame {
 
         jLabel11.setText("Salida");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane3.setViewportView(jTextArea1);
+        Txtaobservacion.setColumns(20);
+        Txtaobservacion.setRows(5);
+        jScrollPane3.setViewportView(Txtaobservacion);
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -294,7 +294,7 @@ public class WinJustificacion extends javax.swing.JInternalFrame {
                         .addComponent(btnDelete)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnClose)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         pack();
@@ -313,6 +313,7 @@ public class WinJustificacion extends javax.swing.JInternalFrame {
     private javax.swing.JLabel Lblcargo;
     private javax.swing.JTable TblJusti;
     private javax.swing.JTextField TxtNum;
+    private javax.swing.JTextArea Txtaobservacion;
     private javax.swing.JButton btnClean;
     private javax.swing.JButton btnClose;
     private javax.swing.JButton btnDelete;
@@ -337,6 +338,5 @@ public class WinJustificacion extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTextArea jTextArea1;
     // End of variables declaration//GEN-END:variables
 }

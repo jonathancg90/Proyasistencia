@@ -33,11 +33,14 @@ public class Query extends ConexionBd{
             ResultSetMetaData meta = rs.getMetaData();
             int nCols = meta.getColumnCount();
             
-            for(int i=1;i<=nCols;i++){
-                if(!meta.isAutoIncrement(i)){
+            for(int i=1;i<=nCols;i++)
+            {
+                if(!meta.isAutoIncrement(i))
+                {
                     campos = campos + meta.getColumnName(i);
                     values = values + "?";
-                    if(i<nCols){
+                    if(i<nCols)
+                    {
                         campos = campos + ",";
                         values = values + ","; 
                     }
@@ -71,7 +74,8 @@ public class Query extends ConexionBd{
     public PreparedStatement sqlUpdate(String Table){
         pt = null;
         
-        try{
+        try
+        {
             getConexion();
             String query;
             String condi="";
@@ -84,13 +88,16 @@ public class Query extends ConexionBd{
             int nCols = meta.getColumnCount();
             query = "update "+Table+" set ";
             
-            for(int i=1;i<=nCols;i++){
-                if(!meta.isAutoIncrement(i)){
+            for(int i=1;i<=nCols;i++)
+            {
+                if(!meta.isAutoIncrement(i))
+                {
                     query = query + meta.getColumnName(i)
                     //+ ",";       
                     + "=?,";
                 }
-                else{
+                else
+                {
                     id =  meta.getColumnName(i);
                 }
             }
@@ -103,7 +110,8 @@ public class Query extends ConexionBd{
             return pt;
             
         }
-        catch(Exception e){
+        catch(Exception e)
+        {
             System.out.println("Utilitarios_Query_sqlUpdate: "+e);
             return pt;
         }
@@ -114,7 +122,8 @@ public class Query extends ConexionBd{
     public PreparedStatement sqlDelete(String Table){
         pt = null;
         
-        try{
+        try
+        {
             getConexion();
             String query;
             String id = "id";
@@ -127,8 +136,10 @@ public class Query extends ConexionBd{
 
             query = "delete from  "+Table+" where  ";
             
-            for(int i=1;i<=nCols;i++){
-                if(meta.isAutoIncrement(i)){
+            for(int i=1;i<=nCols;i++)
+            {
+                if(meta.isAutoIncrement(i))
+                {
                     id =  meta.getColumnName(i);
                 }
             }
@@ -138,7 +149,8 @@ public class Query extends ConexionBd{
             return pt;
             
         }
-        catch(Exception e){
+        catch(Exception e)
+        {
             System.out.println("Utilitarios_Query_sqlDelete: "+e);
             return pt;
         }
@@ -150,7 +162,8 @@ public class Query extends ConexionBd{
     public String getQueryList(String[] args, String Table){
         
         String qs = "select ";
-        for(int i=0;i<args.length;i++){
+        for(int i=0;i<args.length;i++)
+        {
             qs = qs + args[i];
             qs = qs + ",";
         }
@@ -165,7 +178,8 @@ public class Query extends ConexionBd{
      * Clase generica para realizar consulas en Jtable
      */
     public  DefaultTableModel  getAll(String[] args, String Table){
-        try{
+        try
+        {
             datos = new DefaultTableModel();
             getConexion();
             
@@ -180,14 +194,17 @@ public class Query extends ConexionBd{
             int nCols = meta.getColumnCount();
             datos = new DefaultTableModel();
             
-            for(int i=0; i<nCols; ++i){    
+            for(int i=0; i<nCols; ++i)
+            {    
                 datos.addColumn(meta.getColumnName(i+1));
             }
             
             //Llenado registro Jtable
             fila = new Object[nCols];
-            while(rs.next()){
-                for(int i=0; i<nCols; ++i){   
+            while(rs.next())
+            {
+                for(int i=0; i<nCols; ++i)
+                {   
                     fila[i] = rs.getObject(i+1);
                 }
                 datos.addRow(fila);
@@ -198,7 +215,8 @@ public class Query extends ConexionBd{
            closeConexion(); 
             
         }
-        catch(Exception e){
+        catch(Exception e)
+        {
             System.out.println("Utilitarios_Query_getAll: "+e);
         }
         
@@ -208,7 +226,8 @@ public class Query extends ConexionBd{
      * Autocarga de los estados activo, inactivo
      */
     public void loadState(JComboBox cmbState){
-        try{
+        try
+        {
             cf = new Config();
             Mstate = new DefaultComboBoxModel();
             
