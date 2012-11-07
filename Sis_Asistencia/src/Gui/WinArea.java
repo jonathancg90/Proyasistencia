@@ -381,7 +381,9 @@ public class WinArea extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jLabel8MouseClicked
 
     private void btnFindActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFindActionPerformed
-        // TODO add your handling code here:
+        String name = txtFilter.getText();
+        area = new AreaDAO();
+        area.find(name, tblArea);
     }//GEN-LAST:event_btnFindActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

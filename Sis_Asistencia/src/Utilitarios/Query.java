@@ -157,9 +157,9 @@ public class Query extends ConexionBd{
     }
     
     /*
-     * Armado de la consulta de listado
+     * Armado de la consulta de listado y consulta
      */
-    public String getQueryList(String[] args, String Table){
+    public String getQueryList(String[] args, String Table, String[][] Filter){
         
         String qs = "select ";
         for(int i=0;i<args.length;i++)
@@ -170,6 +170,14 @@ public class Query extends ConexionBd{
         qs = qs +" from "+Table;
         qs = qs.replace(", "," ");
         
+        if(Filter.length>0){
+            for(int i=0;i<Filter.length;i++)
+            {
+                qs = qs + " " + Filter[i][0] + "=" + Filter[i][1] + " ";
+                qs = qs + "and";
+            }
+        }
+
         return qs;
     }
     
@@ -177,7 +185,7 @@ public class Query extends ConexionBd{
     /*
      * Clase generica para realizar consulas en Jtable
      */
-    public  DefaultTableModel  getAll(String[] args, String Table){
+    public  DefaultTableModel  getAll(String[] args, String Table, String[][] Filter){
         try
         {
             datos = new DefaultTableModel();
@@ -186,7 +194,7 @@ public class Query extends ConexionBd{
             Object[] fila; 
             
             s = conexion.createStatement();
-            String qs = getQueryList(args,Table);
+            String qs = getQueryList(args,Table, Filter);
             rs = s.executeQuery(qs);
             
             //Llenado Cabecera Jtable

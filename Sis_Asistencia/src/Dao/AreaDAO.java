@@ -13,10 +13,10 @@ import javax.swing.table.DefaultTableModel;
 
 public class AreaDAO extends ConexionBd{
 
-    Query qs;
-    Area objArea;
-    Helpers hp;
-    
+    private Query qs;
+    private Area objArea;
+    private Helpers hp;
+    private String filter[][] = new String[2][1];
     
     PreparedStatement  pt = null;
     /*
@@ -33,12 +33,12 @@ public class AreaDAO extends ConexionBd{
             campos[1]="name";
             String Table = "area";
             qs = new Query();
-            datos = qs.getAll(campos,Table);
+            datos = qs.getAll(campos,Table,filter);
             tblDatos.setModel(datos);   
         }
         catch(Exception e)
         {
-            System.out.println("Dao_AreaDao: "+e);
+            System.out.println("Dao_AreaDao_getTableAll: "+e);
         }
     
     }
@@ -70,7 +70,7 @@ public class AreaDAO extends ConexionBd{
             return i;
         }
         catch(Exception e){
-            System.out.println("Dao_AreaDAO: "+e);
+            System.out.println("Dao_AreaDAO_save: "+e);
             return i;
         }
     }
@@ -104,7 +104,7 @@ public class AreaDAO extends ConexionBd{
             return i;
         }
         catch(Exception e){
-            System.out.println("Dao_AreaDAO: "+e);
+            System.out.println("Dao_AreaDAO_update: "+e);
             return i;
         }
     }
@@ -130,8 +130,18 @@ public class AreaDAO extends ConexionBd{
             return i;
         }
         catch(Exception e){
-            System.out.println("Dao_AreaDAO: "+e);
+            System.out.println("Dao_AreaDAO_delete: "+e);
             return i;
         }
+    }
+    public int find(String name,JTable tblDatos) {
+        int i = 0;
+        try {
+            getTableAll(tblDatos);
+        }
+        catch(Exception e){
+            System.out.println("Dao_AreaDAO_find : "+e);
+        }
+        return i;
     }
 }
