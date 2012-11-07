@@ -28,7 +28,7 @@ public class Query extends ConexionBd{
             String values="";
             Statement s = null;
             s = conexion.createStatement();
-            rs = s.executeQuery("select * from "+Table);
+            rs = s.executeQuery("select * from "+Table +" LIMIT 1 ");
             //Llenado Cabecera Jtable
             ResultSetMetaData meta = rs.getMetaData();
             int nCols = meta.getColumnCount();
@@ -171,12 +171,18 @@ public class Query extends ConexionBd{
         qs = qs.replace(", "," ");
         
         if(Filter.length>0){
+            System.out.println(Filter.length);
+            qs = qs + " where ";
             for(int i=0;i<Filter.length;i++)
             {
-                qs = qs + " " + Filter[i][0] + "=" + Filter[i][1] + " ";
-                qs = qs + "and";
+                qs = qs + " " + Filter[i][0] + "='" + Filter[i][1] + "' ";
+                System.out.println(Filter.length + " - "+i);
+                if(Filter.length!=i+1){ 
+                    qs = qs + "and";
+                }
             }
         }
+        System.out.println(qs);
 
         return qs;
     }
@@ -195,6 +201,7 @@ public class Query extends ConexionBd{
             
             s = conexion.createStatement();
             String qs = getQueryList(args,Table, Filter);
+            System.out.println(qs);
             rs = s.executeQuery(qs);
             
             //Llenado Cabecera Jtable
@@ -221,10 +228,12 @@ public class Query extends ConexionBd{
            //Cerrando conexion
            rs.close();
            closeConexion(); 
-            
+           
         }
         catch(Exception e)
         {
+            String qs = getQueryList(args,Table, Filter);
+            System.out.println(qs);
             System.out.println("Utilitarios_Query_getAll: "+e);
         }
         

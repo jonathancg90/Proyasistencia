@@ -16,7 +16,7 @@ public class AreaDAO extends ConexionBd{
     private Query qs;
     private Area objArea;
     private Helpers hp;
-    private String filter[][] = new String[2][1];
+    private String filter[][] = new String[0][0];
     
     PreparedStatement  pt = null;
     /*
@@ -27,7 +27,10 @@ public class AreaDAO extends ConexionBd{
         try{
             DefaultTableModel datos;
             qs= new Query();
-            
+            System.out.println();
+            if (filter.length <= 0){
+                filter = new String[0][0];
+            }
             String campos[] = new String[2];
             campos[0]="idare";
             campos[1]="name";
@@ -136,6 +139,11 @@ public class AreaDAO extends ConexionBd{
     public int find(String name,JTable tblDatos) {
         int i = 0;
         try {
+            if(!"".equals(name)){
+                filter = new String[1][2];
+                filter[0][0] = "name";
+                filter[0][1] = name; 
+            }
             getTableAll(tblDatos);
         }
         catch(Exception e){

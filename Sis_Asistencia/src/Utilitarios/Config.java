@@ -22,8 +22,8 @@ public class Config {
         G_MAIN_WIDTH = "";
         G_MAIN_HEIGHT = "";
         
-        G_STATES[0]="Activo";
-        G_STATES[1]="Inactivo";
+        G_STATES[0]="Inactivo";
+        G_STATES[1]="Activo";
         
     }
     

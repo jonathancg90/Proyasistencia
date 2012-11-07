@@ -2,6 +2,7 @@
 package Gui;
 
 import Utilitarios.Query;
+import Utilitarios.Config;
 
 import Dao.AreaDAO;
 import javax.swing.JOptionPane;
@@ -14,6 +15,8 @@ public class WinArea extends javax.swing.JInternalFrame {
     
     private AreaDAO area;
     private Query qs;
+    private Config cg;
+    
     public WinArea() {
         initComponents();
         cargaForm();
@@ -310,7 +313,8 @@ public class WinArea extends javax.swing.JInternalFrame {
         }
         else {
             area.getTableAll(tblArea);
-            JOptionPane.showInputDialog(null,"Nueva area registrada");      
+            cleanBox();
+            JOptionPane.showMessageDialog(null,"Nueva area registrada");      
         }
     }//GEN-LAST:event_btnRegisterActionPerformed
 
@@ -327,6 +331,7 @@ public class WinArea extends javax.swing.JInternalFrame {
         }
         else {
             area.getTableAll(tblArea);
+            cleanBox();
             JOptionPane.showMessageDialog(null, "Area actualizada");
         } 
     }//GEN-LAST:event_btnUpdateActionPerformed
@@ -339,6 +344,7 @@ public class WinArea extends javax.swing.JInternalFrame {
         } 
         else {
             try {
+                area = new AreaDAO();
                 DefaultTableModel m = new DefaultTableModel();
                 m = (DefaultTableModel) this.tblArea.getModel();
                 lblId.setText(String.valueOf(m.getValueAt(fsel, 0)));
@@ -360,6 +366,7 @@ public class WinArea extends javax.swing.JInternalFrame {
         }
         else {
             area.getTableAll(tblArea);
+            cleanBox();
             JOptionPane.showMessageDialog(null,"Area eliminada");
         } 
     }//GEN-LAST:event_btnDeleteActionPerformed
