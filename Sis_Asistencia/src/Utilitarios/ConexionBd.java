@@ -9,7 +9,7 @@ public class ConexionBd {
     Helpers hp;
     
     /*
-     * Test de conexion
+     * Test de conexión
      */
     public static void main(String[] args) throws SQLException {
         ConexionBd x = new ConexionBd() ;
