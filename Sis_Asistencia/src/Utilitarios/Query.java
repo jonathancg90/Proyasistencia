@@ -79,7 +79,7 @@ public class Query extends ConexionBd{
             getConexion();
             String query;
             String condi="";
-            String id = "id";
+            String id = "idusu";
             Statement s = null;
             s = conexion.createStatement();
             rs = s.executeQuery("select * from "+Table);
