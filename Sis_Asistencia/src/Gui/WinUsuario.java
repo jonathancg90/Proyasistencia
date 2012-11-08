@@ -1,12 +1,12 @@
 
 package Gui;
 
-import Dao.AreaDAO;
+import Dao.UserDAO;
 import javax.swing.JOptionPane;
 
 
 public class WinUsuario extends javax.swing.JInternalFrame {
-    AreaDAO area;
+    UserDAO user;
     boolean estado=false;
     /**
      * Creates new form WinUsuario
@@ -50,6 +50,7 @@ public class WinUsuario extends javax.swing.JInternalFrame {
         btnRegister = new javax.swing.JButton();
         btnUpdate = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
+        btnList = new javax.swing.JButton();
         btnClose = new javax.swing.JButton();
 
         jLabel1.setText("Username");
@@ -197,6 +198,13 @@ public class WinUsuario extends javax.swing.JInternalFrame {
             }
         });
 
+        btnList.setText("Listar");
+        btnList.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnListActionPerformed(evt);
+            }
+        });
+
         btnClose.setText("Cerrar");
         btnClose.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -216,8 +224,10 @@ public class WinUsuario extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnDelete)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnList)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnClose)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
         pnlOpcionesLayout.setVerticalGroup(
             pnlOpcionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -227,6 +237,7 @@ public class WinUsuario extends javax.swing.JInternalFrame {
                     .addComponent(btnRegister)
                     .addComponent(btnDelete)
                     .addComponent(btnUpdate)
+                    .addComponent(btnList)
                     .addComponent(btnClose))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -240,7 +251,7 @@ public class WinUsuario extends javax.swing.JInternalFrame {
                     .addComponent(pnlMantenimiento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(pnlOpciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 422, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -268,13 +279,13 @@ public class WinUsuario extends javax.swing.JInternalFrame {
         else{
             estado=true;
         }
-        area = new AreaDAO();
-        int i = area.saveUsuario(idusu,username,password,idemp,created,modified,estado);
+        user = new UserDAO();
+        int i = user.saveUsuario(idusu,username,password,idemp,created,modified,estado);
         if (i == 0) {
             JOptionPane.showInputDialog(null,"No se pudo grabar datos");
         }
         else {
-            area.getTableAll(Tbl_Usu);
+            user.getTableAll(Tbl_Usu);
             cleanBox();
             JOptionPane.showMessageDialog(null,"Nueva area registrada");
         }
@@ -294,15 +305,15 @@ public class WinUsuario extends javax.swing.JInternalFrame {
         else{
             estado=true;
         }
-        area = new AreaDAO();
+        user = new UserDAO();
         System.out.println("ID: "+idusu);
-        int i = area.updateUsuario(idusu,username,password,idemp,created,modified,estado);
+        int i = user.updateUsuario(idusu,username,password,idemp,created,modified,estado);
         if (i == 0) {
 
             JOptionPane.showMessageDialog(null, "No se pudo actualizar datos");
         }
         else {
-            area.getTableAll(Tbl_Usu);
+            user.getTableAll(Tbl_Usu);
             cleanBox();
             JOptionPane.showMessageDialog(null, "Area actualizada");
         }
@@ -311,13 +322,13 @@ public class WinUsuario extends javax.swing.JInternalFrame {
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         int id = Integer.valueOf(lblidusu.getText());
 
-        area = new AreaDAO();
-        int i = area.delete(id);
+        user = new UserDAO();
+        int i = user.deleteUsuario(id);
         if(i==0) {
             JOptionPane.showMessageDialog(null,"No se pudo eliminar el area");
         }
         else {
-            area.getTableAll(Tbl_Usu);
+            user.getTableAll(Tbl_Usu);
             cleanBox();
             JOptionPane.showMessageDialog(null,"Area eliminada");
         }
@@ -347,10 +358,15 @@ public class WinUsuario extends javax.swing.JInternalFrame {
                 
     }//GEN-LAST:event_Tbl_UsuMouseClicked
 
+    private void btnListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnListActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable Tbl_Usu;
     private javax.swing.JButton btnClose;
     private javax.swing.JButton btnDelete;
+    private javax.swing.JButton btnList;
     private javax.swing.JButton btnRegister;
     private javax.swing.JButton btnUpdate;
     private javax.swing.JComboBox cboestado;

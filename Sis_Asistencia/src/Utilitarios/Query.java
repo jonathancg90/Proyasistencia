@@ -171,18 +171,15 @@ public class Query extends ConexionBd{
         qs = qs.replace(", "," ");
         
         if(Filter.length>0){
-            System.out.println(Filter.length);
             qs = qs + " where ";
             for(int i=0;i<Filter.length;i++)
             {
                 qs = qs + " " + Filter[i][0] + "='" + Filter[i][1] + "' ";
-                System.out.println(Filter.length + " - "+i);
                 if(Filter.length!=i+1){ 
                     qs = qs + "and";
                 }
             }
         }
-        System.out.println(qs);
 
         return qs;
     }
@@ -257,6 +254,48 @@ public class Query extends ConexionBd{
         {
             System.out.println("Utilitarios_Query_loadState: "+e);
         }
+        
+    }
+        public  String[] getRecords(String Table,int Id){
+        String campos[] = new String[0];
+        try{
+            getConexion();
+            String query;
+            String identify="";
+            Statement s = null;
+            
+            s = conexion.createStatement();
+            rs = s.executeQuery("select * from "+Table +" LIMIT 1 ");
+            //Llenado Cabecera Jtable
+            ResultSetMetaData meta = rs.getMetaData();
+            int nCols = meta.getColumnCount();
+            campos = new String[nCols];
+            for(int i=1;i<=nCols;i++){
+                
+                if(meta.isAutoIncrement(i)){
+                    
+                    identify = meta.getColumnName(i);
+                }
+            }
+            query= "select * from "+Table+" where "+ identify +" = "+Id+"";
+            System.out.println(query);
+            /*pt  = conexion.prepareStatement(query);
+            rs = s.executeQuery(query);
+            int i=0;
+            while (rs.next()){
+                
+                campos[i]=rs.getString(i);
+                i++;
+            }*/
+            rs.close();
+            closeConexion(); 
+
+            
+        }
+        catch(Exception e){
+            System.out.println("Utilitarios_Query_getRecords: "+e);
+        }
+        return campos;
         
     }
 }

@@ -235,6 +235,7 @@ public class WinMdi extends javax.swing.JFrame {
     }//GEN-LAST:event_menurepMousePressed
 
     private void JmitemUsuMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JmitemUsuMousePressed
+
        WinUsuario objUsu= new WinUsuario();
     
        objUsu.setResizable(true);
@@ -244,6 +245,7 @@ public class WinMdi extends javax.swing.JFrame {
        jdpContenedor.add(objUsu);
 
        objUsu.setVisible(true);
+   
     }//GEN-LAST:event_JmitemUsuMousePressed
 
     public static void main(String args[]) {

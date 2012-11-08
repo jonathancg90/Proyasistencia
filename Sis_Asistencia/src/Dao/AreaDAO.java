@@ -29,7 +29,6 @@ public class AreaDAO extends ConexionBd{
         try{
             DefaultTableModel datos;
             qs= new Query();
-            System.out.println();
             if (filter.length <= 0){
                 filter = new String[0][0];
             }
@@ -154,6 +153,7 @@ public class AreaDAO extends ConexionBd{
         return i;
     }
     
+
     /*
      * Cargar valores de busqueda al modelo 
      */
@@ -161,15 +161,16 @@ public class AreaDAO extends ConexionBd{
        int i=0;
         try{
             objArea =  new Area();
+            qs= new Query();
             //Preparando
-            getConexion();
+            String campos[] = new String[4];
+            campos = qs.getRecords("area",idusu);
+            objArea.setName(campos[1]);
+            objArea.setEstado(Boolean.valueOf(campos[2]));
+            objArea.setCreated(campos[3]);
+            objArea.setModified(campos[4]);
+            i=1;
             
-            
-            objArea.setEstado(true);
-            objArea.setModified(null);
-            objArea.setCreated(null);
-            objArea.setName(null);
-            closeConexion();
             return i;
         }
         catch(Exception e){
@@ -177,5 +178,6 @@ public class AreaDAO extends ConexionBd{
             return i;
         }
     }
+
 }
     

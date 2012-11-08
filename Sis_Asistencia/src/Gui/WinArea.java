@@ -3,6 +3,7 @@ package Gui;
 
 import Utilitarios.Query;
 import Utilitarios.Config;
+import Javabeans.Area;
 
 import Dao.AreaDAO;
 import javax.swing.DefaultComboBoxModel;
@@ -14,7 +15,8 @@ import javax.swing.table.DefaultTableModel;
      */
 public class WinArea extends javax.swing.JInternalFrame {
     
-    private AreaDAO area;
+    private AreaDAO objarea;
+    private Area area;
     private Query qs;
     private Config cg;
     
@@ -28,11 +30,10 @@ public class WinArea extends javax.swing.JInternalFrame {
      */
     public void cargaForm(){
         try {
-            area = new AreaDAO();
+            objarea = new AreaDAO();
             qs = new Query();
-            area.getTableAll(tblArea);
+            objarea.getTableAll(tblArea);
             qs.loadState(cmbEstate);
-            //fillCombo();
         } catch (Exception e) {
             System.out.println("Gui_WinMdi: " + e);
         }
@@ -42,13 +43,6 @@ public class WinArea extends javax.swing.JInternalFrame {
         txtName.setText("");
         lblModified.setText("");
         txtFilter.setText("");
-    }
-    public void fillCombo(){
-        cg = new Config();
-        DefaultComboBoxModel state = new DefaultComboBoxModel();
-        state.addElement(cg.G_STATES[0]);
-        state.addElement(cg.G_STATES[1]);
-        this.cmbEstate.setModel(state);
     }
             
     @SuppressWarnings("unchecked")
@@ -324,13 +318,13 @@ public class WinArea extends javax.swing.JInternalFrame {
     private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
         String name = txtName.getText();
         int estate = cmbEstate.getSelectedIndex();
-        area = new AreaDAO();
-        int i = area.save(name, estate);
+        objarea = new AreaDAO();
+        int i = objarea.save(name, estate);
         if (i == 0) {
             JOptionPane.showInputDialog(null,"No se pudo grabar datos");
         }
         else {
-            area.getTableAll(tblArea);
+            objarea.getTableAll(tblArea);
             cleanBox();
             JOptionPane.showMessageDialog(null,"Nueva area registrada");      
         }
@@ -340,15 +334,15 @@ public class WinArea extends javax.swing.JInternalFrame {
         int id = Integer.valueOf(lblId.getText());
         String name = txtName.getText();
         int estate = cmbEstate.getSelectedIndex();
-        area = new AreaDAO();
+        objarea = new AreaDAO();
         System.out.println("ID: "+id);
-        int i = area.update(id,name,estate);
+        int i = objarea.update(id,name,estate);
         if (i == 0) {
             
             JOptionPane.showMessageDialog(null, "No se pudo actualizar datos");
         }
         else {
-            area.getTableAll(tblArea);
+            objarea.getTableAll(tblArea);
             cleanBox();
             JOptionPane.showMessageDialog(null, "Area actualizada");
         } 
@@ -362,13 +356,13 @@ public class WinArea extends javax.swing.JInternalFrame {
         } 
         else {
             try {
-                area = new AreaDAO();
+                area = new Area();
                 DefaultTableModel m = new DefaultTableModel();
                 m = (DefaultTableModel) this.tblArea.getModel();
                 String idArea = String.valueOf(m.getValueAt(fsel, 0));
                 lblId.setText(idArea);
-                area.getValues(Integer.parseInt(idArea));
-                
+                objarea.getValues(Integer.parseInt(idArea));
+                txtName.setText(area.getName());
                 }
             catch (Exception e) {
                 System.out.println("Gui_Win_area: " + e);
@@ -380,20 +374,20 @@ public class WinArea extends javax.swing.JInternalFrame {
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         int id = Integer.valueOf(lblId.getText());
         
-        area = new AreaDAO();
-        int i = area.delete(id);
+        objarea = new AreaDAO();
+        int i = objarea.delete(id);
         if(i==0) {
             JOptionPane.showMessageDialog(null,"No se pudo eliminar el area");
         }
         else {
-            area.getTableAll(tblArea);
+            objarea.getTableAll(tblArea);
             cleanBox();
             JOptionPane.showMessageDialog(null,"Area eliminada");
         } 
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
-
+        this.setVisible(false);
     }//GEN-LAST:event_btnCloseActionPerformed
 
     private void jLabel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseClicked
@@ -410,8 +404,8 @@ public class WinArea extends javax.swing.JInternalFrame {
 
     private void btnFindActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFindActionPerformed
         String name = txtFilter.getText();
-        area = new AreaDAO();
-        area.find(name, tblArea);
+        objarea = new AreaDAO();
+        objarea.find(name, tblArea);
     }//GEN-LAST:event_btnFindActionPerformed
 
     private void cmbEstateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbEstateActionPerformed
