@@ -245,5 +245,32 @@ public class AreaDAO extends ConexionBd{
             return i;
         }
     }
+    /*
+     * Cargar valores de busqueda al modelo 
+     */
+    public int getValues(int idusu){
+       int i=0;
+        try{
+            objArea =  new Area();
+            //Preparando
+            getConexion();
+            objUsu = new Usuario();
+            hp = new Helpers();
+            qs= new Query();
+            String Table = "Usuario";
+            
+            objUsu.setIdusu(idusu);
+            pt = qs.sqlDelete(Table);
+            pt.setInt(1,objUsu.getIdusu());
+            i= pt.executeUpdate();
+            pt.close();
+            closeConexion();
+            return i;
+        }
+        catch(Exception e){
+            System.out.println("Dao_AreaDAO_delete: "+e);
+            return i;
+        }
+    }
 }
     

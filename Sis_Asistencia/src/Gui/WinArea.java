@@ -5,6 +5,7 @@ import Utilitarios.Query;
 import Utilitarios.Config;
 
 import Dao.AreaDAO;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -20,6 +21,7 @@ public class WinArea extends javax.swing.JInternalFrame {
     public WinArea() {
         initComponents();
         cargaForm();
+        
     }
     /**
      * Formulario para el mantenimiento de las areas de la empresa.
@@ -27,7 +29,10 @@ public class WinArea extends javax.swing.JInternalFrame {
     public void cargaForm(){
         try {
             area = new AreaDAO();
+            qs = new Query();
             area.getTableAll(tblArea);
+            qs.loadState(cmbEstate);
+            //fillCombo();
         } catch (Exception e) {
             System.out.println("Gui_WinMdi: " + e);
         }
@@ -38,7 +43,14 @@ public class WinArea extends javax.swing.JInternalFrame {
         lblModified.setText("");
         txtFilter.setText("");
     }
-
+    public void fillCombo(){
+        cg = new Config();
+        DefaultComboBoxModel state = new DefaultComboBoxModel();
+        state.addElement(cg.G_STATES[0]);
+        state.addElement(cg.G_STATES[1]);
+        this.cmbEstate.setModel(state);
+    }
+            
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -73,6 +85,12 @@ public class WinArea extends javax.swing.JInternalFrame {
         jLabel2.setText("Estado");
 
         jLabel3.setText("Modificado");
+
+        cmbEstate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbEstateActionPerformed(evt);
+            }
+        });
 
         jLabel4.setText("Id");
 
@@ -297,7 +315,7 @@ public class WinArea extends javax.swing.JInternalFrame {
                         .add(pnlMantenimiento, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                         .add(6, 6, 6)
                         .add(pnlOpciones, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -347,7 +365,10 @@ public class WinArea extends javax.swing.JInternalFrame {
                 area = new AreaDAO();
                 DefaultTableModel m = new DefaultTableModel();
                 m = (DefaultTableModel) this.tblArea.getModel();
-                lblId.setText(String.valueOf(m.getValueAt(fsel, 0)));
+                String idArea = String.valueOf(m.getValueAt(fsel, 0));
+                lblId.setText(idArea);
+                area.getValues(Integer.parseInt(idArea));
+                
                 }
             catch (Exception e) {
                 System.out.println("Gui_Win_area: " + e);
@@ -392,6 +413,10 @@ public class WinArea extends javax.swing.JInternalFrame {
         area = new AreaDAO();
         area.find(name, tblArea);
     }//GEN-LAST:event_btnFindActionPerformed
+
+    private void cmbEstateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbEstateActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbEstateActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnClose;

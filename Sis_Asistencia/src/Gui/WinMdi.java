@@ -102,6 +102,11 @@ public class WinMdi extends javax.swing.JFrame {
         menudis.add(SubmenuCrit);
 
         JmitemUsu.setText("Usuarios");
+        JmitemUsu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                JmitemUsuMousePressed(evt);
+            }
+        });
         menudis.add(JmitemUsu);
 
         JmitemDis.setText("Diseño");
@@ -141,7 +146,7 @@ public class WinMdi extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 448, Short.MAX_VALUE)
+            .addComponent(jDesktopPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 456, Short.MAX_VALUE)
         );
 
         pack();
@@ -228,6 +233,18 @@ public class WinMdi extends javax.swing.JFrame {
         
         objRep.setVisible(true);  
     }//GEN-LAST:event_menurepMousePressed
+
+    private void JmitemUsuMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JmitemUsuMousePressed
+       WinUsuario objUsu= new WinUsuario();
+    
+       objUsu.setResizable(true);
+       objUsu.setMaximizable(true);
+       objUsu.setIconifiable(true);
+       //obj_Asis.setClosable(true);
+       jdpContenedor.add(objUsu);
+
+       objUsu.setVisible(true);
+    }//GEN-LAST:event_JmitemUsuMousePressed
 
     public static void main(String args[]) {
         
