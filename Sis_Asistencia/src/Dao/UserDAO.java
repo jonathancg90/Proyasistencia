@@ -27,20 +27,20 @@ public class UserDAO extends ConexionBd{
         try{
             DefaultTableModel datos;
             qs= new Query();
-            System.out.println();
+            System.out.println("hola");
             if (filter.length <= 0){
                 filter = new String[0][0];
             }
             String campos[] = new String[2];
-            campos[0]="idare";
-            campos[1]="name";
-            String Table = "Usuario";
+            campos[0]="idusu";
+            campos[1]="username";
+            String Table = "usuario";
             datos = qs.getAll(campos,Table,filter);
             tblDatos.setModel(datos);   
         }
         catch(Exception e)
         {
-            System.out.println("Dao_AreaDao_getTableAll: "+e);
+            System.out.println("UserDAO_getTableAll: "+e);
         }
     
     }
@@ -67,7 +67,7 @@ public class UserDAO extends ConexionBd{
 
         }
         catch(Exception e){
-            System.out.println("Dao_userAuth: "+e);
+            System.out.println("UserDAO_Auth: "+e);
             return false;
         }
     }     
@@ -81,7 +81,7 @@ public class UserDAO extends ConexionBd{
             getConexion();
             hp = new Helpers();
             qs = new Query();
-            String Table = "Usuario";
+            String Table = "usuario";
             String now = hp.getDateNow();
             
             objUsu = new Usuario(idusu,username,password,idemp,created,modified,estado);
@@ -100,7 +100,7 @@ public class UserDAO extends ConexionBd{
             return i;
         }
         catch(Exception e){
-            System.out.println("Dao_AreaDAO_saveUsuario: "+e);
+            System.out.println("UserDAO_saveUsuario: "+e);
             return i;
         }
     }
@@ -114,7 +114,7 @@ public class UserDAO extends ConexionBd{
             getConexion();
             hp = new Helpers();
             qs= new Query();
-            String Table = "Usuario";
+            String Table = "usuario";
             String now = hp.getDateNow();
             
             objUsu = new Usuario(idusu,username,password,idemp,created,modified,estado);
@@ -133,7 +133,7 @@ public class UserDAO extends ConexionBd{
             return i;
         }
         catch(Exception e){
-            System.out.println("Dao_AreaDAO_update: "+e);
+            System.out.println("UserDAO_update: "+e);
             return i;
         }
     }
@@ -148,7 +148,7 @@ public class UserDAO extends ConexionBd{
             objUsu = new Usuario();
             hp = new Helpers();
             qs= new Query();
-            String Table = "Usuario";
+            String Table = "usuario";
             
             objUsu.setIdusu(idusu);
             pt = qs.sqlDelete(Table);
@@ -159,7 +159,7 @@ public class UserDAO extends ConexionBd{
             return i;
         }
         catch(Exception e){
-            System.out.println("Dao_AreaDAO_delete: "+e);
+            System.out.println("UserDAO_delete: "+e);
             return i;
         }
     }
