@@ -11,6 +11,7 @@ public class Config {
     public String G_MAIN_HEIGHT;
     //Forms
     public String G_STATES[] = new String[2];
+    public String G_CITY[] = new String[2];
            
     
     public Config()
@@ -24,6 +25,9 @@ public class Config {
         
         G_STATES[0]="Inactivo";
         G_STATES[1]="Activo";
+        
+        G_CITY[0]="lIMA";
+        G_CITY[1]="CAJAMARCA";
         
     }
     

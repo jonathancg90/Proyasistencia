@@ -255,6 +255,27 @@ public class Query extends ConexionBd{
             System.out.println("Utilitarios_Query_loadState: "+e);
         }
         
+       
+        
+        
+    }
+    public void loadCity(JComboBox cmbCiudad){
+        try
+        {
+            cf = new Config();
+            Mstate = new DefaultComboBoxModel();
+            
+            Mstate.addElement(cf.G_CITY[0]);
+            Mstate.addElement(cf.G_CITY[1]);
+            
+            cmbCiudad.setModel(Mstate);   
+        }
+        catch(Exception e)
+        {
+            System.out.println("Utilitarios_Query_loadCity: "+e);
+        }
+        
+        
     }
         public  String[] getRecords(String Table,int Id){
         String campos[] = new String[0];

@@ -13,12 +13,11 @@ public class Empresa {
     
     /* Constructor final
      */
-    public Empresa(int idempr, String name, String ruc, boolean estado, int idemp, String created, String modified) {
+    public Empresa(int idempr, String name, String ruc, boolean estado, String created, String modified) {
         this.idempr = idempr;
         this.name = name;
         this.ruc = ruc;
         this.estado = estado;
-        this.idemp = idemp;
         this.created = created;
         this.modified = modified;
     }
@@ -84,19 +83,6 @@ public class Empresa {
         this.estado = estado;
     }
 
-    /**
-     * @return the idemp
-     */
-    public int getIdemp() {
-        return idemp;
-    }
-
-    /**
-     * @param idemp the idemp to set
-     */
-    public void setIdemp(int idemp) {
-        this.idemp = idemp;
-    }
 
     /**
      * @return the created
