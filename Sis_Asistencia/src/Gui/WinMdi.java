@@ -91,6 +91,11 @@ public class WinMdi extends javax.swing.JFrame {
         SubmenuCrit.add(JmitemArea);
 
         Jmitememp.setText("Empresa");
+        Jmitememp.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                JmitemempMousePressed(evt);
+            }
+        });
         SubmenuCrit.add(Jmitememp);
 
         JmitemTipo.setText("Tipo empleado");
@@ -146,7 +151,7 @@ public class WinMdi extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 456, Short.MAX_VALUE)
+            .addComponent(jDesktopPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 464, Short.MAX_VALUE)
         );
 
         pack();
@@ -247,6 +252,18 @@ public class WinMdi extends javax.swing.JFrame {
        objUsu.setVisible(true);
    
     }//GEN-LAST:event_JmitemUsuMousePressed
+
+    private void JmitemempMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JmitemempMousePressed
+    WinEmpresa objEmpresa= new WinEmpresa();
+    
+       objEmpresa.setResizable(true);
+       objEmpresa.setMaximizable(true);
+       objEmpresa.setIconifiable(true);
+       //obj_Asis.setClosable(true);
+       jdpContenedor.add(objEmpresa);
+
+       objEmpresa.setVisible(true);
+    }//GEN-LAST:event_JmitemempMousePressed
 
     public static void main(String args[]) {
         

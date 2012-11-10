@@ -1,6 +1,8 @@
-
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package Gui;
-
 import Utilitarios.Query;
 import Utilitarios.Config;
 import Javabeans.Empresa;
@@ -9,14 +11,18 @@ import Dao.EmpresaDAO;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+/**
+ *
+ * @author jsc
+ */
+public class WinEmpresa1 extends javax.swing.JFrame {
 
-public class WinEmpresa extends javax.swing.JInternalFrame {
     private EmpresaDAO objempresa;
     private Empresa area;
     private Query qs;
     private Config cg;
-
-    public WinEmpresa() {
+    
+    public WinEmpresa1() {
         initComponents();
         cargaForm();
     }
@@ -47,11 +53,12 @@ public class WinEmpresa extends javax.swing.JInternalFrame {
         
     }
 
- 
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jInternalFrame1 = new javax.swing.JInternalFrame();
         jPanel1 = new javax.swing.JPanel();
         btnNext = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
@@ -78,6 +85,10 @@ public class WinEmpresa extends javax.swing.JInternalFrame {
         lblsucursales = new javax.swing.JLabel();
         txtruc = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jInternalFrame1.setVisible(true);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Lista"));
 
@@ -201,7 +212,7 @@ public class WinEmpresa extends javax.swing.JInternalFrame {
                 .addComponent(btneliminar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btncerrar)
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -286,7 +297,7 @@ public class WinEmpresa extends javax.swing.JInternalFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(txtruc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(cmbEstate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -297,30 +308,41 @@ public class WinEmpresa extends javax.swing.JInternalFrame {
                 .addContainerGap())
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+        javax.swing.GroupLayout jInternalFrame1Layout = new javax.swing.GroupLayout(jInternalFrame1.getContentPane());
+        jInternalFrame1.getContentPane().setLayout(jInternalFrame1Layout);
+        jInternalFrame1Layout.setHorizontalGroup(
+            jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jInternalFrame1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+        jInternalFrame1Layout.setVerticalGroup(
+            jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jInternalFrame1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
+                    .addGroup(jInternalFrame1Layout.createSequentialGroup()
                         .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
+        );
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jInternalFrame1)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jInternalFrame1)
         );
 
         pack();
@@ -355,11 +377,15 @@ public class WinEmpresa extends javax.swing.JInternalFrame {
         objempresa.find(name, tblempresa);
     }//GEN-LAST:event_btnFindActionPerformed
 
+    private void btncerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncerrarActionPerformed
+    this.setVisible(false);
+    }//GEN-LAST:event_btncerrarActionPerformed
+
     private void btnregistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnregistrarActionPerformed
         String name = txtName.getText();
         String ruc = txtruc.getText();
         int estate = cmbEstate.getSelectedIndex();
-
+        
         objempresa = new EmpresaDAO();
         int i = objempresa.save(name,ruc,estate);
         if(i==0) {
@@ -369,7 +395,7 @@ public class WinEmpresa extends javax.swing.JInternalFrame {
             objempresa.getTableAll(tblempresa);
             cleanBox();
             JOptionPane.showMessageDialog(null,"Nueva empresa registrada");
-        }
+        }    
     }//GEN-LAST:event_btnregistrarActionPerformed
 
     private void btnactualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnactualizarActionPerformed
@@ -377,7 +403,7 @@ public class WinEmpresa extends javax.swing.JInternalFrame {
         String name = txtName.getText();
         String ruc = txtruc.getText();
         int estate = cmbEstate.getSelectedIndex();
-
+        
         objempresa = new EmpresaDAO();
         System.out.println("ID: "+id);
         int i = objempresa.update(id,name,ruc,estate);
@@ -388,12 +414,12 @@ public class WinEmpresa extends javax.swing.JInternalFrame {
             objempresa.getTableAll(tblempresa);
             cleanBox();
             JOptionPane.showMessageDialog(null,"Nueva empresa registrada");
-        }
+        } 
     }//GEN-LAST:event_btnactualizarActionPerformed
 
     private void btneliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btneliminarActionPerformed
-        int id = Integer.valueOf(lblId.getText());
-
+    int id = Integer.valueOf(lblId.getText());
+        
         objempresa = new EmpresaDAO();
         int i = objempresa.delete(id);
         if(i==0) {
@@ -403,24 +429,23 @@ public class WinEmpresa extends javax.swing.JInternalFrame {
             objempresa.getTableAll(tblempresa);
             cleanBox();
             JOptionPane.showMessageDialog(null,"Empresa eliminada");
-        }
+        } 
     }//GEN-LAST:event_btneliminarActionPerformed
 
-    private void btncerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncerrarActionPerformed
-        this.setVisible(false);
-    }//GEN-LAST:event_btncerrarActionPerformed
-
     private void lblsucursalesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblsucursalesMouseClicked
-        WinEmpresa_Sucursal objsucursal= new WinEmpresa_Sucursal();
+    WinEmpresa_Sucursal objsucursal= new WinEmpresa_Sucursal();
+    
+       objsucursal.setResizable(true);
+       objsucursal.setMaximizable(true);
+       objsucursal.setIconifiable(true);
+       WinMdi.jdpContenedor.add(objsucursal);
 
-        objsucursal.setResizable(true);
-        objsucursal.setMaximizable(true);
-        objsucursal.setIconifiable(true);
-        WinMdi.jdpContenedor.add(objsucursal);
-
-        objsucursal.setVisible(true);
+       objsucursal.setVisible(true);
     }//GEN-LAST:event_lblsucursalesMouseClicked
 
+    /**
+     * @param args the command line arguments
+     */
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnFind;
     private javax.swing.JButton btnNext;
@@ -430,6 +455,7 @@ public class WinEmpresa extends javax.swing.JInternalFrame {
     private javax.swing.JButton btneliminar;
     private javax.swing.JButton btnregistrar;
     private javax.swing.JComboBox cmbEstate;
+    private javax.swing.JInternalFrame jInternalFrame1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
