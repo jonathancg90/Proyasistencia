@@ -10,7 +10,7 @@ import java.sql.*;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-public class UserDAO extends ConexionBd{
+public class EmpleadoDAO extends ConexionBd{
     
     ResultSet rs = null;
     Statement s = null;
@@ -75,42 +75,7 @@ public class UserDAO extends ConexionBd{
     /*
      * Registro de usuarios
      */
-    public int saveUsuario(String username, String password,int idemp,int estado){
-       int i=0;
-        try{
-            Date date = new Date(0000-00-00);
-            //Preparando
-            getConexion();
-            hp = new Helpers();
-            qs = new Query();
-            String Table = "usuario";
-            String now = hp.getDateNow();
-            
-            objUsu = new Usuario(2,username,password,0,now,now,false);
-            //Iniciando consulta y asignando valores
-            pt = qs.sqlRegister(Table);
-           
-            pt.setString(1,objUsu.getUsername());
-            pt.setString(2,objUsu.getPassword());
-            pt.setInt(3,objUsu.getIdemp());
-            pt.setDate(4,date.valueOf(objUsu.getCreated()));
-            pt.setDate(5,date.valueOf(objUsu.getModified()));
-            pt.setBoolean(6, objUsu.isEstado());
-            //Ejecucion y cierre
-            i= pt.executeUpdate();
-            pt.close();
-            closeConexion();
-            return i;
-        }
-        catch(Exception e){
-            System.out.println("UserDAO_saveUsuario: "+e);
-            return i;
-        }
-    }
-    /*
-     * Actualizacion de Usuario
-     */
-    public int updateUsuario(String username, String password, int estado){
+    public int saveEmpleado(String username, String password,int estado){
        int i=0;
         try{
             Date date = new Date(0000-00-00);
@@ -127,8 +92,43 @@ public class UserDAO extends ConexionBd{
            
             pt.setString(1,objUsu.getUsername());
             pt.setString(2,objUsu.getPassword());
-            pt.setString(3,objUsu.getCreated());
-            pt.setString(4,objUsu.getModified());
+            pt.setBoolean(3, objUsu.isEstado());
+            pt.setString(4,objUsu.getCreated());
+            pt.setString(5,objUsu.getModified());
+            //Ejecucion y cierre
+            i= pt.executeUpdate();
+            pt.close();
+            closeConexion();
+            return i;
+        }
+        catch(Exception e){
+            System.out.println("UserDAO_saveUsuario: "+e);
+            return i;
+        }
+    }
+    /*
+     * Actualizacion de Usuario
+     */
+    public int updateEmpleado(String username, String password){
+       int i=0;
+        try{
+            Date date = new Date(0000-00-00);
+            //Preparando
+            getConexion();
+            hp = new Helpers();
+            qs = new Query();
+            String Table = "usuario";
+            String now = hp.getDateNow();
+            
+            objUsu = new Usuario(0,username,password,0,now,now,false);
+            //Iniciando consulta y asignando valores
+            pt = qs.sqlRegister(Table);
+           
+            pt.setString(1,objUsu.getUsername());
+            pt.setString(2,objUsu.getPassword());
+            pt.setBoolean(3, objUsu.isEstado());
+            pt.setString(4,objUsu.getCreated());
+            pt.setString(5,objUsu.getModified());
             //Ejecucion y cierre
             i= pt.executeUpdate();
             pt.close();
@@ -143,7 +143,7 @@ public class UserDAO extends ConexionBd{
     /*
      * Eliminar 
      */
-    public int deleteUsuario(int idusu){
+    public int deleteEmpleado(int idusu){
        int i=0;
         try{
             //Preparando

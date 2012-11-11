@@ -12,7 +12,7 @@ import javax.swing.table.DefaultTableModel;
 /**
      * Formulario para el mantenimiento de las sucursales de la empresa.
      */
-public class WinSucursal extends javax.swing.JFrame {
+public class WinSucursal extends javax.swing.JInternalFrame {
 
     private SucursalDao objsucursal;
     private Sucursal sucursal;

@@ -102,6 +102,11 @@ public class WinMdi extends javax.swing.JFrame {
         SubmenuCrit.add(JmitemTipo);
 
         JmitemSucursal.setText("Sucursal");
+        JmitemSucursal.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                JmitemSucursalMousePressed(evt);
+            }
+        });
         SubmenuCrit.add(JmitemSucursal);
 
         menudis.add(SubmenuCrit);
@@ -151,7 +156,7 @@ public class WinMdi extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 464, Short.MAX_VALUE)
+            .addComponent(jDesktopPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 472, Short.MAX_VALUE)
         );
 
         pack();
@@ -264,6 +269,17 @@ public class WinMdi extends javax.swing.JFrame {
 
        objEmpresa.setVisible(true);
     }//GEN-LAST:event_JmitemempMousePressed
+
+    private void JmitemSucursalMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JmitemSucursalMousePressed
+         WinEmpresa_Sucursal objsucursal= new WinEmpresa_Sucursal();
+
+        objsucursal.setResizable(true);
+        objsucursal.setMaximizable(true);
+        objsucursal.setIconifiable(true);
+        WinMdi.jdpContenedor.add(objsucursal);
+
+        objsucursal.setVisible(true);
+    }//GEN-LAST:event_JmitemSucursalMousePressed
 
     public static void main(String args[]) {
         

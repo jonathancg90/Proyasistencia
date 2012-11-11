@@ -9,9 +9,7 @@ public class Usuario {
     private String created;
     private String modified;
     private boolean estado;
-    
-    /*Constructor Final
-     */
+
     public Usuario(int idusu, String username, String password, int idemp, String created, String modified, boolean estado) {
         this.idusu = idusu;
         this.username = username;
@@ -21,9 +19,7 @@ public class Usuario {
         this.modified = modified;
         this.estado = estado;
     }
-    
-    /*Constructor por Omision
-     */
+
     public Usuario() {
     }
 
@@ -124,6 +120,7 @@ public class Usuario {
     public void setEstado(boolean estado) {
         this.estado = estado;
     }
+    
     
     
    
