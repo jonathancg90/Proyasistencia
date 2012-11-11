@@ -39,8 +39,7 @@ public class UserDAO extends ConexionBd{
             datos = qs.getAll(campos,Table,filter);
             tblDatos.setModel(datos);   
         }
-        catch(Exception e)
-        {
+        catch(Exception e){
             System.out.println("UserDAO_getTableAll: "+e);
         }
     
