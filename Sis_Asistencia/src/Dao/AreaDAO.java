@@ -96,7 +96,6 @@ public class AreaDAO extends ConexionBd{
             pt = qs.sqlUpdate(Table);
             pt.setString(1,objArea.getName());
             pt.setBoolean(2,objArea.getState());
-            //pt.setDate(3,date.valueOf(objArea.getModified()));
             pt.setDate(3,date.valueOf(objArea.getCreated()));
             pt.setDate(4,date.valueOf(objArea.getModified()));
             pt.setInt(5,objArea.getIdare());

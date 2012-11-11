@@ -55,7 +55,7 @@ public class UserDAO extends ConexionBd{
             s = conexion.createStatement();
             String qs = "select * from usuario "
                     + "where username='"+user+"' "
-                    + "and password='"+pas+"'";
+                    + "and pass='"+pas+"'";
 
             rs = s.executeQuery(qs);
             result = rs.next();

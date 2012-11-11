@@ -25,7 +25,7 @@ public class WinEmpresa_Sucursal extends javax.swing.JInternalFrame {
             objsucursal = new SucursalDao();
             qs = new Query();
             objsucursal.getTableAll(tblSucursal);
-            qs.loadCity(cmbCiudad);
+            qs.loadChoice(cmbCiudad,"ciudad","nombre");
         } catch (Exception e) {
             System.out.println("Gui_WinMdi: " + e);
         }
@@ -345,10 +345,10 @@ public class WinEmpresa_Sucursal extends javax.swing.JInternalFrame {
     private void btnregistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnregistrarActionPerformed
         String name = txtName.getText();
         String direccion=txtdireccion.getText();
-        int ciudad = cmbCiudad.getSelectedIndex();
-        int idempr = Integer.valueOf(lblidemp.getText());
+        int ciudad = qs.idChoice("ciudad", "nombre", String.valueOf(cmbCiudad.getSelectedItem()));
+        //int idempr = Integer.valueOf(lblidemp.getText());
         objsucursal = new SucursalDao();
-        int i = objsucursal.save(name,direccion, ciudad,idempr);
+        int i = objsucursal.save(name,direccion, ciudad,1);
         if (i == 0) {
             JOptionPane.showInputDialog(null,"No se pudo grabar datos");
         }

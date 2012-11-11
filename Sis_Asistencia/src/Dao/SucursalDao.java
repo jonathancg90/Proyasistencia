@@ -32,8 +32,8 @@ public class SucursalDao extends ConexionBd{
                 filter = new String[0][0];
             } 
             String campos[] = new String[2];
-            campos[0]="idare";
-            campos[1]="name";
+            campos[0]="idsuc";
+            campos[1]="nombre";
             String Table = "sucursal";
             datos = qs.getAll(campos,Table,filter);
             tblDatos.setModel(datos);   
@@ -62,9 +62,9 @@ public class SucursalDao extends ConexionBd{
             objSucursal = new Sucursal(0,name,direccion,idciu,idempr);
             //Iniciando consulta y asignando valores
             pt = qs.sqlRegister(Table);
-            pt.setString(1,objSucursal.getName());
-            pt.setString(2,objSucursal.getDireccion());
-            pt.setInt(3,objSucursal.getIdciu());
+            pt.setInt(1,objSucursal.getIdciu());
+            pt.setString(2,objSucursal.getName());
+            pt.setString(3,objSucursal.getDireccion());            
             pt.setInt(4,objSucursal.getIdempr());
             //Ejecucion y cierre
             i= pt.executeUpdate();
@@ -73,7 +73,7 @@ public class SucursalDao extends ConexionBd{
             return i;
         }
         catch(Exception e){
-            System.out.println("Dao_SucursalDAO: "+e);
+            System.out.println("Dao_SucursalDAO_save: "+e);
             return i;
         }
     }
@@ -143,7 +143,7 @@ public class SucursalDao extends ConexionBd{
         try {
             if(!"".equals(name)){
                 filter = new String[1][2];
-                filter[0][0] = "name";
+                filter[0][0] = "nombre";
                 filter[0][1] = name; 
             }
             getTableAll(tblDatos);
@@ -164,7 +164,7 @@ public class SucursalDao extends ConexionBd{
             qs= new Query();
             //Preparando
             String campos[] = new String[4];
-            campos = qs.getRecords("area",idusu);
+            campos = qs.getRecords("sucursal",idusu);
             objSucursal.setName(campos[1]);
             objSucursal.setDireccion(campos[2]);
             objSucursal.setIdciu(Integer.valueOf(campos[3]));

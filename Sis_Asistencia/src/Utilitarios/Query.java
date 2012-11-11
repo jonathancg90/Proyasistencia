@@ -7,6 +7,7 @@ import java.sql.*;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
+
 public class Query extends ConexionBd{
     
     
@@ -14,7 +15,7 @@ public class Query extends ConexionBd{
     ResultSet rs = null;
     Statement s = null;
     PreparedStatement  pt = null;
-    DefaultComboBoxModel Mstate;
+    DefaultComboBoxModel MChoice;
     Config cf;
     /*
      * Arma registro
@@ -33,14 +34,11 @@ public class Query extends ConexionBd{
             ResultSetMetaData meta = rs.getMetaData();
             int nCols = meta.getColumnCount();
             
-            for(int i=1;i<=nCols;i++)
-            {
-                if(!meta.isAutoIncrement(i))
-                {
+            for(int i=1;i<=nCols;i++){
+                if(!meta.isAutoIncrement(i)){
                     campos = campos + meta.getColumnName(i);
                     values = values + "?";
-                    if(i<nCols)
-                    {
+                    if(i<nCols){
                         campos = campos + ",";
                         values = values + ","; 
                     }
@@ -74,12 +72,11 @@ public class Query extends ConexionBd{
     public PreparedStatement sqlUpdate(String Table){
         pt = null;
         
-        try
-        {
+        try{
             getConexion();
             String query;
             String condi="";
-            String id = "idusu";
+            String id = "id";
             Statement s = null;
             s = conexion.createStatement();
             rs = s.executeQuery("select * from "+Table);
@@ -88,30 +85,25 @@ public class Query extends ConexionBd{
             int nCols = meta.getColumnCount();
             query = "update "+Table+" set ";
             
-            for(int i=1;i<=nCols;i++)
-            {
-                if(!meta.isAutoIncrement(i))
-                {
+            for(int i=1;i<=nCols;i++){
+                if(!meta.isAutoIncrement(i)){
                     query = query + meta.getColumnName(i)
                     //+ ",";       
                     + "=?,";
                 }
-                else
-                {
+                else{
                     id =  meta.getColumnName(i);
                 }
             }
             //query = query + " where "+id;
             query = query + " where "+id+"= ?";
             query = query.replace(", "," ");
-            System.out.println(query);
             pt  = conexion.prepareStatement(query);
             rs.close();
             return pt;
             
         }
-        catch(Exception e)
-        {
+        catch(Exception e){
             System.out.println("Utilitarios_Query_sqlUpdate: "+e);
             return pt;
         }
@@ -122,8 +114,7 @@ public class Query extends ConexionBd{
     public PreparedStatement sqlDelete(String Table){
         pt = null;
         
-        try
-        {
+        try{
             getConexion();
             String query;
             String id = "id";
@@ -136,10 +127,8 @@ public class Query extends ConexionBd{
 
             query = "delete from  "+Table+" where  ";
             
-            for(int i=1;i<=nCols;i++)
-            {
-                if(meta.isAutoIncrement(i))
-                {
+            for(int i=1;i<=nCols;i++){
+                if(meta.isAutoIncrement(i)){
                     id =  meta.getColumnName(i);
                 }
             }
@@ -149,8 +138,7 @@ public class Query extends ConexionBd{
             return pt;
             
         }
-        catch(Exception e)
-        {
+        catch(Exception e){
             System.out.println("Utilitarios_Query_sqlDelete: "+e);
             return pt;
         }
@@ -198,7 +186,6 @@ public class Query extends ConexionBd{
             
             s = conexion.createStatement();
             String qs = getQueryList(args,Table, Filter);
-            System.out.println(qs);
             rs = s.executeQuery(qs);
             
             //Llenado Cabecera Jtable
@@ -229,8 +216,6 @@ public class Query extends ConexionBd{
         }
         catch(Exception e)
         {
-            String qs = getQueryList(args,Table, Filter);
-            System.out.println(qs);
             System.out.println("Utilitarios_Query_getAll: "+e);
         }
         
@@ -243,61 +228,73 @@ public class Query extends ConexionBd{
         try
         {
             cf = new Config();
-            Mstate = new DefaultComboBoxModel();
+            MChoice = new DefaultComboBoxModel();
             
-            Mstate.addElement(cf.G_STATES[0]);
-            Mstate.addElement(cf.G_STATES[1]);
+            MChoice.addElement(cf.G_STATES[0]);
+            MChoice.addElement(cf.G_STATES[1]);
             
-            cmbState.setModel(Mstate);   
+            cmbState.setModel(MChoice);   
         }
         catch(Exception e)
         {
             System.out.println("Utilitarios_Query_loadState: "+e);
         }
         
-       
-        
         
     }
-    public void loadCity(JComboBox cmbCiudad){
-        try
-        {
-            cf = new Config();
-            Mstate = new DefaultComboBoxModel();
+     /*
+     * Autocarga de los combos
+     */
+    public void loadChoice(JComboBox cmbChoice, String Tbl, String Campo){
+        try{
+            getConexion();
+            MChoice = new DefaultComboBoxModel();
+            s = conexion.createStatement();
+            rs = s.executeQuery("select " +Campo+ " from " +Tbl);
+            while(rs.next()) {
+              MChoice.addElement(rs.getString("nombre"));
+            }     
             
-            Mstate.addElement(cf.G_CITY[0]);
-            Mstate.addElement(cf.G_CITY[1]);
-            
-            cmbCiudad.setModel(Mstate);   
+            cmbChoice.setModel(MChoice);   
+            closeConexion(); 
         }
-        catch(Exception e)
-        {
-            System.out.println("Utilitarios_Query_loadCity: "+e);
+        catch(Exception e){
+            System.out.println("Utilitarios_Query_loadChoice: "+e);
         }
-        
-        
     }
+     
+     /*
+     * Autocarga de los combos
+     */
+    public int idChoice(String Tbl, String Campo, String value){
+        int id=0;
+        try{
+            getConexion();
+            String identify = getIdentify(Tbl);
+            MChoice = new DefaultComboBoxModel();
+            s = conexion.createStatement();
+            rs = s.executeQuery("select " +identify+ " from " +Tbl+ " where " +Campo+ " = '"+value+"'");
+            while(rs.next()) {
+                id = rs.getInt(identify);
+            }     
+            
+            closeConexion(); 
+        }
+        catch(Exception e){
+            System.out.println("Utilitarios_Query_idChoice: "+e);
+        }
+        return id;
+    }
+    /*
+     * Obtener valores de la tabla 
+     */
         public  String[] getRecords(String Table,int Id){
         String campos[] = new String[0];
         try{
             getConexion();
             String query;
             String identify="";
-            Statement s = null;
-            
-            s = conexion.createStatement();
-            rs = s.executeQuery("select * from "+Table +" LIMIT 1 ");
-            //Llenado Cabecera Jtable
-            ResultSetMetaData meta = rs.getMetaData();
-            int nCols = meta.getColumnCount();
-            campos = new String[nCols];
-            for(int i=1;i<=nCols;i++){
-                
-                if(meta.isAutoIncrement(i)){
-                    
-                    identify = meta.getColumnName(i);
-                }
-            }
+            identify = getIdentify(Table);
             query= "select * from "+Table+" where "+ identify +" = "+Id+"";
             System.out.println(query);
             /*pt  = conexion.prepareStatement(query);
@@ -317,6 +314,32 @@ public class Query extends ConexionBd{
             System.out.println("Utilitarios_Query_getRecords: "+e);
         }
         return campos;
-        
     }
+        /*
+         * Obetener el indice de una tabla
+         */
+        public  String getIdentify(String Table){
+            String identify="id";
+            try{  
+                Statement s = null;
+
+                s = conexion.createStatement();
+                rs = s.executeQuery("select * from "+Table +" LIMIT 1 ");
+                //Llenado Cabecera Jtable
+                ResultSetMetaData meta = rs.getMetaData();
+                int nCols = meta.getColumnCount();
+                for(int i=1;i<=nCols;i++){
+
+                    if(meta.isAutoIncrement(i)){
+
+                        identify = meta.getColumnName(i);
+                    }
+                }
+            }
+            catch(Exception e){
+                System.out.println("Utilitarios_Query_getIdentify: "+e);
+            }
+                
+            return identify;
+        }
 }
