@@ -34,7 +34,7 @@ public class AreaDAO extends ConexionBd{
             }
             String campos[] = new String[2];
             campos[0]="idare";
-            campos[1]="name";
+            campos[1]="nombre";
             String Table = "area";
             datos = qs.getAll(campos,Table,filter);
             tblDatos.setModel(datos);   
@@ -142,7 +142,7 @@ public class AreaDAO extends ConexionBd{
         try {
             if(!"".equals(name)){
                 filter = new String[1][2];
-                filter[0][0] = "name";
+                filter[0][0] = "nombre";
                 filter[0][1] = name; 
             }
             getTableAll(tblDatos);

@@ -28,8 +28,8 @@ public class EmpresaDAO extends ConexionBd{
             if (filter.length <= 0){
                 filter = new String[0][0];
             }           
-           String campos[] = new String[2];
-            campos[0]="idare";
+            String campos[] = new String[2];
+            campos[0]="idemp";
             campos[1]="name";
             String Table = "empresa";
             datos = qs.getAll(campos,Table, filter);
@@ -157,14 +157,14 @@ public class EmpresaDAO extends ConexionBd{
     /*
      * Cargar valores de busqueda al modelo 
      */
-    public int getValues(int idusu){
+    public int getValues(int idemp){
        int i=0;
         try{
             objEmpresa =  new Empresa();
             qs= new Query();
             //Preparando
             String campos[] = new String[5];
-            campos = qs.getRecords("area",idusu);
+            campos = qs.getRecords("empresa",idemp);
             objEmpresa.setName(campos[1]);
             objEmpresa.setRuc(campos[2]);
             objEmpresa.setEstado(Boolean.valueOf(campos[3]));
