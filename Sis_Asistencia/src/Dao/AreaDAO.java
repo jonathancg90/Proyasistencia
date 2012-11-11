@@ -156,25 +156,23 @@ public class AreaDAO extends ConexionBd{
     /*
      * Cargar valores de busqueda al modelo 
      */
-    public int getValues(int idusu){
-       int i=0;
+    public Area getValues(int idusu){
+       objArea =  new Area();
         try{
-            objArea =  new Area();
             qs= new Query();
             //Preparando
-            String campos[] = new String[4];
+            String campos[] = new String[6];
             campos = qs.getRecords("area",idusu);
-            objArea.setName(campos[1]);
-            objArea.setEstado(Boolean.valueOf(campos[2]));
-            objArea.setCreated(campos[3]);
-            objArea.setModified(campos[4]);
-            i=1;
+            objArea.setName(campos[2]);
+            objArea.setEstado(Boolean.valueOf(campos[3]));
+            objArea.setCreated(campos[4]);
+            objArea.setModified(campos[5]);
             
-            return i;
+            return objArea;
         }
         catch(Exception e){
-            System.out.println("Dao_AreaDAO_delete: "+e);
-            return i;
+            System.out.println("Dao_AreaDAO_getValues: "+e);
+            return objArea;
         }
     }
 

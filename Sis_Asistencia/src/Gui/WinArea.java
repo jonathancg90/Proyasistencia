@@ -361,8 +361,9 @@ public class WinArea extends javax.swing.JInternalFrame {
                 m = (DefaultTableModel) this.tblArea.getModel();
                 String idArea = String.valueOf(m.getValueAt(fsel, 0));
                 lblId.setText(idArea);
-                objarea.getValues(Integer.parseInt(idArea));
+                area = objarea.getValues(Integer.parseInt(idArea));
                 txtName.setText(area.getName());
+                lblModified.setText(area.getModified());
                 }
             catch (Exception e) {
                 System.out.println("Gui_Win_area: " + e);

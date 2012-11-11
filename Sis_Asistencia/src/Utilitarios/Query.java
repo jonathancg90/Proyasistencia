@@ -296,19 +296,19 @@ public class Query extends ConexionBd{
             String identify="";
             identify = getIdentify(Table);
             query= "select * from "+Table+" where "+ identify +" = "+Id+"";
-            System.out.println(query);
-            /*pt  = conexion.prepareStatement(query);
+            s = conexion.createStatement();
             rs = s.executeQuery(query);
-            int i=0;
-            while (rs.next()){
-                
+            ResultSetMetaData meta = rs.getMetaData();
+            int nCols = meta.getColumnCount();
+            campos = new String[nCols+1];
+            int i=1;
+            rs.next();
+            for(;i<=nCols;i++){
                 campos[i]=rs.getString(i);
-                i++;
-            }*/
+                System.out.println(i + " - " + campos[i]);
+            }
             rs.close();
             closeConexion(); 
-
-            
         }
         catch(Exception e){
             System.out.println("Utilitarios_Query_getRecords: "+e);
@@ -318,7 +318,7 @@ public class Query extends ConexionBd{
         /*
          * Obetener el indice de una tabla
          */
-        public  String getIdentify(String Table){
+        private  String getIdentify(String Table){
             String identify="id";
             try{  
                 Statement s = null;
@@ -328,6 +328,7 @@ public class Query extends ConexionBd{
                 //Llenado Cabecera Jtable
                 ResultSetMetaData meta = rs.getMetaData();
                 int nCols = meta.getColumnCount();
+                
                 for(int i=1;i<=nCols;i++){
 
                     if(meta.isAutoIncrement(i)){
@@ -342,4 +343,21 @@ public class Query extends ConexionBd{
                 
             return identify;
         }
+        /*
+         * Obtener la cantidad de registros en una tabla
+         */
+        private  int getCountRegister(String query){
+            int cant=0;
+            try{  
+                Statement s = null;
+
+                s = conexion.createStatement();
+                rs = s.executeQuery("select count(*) from "+query);
+                rs.next();
+                cant = rs.getInt(1); 
+            }catch(Exception e){
+                System.out.println("Utilitarios_Query_getCountRegister"+e);
+            }
+            return cant;
+         } 
 }
