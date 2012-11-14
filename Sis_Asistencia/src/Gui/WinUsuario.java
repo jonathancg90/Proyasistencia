@@ -24,7 +24,7 @@ public class WinUsuario extends javax.swing.JInternalFrame {
             objUser = new UserDAO();
             qs = new Query();
             objUser.getTableAll(TblUsu);
-            qs.loadState(cboestado);
+            qs.loadState(cboestado,false);
         } catch (Exception e) {
             System.out.println("Gui_WinMdi: " + e);
         }

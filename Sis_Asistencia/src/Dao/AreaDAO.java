@@ -4,6 +4,7 @@ package Dao;
 import Utilitarios.ConexionBd;
 import Utilitarios.Helpers;
 import Utilitarios.Query;
+import Utilitarios.Validators;
 import Javabeans.Area;
 import Javabeans.Usuario;
 import java.sql.Date;
@@ -18,6 +19,7 @@ public class AreaDAO extends ConexionBd{
     private Area objArea;
     private Usuario objUsu;
     private Helpers hp;
+    private Validators objVal;
     private String filter[][] = new String[0][0];
     
     PreparedStatement  pt = null;
@@ -48,7 +50,7 @@ public class AreaDAO extends ConexionBd{
     /*
      * Registro de areas
      */
-    public int save(String name, int state){
+    public int save(String name, boolean state){
        int i=0;
         try{
             Date date = new Date(0000-00-00);
@@ -59,7 +61,7 @@ public class AreaDAO extends ConexionBd{
             String Table = "area";
             String now = hp.getDateNow();
             
-            objArea = new Area(0,name,now,now,false);
+            objArea = new Area(0,name,now,now,state);
             //Iniciando consulta y asignando valores
             pt = qs.sqlRegister(Table);
             pt.setString(1,objArea.getName());
@@ -80,7 +82,7 @@ public class AreaDAO extends ConexionBd{
     /*
      * Actualizacion de areas
      */
-    public int update(int id, String name, int state){
+    public int update(int id, String name, boolean state){
        int i=0;
         try{
             Date date = new Date(0000-00-00);
@@ -91,7 +93,7 @@ public class AreaDAO extends ConexionBd{
             String Table = "area";
             String now = hp.getDateNow();
             
-            objArea = new Area(id,name,now,now,false);
+            objArea = new Area(id,name,now,now,state);
             //Iniciando consulta y asignando valores
             pt = qs.sqlUpdate(Table);
             pt.setString(1,objArea.getName());
@@ -158,13 +160,15 @@ public class AreaDAO extends ConexionBd{
      */
     public Area getValues(int idusu){
        objArea =  new Area();
+       objVal = new Validators();
         try{
             qs= new Query();
             //Preparando
             String campos[] = new String[6];
             campos = qs.getRecords("area",idusu);
             objArea.setName(campos[2]);
-            objArea.setEstado(Boolean.valueOf(campos[3]));
+            System.out.println("Estado: "+objVal.StringToBoolean(campos[3]));
+            objArea.setEstado(objVal.StringToBoolean(campos[3]));
             objArea.setCreated(campos[4]);
             objArea.setModified(campos[5]);
             

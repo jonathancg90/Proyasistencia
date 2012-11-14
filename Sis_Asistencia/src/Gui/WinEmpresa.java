@@ -30,7 +30,7 @@ public class WinEmpresa extends javax.swing.JInternalFrame {
             qs = new Query();
             objempresa = new EmpresaDAO();
             objempresa.getTableAll(tblempresa);
-            qs.loadState(this.cmbEstate);
+            qs.loadState(this.cmbEstate,false);
             qs.loadChoice(cboMon,"moneda","nombre");
           
         }

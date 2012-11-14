@@ -49,4 +49,13 @@ public class Validators {
         
         return error;
     }
+    
+    public boolean StringToBoolean(String value){
+        if("t".equals(value)){
+            return true;
+        }else {
+            return false;
+        }
+        
+    }
 }

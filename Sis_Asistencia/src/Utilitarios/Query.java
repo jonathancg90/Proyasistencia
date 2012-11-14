@@ -224,15 +224,20 @@ public class Query extends ConexionBd{
     /*
      * Autocarga de los estados activo, inactivo
      */
-    public void loadState(JComboBox cmbState){
+    public void loadState(JComboBox cmbState, boolean value){
         try
         {
             cf = new Config();
             MChoice = new DefaultComboBoxModel();
-            
-            MChoice.addElement(cf.G_STATES[0]);
-            MChoice.addElement(cf.G_STATES[1]);
-            
+            if(value == false){
+                MChoice.addElement(cf.G_STATES[0]);
+                MChoice.addElement(cf.G_STATES[1]);
+            }
+            else{
+                MChoice.addElement(cf.G_STATES[1]);
+                MChoice.addElement(cf.G_STATES[0]);
+            }
+                
             cmbState.setModel(MChoice);   
         }
         catch(Exception e)
