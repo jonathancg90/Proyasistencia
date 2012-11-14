@@ -385,12 +385,12 @@ public class WinEmpresa_Sucursal extends javax.swing.JInternalFrame {
         objsucursal = new SucursalDao();
         int i = objsucursal.delete(id);
         if(i==0) {
-            JOptionPane.showMessageDialog(null,"No se pudo eliminar el area");
+            JOptionPane.showMessageDialog(null,"No se pudo eliminar la sucursal");
         }
         else {
             objsucursal.getTableAll(tblSucursal);
             cleanBox();
-            JOptionPane.showMessageDialog(null,"Area eliminada");
+            JOptionPane.showMessageDialog(null,"Sucursal eliminada");
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
 

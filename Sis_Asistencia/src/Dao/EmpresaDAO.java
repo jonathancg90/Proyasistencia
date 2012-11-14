@@ -29,7 +29,7 @@ public class EmpresaDAO extends ConexionBd{
                 filter = new String[0][0];
             }           
            String campos[] = new String[2];
-            campos[0]="idare";
+            campos[0]="idemp";
             campos[1]="name";
             String Table = "empresa";
             datos = qs.getAll(campos,Table, filter);

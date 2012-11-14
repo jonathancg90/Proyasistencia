@@ -32,7 +32,7 @@ public class SucursalDao extends ConexionBd{
                 filter = new String[0][0];
             } 
             String campos[] = new String[2];
-            campos[0]="idare";
+            campos[0]="idsuc";
             campos[1]="name";
             String Table = "sucursal";
             datos = qs.getAll(campos,Table,filter);
@@ -164,7 +164,7 @@ public class SucursalDao extends ConexionBd{
             qs= new Query();
             //Preparando
             String campos[] = new String[4];
-            campos = qs.getRecords("area",idusu);
+            campos = qs.getRecords("sucursal",idusu);
             objSucursal.setName(campos[1]);
             objSucursal.setDireccion(campos[2]);
             objSucursal.setIdciu(Integer.valueOf(campos[3]));
