@@ -2,7 +2,7 @@
 package Gui;
 
 import Utilitarios.Query;
-import Utilitarios.Config;
+import Utilitarios.Data;
 import Javabeans.Area;
 
 import Dao.AreaDAO;
@@ -18,7 +18,7 @@ public class WinArea extends javax.swing.JInternalFrame {
     private AreaDAO objarea;
     private Area area;
     private Query qs;
-    private Config cg;
+    private Data dt;
     
     public WinArea() {
         initComponents();
@@ -316,9 +316,9 @@ public class WinArea extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
-        cg = new Config();
+        dt = new Data();
         String name = txtName.getText();
-        boolean estate = Boolean.valueOf(cg.G_BOOLEAN[cmbEstate.getSelectedIndex()]);
+        boolean estate = Boolean.valueOf(dt.G_BOOLEAN[cmbEstate.getSelectedIndex()]);
         objarea = new AreaDAO();
         int i = objarea.save(name, estate);
         if (i == 0) {
@@ -332,10 +332,10 @@ public class WinArea extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnRegisterActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
-        cg = new Config();
+        dt = new Data();
         int id = Integer.valueOf(lblId.getText());
         String name = txtName.getText();
-        boolean estate = Boolean.valueOf(cg.G_BOOLEAN[cmbEstate.getSelectedIndex()]);
+        boolean estate = Boolean.valueOf(dt.G_BOOLEAN[cmbEstate.getSelectedIndex()]);
         objarea = new AreaDAO();
         int i = objarea.update(id,name,estate);
         if (i == 0) {
@@ -396,6 +396,7 @@ public class WinArea extends javax.swing.JInternalFrame {
 
     private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
         this.dispose();
+        Utilitarios.Config.OPENWINDOWS =0;
     }//GEN-LAST:event_btnCloseActionPerformed
 
     private void lblCargosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCargosMouseClicked

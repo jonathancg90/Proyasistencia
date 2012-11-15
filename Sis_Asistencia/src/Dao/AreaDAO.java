@@ -21,6 +21,7 @@ public class AreaDAO extends ConexionBd{
     private Helpers hp;
     private Validators objVal;
     private String filter[][] = new String[0][0];
+    private String _table = "area";
     
     PreparedStatement  pt = null;
     /*
@@ -37,7 +38,7 @@ public class AreaDAO extends ConexionBd{
             String campos[] = new String[2];
             campos[0]="idare";
             campos[1]="nombre";
-            String Table = "area";
+            String Table = this._table;
             datos = qs.getAll(campos,Table,filter);
             tblDatos.setModel(datos);   
         }
@@ -58,7 +59,7 @@ public class AreaDAO extends ConexionBd{
             getConexion();
             hp = new Helpers();
             qs = new Query();
-            String Table = "area";
+            String Table = this._table;
             String now = hp.getDateNow();
             
             objArea = new Area(0,name,now,now,state);
@@ -90,7 +91,7 @@ public class AreaDAO extends ConexionBd{
             getConexion();
             hp = new Helpers();
             qs= new Query();
-            String Table = "area";
+            String Table = this._table;
             String now = hp.getDateNow();
             
             objArea = new Area(id,name,now,now,state);
@@ -123,7 +124,7 @@ public class AreaDAO extends ConexionBd{
             objArea = new Area();
             hp = new Helpers();
             qs= new Query();
-            String Table = "area";
+            String Table = this._table;
             
             objArea.setIdare(id);
             pt = qs.sqlDelete(Table);
@@ -167,7 +168,6 @@ public class AreaDAO extends ConexionBd{
             String campos[] = new String[6];
             campos = qs.getRecords("area",idusu);
             objArea.setName(campos[2]);
-            System.out.println("Estado: "+objVal.StringToBoolean(campos[3]));
             objArea.setEstado(objVal.StringToBoolean(campos[3]));
             objArea.setCreated(campos[4]);
             objArea.setModified(campos[5]);

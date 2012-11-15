@@ -1,7 +1,7 @@
 
 package Utilitarios;
 
-import Utilitarios.Config;
+import Utilitarios.Data;
 
 import java.sql.*;
 import javax.swing.*;
@@ -16,7 +16,7 @@ public class Query extends ConexionBd{
     Statement s = null;
     PreparedStatement  pt = null;
     DefaultComboBoxModel MChoice;
-    Config cf;
+    Data dt;
     /*
      * Arma registro
      */
@@ -227,15 +227,15 @@ public class Query extends ConexionBd{
     public void loadState(JComboBox cmbState, boolean value){
         try
         {
-            cf = new Config();
+            dt = new Data();
             MChoice = new DefaultComboBoxModel();
             if(value == false){
-                MChoice.addElement(cf.G_STATES[0]);
-                MChoice.addElement(cf.G_STATES[1]);
+                MChoice.addElement(dt.G_STATES[0]);
+                MChoice.addElement(dt.G_STATES[1]);
             }
             else{
-                MChoice.addElement(cf.G_STATES[1]);
-                MChoice.addElement(cf.G_STATES[0]);
+                MChoice.addElement(dt.G_STATES[1]);
+                MChoice.addElement(dt.G_STATES[0]);
             }
                 
             cmbState.setModel(MChoice);   
@@ -310,7 +310,6 @@ public class Query extends ConexionBd{
             rs.next();
             for(;i<=nCols;i++){
                 campos[i]=rs.getString(i);
-                System.out.println(i + " - " + campos[i]);
             }
             rs.close();
             closeConexion(); 
