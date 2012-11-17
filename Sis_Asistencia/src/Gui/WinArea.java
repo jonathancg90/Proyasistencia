@@ -404,14 +404,12 @@ public class WinArea extends javax.swing.JInternalFrame {
         WinArea_Cargos objCargo= new WinArea_Cargos();
 
         objCargo.setResizable(true);
-        objCargo.setMaximizable(true);
+        objCargo.setMaximizable(false);
         objCargo.setIconifiable(true);
-        //obj_Asis.setClosable(true);
-        objCargo.geIdArea(Integer.valueOf(lblId.getText()));
+        objCargo.setClosable(true);
         WinMdi.jdpContenedor.add(objCargo);
-
-
         objCargo.setVisible(true);
+        objCargo.lblArea.setText(lblId.getText());
        } else {
            JOptionPane.showMessageDialog(null,"Debe de seleccionar una area para poder asignar cargos");
        }
