@@ -2,14 +2,16 @@
 package Gui;
 
 import javax.swing.*;
+import Utilitarios.Validators;
 
 public class WinMdi extends javax.swing.JFrame {
-
+    Validators val;
     /*
      * Creacion del WinMdi
      */
     public WinMdi() {
         initComponents();
+
     }
     
     
@@ -177,14 +179,14 @@ public class WinMdi extends javax.swing.JFrame {
     private void JmitemAreaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JmitemAreaMousePressed
 
        WinArea objArea= new WinArea();
+       val = new Validators();
     
        objArea.setResizable(true);
        objArea.setMaximizable(true);
        objArea.setIconifiable(true);
        //obj_Asis.setClosable(true);
        jdpContenedor.add(objArea);
-       if(Utilitarios.Config.OPENWINDOWS == 0){
-            Utilitarios.Config.OPENWINDOWS =1;
+       if(val.EntryForms()){
             objArea.setVisible(true);
        } else {
            JOptionPane.showMessageDialog(null,"Cierre la ventana abierta para abrir otra");
@@ -201,8 +203,7 @@ public class WinMdi extends javax.swing.JFrame {
         objAsis.setIconifiable(true);
         jdpContenedor.add(objAsis);
         
-       if(Utilitarios.Config.OPENWINDOWS == 0){
-            Utilitarios.Config.OPENWINDOWS =1;
+       if(val.EntryForms()){
             objAsis.setVisible(true);
        } else {
            JOptionPane.showMessageDialog(null,"Cierre la ventana abierta para abrir otra");
@@ -217,8 +218,7 @@ public class WinMdi extends javax.swing.JFrame {
         objJus.setIconifiable(true);
         
         jdpContenedor.add(objJus);
-       if(Utilitarios.Config.OPENWINDOWS == 0){
-            Utilitarios.Config.OPENWINDOWS =1;
+       if(val.EntryForms()){
             objJus.setVisible(true);
        } else {
            JOptionPane.showMessageDialog(null,"Cierre la ventana abierta para abrir otra");
@@ -233,8 +233,7 @@ public class WinMdi extends javax.swing.JFrame {
         objHor.setMaximizable(true);
         objHor.setIconifiable(true);
         jdpContenedor.add(objHor);
-       if(Utilitarios.Config.OPENWINDOWS == 0){
-            Utilitarios.Config.OPENWINDOWS =1;
+       if(val.EntryForms()){
             objHor.setVisible(true);
        } else {
            JOptionPane.showMessageDialog(null,"Cierre la ventana abierta para abrir otra");
@@ -249,10 +248,9 @@ public class WinMdi extends javax.swing.JFrame {
         objCon.setMaximizable(true);
         objCon.setIconifiable(true);
         jdpContenedor.add(objCon);
-       if(Utilitarios.Config.OPENWINDOWS == 0){
-            Utilitarios.Config.OPENWINDOWS =1;
+        if(val.EntryForms()){
             objCon.setVisible(true);
-       } else {
+        } else {
            JOptionPane.showMessageDialog(null,"Cierre la ventana abierta para abrir otra");
        }
         
@@ -265,8 +263,7 @@ public class WinMdi extends javax.swing.JFrame {
         objRep.setMaximizable(true);
         objRep.setIconifiable(true);
         jdpContenedor.add(objRep);
-       if(Utilitarios.Config.OPENWINDOWS == 0){
-            Utilitarios.Config.OPENWINDOWS =1;
+        if(val.EntryForms()){
             objRep.setVisible(true);
        } else {
            JOptionPane.showMessageDialog(null,"Cierre la ventana abierta para abrir otra");
@@ -283,8 +280,7 @@ public class WinMdi extends javax.swing.JFrame {
        objUsu.setIconifiable(true);
        //obj_Asis.setClosable(true);
        jdpContenedor.add(objUsu);
-       if(Utilitarios.Config.OPENWINDOWS == 0){
-            Utilitarios.Config.OPENWINDOWS =1;
+       if(val.EntryForms()){
             objUsu.setVisible(true);
        } else {
            JOptionPane.showMessageDialog(null,"Cierre la ventana abierta para abrir otra");
@@ -300,8 +296,7 @@ public class WinMdi extends javax.swing.JFrame {
        objEmpresa.setIconifiable(true);
        //obj_Asis.setClosable(true);
        jdpContenedor.add(objEmpresa);
-       if(Utilitarios.Config.OPENWINDOWS == 0){
-            Utilitarios.Config.OPENWINDOWS =1;
+       if(val.EntryForms()){
             objEmpresa.setVisible(true);
        } else {
            JOptionPane.showMessageDialog(null,"Cierre la ventana abierta para abrir otra");
@@ -310,18 +305,17 @@ public class WinMdi extends javax.swing.JFrame {
     }//GEN-LAST:event_JmitemempMousePressed
 
     private void JmitemSucursalMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JmitemSucursalMousePressed
-         WinEmpresa_Sucursal objsucursal= new WinEmpresa_Sucursal();
+        WinEmpresa_Sucursal objsucursal= new WinEmpresa_Sucursal();
 
         objsucursal.setResizable(true);
         objsucursal.setMaximizable(true);
         objsucursal.setIconifiable(true);
         WinMdi.jdpContenedor.add(objsucursal);
-       if(Utilitarios.Config.OPENWINDOWS == 0){
-            Utilitarios.Config.OPENWINDOWS =1;
+        if(val.EntryForms()){
             objsucursal.setVisible(true);
-       } else {
+        } else {
            JOptionPane.showMessageDialog(null,"Cierre la ventana abierta para abrir otra");
-       }
+        }
         
     }//GEN-LAST:event_JmitemSucursalMousePressed
 

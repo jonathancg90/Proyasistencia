@@ -438,6 +438,7 @@ public class WinEmpresa extends javax.swing.JInternalFrame {
 
     private void btncerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncerrarActionPerformed
         this.setVisible(false);
+        Utilitarios.Config.OPENWINDOWS =0;
     }//GEN-LAST:event_btncerrarActionPerformed
 
     private void lblsucursalesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblsucursalesMouseClicked

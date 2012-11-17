@@ -24,6 +24,35 @@ public class Validators {
         }
         
     }
+    /**
+     * Validador de entrada y salida a formualrios (1=abierto, 0=cerrado)
+     */
+    public boolean EntryForms(){
+            boolean acces= false;
+            
+        switch(Utilitarios.Config.OPENWINDOWS){
+            case 0: Utilitarios.Config.OPENWINDOWS = 1; 
+                    acces = true;
+            break;
+            case 1: 
+                    acces = false;
+           break;
+        }
+                        
+        
+        
+        return acces;
+    }
+    
+    public boolean restrictAcces(){
+        boolean acces= false;
+            
+        
+        
+        
+        return acces;
+    }
+    
     
     /**
      * Validador de campos vacios
