@@ -1,7 +1,7 @@
 
 package Utilitarios;
 
-import Utilitarios.Config;
+import Utilitarios.Data;
 
 import java.sql.*;
 import javax.swing.*;
@@ -16,7 +16,8 @@ public class Query extends ConexionBd{
     Statement s = null;
     PreparedStatement  pt = null;
     DefaultComboBoxModel MChoice;
-    Config cf;
+    Data dt;
+    String _error = "Utilitarios_Query_";
     /*
      * Arma registro
      */
@@ -52,7 +53,7 @@ public class Query extends ConexionBd{
             
         }
         catch(Exception e){
-            System.out.println("Utilitarios_Query_sqlRegister: "+e);
+            System.out.println(_error+"sqlRegister: "+e);
             return pt;
         }
         
@@ -104,7 +105,7 @@ public class Query extends ConexionBd{
             
         }
         catch(Exception e){
-            System.out.println("Utilitarios_Query_sqlUpdate: "+e);
+            System.out.println(_error+"sqlUpdate: "+e);
             return pt;
         }
     }
@@ -139,7 +140,7 @@ public class Query extends ConexionBd{
             
         }
         catch(Exception e){
-            System.out.println("Utilitarios_Query_sqlDelete: "+e);
+            System.out.println(_error+"sqlDelete: "+e);
             return pt;
         }
     }
@@ -148,7 +149,8 @@ public class Query extends ConexionBd{
      * Armado de la consulta de listado y consulta
      */
     public String getQueryList(String[] args, String Table, String[][] Filter){
-        
+        String type;
+        String camp;
         String qs = "select ";
         for(int i=0;i<args.length;i++)
         {
@@ -162,13 +164,22 @@ public class Query extends ConexionBd{
             qs = qs + " where ";
             for(int i=0;i<Filter.length;i++)
             {
-                qs = qs + " " + Filter[i][0] + "='" + Filter[i][1] + "' ";
+                type = Filter[i][0].substring(0, 3);
+                camp = Filter[i][0];
+                camp = camp.substring(4, camp.length());
+                if("int".equals(type)){
+                    qs = qs + " " + camp + "=" + Filter[i][1] + " ";
+                }
+                else {
+                   qs = qs + " " + Filter[i][0] + "='" + Filter[i][1] + "' "; 
+                }
                 if(Filter.length!=i+1){ 
                     qs = qs + "and";
                 }
+                System.out.println(type+" - "+camp);
             }
         }
-
+        System.out.println(qs);
         return qs;
     }
     
@@ -216,7 +227,7 @@ public class Query extends ConexionBd{
         }
         catch(Exception e)
         {
-            System.out.println("Utilitarios_Query_getAll: "+e);
+            System.out.println(_error+"getAll: "+e);
         }
         
         return datos;
@@ -227,22 +238,22 @@ public class Query extends ConexionBd{
     public void loadState(JComboBox cmbState, boolean value){
         try
         {
-            cf = new Config();
+            dt = new Data();
             MChoice = new DefaultComboBoxModel();
             if(value == false){
-                MChoice.addElement(cf.G_STATES[0]);
-                MChoice.addElement(cf.G_STATES[1]);
+                MChoice.addElement(dt.G_STATES[0]);
+                MChoice.addElement(dt.G_STATES[1]);
             }
             else{
-                MChoice.addElement(cf.G_STATES[1]);
-                MChoice.addElement(cf.G_STATES[0]);
+                MChoice.addElement(dt.G_STATES[1]);
+                MChoice.addElement(dt.G_STATES[0]);
             }
                 
             cmbState.setModel(MChoice);   
         }
         catch(Exception e)
         {
-            System.out.println("Utilitarios_Query_loadState: "+e);
+            System.out.println(_error+"loadState: "+e);
         }
         
         
@@ -264,7 +275,7 @@ public class Query extends ConexionBd{
             closeConexion(); 
         }
         catch(Exception e){
-            System.out.println("Utilitarios_Query_loadChoice: "+e);
+            System.out.println(_error+"loadChoice: "+e);
         }
     }
      
@@ -286,7 +297,7 @@ public class Query extends ConexionBd{
             closeConexion(); 
         }
         catch(Exception e){
-            System.out.println("Utilitarios_Query_idChoice: "+e);
+            System.out.println(_error+"idChoice: "+e);
         }
         return id;
     }
@@ -310,13 +321,12 @@ public class Query extends ConexionBd{
             rs.next();
             for(;i<=nCols;i++){
                 campos[i]=rs.getString(i);
-                System.out.println(i + " - " + campos[i]);
             }
             rs.close();
             closeConexion(); 
         }
         catch(Exception e){
-            System.out.println("Utilitarios_Query_getRecords: "+e);
+            System.out.println(_error+"getRecords: "+e);
         }
         return campos;
     }
@@ -343,7 +353,7 @@ public class Query extends ConexionBd{
                 }
             }
             catch(Exception e){
-                System.out.println("Utilitarios_Query_getIdentify: "+e);
+                System.out.println(_error+"getIdentify: "+e);
             }
                 
             return identify;
@@ -361,8 +371,8 @@ public class Query extends ConexionBd{
                 rs.next();
                 cant = rs.getInt(1); 
             }catch(Exception e){
-                System.out.println("Utilitarios_Query_getCountRegister"+e);
+                System.out.println(_error+"getCountRegister"+e);
             }
             return cant;
-         } 
+         }
 }

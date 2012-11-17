@@ -259,7 +259,11 @@
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
+<<<<<<< HEAD
                   <EmptySpace pref="18" max="32767" attributes="0"/>
+=======
+                  <EmptySpace max="32767" attributes="0"/>
+>>>>>>> d34f4ef7d5260836bf42c225f9c50e3ac3a8f20a
               </Group>
           </Group>
         </DimensionLayout>

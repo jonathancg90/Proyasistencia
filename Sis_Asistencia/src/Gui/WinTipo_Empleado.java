@@ -6,6 +6,7 @@ import Javabeans.Tipoempleado;
 
 import Dao.TipoEmpleadoDAO;
 import Javabeans.Area;
+import Utilitarios.Data;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -16,6 +17,7 @@ public class WinTipo_Empleado extends javax.swing.JInternalFrame {
     private Tipoempleado tipoemp;
     private Query qs;
     private Config cg;
+    private Data dt;
     
     public WinTipo_Empleado() {
         initComponents();
@@ -332,9 +334,9 @@ public class WinTipo_Empleado extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_tblTipoempMouseClicked
 
     private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
-        cg = new Config();
+        dt = new Data();
         String name = txtName.getText();
-        boolean estate = Boolean.valueOf(cg.G_BOOLEAN[cmbEstate.getSelectedIndex()]);
+        boolean estate = Boolean.valueOf(dt.G_BOOLEAN[cmbEstate.getSelectedIndex()]);
         objtipoemp = new TipoEmpleadoDAO();
         int i = objtipoemp.save(name, estate);
         if (i == 0) {
@@ -348,10 +350,10 @@ public class WinTipo_Empleado extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnRegisterActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
-        cg = new Config();
+        dt = new Data();
         int id = Integer.valueOf(lblId.getText());
         String name = txtName.getText();
-        boolean estate = Boolean.valueOf(cg.G_BOOLEAN[cmbEstate.getSelectedIndex()]);
+        boolean estate = Boolean.valueOf(dt.G_BOOLEAN[cmbEstate.getSelectedIndex()]);
         objtipoemp = new TipoEmpleadoDAO();
         int i = objtipoemp.update(id,name,estate);
         if (i == 0) {

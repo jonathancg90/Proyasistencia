@@ -5,7 +5,7 @@ import Utilitarios.ConexionBd;
 import Utilitarios.Helpers;
 import Utilitarios.Query;
 import Utilitarios.Validators;
-import Javabeans.Area;
+import Javabeans.Cargo;
 import Javabeans.Usuario;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -13,15 +13,15 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 
-public class AreaDAO extends ConexionBd{
+public class CargosDAO extends ConexionBd{
 
     private Query qs;
-    private Area objArea;
+    private Cargo objCargo;
     private Helpers hp;
     private Validators objVal;
     private String filter[][] = new String[0][0];
-    private String _table = "area";
-    private String _error = "Dao_AreaDao_";
+    private String _table = "cargo";
+    private String _error = "Dao_CargoDao_";
     
     PreparedStatement  pt = null;
     /*
@@ -36,22 +36,39 @@ public class AreaDAO extends ConexionBd{
                 filter = new String[0][0];
             }
             String campos[] = new String[2];
-            campos[0]="idare";
+            campos[0]="idcar";
             campos[1]="nombre";
-            String Table = this._table;
-            datos = qs.getAll(campos,Table,filter);
+            datos = qs.getAll(campos,this._table,filter);
             tblDatos.setModel(datos);   
         }
         catch(Exception e)
         {
-            System.out.println(_error + "getTableAll: "+e);
+            System.out.println(_error+"getTableAll: "+e);
         }
     
     }
     /*
+     * Filtros
+     */
+     public int find(String idare,JTable tblDatos) {
+        int i = 0;
+        try {
+            if(!"".equals(idare)){
+                filter = new String[1][2];
+                filter[0][0] = "int_idare";
+                filter[0][1] = idare;
+            }
+            getTableAll(tblDatos);
+        }
+        catch(Exception e){
+            System.out.println("Dao_AreaDAO_find : "+e);
+        }
+        return i;
+    }
+    /*
      * Registro de areas
      */
-    public int save(String name, boolean state){
+    public int save(int idArea, String name){
        int i=0;
         try{
             Date date = new Date(0000-00-00);
@@ -62,13 +79,13 @@ public class AreaDAO extends ConexionBd{
             String Table = this._table;
             String now = hp.getDateNow();
             
-            objArea = new Area(0,name,now,now,state);
+            objCargo = new Cargo(0,name,idArea,now,now);
             //Iniciando consulta y asignando valores
             pt = qs.sqlRegister(Table);
-            pt.setString(1,objArea.getName());
-            pt.setBoolean(2,objArea.getState());
-            pt.setDate(3,date.valueOf(objArea.getCreated()));
-            pt.setDate(4,date.valueOf(objArea.getModified()));
+            pt.setInt(1,objCargo.getIdare());
+            pt.setString(2,objCargo.getName());
+            pt.setDate(3,date.valueOf(objCargo.getCreated()));
+            pt.setDate(4,date.valueOf(objCargo.getModified()));
             //Ejecucion y cierre
             i= pt.executeUpdate();
             pt.close();
@@ -83,7 +100,7 @@ public class AreaDAO extends ConexionBd{
     /*
      * Actualizacion de areas
      */
-    public int update(int id, String name, boolean state){
+    public int update(int id, int idArea, String name){
        int i=0;
         try{
             Date date = new Date(0000-00-00);
@@ -94,14 +111,13 @@ public class AreaDAO extends ConexionBd{
             String Table = this._table;
             String now = hp.getDateNow();
             
-            objArea = new Area(id,name,now,now,state);
+            objCargo = new Cargo(0,name,idArea,now,now);
             //Iniciando consulta y asignando valores
             pt = qs.sqlUpdate(Table);
-            pt.setString(1,objArea.getName());
-            pt.setBoolean(2,objArea.getState());
-            pt.setDate(3,date.valueOf(objArea.getCreated()));
-            pt.setDate(4,date.valueOf(objArea.getModified()));
-            pt.setInt(5,objArea.getIdare());
+            pt.setInt(1,objCargo.getIdare());
+            pt.setString(2,objCargo.getName());
+            pt.setDate(3,date.valueOf(objCargo.getCreated()));
+            pt.setDate(4,date.valueOf(objCargo.getModified()));
             //Ejecucion y cierre
             i= pt.executeUpdate();
             pt.close();
@@ -121,14 +137,14 @@ public class AreaDAO extends ConexionBd{
         try{
             //Preparando
             getConexion();
-            objArea = new Area();
+            objCargo = new Cargo();
             hp = new Helpers();
             qs= new Query();
             String Table = this._table;
             
-            objArea.setIdare(id);
+            objCargo.setIdcar(id);
             pt = qs.sqlDelete(Table);
-            pt.setInt(1,objArea.getIdare());
+            pt.setInt(1,objCargo.getIdcar());
             i= pt.executeUpdate();
             pt.close();
             closeConexion();
@@ -137,46 +153,6 @@ public class AreaDAO extends ConexionBd{
         catch(Exception e){
             System.out.println(_error + "delete: "+e);
             return i;
-        }
-    }
-    public int find(String name,JTable tblDatos) {
-        int i = 0;
-        try {
-            if(!"".equals(name)){
-                filter = new String[1][2];
-                filter[0][0] = "nombre";
-                filter[0][1] = name; 
-            }
-            getTableAll(tblDatos);
-        }
-        catch(Exception e){
-            System.out.println(_error + "find : "+e);
-        }
-        return i;
-    }
-    
-
-    /*
-     * Cargar valores de busqueda al modelo 
-     */
-    public Area getValues(int idusu){
-       objArea =  new Area();
-       objVal = new Validators();
-        try{
-            qs= new Query();
-            //Preparando
-            String campos[] = new String[6];
-            campos = qs.getRecords("area",idusu);
-            objArea.setName(campos[2]);
-            objArea.setEstado(objVal.StringToBoolean(campos[3]));
-            objArea.setCreated(campos[4]);
-            objArea.setModified(campos[5]);
-            
-            return objArea;
-        }
-        catch(Exception e){
-            System.out.println(_error + "getValues: "+e);
-            return objArea;
         }
     }
 

@@ -7,6 +7,7 @@ import Javabeans.Empresa;
 
 import Dao.EmpresaDAO;
 import Javabeans.Area;
+import Utilitarios.Data;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -16,6 +17,7 @@ public class WinEmpresa extends javax.swing.JInternalFrame {
     private Empresa empresa;
     private Query qs;
     private Config cg;
+    private Data dt;
 
     public WinEmpresa() {
         initComponents();
@@ -396,10 +398,10 @@ public class WinEmpresa extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnFindActionPerformed
 
     private void btnregistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnregistrarActionPerformed
-        cg = new Config();
+        dt = new Data();
         String name = txtName.getText();
         String ruc = txtruc.getText();
-        boolean estate = Boolean.valueOf(cg.G_BOOLEAN[cmbEstate.getSelectedIndex()]);
+        boolean estate = Boolean.valueOf(dt.G_BOOLEAN[cmbEstate.getSelectedIndex()]);
         //int estate = Integer.parseInt(txtCantTrab.getText());
         int trab = Integer.parseInt(txtCantTrab.getText());
         int mon = qs.idChoice("empresa","nombre",String.valueOf(cboMon.getSelectedItem()));
@@ -417,11 +419,11 @@ public class WinEmpresa extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnregistrarActionPerformed
 
     private void btnactualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnactualizarActionPerformed
-         cg = new Config();
+        dt = new Data();
         int id = Integer.valueOf(lblId.getText());
         String name = txtName.getText();
         String ruc = txtruc.getText();
-        boolean estate = Boolean.valueOf(cg.G_BOOLEAN[cmbEstate.getSelectedIndex()]);
+        boolean estate = Boolean.valueOf(dt.G_BOOLEAN[cmbEstate.getSelectedIndex()]);
         //int estate = cmbEstate.getSelectedIndex();
         int trab = Integer.parseInt(txtCantTrab.getText());
         int mon = qs.idChoice("empresa","nombre",String.valueOf(cboMon.getSelectedItem()));
@@ -459,6 +461,7 @@ public class WinEmpresa extends javax.swing.JInternalFrame {
 
     private void btncerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncerrarActionPerformed
         this.setVisible(false);
+        Utilitarios.Config.OPENWINDOWS =0;
     }//GEN-LAST:event_btncerrarActionPerformed
 
     private void lblsucursalesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblsucursalesMouseClicked
