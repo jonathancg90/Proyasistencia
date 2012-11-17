@@ -1,74 +1,72 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Dao;
 
 import Utilitarios.ConexionBd;
 import Utilitarios.Helpers;
 import Utilitarios.Query;
-import Javabeans.Sucursal;
-import Javabeans.Usuario;
 import Utilitarios.Validators;
+import Javabeans.Tipoempleado;
+import Javabeans.Usuario;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-
-public class SucursalDao extends ConexionBd{
+public class TipoEmpleadoDAO extends ConexionBd{
     
     private Query qs;
-    private Sucursal objSucursal;
-    private Helpers hp;
-    private String filter[][] = new String[0][0];
+    private Tipoempleado objtipoemp;
     private Usuario objUsu;
+    private Helpers hp;
     private Validators objVal;
+    private String filter[][] = new String[0][0];
     
     PreparedStatement  pt = null;
+    /*
+     * Middleware mostrar nombres de los tipos de empleados
+     */
     
-     public void getTableAll(JTable tblDatos){
+    public void getTableAll(JTable tblDatos){
         try{
             DefaultTableModel datos;
-            qs = new Query();            
+            qs= new Query();
             if (filter.length <= 0){
                 filter = new String[0][0];
-            } 
+            }
             String campos[] = new String[2];
-            campos[0]="idsuc";
+            campos[0]="idtip";
             campos[1]="nombre";
-            String Table = "sucursal";
+            String Table = "tipoempleado";
             datos = qs.getAll(campos,Table,filter);
             tblDatos.setModel(datos);   
         }
         catch(Exception e)
         {
-            System.out.println("Dao_Sucursal: "+e);
+            System.out.println("Dao_TipoEmpleadoDAO_getTableAll: "+e);
         }
     
     }
-     
-     /*
-     * Registro de Empresas
+    /*
+     * Registro de tipo de empleados
      */
-    public int save(String name, String direccion,int idciu, int idempr){
+    public int save(String name, boolean state){
        int i=0;
         try{
             Date date = new Date(0000-00-00);
             //Preparando
             getConexion();
             hp = new Helpers();
-            qs= new Query();
-            String Table = "sucursal";
+            qs = new Query();
+            String Table = "tipoempleado";
             String now = hp.getDateNow();
             
-            objSucursal = new Sucursal(0,name,direccion,idciu,idempr);
+            objtipoemp = new Tipoempleado(0,name,now,now,state);
             //Iniciando consulta y asignando valores
             pt = qs.sqlRegister(Table);
-            pt.setInt(1,objSucursal.getIdciu());
-            pt.setString(2,objSucursal.getName());
-            pt.setString(3,objSucursal.getDireccion());            
-            pt.setInt(4,objSucursal.getIdempr());
+            pt.setString(1,objtipoemp.getName());
+            pt.setBoolean(2,objtipoemp.isEstado());
+            pt.setDate(3,date.valueOf(objtipoemp.getCreated()));
+            pt.setDate(4,date.valueOf(objtipoemp.getModified()));
             //Ejecucion y cierre
             i= pt.executeUpdate();
             pt.close();
@@ -76,15 +74,14 @@ public class SucursalDao extends ConexionBd{
             return i;
         }
         catch(Exception e){
-            System.out.println("Dao_SucursalDAO_save: "+e);
+            System.out.println("Dao_TipoEmpleadoDAO_save: "+e);
             return i;
         }
     }
-    
     /*
-     * Actualizacion de Empresa
+     * Actualizacion de tipo de empleados
      */
-    public int update(int id, String name, String direccion,int idciu, int idempr){
+    public int update(int id, String name, boolean state){
        int i=0;
         try{
             Date date = new Date(0000-00-00);
@@ -92,17 +89,17 @@ public class SucursalDao extends ConexionBd{
             getConexion();
             hp = new Helpers();
             qs= new Query();
-            String Table = "sucursal";
+            String Table = "tipoempleado";
             String now = hp.getDateNow();
             
-            objSucursal = new Sucursal(0,name,direccion,idciu,idempr);
+            objtipoemp = new Tipoempleado(id,name,now,now,state);
             //Iniciando consulta y asignando valores
             pt = qs.sqlUpdate(Table);
-            pt.setString(3,objSucursal.getName());
-            pt.setString(4,objSucursal.getDireccion());
-            pt.setInt(2,objSucursal.getIdciu());
-            pt.setInt(5,objSucursal.getIdempr());
-            pt.setInt(1,objSucursal.getIdsuc());
+            pt.setString(1,objtipoemp.getName());
+            pt.setBoolean(2,objtipoemp.isEstado());
+            pt.setDate(3,date.valueOf(objtipoemp.getCreated()));
+            pt.setDate(4,date.valueOf(objtipoemp.getModified()));
+            pt.setInt(5,objtipoemp.getIdtip());
             //Ejecucion y cierre
             i= pt.executeUpdate();
             pt.close();
@@ -110,11 +107,10 @@ public class SucursalDao extends ConexionBd{
             return i;
         }
         catch(Exception e){
-            System.out.println("Dao_SucursalDAO: "+e);
+            System.out.println("Dao_TipoEmpleadoDAO_update: "+e);
             return i;
         }
     }
-    
     /*
      * Eliminar 
      */
@@ -123,24 +119,25 @@ public class SucursalDao extends ConexionBd{
         try{
             //Preparando
             getConexion();
-            objSucursal = new Sucursal();
+            objtipoemp = new Tipoempleado();
             hp = new Helpers();
             qs= new Query();
-            String Table = "sucursal";
+            String Table = "tipoempleado";
             
-            objSucursal.setIdsuc(id);
+            objtipoemp.setIdtip(id);
             pt = qs.sqlDelete(Table);
-            pt.setInt(1,objSucursal.getIdsuc());
+            pt.setInt(1,objtipoemp.getIdtip());
             i= pt.executeUpdate();
             pt.close();
             closeConexion();
             return i;
         }
         catch(Exception e){
-            System.out.println("Dao_SucursalDAO: "+e);
+            System.out.println("Dao_TipoEmpleadoDAO_delete: "+e);
             return i;
         }
     }
+    
     public int find(String name,JTable tblDatos) {
         int i = 0;
         try {
@@ -152,32 +149,35 @@ public class SucursalDao extends ConexionBd{
             getTableAll(tblDatos);
         }
         catch(Exception e){
-            System.out.println("Dao_SucursalDAO_find : "+e);
+            System.out.println("Dao_TipoEmpleadoDAO_find : "+e);
         }
         return i;
     }
     
+
     /*
      * Cargar valores de busqueda al modelo 
      */
-    public Sucursal getValues(int idusu){
-       objVal = new Validators(); 
-       objSucursal =  new Sucursal();
-       try{           
+    public Tipoempleado getValues(int idusu){
+       objtipoemp =  new Tipoempleado();
+       objVal = new Validators();
+        try{
             qs= new Query();
             //Preparando
-            String campos[] = new String[4];
-            campos = qs.getRecords("sucursal",idusu);
-            objSucursal.setName(campos[2]);
-            objSucursal.setDireccion(campos[3]);
-            objSucursal.setIdciu(Integer.valueOf(campos[1]));
-            objSucursal.setIdempr(Integer.valueOf(campos[4]));
+            String campos[] = new String[6];
+            campos = qs.getRecords("tipoempleado",idusu);
+            objtipoemp.setName(campos[2]);
+            System.out.println("Estado: "+objVal.StringToBoolean(campos[3]));
+            objtipoemp.setEstado(objVal.StringToBoolean(campos[3]));
+            objtipoemp.setCreated(campos[4]);
+            objtipoemp.setModified(campos[5]);
             
-            return objSucursal;
+            return objtipoemp;
         }
         catch(Exception e){
-            System.out.println("Dao_SucursalDAO_delete: "+e);
-            return objSucursal;
+            System.out.println("Dao_AreaDAO_getValues: "+e);
+            return objtipoemp;
         }
     }
+    
 }

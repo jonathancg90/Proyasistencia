@@ -71,6 +71,9 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Tipo empleado"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="JmitemTipoMousePressed"/>
+                  </Events>
                 </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="JmitemSucursal">
                   <Properties>
@@ -153,7 +156,7 @@
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jDesktopPane1" alignment="0" pref="472" max="32767" attributes="0"/>
+          <Component id="jDesktopPane1" alignment="0" pref="476" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>

@@ -4,6 +4,7 @@ package Dao;
 import Utilitarios.ConexionBd;
 import Utilitarios.Helpers;
 import Utilitarios.Query;
+import Utilitarios.Validators;
 import Javabeans.Area;
 import Javabeans.Usuario;
 import java.sql.Date;
@@ -18,6 +19,7 @@ public class AreaDAO extends ConexionBd{
     private Area objArea;
     private Usuario objUsu;
     private Helpers hp;
+    private Validators objVal;
     private String filter[][] = new String[0][0];
     
     PreparedStatement  pt = null;
@@ -34,7 +36,7 @@ public class AreaDAO extends ConexionBd{
             }
             String campos[] = new String[2];
             campos[0]="idare";
-            campos[1]="name";
+            campos[1]="nombre";
             String Table = "area";
             datos = qs.getAll(campos,Table,filter);
             tblDatos.setModel(datos);   
@@ -48,7 +50,7 @@ public class AreaDAO extends ConexionBd{
     /*
      * Registro de areas
      */
-    public int save(String name, int state){
+    public int save(String name, boolean state){
        int i=0;
         try{
             Date date = new Date(0000-00-00);
@@ -59,7 +61,7 @@ public class AreaDAO extends ConexionBd{
             String Table = "area";
             String now = hp.getDateNow();
             
-            objArea = new Area(0,name,now,now,false);
+            objArea = new Area(0,name,now,now,state);
             //Iniciando consulta y asignando valores
             pt = qs.sqlRegister(Table);
             pt.setString(1,objArea.getName());
@@ -80,7 +82,7 @@ public class AreaDAO extends ConexionBd{
     /*
      * Actualizacion de areas
      */
-    public int update(int id, String name, int state){
+    public int update(int id, String name, boolean state){
        int i=0;
         try{
             Date date = new Date(0000-00-00);
@@ -91,12 +93,11 @@ public class AreaDAO extends ConexionBd{
             String Table = "area";
             String now = hp.getDateNow();
             
-            objArea = new Area(id,name,now,now,false);
+            objArea = new Area(id,name,now,now,state);
             //Iniciando consulta y asignando valores
             pt = qs.sqlUpdate(Table);
             pt.setString(1,objArea.getName());
             pt.setBoolean(2,objArea.getState());
-            //pt.setDate(3,date.valueOf(objArea.getModified()));
             pt.setDate(3,date.valueOf(objArea.getCreated()));
             pt.setDate(4,date.valueOf(objArea.getModified()));
             pt.setInt(5,objArea.getIdare());
@@ -142,7 +143,7 @@ public class AreaDAO extends ConexionBd{
         try {
             if(!"".equals(name)){
                 filter = new String[1][2];
-                filter[0][0] = "name";
+                filter[0][0] = "nombre";
                 filter[0][1] = name; 
             }
             getTableAll(tblDatos);
@@ -157,25 +158,25 @@ public class AreaDAO extends ConexionBd{
     /*
      * Cargar valores de busqueda al modelo 
      */
-    public int getValues(int idusu){
-       int i=0;
+    public Area getValues(int idusu){
+       objArea =  new Area();
+       objVal = new Validators();
         try{
-            objArea =  new Area();
             qs= new Query();
             //Preparando
-            String campos[] = new String[4];
+            String campos[] = new String[6];
             campos = qs.getRecords("area",idusu);
-            objArea.setName(campos[1]);
-            objArea.setEstado(Boolean.valueOf(campos[2]));
-            objArea.setCreated(campos[3]);
-            objArea.setModified(campos[4]);
-            i=1;
+            objArea.setName(campos[2]);
+            System.out.println("Estado: "+objVal.StringToBoolean(campos[3]));
+            objArea.setEstado(objVal.StringToBoolean(campos[3]));
+            objArea.setCreated(campos[4]);
+            objArea.setModified(campos[5]);
             
-            return i;
+            return objArea;
         }
         catch(Exception e){
-            System.out.println("Dao_AreaDAO_delete: "+e);
-            return i;
+            System.out.println("Dao_AreaDAO_getValues: "+e);
+            return objArea;
         }
     }
 

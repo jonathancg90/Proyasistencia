@@ -6,6 +6,7 @@ import Utilitarios.Helpers;
 import Utilitarios.Query;
 import Javabeans.Empresa;
 import Javabeans.Usuario;
+import Utilitarios.Validators;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import javax.swing.JTable;
@@ -18,6 +19,7 @@ public class EmpresaDAO extends ConexionBd{
     private Helpers hp;
     private String filter[][] = new String[0][0];
     private Usuario objUsu;
+    private Validators objVal;
     
     PreparedStatement  pt = null;
     
@@ -28,9 +30,10 @@ public class EmpresaDAO extends ConexionBd{
             if (filter.length <= 0){
                 filter = new String[0][0];
             }           
-           String campos[] = new String[2];
-            campos[0]="idemp";
-            campos[1]="name";
+
+            String campos[] = new String[2];
+            campos[0]="idempr";
+            campos[1]="nombre";
             String Table = "empresa";
             datos = qs.getAll(campos,Table, filter);
             tblDatos.setModel(datos);   
@@ -44,7 +47,7 @@ public class EmpresaDAO extends ConexionBd{
     /*
      * Registro de Empresas
      */
-    public int save(String name,String ruc, int state){
+    public int save(String name,String ruc, boolean statem,int trabajadores,int mon){
        int i=0;
         try{
             Date date = new Date(0000-00-00);
@@ -55,7 +58,7 @@ public class EmpresaDAO extends ConexionBd{
             String Table = "empresa";
             String now = hp.getDateNow();
             
-            objEmpresa = new Empresa(0,name,ruc,false,now,now);
+            objEmpresa = new Empresa(0,name,ruc,statem,now,now,trabajadores,mon);
             //Iniciando consulta y asignando valores
             pt = qs.sqlRegister(Table);
             pt.setString(1,objEmpresa.getName());
@@ -63,6 +66,9 @@ public class EmpresaDAO extends ConexionBd{
             pt.setBoolean(3,objEmpresa.isEstado());
             pt.setDate(4,date.valueOf(objEmpresa.getCreated()));
             pt.setDate(5,date.valueOf(objEmpresa.getModified()));
+            pt.setInt(6,objEmpresa.getTrabajadores());
+            pt.setInt(7,objEmpresa.getMon());
+            
             //Ejecucion y cierre
             i= pt.executeUpdate();
             pt.close();
@@ -70,7 +76,7 @@ public class EmpresaDAO extends ConexionBd{
             return i;
         }
         catch(Exception e){
-            System.out.println("Dao_EmpresaDAO: "+e);
+            System.out.println("Dao_EmpresaDAO_save: "+e);
             return i;
         }
     }
@@ -78,7 +84,7 @@ public class EmpresaDAO extends ConexionBd{
     /*
      * Actualizacion de Empresa
      */
-    public int update(int id, String name,String ruc, int state){
+    public int update(int id, String name,String ruc, boolean state,int trabajadores, int mon){
        int i=0;
         try{
             Date date = new Date(0000-00-00);
@@ -89,16 +95,16 @@ public class EmpresaDAO extends ConexionBd{
             String Table = "empresa";
             String now = hp.getDateNow();
             
-            objEmpresa = new Empresa(0,name,ruc,false,now,now);
+            objEmpresa = new Empresa(id,name,ruc,state,now,now,trabajadores,mon);
             //Iniciando consulta y asignando valores
             pt = qs.sqlUpdate(Table);
             pt.setString(1,objEmpresa.getName());
             pt.setString(2,objEmpresa.getRuc());
             pt.setBoolean(3,objEmpresa.isEstado());
-            //pt.setDate(3,date.valueOf(objArea.getModified()));
             pt.setDate(4,date.valueOf(objEmpresa.getCreated()));
             pt.setDate(5,date.valueOf(objEmpresa.getModified()));
-            pt.setInt(6,objEmpresa.getIdempr());
+            pt.setInt(6,objEmpresa.getTrabajadores());
+            pt.setInt(7,objEmpresa.getMon());
             //Ejecucion y cierre
             i= pt.executeUpdate();
             pt.close();
@@ -106,7 +112,7 @@ public class EmpresaDAO extends ConexionBd{
             return i;
         }
         catch(Exception e){
-            System.out.println("Dao_EmpresaDAO: "+e);
+            System.out.println("Dao_EmpresaDAO_update: "+e);
             return i;
         }
     }
@@ -133,7 +139,7 @@ public class EmpresaDAO extends ConexionBd{
             return i;
         }
         catch(Exception e){
-            System.out.println("Dao_EmpresaDAO: "+e);
+            System.out.println("Dao_EmpresaDAO_delete: "+e);
             return i;
         }
     }
@@ -143,7 +149,7 @@ public class EmpresaDAO extends ConexionBd{
         try {
             if(!"".equals(name)){
                 filter = new String[1][2];
-                filter[0][0] = "name";
+                filter[0][0] = "nombre";
                 filter[0][1] = name; 
             }
             getTableAll(tblDatos);
@@ -157,26 +163,31 @@ public class EmpresaDAO extends ConexionBd{
     /*
      * Cargar valores de busqueda al modelo 
      */
-    public int getValues(int idusu){
-       int i=0;
+    public Empresa getValues(int idemp){
+        objEmpresa =  new Empresa();
+        objVal = new Validators();
         try{
-            objEmpresa =  new Empresa();
+            
             qs= new Query();
             //Preparando
-            String campos[] = new String[5];
-            campos = qs.getRecords("area",idusu);
+            String campos[] = new String[7];
+            campos = qs.getRecords("empresa",idemp);
             objEmpresa.setName(campos[1]);
             objEmpresa.setRuc(campos[2]);
-            objEmpresa.setEstado(Boolean.valueOf(campos[3]));
+            objEmpresa.setEstado(objVal.StringToBoolean(campos[3]));
             objEmpresa.setCreated(campos[4]);
             objEmpresa.setModified(campos[5]);
-            i=1;
+            objEmpresa.setTrabajadores(Integer.parseInt(campos[6]));
+            objEmpresa.setMon(Integer.parseInt(campos[7]));
             
-            return i;
+            
+            
+            
+            return objEmpresa;
         }
         catch(Exception e){
-            System.out.println("Dao_EmpresaDAO_delete: "+e);
-            return i;
+            System.out.println("Dao_EmpresaDAO_getValues: "+e);
+            return objEmpresa;
         }
     }
 }

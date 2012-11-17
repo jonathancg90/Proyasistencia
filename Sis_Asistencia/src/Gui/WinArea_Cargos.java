@@ -1,14 +1,37 @@
 
 package Gui;
 
+import Dao.SucursalDao;
+import Utilitarios.Query;
+
 
 public class WinArea_Cargos extends javax.swing.JInternalFrame {
 
-
+    public int idArea;
+    private SucursalDao objSuc;
+    private Query qs;
+    
     public WinArea_Cargos() {
         initComponents();
+        lblArea.setText(""+this.idArea);
     }
 
+    public void geIdArea(int id){
+        this.idArea = id;
+    }
+    /**
+     * Formulario para el mantenimiento de las areas de la empresa.
+    */
+    public void cargaForm(){
+        try {
+            objSuc = new SucursalDao();
+            qs = new Query();
+            
+            objSuc.getTableAll(TblCargos);
+        } catch (Exception e) {
+            System.out.println("Gui_WinArea_Cargos: " + e);
+        }
+    }                 
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents

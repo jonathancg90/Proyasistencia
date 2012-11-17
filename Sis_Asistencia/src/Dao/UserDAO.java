@@ -39,8 +39,7 @@ public class UserDAO extends ConexionBd{
             datos = qs.getAll(campos,Table,filter);
             tblDatos.setModel(datos);   
         }
-        catch(Exception e)
-        {
+        catch(Exception e){
             System.out.println("UserDAO_getTableAll: "+e);
         }
     
@@ -56,7 +55,7 @@ public class UserDAO extends ConexionBd{
             s = conexion.createStatement();
             String qs = "select * from usuario "
                     + "where username='"+user+"' "
-                    + "and password='"+pas+"'";
+                    + "and pass='"+pas+"'";
 
             rs = s.executeQuery(qs);
             result = rs.next();

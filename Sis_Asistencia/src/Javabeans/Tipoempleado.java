@@ -11,7 +11,7 @@ public class Tipoempleado {
     
     /* Constructor final
      */
-    public Tipoempleado(int idtip, String name, boolean estado, String created, String modified) {
+    public Tipoempleado(int idtip, String name, String created, String modified, boolean estado) {
         this.idtip = idtip;
         this.name = name;
         this.estado = estado;

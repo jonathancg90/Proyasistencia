@@ -33,7 +33,7 @@ public class WinArea extends javax.swing.JInternalFrame {
             objarea = new AreaDAO();
             qs = new Query();
             objarea.getTableAll(tblArea);
-            qs.loadState(cmbEstate);
+            qs.loadState(cmbEstate,false);
         } catch (Exception e) {
             System.out.println("Gui_WinMdi: " + e);
         }
@@ -57,7 +57,7 @@ public class WinArea extends javax.swing.JInternalFrame {
         cmbEstate = new javax.swing.JComboBox();
         jLabel4 = new javax.swing.JLabel();
         lblId = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
+        lblCargos = new javax.swing.JLabel();
         lblModified = new javax.swing.JLabel();
         pnlOpciones = new javax.swing.JPanel();
         btnRegister = new javax.swing.JButton();
@@ -90,10 +90,10 @@ public class WinArea extends javax.swing.JInternalFrame {
 
         lblId.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        jLabel8.setText("Añadir cargos");
-        jLabel8.addMouseListener(new java.awt.event.MouseAdapter() {
+        lblCargos.setText("Añadir cargos");
+        lblCargos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel8MouseClicked(evt);
+                lblCargosMouseClicked(evt);
             }
         });
 
@@ -116,7 +116,7 @@ public class WinArea extends javax.swing.JInternalFrame {
                             .add(pnlMantenimientoLayout.createSequentialGroup()
                                 .add(lblId, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 50, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .add(jLabel8)
+                                .add(lblCargos)
                                 .add(30, 30, 30))))
                     .add(org.jdesktop.layout.GroupLayout.TRAILING, pnlMantenimientoLayout.createSequentialGroup()
                         .add(pnlMantenimientoLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -140,7 +140,7 @@ public class WinArea extends javax.swing.JInternalFrame {
                         .addContainerGap()
                         .add(jLabel4, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .add(lblId, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .add(org.jdesktop.layout.GroupLayout.TRAILING, jLabel8))
+                    .add(org.jdesktop.layout.GroupLayout.TRAILING, lblCargos))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 15, Short.MAX_VALUE)
                 .add(pnlMantenimientoLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(jLabel1)
@@ -263,9 +263,9 @@ public class WinArea extends javax.swing.JInternalFrame {
                 .add(btnPrevious)
                 .add(26, 26, 26)
                 .add(jLabel7)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .add(31, 31, 31)
                 .add(btnNext)
-                .add(79, 79, 79))
+                .addContainerGap())
             .add(jPanel1Layout.createSequentialGroup()
                 .add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                 .addContainerGap())
@@ -316,8 +316,9 @@ public class WinArea extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
+        cg = new Config();
         String name = txtName.getText();
-        int estate = cmbEstate.getSelectedIndex();
+        boolean estate = Boolean.valueOf(cg.G_BOOLEAN[cmbEstate.getSelectedIndex()]);
         objarea = new AreaDAO();
         int i = objarea.save(name, estate);
         if (i == 0) {
@@ -331,11 +332,11 @@ public class WinArea extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnRegisterActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        cg = new Config();
         int id = Integer.valueOf(lblId.getText());
         String name = txtName.getText();
-        int estate = cmbEstate.getSelectedIndex();
+        boolean estate = Boolean.valueOf(cg.G_BOOLEAN[cmbEstate.getSelectedIndex()]);
         objarea = new AreaDAO();
-        System.out.println("ID: "+id);
         int i = objarea.update(id,name,estate);
         if (i == 0) {
             
@@ -360,9 +361,13 @@ public class WinArea extends javax.swing.JInternalFrame {
                 DefaultTableModel m = new DefaultTableModel();
                 m = (DefaultTableModel) this.tblArea.getModel();
                 String idArea = String.valueOf(m.getValueAt(fsel, 0));
+                //Asigando valores obtenidos
                 lblId.setText(idArea);
-                objarea.getValues(Integer.parseInt(idArea));
+                area = objarea.getValues(Integer.parseInt(idArea));
                 txtName.setText(area.getName());
+                lblModified.setText(area.getModified());
+                System.out.println(area.getState());
+                qs.loadState(cmbEstate,area.getState());
                 }
             catch (Exception e) {
                 System.out.println("Gui_Win_area: " + e);
@@ -372,35 +377,45 @@ public class WinArea extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_tblAreaMouseClicked
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
-        int id = Integer.valueOf(lblId.getText());
-        
-        objarea = new AreaDAO();
-        int i = objarea.delete(id);
-        if(i==0) {
-            JOptionPane.showMessageDialog(null,"No se pudo eliminar el area");
-        }
-        else {
-            objarea.getTableAll(tblArea);
-            cleanBox();
-            JOptionPane.showMessageDialog(null,"Area eliminada");
-        } 
+        int i;
+        i= JOptionPane.showConfirmDialog(null,"¿Esta seguro de eliminar este registro?","Aviso",JOptionPane.OK_CANCEL_OPTION,JOptionPane.WARNING_MESSAGE);
+        if(i==0){
+            int id = Integer.valueOf(lblId.getText());
+
+            objarea = new AreaDAO();
+            i = objarea.delete(id);
+            if(i==0) {
+                JOptionPane.showMessageDialog(null,"No se pudo eliminar el area");
+            }
+            else {
+                objarea.getTableAll(tblArea);
+                cleanBox();
+            } 
+         }
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
-        this.setVisible(false);
+        this.dispose();
     }//GEN-LAST:event_btnCloseActionPerformed
 
-    private void jLabel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseClicked
-       WinArea_Cargos objCargo= new WinArea_Cargos();
-    
-       objCargo.setResizable(true);
-       objCargo.setMaximizable(true);
-       objCargo.setIconifiable(true);
-       //obj_Asis.setClosable(true);
-       WinMdi.jdpContenedor.add(objCargo);
+    private void lblCargosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCargosMouseClicked
+       if(!"".equals(lblId.getText())){
+        WinArea_Cargos objCargo= new WinArea_Cargos();
 
-       objCargo.setVisible(true);
-    }//GEN-LAST:event_jLabel8MouseClicked
+        objCargo.setResizable(true);
+        objCargo.setMaximizable(true);
+        objCargo.setIconifiable(true);
+        //obj_Asis.setClosable(true);
+        objCargo.geIdArea(Integer.valueOf(lblId.getText()));
+        WinMdi.jdpContenedor.add(objCargo);
+
+
+        objCargo.setVisible(true);
+       } else {
+           JOptionPane.showMessageDialog(null,"Debe de seleccionar una area para poder asignar cargos");
+       }
+       
+    }//GEN-LAST:event_lblCargosMouseClicked
 
     private void btnFindActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFindActionPerformed
         String name = txtFilter.getText();
@@ -427,9 +442,9 @@ public class WinArea extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblCargos;
     private javax.swing.JLabel lblId;
     private javax.swing.JLabel lblModified;
     private javax.swing.JPanel pnlMantenimiento;
