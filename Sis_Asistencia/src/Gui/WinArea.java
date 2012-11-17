@@ -402,14 +402,14 @@ public class WinArea extends javax.swing.JInternalFrame {
     private void lblCargosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCargosMouseClicked
        if(!"".equals(lblId.getText())){
         WinArea_Cargos objCargo= new WinArea_Cargos();
-
+        objCargo.lblArea.setText(lblId.getText());
         objCargo.setResizable(true);
         objCargo.setMaximizable(false);
         objCargo.setIconifiable(true);
         objCargo.setClosable(true);
         WinMdi.jdpContenedor.add(objCargo);
         objCargo.setVisible(true);
-        objCargo.lblArea.setText(lblId.getText());
+        
        } else {
            JOptionPane.showMessageDialog(null,"Debe de seleccionar una area para poder asignar cargos");
        }

@@ -38,8 +38,7 @@ public class CargosDAO extends ConexionBd{
             String campos[] = new String[2];
             campos[0]="idcar";
             campos[1]="nombre";
-            String Table = this._table;
-            datos = qs.getAll(campos,Table,filter);
+            datos = qs.getAll(campos,this._table,filter);
             tblDatos.setModel(datos);   
         }
         catch(Exception e)
@@ -47,6 +46,24 @@ public class CargosDAO extends ConexionBd{
             System.out.println(_error+"getTableAll: "+e);
         }
     
+    }
+    /*
+     * Filtros
+     */
+     public int find(String idare,JTable tblDatos) {
+        int i = 0;
+        try {
+            if(!"".equals(idare)){
+                filter = new String[1][2];
+                filter[0][0] = "int_idare";
+                filter[0][1] = idare;
+            }
+            getTableAll(tblDatos);
+        }
+        catch(Exception e){
+            System.out.println("Dao_AreaDAO_find : "+e);
+        }
+        return i;
     }
     /*
      * Registro de areas

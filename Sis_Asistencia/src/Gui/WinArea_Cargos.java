@@ -16,7 +16,7 @@ public class WinArea_Cargos extends javax.swing.JInternalFrame {
     
     public WinArea_Cargos() {
         initComponents();
-        cargaForm();
+        
     }
 
     /**
@@ -27,7 +27,7 @@ public class WinArea_Cargos extends javax.swing.JInternalFrame {
             objCar = new CargosDAO();
             qs = new Query();
             
-            objCar.getTableAll(TblCargos);
+            objCar.find(lblArea.getText(),TblCargos);
         } catch (Exception e) {
             System.out.println(_error + "Cargos: " + e);
         }
@@ -53,6 +53,24 @@ public class WinArea_Cargos extends javax.swing.JInternalFrame {
         btnRegistrar = new javax.swing.JButton();
         btnRegistrar1 = new javax.swing.JButton();
 
+        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameOpened(evt);
+            }
+        });
+
         TblCargos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -72,7 +90,7 @@ public class WinArea_Cargos extends javax.swing.JInternalFrame {
 
         jLabel3.setText("Area >> ");
 
-        lblArea.setText("Area");
+        lblArea.setText("0");
 
         btnEliminar.setText("Eliminar");
         btnEliminar.addActionListener(new java.awt.event.ActionListener() {
@@ -114,7 +132,7 @@ public class WinArea_Cargos extends javax.swing.JInternalFrame {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(14, Short.MAX_VALUE)
+                .addContainerGap(16, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(txtname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -163,7 +181,7 @@ public class WinArea_Cargos extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 197, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
@@ -186,7 +204,7 @@ public class WinArea_Cargos extends javax.swing.JInternalFrame {
             JOptionPane.showInputDialog(null,"No se pudo grabar datos");
         }
         else {
-            objCar.getTableAll(TblCargos);
+            objCar.find(lblArea.getText(),TblCargos);
             cleanBox();
             JOptionPane.showMessageDialog(null,"Nuevo cargo registrado");      
         }
@@ -218,7 +236,7 @@ public class WinArea_Cargos extends javax.swing.JInternalFrame {
                        JOptionPane.showMessageDialog(null,"No se pudo eliminar el area");
                    }
                    else {
-                       objCar.getTableAll(TblCargos);
+                       objCar.find(lblArea.getText(),TblCargos);
                        cleanBox();
                    } 
                 }                       
@@ -228,6 +246,10 @@ public class WinArea_Cargos extends javax.swing.JInternalFrame {
         }
         
     }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
+     cargaForm();
+    }//GEN-LAST:event_formInternalFrameOpened
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable TblCargos;

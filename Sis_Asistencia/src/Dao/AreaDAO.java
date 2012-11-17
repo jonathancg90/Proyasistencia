@@ -17,11 +17,11 @@ public class AreaDAO extends ConexionBd{
 
     private Query qs;
     private Area objArea;
-    private Usuario objUsu;
     private Helpers hp;
     private Validators objVal;
     private String filter[][] = new String[0][0];
     private String _table = "area";
+    private String _error = "Dao_AreaDao_";
     
     PreparedStatement  pt = null;
     /*
@@ -44,7 +44,7 @@ public class AreaDAO extends ConexionBd{
         }
         catch(Exception e)
         {
-            System.out.println("Dao_AreaDao_getTableAll: "+e);
+            System.out.println(_error + "getTableAll: "+e);
         }
     
     }
@@ -76,7 +76,7 @@ public class AreaDAO extends ConexionBd{
             return i;
         }
         catch(Exception e){
-            System.out.println("Dao_AreaDAO_save: "+e);
+            System.out.println(_error + "save: "+e);
             return i;
         }
     }
@@ -109,7 +109,7 @@ public class AreaDAO extends ConexionBd{
             return i;
         }
         catch(Exception e){
-            System.out.println("Dao_AreaDAO_update: "+e);
+            System.out.println(_error + "update: "+e);
             return i;
         }
     }
@@ -135,7 +135,7 @@ public class AreaDAO extends ConexionBd{
             return i;
         }
         catch(Exception e){
-            System.out.println("Dao_AreaDAO_delete: "+e);
+            System.out.println(_error + "delete: "+e);
             return i;
         }
     }
@@ -150,7 +150,7 @@ public class AreaDAO extends ConexionBd{
             getTableAll(tblDatos);
         }
         catch(Exception e){
-            System.out.println("Dao_AreaDAO_find : "+e);
+            System.out.println(_error + "find : "+e);
         }
         return i;
     }
@@ -175,7 +175,7 @@ public class AreaDAO extends ConexionBd{
             return objArea;
         }
         catch(Exception e){
-            System.out.println("Dao_AreaDAO_getValues: "+e);
+            System.out.println(_error + "getValues: "+e);
             return objArea;
         }
     }
