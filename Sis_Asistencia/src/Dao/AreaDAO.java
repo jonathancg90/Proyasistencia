@@ -168,7 +168,7 @@ public class AreaDAO extends ConexionBd{
             String campos[] = new String[6];
             campos = qs.getRecords("area",idusu);
             objArea.setName(campos[2]);
-            objArea.setEstado(objVal.StringToBoolean(campos[3]));
+            objArea.setState(objVal.StringToBoolean(campos[3]));
             objArea.setCreated(campos[4]);
             objArea.setModified(campos[5]);
             

@@ -6,6 +6,7 @@ import Javabeans.Usuario;
 import Utilitarios.ConexionBd;
 import Utilitarios.Helpers;
 import Utilitarios.Query;
+import Utilitarios.Validators;
 import java.sql.*;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -16,9 +17,10 @@ public class UserDAO extends ConexionBd{
     Statement s = null;
     private Query qs;
     private Usuario objUsu;
+    private Validators objVal;
     private Helpers hp;
     private String filter[][] = new String[0][0];
-    
+    private String _error="UserDAO_";
     PreparedStatement  pt = null;
     /*
      * Middleware mostrar nombres de las areas
@@ -28,7 +30,6 @@ public class UserDAO extends ConexionBd{
         try{
             DefaultTableModel datos;
             qs= new Query();
-            System.out.println("hola");
             if (filter.length <= 0){
                 filter = new String[0][0];
             }
@@ -37,10 +38,11 @@ public class UserDAO extends ConexionBd{
             campos[1]="username";
             String Table = "usuario";
             datos = qs.getAll(campos,Table,filter);
+            System.out.println("mundo");
             tblDatos.setModel(datos);   
         }
         catch(Exception e){
-            System.out.println("UserDAO_getTableAll: "+e);
+            System.out.println(_error+"getTableAll: "+e);
         }
     
     }
@@ -67,14 +69,14 @@ public class UserDAO extends ConexionBd{
 
         }
         catch(Exception e){
-            System.out.println("UserDAO_Auth: "+e);
+            System.out.println(_error+"Auth: "+e);
             return false;
         }
     }     
     /*
      * Registro de usuarios
      */
-    public int saveUsuario(String username, String password,int idemp,int estado){
+    public int saveUsuario(String username, String password,int idemp,boolean estado,int rol){
        int i=0;
         try{
             Date date = new Date(0000-00-00);
@@ -85,16 +87,16 @@ public class UserDAO extends ConexionBd{
             String Table = "usuario";
             String now = hp.getDateNow();
             
-            objUsu = new Usuario(2,username,password,0,now,now,false);
+            objUsu = new Usuario(2,username,password,idemp,now,now,estado,rol);
             //Iniciando consulta y asignando valores
             pt = qs.sqlRegister(Table);
-           
-            pt.setString(1,objUsu.getUsername());
-            pt.setString(2,objUsu.getPassword());
-            pt.setInt(3,objUsu.getIdemp());
+            pt.setInt(1,objUsu.getIdemp());
+            pt.setString(2,objUsu.getUsername());
+            pt.setString(3,objUsu.getPassword());
             pt.setDate(4,date.valueOf(objUsu.getCreated()));
             pt.setDate(5,date.valueOf(objUsu.getModified()));
             pt.setBoolean(6, objUsu.isEstado());
+            pt.setInt(7, objUsu.getRol());
             //Ejecucion y cierre
             i= pt.executeUpdate();
             pt.close();
@@ -102,14 +104,14 @@ public class UserDAO extends ConexionBd{
             return i;
         }
         catch(Exception e){
-            System.out.println("UserDAO_saveUsuario: "+e);
+            System.out.println(_error+"saveUsuario: "+e);
             return i;
         }
     }
     /*
      * Actualizacion de Usuario
      */
-    public int updateUsuario(String username, String password, int estado){
+    public int updateUsuario(int id,String username, String password, int emp, boolean estado,int rol){
        int i=0;
         try{
             Date date = new Date(0000-00-00);
@@ -120,14 +122,18 @@ public class UserDAO extends ConexionBd{
             String Table = "usuario";
             String now = hp.getDateNow();
             
-            objUsu = new Usuario(0,username,password,0,now,now,false);
+            objUsu = new Usuario(id,username,password,emp,now,now,false,rol);
             //Iniciando consulta y asignando valores
-            pt = qs.sqlRegister(Table);
+            pt = qs.sqlUpdate(Table);
            
-            pt.setString(1,objUsu.getUsername());
-            pt.setString(2,objUsu.getPassword());
-            pt.setString(3,objUsu.getCreated());
-            pt.setString(4,objUsu.getModified());
+            pt.setInt(1,objUsu.getIdemp());
+            pt.setString(2,objUsu.getUsername());
+            pt.setString(3,objUsu.getPassword());
+            pt.setDate(4,date.valueOf(objUsu.getCreated()));
+            pt.setDate(5,date.valueOf(objUsu.getModified()));
+            pt.setBoolean(6, objUsu.isEstado());
+            pt.setInt(7, objUsu.getRol());
+            pt.setInt(8, objUsu.getIdusu());
             //Ejecucion y cierre
             i= pt.executeUpdate();
             pt.close();
@@ -135,7 +141,7 @@ public class UserDAO extends ConexionBd{
             return i;
         }
         catch(Exception e){
-            System.out.println("UserDAO_update: "+e);
+            System.out.println(_error+"update: "+e);
             return i;
         }
     }
@@ -161,9 +167,35 @@ public class UserDAO extends ConexionBd{
             return i;
         }
         catch(Exception e){
-            System.out.println("UserDAO_delete: "+e);
+            System.out.println(_error+"delete: "+e);
             return i;
         }
     }
-    
+     /*
+     * Cargar valores de busqueda al modelo 
+     */
+    public Usuario getValues(int idusu){
+       objUsu =  new Usuario();
+       objVal = new Validators();
+        try{
+            qs= new Query();
+            //Preparando
+            String campos[] = new String[8];
+            campos = qs.getRecords("usuario",idusu);
+            objUsu.setIdemp(Integer.parseInt(campos[2]));
+            objUsu.setUsername(campos[3]);
+            objUsu.setPassword(campos[4]);
+            objUsu.setCreated(campos[5]);
+            objUsu.setModified(campos[6]);
+            objUsu.setEstado(objVal.StringToBoolean(campos[7]));
+            objUsu.setRol(Integer.parseInt(campos[8]));
+            
+            
+            return objUsu;
+        }
+        catch(Exception e){
+            System.out.println(_error + "getValues: "+e);
+            return objUsu;
+        }
+    }
 }

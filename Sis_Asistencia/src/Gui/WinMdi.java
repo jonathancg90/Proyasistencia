@@ -11,7 +11,8 @@ public class WinMdi extends javax.swing.JFrame {
      */
     public WinMdi() {
         initComponents();
-
+        this.setSize(877, 474);
+        jdpContenedor.setSize(877, 474);
     }
     
     
@@ -42,7 +43,7 @@ public class WinMdi extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jdpContenedor.setBounds(0, 0, 730, 440);
+        jdpContenedor.setBounds(0, 0, 1060, 480);
         jDesktopPane1.add(jdpContenedor, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         menuasi.setText("Asistencia");
@@ -127,6 +128,11 @@ public class WinMdi extends javax.swing.JFrame {
         menudis.add(JmitemUsu);
 
         JmitemDis.setText("Diseño");
+        JmitemDis.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                JmitemDisMousePressed(evt);
+            }
+        });
         menudis.add(JmitemDis);
 
         JmiBackup.setText("Backup");
@@ -159,11 +165,13 @@ public class WinMdi extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 725, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 517, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 360, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 476, Short.MAX_VALUE)
+            .addComponent(jDesktopPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 453, Short.MAX_VALUE)
         );
 
         pack();
@@ -178,7 +186,7 @@ public class WinMdi extends javax.swing.JFrame {
         objusuario.show();
         objusuario.setLocationRelativeTo(this);
         this.dispose();
-        }  
+        }
     }//GEN-LAST:event_menusalMousePressed
 
     private void JmitemAreaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JmitemAreaMousePressed
@@ -196,13 +204,12 @@ public class WinMdi extends javax.swing.JFrame {
        } else {
            JOptionPane.showMessageDialog(null,"Cierre la ventana abierta para abrir otra");
        }
-
        
     }//GEN-LAST:event_JmitemAreaMousePressed
 
     private void menuasiMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuasiMousePressed
         WinAsistencia objAsis = new WinAsistencia();
-        
+        val = new Validators();
         objAsis.setResizable(true);
         objAsis.setMaximizable(true);
         objAsis.setIconifiable(true);
@@ -217,7 +224,7 @@ public class WinMdi extends javax.swing.JFrame {
 
     private void menujusMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menujusMousePressed
         WinJustificacion objJus = new WinJustificacion();
-        
+        val = new Validators();
         objJus.setResizable(true);
         objJus.setMaximizable(true);
         objJus.setIconifiable(true);
@@ -233,7 +240,7 @@ public class WinMdi extends javax.swing.JFrame {
 
     private void menuhorMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuhorMousePressed
         WinHorarios objHor = new WinHorarios();
-        
+        val = new Validators();
         objHor.setResizable(true);
         objHor.setMaximizable(true);
         objHor.setIconifiable(true);
@@ -248,7 +255,7 @@ public class WinMdi extends javax.swing.JFrame {
 
     private void menuvisMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuvisMousePressed
         WinConsulta objCon = new WinConsulta();
-        
+        val = new Validators();
         objCon.setResizable(true);
         objCon.setMaximizable(true);
         objCon.setIconifiable(true);
@@ -262,8 +269,8 @@ public class WinMdi extends javax.swing.JFrame {
     }//GEN-LAST:event_menuvisMousePressed
 
     private void menurepMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menurepMousePressed
-    WinReportes objRep = new WinReportes();
-        
+        WinReportes objRep = new WinReportes();
+        val = new Validators();
         objRep.setResizable(true);
         objRep.setMaximizable(true);
         objRep.setIconifiable(true);
@@ -276,26 +283,9 @@ public class WinMdi extends javax.swing.JFrame {
           
     }//GEN-LAST:event_menurepMousePressed
 
-    private void JmitemUsuMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JmitemUsuMousePressed
-
-       WinUsuario objUsu= new WinUsuario();
-    
-       objUsu.setResizable(true);
-       objUsu.setMaximizable(true);
-       objUsu.setIconifiable(true);
-       //obj_Asis.setClosable(true);
-       jdpContenedor.add(objUsu);
-       if(val.EntryForms()){
-            objUsu.setVisible(true);
-       } else {
-           JOptionPane.showMessageDialog(null,"Cierre la ventana abierta para abrir otra");
-       }
-   
-    }//GEN-LAST:event_JmitemUsuMousePressed
-
     private void JmitemempMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JmitemempMousePressed
-    WinEmpresa objEmpresa= new WinEmpresa();
-    
+       WinEmpresa objEmpresa= new WinEmpresa();
+       val = new Validators();
        objEmpresa.setResizable(true);
        objEmpresa.setMaximizable(true);
        objEmpresa.setIconifiable(true);
@@ -311,7 +301,7 @@ public class WinMdi extends javax.swing.JFrame {
 
     private void JmitemSucursalMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JmitemSucursalMousePressed
         WinEmpresa_Sucursal objsucursal= new WinEmpresa_Sucursal();
-
+        val = new Validators();
         objsucursal.setResizable(true);
         objsucursal.setMaximizable(true);
         objsucursal.setIconifiable(true);
@@ -326,7 +316,7 @@ public class WinMdi extends javax.swing.JFrame {
 
     private void JmitemTipoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JmitemTipoMousePressed
         WinTipo_Empleado objtipo= new WinTipo_Empleado();
-
+        val = new Validators();
         objtipo.setResizable(true);
         objtipo.setMaximizable(true);
         objtipo.setIconifiable(true);
@@ -334,6 +324,37 @@ public class WinMdi extends javax.swing.JFrame {
 
         objtipo.setVisible(true);
     }//GEN-LAST:event_JmitemTipoMousePressed
+
+    private void JmitemDisMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JmitemDisMousePressed
+        WinArea objUsu= new WinArea();
+        val = new Validators();
+        objUsu.setResizable(true);
+        objUsu.setMaximizable(true);
+        objUsu.setIconifiable(true);
+        //obj_Asis.setClosable(true);
+        jdpContenedor.add(objUsu);
+        if(val.EntryForms()){
+            objUsu.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(null,"Cierre la ventana abierta para abrir otra");
+        }
+
+    }//GEN-LAST:event_JmitemDisMousePressed
+
+    private void JmitemUsuMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JmitemUsuMousePressed
+        WinUsuario_test objUsu= new WinUsuario_test();
+        val = new Validators();
+        objUsu.setResizable(true);
+        objUsu.setMaximizable(true);
+        objUsu.setIconifiable(true);
+        //obj_Asis.setClosable(true);
+        jdpContenedor.add(objUsu);
+        if(val.EntryForms()){
+            objUsu.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(null,"Cierre la ventana abierta para abrir otra");
+        }
+    }//GEN-LAST:event_JmitemUsuMousePressed
 
     public static void main(String args[]) {
         

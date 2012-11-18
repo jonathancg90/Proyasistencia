@@ -176,10 +176,8 @@ public class Query extends ConexionBd{
                 if(Filter.length!=i+1){ 
                     qs = qs + "and";
                 }
-                System.out.println(type+" - "+camp);
             }
         }
-        System.out.println(qs);
         return qs;
     }
     
@@ -268,7 +266,7 @@ public class Query extends ConexionBd{
             s = conexion.createStatement();
             rs = s.executeQuery("select " +Campo+ " from " +Tbl);
             while(rs.next()) {
-              MChoice.addElement(rs.getString("nombre"));
+              MChoice.addElement(rs.getString(Campo));
             }     
             
             cmbChoice.setModel(MChoice);   
@@ -375,4 +373,7 @@ public class Query extends ConexionBd{
             }
             return cant;
          }
-}
+            
+        }
+        
+

@@ -33,7 +33,7 @@ public class WinArea extends javax.swing.JInternalFrame {
             objarea = new AreaDAO();
             qs = new Query();
             objarea.getTableAll(tblArea);
-            qs.loadState(cmbEstate,false);
+//            qs.loadState(cmbEstate,false);
         } catch (Exception e) {
             System.out.println("Gui_WinMdi: " + e);
         }
@@ -366,7 +366,7 @@ public class WinArea extends javax.swing.JInternalFrame {
                 area = objarea.getValues(Integer.parseInt(idArea));
                 txtName.setText(area.getName());
                 lblModified.setText(area.getModified());
-                System.out.println(area.getState());
+                
                 qs.loadState(cmbEstate,area.getState());
                 }
             catch (Exception e) {
