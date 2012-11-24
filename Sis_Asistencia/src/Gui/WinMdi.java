@@ -20,7 +20,6 @@ public class WinMdi extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jDesktopPane1 = new javax.swing.JDesktopPane();
         jdpContenedor = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         menuasi = new javax.swing.JMenu();
@@ -42,9 +41,6 @@ public class WinMdi extends javax.swing.JFrame {
         menusal = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jdpContenedor.setBounds(0, 0, 1060, 480);
-        jDesktopPane1.add(jdpContenedor, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         menuasi.setText("Asistencia");
         menuasi.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -165,13 +161,11 @@ public class WinMdi extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 517, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 360, Short.MAX_VALUE))
+            .addComponent(jdpContenedor, javax.swing.GroupLayout.DEFAULT_SIZE, 659, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 453, Short.MAX_VALUE)
+            .addComponent(jdpContenedor, javax.swing.GroupLayout.DEFAULT_SIZE, 457, Short.MAX_VALUE)
         );
 
         pack();
@@ -398,7 +392,6 @@ public class WinMdi extends javax.swing.JFrame {
     private javax.swing.JMenuItem Jmitememp;
     private javax.swing.JMenuItem Jmitemhelp;
     private javax.swing.JMenu SubmenuCrit;
-    private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JMenuBar jMenuBar1;
     public static javax.swing.JDesktopPane jdpContenedor;
     private javax.swing.JMenu menuasi;
