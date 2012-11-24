@@ -13,15 +13,15 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 
-public class WinUsuario_test extends javax.swing.JInternalFrame {
+public class WinUsuario extends javax.swing.JInternalFrame {
     private UserDAO objUser;
     private Query qs;
     private Usuario modusu;
     private Data dt ;
     /**
-     * Creates new form WinUsuario_test
+     * Creates new form WinUsuario
      */
-    public WinUsuario_test() {
+    public WinUsuario() {
         initComponents();
         cargaForm();
     }

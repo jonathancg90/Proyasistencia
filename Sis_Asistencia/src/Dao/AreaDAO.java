@@ -27,7 +27,6 @@ public class AreaDAO extends ConexionBd{
     /*
      * Middleware mostrar nombres de las areas
      */
-    
     public void getTableAll(JTable tblDatos){
         try{
             DefaultTableModel datos;

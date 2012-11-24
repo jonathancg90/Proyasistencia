@@ -88,15 +88,19 @@ public class Query extends ConexionBd{
             
             for(int i=1;i<=nCols;i++){
                 if(!meta.isAutoIncrement(i)){
-                    query = query + meta.getColumnName(i)
-                    //+ ",";       
-                    + "=?,";
+                    for(int x=0;x<Utilitarios.Data.G_EXCLUDE.length;x++){
+                        if(meta.getColumnName(i).equals(Utilitarios.Data.G_EXCLUDE[x])){
+                            //Este campo ha sido excluido
+                        } else {
+                            query = query + meta.getColumnName(i)+ "=?,";
+                        }
+                    }  
+                    
                 }
                 else{
                     id =  meta.getColumnName(i);
                 }
             }
-            //query = query + " where "+id;
             query = query + " where "+id+"= ?";
             query = query.replace(", "," ");
             pt  = conexion.prepareStatement(query);
