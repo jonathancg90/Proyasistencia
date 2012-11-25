@@ -9,13 +9,13 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-public class Winroles extends javax.swing.JInternalFrame {
+public class WinRoles extends javax.swing.JInternalFrame {
     private RolesDAO objroles;
     private Roles roles;
     private Query qs;
     private Config cg;
 
-    public Winroles() {
+    public WinRoles() {
         initComponents();
         
     }

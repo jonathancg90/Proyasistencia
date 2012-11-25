@@ -75,12 +75,12 @@
                     <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="JmitemTipoMousePressed"/>
                   </Events>
                 </MenuItem>
-                <MenuItem class="javax.swing.JMenuItem" name="JmitemSucursal">
+                <MenuItem class="javax.swing.JMenuItem" name="JmitemRoles">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Sucursal"/>
+                    <Property name="text" type="java.lang.String" value="Roles"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="JmitemSucursalMousePressed"/>
+                    <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="JmitemRolesMousePressed"/>
                   </Events>
                 </MenuItem>
               </SubComponents>
@@ -159,7 +159,7 @@
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jdpContenedor" alignment="0" pref="482" max="32767" attributes="0"/>
+          <Component id="jdpContenedor" alignment="0" pref="486" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>

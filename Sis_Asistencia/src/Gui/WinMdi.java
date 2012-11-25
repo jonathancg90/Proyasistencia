@@ -32,7 +32,7 @@ public class WinMdi extends javax.swing.JFrame {
         JmitemArea = new javax.swing.JMenuItem();
         Jmitememp = new javax.swing.JMenuItem();
         JmitemTipo = new javax.swing.JMenuItem();
-        JmitemSucursal = new javax.swing.JMenuItem();
+        JmitemRoles = new javax.swing.JMenuItem();
         JmitemUsu = new javax.swing.JMenuItem();
         JmitemDis = new javax.swing.JMenuItem();
         JmiBackup = new javax.swing.JMenuItem();
@@ -105,13 +105,13 @@ public class WinMdi extends javax.swing.JFrame {
         });
         SubmenuCrit.add(JmitemTipo);
 
-        JmitemSucursal.setText("Sucursal");
-        JmitemSucursal.addMouseListener(new java.awt.event.MouseAdapter() {
+        JmitemRoles.setText("Roles");
+        JmitemRoles.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                JmitemSucursalMousePressed(evt);
+                JmitemRolesMousePressed(evt);
             }
         });
-        SubmenuCrit.add(JmitemSucursal);
+        SubmenuCrit.add(JmitemRoles);
 
         menudis.add(SubmenuCrit);
 
@@ -165,7 +165,7 @@ public class WinMdi extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jdpContenedor, javax.swing.GroupLayout.DEFAULT_SIZE, 482, Short.MAX_VALUE)
+            .addComponent(jdpContenedor, javax.swing.GroupLayout.DEFAULT_SIZE, 486, Short.MAX_VALUE)
         );
 
         pack();
@@ -278,7 +278,7 @@ public class WinMdi extends javax.swing.JFrame {
     }//GEN-LAST:event_menurepMousePressed
 
     private void JmitemempMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JmitemempMousePressed
-       WinEmpresa objEmpresa= new WinEmpresa();
+       WinEmpresa1 objEmpresa= new WinEmpresa1();
        val = new Validators();
        objEmpresa.setResizable(true);
        objEmpresa.setMaximizable(true);
@@ -293,8 +293,8 @@ public class WinMdi extends javax.swing.JFrame {
        
     }//GEN-LAST:event_JmitemempMousePressed
 
-    private void JmitemSucursalMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JmitemSucursalMousePressed
-        WinEmpresa_Sucursal objsucursal= new WinEmpresa_Sucursal();
+    private void JmitemRolesMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JmitemRolesMousePressed
+        WinRoles objsucursal= new WinRoles();
         val = new Validators();
         objsucursal.setResizable(true);
         objsucursal.setMaximizable(true);
@@ -306,7 +306,7 @@ public class WinMdi extends javax.swing.JFrame {
            JOptionPane.showMessageDialog(null,"Cierre la ventana abierta para abrir otra");
         }
         
-    }//GEN-LAST:event_JmitemSucursalMousePressed
+    }//GEN-LAST:event_JmitemRolesMousePressed
 
     private void JmitemTipoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JmitemTipoMousePressed
         WinTipo_Empleado objtipo= new WinTipo_Empleado();
@@ -386,7 +386,7 @@ public class WinMdi extends javax.swing.JFrame {
     private javax.swing.JMenuItem JmiBackup;
     private javax.swing.JMenuItem JmitemArea;
     private javax.swing.JMenuItem JmitemDis;
-    private javax.swing.JMenuItem JmitemSucursal;
+    private javax.swing.JMenuItem JmitemRoles;
     private javax.swing.JMenuItem JmitemTipo;
     private javax.swing.JMenuItem JmitemUsu;
     private javax.swing.JMenuItem Jmitememp;

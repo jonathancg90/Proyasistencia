@@ -101,10 +101,10 @@ public class EmpresaDAO extends ConexionBd{
             pt.setString(1,objEmpresa.getName());
             pt.setString(2,objEmpresa.getRuc());
             pt.setBoolean(3,objEmpresa.isEstado());
-            pt.setDate(4,date.valueOf(objEmpresa.getCreated()));
-            pt.setDate(5,date.valueOf(objEmpresa.getModified()));
-            pt.setInt(6,objEmpresa.getTrabajadores());
-            pt.setInt(7,objEmpresa.getMon());
+            pt.setDate(4,date.valueOf(objEmpresa.getModified()));
+            pt.setInt(5,objEmpresa.getTrabajadores());
+            pt.setInt(6,objEmpresa.getMon());
+            pt.setInt(7,objEmpresa.getIdempr());
             //Ejecucion y cierre
             i= pt.executeUpdate();
             pt.close();
@@ -172,13 +172,13 @@ public class EmpresaDAO extends ConexionBd{
             //Preparando
             String campos[] = new String[7];
             campos = qs.getRecords("empresa",idemp);
-            objEmpresa.setName(campos[1]);
-            objEmpresa.setRuc(campos[2]);
-            objEmpresa.setEstado(objVal.StringToBoolean(campos[3]));
-            objEmpresa.setCreated(campos[4]);
-            objEmpresa.setModified(campos[5]);
-            objEmpresa.setTrabajadores(Integer.parseInt(campos[6]));
-            objEmpresa.setMon(Integer.parseInt(campos[7]));
+            objEmpresa.setName(campos[2]);
+            objEmpresa.setRuc(campos[3]);
+            objEmpresa.setEstado(objVal.StringToBoolean(campos[4]));
+            objEmpresa.setCreated(campos[5]);
+            objEmpresa.setModified(campos[6]);
+            objEmpresa.setTrabajadores(Integer.parseInt(campos[7]));
+            objEmpresa.setMon(Integer.parseInt(campos[8]));
             
             
             

@@ -375,6 +375,7 @@ public class WinEmpresa1 extends javax.swing.JInternalFrame {
                 txtruc.setText(empresa.getRuc());
                 lblModified.setText(empresa.getModified());                
                 txtCantTrab.setText(String.valueOf(empresa.getTrabajadores()));
+                qs.loadChoiceDefault(cboMon,"moneda","nombre",empresa.getMon());
                 //cboMon.setText(empresa.getName());
 
                 System.out.println(empresa.isEstado());
@@ -411,7 +412,7 @@ public class WinEmpresa1 extends javax.swing.JInternalFrame {
         boolean estate = Boolean.valueOf(dt.G_BOOLEAN[cmbEstate.getSelectedIndex()]);
         //int estate = Integer.parseInt(txtCantTrab.getText());
         int trab = Integer.parseInt(txtCantTrab.getText());
-        int mon = qs.idChoice("empresa","nombre",String.valueOf(cboMon.getSelectedItem()));
+        int mon = qs.idChoice("moneda","nombre",String.valueOf(cboMon.getSelectedItem()));
         
         objempresa = new EmpresaDAO();
         int i = objempresa.save(name,ruc,estate,trab,mon);
@@ -433,7 +434,7 @@ public class WinEmpresa1 extends javax.swing.JInternalFrame {
         boolean estate = Boolean.valueOf(dt.G_BOOLEAN[cmbEstate.getSelectedIndex()]);
         //int estate = cmbEstate.getSelectedIndex();
         int trab = Integer.parseInt(txtCantTrab.getText());
-        int mon = qs.idChoice("empresa","nombre",String.valueOf(cboMon.getSelectedItem()));
+        int mon = qs.idChoice("moneda","nombre",String.valueOf(cboMon.getSelectedItem()));
 
         objempresa = new EmpresaDAO();
         System.out.println("ID: "+id);
