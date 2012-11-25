@@ -81,11 +81,11 @@ public class RolesDAO extends ConexionBd{
             hp = new Helpers();
             qs= new Query();
             String Table = "roles";
-            objRoles = new Roles(0,name);
+            objRoles = new Roles(id,name);
             //Iniciando consulta y asignando valores
             pt = qs.sqlUpdate(Table);
-            pt.setInt(1,objRoles.getIdrol());           
-            pt.setString(2,objRoles.getName());
+            pt.setInt(2,objRoles.getIdrol());           
+            pt.setString(1,objRoles.getName());
             //Ejecucion y cierre
             i= pt.executeUpdate();
             pt.close();
@@ -151,7 +151,7 @@ public class RolesDAO extends ConexionBd{
             //Preparando
             String campos[] = new String[1];
             campos = qs.getRecords("roles",idrol);
-            objRoles.setName(campos[1]);
+            objRoles.setName(campos[2]);
             
             return objRoles;
         }

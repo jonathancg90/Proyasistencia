@@ -97,9 +97,8 @@ public class TipoEmpleadoDAO extends ConexionBd{
             pt = qs.sqlUpdate(Table);
             pt.setString(1,objtipoemp.getName());
             pt.setBoolean(2,objtipoemp.isEstado());
-            pt.setDate(3,date.valueOf(objtipoemp.getCreated()));
-            pt.setDate(4,date.valueOf(objtipoemp.getModified()));
-            pt.setInt(5,objtipoemp.getIdtip());
+            pt.setDate(3,date.valueOf(objtipoemp.getModified()));
+            pt.setInt(4,objtipoemp.getIdtip());
             //Ejecucion y cierre
             i= pt.executeUpdate();
             pt.close();

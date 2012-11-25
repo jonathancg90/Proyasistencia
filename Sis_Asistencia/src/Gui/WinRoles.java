@@ -17,7 +17,17 @@ public class WinRoles extends javax.swing.JInternalFrame {
 
     public WinRoles() {
         initComponents();
-        
+        cargaForm();
+    }
+    
+    public void cargaForm(){
+        try {
+            objroles = new RolesDAO();
+            qs = new Query();
+            objroles.getTableAll(tblroles);
+        } catch (Exception e) {
+            System.out.println("Gui_WinMdi: " + e);
+        }
     }
     
     public void cleanBox(){
@@ -299,7 +309,7 @@ public class WinRoles extends javax.swing.JInternalFrame {
         else {
             objroles.getTableAll(tblroles);
             cleanBox();
-            JOptionPane.showMessageDialog(null,"Nueva area registrada");
+            JOptionPane.showMessageDialog(null,"Nueva rol registrado");
         }
     }//GEN-LAST:event_btnregistrarActionPerformed
 
@@ -337,6 +347,7 @@ public class WinRoles extends javax.swing.JInternalFrame {
 
     private void btnCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarActionPerformed
         this.setVisible(false);
+        Utilitarios.Config.OPENWINDOWS =0;
     }//GEN-LAST:event_btnCerrarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
