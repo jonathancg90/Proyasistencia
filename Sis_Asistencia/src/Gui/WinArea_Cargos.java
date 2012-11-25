@@ -51,7 +51,7 @@ public class WinArea_Cargos extends javax.swing.JInternalFrame {
         jLabel5 = new javax.swing.JLabel();
         txtname = new javax.swing.JTextField();
         btnRegistrar = new javax.swing.JButton();
-        btnRegistrar1 = new javax.swing.JButton();
+        btnActualizar = new javax.swing.JButton();
 
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
             public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
@@ -139,7 +139,12 @@ public class WinArea_Cargos extends javax.swing.JInternalFrame {
                     .addComponent(btnRegistrar)))
         );
 
-        btnRegistrar1.setText("Actualizar");
+        btnActualizar.setText("Actualizar");
+        btnActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnActualizarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -151,7 +156,7 @@ public class WinArea_Cargos extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnEliminar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnRegistrar1)
+                        .addComponent(btnActualizar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel1)
                         .addGap(29, 29, 29)
@@ -181,13 +186,13 @@ public class WinArea_Cargos extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jLabel2)
                     .addComponent(btnEliminar)
-                    .addComponent(btnRegistrar1))
+                    .addComponent(btnActualizar))
                 .addGap(12, 12, 12))
         );
 
@@ -251,11 +256,38 @@ public class WinArea_Cargos extends javax.swing.JInternalFrame {
      cargaForm();
     }//GEN-LAST:event_formInternalFrameOpened
 
+    private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
+             int fsel;
+        fsel = this.TblCargos.getSelectedRow();
+        if (fsel == -1) {
+            //No se ha seleccionado registo en Jtable
+        } 
+        else {
+            try {
+                   int i;  
+                   DefaultTableModel m = new DefaultTableModel();
+                   m = (DefaultTableModel) this.TblCargos.getModel();
+                   int id = Integer.parseInt(String.valueOf(m.getValueAt(fsel, 0)));
+
+                   objCar = new CargosDAO();
+                   i = objCar.delete(id);
+                   if(i==0) {
+                       JOptionPane.showMessageDialog(null,"No se pudo actualizar el cargo");
+                   }
+                       cleanBox();
+                   
+                }                       
+            catch(Exception e) {
+                
+            }
+        }
+    }//GEN-LAST:event_btnActualizarActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable TblCargos;
+    private javax.swing.JButton btnActualizar;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnRegistrar;
-    private javax.swing.JButton btnRegistrar1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

@@ -5,9 +5,9 @@ package Javabeans;
 public class Area {
     private int idare;
     private String name;
+    private boolean state;
     private String created;
     private String modified;
-    private boolean state;
     
     /* 
      * Constructor final
@@ -15,9 +15,9 @@ public class Area {
     public Area(int idarea, String name, String created, String modified, boolean state) {
         this.idare = idarea;
         this.name = name;
+        this.state = state;
         this.created = created;
         this.modified = modified;
-        this.state = state;
     }
     
     /* 
@@ -92,7 +92,7 @@ public class Area {
     /**
      * @param estado the estado to set
      */
-    public void setEstado(boolean estado) {
+    public void setState(boolean estado) {
         this.state = estado;
     }
     

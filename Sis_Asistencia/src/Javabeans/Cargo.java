@@ -4,8 +4,8 @@ package Javabeans;
 
 public class Cargo {
     private int idcar;
-    private String name;
     private int idare;
+    private String name;
     private String created;
     private String modified;
     
@@ -13,8 +13,8 @@ public class Cargo {
      */
     public Cargo(int idcar, String name, int idare, String created, String modified) {
         this.idcar = idcar;
-        this.name = name;
         this.idare = idare;
+        this.name = name;
         this.created = created;
         this.modified = modified;
     }
