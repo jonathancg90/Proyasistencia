@@ -19,14 +19,25 @@ public class AreaDAO extends ConexionBd{
     private Area objArea;
     private Helpers hp;
     private Validators objVal;
-    private String filter[][] = new String[0][0];
-    private String _table = "area";
-    private String _error = "Dao_AreaDao_";
+    private String filter[][];
+    String campos[];
+    private String _table;
+    private String _error;
     
     PreparedStatement  pt = null;
     /*
-     * Middleware mostrar nombres de las areas
+     * Carga de datos
      */
+    public AreaDAO(){
+        _table = "area";
+        _error = "Dao_AreaDao_";
+        filter = new String[0][0];
+        campos = new String[2];
+        campos[0]="idare";
+        campos[1]="nombre";
+    }
+    
+    //==========================================================================        
     public void getTableAll(JTable tblDatos){
         try{
             DefaultTableModel datos;
@@ -34,11 +45,8 @@ public class AreaDAO extends ConexionBd{
             if (filter.length <= 0){
                 filter = new String[0][0];
             }
-            String campos[] = new String[2];
-            campos[0]="idare";
-            campos[1]="nombre";
             String Table = this._table;
-            datos = qs.getAll(campos,Table,filter);
+            datos = qs.getAll(this.campos,Table,filter);
             tblDatos.setModel(datos);   
         }
         catch(Exception e)
@@ -98,9 +106,8 @@ public class AreaDAO extends ConexionBd{
             pt = qs.sqlUpdate(Table);
             pt.setString(1,objArea.getName());
             pt.setBoolean(2,objArea.getState());
-            pt.setDate(3,date.valueOf(objArea.getCreated()));
-            pt.setDate(4,date.valueOf(objArea.getModified()));
-            pt.setInt(5,objArea.getIdare());
+            pt.setDate(3,date.valueOf(objArea.getModified()));
+            pt.setInt(4,objArea.getIdare());
             //Ejecucion y cierre
             i= pt.executeUpdate();
             pt.close();
@@ -165,7 +172,7 @@ public class AreaDAO extends ConexionBd{
             qs= new Query();
             //Preparando
             String campos[] = new String[6];
-            campos = qs.getRecords("area",idusu);
+            campos = qs.getRecords(_table,idusu);
             objArea.setName(campos[2]);
             objArea.setState(objVal.StringToBoolean(campos[3]));
             objArea.setCreated(campos[4]);

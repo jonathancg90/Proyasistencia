@@ -61,7 +61,7 @@ public class Query extends ConexionBd{
     /*
      * Arma busqueda
      */
-    public String sqlsearch(){
+    public String sqlSearch(){
         
         String query="";
     
@@ -238,8 +238,7 @@ public class Query extends ConexionBd{
      * Autocarga de los estados activo, inactivo
      */
     public void loadState(JComboBox cmbState, boolean value){
-        try
-        {
+        try{
             dt = new Data();
             MChoice = new DefaultComboBoxModel();
             if(value == false){
@@ -253,12 +252,9 @@ public class Query extends ConexionBd{
                 
             cmbState.setModel(MChoice);   
         }
-        catch(Exception e)
-        {
+        catch(Exception e){
             System.out.println(_error+"loadState: "+e);
         }
-        
-        
     }
      /*
      * Autocarga de los combos
@@ -280,9 +276,35 @@ public class Query extends ConexionBd{
             System.out.println(_error+"loadChoice: "+e);
         }
     }
+       /*
+     * Autocarga de los combos
+     */
+    public void loadChoiceDefault(JComboBox cmbChoice, String Tbl, String Campo, int value){
+        try{
+            getConexion();
+            MChoice = new DefaultComboBoxModel();
+            s = conexion.createStatement();
+            String identify = getIdentify(Tbl);
+            
+            rs = s.executeQuery("select " +Campo+ " from " +Tbl + " where " + identify + "=" +value);
+            while(rs.next()) {
+              MChoice.addElement(rs.getString(Campo));
+            }
+            rs = s.executeQuery("select " +Campo+ " from " +Tbl + " where " + identify + "!=" +value);
+            while(rs.next()) {
+              MChoice.addElement(rs.getString(Campo));
+            } 
+            
+            cmbChoice.setModel(MChoice);   
+            closeConexion(); 
+        }
+        catch(Exception e){
+            System.out.println(_error+"loadChoiceDefault: "+e);
+        }
+    }
      
      /*
-     * Autocarga de los combos
+     * Me devuelve el id de 
      */
     public int idChoice(String Tbl, String Campo, String value){
         int id=0;

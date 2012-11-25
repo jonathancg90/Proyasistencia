@@ -129,11 +129,10 @@ public class UserDAO extends ConexionBd{
             pt.setInt(1,objUsu.getIdemp());
             pt.setString(2,objUsu.getUsername());
             pt.setString(3,objUsu.getPassword());
-            pt.setDate(4,date.valueOf(objUsu.getCreated()));
-            pt.setDate(5,date.valueOf(objUsu.getModified()));
-            pt.setBoolean(6, objUsu.isEstado());
-            pt.setInt(7, objUsu.getRol());
-            pt.setInt(8, objUsu.getIdusu());
+            pt.setDate(4,date.valueOf(objUsu.getModified()));
+            pt.setBoolean(5, objUsu.isEstado());
+            pt.setInt(6, objUsu.getRol());
+            pt.setInt(7, objUsu.getIdusu());
             //Ejecucion y cierre
             i= pt.executeUpdate();
             pt.close();
