@@ -9,8 +9,9 @@ public class Usuario {
     private String created;
     private String modified;
     private boolean estado;
+    private int rol;
 
-    public Usuario(int idusu, String username, String password, int idemp, String created, String modified, boolean estado) {
+    public Usuario(int idusu, String username, String password, int idemp, String created, String modified, boolean estado, int rol) {
         this.idusu = idusu;
         this.username = username;
         this.password = password;
@@ -18,6 +19,7 @@ public class Usuario {
         this.created = created;
         this.modified = modified;
         this.estado = estado;
+        this.rol = rol;
     }
 
     public Usuario() {
@@ -120,8 +122,20 @@ public class Usuario {
     public void setEstado(boolean estado) {
         this.estado = estado;
     }
+
+    /**
+     * @return the rol
+     */
+    public int getRol() {
+        return rol;
+    }
+
+    /**
+     * @param rol the rol to set
+     */
+    public void setRol(int rol) {
+        this.rol = rol;
+    }
+
     
-    
-    
-   
 }

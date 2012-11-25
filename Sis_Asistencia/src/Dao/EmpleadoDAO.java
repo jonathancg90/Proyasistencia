@@ -86,7 +86,7 @@ public class EmpleadoDAO extends ConexionBd{
             String Table = "usuario";
             String now = hp.getDateNow();
             
-            objUsu = new Usuario(0,username,password,0,now,now,false);
+            objUsu = new Usuario(0,username,password,0,now,now,false,1);
             //Iniciando consulta y asignando valores
             pt = qs.sqlRegister(Table);
            
@@ -120,7 +120,7 @@ public class EmpleadoDAO extends ConexionBd{
             String Table = "usuario";
             String now = hp.getDateNow();
             
-            objUsu = new Usuario(0,username,password,0,now,now,false);
+            objUsu = new Usuario(0,username,password,0,now,now,false,1);
             //Iniciando consulta y asignando valores
             pt = qs.sqlRegister(Table);
            

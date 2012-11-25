@@ -61,7 +61,7 @@ public class Query extends ConexionBd{
     /*
      * Arma busqueda
      */
-    public String sqlsearch(){
+    public String sqlSearch(){
         
         String query="";
     
@@ -88,15 +88,19 @@ public class Query extends ConexionBd{
             
             for(int i=1;i<=nCols;i++){
                 if(!meta.isAutoIncrement(i)){
-                    query = query + meta.getColumnName(i)
-                    //+ ",";       
-                    + "=?,";
+                    for(int x=0;x<Utilitarios.Data.G_EXCLUDE.length;x++){
+                        if(meta.getColumnName(i).equals(Utilitarios.Data.G_EXCLUDE[x])){
+                            //Este campo ha sido excluido
+                        } else {
+                            query = query + meta.getColumnName(i)+ "=?,";
+                        }
+                    }  
+                    
                 }
                 else{
                     id =  meta.getColumnName(i);
                 }
             }
-            //query = query + " where "+id;
             query = query + " where "+id+"= ?";
             query = query.replace(", "," ");
             pt  = conexion.prepareStatement(query);
@@ -176,10 +180,8 @@ public class Query extends ConexionBd{
                 if(Filter.length!=i+1){ 
                     qs = qs + "and";
                 }
-                System.out.println(type+" - "+camp);
             }
         }
-        System.out.println(qs);
         return qs;
     }
     
@@ -236,8 +238,7 @@ public class Query extends ConexionBd{
      * Autocarga de los estados activo, inactivo
      */
     public void loadState(JComboBox cmbState, boolean value){
-        try
-        {
+        try{
             dt = new Data();
             MChoice = new DefaultComboBoxModel();
             if(value == false){
@@ -251,12 +252,9 @@ public class Query extends ConexionBd{
                 
             cmbState.setModel(MChoice);   
         }
-        catch(Exception e)
-        {
+        catch(Exception e){
             System.out.println(_error+"loadState: "+e);
         }
-        
-        
     }
      /*
      * Autocarga de los combos
@@ -268,7 +266,7 @@ public class Query extends ConexionBd{
             s = conexion.createStatement();
             rs = s.executeQuery("select " +Campo+ " from " +Tbl);
             while(rs.next()) {
-              MChoice.addElement(rs.getString("nombre"));
+              MChoice.addElement(rs.getString(Campo));
             }     
             
             cmbChoice.setModel(MChoice);   
@@ -278,9 +276,35 @@ public class Query extends ConexionBd{
             System.out.println(_error+"loadChoice: "+e);
         }
     }
+       /*
+     * Autocarga de los combos
+     */
+    public void loadChoiceDefault(JComboBox cmbChoice, String Tbl, String Campo, int value){
+        try{
+            getConexion();
+            MChoice = new DefaultComboBoxModel();
+            s = conexion.createStatement();
+            String identify = getIdentify(Tbl);
+            
+            rs = s.executeQuery("select " +Campo+ " from " +Tbl + " where " + identify + "=" +value);
+            while(rs.next()) {
+              MChoice.addElement(rs.getString(Campo));
+            }
+            rs = s.executeQuery("select " +Campo+ " from " +Tbl + " where " + identify + "!=" +value);
+            while(rs.next()) {
+              MChoice.addElement(rs.getString(Campo));
+            } 
+            
+            cmbChoice.setModel(MChoice);   
+            closeConexion(); 
+        }
+        catch(Exception e){
+            System.out.println(_error+"loadChoiceDefault: "+e);
+        }
+    }
      
      /*
-     * Autocarga de los combos
+     * Me devuelve el id de 
      */
     public int idChoice(String Tbl, String Campo, String value){
         int id=0;
@@ -375,4 +399,9 @@ public class Query extends ConexionBd{
             }
             return cant;
          }
-}
+
+   
+            
+        }
+        
+

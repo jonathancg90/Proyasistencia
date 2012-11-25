@@ -45,6 +45,7 @@ public class WinArea extends javax.swing.JInternalFrame {
         txtFilter.setText("");
     }
             
+   
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -366,7 +367,7 @@ public class WinArea extends javax.swing.JInternalFrame {
                 area = objarea.getValues(Integer.parseInt(idArea));
                 txtName.setText(area.getName());
                 lblModified.setText(area.getModified());
-                System.out.println(area.getState());
+                
                 qs.loadState(cmbEstate,area.getState());
                 }
             catch (Exception e) {

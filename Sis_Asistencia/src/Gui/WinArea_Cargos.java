@@ -257,24 +257,31 @@ public class WinArea_Cargos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_formInternalFrameOpened
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
-             int fsel;
+
+        int fsel;
         fsel = this.TblCargos.getSelectedRow();
         if (fsel == -1) {
             //No se ha seleccionado registo en Jtable
         } 
         else {
-            try {
-                   int i;  
+
+            try { 
                    DefaultTableModel m = new DefaultTableModel();
                    m = (DefaultTableModel) this.TblCargos.getModel();
                    int id = Integer.parseInt(String.valueOf(m.getValueAt(fsel, 0)));
-
+                   String name = String.valueOf(m.getValueAt(fsel, 1));
+                   int idarea = Integer.parseInt(lblArea.getText());
                    objCar = new CargosDAO();
-                   i = objCar.delete(id);
+                   
+                   int i = objCar.update(id,idarea,name);
                    if(i==0) {
                        JOptionPane.showMessageDialog(null,"No se pudo actualizar el cargo");
                    }
+                   else {
+                       objCar.find(lblArea.getText(),TblCargos);
                        cleanBox();
+                   } 
+
                    
                 }                       
             catch(Exception e) {

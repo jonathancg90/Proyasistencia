@@ -19,14 +19,12 @@ public class CargosDAO extends ConexionBd{
     private Cargo objCargo;
     private Helpers hp;
     private Validators objVal;
+    
     private String filter[][] = new String[0][0];
     private String _table = "cargo";
     private String _error = "Dao_CargoDao_";
     
     PreparedStatement  pt = null;
-    /*
-     * Middleware mostrar nombres de las areas
-     */
     
     public void getTableAll(JTable tblDatos){
         try{
@@ -48,7 +46,7 @@ public class CargosDAO extends ConexionBd{
     
     }
     /*
-     * Filtros
+     * Filtros de busquedas
      */
      public int find(String idare,JTable tblDatos) {
         int i = 0;
@@ -111,13 +109,13 @@ public class CargosDAO extends ConexionBd{
             String Table = this._table;
             String now = hp.getDateNow();
             
-            objCargo = new Cargo(0,name,idArea,now,now);
+            objCargo = new Cargo(id,name,idArea,now,now);
             //Iniciando consulta y asignando valores
             pt = qs.sqlUpdate(Table);
             pt.setInt(1,objCargo.getIdare());
             pt.setString(2,objCargo.getName());
-            pt.setDate(3,date.valueOf(objCargo.getCreated()));
-            pt.setDate(4,date.valueOf(objCargo.getModified()));
+            pt.setDate(3,date.valueOf(objCargo.getModified()));
+            pt.setInt(4,objCargo.getIdcar());
             //Ejecucion y cierre
             i= pt.executeUpdate();
             pt.close();
