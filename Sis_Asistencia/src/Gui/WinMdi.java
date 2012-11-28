@@ -33,6 +33,7 @@ public class WinMdi extends javax.swing.JFrame {
         Jmitememp = new javax.swing.JMenuItem();
         JmitemTipo = new javax.swing.JMenuItem();
         JmitemRoles = new javax.swing.JMenuItem();
+        JmitemCiudad = new javax.swing.JMenuItem();
         JmitemUsu = new javax.swing.JMenuItem();
         JmitemDis = new javax.swing.JMenuItem();
         JmiBackup = new javax.swing.JMenuItem();
@@ -113,6 +114,14 @@ public class WinMdi extends javax.swing.JFrame {
         });
         SubmenuCrit.add(JmitemRoles);
 
+        JmitemCiudad.setText("Ciudad");
+        JmitemCiudad.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                JmitemCiudadMousePressed(evt);
+            }
+        });
+        SubmenuCrit.add(JmitemCiudad);
+
         menudis.add(SubmenuCrit);
 
         JmitemUsu.setText("Usuarios");
@@ -165,7 +174,7 @@ public class WinMdi extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jdpContenedor, javax.swing.GroupLayout.DEFAULT_SIZE, 486, Short.MAX_VALUE)
+            .addComponent(jdpContenedor, javax.swing.GroupLayout.DEFAULT_SIZE, 494, Short.MAX_VALUE)
         );
 
         pack();
@@ -350,6 +359,21 @@ public class WinMdi extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_JmitemUsuMousePressed
 
+    private void JmitemCiudadMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JmitemCiudadMousePressed
+        WinCiudad objUsu= new WinCiudad();
+        val = new Validators();
+        objUsu.setResizable(true);
+        objUsu.setMaximizable(true);
+        objUsu.setIconifiable(true);
+        //obj_Asis.setClosable(true);
+        jdpContenedor.add(objUsu);
+        if(val.EntryForms()){
+            objUsu.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(null,"Cierre la ventana abierta para abrir otra");
+        }
+    }//GEN-LAST:event_JmitemCiudadMousePressed
+
     public static void main(String args[]) {
         
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -385,6 +409,7 @@ public class WinMdi extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem JmiBackup;
     private javax.swing.JMenuItem JmitemArea;
+    private javax.swing.JMenuItem JmitemCiudad;
     private javax.swing.JMenuItem JmitemDis;
     private javax.swing.JMenuItem JmitemRoles;
     private javax.swing.JMenuItem JmitemTipo;
