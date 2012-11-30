@@ -179,8 +179,11 @@ public class WinMdi extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+<<<<<<< HEAD
             .addComponent(jdpContenedor, javax.swing.GroupLayout.DEFAULT_SIZE, 490, Short.MAX_VALUE)
-
+=======
+            .addComponent(jdpContenedor, javax.swing.GroupLayout.DEFAULT_SIZE, 494, Short.MAX_VALUE)
+>>>>>>> 7a6c17d7414d59d8b8474d972942d965809de6bf
         );
 
         pack();
