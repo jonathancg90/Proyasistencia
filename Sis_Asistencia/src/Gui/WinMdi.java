@@ -59,6 +59,11 @@ public class WinMdi extends javax.swing.JFrame {
         jMenuBar1.add(menujus);
 
         menuemp.setText("Empleados");
+        menuemp.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                menuempMousePressed(evt);
+            }
+        });
         jMenuBar1.add(menuemp);
 
         menuhor.setText("Horarios");
@@ -165,7 +170,7 @@ public class WinMdi extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jdpContenedor, javax.swing.GroupLayout.DEFAULT_SIZE, 486, Short.MAX_VALUE)
+            .addComponent(jdpContenedor, javax.swing.GroupLayout.DEFAULT_SIZE, 490, Short.MAX_VALUE)
         );
 
         pack();
@@ -278,7 +283,7 @@ public class WinMdi extends javax.swing.JFrame {
     }//GEN-LAST:event_menurepMousePressed
 
     private void JmitemempMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JmitemempMousePressed
-       WinEmpresa1 objEmpresa= new WinEmpresa1();
+       WinEmpresa objEmpresa= new WinEmpresa();
        val = new Validators();
        objEmpresa.setResizable(true);
        objEmpresa.setMaximizable(true);
@@ -349,6 +354,21 @@ public class WinMdi extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null,"Cierre la ventana abierta para abrir otra");
         }
     }//GEN-LAST:event_JmitemUsuMousePressed
+
+    private void menuempMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuempMousePressed
+        WinEmpleado objEmp= new WinEmpleado();
+        val = new Validators();
+        objEmp.setResizable(true);
+        objEmp.setMaximizable(true);
+        objEmp.setIconifiable(true);
+        //obj_Asis.setClosable(true);
+        jdpContenedor.add(objEmp);
+        if(val.EntryForms()){
+            objEmp.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(null,"Cierre la ventana abierta para abrir otra");
+        }
+    }//GEN-LAST:event_menuempMousePressed
 
     public static void main(String args[]) {
         

@@ -12,7 +12,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-public class WinEmpresa1 extends javax.swing.JInternalFrame {
+public class WinEmpresa extends javax.swing.JInternalFrame {
 
     private EmpresaDAO objempresa;
     private Empresa empresa;
@@ -20,7 +20,7 @@ public class WinEmpresa1 extends javax.swing.JInternalFrame {
     private Config cg;
     private Data dt;
     
-    public WinEmpresa1() {
+    public WinEmpresa() {
         initComponents();
         cargaForm();
     }
@@ -159,7 +159,7 @@ public class WinEmpresa1 extends javax.swing.JInternalFrame {
                     .addComponent(txtFilter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnFind))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 253, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnNext)
