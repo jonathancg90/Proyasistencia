@@ -3,17 +3,19 @@ package Gui;
 
 
 import Dao.EmpleadoDAO;
+import Dao.UserDAO;
 import Javabeans.Empleado;
 import Utilitarios.Data;
 import Utilitarios.Query;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 
 public class WinEmpleado extends javax.swing.JInternalFrame {
     private EmpleadoDAO objempl;
     private Query qs;
     
-    private Empleado modusu;
+    private Empleado modemp;
     private Data dt ;
 
     public WinEmpleado() {
@@ -34,9 +36,10 @@ public class WinEmpleado extends javax.swing.JInternalFrame {
             qs.loadChoice(cboSucursal,"sucursal","nombre");
             qs.loadChoice(cboCargo,"cargo","nombre");
             qs.loadChoice(cboAreaFilter,"area","nombre");
+            objempl.getTableAll(tblEmpleado);
 
         } catch (Exception e) {
-            System.out.println("Gui_WinMdi: " + e);
+            System.out.println("Gui_Win_area: " + e);
         }
     }  
     public void cleanBox(){
@@ -89,10 +92,10 @@ public class WinEmpleado extends javax.swing.JInternalFrame {
         jCheckBox1 = new javax.swing.JCheckBox();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
-        jMenuItem5 = new javax.swing.JMenuItem();
-        jMenuItem6 = new javax.swing.JMenuItem();
+        mitemregister = new javax.swing.JMenuItem();
+        mitemupdate = new javax.swing.JMenuItem();
+        mitemdelete = new javax.swing.JMenuItem();
+        mitemclearall = new javax.swing.JMenuItem();
         jMenuItem7 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
@@ -139,7 +142,7 @@ public class WinEmpleado extends javax.swing.JInternalFrame {
 
         lblempleado1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         pnlMantenimiento.add(lblempleado1);
-        lblempleado1.setBounds(120, 30, 94, 29);
+        lblempleado1.setBounds(120, 30, 70, 30);
 
         pnlMantenimiento.add(cboEmpresa);
         cboEmpresa.setBounds(120, 160, 160, 27);
@@ -192,6 +195,11 @@ public class WinEmpleado extends javax.swing.JInternalFrame {
 
             }
         ));
+        tblEmpleado.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblEmpleadoMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblEmpleado);
 
         jLabel3.setText("Area");
@@ -207,11 +215,11 @@ public class WinEmpleado extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel3)
-                        .addGap(46, 46, 46)
+                        .addGap(29, 29, 29)
                         .addComponent(cboAreaFilter, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(181, 181, 181)
+                        .addGap(198, 198, 198)
                         .addComponent(jCheckBox1)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addGap(0, 45, Short.MAX_VALUE))
                     .addComponent(jScrollPane1))
                 .addContainerGap())
         );
@@ -223,28 +231,43 @@ public class WinEmpleado extends javax.swing.JInternalFrame {
                     .addComponent(cboAreaFilter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jCheckBox1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         jMenu1.setText("Mantenimiento");
 
-        jMenuItem3.setText("Registrar");
-        jMenuItem3.addMouseListener(new java.awt.event.MouseAdapter() {
+        mitemregister.setText("Registrar");
+        mitemregister.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                jMenuItem3MousePressed(evt);
+                mitemregisterMousePressed(evt);
             }
         });
-        jMenu1.add(jMenuItem3);
+        jMenu1.add(mitemregister);
 
-        jMenuItem4.setText("Actualizar");
-        jMenu1.add(jMenuItem4);
+        mitemupdate.setText("Actualizar");
+        mitemupdate.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                mitemupdateMousePressed(evt);
+            }
+        });
+        jMenu1.add(mitemupdate);
 
-        jMenuItem5.setText("Eliminar");
-        jMenu1.add(jMenuItem5);
+        mitemdelete.setText("Eliminar");
+        mitemdelete.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                mitemdeleteMousePressed(evt);
+            }
+        });
+        mitemdelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mitemdeleteActionPerformed(evt);
+            }
+        });
+        jMenu1.add(mitemdelete);
 
-        jMenuItem6.setText("Limpiar");
-        jMenu1.add(jMenuItem6);
+        mitemclearall.setText("Limpiar");
+        jMenu1.add(mitemclearall);
 
         jMenuItem7.setText("Limpiar todo");
         jMenu1.add(jMenuItem7);
@@ -286,7 +309,7 @@ public class WinEmpleado extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuItem3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem3MousePressed
+    private void mitemregisterMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemregisterMousePressed
         Data dt = new Data();
         String nombre = txtnombres.getText();
         String dni=txtdni.getText();
@@ -299,13 +322,12 @@ public class WinEmpleado extends javax.swing.JInternalFrame {
         int empresa = cboEmpresa.getSelectedIndex();
         
         qs = new Query();
-        int idemp = qs.idChoice("empleado","nombres", nombre);
         //boolean estate = Boolean.valueOf(dt.G_BOOLEAN[cboEstado.getSelectedIndex()]);
         int estate=cboEstado.getSelectedIndex();
         //int rol = qs.idChoice("roles","nombre",String.valueOf(cboRol.getSelectedItem()));
        
         objempl = new EmpleadoDAO();
-        int i = objempl.saveEmpleado(idemp,nombre,apellido,dni, telefono,area, tipo, estate,cargo,empresa);
+        int i = objempl.saveEmpleado(0,nombre,apellido,dni, telefono,area, tipo, estate,cargo,empresa,sucursal);
         if (i == 0) {
             JOptionPane.showMessageDialog(null,"No se pudo grabar datos");
         }
@@ -314,7 +336,79 @@ public class WinEmpleado extends javax.swing.JInternalFrame {
             cleanBox();
             JOptionPane.showMessageDialog(null,"Nuevo usuario registrado");
         }        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem3MousePressed
+    }//GEN-LAST:event_mitemregisterMousePressed
+
+    private void mitemupdateMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemupdateMousePressed
+        Data dt = new Data();
+        String nombre = txtnombres.getText();
+        String dni=txtdni.getText();
+        String apellido=txtapellidos.getText();
+        String telefono=txttelefono.getText();
+        int  area = cboArea.getSelectedIndex();
+        int cargo = cboCargo.getSelectedIndex();
+        int tipo = cboTipo.getSelectedIndex();
+        int sucursal = cboSucursal.getSelectedIndex();
+        int empresa = cboEmpresa.getSelectedIndex();
+        
+        qs = new Query();
+        //boolean estate = Boolean.valueOf(dt.G_BOOLEAN[cboEstado.getSelectedIndex()]);
+        int estate=cboEstado.getSelectedIndex();
+        //int rol = qs.idChoice("roles","nombre",String.valueOf(cboRol.getSelectedItem()));
+       
+        objempl = new EmpleadoDAO();
+        int i = objempl.updateEmpleado(0,nombre,apellido,dni, telefono,area, tipo, estate,cargo,empresa,sucursal);
+        if (i == 0) {
+            JOptionPane.showMessageDialog(null,"No se pudo grabar datos");
+        }
+        else {
+            objempl.getTableAll(tblEmpleado);
+            cleanBox();
+            JOptionPane.showMessageDialog(null,"Nuevo usuario actualizado");
+        }     
+    }//GEN-LAST:event_mitemupdateMousePressed
+
+    private void tblEmpleadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblEmpleadoMouseClicked
+     try {       int fsel;
+                fsel = this.tblEmpleado.getSelectedRow();
+                objempl = new EmpleadoDAO();
+                DefaultTableModel m = new DefaultTableModel();
+                m = (DefaultTableModel) this.tblEmpleado.getModel();
+                String idEmp = String.valueOf(m.getValueAt(fsel, 0));
+                
+                //crear objeto modusu
+                modemp = objempl.getValues(Integer.parseInt(idEmp));
+                //Asigando valores obtenidos
+                lblempleado1.setText(idEmp);
+                txtnombres.setText(modemp.getNombres());
+                txtapellidos.setText(modemp.getApellidos());
+                txtdni.setText(modemp.getDni());
+                txttelefono.setText(modemp.getTelefono());
+                qs.loadChoiceDefault(cboCargo,"cargo","nombre",modemp.getIdcar());
+                qs.loadState(cboEstado,Boolean.valueOf(""+modemp.getIdest()));
+                }
+            catch (Exception e) {
+                System.out.println("Gui_Win_area: " + e);
+            }     
+    }//GEN-LAST:event_tblEmpleadoMouseClicked
+
+    private void mitemdeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mitemdeleteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mitemdeleteActionPerformed
+
+    private void mitemdeleteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemdeleteMousePressed
+     int id = Integer.valueOf(lblempleado1.getText());
+
+        objempl = new EmpleadoDAO();
+        int i = objempl.deleteEmpleado(id);
+        if(i==0) {
+            JOptionPane.showMessageDialog(null,"No se pudo eliminar el area");
+        }
+        else {
+            objempl.getTableAll(tblEmpleado);
+            cleanBox();
+            JOptionPane.showMessageDialog(null,"Area eliminada");
+        }  
+    }//GEN-LAST:event_mitemdeleteMousePressed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox cboArea;
@@ -344,14 +438,14 @@ public class WinEmpleado extends javax.swing.JInternalFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem5;
-    private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblempleado1;
+    private javax.swing.JMenuItem mitemclearall;
+    private javax.swing.JMenuItem mitemdelete;
+    private javax.swing.JMenuItem mitemregister;
+    private javax.swing.JMenuItem mitemupdate;
     private javax.swing.JPanel pnlMantenimiento;
     private javax.swing.JTable tblEmpleado;
     private javax.swing.JTextField txtapellidos;

@@ -87,7 +87,7 @@ public class UserDAO extends ConexionBd{
             String Table = "usuario";
             String now = hp.getDateNow();
             
-            objUsu = new Usuario(2,username,password,idemp,now,now,estado,rol);
+            objUsu = new Usuario(0,username,password,idemp,now,now,estado,rol);
             //Iniciando consulta y asignando valores
             pt = qs.sqlRegister(Table);
             pt.setInt(1,objUsu.getIdemp());

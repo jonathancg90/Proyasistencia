@@ -16,10 +16,12 @@ public class Empleado {
     private int idest;
     private int idcar;
     private int idempr;
+    private int idsuc;
     
-    /* Constructor final
-     */
-    public Empleado(int idemp, String nombres, String apellidos, String dni, String telefono, String retiro, int huella, String created, String modified, int idare, int idtip, int idest, int idcar, int idempr) {
+    public Empleado() {
+    }
+
+    public Empleado(int idemp, String nombres, String apellidos, String dni, String telefono, String retiro, int huella, String created, String modified, int idare, int idtip, int idest, int idcar, int idempr, int idsuc) {
         this.idemp = idemp;
         this.nombres = nombres;
         this.apellidos = apellidos;
@@ -34,11 +36,7 @@ public class Empleado {
         this.idest = idest;
         this.idcar = idcar;
         this.idempr = idempr;
-    }
-    
-    /* Constructor fpor Omision
-     */
-    public Empleado() {
+        this.idsuc = idsuc;
     }
 
     /**
@@ -236,5 +234,20 @@ public class Empleado {
     public void setIdempr(int idempr) {
         this.idempr = idempr;
     }
+
+    /**
+     * @return the idsucursal
+     */
+    public int getIdsuc() {
+        return idsuc;
+    }
+
+    /**
+     * @param idsucursal the idsucursal to set
+     */
+    public void setIdsuc(int idsuc) {
+        this.idsuc = idsuc;
+    }
     
+   
 }

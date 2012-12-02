@@ -103,6 +103,7 @@ public class Query extends ConexionBd{
             }
             query = query + " where "+id+"= ?";
             query = query.replace(", "," ");
+            System.out.println("olaaaaaaaaaaaa"+query);
             pt  = conexion.prepareStatement(query);
             rs.close();
             return pt;

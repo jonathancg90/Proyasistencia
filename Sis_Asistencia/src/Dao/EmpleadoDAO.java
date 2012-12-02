@@ -6,6 +6,7 @@ import Javabeans.Empleado;
 import Utilitarios.ConexionBd;
 import Utilitarios.Helpers;
 import Utilitarios.Query;
+import Utilitarios.Validators;
 import java.sql.*;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -18,30 +19,38 @@ public class EmpleadoDAO extends ConexionBd{
     private Empleado objEmpl;
     private Helpers hp;
     private String filter[][] = new String[0][0];
-    
+    String campos[];
+    private String _table;
+    private String _error;
     PreparedStatement  pt = null;
+    Validators objVal;
     /*
      * Middleware mostrar nombres de las areas
      */
-    
+     public EmpleadoDAO(){
+        _table = "Empleado";
+        _error = "Dao_EmpleadoDao_";
+        filter = new String[0][0];
+        campos = new String[4];
+        campos[0]="idemp";
+        campos[1]="nombres";
+        campos[2]="apellidos";
+        campos[3]="idcar";
+    }
     public void getTableAll(JTable tblDatos){
         try{
             DefaultTableModel datos;
             qs= new Query();
-            System.out.println("hola");
             if (filter.length <= 0){
                 filter = new String[0][0];
             }
-            String campos[] = new String[2];
-            campos[0]="idusu";
-            campos[1]="username";
-            String Table = "usuario";
-            datos = qs.getAll(campos,Table,filter);
+            
+            datos = qs.getAll(campos,_table,filter);
             tblDatos.setModel(datos);   
         }
         catch(Exception e)
         {
-            System.out.println("UserDAO_getTableAll: "+e);
+            System.out.println(_error+"getTableAll: "+e);
         }
     
     }
@@ -75,26 +84,35 @@ public class EmpleadoDAO extends ConexionBd{
     /*
      * Registro de usuarios
      */
-    public int saveEmpleado(int idemp,String nombres, String apellidos, String dni, String telefono, int idare, int idtip, int idest, int idcar, int idempr){
+    public int saveEmpleado(int idemp,String nombres, String apellidos, String dni, String telefono, int idare, int idtip, int idest, int idcar, int idempr,int idsuc){
        int i=0;
         try{
             Date date = new Date(0000-00-00);
+            
             //Preparando
             getConexion();
             hp = new Helpers();
             qs = new Query();
-            String Table = "usuario";
             String now = hp.getDateNow();
             
-            objEmpl = new Empleado( idemp,  nombres, apellidos, dni,  telefono,  now, 1,now, now, idare, idtip, idest,  idcar,  idempr);
+            objEmpl = new Empleado( idemp,  nombres, apellidos, dni,  telefono, now, 1,now, now, idare, idtip, idest,  idcar,  idempr,idsuc);
             //Iniciando consulta y asignando valores
-            pt = qs.sqlRegister(Table);
-           /*
-            pt.setString(1,objUsu.getUsername());
-            pt.setString(2,objUsu.getPassword());
-            pt.setBoolean(3, objUsu.isEstado());
-            pt.setString(4,objUsu.getCreated());
-            pt.setString(5,objUsu.getModified());*/
+            pt = qs.sqlRegister(_table);
+           
+            pt.setString(1,objEmpl.getNombres());
+            pt.setString(2,objEmpl.getApellidos());
+            pt.setString(3, objEmpl.getDni());
+            pt.setString(4, objEmpl.getTelefono());
+            pt.setDate(5,date.valueOf(objEmpl.getRetiro()));
+            pt.setNull(6,java.sql.Types.VARBINARY);
+            pt.setDate(7,date.valueOf(objEmpl.getCreated()));
+            pt.setDate(8,date.valueOf(objEmpl.getModified()));
+            pt.setInt(9, objEmpl.getIdare());
+            pt.setInt(10, objEmpl.getIdtip());
+            pt.setInt(11, objEmpl.getIdest());
+            pt.setInt(12, objEmpl.getIdcar());
+            pt.setInt(13, objEmpl.getIdemp());
+            pt.setInt(14, objEmpl.getIdsuc());
             //Ejecucion y cierre
             i= pt.executeUpdate();
             pt.close();
@@ -102,41 +120,50 @@ public class EmpleadoDAO extends ConexionBd{
             return i;
         }
         catch(Exception e){
-            System.out.println("UserDAO_saveUsuario: "+e);
+            System.out.println(_error+"save: "+e);
             return i;
         }
     }
     /*
      * Actualizacion de Usuario
      */
-    public int updateEmpleado(int idemp,String nombres, String apellidos, String dni, String telefono, int idare, int idtip, int idest, int idcar, int idempr){
+    public int updateEmpleado(int idemp,String nombres, String apellidos, String dni, String telefono, int idare, int idtip, int idest, int idcar, int idempr,int idsuc){
        int i=0;
         try{
             Date date = new Date(0000-00-00);
+            
             //Preparando
             getConexion();
             hp = new Helpers();
             qs = new Query();
-            String Table = "usuario";
             String now = hp.getDateNow();
             
-            objEmpl = new Empleado(idemp,  nombres, apellidos, dni,  telefono,  now, 1,now, now, idare, idtip, idest,  idcar,  idempr);
+            objEmpl = new Empleado( idemp,  nombres, apellidos, dni,  telefono, now, 1,now, now, idare, idtip, idest,  idcar,  idempr,idsuc);
             //Iniciando consulta y asignando valores
-            pt = qs.sqlRegister(Table);
-           
-           /* pt.setString(1,objUsu.getUsername());
-            pt.setString(2,objUsu.getPassword());
-            pt.setBoolean(3, objUsu.isEstado());
-            pt.setString(4,objUsu.getCreated());
-            pt.setString(5,objUsu.getModified());*/
+            pt = qs.sqlUpdate(_table);
+            
+            pt.setString(1,objEmpl.getNombres());
+            pt.setString(2,objEmpl.getApellidos());
+            pt.setString(3, objEmpl.getDni());
+            pt.setString(4, objEmpl.getTelefono());
+            pt.setDate(5,date.valueOf(objEmpl.getRetiro()));
+            pt.setNull(6,java.sql.Types.VARBINARY);
+            pt.setDate(7,date.valueOf(objEmpl.getModified()));
+            pt.setInt(8, objEmpl.getIdare());
+            pt.setInt(9, objEmpl.getIdtip());
+            pt.setInt(10, objEmpl.getIdest());
+            pt.setInt(11, objEmpl.getIdcar());
+            pt.setInt(12, objEmpl.getIdempr());
+            pt.setInt(13, objEmpl.getIdsuc());
+            pt.setInt(14, objEmpl.getIdemp());
             //Ejecucion y cierre
             i= pt.executeUpdate();
             pt.close();
             closeConexion();
             return i;
         }
-        catch(Exception e){
-            System.out.println("UserDAO_update: "+e);
+         catch(Exception e){
+            System.out.println(_error+"update: "+e);
             return i;
         }
     }
@@ -151,7 +178,7 @@ public class EmpleadoDAO extends ConexionBd{
             objEmpl = new Empleado();
             hp = new Helpers();
             qs= new Query();
-            String Table = "usuario";
+            String Table = "Empleado";
             
             objEmpl.setIdemp(idemp);
             pt = qs.sqlDelete(Table);
@@ -160,10 +187,34 @@ public class EmpleadoDAO extends ConexionBd{
             pt.close();
             closeConexion();
             return i;
+            }
+        catch(Exception e){
+            System.out.println(_error+"delete: "+e);
+            return i;
+        }
+    }
+     /*
+     * Cargar valores de busqueda al modelo 
+     */
+    public Empleado getValues(int idemp){
+       objEmpl =  new Empleado();
+       objVal = new Validators();
+        try{
+            qs= new Query();
+            //Preparando
+            String campos[] = new String[15];
+            campos = qs.getRecords("Empleado",idemp);
+            objEmpl.setIdemp(Integer.parseInt(campos[1]));
+            objEmpl.setNombres(campos[2]);
+            objEmpl.setApellidos(campos[3]);
+            objEmpl.setDni(campos[4]);
+            objEmpl.setTelefono(campos[5]);
+            objEmpl.setIdcar(Integer.parseInt(campos[4]));
+            return objEmpl;
         }
         catch(Exception e){
-            System.out.println("UserDAO_delete: "+e);
-            return i;
+            System.out.println(_error + "getValues: "+e);
+            return objEmpl;
         }
     }
     

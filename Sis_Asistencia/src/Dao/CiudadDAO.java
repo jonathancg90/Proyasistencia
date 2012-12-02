@@ -80,7 +80,6 @@ public class CiudadDAO extends ConexionBd{
         try{           
             //Preparando
             getConexion();
-            hp = new Helpers();
             qs= new Query();
             String Table = "ciudad";
             objCiudad = new Ciudad(id,name);
@@ -109,7 +108,6 @@ public class CiudadDAO extends ConexionBd{
             //Preparando
             getConexion();
             objCiudad = new Ciudad();
-            hp = new Helpers();
             qs= new Query();
             String Table = "ciudad";
             
