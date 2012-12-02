@@ -45,7 +45,8 @@ public class WinEmpleado extends javax.swing.JInternalFrame {
     public void cleanBox(){
         txtapellidos.setText("");
         txtdni.setText("");
-        txtnombres.setText("");
+        //txtdni.setm
+        //txtnombres.setText("");
         txttelefono.setText("");
         cboArea.setSelectedIndex(0);
         cboCargo.setSelectedIndex(0);

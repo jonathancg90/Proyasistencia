@@ -38,7 +38,6 @@ public class UserDAO extends ConexionBd{
             campos[1]="username";
             String Table = "usuario";
             datos = qs.getAll(campos,Table,filter);
-            System.out.println("mundo");
             tblDatos.setModel(datos);   
         }
         catch(Exception e){
@@ -169,6 +168,24 @@ public class UserDAO extends ConexionBd{
             System.out.println(_error+"delete: "+e);
             return i;
         }
+    }
+     /*
+     * Filtros de busqueda
+     */
+    public int find(String state,JTable tblDatos) {
+        int i = 0;
+        try {
+            if(!"".equals(state)){
+                filter = new String[1][2];
+                filter[0][0] = "estado";
+                filter[0][1] = state; 
+            }
+            getTableAll(tblDatos);
+        }
+        catch(Exception e){
+            System.out.println(_error + "find : "+e);
+        }
+        return i;
     }
      /*
      * Cargar valores de busqueda al modelo 
