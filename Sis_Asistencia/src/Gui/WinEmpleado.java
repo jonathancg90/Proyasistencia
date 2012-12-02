@@ -1,7 +1,10 @@
 
 package Gui;
 
+
 import Dao.EmpleadoDAO;
+import Javabeans.Empleado;
+import Utilitarios.Data;
 import Utilitarios.Query;
 import javax.swing.JOptionPane;
 
@@ -9,6 +12,9 @@ import javax.swing.JOptionPane;
 public class WinEmpleado extends javax.swing.JInternalFrame {
     private EmpleadoDAO objempl;
     private Query qs;
+    
+    private Empleado modusu;
+    private Data dt ;
 
     public WinEmpleado() {
         initComponents();
@@ -32,7 +38,20 @@ public class WinEmpleado extends javax.swing.JInternalFrame {
         } catch (Exception e) {
             System.out.println("Gui_WinMdi: " + e);
         }
-    }     
+    }  
+    public void cleanBox(){
+        txtapellidos.setText("");
+        txtdni.setText("");
+        txtnombres.setText("");
+        txttelefono.setText("");
+        cboArea.setSelectedIndex(0);
+        cboCargo.setSelectedIndex(0);
+        cboEmpresa.setSelectedIndex(0);
+        cboEstado.setSelectedIndex(0);
+        cboSucursal.setSelectedIndex(0);
+        cboTipo.setSelectedIndex(0);
+        
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -64,7 +83,7 @@ public class WinEmpleado extends javax.swing.JInternalFrame {
         cboTipo = new javax.swing.JComboBox();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblEmpleado = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
         cboAreaFilter = new javax.swing.JComboBox();
         jCheckBox1 = new javax.swing.JCheckBox();
@@ -162,7 +181,7 @@ public class WinEmpleado extends javax.swing.JInternalFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Listado", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, null, new java.awt.Color(1, 1, 1)));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblEmpleado.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
                 {},
@@ -173,7 +192,7 @@ public class WinEmpleado extends javax.swing.JInternalFrame {
 
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tblEmpleado);
 
         jLabel3.setText("Area");
 
@@ -204,13 +223,18 @@ public class WinEmpleado extends javax.swing.JInternalFrame {
                     .addComponent(cboAreaFilter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jCheckBox1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         jMenu1.setText("Mantenimiento");
 
         jMenuItem3.setText("Registrar");
+        jMenuItem3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jMenuItem3MousePressed(evt);
+            }
+        });
         jMenu1.add(jMenuItem3);
 
         jMenuItem4.setText("Actualizar");
@@ -262,6 +286,36 @@ public class WinEmpleado extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jMenuItem3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem3MousePressed
+        Data dt = new Data();
+        String nombre = txtnombres.getText();
+        String dni=txtdni.getText();
+        String apellido=txtapellidos.getText();
+        String telefono=txttelefono.getText();
+        int  area = cboArea.getSelectedIndex();
+        int cargo = cboCargo.getSelectedIndex();
+        int tipo = cboTipo.getSelectedIndex();
+        int sucursal = cboSucursal.getSelectedIndex();
+        int empresa = cboEmpresa.getSelectedIndex();
+        
+        qs = new Query();
+        int idemp = qs.idChoice("empleado","nombres", nombre);
+        //boolean estate = Boolean.valueOf(dt.G_BOOLEAN[cboEstado.getSelectedIndex()]);
+        int estate=cboEstado.getSelectedIndex();
+        //int rol = qs.idChoice("roles","nombre",String.valueOf(cboRol.getSelectedItem()));
+       
+        objempl = new EmpleadoDAO();
+        int i = objempl.saveEmpleado(idemp,nombre,apellido,dni, telefono,area, tipo, estate,cargo,empresa);
+        if (i == 0) {
+            JOptionPane.showMessageDialog(null,"No se pudo grabar datos");
+        }
+        else {
+            objempl.getTableAll(tblEmpleado);
+            cleanBox();
+            JOptionPane.showMessageDialog(null,"Nuevo usuario registrado");
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem3MousePressed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox cboArea;
     private javax.swing.JComboBox cboAreaFilter;
@@ -297,9 +351,9 @@ public class WinEmpleado extends javax.swing.JInternalFrame {
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblempleado1;
     private javax.swing.JPanel pnlMantenimiento;
+    private javax.swing.JTable tblEmpleado;
     private javax.swing.JTextField txtapellidos;
     private javax.swing.JTextField txtdni;
     private javax.swing.JTextField txtnombres;

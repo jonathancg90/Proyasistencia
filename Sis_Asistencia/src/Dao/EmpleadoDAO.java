@@ -1,8 +1,8 @@
 
 package Dao;
 
-import Javabeans.Area;
-import Javabeans.Usuario;
+
+import Javabeans.Empleado;
 import Utilitarios.ConexionBd;
 import Utilitarios.Helpers;
 import Utilitarios.Query;
@@ -15,7 +15,7 @@ public class EmpleadoDAO extends ConexionBd{
     ResultSet rs = null;
     Statement s = null;
     private Query qs;
-    private Usuario objUsu;
+    private Empleado objEmpl;
     private Helpers hp;
     private String filter[][] = new String[0][0];
     
@@ -75,7 +75,7 @@ public class EmpleadoDAO extends ConexionBd{
     /*
      * Registro de usuarios
      */
-    public int saveEmpleado(String username, String password,int estado){
+    public int saveEmpleado(int idemp,String nombres, String apellidos, String dni, String telefono, int idare, int idtip, int idest, int idcar, int idempr){
        int i=0;
         try{
             Date date = new Date(0000-00-00);
@@ -86,15 +86,15 @@ public class EmpleadoDAO extends ConexionBd{
             String Table = "usuario";
             String now = hp.getDateNow();
             
-            objUsu = new Usuario(0,username,password,0,now,now,false,1);
+            objEmpl = new Empleado( idemp,  nombres, apellidos, dni,  telefono,  now, 1,now, now, idare, idtip, idest,  idcar,  idempr);
             //Iniciando consulta y asignando valores
             pt = qs.sqlRegister(Table);
-           
+           /*
             pt.setString(1,objUsu.getUsername());
             pt.setString(2,objUsu.getPassword());
             pt.setBoolean(3, objUsu.isEstado());
             pt.setString(4,objUsu.getCreated());
-            pt.setString(5,objUsu.getModified());
+            pt.setString(5,objUsu.getModified());*/
             //Ejecucion y cierre
             i= pt.executeUpdate();
             pt.close();
@@ -109,7 +109,7 @@ public class EmpleadoDAO extends ConexionBd{
     /*
      * Actualizacion de Usuario
      */
-    public int updateEmpleado(String username, String password){
+    public int updateEmpleado(int idemp,String nombres, String apellidos, String dni, String telefono, int idare, int idtip, int idest, int idcar, int idempr){
        int i=0;
         try{
             Date date = new Date(0000-00-00);
@@ -120,15 +120,15 @@ public class EmpleadoDAO extends ConexionBd{
             String Table = "usuario";
             String now = hp.getDateNow();
             
-            objUsu = new Usuario(0,username,password,0,now,now,false,1);
+            objEmpl = new Empleado(idemp,  nombres, apellidos, dni,  telefono,  now, 1,now, now, idare, idtip, idest,  idcar,  idempr);
             //Iniciando consulta y asignando valores
             pt = qs.sqlRegister(Table);
            
-            pt.setString(1,objUsu.getUsername());
+           /* pt.setString(1,objUsu.getUsername());
             pt.setString(2,objUsu.getPassword());
             pt.setBoolean(3, objUsu.isEstado());
             pt.setString(4,objUsu.getCreated());
-            pt.setString(5,objUsu.getModified());
+            pt.setString(5,objUsu.getModified());*/
             //Ejecucion y cierre
             i= pt.executeUpdate();
             pt.close();
@@ -143,19 +143,19 @@ public class EmpleadoDAO extends ConexionBd{
     /*
      * Eliminar 
      */
-    public int deleteEmpleado(int idusu){
+    public int deleteEmpleado(int idemp){
        int i=0;
         try{
             //Preparando
             getConexion();
-            objUsu = new Usuario();
+            objEmpl = new Empleado();
             hp = new Helpers();
             qs= new Query();
             String Table = "usuario";
             
-            objUsu.setIdusu(idusu);
+            objEmpl.setIdemp(idemp);
             pt = qs.sqlDelete(Table);
-            pt.setInt(1,objUsu.getIdusu());
+            pt.setInt(1,objEmpl.getIdemp());
             i= pt.executeUpdate();
             pt.close();
             closeConexion();

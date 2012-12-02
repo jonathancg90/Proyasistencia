@@ -18,8 +18,8 @@ public class EmpresaDAO extends ConexionBd{
     private Empresa objEmpresa;
     private Helpers hp;
     private String filter[][] = new String[0][0];
-    private Usuario objUsu;
     private Validators objVal;
+   
     
     PreparedStatement  pt = null;
     
