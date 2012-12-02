@@ -80,7 +80,7 @@ public class Query extends ConexionBd{
             String id = "id";
             Statement s = null;
             s = conexion.createStatement();
-            rs = s.executeQuery("select * from "+Table);
+            rs = s.executeQuery("select * from "+Table+" LIMIT 1 ");
             //Llenado Cabecera Jtable
             ResultSetMetaData meta = rs.getMetaData();
             int nCols = meta.getColumnCount();
@@ -95,7 +95,7 @@ public class Query extends ConexionBd{
                             query = query + meta.getColumnName(i)+ "=?,";
                         }
                     }  
-                    
+
                 }
                 else{
                     id =  meta.getColumnName(i);
@@ -125,7 +125,7 @@ public class Query extends ConexionBd{
             String id = "id";
             Statement s = null;
             s = conexion.createStatement();
-            rs = s.executeQuery("select * from "+Table);
+            rs = s.executeQuery("select * from "+Table+" LIMIT 1 ");
             //Llenado Cabecera Jtable
             ResultSetMetaData meta = rs.getMetaData();
             int nCols = meta.getColumnCount();
@@ -204,7 +204,7 @@ public class Query extends ConexionBd{
             //Llenado Cabecera Jtable
             ResultSetMetaData meta = rs.getMetaData();
             int nCols = meta.getColumnCount();
-            datos = new DefaultTableModel();
+            
             
             for(int i=0; i<nCols; ++i)
             {    

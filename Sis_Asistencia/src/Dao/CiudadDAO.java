@@ -20,6 +20,7 @@ public class CiudadDAO extends ConexionBd{
     private Usuario objUsu;
     private String _table = "ciudad";
     private Validators objVal;
+    private String _error = "Dao_CiudadDAO_";
     
     PreparedStatement  pt = null;
     
@@ -39,7 +40,7 @@ public class CiudadDAO extends ConexionBd{
         }
         catch(Exception e)
         {
-            System.out.println("Dao_Ciudad: "+e);
+            System.out.println(_error +"getTableAll: "+e);
         }
     
     }
@@ -52,12 +53,12 @@ public class CiudadDAO extends ConexionBd{
         try{
             //Preparando
             getConexion();
-            hp = new Helpers();
             qs= new Query();
-            String Table = "ciudad";
+            String Table = _table;
             objCiudad = new Ciudad(0,name);
             //Iniciando consulta y asignando valores
             pt = qs.sqlRegister(Table);
+            
             pt.setString(1,objCiudad.getName());
             //Ejecucion y cierre
             i= pt.executeUpdate();
@@ -66,7 +67,7 @@ public class CiudadDAO extends ConexionBd{
             return i;
         }
         catch(Exception e){
-            System.out.println("Dao_CiudadDAO_save: "+e);
+            System.out.println(_error + "save: "+e);
             return i;
         }
     }
@@ -94,7 +95,7 @@ public class CiudadDAO extends ConexionBd{
             return i;
         }
         catch(Exception e){
-            System.out.println("Dao_CiudadDAO: "+e);
+            System.out.println(_error + "update: "+e);
             return i;
         }
     }
@@ -121,7 +122,7 @@ public class CiudadDAO extends ConexionBd{
             return i;
         }
         catch(Exception e){
-            System.out.println("Dao_CiudadDAO: "+e);
+            System.out.println(_error + "delete: "+e);
             return i;
         }
     }
@@ -136,7 +137,7 @@ public class CiudadDAO extends ConexionBd{
             getTableAll(tblDatos);
         }
         catch(Exception e){
-            System.out.println("Dao_CiudadDAO_find : "+e);
+            System.out.println(_error + "find :  "+e);
         }
         return i;
     }
@@ -157,7 +158,7 @@ public class CiudadDAO extends ConexionBd{
             return objCiudad;
         }
         catch(Exception e){
-            System.out.println("Dao_RolesDAO_delete: "+e);
+            System.out.println(_error + "getValues: "+e);
             return objCiudad;
         }
     }
