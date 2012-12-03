@@ -51,35 +51,42 @@ public class WinArea extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         pnlMantenimiento = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        txtName = new javax.swing.JTextField();
-        cmbEstate = new javax.swing.JComboBox();
+        pnlOpciones = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         lblId = new javax.swing.JLabel();
-        lblCargos = new javax.swing.JLabel();
+        txtName = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        cmbEstate = new javax.swing.JComboBox();
         lblModified = new javax.swing.JLabel();
-        pnlOpciones = new javax.swing.JPanel();
-        btnRegister = new javax.swing.JButton();
-        btnUpdate = new javax.swing.JButton();
-        btnDelete = new javax.swing.JButton();
-        btnClose = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         txtFilter = new javax.swing.JTextField();
         btnFind = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblArea = new javax.swing.JTable();
-        btnNext = new javax.swing.JButton();
-        btnPrevious = new javax.swing.JButton();
-        jLabel7 = new javax.swing.JLabel();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        OpcRegistrar = new javax.swing.JMenuItem();
+        OpcActualizar = new javax.swing.JMenuItem();
+        OpcEliminar = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenu3 = new javax.swing.JMenu();
+        jMenu4 = new javax.swing.JMenu();
+
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        pnlOpciones.setBorder(javax.swing.BorderFactory.createTitledBorder("Datos del area"));
+
+        jLabel4.setText("Id");
+
+        lblId.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jLabel1.setText("Nombre");
 
         jLabel2.setText("Estado");
-
-        jLabel3.setText("Modificado");
 
         cmbEstate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -87,105 +94,9 @@ public class WinArea extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel4.setText("Id");
-
-        lblId.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        lblCargos.setText("Añadir cargos");
-        lblCargos.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblCargosMouseClicked(evt);
-            }
-        });
-
         lblModified.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        org.jdesktop.layout.GroupLayout pnlMantenimientoLayout = new org.jdesktop.layout.GroupLayout(pnlMantenimiento);
-        pnlMantenimiento.setLayout(pnlMantenimientoLayout);
-        pnlMantenimientoLayout.setHorizontalGroup(
-            pnlMantenimientoLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(pnlMantenimientoLayout.createSequentialGroup()
-                .addContainerGap()
-                .add(pnlMantenimientoLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(pnlMantenimientoLayout.createSequentialGroup()
-                        .add(pnlMantenimientoLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                            .add(jLabel1)
-                            .add(jLabel4))
-                        .add(42, 42, 42)
-                        .add(pnlMantenimientoLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                            .add(txtName)
-                            .add(pnlMantenimientoLayout.createSequentialGroup()
-                                .add(lblId, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 50, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .add(lblCargos)
-                                .add(30, 30, 30))))
-                    .add(org.jdesktop.layout.GroupLayout.TRAILING, pnlMantenimientoLayout.createSequentialGroup()
-                        .add(pnlMantenimientoLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                            .add(jLabel3)
-                            .add(jLabel2))
-                        .add(22, 22, 22)
-                        .add(pnlMantenimientoLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                            .add(pnlMantenimientoLayout.createSequentialGroup()
-                                .add(cmbEstate, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 146, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 84, Short.MAX_VALUE))
-                            .add(pnlMantenimientoLayout.createSequentialGroup()
-                                .add(lblModified, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 170, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                                .add(0, 0, Short.MAX_VALUE)))))
-                .addContainerGap())
-        );
-        pnlMantenimientoLayout.setVerticalGroup(
-            pnlMantenimientoLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(pnlMantenimientoLayout.createSequentialGroup()
-                .add(pnlMantenimientoLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
-                    .add(pnlMantenimientoLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .add(jLabel4, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .add(lblId, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .add(org.jdesktop.layout.GroupLayout.TRAILING, lblCargos))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 15, Short.MAX_VALUE)
-                .add(pnlMantenimientoLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(jLabel1)
-                    .add(txtName, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                .add(18, 18, 18)
-                .add(pnlMantenimientoLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(jLabel2)
-                    .add(cmbEstate, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                .add(18, 18, 18)
-                .add(pnlMantenimientoLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(jLabel3)
-                    .add(lblModified, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 32, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                .add(22, 22, 22))
-        );
-
-        pnlOpciones.setBorder(javax.swing.BorderFactory.createTitledBorder("Opciones"));
-
-        btnRegister.setText("Registrar");
-        btnRegister.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRegisterActionPerformed(evt);
-            }
-        });
-
-        btnUpdate.setText("Actualizar");
-        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnUpdateActionPerformed(evt);
-            }
-        });
-
-        btnDelete.setText("Eliminar");
-        btnDelete.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDeleteActionPerformed(evt);
-            }
-        });
-
-        btnClose.setText("Cerrar");
-        btnClose.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCloseActionPerformed(evt);
-            }
-        });
+        jLabel3.setText("Modificado");
 
         org.jdesktop.layout.GroupLayout pnlOpcionesLayout = new org.jdesktop.layout.GroupLayout(pnlOpciones);
         pnlOpciones.setLayout(pnlOpcionesLayout);
@@ -193,28 +104,75 @@ public class WinArea extends javax.swing.JInternalFrame {
             pnlOpcionesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(pnlOpcionesLayout.createSequentialGroup()
                 .addContainerGap()
-                .add(btnRegister)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(btnUpdate)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(btnDelete)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(btnClose)
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .add(pnlOpcionesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(pnlOpcionesLayout.createSequentialGroup()
+                        .add(pnlOpcionesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                            .add(jLabel1)
+                            .add(jLabel4))
+                        .add(42, 42, 42)
+                        .add(pnlOpcionesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                            .add(txtName)
+                            .add(pnlOpcionesLayout.createSequentialGroup()
+                                .add(lblId, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 50, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                .add(30, 180, Short.MAX_VALUE))))
+                    .add(org.jdesktop.layout.GroupLayout.TRAILING, pnlOpcionesLayout.createSequentialGroup()
+                        .add(pnlOpcionesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                            .add(jLabel3)
+                            .add(jLabel2))
+                        .add(22, 22, 22)
+                        .add(pnlOpcionesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                            .add(pnlOpcionesLayout.createSequentialGroup()
+                                .add(cmbEstate, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 146, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .add(pnlOpcionesLayout.createSequentialGroup()
+                                .add(lblModified, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 170, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                .add(0, 0, Short.MAX_VALUE)))))
+                .addContainerGap())
         );
         pnlOpcionesLayout.setVerticalGroup(
             pnlOpcionesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(pnlOpcionesLayout.createSequentialGroup()
                 .addContainerGap()
+                .add(pnlOpcionesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
+                    .add(pnlOpcionesLayout.createSequentialGroup()
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                        .add(jLabel4, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .add(lblId, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 29, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(pnlOpcionesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(btnRegister)
-                    .add(btnDelete)
-                    .add(btnUpdate)
-                    .add(btnClose))
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .add(jLabel1)
+                    .add(txtName, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(pnlOpcionesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(jLabel2)
+                    .add(cmbEstate, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                .add(pnlOpcionesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(jLabel3)
+                    .add(lblModified, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 32, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(75, Short.MAX_VALUE))
         );
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Lista"));
+        org.jdesktop.layout.GroupLayout pnlMantenimientoLayout = new org.jdesktop.layout.GroupLayout(pnlMantenimiento);
+        pnlMantenimiento.setLayout(pnlMantenimientoLayout);
+        pnlMantenimientoLayout.setHorizontalGroup(
+            pnlMantenimientoLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(org.jdesktop.layout.GroupLayout.TRAILING, pnlMantenimientoLayout.createSequentialGroup()
+                .addContainerGap()
+                .add(pnlOpciones, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        pnlMantenimientoLayout.setVerticalGroup(
+            pnlMantenimientoLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(pnlMantenimientoLayout.createSequentialGroup()
+                .addContainerGap()
+                .add(pnlOpciones, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        getContentPane().add(pnlMantenimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(275, 12, -1, -1));
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Busqueda de areas"));
 
         jLabel6.setText("Nombre");
 
@@ -243,31 +201,19 @@ public class WinArea extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(tblArea);
 
-        btnNext.setText(">");
-
-        btnPrevious.setText("<");
-
-        jLabel7.setText("1 / 5");
-
         org.jdesktop.layout.GroupLayout jPanel1Layout = new org.jdesktop.layout.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(jPanel1Layout.createSequentialGroup()
                 .add(jLabel6)
-                .add(4, 4, 4)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(txtFilter, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 134, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 12, Short.MAX_VALUE)
-                .add(btnFind))
-            .add(jPanel1Layout.createSequentialGroup()
-                .add(34, 34, 34)
-                .add(btnPrevious)
-                .add(26, 26, 26)
-                .add(jLabel7)
-                .add(31, 31, 31)
-                .add(btnNext)
-                .addContainerGap())
-            .add(jPanel1Layout.createSequentialGroup()
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(btnFind)
+                .add(0, 7, Short.MAX_VALUE))
+            .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
                 .add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                 .addContainerGap())
         );
@@ -279,76 +225,72 @@ public class WinArea extends javax.swing.JInternalFrame {
                     .add(txtFilter, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .add(btnFind))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
-                .add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                .add(18, 18, 18)
-                .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(btnNext)
-                    .add(btnPrevious)
-                    .add(jLabel7))
+                .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(layout.createSequentialGroup()
-                .add(18, 18, 18)
-                .add(jPanel1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .add(6, 6, 6)
-                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(pnlMantenimiento, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .add(pnlOpciones, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(layout.createSequentialGroup()
-                .add(12, 12, 12)
-                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING, false)
-                    .add(jPanel1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .add(layout.createSequentialGroup()
-                        .add(pnlMantenimiento, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .add(6, 6, 6)
-                        .add(pnlOpciones, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 260, -1));
+
+        jMenu1.setText("Archivo");
+
+        OpcRegistrar.setText("Registrar");
+        OpcRegistrar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                OpcRegistrarMousePressed(evt);
+            }
+        });
+        jMenu1.add(OpcRegistrar);
+
+        OpcActualizar.setText("Actualizar");
+        OpcActualizar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                OpcActualizarMousePressed(evt);
+            }
+        });
+        OpcActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                OpcActualizarActionPerformed(evt);
+            }
+        });
+        jMenu1.add(OpcActualizar);
+
+        OpcEliminar.setText("Eliminar");
+        OpcEliminar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                OpcEliminarMousePressed(evt);
+            }
+        });
+        jMenu1.add(OpcEliminar);
+
+        jMenuBar1.add(jMenu1);
+
+        jMenu2.setText("Editar");
+
+        jMenuItem1.setText("Limpiar");
+        jMenu2.add(jMenuItem1);
+
+        jMenuBar1.add(jMenu2);
+
+        jMenu3.setText("Cerrar");
+        jMenu3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jMenu3MousePressed(evt);
+            }
+        });
+        jMenuBar1.add(jMenu3);
+
+        jMenu4.setText("Añadir cargos");
+        jMenu4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jMenu4MousePressed(evt);
+            }
+        });
+        jMenuBar1.add(jMenu4);
+
+        setJMenuBar(jMenuBar1);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
-        dt = new Data();
-        String name = txtName.getText();
-        boolean estate = Boolean.valueOf(dt.G_BOOLEAN[cmbEstate.getSelectedIndex()]);
-        objarea = new AreaDAO();
-        int i = objarea.save(name, estate);
-        if (i == 0) {
-            JOptionPane.showInputDialog(null,"No se pudo grabar datos");
-        }
-        else {
-            objarea.getTableAll(tblArea);
-            cleanBox();
-            JOptionPane.showMessageDialog(null,"Nueva area registrada");      
-        }
-    }//GEN-LAST:event_btnRegisterActionPerformed
-
-    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
-        dt = new Data();
-        int id = Integer.valueOf(lblId.getText());
-        String name = txtName.getText();
-        boolean estate = Boolean.valueOf(dt.G_BOOLEAN[cmbEstate.getSelectedIndex()]);
-        objarea = new AreaDAO();
-        int i = objarea.update(id,name,estate);
-        if (i == 0) {
-            
-            JOptionPane.showMessageDialog(null, "No se pudo actualizar datos");
-        }
-        else {
-            objarea.getTableAll(tblArea);
-            cleanBox();
-            JOptionPane.showMessageDialog(null, "Area actualizada");
-        } 
-    }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void tblAreaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblAreaMouseClicked
         int fsel;
@@ -377,7 +319,22 @@ public class WinArea extends javax.swing.JInternalFrame {
             }
     }//GEN-LAST:event_tblAreaMouseClicked
 
-    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+    private void btnFindActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFindActionPerformed
+        String name = txtFilter.getText();
+        objarea = new AreaDAO();
+        objarea.find(name, tblArea);
+    }//GEN-LAST:event_btnFindActionPerformed
+
+    private void cmbEstateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbEstateActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbEstateActionPerformed
+
+    private void jMenu3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu3MousePressed
+        this.dispose();
+        Utilitarios.Config.OPENWINDOWS =0;
+    }//GEN-LAST:event_jMenu3MousePressed
+
+    private void OpcEliminarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_OpcEliminarMousePressed
         int i;
         i= JOptionPane.showConfirmDialog(null,"¿Esta seguro de eliminar este registro?","Aviso",JOptionPane.OK_CANCEL_OPTION,JOptionPane.WARNING_MESSAGE);
         if(i==0){
@@ -393,58 +350,80 @@ public class WinArea extends javax.swing.JInternalFrame {
                 cleanBox();
             } 
          }
-    }//GEN-LAST:event_btnDeleteActionPerformed
+    }//GEN-LAST:event_OpcEliminarMousePressed
 
-    private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
-        this.dispose();
-        Utilitarios.Config.OPENWINDOWS =0;
-    }//GEN-LAST:event_btnCloseActionPerformed
+    private void OpcActualizarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_OpcActualizarMousePressed
+         dt = new Data();
+        int id = Integer.valueOf(lblId.getText());
+        String name = txtName.getText();
+        boolean estate = Boolean.valueOf(dt.G_BOOLEAN[cmbEstate.getSelectedIndex()]);
+        objarea = new AreaDAO();
+        int i = objarea.update(id,name,estate);
+        if (i == 0) {
+            
+            JOptionPane.showMessageDialog(null, "No se pudo actualizar datos");
+        }
+        else {
+            objarea.getTableAll(tblArea);
+            cleanBox();
+            JOptionPane.showMessageDialog(null, "Area actualizada");
+        } 
+    }//GEN-LAST:event_OpcActualizarMousePressed
 
-    private void lblCargosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCargosMouseClicked
-       if(!"".equals(lblId.getText())){
-        WinArea_Cargos objCargo= new WinArea_Cargos();
-        objCargo.lblArea.setText(lblId.getText());
-        objCargo.setResizable(true);
-        objCargo.setMaximizable(false);
-        objCargo.setIconifiable(true);
-        objCargo.setClosable(true);
-        WinMdi.jdpContenedor.add(objCargo);
-        objCargo.setVisible(true);
-        
+    private void OpcRegistrarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_OpcRegistrarMousePressed
+        dt = new Data();
+        String name = txtName.getText();
+        boolean estate = Boolean.valueOf(dt.G_BOOLEAN[cmbEstate.getSelectedIndex()]);
+        objarea = new AreaDAO();
+        int i = objarea.save(name, estate);
+        if (i == 0) {
+            JOptionPane.showInputDialog(null,"No se pudo grabar datos");
+        }
+        else {
+            objarea.getTableAll(tblArea);
+            cleanBox();
+            JOptionPane.showMessageDialog(null,"Nueva area registrada");      
+        }
+    }//GEN-LAST:event_OpcRegistrarMousePressed
+
+    private void jMenu4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu4MousePressed
+        if(!"".equals(lblId.getText())){
+            WinArea_Cargos objCargo= new WinArea_Cargos();
+            objCargo.lblArea.setText(lblId.getText());
+            objCargo.setResizable(true);
+            objCargo.setMaximizable(false);
+            objCargo.setIconifiable(true);
+            objCargo.setClosable(true);
+            WinMdi.jdpContenedor.add(objCargo);
+            objCargo.setVisible(true);
        } else {
            JOptionPane.showMessageDialog(null,"Debe de seleccionar una area para poder asignar cargos");
        }
-       
-    }//GEN-LAST:event_lblCargosMouseClicked
+    }//GEN-LAST:event_jMenu4MousePressed
 
-    private void btnFindActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFindActionPerformed
-        String name = txtFilter.getText();
-        objarea = new AreaDAO();
-        objarea.find(name, tblArea);
-    }//GEN-LAST:event_btnFindActionPerformed
-
-    private void cmbEstateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbEstateActionPerformed
+    private void OpcActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OpcActualizarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_cmbEstateActionPerformed
+    }//GEN-LAST:event_OpcActualizarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnClose;
-    private javax.swing.JButton btnDelete;
+    private javax.swing.JMenuItem OpcActualizar;
+    private javax.swing.JMenuItem OpcEliminar;
+    private javax.swing.JMenuItem OpcRegistrar;
     private javax.swing.JButton btnFind;
-    private javax.swing.JButton btnNext;
-    private javax.swing.JButton btnPrevious;
-    private javax.swing.JButton btnRegister;
-    private javax.swing.JButton btnUpdate;
     private javax.swing.JComboBox cmbEstate;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel lblCargos;
     private javax.swing.JLabel lblId;
     private javax.swing.JLabel lblModified;
     private javax.swing.JPanel pnlMantenimiento;

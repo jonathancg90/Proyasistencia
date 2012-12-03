@@ -11,8 +11,9 @@ public class WinMdi extends javax.swing.JFrame {
      */
     public WinMdi() {
         initComponents();
-        this.setSize(877, 474);
-        jdpContenedor.setSize(877, 474);
+        jdpContenedor.setSize(this.getWidth(), this.getHeight());
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
+
     }
     
     
@@ -34,6 +35,9 @@ public class WinMdi extends javax.swing.JFrame {
         JmitemTipo = new javax.swing.JMenuItem();
         JmitemRoles = new javax.swing.JMenuItem();
         JmitemCiudad = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
         JmitemUsu = new javax.swing.JMenuItem();
         JmitemDis = new javax.swing.JMenuItem();
         JmiBackup = new javax.swing.JMenuItem();
@@ -127,6 +131,15 @@ public class WinMdi extends javax.swing.JFrame {
         });
         SubmenuCrit.add(JmitemCiudad);
 
+        jMenuItem1.setText("Est. Empleado");
+        SubmenuCrit.add(jMenuItem1);
+
+        jMenuItem2.setText("Dias no laborables");
+        SubmenuCrit.add(jMenuItem2);
+
+        jMenuItem3.setText("Tipo de horario");
+        SubmenuCrit.add(jMenuItem3);
+
         menudis.add(SubmenuCrit);
 
         JmitemUsu.setText("Usuarios");
@@ -175,13 +188,11 @@ public class WinMdi extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jdpContenedor, javax.swing.GroupLayout.PREFERRED_SIZE, 796, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jdpContenedor, javax.swing.GroupLayout.DEFAULT_SIZE, 652, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jdpContenedor, javax.swing.GroupLayout.DEFAULT_SIZE, 591, Short.MAX_VALUE)
+            .addComponent(jdpContenedor, javax.swing.GroupLayout.DEFAULT_SIZE, 289, Short.MAX_VALUE)
         );
 
         pack();
@@ -442,6 +453,9 @@ public class WinMdi extends javax.swing.JFrame {
     private javax.swing.JMenuItem Jmitemhelp;
     private javax.swing.JMenu SubmenuCrit;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     public static javax.swing.JDesktopPane jdpContenedor;
     private javax.swing.JMenu menuasi;
     private javax.swing.JMenu menudis;
