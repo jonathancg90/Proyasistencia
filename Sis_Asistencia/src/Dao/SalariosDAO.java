@@ -21,20 +21,46 @@ public class SalariosDAO extends ConexionBd {
     private String filter[][] = new String[0][0];
     private Empleado objEmp;
     private Validators objVal;
-    private String _error = "Dao_SalariosDAO_";
-    private String _table = "salarios";
+    String campos[];
+    private String _error;
+    private String _table;
     
     PreparedStatement  pt = null;
     
+     public SalariosDAO(){
+        _table = "salarios";
+        _error = "Dao_SalariosDAO_";
+        filter = new String[0][0];
+        campos = new String[4];
+        campos[0]="idsalario";
+        campos[1]="f_inicio";
+        campos[2]="f_final";
+        campos[3]="monto";
+     }
+    
     public void getTableAll(JTable tblDatos){
         
-        
+        try{
+            DefaultTableModel datos;
+            qs= new Query();
+            if (filter.length <= 0){
+                filter = new String[0][0];
+            }
+            String Table = this._table;
+            datos = qs.getAll(this.campos,Table,filter);
+            tblDatos.setModel(datos);   
+        }
+        catch(Exception e)
+        {
+            System.out.println(_error + "getTableAll: "+e);
+        }
+    
     
     }
     /*
      * Registro de Salarios
      */
-    public int save(String f_inicio,String f_final, boolean por_defecto,int idemp){
+    public int save(String f_inicio,String f_final, boolean por_defecto,int idemp,double monto){
        int i=0;
         try{
             Date date = new Date(0000-00-00);
@@ -45,16 +71,27 @@ public class SalariosDAO extends ConexionBd {
             
             String now = hp.getDateNow();
             
-            objSalarios = new Salarios(0,idemp,f_inicio,f_final,por_defecto,now,now);
+            objSalarios = new Salarios(0,idemp,f_inicio,f_final,por_defecto,now,now,monto);
             //Iniciando consulta y asignando 
+            System.out.println(objSalarios.getIdemp());
+            System.out.println(objSalarios.getF_inicio());
+            System.out.println(objSalarios.getF_final());
+            System.out.println(objSalarios.isPor_defecto());
+            System.out.println(objSalarios.getCreated());
+            System.out.println(objSalarios.getModified());
+            System.out.println(objSalarios.getMonto());
+            
+            
             
             pt = qs.sqlRegister(_table);
             pt.setInt(1,objSalarios.getIdemp());
-            pt.setDate(2,date.valueOf(objSalarios.getF_inicio()));
-            pt.setDate(3,date.valueOf(objSalarios.getF_final()));
+            pt.setDate(2,date.valueOf(objSalarios.getCreated()));
+            pt.setDate(3,date.valueOf(objSalarios.getCreated()));
             pt.setBoolean(4,objSalarios.isPor_defecto());
             pt.setDate(5,date.valueOf(objSalarios.getCreated()));
             pt.setDate(6,date.valueOf(objSalarios.getModified()));
+            pt.setDouble(7, objSalarios.getMonto());
+            
             //Ejecucion y cierre
             
             i= pt.executeUpdate();

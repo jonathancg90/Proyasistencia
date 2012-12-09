@@ -19,6 +19,7 @@ public class TipoHorarioDAO extends ConexionBd{
     private Usuario objUsu;
     private String _table = "tipohorario";
     private Validators objVal;
+    private String _error = "Dao_Tipohorario_";
     
     PreparedStatement  pt = null;
     
@@ -30,7 +31,7 @@ public class TipoHorarioDAO extends ConexionBd{
                 filter = new String[0][0];
             } 
             String campos[] = new String[2];
-            campos[0]="idtiphor";
+            campos[0]="idtipohor";
             campos[1]="nombre";
             String Table = this._table;
             datos = qs.getAll(campos,Table,filter);
@@ -38,7 +39,7 @@ public class TipoHorarioDAO extends ConexionBd{
         }
         catch(Exception e)
         {
-            System.out.println("Dao_Tipohorario: "+e);
+            System.out.println(_error + "getTableAll: "+e);
         }
     
     }
@@ -53,7 +54,7 @@ public class TipoHorarioDAO extends ConexionBd{
             getConexion();
             hp = new Helpers();
             qs= new Query();
-            String Table = "tipohorario";
+            String Table = this._table;
             objtiphor = new Tipohorario(0,name);
             //Iniciando consulta y asignando valores
             pt = qs.sqlRegister(Table);
@@ -65,7 +66,7 @@ public class TipoHorarioDAO extends ConexionBd{
             return i;
         }
         catch(Exception e){
-            System.out.println("Dao_TipoHorarioDAO_save: "+e);
+            System.out.println(_error + "_save: "+e);
             return i;
         }
     }
@@ -80,7 +81,7 @@ public class TipoHorarioDAO extends ConexionBd{
             getConexion();
             hp = new Helpers();
             qs= new Query();
-            String Table = "roles";
+            String Table = this._table;
             objtiphor = new Tipohorario(id,name);
             //Iniciando consulta y asignando valores
             pt = qs.sqlUpdate(Table);
@@ -93,7 +94,7 @@ public class TipoHorarioDAO extends ConexionBd{
             return i;
         }
         catch(Exception e){
-            System.out.println("Dao_TipoHorarioDAO: "+e);
+            System.out.println(_error + "update: "+e);
             return i;
         }
     }
@@ -109,7 +110,7 @@ public class TipoHorarioDAO extends ConexionBd{
             objtiphor = new Tipohorario();
             hp = new Helpers();
             qs= new Query();
-            String Table = "tipohorario";
+            String Table = this._table;
             
             objtiphor.setIdtiphor(id);
             pt = qs.sqlDelete(Table);
@@ -120,7 +121,7 @@ public class TipoHorarioDAO extends ConexionBd{
             return i;
         }
         catch(Exception e){
-            System.out.println("Dao_TipoHorarioDAO: "+e);
+            System.out.println(_error + "delete: "+e);
             return i;
         }
     }
@@ -135,7 +136,7 @@ public class TipoHorarioDAO extends ConexionBd{
             getTableAll(tblDatos);
         }
         catch(Exception e){
-            System.out.println("Dao_TipoHorarioDAO_find : "+e);
+            System.out.println(_error + "find : "+e);
         }
         return i;
     }
@@ -150,13 +151,13 @@ public class TipoHorarioDAO extends ConexionBd{
             qs= new Query();
             //Preparando
             String campos[] = new String[1];
-            campos = qs.getRecords("tipohorario",idtiphor);
+            campos = qs.getRecords(this._table,idtiphor);
             objtiphor.setName(campos[2]);
             
             return objtiphor;
         }
         catch(Exception e){
-            System.out.println("Dao_TipoHorarioDAO_delete: "+e);
+            System.out.println(_error + "getValues: "+e);
             return objtiphor;
         }
     }

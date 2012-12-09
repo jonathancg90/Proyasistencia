@@ -47,6 +47,7 @@ public class Query extends ConexionBd{
             }
            
             query= "insert into "+Table+" ("+campos+") values("+values+")";
+            System.out.println(query);
             pt  = conexion.prepareStatement(query);
             rs.close();
             return pt;
@@ -103,7 +104,6 @@ public class Query extends ConexionBd{
             }
             query = query + " where "+id+"= ?";
             query = query.replace(", "," ");
-            System.out.println("olaaaaaaaaaaaa"+query);
             pt  = conexion.prepareStatement(query);
             rs.close();
             return pt;

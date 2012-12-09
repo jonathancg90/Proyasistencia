@@ -11,9 +11,12 @@ public class Salarios {
    private boolean por_defecto;
    private String created;
    private String modified;
-   
+   private double monto;
 
-    public Salarios(int idsalario, int idemp, String f_inicio, String f_final, boolean por_defecto, String created, String modified) {
+    public Salarios() {
+    }
+
+    public Salarios(int idsalario, int idemp, String f_inicio, String f_final, boolean por_defecto, String created, String modified, double monto) {
         this.idsalario = idsalario;
         this.idemp = idemp;
         this.f_inicio = f_inicio;
@@ -21,9 +24,7 @@ public class Salarios {
         this.por_defecto = por_defecto;
         this.created = created;
         this.modified = modified;
-    }
-
-    public Salarios() {
+        this.monto = monto;
     }
 
     /**
@@ -123,7 +124,22 @@ public class Salarios {
     public void setModified(String modified) {
         this.modified = modified;
     }
-   
+
+    /**
+     * @return the monto
+     */
+    public double getMonto() {
+        return monto;
+    }
+
+    /**
+     * @param monto the monto to set
+     */
+    public void setMonto(double monto) {
+        this.monto = monto;
+    }
+
+    
    
     
     

@@ -74,7 +74,7 @@ public class WinEmpleado extends javax.swing.JInternalFrame {
         txttelefono = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        lblempleado1 = new javax.swing.JLabel();
+        lblidempleado = new javax.swing.JLabel();
         cboEmpresa = new javax.swing.JComboBox();
         cboSucursal = new javax.swing.JComboBox();
         jLabel5 = new javax.swing.JLabel();
@@ -141,9 +141,9 @@ public class WinEmpleado extends javax.swing.JInternalFrame {
         pnlMantenimiento.add(jLabel6);
         jLabel6.setBounds(310, 40, 48, 17);
 
-        lblempleado1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        pnlMantenimiento.add(lblempleado1);
-        lblempleado1.setBounds(120, 30, 70, 30);
+        lblidempleado.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        pnlMantenimiento.add(lblidempleado);
+        lblidempleado.setBounds(120, 30, 70, 30);
 
         pnlMantenimiento.add(cboEmpresa);
         cboEmpresa.setBounds(120, 160, 160, 27);
@@ -232,7 +232,7 @@ public class WinEmpleado extends javax.swing.JInternalFrame {
                     .addComponent(cboAreaFilter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jCheckBox1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -381,7 +381,7 @@ public class WinEmpleado extends javax.swing.JInternalFrame {
                 //crear objeto modusu
                 modemp = objempl.getValues(Integer.parseInt(idEmp));
                 //Asigando valores obtenidos
-                lblempleado1.setText(idEmp);
+                lblidempleado.setText(idEmp);
                 txtnombres.setText(modemp.getNombres());
                 txtapellidos.setText(modemp.getApellidos());
                 txtdni.setText(modemp.getDni());
@@ -395,7 +395,7 @@ public class WinEmpleado extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_tblEmpleadoMouseClicked
 
     private void mitemdeleteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemdeleteMousePressed
-     int id = Integer.valueOf(lblempleado1.getText());
+     int id = Integer.valueOf(lblidempleado.getText());
 
         objempl = new EmpleadoDAO();
         int i = objempl.deleteEmpleado(id);
@@ -411,7 +411,7 @@ public class WinEmpleado extends javax.swing.JInternalFrame {
 
     private void menusueMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menusueMousePressed
        WinSalarios objsalarios= new WinSalarios();
-       
+        objsalarios.lblIdemp.setText(lblidempleado.getText());
         objsalarios.setResizable(true);
         objsalarios.setMaximizable(true);
         objsalarios.setIconifiable(true);
@@ -451,7 +451,7 @@ public class WinEmpleado extends javax.swing.JInternalFrame {
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel lblempleado1;
+    private javax.swing.JLabel lblidempleado;
     private javax.swing.JMenu menuarc;
     private javax.swing.JMenu menuhor;
     private javax.swing.JMenu menusal;
