@@ -78,6 +78,14 @@
                     <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="JmitemTipoMousePressed"/>
                   </Events>
                 </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="Jmitemtpmon">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Tipo de Moneda"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="JmitemtpmonMousePressed"/>
+                  </Events>
+                </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="JmitemRoles">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Roles"/>
@@ -108,6 +116,9 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Tipo de horario"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jMenuItem3MousePressed"/>
+                  </Events>
                 </MenuItem>
               </SubComponents>
             </Menu>
@@ -180,7 +191,7 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jdpContenedor" alignment="0" pref="652" max="32767" attributes="0"/>
+          <Component id="jdpContenedor" alignment="0" pref="664" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">

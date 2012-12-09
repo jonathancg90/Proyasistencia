@@ -1,33 +1,33 @@
 
 package Gui;
 
+import Dao.RolesDAO;
 import Utilitarios.Query;
 import Utilitarios.Config;
-import Javabeans.Tipomoneda;
+import Javabeans.Tipohorario;
 
-import Dao.TipomonedaDAO;
+import Dao.TipoHorarioDAO;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-
-public class WinTipo_moneda extends javax.swing.JInternalFrame {
-
-    private TipomonedaDAO objmoneda;
-    private Tipomoneda moneda;
+public class WinTipo_Horario extends javax.swing.JInternalFrame {
+    private TipoHorarioDAO objtiphor;
+    private Tipohorario tiphor;
     private Query qs;
     private Config cg;
-
-    public WinTipo_moneda() {
+    
+    public WinTipo_Horario() {
         initComponents();
         cargaForm();
+        
     }
     
     public void cargaForm(){
         try {
-            objmoneda = new TipomonedaDAO();
+            objtiphor = new TipoHorarioDAO();
             qs = new Query();
-            objmoneda.getTableAll(tblmoneda);
+            objtiphor.getTableAll(tbltiphor);
         } catch (Exception e) {
             System.out.println("Gui_WinMdi: " + e);
         }
@@ -43,42 +43,67 @@ public class WinTipo_moneda extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        jLabel6 = new javax.swing.JLabel();
-        txtFilter = new javax.swing.JTextField();
-        btnFind = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tblmoneda = new javax.swing.JTable();
-        btnNext = new javax.swing.JButton();
-        jLabel7 = new javax.swing.JLabel();
-        btnPrevious = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         txtName = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         lblId = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jCheckBox1 = new javax.swing.JCheckBox();
-        jLabel3 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+        txtFilter = new javax.swing.JTextField();
+        btnFind = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tbltiphor = new javax.swing.JTable();
+        btnNext = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
+        btnPrevious = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         btnregistrar = new javax.swing.JButton();
         btnActualizar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
         btnCerrar = new javax.swing.JButton();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem5 = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
-        jMenuItem4 = new javax.swing.JMenuItem();
+
+        jLabel1.setText("Nombre");
+
+        jLabel4.setText("Id");
+
+        lblId.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addGap(51, 51, 51)
+                        .addComponent(lblId, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(4, 4, 4)
+                        .addComponent(txtName)
+                        .addGap(38, 38, 38))))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(36, 36, 36)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblId, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(21, 21, 21)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Lista"));
 
-        jLabel6.setText("moneda");
+        jLabel6.setText("Nombre");
 
         btnFind.setText("Ok");
         btnFind.addActionListener(new java.awt.event.ActionListener() {
@@ -87,7 +112,7 @@ public class WinTipo_moneda extends javax.swing.JInternalFrame {
             }
         });
 
-        tblmoneda.setModel(new javax.swing.table.DefaultTableModel(
+        tbltiphor.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
                 {},
@@ -98,12 +123,12 @@ public class WinTipo_moneda extends javax.swing.JInternalFrame {
 
             }
         ));
-        tblmoneda.addMouseListener(new java.awt.event.MouseAdapter() {
+        tbltiphor.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tblmonedaMouseClicked(evt);
+                tbltiphorMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(tblmoneda);
+        jScrollPane1.setViewportView(tbltiphor);
 
         btnNext.setText(">");
         btnNext.addActionListener(new java.awt.event.ActionListener() {
@@ -121,8 +146,9 @@ public class WinTipo_moneda extends javax.swing.JInternalFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jLabel6)
-                .addGap(18, 18, 18)
+                .addContainerGap()
+                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtFilter, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnFind)
@@ -132,7 +158,7 @@ public class WinTipo_moneda extends javax.swing.JInternalFrame {
                 .addComponent(btnPrevious)
                 .addGap(49, 49, 49)
                 .addComponent(jLabel7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 85, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnNext)
                 .addGap(79, 79, 79))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
@@ -149,78 +175,12 @@ public class WinTipo_moneda extends javax.swing.JInternalFrame {
                     .addComponent(jLabel6)
                     .addComponent(btnFind))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnNext)
                     .addComponent(btnPrevious)
                     .addComponent(jLabel7))
-                .addContainerGap())
-        );
-
-        jLabel1.setText("Moneda");
-
-        jLabel4.setText("Id");
-
-        lblId.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        jLabel2.setText("Simbolo");
-
-        jLabel5.setText("Modified");
-
-        jCheckBox1.setText("Default");
-
-        jLabel3.setText("jLabel3");
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addComponent(txtName)
-                .addGap(38, 38, 38))
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel4)
-                        .addGap(51, 51, 51)
-                        .addComponent(lblId, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(33, 33, 33)
-                        .addComponent(jCheckBox1))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(20, 20, 20)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addGap(27, 27, 27)
-                        .addComponent(jLabel3)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(36, 36, 36)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lblId, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jCheckBox1))
-                .addGap(21, 21, 21)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel3))
                 .addContainerGap())
         );
 
@@ -277,33 +237,8 @@ public class WinTipo_moneda extends javax.swing.JInternalFrame {
                     .addComponent(btnActualizar)
                     .addComponent(btnEliminar)
                     .addComponent(btnCerrar))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
-
-        jMenu1.setText("Archivo");
-
-        jMenuItem1.setText("Registrar");
-        jMenu1.add(jMenuItem1);
-
-        jMenuItem2.setText("Actualizar");
-        jMenu1.add(jMenuItem2);
-
-        jMenuItem3.setText("Eliminar");
-        jMenu1.add(jMenuItem3);
-
-        jMenuItem5.setText("Cerrar");
-        jMenu1.add(jMenuItem5);
-
-        jMenuBar1.add(jMenu1);
-
-        jMenu2.setText("Edit");
-
-        jMenuItem4.setText("Limpiar");
-        jMenu2.add(jMenuItem4);
-
-        jMenuBar1.add(jMenu2);
-
-        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -312,10 +247,10 @@ public class WinTipo_moneda extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -324,12 +259,12 @@ public class WinTipo_moneda extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
 
@@ -338,33 +273,33 @@ public class WinTipo_moneda extends javax.swing.JInternalFrame {
 
     private void btnFindActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFindActionPerformed
         String name = txtFilter.getText();
-        objmoneda = new TipomonedaDAO();
-        objmoneda.find(name, tblmoneda);
+        objtiphor = new TipoHorarioDAO();
+        objtiphor.find(name, tbltiphor);
     }//GEN-LAST:event_btnFindActionPerformed
 
-    private void tblmonedaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblmonedaMouseClicked
+    private void tbltiphorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbltiphorMouseClicked
         int fsel;
-        fsel= this.tblmoneda.getSelectedRow();
+        fsel= this.tbltiphor.getSelectedRow();
         if(fsel==-1){
 
         }
         else{
             try{
-                moneda = new Tipomoneda();
+                tiphor = new Tipohorario();
                 DefaultTableModel m = new DefaultTableModel();
-                m = (DefaultTableModel) this.tblmoneda.getModel();
-                String idTipmon = String.valueOf(m.getValueAt(fsel, 0));
-                lblId.setText(idTipmon);
-                moneda = objmoneda.getValues(Integer.parseInt(idTipmon));
-                txtName.setText(moneda.getName());
+                m = (DefaultTableModel) this.tbltiphor.getModel();
+                String idrol = String.valueOf(m.getValueAt(fsel, 0));
+                lblId.setText(idrol);
+                tiphor = objtiphor.getValues(Integer.parseInt(idrol));
+                txtName.setText(tiphor.getName());
 
             }
             catch(Exception e){
-                System.out.println("Gui_WinTipo_moneda: "+e);
+                System.out.println("Gui_WinTipo_Horario: "+e);
             }
 
         }
-    }//GEN-LAST:event_tblmonedaMouseClicked
+    }//GEN-LAST:event_tbltiphorMouseClicked
 
     private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
         // TODO add your handling code here:
@@ -372,47 +307,47 @@ public class WinTipo_moneda extends javax.swing.JInternalFrame {
 
     private void btnregistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnregistrarActionPerformed
         String name = txtName.getText();
-        objmoneda = new TipomonedaDAO();
-        int i = objmoneda.save(name);
+        objtiphor = new TipoHorarioDAO();
+        int i = objtiphor.save(name);
         if (i == 0) {
             JOptionPane.showInputDialog(null,"No se pudo grabar datos");
         }
         else {
-            objmoneda.getTableAll(tblmoneda);
+            objtiphor.getTableAll(tbltiphor);
             cleanBox();
-            JOptionPane.showMessageDialog(null,"Nueva moneda registrada");
+            JOptionPane.showMessageDialog(null,"Nueva tipo horario registrado");
         }
     }//GEN-LAST:event_btnregistrarActionPerformed
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
         int id = Integer.valueOf(lblId.getText());
         String name = txtName.getText();
-        objmoneda = new TipomonedaDAO();
+        objtiphor = new TipoHorarioDAO();
         System.out.println("ID: "+id);
-        int i = objmoneda.update(id,name);
+        int i = objtiphor.update(id,name);
         if (i == 0) {
 
             JOptionPane.showMessageDialog(null, "No se pudo actualizar datos");
         }
         else {
-            objmoneda.getTableAll(tblmoneda);
+            objtiphor.getTableAll(tbltiphor);
             cleanBox();
-            JOptionPane.showMessageDialog(null, "moneda actualizadas");
+            JOptionPane.showMessageDialog(null, "tipo de horario actualizados");
         }
     }//GEN-LAST:event_btnActualizarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         int id = Integer.valueOf(lblId.getText());
 
-        objmoneda = new TipomonedaDAO();
-        int i = objmoneda.delete(id);
+        objtiphor = new TipoHorarioDAO();
+        int i = objtiphor.delete(id);
         if(i==0) {
-            JOptionPane.showMessageDialog(null,"No se pudo eliminar la moneda");
+            JOptionPane.showMessageDialog(null,"No se pudo eliminar el tipo de horario");
         }
         else {
-            objmoneda.getTableAll(tblmoneda);
+            objtiphor.getTableAll(tbltiphor);
             cleanBox();
-            JOptionPane.showMessageDialog(null,"moneda eliminada");
+            JOptionPane.showMessageDialog(null,"tipo de horario eliminado");
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
@@ -429,29 +364,16 @@ public class WinTipo_moneda extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnNext;
     private javax.swing.JButton btnPrevious;
     private javax.swing.JButton btnregistrar;
-    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lblId;
-    private javax.swing.JTable tblmoneda;
+    private javax.swing.JTable tbltiphor;
     private javax.swing.JTextField txtFilter;
     private javax.swing.JTextField txtName;
     // End of variables declaration//GEN-END:variables

@@ -33,6 +33,7 @@ public class WinMdi extends javax.swing.JFrame {
         JmitemArea = new javax.swing.JMenuItem();
         Jmitememp = new javax.swing.JMenuItem();
         JmitemTipo = new javax.swing.JMenuItem();
+        Jmitemtpmon = new javax.swing.JMenuItem();
         JmitemRoles = new javax.swing.JMenuItem();
         JmitemCiudad = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -115,6 +116,14 @@ public class WinMdi extends javax.swing.JFrame {
         });
         SubmenuCrit.add(JmitemTipo);
 
+        Jmitemtpmon.setText("Tipo de Moneda");
+        Jmitemtpmon.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                JmitemtpmonMousePressed(evt);
+            }
+        });
+        SubmenuCrit.add(Jmitemtpmon);
+
         JmitemRoles.setText("Roles");
         JmitemRoles.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -138,6 +147,11 @@ public class WinMdi extends javax.swing.JFrame {
         SubmenuCrit.add(jMenuItem2);
 
         jMenuItem3.setText("Tipo de horario");
+        jMenuItem3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jMenuItem3MousePressed(evt);
+            }
+        });
         SubmenuCrit.add(jMenuItem3);
 
         menudis.add(SubmenuCrit);
@@ -188,7 +202,7 @@ public class WinMdi extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jdpContenedor, javax.swing.GroupLayout.DEFAULT_SIZE, 652, Short.MAX_VALUE)
+            .addComponent(jdpContenedor, javax.swing.GroupLayout.DEFAULT_SIZE, 664, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -408,6 +422,36 @@ public class WinMdi extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_JmitemCiudadMousePressed
 
+    private void JmitemtpmonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JmitemtpmonMousePressed
+        WinTipo_moneda objmon= new WinTipo_moneda();
+        val = new Validators();
+        objmon.setResizable(true);
+        objmon.setMaximizable(true);
+        objmon.setIconifiable(true);
+        //obj_Asis.setClosable(true);
+        jdpContenedor.add(objmon);
+        if(val.EntryForms()){
+            objmon.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(null,"Cierre la ventana abierta para abrir otra");
+        }
+    }//GEN-LAST:event_JmitemtpmonMousePressed
+
+    private void jMenuItem3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem3MousePressed
+        WinTipo_Horario objtiphor= new WinTipo_Horario();
+        val = new Validators();
+        objtiphor.setResizable(true);
+        objtiphor.setMaximizable(true);
+        objtiphor.setIconifiable(true);
+        //obj_Asis.setClosable(true);
+        jdpContenedor.add(objtiphor);
+        if(val.EntryForms()){
+            objtiphor.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(null,"Cierre la ventana abierta para abrir otra");
+        }
+    }//GEN-LAST:event_jMenuItem3MousePressed
+
 
     public static void main(String args[]) {
         
@@ -451,6 +495,7 @@ public class WinMdi extends javax.swing.JFrame {
     private javax.swing.JMenuItem JmitemUsu;
     private javax.swing.JMenuItem Jmitememp;
     private javax.swing.JMenuItem Jmitemhelp;
+    private javax.swing.JMenuItem Jmitemtpmon;
     private javax.swing.JMenu SubmenuCrit;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
