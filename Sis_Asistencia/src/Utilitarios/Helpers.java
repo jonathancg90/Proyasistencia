@@ -39,6 +39,19 @@ public class Helpers{
                 
         return date;
     }
+     /*
+     * Formateo de fehca
+     */
+    public String getFormatDate(String fecha)
+    {
+        String date;
+        String [] arrayfecha = fecha.split("-");
+        date = arrayfecha[1];
+        date = date.toUpperCase();
+        date = date.replaceFirst("DIC", "12");
+        date = arrayfecha[0]+"-"+date+"-"+arrayfecha[2];
+        return date;
+    }
     /*
      * Encriptador
      */

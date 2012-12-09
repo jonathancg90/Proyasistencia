@@ -7,6 +7,7 @@ import Utilitarios.Query;
 import Javabeans.Empleado;
 import Javabeans.Salarios;
 import Utilitarios.Validators;
+import java.math.BigDecimal;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import javax.swing.JTable;
@@ -64,29 +65,24 @@ public class SalariosDAO extends ConexionBd {
        int i=0;
         try{
             Date date = new Date(0000-00-00);
+            Date date2 = new Date(00-00-0000);
+            
+            //SimpleDateFormat formato = new SimpleDateFormat("dd")
+            
             //Preparando
             getConexion();
             hp = new Helpers();
             qs = new Query();
             
             String now = hp.getDateNow();
-            
+            System.out.println("SI FUNCIONA "+ now);
             objSalarios = new Salarios(0,idemp,f_inicio,f_final,por_defecto,now,now,monto);
             //Iniciando consulta y asignando 
-            System.out.println(objSalarios.getIdemp());
-            System.out.println(objSalarios.getF_inicio());
-            System.out.println(objSalarios.getF_final());
-            System.out.println(objSalarios.isPor_defecto());
-            System.out.println(objSalarios.getCreated());
-            System.out.println(objSalarios.getModified());
-            System.out.println(objSalarios.getMonto());
-            
-            
-            
+
             pt = qs.sqlRegister(_table);
             pt.setInt(1,objSalarios.getIdemp());
-            pt.setDate(2,date.valueOf(objSalarios.getCreated()));
-            pt.setDate(3,date.valueOf(objSalarios.getCreated()));
+            pt.setDate(2,date2.valueOf(objSalarios.getF_inicio()));
+            pt.setDate(3,date2.valueOf(objSalarios.getF_final()));
             pt.setBoolean(4,objSalarios.isPor_defecto());
             pt.setDate(5,date.valueOf(objSalarios.getCreated()));
             pt.setDate(6,date.valueOf(objSalarios.getModified()));
