@@ -17,6 +17,8 @@ public class WinEmpleado extends javax.swing.JInternalFrame {
     
     private Empleado modemp;
     private Data dt ;
+    
+    
 
     public WinEmpleado() {
         initComponents();
@@ -231,7 +233,7 @@ public class WinEmpleado extends javax.swing.JInternalFrame {
                     .addComponent(cboAreaFilter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jCheckBox1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -259,11 +261,6 @@ public class WinEmpleado extends javax.swing.JInternalFrame {
                 mitemdeleteMousePressed(evt);
             }
         });
-        mitemdelete.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mitemdeleteActionPerformed(evt);
-            }
-        });
         jMenu1.add(mitemdelete);
 
         jMenuBar1.add(jMenu1);
@@ -271,13 +268,23 @@ public class WinEmpleado extends javax.swing.JInternalFrame {
         jMenu2.setText("Horarios");
         jMenuBar1.add(jMenu2);
 
-        jMenu3.setText("Sueldos");
+        jMenu3.setText("Salarios");
+        jMenu3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jMenu3MousePressed(evt);
+            }
+        });
         jMenuBar1.add(jMenu3);
 
         jMenu4.setText("Vacaciones");
         jMenuBar1.add(jMenu4);
 
         jMenu5.setText("Cerrar");
+        jMenu5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jMenu5MousePressed(evt);
+            }
+        });
         jMenuBar1.add(jMenu5);
 
         setJMenuBar(jMenuBar1);
@@ -388,10 +395,6 @@ public class WinEmpleado extends javax.swing.JInternalFrame {
             }     
     }//GEN-LAST:event_tblEmpleadoMouseClicked
 
-    private void mitemdeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mitemdeleteActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_mitemdeleteActionPerformed
-
     private void mitemdeleteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemdeleteMousePressed
      int id = Integer.valueOf(lblempleado1.getText());
 
@@ -406,6 +409,22 @@ public class WinEmpleado extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null,"Area eliminada");
         }  
     }//GEN-LAST:event_mitemdeleteMousePressed
+
+    private void jMenu3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu3MousePressed
+       WinSalarios objsalarios= new WinSalarios();
+       
+        objsalarios.setResizable(true);
+        objsalarios.setMaximizable(true);
+        objsalarios.setIconifiable(true);
+        WinMdi.jdpContenedor.add(objsalarios);
+
+        objsalarios.setVisible(true);
+    }//GEN-LAST:event_jMenu3MousePressed
+
+    private void jMenu5MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu5MousePressed
+        this.setVisible(false);
+        Utilitarios.Config.OPENWINDOWS =0;
+    }//GEN-LAST:event_jMenu5MousePressed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox cboArea;
