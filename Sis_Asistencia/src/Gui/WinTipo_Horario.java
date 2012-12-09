@@ -1,13 +1,10 @@
 
 package Gui;
 
-import Dao.RolesDAO;
-import Utilitarios.Query;
-import Utilitarios.Config;
-import Javabeans.Tipohorario;
-
 import Dao.TipoHorarioDAO;
-import javax.swing.DefaultComboBoxModel;
+import Javabeans.Tipohorario;
+import Utilitarios.Config;
+import Utilitarios.Query;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 

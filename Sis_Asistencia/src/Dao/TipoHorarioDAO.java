@@ -1,11 +1,11 @@
 
 package Dao;
 
+import Javabeans.Tipohorario;
+import Javabeans.Usuario;
 import Utilitarios.ConexionBd;
 import Utilitarios.Helpers;
 import Utilitarios.Query;
-import Javabeans.Tipohorario;
-import Javabeans.Usuario;
 import Utilitarios.Validators;
 import java.sql.PreparedStatement;
 import javax.swing.JTable;

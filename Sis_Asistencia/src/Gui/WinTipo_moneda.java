@@ -1,12 +1,10 @@
 
 package Gui;
 
-import Utilitarios.Query;
-import Utilitarios.Config;
-import Javabeans.Tipomoneda;
-
 import Dao.TipomonedaDAO;
-import javax.swing.DefaultComboBoxModel;
+import Javabeans.Tipomoneda;
+import Utilitarios.Config;
+import Utilitarios.Query;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 

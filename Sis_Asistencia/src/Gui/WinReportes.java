@@ -152,7 +152,8 @@ public class WinReportes extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSalirActionPerformed
-          this.setVisible(false);   
+        this.setVisible(false);
+        Utilitarios.Config.OPENWINDOWS =0;
     }//GEN-LAST:event_BtnSalirActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

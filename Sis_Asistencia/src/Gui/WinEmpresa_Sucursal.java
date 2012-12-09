@@ -1,11 +1,9 @@
 
 package Gui;
-import Utilitarios.Query;
-import Utilitarios.Config;
-import Javabeans.Sucursal;
-
 import Dao.SucursalDao;
-import javax.swing.DefaultComboBoxModel;
+import Javabeans.Sucursal;
+import Utilitarios.Config;
+import Utilitarios.Query;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -68,12 +66,12 @@ public class WinEmpresa_Sucursal extends javax.swing.JInternalFrame {
         jLabel4 = new javax.swing.JLabel();
         lblId = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
+        menuarc = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
+        menuedit = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Lista"));
@@ -285,31 +283,36 @@ public class WinEmpresa_Sucursal extends javax.swing.JInternalFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(cmbCiudad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(43, Short.MAX_VALUE))
+                .addContainerGap(45, Short.MAX_VALUE))
         );
 
-        jMenu1.setText("Archivo");
+        menuarc.setText("Archivo");
 
         jMenuItem2.setText("Registrar");
-        jMenu1.add(jMenuItem2);
+        menuarc.add(jMenuItem2);
 
         jMenuItem3.setText("Actualizar");
-        jMenu1.add(jMenuItem3);
+        menuarc.add(jMenuItem3);
 
         jMenuItem4.setText("Eliminar");
-        jMenu1.add(jMenuItem4);
+        menuarc.add(jMenuItem4);
 
         jMenuItem5.setText("Cerrar");
-        jMenu1.add(jMenuItem5);
+        jMenuItem5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jMenuItem5MousePressed(evt);
+            }
+        });
+        menuarc.add(jMenuItem5);
 
-        jMenuBar1.add(jMenu1);
+        jMenuBar1.add(menuarc);
 
-        jMenu2.setText("Edit");
+        menuedit.setText("Edit");
 
         jMenuItem1.setText("Limpiar");
-        jMenu2.add(jMenuItem1);
+        menuedit.add(jMenuItem1);
 
-        jMenuBar1.add(jMenu2);
+        jMenuBar1.add(menuedit);
 
         setJMenuBar(jMenuBar1);
 
@@ -431,7 +434,13 @@ public class WinEmpresa_Sucursal extends javax.swing.JInternalFrame {
 
     private void btnCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarActionPerformed
         this.setVisible(false);
+        Utilitarios.Config.OPENWINDOWS =0;
     }//GEN-LAST:event_btnCerrarActionPerformed
+
+    private void jMenuItem5MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem5MousePressed
+        this.setVisible(false);
+        Utilitarios.Config.OPENWINDOWS =0;
+    }//GEN-LAST:event_jMenuItem5MousePressed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnActualizar;
@@ -449,8 +458,6 @@ public class WinEmpresa_Sucursal extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
@@ -463,6 +470,8 @@ public class WinEmpresa_Sucursal extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblId;
     private javax.swing.JLabel lblidemp;
+    private javax.swing.JMenu menuarc;
+    private javax.swing.JMenu menuedit;
     private javax.swing.JTable tblSucursal;
     private javax.swing.JTextField txtFilter;
     private javax.swing.JTextField txtName;

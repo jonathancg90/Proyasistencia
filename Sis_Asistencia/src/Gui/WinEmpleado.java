@@ -3,7 +3,6 @@ package Gui;
 
 
 import Dao.EmpleadoDAO;
-import Dao.UserDAO;
 import Javabeans.Empleado;
 import Utilitarios.Data;
 import Utilitarios.Query;
@@ -94,14 +93,14 @@ public class WinEmpleado extends javax.swing.JInternalFrame {
         cboAreaFilter = new javax.swing.JComboBox();
         jCheckBox1 = new javax.swing.JCheckBox();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
+        menuarc = new javax.swing.JMenu();
         mitemregister = new javax.swing.JMenuItem();
         mitemupdate = new javax.swing.JMenuItem();
         mitemdelete = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
-        jMenu3 = new javax.swing.JMenu();
-        jMenu4 = new javax.swing.JMenu();
-        jMenu5 = new javax.swing.JMenu();
+        menuhor = new javax.swing.JMenu();
+        menusue = new javax.swing.JMenu();
+        menuvac = new javax.swing.JMenu();
+        menusal = new javax.swing.JMenu();
 
         jMenuItem1.setText("jMenuItem1");
 
@@ -233,11 +232,11 @@ public class WinEmpleado extends javax.swing.JInternalFrame {
                     .addComponent(cboAreaFilter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jCheckBox1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        jMenu1.setText("Archivo");
+        menuarc.setText("Archivo");
 
         mitemregister.setText("Registrar");
         mitemregister.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -245,7 +244,7 @@ public class WinEmpleado extends javax.swing.JInternalFrame {
                 mitemregisterMousePressed(evt);
             }
         });
-        jMenu1.add(mitemregister);
+        menuarc.add(mitemregister);
 
         mitemupdate.setText("Actualizar");
         mitemupdate.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -253,7 +252,7 @@ public class WinEmpleado extends javax.swing.JInternalFrame {
                 mitemupdateMousePressed(evt);
             }
         });
-        jMenu1.add(mitemupdate);
+        menuarc.add(mitemupdate);
 
         mitemdelete.setText("Eliminar");
         mitemdelete.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -261,31 +260,31 @@ public class WinEmpleado extends javax.swing.JInternalFrame {
                 mitemdeleteMousePressed(evt);
             }
         });
-        jMenu1.add(mitemdelete);
+        menuarc.add(mitemdelete);
 
-        jMenuBar1.add(jMenu1);
+        jMenuBar1.add(menuarc);
 
-        jMenu2.setText("Horarios");
-        jMenuBar1.add(jMenu2);
+        menuhor.setText("Horarios");
+        jMenuBar1.add(menuhor);
 
-        jMenu3.setText("Salarios");
-        jMenu3.addMouseListener(new java.awt.event.MouseAdapter() {
+        menusue.setText("Salarios");
+        menusue.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                jMenu3MousePressed(evt);
+                menusueMousePressed(evt);
             }
         });
-        jMenuBar1.add(jMenu3);
+        jMenuBar1.add(menusue);
 
-        jMenu4.setText("Vacaciones");
-        jMenuBar1.add(jMenu4);
+        menuvac.setText("Vacaciones");
+        jMenuBar1.add(menuvac);
 
-        jMenu5.setText("Cerrar");
-        jMenu5.addMouseListener(new java.awt.event.MouseAdapter() {
+        menusal.setText("Cerrar");
+        menusal.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                jMenu5MousePressed(evt);
+                menusalMousePressed(evt);
             }
         });
-        jMenuBar1.add(jMenu5);
+        jMenuBar1.add(menusal);
 
         setJMenuBar(jMenuBar1);
 
@@ -410,7 +409,7 @@ public class WinEmpleado extends javax.swing.JInternalFrame {
         }  
     }//GEN-LAST:event_mitemdeleteMousePressed
 
-    private void jMenu3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu3MousePressed
+    private void menusueMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menusueMousePressed
        WinSalarios objsalarios= new WinSalarios();
        
         objsalarios.setResizable(true);
@@ -419,12 +418,12 @@ public class WinEmpleado extends javax.swing.JInternalFrame {
         WinMdi.jdpContenedor.add(objsalarios);
 
         objsalarios.setVisible(true);
-    }//GEN-LAST:event_jMenu3MousePressed
+    }//GEN-LAST:event_menusueMousePressed
 
-    private void jMenu5MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu5MousePressed
+    private void menusalMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menusalMousePressed
         this.setVisible(false);
         Utilitarios.Config.OPENWINDOWS =0;
-    }//GEN-LAST:event_jMenu5MousePressed
+    }//GEN-LAST:event_menusalMousePressed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox cboArea;
@@ -447,17 +446,17 @@ public class WinEmpleado extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenu jMenu4;
-    private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblempleado1;
+    private javax.swing.JMenu menuarc;
+    private javax.swing.JMenu menuhor;
+    private javax.swing.JMenu menusal;
+    private javax.swing.JMenu menusue;
+    private javax.swing.JMenu menuvac;
     private javax.swing.JMenuItem mitemdelete;
     private javax.swing.JMenuItem mitemregister;
     private javax.swing.JMenuItem mitemupdate;

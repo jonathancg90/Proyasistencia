@@ -1,14 +1,11 @@
 
 package Gui;
 
-import Utilitarios.Query;
-import Utilitarios.Config;
-import Javabeans.Salarios;
-
 import Dao.SalariosDAO;
-import javax.swing.DefaultComboBoxModel;
+import Javabeans.Salarios;
+import Utilitarios.Config;
+import Utilitarios.Query;
 import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
 
 
 public class WinSalarios extends javax.swing.JInternalFrame {

@@ -1,8 +1,8 @@
 
 package Gui;
 
-import javax.swing.*;
 import Utilitarios.Validators;
+import javax.swing.*;
 
 public class WinMdi extends javax.swing.JFrame {
     Validators val;

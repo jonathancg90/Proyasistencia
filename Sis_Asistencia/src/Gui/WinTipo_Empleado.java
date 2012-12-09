@@ -1,13 +1,10 @@
 package Gui;
 
-import Utilitarios.Query;
-import Utilitarios.Config;
-import Javabeans.Tipoempleado;
-
 import Dao.TipoEmpleadoDAO;
-import Javabeans.Area;
+import Javabeans.Tipoempleado;
+import Utilitarios.Config;
 import Utilitarios.Data;
-import javax.swing.DefaultComboBoxModel;
+import Utilitarios.Query;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -416,7 +413,8 @@ public class WinTipo_Empleado extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
-        this.dispose();
+        this.setVisible(false);
+        Utilitarios.Config.OPENWINDOWS =0;
     }//GEN-LAST:event_btnCloseActionPerformed
 
     private void cmbEstateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbEstateActionPerformed

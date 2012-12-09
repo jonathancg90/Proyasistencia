@@ -1,11 +1,9 @@
 
 package Gui;
-import Utilitarios.Query;
-import Utilitarios.Config;
-import Javabeans.Roles;
-
 import Dao.RolesDAO;
-import javax.swing.DefaultComboBoxModel;
+import Javabeans.Roles;
+import Utilitarios.Config;
+import Utilitarios.Query;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 

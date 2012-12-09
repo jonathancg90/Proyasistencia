@@ -1,14 +1,11 @@
 
 package Gui;
 
-import Utilitarios.Query;
-import Utilitarios.Config;
-import Javabeans.Empresa;
-
 import Dao.EmpresaDAO;
-import Javabeans.Area;
+import Javabeans.Empresa;
+import Utilitarios.Config;
 import Utilitarios.Data;
-import javax.swing.DefaultComboBoxModel;
+import Utilitarios.Query;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -81,14 +78,14 @@ public class WinEmpresa extends javax.swing.JInternalFrame {
         jLabel3 = new javax.swing.JLabel();
         lblModified = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
+        menuarc = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
+        menuedit = new javax.swing.JMenu();
         jMenuItem5 = new javax.swing.JMenuItem();
-        jMenu4 = new javax.swing.JMenu();
-        jMenu3 = new javax.swing.JMenu();
+        menuañ = new javax.swing.JMenu();
+        menusal = new javax.swing.JMenu();
 
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -143,7 +140,7 @@ public class WinEmpresa extends javax.swing.JInternalFrame {
                     .addComponent(txtFilter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnFind))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 214, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -254,7 +251,7 @@ public class WinEmpresa extends javax.swing.JInternalFrame {
 
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(269, 12, -1, -1));
 
-        jMenu1.setText("Archivo");
+        menuarc.setText("Archivo");
 
         jMenuItem1.setText("Registrar");
         jMenuItem1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -262,7 +259,7 @@ public class WinEmpresa extends javax.swing.JInternalFrame {
                 jMenuItem1MousePressed(evt);
             }
         });
-        jMenu1.add(jMenuItem1);
+        menuarc.add(jMenuItem1);
 
         jMenuItem2.setText("Actualizar");
         jMenuItem2.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -270,7 +267,7 @@ public class WinEmpresa extends javax.swing.JInternalFrame {
                 jMenuItem2MousePressed(evt);
             }
         });
-        jMenu1.add(jMenuItem2);
+        menuarc.add(jMenuItem2);
 
         jMenuItem3.setText("Eliminar");
         jMenuItem3.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -278,32 +275,32 @@ public class WinEmpresa extends javax.swing.JInternalFrame {
                 jMenuItem3MousePressed(evt);
             }
         });
-        jMenu1.add(jMenuItem3);
+        menuarc.add(jMenuItem3);
 
-        jMenuBar1.add(jMenu1);
+        jMenuBar1.add(menuarc);
 
-        jMenu2.setText("Edit");
+        menuedit.setText("Edit");
 
         jMenuItem5.setText("Limpiar");
-        jMenu2.add(jMenuItem5);
+        menuedit.add(jMenuItem5);
 
-        jMenuBar1.add(jMenu2);
+        jMenuBar1.add(menuedit);
 
-        jMenu4.setText("Añadir sucursales");
-        jMenu4.addMouseListener(new java.awt.event.MouseAdapter() {
+        menuañ.setText("Añadir sucursales");
+        menuañ.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                jMenu4MousePressed(evt);
+                menuañMousePressed(evt);
             }
         });
-        jMenuBar1.add(jMenu4);
+        jMenuBar1.add(menuañ);
 
-        jMenu3.setText("Cerrar");
-        jMenu3.addMouseListener(new java.awt.event.MouseAdapter() {
+        menusal.setText("Cerrar");
+        menusal.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                jMenu3MousePressed(evt);
+                menusalMousePressed(evt);
             }
         });
-        jMenuBar1.add(jMenu3);
+        jMenuBar1.add(menusal);
 
         setJMenuBar(jMenuBar1);
 
@@ -348,7 +345,7 @@ public class WinEmpresa extends javax.swing.JInternalFrame {
         objempresa.find(name, tblempresa);
     }//GEN-LAST:event_btnFindActionPerformed
 
-    private void jMenu4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu4MousePressed
+    private void menuañMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuañMousePressed
         WinEmpresa_Sucursal objsucursal= new WinEmpresa_Sucursal();
 
         objsucursal.setResizable(true);
@@ -357,12 +354,12 @@ public class WinEmpresa extends javax.swing.JInternalFrame {
         WinMdi.jdpContenedor.add(objsucursal);
 
         objsucursal.setVisible(true);
-    }//GEN-LAST:event_jMenu4MousePressed
+    }//GEN-LAST:event_menuañMousePressed
 
-    private void jMenu3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu3MousePressed
+    private void menusalMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menusalMousePressed
         this.setVisible(false);
         Utilitarios.Config.OPENWINDOWS =0;
-    }//GEN-LAST:event_jMenu3MousePressed
+    }//GEN-LAST:event_menusalMousePressed
 
     private void jMenuItem3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem3MousePressed
         int i;      
@@ -438,10 +435,6 @@ public class WinEmpresa extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
@@ -453,6 +446,10 @@ public class WinEmpresa extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblId;
     private javax.swing.JLabel lblModified;
+    private javax.swing.JMenu menuarc;
+    private javax.swing.JMenu menuañ;
+    private javax.swing.JMenu menuedit;
+    private javax.swing.JMenu menusal;
     private javax.swing.JTable tblempresa;
     private javax.swing.JTextField txtCantTrab;
     private javax.swing.JTextField txtFilter;

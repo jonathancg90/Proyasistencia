@@ -1,17 +1,15 @@
 
 package Gui;
 
-import Utilitarios.Query;
-import Utilitarios.Data;
-import Javabeans.Area;
-
 import Dao.AreaDAO;
-import javax.swing.DefaultComboBoxModel;
+import Javabeans.Area;
+import Utilitarios.Data;
+import Utilitarios.Query;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
     /**
-     * Formulario para el mantenimiento de las areas de la empresa.
+     * Formulario para el mantenimiento de las areas de la empresa.olaaaa
      */
 public class WinArea extends javax.swing.JInternalFrame {
     
@@ -67,14 +65,14 @@ public class WinArea extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblArea = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
+        menuarc = new javax.swing.JMenu();
         OpcRegistrar = new javax.swing.JMenuItem();
         OpcActualizar = new javax.swing.JMenuItem();
         OpcEliminar = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenu3 = new javax.swing.JMenu();
-        jMenu4 = new javax.swing.JMenu();
+        menuedit = new javax.swing.JMenu();
+        OpcLimpiar = new javax.swing.JMenuItem();
+        menusal = new javax.swing.JMenu();
+        menuaña = new javax.swing.JMenu();
 
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -121,9 +119,7 @@ public class WinArea extends javax.swing.JInternalFrame {
                             .add(jLabel2))
                         .add(22, 22, 22)
                         .add(pnlOpcionesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                            .add(pnlOpcionesLayout.createSequentialGroup()
-                                .add(cmbEstate, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 146, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .add(cmbEstate, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 146, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                             .add(pnlOpcionesLayout.createSequentialGroup()
                                 .add(lblModified, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 170, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                                 .add(0, 0, Short.MAX_VALUE)))))
@@ -134,9 +130,7 @@ public class WinArea extends javax.swing.JInternalFrame {
             .add(pnlOpcionesLayout.createSequentialGroup()
                 .addContainerGap()
                 .add(pnlOpcionesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
-                    .add(pnlOpcionesLayout.createSequentialGroup()
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(jLabel4, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .add(jLabel4, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .add(lblId, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 29, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(pnlOpcionesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
@@ -231,7 +225,7 @@ public class WinArea extends javax.swing.JInternalFrame {
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 260, -1));
 
-        jMenu1.setText("Archivo");
+        menuarc.setText("Archivo");
 
         OpcRegistrar.setText("Registrar");
         OpcRegistrar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -239,7 +233,7 @@ public class WinArea extends javax.swing.JInternalFrame {
                 OpcRegistrarMousePressed(evt);
             }
         });
-        jMenu1.add(OpcRegistrar);
+        menuarc.add(OpcRegistrar);
 
         OpcActualizar.setText("Actualizar");
         OpcActualizar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -252,7 +246,7 @@ public class WinArea extends javax.swing.JInternalFrame {
                 OpcActualizarActionPerformed(evt);
             }
         });
-        jMenu1.add(OpcActualizar);
+        menuarc.add(OpcActualizar);
 
         OpcEliminar.setText("Eliminar");
         OpcEliminar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -260,32 +254,32 @@ public class WinArea extends javax.swing.JInternalFrame {
                 OpcEliminarMousePressed(evt);
             }
         });
-        jMenu1.add(OpcEliminar);
+        menuarc.add(OpcEliminar);
 
-        jMenuBar1.add(jMenu1);
+        jMenuBar1.add(menuarc);
 
-        jMenu2.setText("Editar");
+        menuedit.setText("Editar");
 
-        jMenuItem1.setText("Limpiar");
-        jMenu2.add(jMenuItem1);
+        OpcLimpiar.setText("Limpiar");
+        menuedit.add(OpcLimpiar);
 
-        jMenuBar1.add(jMenu2);
+        jMenuBar1.add(menuedit);
 
-        jMenu3.setText("Cerrar");
-        jMenu3.addMouseListener(new java.awt.event.MouseAdapter() {
+        menusal.setText("Cerrar");
+        menusal.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                jMenu3MousePressed(evt);
+                menusalMousePressed(evt);
             }
         });
-        jMenuBar1.add(jMenu3);
+        jMenuBar1.add(menusal);
 
-        jMenu4.setText("Añadir cargos");
-        jMenu4.addMouseListener(new java.awt.event.MouseAdapter() {
+        menuaña.setText("Añadir cargos");
+        menuaña.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                jMenu4MousePressed(evt);
+                menuañaMousePressed(evt);
             }
         });
-        jMenuBar1.add(jMenu4);
+        jMenuBar1.add(menuaña);
 
         setJMenuBar(jMenuBar1);
 
@@ -329,10 +323,10 @@ public class WinArea extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cmbEstateActionPerformed
 
-    private void jMenu3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu3MousePressed
+    private void menusalMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menusalMousePressed
         this.dispose();
         Utilitarios.Config.OPENWINDOWS =0;
-    }//GEN-LAST:event_jMenu3MousePressed
+    }//GEN-LAST:event_menusalMousePressed
 
     private void OpcEliminarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_OpcEliminarMousePressed
         int i;
@@ -386,10 +380,9 @@ public class WinArea extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_OpcRegistrarMousePressed
 
-    private void jMenu4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu4MousePressed
+    private void menuañaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuañaMousePressed
         if(!"".equals(lblId.getText())){
             WinArea_Cargos objCargo= new WinArea_Cargos();
-            objCargo.lblArea.setText(lblId.getText());
             objCargo.setResizable(true);
             objCargo.setMaximizable(false);
             objCargo.setIconifiable(true);
@@ -399,7 +392,7 @@ public class WinArea extends javax.swing.JInternalFrame {
        } else {
            JOptionPane.showMessageDialog(null,"Debe de seleccionar una area para poder asignar cargos");
        }
-    }//GEN-LAST:event_jMenu4MousePressed
+    }//GEN-LAST:event_menuañaMousePressed
 
     private void OpcActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OpcActualizarActionPerformed
         // TODO add your handling code here:
@@ -408,6 +401,7 @@ public class WinArea extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem OpcActualizar;
     private javax.swing.JMenuItem OpcEliminar;
+    private javax.swing.JMenuItem OpcLimpiar;
     private javax.swing.JMenuItem OpcRegistrar;
     private javax.swing.JButton btnFind;
     private javax.swing.JComboBox cmbEstate;
@@ -416,16 +410,15 @@ public class WinArea extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblId;
     private javax.swing.JLabel lblModified;
+    private javax.swing.JMenu menuarc;
+    private javax.swing.JMenu menuaña;
+    private javax.swing.JMenu menuedit;
+    private javax.swing.JMenu menusal;
     private javax.swing.JPanel pnlMantenimiento;
     private javax.swing.JPanel pnlOpciones;
     private javax.swing.JTable tblArea;
