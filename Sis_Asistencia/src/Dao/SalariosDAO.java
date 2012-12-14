@@ -12,7 +12,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-
+import Gui.WinSalarios;
 
 public class SalariosDAO extends ConexionBd {
     
@@ -28,10 +28,12 @@ public class SalariosDAO extends ConexionBd {
     
     PreparedStatement  pt = null;
     
+     
      public SalariosDAO(){
         _table = "salarios";
         _error = "Dao_SalariosDAO_";
         filter = new String[0][0];
+        
         campos = new String[4];
         campos[0]="idsalario";
         campos[1]="f_inicio";
@@ -42,6 +44,7 @@ public class SalariosDAO extends ConexionBd {
     public void getTableAll(JTable tblDatos){
         
         try{
+            
             DefaultTableModel datos;
             qs= new Query();
             if (filter.length <= 0){
@@ -65,7 +68,7 @@ public class SalariosDAO extends ConexionBd {
        int i=0;
         try{
             Date date = new Date(0000-00-00);
-            Date date2 = new Date(00-00-0000);
+            //Date date2 = new Date(00-00-0000);
             
             //SimpleDateFormat formato = new SimpleDateFormat("dd")
             
@@ -75,14 +78,13 @@ public class SalariosDAO extends ConexionBd {
             qs = new Query();
             
             String now = hp.getDateNow();
-            System.out.println("SI FUNCIONA "+ now);
             objSalarios = new Salarios(0,idemp,f_inicio,f_final,por_defecto,now,now,monto);
             //Iniciando consulta y asignando 
 
             pt = qs.sqlRegister(_table);
             pt.setInt(1,objSalarios.getIdemp());
-            pt.setDate(2,date2.valueOf(objSalarios.getF_inicio()));
-            pt.setDate(3,date2.valueOf(objSalarios.getF_final()));
+            pt.setDate(2,date.valueOf(objSalarios.getF_inicio()));
+            pt.setDate(3,date.valueOf(objSalarios.getF_final()));
             pt.setBoolean(4,objSalarios.isPor_defecto());
             pt.setDate(5,date.valueOf(objSalarios.getCreated()));
             pt.setDate(6,date.valueOf(objSalarios.getModified()));
@@ -103,5 +105,85 @@ public class SalariosDAO extends ConexionBd {
     /*
      * Actualizacion de tipo de empleados
      */
+    public int update(int idsalario,String f_inicio,String f_final, boolean por_defecto,int idemp,double monto){
+       int i=0;
+        try{
+            Date date = new Date(0000-00-00);
+            //Preparando
+            getConexion();
+            hp = new Helpers();
+            qs= new Query();
+            String Table = this._table;
+            String now = hp.getDateNow();
+            
+            objSalarios = new Salarios(idsalario,idemp,f_inicio,f_final,por_defecto,now,now,monto);
+            //Iniciando consulta y asignando valores
+            pt = qs.sqlUpdate(Table);
+            pt.setInt(1,objSalarios.getIdemp());
+            pt.setDate(2,date.valueOf(objSalarios.getF_inicio()));
+            pt.setDate(3,date.valueOf(objSalarios.getF_final()));
+            pt.setBoolean(4,objSalarios.isPor_defecto());
+            pt.setDate(5,date.valueOf(objSalarios.getModified()));
+            pt.setDouble(6, objSalarios.getMonto());
+            pt.setInt(7,objSalarios.getIdsalario());
+            //Ejecucion y cierre
+            i= pt.executeUpdate();
+            pt.close();
+            closeConexion();
+            return i;
+        }
+        catch(Exception e){
+            System.out.println(_error + "update: "+e);
+            return i;
+        }
+    }
     
+    public Salarios getValues(int idSalarios){
+       objSalarios =  new Salarios();
+       objVal = new Validators();
+        try{
+            qs= new Query();
+            //Preparando
+            String campos[] = new String[9];
+            campos = qs.getRecords(_table,idSalarios);
+            objSalarios.setIdemp(Integer.parseInt(campos[2]));
+            objSalarios.setF_inicio(campos[3]);
+            objSalarios.setF_final(campos[4]);
+            objSalarios.setPor_defecto(objVal.StringToBoolean(campos[5]));
+            objSalarios.setCreated(campos[6]);
+            objSalarios.setCreated(campos[7]);
+            objSalarios.setMonto(Double.parseDouble(campos[8]));
+            
+            return objSalarios;
+        }
+        catch(Exception e){
+            System.out.println(_error + "getValues: "+e);
+            return objSalarios;
+        }
+    }
+    
+    public int delete(int id){
+       int i=0;
+        try{
+            //Preparando
+            getConexion();
+            objSalarios = new Salarios();
+            hp = new Helpers();
+            qs= new Query();
+            String Table = this._table;
+            
+            objSalarios.setIdsalario(id);
+            pt = qs.sqlDelete(Table);
+            pt.setInt(1,objSalarios.getIdsalario());
+            i= pt.executeUpdate();
+            pt.close();
+            closeConexion();
+            return i;
+        }
+        catch(Exception e){
+            System.out.println(_error + "delete: "+e);
+            return i;
+        }
+        
+    }
 }

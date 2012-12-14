@@ -45,11 +45,8 @@ public class Helpers{
     public String getFormatDate(String fecha)
     {
         String date;
-        String [] arrayfecha = fecha.split("-");
-        date = arrayfecha[1];
-        date = date.toUpperCase();
-        date = date.replaceFirst("DIC", "12");
-        date = arrayfecha[0]+"-"+date+"-"+arrayfecha[2];
+        String [] arrayfecha = fecha.split("/");
+        date = "20"+arrayfecha[2]+"-"+arrayfecha[1]+"-"+arrayfecha[0];
         return date;
     }
     /*

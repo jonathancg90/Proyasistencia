@@ -47,7 +47,7 @@ public class Query extends ConexionBd{
             }
            
             query= "insert into "+Table+" ("+campos+") values("+values+")";
-            System.out.println(query);
+            
             pt  = conexion.prepareStatement(query);
             rs.close();
             return pt;
@@ -177,12 +177,14 @@ public class Query extends ConexionBd{
                 }
                 else {
                    qs = qs + " " + Filter[i][0] + "='" + Filter[i][1] + "' "; 
+                   
                 }
                 if(Filter.length!=i+1){ 
                     qs = qs + "and";
                 }
             }
         }
+        
         return qs;
     }
     
@@ -200,6 +202,7 @@ public class Query extends ConexionBd{
             
             s = conexion.createStatement();
             String qs = getQueryList(args,Table, Filter);
+            
             rs = s.executeQuery(qs);
             
             //Llenado Cabecera Jtable

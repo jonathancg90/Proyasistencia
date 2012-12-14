@@ -7,7 +7,8 @@ import Utilitarios.Config;
 import Utilitarios.Query;
 import java.sql.Date;
 import javax.swing.JOptionPane;
-import java.text.DateFormat;
+import javax.swing.table.DefaultTableModel;
+
 import Utilitarios.Helpers;
 
 public class WinSalarios extends javax.swing.JInternalFrame {
@@ -35,11 +36,10 @@ public class WinSalarios extends javax.swing.JInternalFrame {
     }
     
     public void cleanBox(){
-        lblIdemp.setText("");
+        
         lblIdsalario.setText("");
         lblMod.setText("");
-        cboF_final.setText("");
-        cboF_inicio.setText("");
+        txtMonto.setText("");
     }
     
     @SuppressWarnings("unchecked")
@@ -85,6 +85,11 @@ public class WinSalarios extends javax.swing.JInternalFrame {
 
             }
         ));
+        tblSalarios.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblSalariosMouseClicked(evt);
+            }
+        });
         jScrollPane4.setViewportView(tblSalarios);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -93,7 +98,7 @@ public class WinSalarios extends javax.swing.JInternalFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 274, Short.MAX_VALUE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 364, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -104,7 +109,7 @@ public class WinSalarios extends javax.swing.JInternalFrame {
                 .addContainerGap())
         );
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 310, 300));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 400, 300));
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Ingreso de salarios"));
 
@@ -122,15 +127,11 @@ public class WinSalarios extends javax.swing.JInternalFrame {
 
         lblMod.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        cboF_inicio.setFormat(2);
-
         jLabel7.setText("Fecha de inicio");
 
         jLabel8.setText("Fecha final");
 
         jLabel3.setText("Monto");
-
-        cboF_final.setFormat(2);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -162,7 +163,7 @@ public class WinSalarios extends javax.swing.JInternalFrame {
                             .addComponent(jLabel7)
                             .addComponent(jLabel8))
                         .addGap(29, 29, 29)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(cboF_inicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(cboF_final, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -186,20 +187,17 @@ public class WinSalarios extends javax.swing.JInternalFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cboF_inicio, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(10, 10, 10)
-                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cboF_final, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+                        .addComponent(cboF_final, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtMonto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)))
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -208,7 +206,7 @@ public class WinSalarios extends javax.swing.JInternalFrame {
                 .addGap(39, 39, 39))
         );
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 20, 320, 300));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 30, 320, 300));
 
         jMenu1.setText("Archivo");
 
@@ -260,7 +258,7 @@ public class WinSalarios extends javax.swing.JInternalFrame {
         boolean por_defecto=jCheckBox1.isSelected();
         double monto=Double.parseDouble(txtMonto.getText());
         int idemp=Integer.valueOf(lblIdemp.getText());
-        objSalarios = new SalariosDAO();
+        
         int i = objSalarios.save(F_inicio,F_final,por_defecto,idemp,monto);
         if (i == 0) {
             JOptionPane.showMessageDialog(null,"No se pudo grabar datos");
@@ -277,16 +275,84 @@ public class WinSalarios extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_mitemregisterMousePressed
 
     private void mitemupdateMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemupdateMousePressed
-       
+
+        
+        hp = new Helpers();
+        int idsalario=Integer.parseInt(lblIdsalario.getText());
+        int idemp=Integer.parseInt(lblIdemp.getText());
+        String F_inicio=hp.getFormatDate(cboF_inicio.getText());
+        String F_final=hp.getFormatDate(cboF_final.getText());
+        
+        boolean por_defecto=jCheckBox1.isSelected();
+        double monto=Double.parseDouble(txtMonto.getText());
+        
+        int i = objSalarios.update(idsalario,F_inicio,F_final,por_defecto,idemp,monto);
+        if (i == 0) {
+            
+            JOptionPane.showMessageDialog(null, "No se pudo actualizar datos");
+        }
+        else {
+            objSalarios.getTableAll(tblSalarios);
+            cleanBox();
+            JOptionPane.showMessageDialog(null, "Salario actualizado");
+        } 
     }//GEN-LAST:event_mitemupdateMousePressed
 
     private void mitemdeleteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemdeleteMousePressed
+        
+        int i;
+        i= JOptionPane.showConfirmDialog(null,"¿Esta seguro de eliminar este registro?","Aviso",JOptionPane.OK_CANCEL_OPTION,JOptionPane.WARNING_MESSAGE);
+        if(i==0){
+            int id = Integer.valueOf(lblIdsalario.getText());
+
+            
+            i = objSalarios.delete(id);
+            if(i==0) {
+                JOptionPane.showMessageDialog(null,"No se pudo eliminar el salario");
+            }
+            else {
+                objSalarios.getTableAll(tblSalarios);
+                cleanBox();
+            } 
+         }
+        
+        
         
     }//GEN-LAST:event_mitemdeleteMousePressed
 
     private void jMenu5MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu5MousePressed
         this.setVisible(false);
     }//GEN-LAST:event_jMenu5MousePressed
+
+    private void tblSalariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblSalariosMouseClicked
+        
+        int fsel;
+        fsel = this.tblSalarios.getSelectedRow();
+        if (fsel == -1) {
+            //No se ha seleccionado registo en Jtable
+        } 
+        else {
+            try {
+                Salarios = new Salarios();
+                DefaultTableModel m = new DefaultTableModel();
+                m = (DefaultTableModel) this.tblSalarios.getModel();
+                String idSalarios = String.valueOf(m.getValueAt(fsel, 0));
+                //Asigando valores obtenidos
+                lblIdsalario.setText(idSalarios);
+                Salarios = objSalarios.getValues(Integer.parseInt(idSalarios));
+                txtMonto.setText(String.valueOf(Salarios.getMonto()));
+                lblIdemp.setText(String.valueOf(Salarios.getIdemp()));
+                
+                
+                }
+            catch (Exception e) {
+                System.out.println("Gui_Win_Salarios " + e);
+            }
+                
+            }
+        
+        
+    }//GEN-LAST:event_tblSalariosMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private datechooser.beans.DateChooserCombo cboF_final;
