@@ -232,7 +232,7 @@ public class WinEmpleado extends javax.swing.JInternalFrame {
                     .addComponent(cboAreaFilter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jCheckBox1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -276,6 +276,11 @@ public class WinEmpleado extends javax.swing.JInternalFrame {
         jMenuBar1.add(menusue);
 
         menuvac.setText("Vacaciones");
+        menuvac.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                menuvacMousePressed(evt);
+            }
+        });
         jMenuBar1.add(menuvac);
 
         menusal.setText("Cerrar");
@@ -424,6 +429,17 @@ public class WinEmpleado extends javax.swing.JInternalFrame {
         this.setVisible(false);
         Utilitarios.Config.OPENWINDOWS =0;
     }//GEN-LAST:event_menusalMousePressed
+
+    private void menuvacMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuvacMousePressed
+       WinVacaciones objvacaciones= new WinVacaciones();
+        objvacaciones.lblIdemp.setText(lblidempleado.getText());
+        objvacaciones.setResizable(true);
+        objvacaciones.setMaximizable(true);
+        objvacaciones.setIconifiable(true);
+        WinMdi.jdpContenedor.add(objvacaciones);
+
+        objvacaciones.setVisible(true); 
+    }//GEN-LAST:event_menuvacMousePressed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox cboArea;

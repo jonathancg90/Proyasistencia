@@ -5,19 +5,20 @@ import Utilitarios.ConexionBd;
 import Utilitarios.Helpers;
 import Utilitarios.Query;
 
-import Javabeans.Salarios;
+import Javabeans.Vacaciones;
 import Utilitarios.Validators;
 import java.math.BigDecimal;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import Gui.WinSalarios;
+import Gui.WinVacaciones;
 
-public class SalariosDAO extends ConexionBd {
+public class VacacionesDAO extends ConexionBd {
     
-    private Query qs;
-    private Salarios objSalarios;
+    
+     private Query qs;
+    private Vacaciones objVacaciones;
     private Helpers hp;
     private String filter[][] = new String[0][0];
     
@@ -29,16 +30,16 @@ public class SalariosDAO extends ConexionBd {
     PreparedStatement  pt = null;
     
      
-     public SalariosDAO(){
-        _table = "salarios";
-        _error = "Dao_SalariosDAO_";
+     public VacacionesDAO(){
+        _table = "vacaciones";
+        _error = "Dao_VacacionesDAO_";
         filter = new String[0][0];
         
-        campos = new String[4];
-        campos[0]="idsalario";
+        campos = new String[3];
+        campos[0]="idvacaciones";
         campos[1]="f_inicio";
         campos[2]="f_final";
-        campos[3]="monto";
+        
      }
     
     public void getTableAll(JTable tblDatos){
@@ -64,7 +65,7 @@ public class SalariosDAO extends ConexionBd {
     /*
      * Registro de Salarios
      */
-    public int save(String f_inicio,String f_final, boolean por_defecto,int idemp,double monto){
+    public int save(String f_inicio,String f_final,int idemp){
        int i=0;
         try{
             Date date = new Date(0000-00-00);
@@ -78,17 +79,16 @@ public class SalariosDAO extends ConexionBd {
             qs = new Query();
             
             String now = hp.getDateNow();
-            objSalarios = new Salarios(0,idemp,f_inicio,f_final,por_defecto,now,now,monto);
+            objVacaciones = new Vacaciones(0,idemp,f_inicio,f_final,now,now);
             //Iniciando consulta y asignando 
 
             pt = qs.sqlRegister(_table);
-            pt.setInt(1,objSalarios.getIdemp());
-            pt.setDate(2,date.valueOf(objSalarios.getF_inicio()));
-            pt.setDate(3,date.valueOf(objSalarios.getF_final()));
-            pt.setBoolean(4,objSalarios.isPor_defecto());
-            pt.setDate(5,date.valueOf(objSalarios.getCreated()));
-            pt.setDate(6,date.valueOf(objSalarios.getModified()));
-            pt.setDouble(7, objSalarios.getMonto());
+            pt.setInt(1,objVacaciones.getIdemp());
+            pt.setDate(2,date.valueOf(objVacaciones.getF_ini()));
+            pt.setDate(3,date.valueOf(objVacaciones.getF_final()));
+            pt.setDate(4,date.valueOf(objVacaciones.getCreated()));
+            pt.setDate(5,date.valueOf(objVacaciones.getModified()));
+            
             
             //Ejecucion y cierre
             
@@ -105,7 +105,7 @@ public class SalariosDAO extends ConexionBd {
     /*
      * Actualizacion de tipo de empleados
      */
-    public int update(int idsalario,String f_inicio,String f_final, boolean por_defecto,int idemp,double monto){
+    public int update(int idsalario,String f_inicio,String f_final,int idemp){
        int i=0;
         try{
             Date date = new Date(0000-00-00);
@@ -116,16 +116,14 @@ public class SalariosDAO extends ConexionBd {
             String Table = this._table;
             String now = hp.getDateNow();
             
-            objSalarios = new Salarios(idsalario,idemp,f_inicio,f_final,por_defecto,now,now,monto);
+            objVacaciones = new Vacaciones(idsalario,idemp,f_inicio,f_final,now,now);
             //Iniciando consulta y asignando valores
             pt = qs.sqlUpdate(Table);
-            pt.setInt(1,objSalarios.getIdemp());
-            pt.setDate(2,date.valueOf(objSalarios.getF_inicio()));
-            pt.setDate(3,date.valueOf(objSalarios.getF_final()));
-            pt.setBoolean(4,objSalarios.isPor_defecto());
-            pt.setDate(5,date.valueOf(objSalarios.getModified()));
-            pt.setDouble(6, objSalarios.getMonto());
-            pt.setInt(7,objSalarios.getIdsalario());
+            pt.setInt(1,objVacaciones.getIdemp());
+            pt.setDate(2,date.valueOf(objVacaciones.getF_ini()));
+            pt.setDate(3,date.valueOf(objVacaciones.getF_final()));
+            pt.setDate(4,date.valueOf(objVacaciones.getModified()));
+            pt.setInt(5,objVacaciones.getIdvac());
             //Ejecucion y cierre
             i= pt.executeUpdate();
             pt.close();
@@ -138,27 +136,26 @@ public class SalariosDAO extends ConexionBd {
         }
     }
     
-    public Salarios getValues(int idSalarios){
-       objSalarios =  new Salarios();
-       objVal = new Validators();
+    public Vacaciones getValues(int idVacaciones){
+       objVacaciones =  new Vacaciones();
+       
         try{
             qs= new Query();
             //Preparando
-            String campos[] = new String[9];
-            campos = qs.getRecords(_table,idSalarios);
-            objSalarios.setIdemp(Integer.parseInt(campos[2]));
-            objSalarios.setF_inicio(campos[3]);
-            objSalarios.setF_final(campos[4]);
-            objSalarios.setPor_defecto(objVal.StringToBoolean(campos[5]));
-            objSalarios.setCreated(campos[6]);
-            objSalarios.setModified(campos[7]);
-            objSalarios.setMonto(Double.parseDouble(campos[8]));
+            String campos[] = new String[7];
+            campos = qs.getRecords(_table,idVacaciones);
+            objVacaciones.setIdemp(Integer.parseInt(campos[2]));
+            objVacaciones.setF_ini(campos[3]);
+            objVacaciones.setF_final(campos[4]);
+            objVacaciones.setCreated(campos[5]);
+            objVacaciones.setModified(campos[6]);
             
-            return objSalarios;
+            
+            return objVacaciones;
         }
         catch(Exception e){
             System.out.println(_error + "getValues: "+e);
-            return objSalarios;
+            return objVacaciones;
         }
     }
     
@@ -167,14 +164,14 @@ public class SalariosDAO extends ConexionBd {
         try{
             //Preparando
             getConexion();
-            objSalarios = new Salarios();
+            objVacaciones = new Vacaciones();
             hp = new Helpers();
             qs= new Query();
             String Table = this._table;
             
-            objSalarios.setIdsalario(id);
+            objVacaciones.setIdvac(id);
             pt = qs.sqlDelete(Table);
-            pt.setInt(1,objSalarios.getIdsalario());
+            pt.setInt(1,objVacaciones.getIdvac());
             i= pt.executeUpdate();
             pt.close();
             closeConexion();

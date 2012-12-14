@@ -62,6 +62,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Vacaciones"/>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="menuvacMousePressed"/>
+          </Events>
         </Menu>
         <Menu class="javax.swing.JMenu" name="menusal">
           <Properties>
@@ -395,7 +398,7 @@
                       <Component id="jCheckBox1" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jScrollPane1" pref="139" max="32767" attributes="0"/>
+                  <Component id="jScrollPane1" pref="141" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
