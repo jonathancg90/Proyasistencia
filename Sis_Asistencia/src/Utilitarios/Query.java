@@ -172,13 +172,17 @@ public class Query extends ConexionBd{
                 type = Filter[i][0].substring(0, 3);
                 camp = Filter[i][0];
                 camp = camp.substring(4, camp.length());
-                if("int".equals(type)){
-                    qs = qs + " " + camp + "=" + Filter[i][1] + " ";
+                
+                switch(type){
+                    case "int":qs = qs + " " + camp + "=" + Filter[i][1] + " ";
+                         break;
+                    case "equ":qs = qs + " " + camp + "='" + Filter[i][1] + "' ";
+                         break;
+                    default:qs = qs + " " + Filter[i][0] + " like '%" + Filter[i][1] + "%' ";
+                         break;
+                    
                 }
-                else {
-                   qs = qs + " " + Filter[i][0] + "='" + Filter[i][1] + "' "; 
-                   
-                }
+
                 if(Filter.length!=i+1){ 
                     qs = qs + "and";
                 }
@@ -219,6 +223,7 @@ public class Query extends ConexionBd{
             fila = new Object[nCols];
             while(rs.next())
             {
+                
                 for(int i=0; i<nCols; ++i)
                 {   
                     fila[i] = rs.getObject(i+1);

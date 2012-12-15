@@ -145,6 +145,11 @@ public class AreaDAO extends ConexionBd{
             return i;
         }
     }
+    /*
+     * Por defecto busca a travez de un like '%%'
+     * int_ = Busqueda de entero
+     * equ_ = busca exactamente la plabra
+     */
     public int find(String name,JTable tblDatos) {
         int i = 0;
         try {
