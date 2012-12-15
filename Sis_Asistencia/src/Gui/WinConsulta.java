@@ -30,7 +30,9 @@ public class WinConsulta extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
-        menusal = new javax.swing.JMenu();
+        medit = new javax.swing.JMenu();
+        mitemclear = new javax.swing.JMenuItem();
+        mclose = new javax.swing.JMenu();
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Lista de reportes", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, null, java.awt.Color.black));
 
@@ -129,16 +131,29 @@ public class WinConsulta extends javax.swing.JInternalFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 16, Short.MAX_VALUE))
+                .addGap(0, 14, Short.MAX_VALUE))
         );
 
-        menusal.setText("Cerrar");
-        menusal.addMouseListener(new java.awt.event.MouseAdapter() {
+        medit.setText("Edit");
+
+        mitemclear.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.CTRL_MASK));
+        mitemclear.setText("Limpiar");
+        medit.add(mitemclear);
+
+        jMenuBar1.add(medit);
+
+        mclose.setText("Cerrar");
+        mclose.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                menusalMousePressed(evt);
+                mcloseMousePressed(evt);
             }
         });
-        jMenuBar1.add(menusal);
+        mclose.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mcloseActionPerformed(evt);
+            }
+        });
+        jMenuBar1.add(mclose);
 
         setJMenuBar(jMenuBar1);
 
@@ -160,16 +175,20 @@ public class WinConsulta extends javax.swing.JInternalFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void menusalMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menusalMousePressed
+    private void mcloseMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mcloseMousePressed
         this.setVisible(false);
         Utilitarios.Config.OPENWINDOWS =0;
-    }//GEN-LAST:event_menusalMousePressed
+    }//GEN-LAST:event_mcloseMousePressed
+
+    private void mcloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mcloseActionPerformed
+
+    }//GEN-LAST:event_mcloseActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private datechooser.beans.DateChooserCombo dateChooserCombo1;
@@ -186,6 +205,8 @@ public class WinConsulta extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JMenu menusal;
+    private javax.swing.JMenu mclose;
+    private javax.swing.JMenu medit;
+    private javax.swing.JMenuItem mitemclear;
     // End of variables declaration//GEN-END:variables
 }

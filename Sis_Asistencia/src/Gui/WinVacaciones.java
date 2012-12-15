@@ -79,11 +79,13 @@ public class WinVacaciones extends javax.swing.JInternalFrame {
         jLabel8 = new javax.swing.JLabel();
         cboF_final = new datechooser.beans.DateChooserCombo();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
+        mfile = new javax.swing.JMenu();
         mitemregister = new javax.swing.JMenuItem();
         mitemupdate = new javax.swing.JMenuItem();
         mitemdelete = new javax.swing.JMenuItem();
-        jMenu5 = new javax.swing.JMenu();
+        medit = new javax.swing.JMenu();
+        mitemclear = new javax.swing.JMenuItem();
+        mclose = new javax.swing.JMenu();
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Lista de vacaciones", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, null, java.awt.Color.black));
 
@@ -199,41 +201,52 @@ public class WinVacaciones extends javax.swing.JInternalFrame {
                 .addGap(68, 68, 68))
         );
 
-        jMenu1.setText("Archivo");
+        mfile.setText("Archivo");
 
+        mitemregister.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.CTRL_MASK));
         mitemregister.setText("Registrar");
         mitemregister.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 mitemregisterMousePressed(evt);
             }
         });
-        jMenu1.add(mitemregister);
+        mfile.add(mitemregister);
 
+        mitemupdate.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));
         mitemupdate.setText("Actualizar");
         mitemupdate.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 mitemupdateMousePressed(evt);
             }
         });
-        jMenu1.add(mitemupdate);
+        mfile.add(mitemupdate);
 
+        mitemdelete.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_X, java.awt.event.InputEvent.CTRL_MASK));
         mitemdelete.setText("Eliminar");
         mitemdelete.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 mitemdeleteMousePressed(evt);
             }
         });
-        jMenu1.add(mitemdelete);
+        mfile.add(mitemdelete);
 
-        jMenuBar1.add(jMenu1);
+        jMenuBar1.add(mfile);
 
-        jMenu5.setText("Cerrar");
-        jMenu5.addMouseListener(new java.awt.event.MouseAdapter() {
+        medit.setText("Edit");
+
+        mitemclear.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.CTRL_MASK));
+        mitemclear.setText("Limpiar");
+        medit.add(mitemclear);
+
+        jMenuBar1.add(medit);
+
+        mclose.setText("Cerrar");
+        mclose.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                jMenu5MousePressed(evt);
+                mcloseMousePressed(evt);
             }
         });
-        jMenuBar1.add(jMenu5);
+        jMenuBar1.add(mclose);
 
         setJMenuBar(jMenuBar1);
 
@@ -255,10 +268,8 @@ public class WinVacaciones extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
-
-        jPanel1.getAccessibleContext().setAccessibleName("Lista de vacaciones");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -367,9 +378,9 @@ public class WinVacaciones extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_mitemdeleteMousePressed
 
-    private void jMenu5MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu5MousePressed
+    private void mcloseMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mcloseMousePressed
         this.setVisible(false);
-    }//GEN-LAST:event_jMenu5MousePressed
+    }//GEN-LAST:event_mcloseMousePressed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private datechooser.beans.DateChooserCombo cboF_final;
@@ -379,8 +390,6 @@ public class WinVacaciones extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -388,6 +397,10 @@ public class WinVacaciones extends javax.swing.JInternalFrame {
     public javax.swing.JLabel lblIdemp;
     private javax.swing.JLabel lblIdvacaciones;
     private javax.swing.JLabel lblMod;
+    private javax.swing.JMenu mclose;
+    private javax.swing.JMenu medit;
+    private javax.swing.JMenu mfile;
+    private javax.swing.JMenuItem mitemclear;
     private javax.swing.JMenuItem mitemdelete;
     private javax.swing.JMenuItem mitemregister;
     private javax.swing.JMenuItem mitemupdate;

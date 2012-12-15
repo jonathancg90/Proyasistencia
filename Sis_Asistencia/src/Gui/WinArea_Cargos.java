@@ -46,14 +46,17 @@ public class WinArea_Cargos extends javax.swing.JInternalFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         lblArea = new javax.swing.JLabel();
-        btnEliminar = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         txtname = new javax.swing.JTextField();
-        btnRegistrar = new javax.swing.JButton();
-        btnActualizar = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
-        menusal = new javax.swing.JMenu();
+        mfile = new javax.swing.JMenu();
+        mitemregister = new javax.swing.JMenuItem();
+        mitemupdate = new javax.swing.JMenuItem();
+        mitemdelete = new javax.swing.JMenuItem();
+        medit = new javax.swing.JMenu();
+        mitemclear = new javax.swing.JMenuItem();
+        mclose = new javax.swing.JMenu();
 
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
             public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
@@ -94,13 +97,6 @@ public class WinArea_Cargos extends javax.swing.JInternalFrame {
 
         lblArea.setText("0");
 
-        btnEliminar.setText("Eliminar");
-        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEliminarActionPerformed(evt);
-            }
-        });
-
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Nuevo cargo"));
 
         jLabel5.setText("Nombre");
@@ -108,13 +104,6 @@ public class WinArea_Cargos extends javax.swing.JInternalFrame {
         txtname.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtnameActionPerformed(evt);
-            }
-        });
-
-        btnRegistrar.setText("Registrar");
-        btnRegistrar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRegistrarActionPerformed(evt);
             }
         });
 
@@ -127,34 +116,68 @@ public class WinArea_Cargos extends javax.swing.JInternalFrame {
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtname, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnRegistrar)
-                .addContainerGap(98, Short.MAX_VALUE))
+                .addContainerGap(184, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(16, Short.MAX_VALUE)
+                .addContainerGap(25, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(txtname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnRegistrar)))
+                    .addComponent(txtname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
-        btnActualizar.setText("Actualizar");
-        btnActualizar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnActualizarActionPerformed(evt);
-            }
-        });
+        mfile.setText("Archivo");
 
-        menusal.setText("Cerrar");
-        menusal.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menusalActionPerformed(evt);
+        mitemregister.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.CTRL_MASK));
+        mitemregister.setText("Registrar");
+        mitemregister.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                mitemregisterMousePressed(evt);
             }
         });
-        jMenuBar1.add(menusal);
+        mfile.add(mitemregister);
+
+        mitemupdate.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));
+        mitemupdate.setText(" Actualizar");
+        mitemupdate.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                mitemupdateMousePressed(evt);
+            }
+        });
+        mfile.add(mitemupdate);
+
+        mitemdelete.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_X, java.awt.event.InputEvent.CTRL_MASK));
+        mitemdelete.setText("Eliminar");
+        mitemdelete.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                mitemdeleteMousePressed(evt);
+            }
+        });
+        mfile.add(mitemdelete);
+
+        jMenuBar1.add(mfile);
+
+        medit.setText("Edit");
+
+        mitemclear.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.CTRL_MASK));
+        mitemclear.setText("Limpiar");
+        medit.add(mitemclear);
+
+        jMenuBar1.add(medit);
+
+        mclose.setText("Cerrar");
+        mclose.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                mcloseMousePressed(evt);
+            }
+        });
+        mclose.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mcloseActionPerformed(evt);
+            }
+        });
+        jMenuBar1.add(mclose);
 
         setJMenuBar(jMenuBar1);
 
@@ -166,10 +189,7 @@ public class WinArea_Cargos extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnEliminar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnActualizar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jLabel1)
                         .addGap(29, 29, 29)
                         .addComponent(jLabel2)
@@ -198,22 +218,32 @@ public class WinArea_Cargos extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 168, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 177, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jLabel2)
-                    .addComponent(btnEliminar)
-                    .addComponent(btnActualizar))
-                .addGap(12, 12, 12))
+                    .addComponent(jLabel2))
+                .addGap(18, 18, 18))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
+    private void txtnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtnameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtnameActionPerformed
 
-        String name = txtname.getText();
+    private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
+     cargaForm();
+    }//GEN-LAST:event_formInternalFrameOpened
+
+    private void mcloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mcloseActionPerformed
+        this.setVisible(false);
+        Utilitarios.Config.OPENWINDOWS =0;        
+    }//GEN-LAST:event_mcloseActionPerformed
+
+    private void mitemregisterMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemregisterMousePressed
+    String name = txtname.getText();
         int idArea = Integer.parseInt(lblArea.getText());
         objCar = new CargosDAO();
         int i = objCar.save(idArea,name);
@@ -224,16 +254,11 @@ public class WinArea_Cargos extends javax.swing.JInternalFrame {
             objCar.find(lblArea.getText(),TblCargos);
             cleanBox();
             JOptionPane.showMessageDialog(null,"Nuevo cargo registrado");      
-        }
-    }//GEN-LAST:event_btnRegistrarActionPerformed
+        }     
+    }//GEN-LAST:event_mitemregisterMousePressed
 
-    private void txtnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtnameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtnameActionPerformed
-
-    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-   
-        int fsel;
+    private void mitemdeleteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemdeleteMousePressed
+    int fsel;
         fsel = this.TblCargos.getSelectedRow();
         if (fsel == -1) {
             //No se ha seleccionado registo en Jtable
@@ -261,16 +286,10 @@ public class WinArea_Cargos extends javax.swing.JInternalFrame {
                 
             }
         }
-        
-    }//GEN-LAST:event_btnEliminarActionPerformed
+    }//GEN-LAST:event_mitemdeleteMousePressed
 
-    private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
-     cargaForm();
-    }//GEN-LAST:event_formInternalFrameOpened
-
-    private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
-
-        int fsel;
+    private void mitemupdateMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemupdateMousePressed
+    int fsel;
         fsel = this.TblCargos.getSelectedRow();
         if (fsel == -1) {
             //No se ha seleccionado registo en Jtable
@@ -300,18 +319,15 @@ public class WinArea_Cargos extends javax.swing.JInternalFrame {
                 
             }
         }
-    }//GEN-LAST:event_btnActualizarActionPerformed
+    }//GEN-LAST:event_mitemupdateMousePressed
 
-    private void menusalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menusalActionPerformed
+    private void mcloseMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mcloseMousePressed
         this.setVisible(false);
-        Utilitarios.Config.OPENWINDOWS =0;        
-    }//GEN-LAST:event_menusalActionPerformed
+        Utilitarios.Config.OPENWINDOWS =0;
+    }//GEN-LAST:event_mcloseMousePressed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable TblCargos;
-    private javax.swing.JButton btnActualizar;
-    private javax.swing.JButton btnEliminar;
-    private javax.swing.JButton btnRegistrar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -319,8 +335,14 @@ public class WinArea_Cargos extends javax.swing.JInternalFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel lblArea;
-    private javax.swing.JMenu menusal;
+    public javax.swing.JLabel lblArea;
+    private javax.swing.JMenu mclose;
+    private javax.swing.JMenu medit;
+    private javax.swing.JMenu mfile;
+    private javax.swing.JMenuItem mitemclear;
+    private javax.swing.JMenuItem mitemdelete;
+    private javax.swing.JMenuItem mitemregister;
+    private javax.swing.JMenuItem mitemupdate;
     private javax.swing.JTextField txtname;
     // End of variables declaration//GEN-END:variables
 }

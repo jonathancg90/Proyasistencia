@@ -93,14 +93,16 @@ public class WinEmpleado extends javax.swing.JInternalFrame {
         cboAreaFilter = new javax.swing.JComboBox();
         jCheckBox1 = new javax.swing.JCheckBox();
         jMenuBar1 = new javax.swing.JMenuBar();
-        menuarc = new javax.swing.JMenu();
+        mfile = new javax.swing.JMenu();
         mitemregister = new javax.swing.JMenuItem();
         mitemupdate = new javax.swing.JMenuItem();
         mitemdelete = new javax.swing.JMenuItem();
-        menuhor = new javax.swing.JMenu();
-        menusue = new javax.swing.JMenu();
-        menuvac = new javax.swing.JMenu();
-        menusal = new javax.swing.JMenu();
+        mhor = new javax.swing.JMenu();
+        msue = new javax.swing.JMenu();
+        mvac = new javax.swing.JMenu();
+        medit = new javax.swing.JMenu();
+        mitemclear = new javax.swing.JMenuItem();
+        mclose = new javax.swing.JMenu();
 
         jMenuItem1.setText("jMenuItem1");
 
@@ -232,64 +234,75 @@ public class WinEmpleado extends javax.swing.JInternalFrame {
                     .addComponent(cboAreaFilter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jCheckBox1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        menuarc.setText("Archivo");
+        mfile.setText("Archivo");
 
+        mitemregister.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.CTRL_MASK));
         mitemregister.setText("Registrar");
         mitemregister.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 mitemregisterMousePressed(evt);
             }
         });
-        menuarc.add(mitemregister);
+        mfile.add(mitemregister);
 
+        mitemupdate.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));
         mitemupdate.setText("Actualizar");
         mitemupdate.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 mitemupdateMousePressed(evt);
             }
         });
-        menuarc.add(mitemupdate);
+        mfile.add(mitemupdate);
 
+        mitemdelete.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_X, java.awt.event.InputEvent.CTRL_MASK));
         mitemdelete.setText("Eliminar");
         mitemdelete.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 mitemdeleteMousePressed(evt);
             }
         });
-        menuarc.add(mitemdelete);
+        mfile.add(mitemdelete);
 
-        jMenuBar1.add(menuarc);
+        jMenuBar1.add(mfile);
 
-        menuhor.setText("Horarios");
-        jMenuBar1.add(menuhor);
+        mhor.setText("Horarios");
+        jMenuBar1.add(mhor);
 
-        menusue.setText("Salarios");
-        menusue.addMouseListener(new java.awt.event.MouseAdapter() {
+        msue.setText("Salarios");
+        msue.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                menusueMousePressed(evt);
+                msueMousePressed(evt);
             }
         });
-        jMenuBar1.add(menusue);
+        jMenuBar1.add(msue);
 
-        menuvac.setText("Vacaciones");
-        menuvac.addMouseListener(new java.awt.event.MouseAdapter() {
+        mvac.setText("Vacaciones");
+        mvac.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                menuvacMousePressed(evt);
+                mvacMousePressed(evt);
             }
         });
-        jMenuBar1.add(menuvac);
+        jMenuBar1.add(mvac);
 
-        menusal.setText("Cerrar");
-        menusal.addMouseListener(new java.awt.event.MouseAdapter() {
+        medit.setText("Edit");
+
+        mitemclear.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.CTRL_MASK));
+        mitemclear.setText("Limpiar");
+        medit.add(mitemclear);
+
+        jMenuBar1.add(medit);
+
+        mclose.setText("Cerrar");
+        mclose.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                menusalMousePressed(evt);
+                mcloseMousePressed(evt);
             }
         });
-        jMenuBar1.add(menusal);
+        jMenuBar1.add(mclose);
 
         setJMenuBar(jMenuBar1);
 
@@ -414,7 +427,7 @@ public class WinEmpleado extends javax.swing.JInternalFrame {
         }  
     }//GEN-LAST:event_mitemdeleteMousePressed
 
-    private void menusueMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menusueMousePressed
+    private void msueMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_msueMousePressed
        WinSalarios objsalarios= new WinSalarios();
         objsalarios.lblIdemp.setText(lblidempleado.getText());
         objsalarios.setResizable(true);
@@ -423,14 +436,14 @@ public class WinEmpleado extends javax.swing.JInternalFrame {
         WinMdi.jdpContenedor.add(objsalarios);
 
         objsalarios.setVisible(true);
-    }//GEN-LAST:event_menusueMousePressed
+    }//GEN-LAST:event_msueMousePressed
 
-    private void menusalMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menusalMousePressed
+    private void mcloseMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mcloseMousePressed
         this.setVisible(false);
         Utilitarios.Config.OPENWINDOWS =0;
-    }//GEN-LAST:event_menusalMousePressed
+    }//GEN-LAST:event_mcloseMousePressed
 
-    private void menuvacMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuvacMousePressed
+    private void mvacMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mvacMousePressed
        WinVacaciones objvacaciones= new WinVacaciones();
         objvacaciones.lblIdemp.setText(lblidempleado.getText());
         objvacaciones.setResizable(true);
@@ -439,7 +452,7 @@ public class WinEmpleado extends javax.swing.JInternalFrame {
         WinMdi.jdpContenedor.add(objvacaciones);
 
         objvacaciones.setVisible(true); 
-    }//GEN-LAST:event_menuvacMousePressed
+    }//GEN-LAST:event_mvacMousePressed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox cboArea;
@@ -468,14 +481,16 @@ public class WinEmpleado extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblidempleado;
-    private javax.swing.JMenu menuarc;
-    private javax.swing.JMenu menuhor;
-    private javax.swing.JMenu menusal;
-    private javax.swing.JMenu menusue;
-    private javax.swing.JMenu menuvac;
+    private javax.swing.JMenu mclose;
+    private javax.swing.JMenu medit;
+    private javax.swing.JMenu mfile;
+    private javax.swing.JMenu mhor;
+    private javax.swing.JMenuItem mitemclear;
     private javax.swing.JMenuItem mitemdelete;
     private javax.swing.JMenuItem mitemregister;
     private javax.swing.JMenuItem mitemupdate;
+    private javax.swing.JMenu msue;
+    private javax.swing.JMenu mvac;
     private javax.swing.JPanel pnlMantenimiento;
     private javax.swing.JTable tblEmpleado;
     private javax.swing.JTextField txtapellidos;

@@ -56,13 +56,13 @@ public class WinCiudad extends javax.swing.JInternalFrame {
         jLabel4 = new javax.swing.JLabel();
         lblId = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenu3 = new javax.swing.JMenu();
+        mfile = new javax.swing.JMenu();
+        mitemregister = new javax.swing.JMenuItem();
+        mitemupdate = new javax.swing.JMenuItem();
+        mitemdelete = new javax.swing.JMenuItem();
+        medit = new javax.swing.JMenu();
+        mitemclear = new javax.swing.JMenuItem();
+        mclose = new javax.swing.JMenu();
 
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -101,15 +101,14 @@ public class WinCiudad extends javax.swing.JInternalFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
-                .addComponent(txtFilter, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnFind)
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                        .addComponent(txtFilter, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnFind))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -160,7 +159,7 @@ public class WinCiudad extends javax.swing.JInternalFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 107, Short.MAX_VALUE))
+                .addGap(0, 101, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -178,48 +177,57 @@ public class WinCiudad extends javax.swing.JInternalFrame {
 
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(316, 12, -1, -1));
 
-        jMenu1.setText("Archivo");
+        mfile.setText("Archivo");
 
-        jMenuItem2.setText("Registrar");
-        jMenuItem2.addMouseListener(new java.awt.event.MouseAdapter() {
+        mitemregister.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.CTRL_MASK));
+        mitemregister.setText("Registrar");
+        mitemregister.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                jMenuItem2MousePressed(evt);
+                mitemregisterMousePressed(evt);
             }
         });
-        jMenu1.add(jMenuItem2);
+        mfile.add(mitemregister);
 
-        jMenuItem3.setText("Actualizar");
-        jMenuItem3.addMouseListener(new java.awt.event.MouseAdapter() {
+        mitemupdate.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));
+        mitemupdate.setText("Actualizar");
+        mitemupdate.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                jMenuItem3MousePressed(evt);
+                mitemupdateMousePressed(evt);
             }
         });
-        jMenu1.add(jMenuItem3);
+        mfile.add(mitemupdate);
 
-        jMenuItem4.setText("Eliminar");
-        jMenuItem4.addMouseListener(new java.awt.event.MouseAdapter() {
+        mitemdelete.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_X, java.awt.event.InputEvent.CTRL_MASK));
+        mitemdelete.setText("Eliminar");
+        mitemdelete.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                jMenuItem4MousePressed(evt);
+                mitemdeleteMousePressed(evt);
             }
         });
-        jMenu1.add(jMenuItem4);
+        mfile.add(mitemdelete);
 
-        jMenuBar1.add(jMenu1);
+        jMenuBar1.add(mfile);
 
-        jMenu2.setText("Edit");
+        medit.setText("Edit");
 
-        jMenuItem1.setText("Limpiar");
-        jMenu2.add(jMenuItem1);
+        mitemclear.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.CTRL_MASK));
+        mitemclear.setText("Limpiar");
+        medit.add(mitemclear);
 
-        jMenuBar1.add(jMenu2);
+        jMenuBar1.add(medit);
 
-        jMenu3.setText("Cerrar");
-        jMenu3.addMouseListener(new java.awt.event.MouseAdapter() {
+        mclose.setText("Cerrar");
+        mclose.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                jMenu3MousePressed(evt);
+                mcloseMousePressed(evt);
             }
         });
-        jMenuBar1.add(jMenu3);
+        mclose.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mcloseActionPerformed(evt);
+            }
+        });
+        jMenuBar1.add(mclose);
 
         setJMenuBar(jMenuBar1);
 
@@ -256,7 +264,7 @@ public class WinCiudad extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_tblciudadMouseClicked
 
-    private void jMenuItem2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem2MousePressed
+    private void mitemregisterMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemregisterMousePressed
         String name = txtName.getText();
         objciudad = new CiudadDAO();
         int i = objciudad.save(name);
@@ -268,9 +276,9 @@ public class WinCiudad extends javax.swing.JInternalFrame {
             cleanBox();
             JOptionPane.showMessageDialog(null,"Nueva ciudad registrada");
         }
-    }//GEN-LAST:event_jMenuItem2MousePressed
+    }//GEN-LAST:event_mitemregisterMousePressed
 
-    private void jMenuItem3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem3MousePressed
+    private void mitemupdateMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemupdateMousePressed
         int id = Integer.valueOf(lblId.getText());
         String name = txtName.getText();
         objciudad = new CiudadDAO();
@@ -285,9 +293,9 @@ public class WinCiudad extends javax.swing.JInternalFrame {
             cleanBox();
             JOptionPane.showMessageDialog(null, "ciudad actualizadas");
         }
-    }//GEN-LAST:event_jMenuItem3MousePressed
+    }//GEN-LAST:event_mitemupdateMousePressed
 
-    private void jMenuItem4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem4MousePressed
+    private void mitemdeleteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemdeleteMousePressed
         int id = Integer.valueOf(lblId.getText());
 
         objciudad = new CiudadDAO();
@@ -300,31 +308,35 @@ public class WinCiudad extends javax.swing.JInternalFrame {
             cleanBox();
             JOptionPane.showMessageDialog(null,"Ciudad eliminada");
         }
-    }//GEN-LAST:event_jMenuItem4MousePressed
+    }//GEN-LAST:event_mitemdeleteMousePressed
 
-    private void jMenu3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu3MousePressed
+    private void mcloseMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mcloseMousePressed
         this.setVisible(false);
         Utilitarios.Config.OPENWINDOWS =0;
-    }//GEN-LAST:event_jMenu3MousePressed
+    }//GEN-LAST:event_mcloseMousePressed
+
+    private void mcloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mcloseActionPerformed
+
+    }//GEN-LAST:event_mcloseActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnFind;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblId;
+    private javax.swing.JMenu mclose;
+    private javax.swing.JMenu medit;
+    private javax.swing.JMenu mfile;
+    private javax.swing.JMenuItem mitemclear;
+    private javax.swing.JMenuItem mitemdelete;
+    private javax.swing.JMenuItem mitemregister;
+    private javax.swing.JMenuItem mitemupdate;
     private javax.swing.JTable tblciudad;
     private javax.swing.JTextField txtFilter;
     private javax.swing.JTextField txtName;

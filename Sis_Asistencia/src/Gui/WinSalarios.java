@@ -79,11 +79,13 @@ public class WinSalarios extends javax.swing.JInternalFrame {
         txtMonto = new javax.swing.JTextField();
         cboF_final = new datechooser.beans.DateChooserCombo();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
+        mfile = new javax.swing.JMenu();
         mitemregister = new javax.swing.JMenuItem();
         mitemupdate = new javax.swing.JMenuItem();
         mitemdelete = new javax.swing.JMenuItem();
-        jMenu5 = new javax.swing.JMenu();
+        medit = new javax.swing.JMenu();
+        mitemclear = new javax.swing.JMenuItem();
+        mclose = new javax.swing.JMenu();
 
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -223,41 +225,52 @@ public class WinSalarios extends javax.swing.JInternalFrame {
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 30, 320, 300));
 
-        jMenu1.setText("Archivo");
+        mfile.setText("Archivo");
 
+        mitemregister.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.CTRL_MASK));
         mitemregister.setText("Registrar");
         mitemregister.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 mitemregisterMousePressed(evt);
             }
         });
-        jMenu1.add(mitemregister);
+        mfile.add(mitemregister);
 
+        mitemupdate.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));
         mitemupdate.setText("Actualizar");
         mitemupdate.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 mitemupdateMousePressed(evt);
             }
         });
-        jMenu1.add(mitemupdate);
+        mfile.add(mitemupdate);
 
+        mitemdelete.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_X, java.awt.event.InputEvent.CTRL_MASK));
         mitemdelete.setText("Eliminar");
         mitemdelete.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 mitemdeleteMousePressed(evt);
             }
         });
-        jMenu1.add(mitemdelete);
+        mfile.add(mitemdelete);
 
-        jMenuBar1.add(jMenu1);
+        jMenuBar1.add(mfile);
 
-        jMenu5.setText("Cerrar");
-        jMenu5.addMouseListener(new java.awt.event.MouseAdapter() {
+        medit.setText("Edit");
+
+        mitemclear.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.CTRL_MASK));
+        mitemclear.setText("Limpiar");
+        medit.add(mitemclear);
+
+        jMenuBar1.add(medit);
+
+        mclose.setText("Cerrar");
+        mclose.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                jMenu5MousePressed(evt);
+                mcloseMousePressed(evt);
             }
         });
-        jMenuBar1.add(jMenu5);
+        jMenuBar1.add(mclose);
 
         setJMenuBar(jMenuBar1);
 
@@ -335,9 +348,9 @@ public class WinSalarios extends javax.swing.JInternalFrame {
         
     }//GEN-LAST:event_mitemdeleteMousePressed
 
-    private void jMenu5MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu5MousePressed
+    private void mcloseMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mcloseMousePressed
         this.setVisible(false);
-    }//GEN-LAST:event_jMenu5MousePressed
+    }//GEN-LAST:event_mcloseMousePressed
 
     private void tblSalariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblSalariosMouseClicked
         date = new Date();
@@ -389,8 +402,6 @@ public class WinSalarios extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -398,6 +409,10 @@ public class WinSalarios extends javax.swing.JInternalFrame {
     public javax.swing.JLabel lblIdemp;
     private javax.swing.JLabel lblIdsalario;
     private javax.swing.JLabel lblMod;
+    private javax.swing.JMenu mclose;
+    private javax.swing.JMenu medit;
+    private javax.swing.JMenu mfile;
+    private javax.swing.JMenuItem mitemclear;
     private javax.swing.JMenuItem mitemdelete;
     private javax.swing.JMenuItem mitemregister;
     private javax.swing.JMenuItem mitemupdate;

@@ -66,13 +66,13 @@ public class WinTipo_moneda extends javax.swing.JInternalFrame {
         btnEliminar = new javax.swing.JButton();
         btnCerrar = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem5 = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
-        jMenuItem4 = new javax.swing.JMenuItem();
+        mfile = new javax.swing.JMenu();
+        mitemregister = new javax.swing.JMenuItem();
+        mitemupdate = new javax.swing.JMenuItem();
+        mitemdelete = new javax.swing.JMenuItem();
+        medit = new javax.swing.JMenu();
+        mitemclear = new javax.swing.JMenuItem();
+        mclose = new javax.swing.JMenu();
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Lista"));
 
@@ -278,28 +278,57 @@ public class WinTipo_moneda extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jMenu1.setText("Archivo");
+        mfile.setText("Archivo");
 
-        jMenuItem1.setText("Registrar");
-        jMenu1.add(jMenuItem1);
+        mitemregister.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.CTRL_MASK));
+        mitemregister.setText("Registrar");
+        mitemregister.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                mitemregisterMousePressed(evt);
+            }
+        });
+        mfile.add(mitemregister);
 
-        jMenuItem2.setText("Actualizar");
-        jMenu1.add(jMenuItem2);
+        mitemupdate.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));
+        mitemupdate.setText("Actualizar");
+        mitemupdate.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                mitemupdateMousePressed(evt);
+            }
+        });
+        mfile.add(mitemupdate);
 
-        jMenuItem3.setText("Eliminar");
-        jMenu1.add(jMenuItem3);
+        mitemdelete.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_X, java.awt.event.InputEvent.CTRL_MASK));
+        mitemdelete.setText("Eliminar");
+        mitemdelete.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                mitemdeleteMousePressed(evt);
+            }
+        });
+        mfile.add(mitemdelete);
 
-        jMenuItem5.setText("Cerrar");
-        jMenu1.add(jMenuItem5);
+        jMenuBar1.add(mfile);
 
-        jMenuBar1.add(jMenu1);
+        medit.setText("Edit");
 
-        jMenu2.setText("Edit");
+        mitemclear.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.CTRL_MASK));
+        mitemclear.setText("Limpiar");
+        medit.add(mitemclear);
 
-        jMenuItem4.setText("Limpiar");
-        jMenu2.add(jMenuItem4);
+        jMenuBar1.add(medit);
 
-        jMenuBar1.add(jMenu2);
+        mclose.setText("Cerrar");
+        mclose.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                mcloseMousePressed(evt);
+            }
+        });
+        mclose.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mcloseActionPerformed(evt);
+            }
+        });
+        jMenuBar1.add(mclose);
 
         setJMenuBar(jMenuBar1);
 
@@ -327,7 +356,7 @@ public class WinTipo_moneda extends javax.swing.JInternalFrame {
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 6, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -369,6 +398,22 @@ public class WinTipo_moneda extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnNextActionPerformed
 
     private void btnregistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnregistrarActionPerformed
+        
+    }//GEN-LAST:event_btnregistrarActionPerformed
+
+    private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
+        
+    }//GEN-LAST:event_btnActualizarActionPerformed
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        
+    }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void btnCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarActionPerformed
+        
+    }//GEN-LAST:event_btnCerrarActionPerformed
+
+    private void mitemregisterMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemregisterMousePressed
         String name = txtName.getText();
         objmoneda = new TipomonedaDAO();
         int i = objmoneda.save(name);
@@ -380,9 +425,9 @@ public class WinTipo_moneda extends javax.swing.JInternalFrame {
             cleanBox();
             JOptionPane.showMessageDialog(null,"Nueva moneda registrada");
         }
-    }//GEN-LAST:event_btnregistrarActionPerformed
+    }//GEN-LAST:event_mitemregisterMousePressed
 
-    private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
+    private void mitemupdateMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemupdateMousePressed
         int id = Integer.valueOf(lblId.getText());
         String name = txtName.getText();
         objmoneda = new TipomonedaDAO();
@@ -397,9 +442,9 @@ public class WinTipo_moneda extends javax.swing.JInternalFrame {
             cleanBox();
             JOptionPane.showMessageDialog(null, "moneda actualizadas");
         }
-    }//GEN-LAST:event_btnActualizarActionPerformed
+    }//GEN-LAST:event_mitemupdateMousePressed
 
-    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+    private void mitemdeleteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemdeleteMousePressed
         int id = Integer.valueOf(lblId.getText());
 
         objmoneda = new TipomonedaDAO();
@@ -412,12 +457,16 @@ public class WinTipo_moneda extends javax.swing.JInternalFrame {
             cleanBox();
             JOptionPane.showMessageDialog(null,"moneda eliminada");
         }
-    }//GEN-LAST:event_btnEliminarActionPerformed
+    }//GEN-LAST:event_mitemdeleteMousePressed
 
-    private void btnCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarActionPerformed
+    private void mcloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mcloseActionPerformed
+
+    }//GEN-LAST:event_mcloseActionPerformed
+
+    private void mcloseMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mcloseMousePressed
         this.setVisible(false);
         Utilitarios.Config.OPENWINDOWS =0;
-    }//GEN-LAST:event_btnCerrarActionPerformed
+    }//GEN-LAST:event_mcloseMousePressed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnActualizar;
@@ -435,20 +484,20 @@ public class WinTipo_moneda extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lblId;
+    private javax.swing.JMenu mclose;
+    private javax.swing.JMenu medit;
+    private javax.swing.JMenu mfile;
+    private javax.swing.JMenuItem mitemclear;
+    private javax.swing.JMenuItem mitemdelete;
+    private javax.swing.JMenuItem mitemregister;
+    private javax.swing.JMenuItem mitemupdate;
     private javax.swing.JTable tblmoneda;
     private javax.swing.JTextField txtFilter;
     private javax.swing.JTextField txtName;

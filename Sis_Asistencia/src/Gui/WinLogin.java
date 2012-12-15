@@ -2,6 +2,8 @@
 package Gui;
 
 import Dao.UserDAO;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.*;
 
 
@@ -17,7 +19,7 @@ public class WinLogin extends javax.swing.JFrame {
      * Creacion del WinUsuario
      */
     public WinLogin() {
-        initComponents();
+        initComponents();this.setLocationRelativeTo(this);
     }
 
     
@@ -203,6 +205,12 @@ public class WinLogin extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
+                try {
+                    UIManager.setLookAndFeel("com.jtattoo.plaf.texture.TextureLookAndFeel");
+                } 
+                catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
+                    Logger.getLogger(WinLogin.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 new WinLogin().setVisible(true);
             }
         });

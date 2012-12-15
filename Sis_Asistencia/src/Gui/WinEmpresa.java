@@ -78,14 +78,14 @@ public class WinEmpresa extends javax.swing.JInternalFrame {
         jLabel3 = new javax.swing.JLabel();
         lblModified = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
-        menuarc = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        menuedit = new javax.swing.JMenu();
-        jMenuItem5 = new javax.swing.JMenuItem();
-        menuañ = new javax.swing.JMenu();
-        menusal = new javax.swing.JMenu();
+        mfile = new javax.swing.JMenu();
+        mitemregister = new javax.swing.JMenuItem();
+        mitemupdate = new javax.swing.JMenuItem();
+        mitemdelete = new javax.swing.JMenuItem();
+        medit = new javax.swing.JMenu();
+        mitemclear = new javax.swing.JMenuItem();
+        maño = new javax.swing.JMenu();
+        mclose = new javax.swing.JMenu();
 
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -251,56 +251,63 @@ public class WinEmpresa extends javax.swing.JInternalFrame {
 
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(269, 12, -1, -1));
 
-        menuarc.setText("Archivo");
+        mfile.setText("Archivo");
 
-        jMenuItem1.setText("Registrar");
-        jMenuItem1.addMouseListener(new java.awt.event.MouseAdapter() {
+        mitemregister.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.CTRL_MASK));
+        mitemregister.setText("Registrar");
+        mitemregister.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                jMenuItem1MousePressed(evt);
+                mitemregisterMousePressed(evt);
             }
         });
-        menuarc.add(jMenuItem1);
+        mfile.add(mitemregister);
 
-        jMenuItem2.setText("Actualizar");
-        jMenuItem2.addMouseListener(new java.awt.event.MouseAdapter() {
+        mitemupdate.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));
+        mitemupdate.setText("Actualizar");
+        mitemupdate.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                jMenuItem2MousePressed(evt);
+                mitemupdateMousePressed(evt);
             }
         });
-        menuarc.add(jMenuItem2);
+        mfile.add(mitemupdate);
 
-        jMenuItem3.setText("Eliminar");
-        jMenuItem3.addMouseListener(new java.awt.event.MouseAdapter() {
+        mitemdelete.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_X, java.awt.event.InputEvent.CTRL_MASK));
+        mitemdelete.setText("Eliminar");
+        mitemdelete.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                jMenuItem3MousePressed(evt);
+                mitemdeleteMousePressed(evt);
             }
         });
-        menuarc.add(jMenuItem3);
+        mfile.add(mitemdelete);
 
-        jMenuBar1.add(menuarc);
+        jMenuBar1.add(mfile);
 
-        menuedit.setText("Edit");
+        medit.setText("Edit");
 
-        jMenuItem5.setText("Limpiar");
-        menuedit.add(jMenuItem5);
+        mitemclear.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.CTRL_MASK));
+        mitemclear.setText("Limpiar");
+        medit.add(mitemclear);
 
-        jMenuBar1.add(menuedit);
+        jMenuBar1.add(medit);
 
-        menuañ.setText("Añadir sucursales");
-        menuañ.addMouseListener(new java.awt.event.MouseAdapter() {
+        maño.setText("Añadir sucursales");
+        maño.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                menuañMousePressed(evt);
+                mañoMousePressed(evt);
             }
         });
-        jMenuBar1.add(menuañ);
+        jMenuBar1.add(maño);
 
-        menusal.setText("Cerrar");
-        menusal.addMouseListener(new java.awt.event.MouseAdapter() {
+        mclose.setText("Cerrar");
+        mclose.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                menusalMousePressed(evt);
+                mcloseMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                mcloseMouseReleased(evt);
             }
         });
-        jMenuBar1.add(menusal);
+        jMenuBar1.add(mclose);
 
         setJMenuBar(jMenuBar1);
 
@@ -345,7 +352,7 @@ public class WinEmpresa extends javax.swing.JInternalFrame {
         objempresa.find(name, tblempresa);
     }//GEN-LAST:event_btnFindActionPerformed
 
-    private void menuañMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuañMousePressed
+    private void mañoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mañoMousePressed
         WinEmpresa_Sucursal objsucursal= new WinEmpresa_Sucursal();
 
         objsucursal.setResizable(true);
@@ -354,14 +361,14 @@ public class WinEmpresa extends javax.swing.JInternalFrame {
         WinMdi.jdpContenedor.add(objsucursal);
 
         objsucursal.setVisible(true);
-    }//GEN-LAST:event_menuañMousePressed
+    }//GEN-LAST:event_mañoMousePressed
 
-    private void menusalMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menusalMousePressed
+    private void mcloseMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mcloseMousePressed
         this.setVisible(false);
         Utilitarios.Config.OPENWINDOWS =0;
-    }//GEN-LAST:event_menusalMousePressed
+    }//GEN-LAST:event_mcloseMousePressed
 
-    private void jMenuItem3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem3MousePressed
+    private void mitemdeleteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemdeleteMousePressed
         int i;      
         i= JOptionPane.showConfirmDialog(null,"¿Esta seguro de eliminar este registro?","Aviso",JOptionPane.OK_CANCEL_OPTION,JOptionPane.WARNING_MESSAGE);
         
@@ -377,9 +384,9 @@ public class WinEmpresa extends javax.swing.JInternalFrame {
                   cleanBox();
             }
         }
-    }//GEN-LAST:event_jMenuItem3MousePressed
+    }//GEN-LAST:event_mitemdeleteMousePressed
 
-    private void jMenuItem2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem2MousePressed
+    private void mitemupdateMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemupdateMousePressed
         dt = new Data();
         int id = Integer.valueOf(lblId.getText());
         String name = txtName.getText();
@@ -400,9 +407,9 @@ public class WinEmpresa extends javax.swing.JInternalFrame {
             cleanBox();
             JOptionPane.showMessageDialog(null,"Nueva empresa registrada");
         }
-    }//GEN-LAST:event_jMenuItem2MousePressed
+    }//GEN-LAST:event_mitemupdateMousePressed
 
-    private void jMenuItem1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem1MousePressed
+    private void mitemregisterMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemregisterMousePressed
         dt = new Data();
         String name = txtName.getText();
         String ruc = txtruc.getText();
@@ -421,7 +428,11 @@ public class WinEmpresa extends javax.swing.JInternalFrame {
             cleanBox();
             JOptionPane.showMessageDialog(null,"Nueva empresa registrada");
         }
-    }//GEN-LAST:event_jMenuItem1MousePressed
+    }//GEN-LAST:event_mitemregisterMousePressed
+
+    private void mcloseMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mcloseMouseReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mcloseMouseReleased
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnFind;
@@ -436,20 +447,20 @@ public class WinEmpresa extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblId;
     private javax.swing.JLabel lblModified;
-    private javax.swing.JMenu menuarc;
-    private javax.swing.JMenu menuañ;
-    private javax.swing.JMenu menuedit;
-    private javax.swing.JMenu menusal;
+    private javax.swing.JMenu maño;
+    private javax.swing.JMenu mclose;
+    private javax.swing.JMenu medit;
+    private javax.swing.JMenu mfile;
+    private javax.swing.JMenuItem mitemclear;
+    private javax.swing.JMenuItem mitemdelete;
+    private javax.swing.JMenuItem mitemregister;
+    private javax.swing.JMenuItem mitemupdate;
     private javax.swing.JTable tblempresa;
     private javax.swing.JTextField txtCantTrab;
     private javax.swing.JTextField txtFilter;

@@ -63,9 +63,11 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
         jLabel10 = new javax.swing.JLabel();
         jButton5 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
-        menuman = new javax.swing.JMenu();
-        menuver = new javax.swing.JMenu();
-        menusal = new javax.swing.JMenu();
+        mman = new javax.swing.JMenu();
+        mver = new javax.swing.JMenu();
+        medit = new javax.swing.JMenu();
+        mitemclear = new javax.swing.JMenuItem();
+        mclose = new javax.swing.JMenu();
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Asistencias"));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -88,7 +90,7 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 98, Short.MAX_VALUE)
+            .addGap(0, 100, Short.MAX_VALUE)
         );
 
         jLabel6.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -128,7 +130,7 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
-                .addContainerGap(14, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -232,7 +234,7 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(18, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13)
                     .addComponent(cbotipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -466,19 +468,32 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
 
         jPanel3.add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 166, 451, 440));
 
-        menuman.setText("Mantenimiento");
-        jMenuBar1.add(menuman);
+        mman.setText("Mantenimiento");
+        jMenuBar1.add(mman);
 
-        menuver.setText("Ver asistencias");
-        jMenuBar1.add(menuver);
+        mver.setText("Ver asistencias");
+        jMenuBar1.add(mver);
 
-        menusal.setText("Cerrar");
-        menusal.addMouseListener(new java.awt.event.MouseAdapter() {
+        medit.setText("Edit");
+
+        mitemclear.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.CTRL_MASK));
+        mitemclear.setText("Limpiar");
+        medit.add(mitemclear);
+
+        jMenuBar1.add(medit);
+
+        mclose.setText("Cerrar");
+        mclose.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                menusalMousePressed(evt);
+                mcloseMousePressed(evt);
             }
         });
-        jMenuBar1.add(menusal);
+        mclose.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mcloseActionPerformed(evt);
+            }
+        });
+        jMenuBar1.add(mclose);
 
         setJMenuBar(jMenuBar1);
 
@@ -494,17 +509,21 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 630, Short.MAX_VALUE)
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 638, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void menusalMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menusalMousePressed
+    private void mcloseMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mcloseMousePressed
         this.setVisible(false);
-        Utilitarios.Config.OPENWINDOWS =0;        
-    }//GEN-LAST:event_menusalMousePressed
+        Utilitarios.Config.OPENWINDOWS =0;
+    }//GEN-LAST:event_mcloseMousePressed
+
+    private void mcloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mcloseActionPerformed
+          
+    }//GEN-LAST:event_mcloseActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnbuscar;
@@ -556,8 +575,10 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
     private javax.swing.JTable jTable2;
     private javax.swing.JTable jTable3;
     private javax.swing.JTable jTable4;
-    private javax.swing.JMenu menuman;
-    private javax.swing.JMenu menusal;
-    private javax.swing.JMenu menuver;
+    private javax.swing.JMenu mclose;
+    private javax.swing.JMenu medit;
+    private javax.swing.JMenuItem mitemclear;
+    private javax.swing.JMenu mman;
+    private javax.swing.JMenu mver;
     // End of variables declaration//GEN-END:variables
 }
