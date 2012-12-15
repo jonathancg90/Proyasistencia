@@ -19,9 +19,24 @@ public class UserDAO extends ConexionBd{
     private Usuario objUsu;
     private Validators objVal;
     private Helpers hp;
-    private String filter[][] = new String[0][0];
-    private String _error="UserDAO_";
+    private String filter[][];
+    private String campos[];
+    private String _error;
+    private String _table;
+    
     PreparedStatement  pt = null;
+    /*
+    * Carga de datos
+    */
+    public UserDAO(){
+        _table = "usuario";
+        _error = "UserDAO_";
+        filter = new String[0][0];
+        campos = new String[2];
+        campos[0]="idusu";
+        campos[1]="username";
+    }
+    
     /*
      * Middleware mostrar nombres de las areas
      */
@@ -33,11 +48,8 @@ public class UserDAO extends ConexionBd{
             if (filter.length <= 0){
                 filter = new String[0][0];
             }
-            String campos[] = new String[2];
-            campos[0]="idusu";
-            campos[1]="username";
-            String Table = "usuario";
-            datos = qs.getAll(campos,Table,filter);
+            String Table = _table;
+            datos = qs.getAll(this.campos,Table,filter);
             tblDatos.setModel(datos);   
         }
         catch(Exception e){
@@ -68,7 +80,7 @@ public class UserDAO extends ConexionBd{
 
         }
         catch(Exception e){
-            System.out.println(_error+"Auth: "+e);
+            System.out.println(_error+"userAuth: "+e);
             return false;
         }
     }     
@@ -83,7 +95,7 @@ public class UserDAO extends ConexionBd{
             getConexion();
             hp = new Helpers();
             qs = new Query();
-            String Table = "usuario";
+            String Table = _table;
             String now = hp.getDateNow();
             
             objUsu = new Usuario(0,username,password,idemp,now,now,estado,rol);
@@ -118,7 +130,7 @@ public class UserDAO extends ConexionBd{
             getConexion();
             hp = new Helpers();
             qs = new Query();
-            String Table = "usuario";
+            String Table = _table;
             String now = hp.getDateNow();
             
             objUsu = new Usuario(id,username,password,emp,now,now,estado,rol);
@@ -139,7 +151,7 @@ public class UserDAO extends ConexionBd{
             return i;
         }
         catch(Exception e){
-            System.out.println(_error+"update: "+e);
+            System.out.println(_error+"updateUsuario: "+e);
             return i;
         }
     }
@@ -154,7 +166,7 @@ public class UserDAO extends ConexionBd{
             objUsu = new Usuario();
             hp = new Helpers();
             qs= new Query();
-            String Table = "usuario";
+            String Table = _table;
             
             objUsu.setIdusu(idusu);
             pt = qs.sqlDelete(Table);
@@ -165,7 +177,7 @@ public class UserDAO extends ConexionBd{
             return i;
         }
         catch(Exception e){
-            System.out.println(_error+"delete: "+e);
+            System.out.println(_error+"deleteUsuario: "+e);
             return i;
         }
     }
@@ -177,7 +189,7 @@ public class UserDAO extends ConexionBd{
         try {
             if(!"".equals(state)){
                 filter = new String[1][2];
-                filter[0][0] = "estado";
+                filter[0][0] = "equ_estado";
                 filter[0][1] = state; 
             }
             getTableAll(tblDatos);
@@ -197,7 +209,7 @@ public class UserDAO extends ConexionBd{
             qs= new Query();
             //Preparando
             String campos[] = new String[8];
-            campos = qs.getRecords("usuario",idusu);
+            campos = qs.getRecords(_table,idusu);
             objUsu.setIdemp(Integer.parseInt(campos[2]));
             objUsu.setUsername(campos[3]);
             objUsu.setPassword(campos[4]);
@@ -205,7 +217,6 @@ public class UserDAO extends ConexionBd{
             objUsu.setModified(campos[6]);
             objUsu.setEstado(objVal.StringToBoolean(campos[7]));
             objUsu.setRol(Integer.parseInt(campos[8]));
-            System.out.println("roles -"+campos[8]);
             
             return objUsu;
         }
