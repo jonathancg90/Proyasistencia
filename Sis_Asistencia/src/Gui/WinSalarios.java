@@ -5,11 +5,16 @@ import Dao.SalariosDAO;
 import Javabeans.Salarios;
 import Utilitarios.Config;
 import Utilitarios.Query;
-import java.sql.Date;
+import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import java.text.DateFormat;
+import java.util.Calendar;
 
 import Utilitarios.Helpers;
+import java.text.SimpleDateFormat;
+import java.util.GregorianCalendar;
+
 
 public class WinSalarios extends javax.swing.JInternalFrame {
     
@@ -18,11 +23,19 @@ public class WinSalarios extends javax.swing.JInternalFrame {
     private Query qs;
     private Config cg;
     private Helpers hp;
-
+    private DateFormat format;
+    private Date date,date2;
+    private Calendar calendar,calendar2;
+    
     
     public WinSalarios() {
         initComponents();
         cargaForm();
+        
+        format=new SimpleDateFormat("yyyy-MM-dd");
+        cboF_inicio.setDateFormat(format);
+        cboF_final.setDateFormat(format);
+        
     }
 
     public void cargaForm(){
@@ -40,6 +53,8 @@ public class WinSalarios extends javax.swing.JInternalFrame {
         lblIdsalario.setText("");
         lblMod.setText("");
         txtMonto.setText("");
+        cboF_inicio.setSelectedDate(null);
+        cboF_final.setSelectedDate(null);
     }
     
     @SuppressWarnings("unchecked")
@@ -252,8 +267,8 @@ public class WinSalarios extends javax.swing.JInternalFrame {
     private void mitemregisterMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemregisterMousePressed
         try{
         hp = new Helpers();
-        String F_inicio=hp.getFormatDate(cboF_inicio.getText());
-        String F_final=hp.getFormatDate(cboF_final.getText());
+        String F_inicio=cboF_inicio.getText();
+        String F_final=cboF_final.getText();
         System.out.println(F_inicio +" - " +F_final);
         boolean por_defecto=jCheckBox1.isSelected();
         double monto=Double.parseDouble(txtMonto.getText());
@@ -280,8 +295,8 @@ public class WinSalarios extends javax.swing.JInternalFrame {
         hp = new Helpers();
         int idsalario=Integer.parseInt(lblIdsalario.getText());
         int idemp=Integer.parseInt(lblIdemp.getText());
-        String F_inicio=hp.getFormatDate(cboF_inicio.getText());
-        String F_final=hp.getFormatDate(cboF_final.getText());
+        String F_inicio=cboF_inicio.getText();
+        String F_final=cboF_final.getText();
         
         boolean por_defecto=jCheckBox1.isSelected();
         double monto=Double.parseDouble(txtMonto.getText());
@@ -325,7 +340,10 @@ public class WinSalarios extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jMenu5MousePressed
 
     private void tblSalariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblSalariosMouseClicked
-        
+        date = new Date();
+        date2=new Date();
+        calendar= new GregorianCalendar();
+        calendar2= new GregorianCalendar();
         int fsel;
         fsel = this.tblSalarios.getSelectedRow();
         if (fsel == -1) {
@@ -343,6 +361,13 @@ public class WinSalarios extends javax.swing.JInternalFrame {
                 txtMonto.setText(String.valueOf(Salarios.getMonto()));
                 lblIdemp.setText(String.valueOf(Salarios.getIdemp()));
                 lblMod.setText(Salarios.getModified());
+                date=format.parse(Salarios.getF_inicio());
+                calendar.setTime(date);
+                cboF_inicio.setSelectedDate(calendar);
+                
+                date2=format.parse(Salarios.getF_final());
+                calendar2.setTime(date2);
+                cboF_final.setSelectedDate(calendar2);
                 
                 }
             catch (Exception e) {

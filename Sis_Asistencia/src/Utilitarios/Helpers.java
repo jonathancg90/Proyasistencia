@@ -4,6 +4,7 @@ package Utilitarios;
 import java.io.*;
 import java.util.Calendar;
 
+
 public class Helpers{
     
     /*
@@ -40,15 +41,18 @@ public class Helpers{
         return date;
     }
      /*
-     * Formateo de fehca
+     * Formateo de fecha
      */
-    public String getFormatDate(String fecha)
+    
+    
+    /*public String getFormatDate(String fecha)
     {
         String date;
-        String [] arrayfecha = fecha.split("/");
-        date = "20"+arrayfecha[2]+"-"+arrayfecha[1]+"-"+arrayfecha[0];
+        String [] arrayfecha = fecha.split("-");
+        date = arrayfecha[2]+"-"+arrayfecha[1]+"-"+arrayfecha[0];
         return date;
-    }
+    }*/
+     
     /*
      * Encriptador
      */

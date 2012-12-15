@@ -6,10 +6,17 @@ import Dao.VacacionesDAO;
 import Javabeans.Vacaciones;
 import Utilitarios.Config;
 import Utilitarios.Query;
-import java.sql.Date;
+
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import Utilitarios.Helpers;
+
+import java.text.DateFormat;
+import java.util.Calendar;
+
+import java.util.Date;
+import java.text.SimpleDateFormat;
+import java.util.GregorianCalendar;
 
 public class WinVacaciones extends javax.swing.JInternalFrame {
 
@@ -18,11 +25,17 @@ public class WinVacaciones extends javax.swing.JInternalFrame {
     private Query qs;
     private Config cg;
     private Helpers hp;
+    private DateFormat format;
+    private Date date,date2;
+    private Calendar calendar,calendar2;
     
     
     public WinVacaciones() {
         initComponents();
         cargaForm();
+        format=new SimpleDateFormat("yyyy-MM-dd");
+        cboF_inicio.setDateFormat(format);
+        cboF_final.setDateFormat(format);
         
     }
     
@@ -41,6 +54,8 @@ public class WinVacaciones extends javax.swing.JInternalFrame {
         
         lblIdvacaciones.setText("");
         lblMod.setText("");
+        cboF_inicio.setSelectedDate(null);
+        cboF_final.setSelectedDate(null);
         
     }
 
@@ -249,7 +264,10 @@ public class WinVacaciones extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tblVacacionesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblVacacionesMouseClicked
-
+        date = new Date();
+        date2=new Date();
+        calendar= new GregorianCalendar();
+        calendar2= new GregorianCalendar();
         int fsel;
         fsel = this.tblVacaciones.getSelectedRow();
         if (fsel == -1) {
@@ -267,6 +285,14 @@ public class WinVacaciones extends javax.swing.JInternalFrame {
                 
                 lblIdemp.setText(String.valueOf(Vacaciones.getIdemp()));
                 lblMod.setText(Vacaciones.getModified());
+                
+                date=format.parse(Vacaciones.getF_ini());
+                calendar.setTime(date);
+                cboF_inicio.setSelectedDate(calendar);
+                
+                date2=format.parse(Vacaciones.getF_final());
+                calendar2.setTime(date2);
+                cboF_final.setSelectedDate(calendar2);
 
             }
             catch (Exception e) {
@@ -280,8 +306,8 @@ public class WinVacaciones extends javax.swing.JInternalFrame {
     private void mitemregisterMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemregisterMousePressed
         try{
             hp = new Helpers();
-            String F_inicio=hp.getFormatDate(cboF_inicio.getText());
-            String F_final=hp.getFormatDate(cboF_final.getText());
+            String F_inicio=cboF_inicio.getText();
+            String F_final=cboF_final.getText();
             System.out.println(F_inicio +" - " +F_final);
             
             
@@ -305,8 +331,8 @@ public class WinVacaciones extends javax.swing.JInternalFrame {
         hp = new Helpers();
         int idsalario=Integer.parseInt(lblIdvacaciones.getText());
         int idemp=Integer.parseInt(lblIdemp.getText());
-        String F_inicio=hp.getFormatDate(cboF_inicio.getText());
-        String F_final=hp.getFormatDate(cboF_final.getText());
+        String F_inicio=cboF_inicio.getText();
+        String F_final=cboF_final.getText();
 
         
 
