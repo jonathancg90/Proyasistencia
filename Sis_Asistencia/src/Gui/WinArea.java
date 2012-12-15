@@ -65,14 +65,14 @@ public class WinArea extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblArea = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
-        menuarc = new javax.swing.JMenu();
-        OpcRegistrar = new javax.swing.JMenuItem();
-        OpcActualizar = new javax.swing.JMenuItem();
-        OpcEliminar = new javax.swing.JMenuItem();
-        menuedit = new javax.swing.JMenu();
-        OpcLimpiar = new javax.swing.JMenuItem();
-        menusal = new javax.swing.JMenu();
-        menuaña = new javax.swing.JMenu();
+        mfile = new javax.swing.JMenu();
+        mitemregister = new javax.swing.JMenuItem();
+        mitemupdate = new javax.swing.JMenuItem();
+        mitemeliminar = new javax.swing.JMenuItem();
+        medit = new javax.swing.JMenu();
+        mitemclear = new javax.swing.JMenuItem();
+        maña = new javax.swing.JMenu();
+        mclose = new javax.swing.JMenu();
 
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -120,9 +120,8 @@ public class WinArea extends javax.swing.JInternalFrame {
                         .add(22, 22, 22)
                         .add(pnlOpcionesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                             .add(cmbEstate, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 146, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                            .add(pnlOpcionesLayout.createSequentialGroup()
-                                .add(lblModified, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 170, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                                .add(0, 0, Short.MAX_VALUE)))))
+                            .add(lblModified, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 170, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                        .add(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         pnlOpcionesLayout.setVerticalGroup(
@@ -225,61 +224,70 @@ public class WinArea extends javax.swing.JInternalFrame {
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 260, -1));
 
-        menuarc.setText("Archivo");
+        mfile.setText("Archivo");
 
-        OpcRegistrar.setText("Registrar");
-        OpcRegistrar.addMouseListener(new java.awt.event.MouseAdapter() {
+        mitemregister.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.CTRL_MASK));
+        mitemregister.setText("Registrar");
+        mitemregister.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                OpcRegistrarMousePressed(evt);
+                mitemregisterMousePressed(evt);
             }
         });
-        menuarc.add(OpcRegistrar);
+        mfile.add(mitemregister);
 
-        OpcActualizar.setText("Actualizar");
-        OpcActualizar.addMouseListener(new java.awt.event.MouseAdapter() {
+        mitemupdate.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));
+        mitemupdate.setText("Actualizar");
+        mitemupdate.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                OpcActualizarMousePressed(evt);
+                mitemupdateMousePressed(evt);
             }
         });
-        OpcActualizar.addActionListener(new java.awt.event.ActionListener() {
+        mitemupdate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                OpcActualizarActionPerformed(evt);
+                mitemupdateActionPerformed(evt);
             }
         });
-        menuarc.add(OpcActualizar);
+        mfile.add(mitemupdate);
 
-        OpcEliminar.setText("Eliminar");
-        OpcEliminar.addMouseListener(new java.awt.event.MouseAdapter() {
+        mitemeliminar.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_X, java.awt.event.InputEvent.CTRL_MASK));
+        mitemeliminar.setText("Eliminar");
+        mitemeliminar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                OpcEliminarMousePressed(evt);
+                mitemeliminarMousePressed(evt);
             }
         });
-        menuarc.add(OpcEliminar);
+        mfile.add(mitemeliminar);
 
-        jMenuBar1.add(menuarc);
+        jMenuBar1.add(mfile);
 
-        menuedit.setText("Editar");
+        medit.setText("Editar");
 
-        OpcLimpiar.setText("Limpiar");
-        menuedit.add(OpcLimpiar);
+        mitemclear.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.CTRL_MASK));
+        mitemclear.setText("Limpiar");
+        medit.add(mitemclear);
 
-        jMenuBar1.add(menuedit);
+        jMenuBar1.add(medit);
 
-        menusal.setText("Cerrar");
-        menusal.addMouseListener(new java.awt.event.MouseAdapter() {
+        maña.setText("Añadir cargos");
+        maña.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                menusalMousePressed(evt);
+                mañaMousePressed(evt);
             }
         });
-        jMenuBar1.add(menusal);
+        jMenuBar1.add(maña);
 
-        menuaña.setText("Añadir cargos");
-        menuaña.addMouseListener(new java.awt.event.MouseAdapter() {
+        mclose.setText("Cerrar");
+        mclose.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                menuañaMousePressed(evt);
+                mcloseMousePressed(evt);
             }
         });
-        jMenuBar1.add(menuaña);
+        mclose.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mcloseActionPerformed(evt);
+            }
+        });
+        jMenuBar1.add(mclose);
 
         setJMenuBar(jMenuBar1);
 
@@ -323,12 +331,12 @@ public class WinArea extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cmbEstateActionPerformed
 
-    private void menusalMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menusalMousePressed
-        this.dispose();
+    private void mcloseMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mcloseMousePressed
+        this.setVisible(false);
         Utilitarios.Config.OPENWINDOWS =0;
-    }//GEN-LAST:event_menusalMousePressed
+    }//GEN-LAST:event_mcloseMousePressed
 
-    private void OpcEliminarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_OpcEliminarMousePressed
+    private void mitemeliminarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemeliminarMousePressed
         int i;
         i= JOptionPane.showConfirmDialog(null,"¿Esta seguro de eliminar este registro?","Aviso",JOptionPane.OK_CANCEL_OPTION,JOptionPane.WARNING_MESSAGE);
         if(i==0){
@@ -344,9 +352,9 @@ public class WinArea extends javax.swing.JInternalFrame {
                 cleanBox();
             } 
          }
-    }//GEN-LAST:event_OpcEliminarMousePressed
+    }//GEN-LAST:event_mitemeliminarMousePressed
 
-    private void OpcActualizarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_OpcActualizarMousePressed
+    private void mitemupdateMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemupdateMousePressed
          dt = new Data();
         int id = Integer.valueOf(lblId.getText());
         String name = txtName.getText();
@@ -362,9 +370,9 @@ public class WinArea extends javax.swing.JInternalFrame {
             cleanBox();
             JOptionPane.showMessageDialog(null, "Area actualizada");
         } 
-    }//GEN-LAST:event_OpcActualizarMousePressed
+    }//GEN-LAST:event_mitemupdateMousePressed
 
-    private void OpcRegistrarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_OpcRegistrarMousePressed
+    private void mitemregisterMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemregisterMousePressed
         dt = new Data();
         String name = txtName.getText();
         boolean estate = Boolean.valueOf(dt.G_BOOLEAN[cmbEstate.getSelectedIndex()]);
@@ -378,9 +386,9 @@ public class WinArea extends javax.swing.JInternalFrame {
             cleanBox();
             JOptionPane.showMessageDialog(null,"Nueva area registrada");      
         }
-    }//GEN-LAST:event_OpcRegistrarMousePressed
+    }//GEN-LAST:event_mitemregisterMousePressed
 
-    private void menuañaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuañaMousePressed
+    private void mañaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mañaMousePressed
         if(!"".equals(lblId.getText())){
             WinArea_Cargos objCargo= new WinArea_Cargos();
             objCargo.setResizable(true);
@@ -392,17 +400,17 @@ public class WinArea extends javax.swing.JInternalFrame {
        } else {
            JOptionPane.showMessageDialog(null,"Debe de seleccionar una area para poder asignar cargos");
        }
-    }//GEN-LAST:event_menuañaMousePressed
+    }//GEN-LAST:event_mañaMousePressed
 
-    private void OpcActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OpcActualizarActionPerformed
+    private void mitemupdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mitemupdateActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_OpcActualizarActionPerformed
+    }//GEN-LAST:event_mitemupdateActionPerformed
+
+    private void mcloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mcloseActionPerformed
+   
+    }//GEN-LAST:event_mcloseActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenuItem OpcActualizar;
-    private javax.swing.JMenuItem OpcEliminar;
-    private javax.swing.JMenuItem OpcLimpiar;
-    private javax.swing.JMenuItem OpcRegistrar;
     private javax.swing.JButton btnFind;
     private javax.swing.JComboBox cmbEstate;
     private javax.swing.JLabel jLabel1;
@@ -415,10 +423,14 @@ public class WinArea extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblId;
     private javax.swing.JLabel lblModified;
-    private javax.swing.JMenu menuarc;
-    private javax.swing.JMenu menuaña;
-    private javax.swing.JMenu menuedit;
-    private javax.swing.JMenu menusal;
+    private javax.swing.JMenu maña;
+    private javax.swing.JMenu mclose;
+    private javax.swing.JMenu medit;
+    private javax.swing.JMenu mfile;
+    private javax.swing.JMenuItem mitemclear;
+    private javax.swing.JMenuItem mitemeliminar;
+    private javax.swing.JMenuItem mitemregister;
+    private javax.swing.JMenuItem mitemupdate;
     private javax.swing.JPanel pnlMantenimiento;
     private javax.swing.JPanel pnlOpciones;
     private javax.swing.JTable tblArea;

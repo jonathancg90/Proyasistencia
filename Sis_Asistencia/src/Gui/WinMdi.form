@@ -4,47 +4,47 @@
   <NonVisualComponents>
     <Menu class="javax.swing.JMenuBar" name="jMenuBar1">
       <SubComponents>
-        <Menu class="javax.swing.JMenu" name="menuasi">
+        <Menu class="javax.swing.JMenu" name="masi">
           <Properties>
             <Property name="text" type="java.lang.String" value="Asistencia"/>
           </Properties>
           <Events>
-            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="menuasiMousePressed"/>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="masiMousePressed"/>
           </Events>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="menujus">
+        <Menu class="javax.swing.JMenu" name="mjus">
           <Properties>
             <Property name="text" type="java.lang.String" value="Justificaciones"/>
           </Properties>
           <Events>
-            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="menujusMousePressed"/>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="mjusMousePressed"/>
           </Events>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="menuemp">
+        <Menu class="javax.swing.JMenu" name="memp">
           <Properties>
             <Property name="text" type="java.lang.String" value="Empleados"/>
           </Properties>
           <Events>
-            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="menuempMousePressed"/>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="mempMousePressed"/>
           </Events>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="menuhor">
+        <Menu class="javax.swing.JMenu" name="mhor">
           <Properties>
             <Property name="text" type="java.lang.String" value="Horarios"/>
           </Properties>
           <Events>
-            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="menuhorMousePressed"/>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="mhorMousePressed"/>
           </Events>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="menuvis">
+        <Menu class="javax.swing.JMenu" name="mvis">
           <Properties>
             <Property name="text" type="java.lang.String" value="Consulta"/>
           </Properties>
           <Events>
-            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="menuvisMousePressed"/>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="mvisMousePressed"/>
           </Events>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="menudis">
+        <Menu class="javax.swing.JMenu" name="mdis">
           <Properties>
             <Property name="text" type="java.lang.String" value="Configuraciones"/>
           </Properties>
@@ -150,20 +150,20 @@
             </MenuItem>
           </SubComponents>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="menurep">
+        <Menu class="javax.swing.JMenu" name="mrep">
           <Properties>
             <Property name="text" type="java.lang.String" value="Reportes"/>
           </Properties>
           <Events>
-            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="menurepMousePressed"/>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="mrepMousePressed"/>
           </Events>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="menusal">
+        <Menu class="javax.swing.JMenu" name="mclose">
           <Properties>
             <Property name="text" type="java.lang.String" value="Salir"/>
           </Properties>
           <Events>
-            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="menusalMousePressed"/>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="mcloseMousePressed"/>
           </Events>
         </Menu>
       </SubComponents>
@@ -196,7 +196,7 @@
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jdpContenedor" alignment="0" pref="293" max="32767" attributes="0"/>
+          <Component id="jdpContenedor" alignment="0" pref="297" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>

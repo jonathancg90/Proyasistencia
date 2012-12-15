@@ -52,11 +52,6 @@ public class WinUsuario extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jPanel3 = new javax.swing.JPanel();
-        pnlOpciones = new javax.swing.JPanel();
-        btnRegister = new javax.swing.JButton();
-        btnUpdate = new javax.swing.JButton();
-        btnDelete = new javax.swing.JButton();
-        btnClose = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         lblUsu = new javax.swing.JLabel();
@@ -79,13 +74,13 @@ public class WinUsuario extends javax.swing.JInternalFrame {
         cboFilter = new javax.swing.JComboBox();
         jButton1 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem5 = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
-        jMenuItem4 = new javax.swing.JMenuItem();
+        mfile = new javax.swing.JMenu();
+        mitemregister = new javax.swing.JMenuItem();
+        mitemupdate = new javax.swing.JMenuItem();
+        mitemdelete = new javax.swing.JMenuItem();
+        medit = new javax.swing.JMenu();
+        mitemclear = new javax.swing.JMenuItem();
+        mclose = new javax.swing.JMenu();
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -98,62 +93,7 @@ public class WinUsuario extends javax.swing.JInternalFrame {
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
-        pnlOpciones.setBorder(javax.swing.BorderFactory.createTitledBorder("Opciones"));
-
-        btnRegister.setText("Registrar");
-        btnRegister.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRegisterActionPerformed(evt);
-            }
-        });
-
-        btnUpdate.setText("Actualizar");
-        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnUpdateActionPerformed(evt);
-            }
-        });
-
-        btnDelete.setText("Eliminar");
-        btnDelete.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDeleteActionPerformed(evt);
-            }
-        });
-
-        btnClose.setText("Cerrar");
-        btnClose.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCloseActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout pnlOpcionesLayout = new javax.swing.GroupLayout(pnlOpciones);
-        pnlOpciones.setLayout(pnlOpcionesLayout);
-        pnlOpcionesLayout.setHorizontalGroup(
-            pnlOpcionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlOpcionesLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btnRegister)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnUpdate)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnDelete)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnClose)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        pnlOpcionesLayout.setVerticalGroup(
-            pnlOpcionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlOpcionesLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(pnlOpcionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnRegister)
-                    .addComponent(btnDelete)
-                    .addComponent(btnUpdate)
-                    .addComponent(btnClose))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Datos:"));
 
@@ -263,6 +203,8 @@ public class WinUsuario extends javax.swing.JInternalFrame {
                     .addComponent(cboRol, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 12, -1, 289));
+
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Listado", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, null, new java.awt.Color(1, 1, 1)));
 
         TblUsu.setModel(new javax.swing.table.DefaultTableModel(
@@ -321,127 +263,64 @@ public class WinUsuario extends javax.swing.JInternalFrame {
                 .addContainerGap())
         );
 
-        jMenu1.setText("Archivo");
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(296, 12, -1, -1));
 
-        jMenuItem1.setText("Registrar");
-        jMenu1.add(jMenuItem1);
+        mfile.setText("Archivo");
 
-        jMenuItem2.setText("Actualizar");
-        jMenu1.add(jMenuItem2);
+        mitemregister.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.CTRL_MASK));
+        mitemregister.setText("Registrar");
+        mitemregister.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                mitemregisterMousePressed(evt);
+            }
+        });
+        mfile.add(mitemregister);
 
-        jMenuItem3.setText("Eliminar");
-        jMenu1.add(jMenuItem3);
+        mitemupdate.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));
+        mitemupdate.setText("Actualizar");
+        mitemupdate.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                mitemupdateMousePressed(evt);
+            }
+        });
+        mitemupdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mitemupdateActionPerformed(evt);
+            }
+        });
+        mfile.add(mitemupdate);
 
-        jMenuItem5.setText("Cerrar");
-        jMenu1.add(jMenuItem5);
+        mitemdelete.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_X, java.awt.event.InputEvent.CTRL_MASK));
+        mitemdelete.setText("Eliminar");
+        mitemdelete.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                mitemdeleteMousePressed(evt);
+            }
+        });
+        mfile.add(mitemdelete);
 
-        jMenuBar1.add(jMenu1);
+        jMenuBar1.add(mfile);
 
-        jMenu2.setText("Edit");
+        medit.setText("Edit");
 
-        jMenuItem4.setText("Limpiar");
-        jMenu2.add(jMenuItem4);
+        mitemclear.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.CTRL_MASK));
+        mitemclear.setText("Limpiar");
+        medit.add(mitemclear);
 
-        jMenuBar1.add(jMenu2);
+        jMenuBar1.add(medit);
+
+        mclose.setText("Cerrar");
+        mclose.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                mcloseMousePressed(evt);
+            }
+        });
+        jMenuBar1.add(mclose);
 
         setJMenuBar(jMenuBar1);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(pnlOpciones, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(23, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(46, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pnlOpciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
-        dt = new Data();
-        String username = txtUsername.getText();
-        String password=String.valueOf(txtPassword.getPassword());
-        String nomemp = String.valueOf(cboEmp.getSelectedItem());
-        
-        qs = new Query();
-        int idemp = qs.idChoice("empleado","nombres", nomemp);
-        boolean estate = Boolean.valueOf(dt.G_BOOLEAN[cboEstado.getSelectedIndex()]);
-        int rol = qs.idChoice("roles","nombre",String.valueOf(cboRol.getSelectedItem()));
-       
-        objUser = new UserDAO();
-        System.out.println(""+rol);
-        int i = objUser.saveUsuario(username,password,idemp,estate,rol);
-        if (i == 0) {
-            JOptionPane.showMessageDialog(null,"No se pudo grabar datos");
-        }
-        else {
-            objUser.getTableAll(TblUsu);
-            cleanBox();
-            JOptionPane.showMessageDialog(null,"Nuevo usuario registrado");
-        }
-    }//GEN-LAST:event_btnRegisterActionPerformed
-
-    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
-        dt = new Data();
-        int id = Integer.parseInt(lblUsu.getText());
-        String username = txtUsername.getText();
-        String password=String.valueOf(txtPassword.getPassword());
-        String nomemp = String.valueOf(cboEmp.getSelectedItem());
-        
-        qs = new Query();
-        int idemp = qs.idChoice("empleado","nombres", nomemp);
-        
-        boolean estate = Boolean.valueOf(dt.G_BOOLEAN[cboEstado.getSelectedIndex()]);
-        int rol = qs.idChoice("roles","nombre",String.valueOf(cboRol.getSelectedItem()));
-        
-        objUser = new UserDAO();
-        int i = objUser.updateUsuario(id,username,password,idemp,estate,rol);
-        if (i == 0) {
-            JOptionPane.showMessageDialog(null,"No se pudo grabar datos");
-        }
-        else {
-            objUser.getTableAll(TblUsu);
-            cleanBox();
-            JOptionPane.showMessageDialog(null,"usuario actualizado");
-        }  
-    }//GEN-LAST:event_btnUpdateActionPerformed
-
-    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
-        int id = Integer.valueOf(lblUsu.getText());
-
-        objUser = new UserDAO();
-        int i = objUser.deleteUsuario(id);
-        if(i==0) {
-            JOptionPane.showMessageDialog(null,"No se pudo eliminar el area");
-        }
-        else {
-            objUser.getTableAll(TblUsu);
-            cleanBox();
-            JOptionPane.showMessageDialog(null,"Area eliminada");
-        }
-    }//GEN-LAST:event_btnDeleteActionPerformed
-
-    private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
-        this.setVisible(false);
-        Utilitarios.Config.OPENWINDOWS =0;
-    }//GEN-LAST:event_btnCloseActionPerformed
 
     private void TblUsuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TblUsuMouseClicked
     try {       int fsel;
@@ -475,12 +354,81 @@ public class WinUsuario extends javax.swing.JInternalFrame {
         objUser.find(state, TblUsu);
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void mitemregisterMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemregisterMousePressed
+        dt = new Data();
+        String username = txtUsername.getText();
+        String password=String.valueOf(txtPassword.getPassword());
+        String nomemp = String.valueOf(cboEmp.getSelectedItem());
+        
+        qs = new Query();
+        int idemp = qs.idChoice("empleado","nombres", nomemp);
+        boolean estate = Boolean.valueOf(dt.G_BOOLEAN[cboEstado.getSelectedIndex()]);
+        int rol = qs.idChoice("roles","nombre",String.valueOf(cboRol.getSelectedItem()));
+       
+        objUser = new UserDAO();
+        System.out.println(""+rol);
+        int i = objUser.saveUsuario(username,password,idemp,estate,rol);
+        if (i == 0) {
+            JOptionPane.showMessageDialog(null,"No se pudo grabar datos");
+        }
+        else {
+            objUser.getTableAll(TblUsu);
+            cleanBox();
+            JOptionPane.showMessageDialog(null,"Nuevo usuario registrado");
+        }
+    }//GEN-LAST:event_mitemregisterMousePressed
+
+    private void mitemupdateMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemupdateMousePressed
+        dt = new Data();
+        int id = Integer.parseInt(lblUsu.getText());
+        String username = txtUsername.getText();
+        String password=String.valueOf(txtPassword.getPassword());
+        String nomemp = String.valueOf(cboEmp.getSelectedItem());
+        
+        qs = new Query();
+        int idemp = qs.idChoice("empleado","nombres", nomemp);
+        
+        boolean estate = Boolean.valueOf(dt.G_BOOLEAN[cboEstado.getSelectedIndex()]);
+        int rol = qs.idChoice("roles","nombre",String.valueOf(cboRol.getSelectedItem()));
+        
+        objUser = new UserDAO();
+        int i = objUser.updateUsuario(id,username,password,idemp,estate,rol);
+        if (i == 0) {
+            JOptionPane.showMessageDialog(null,"No se pudo grabar datos");
+        }
+        else {
+            objUser.getTableAll(TblUsu);
+            cleanBox();
+            JOptionPane.showMessageDialog(null,"usuario actualizado");
+        }
+    }//GEN-LAST:event_mitemupdateMousePressed
+
+    private void mitemdeleteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemdeleteMousePressed
+        int id = Integer.valueOf(lblUsu.getText());
+
+        objUser = new UserDAO();
+        int i = objUser.deleteUsuario(id);
+        if(i==0) {
+            JOptionPane.showMessageDialog(null,"No se pudo eliminar el area");
+        }
+        else {
+            objUser.getTableAll(TblUsu);
+            cleanBox();
+            JOptionPane.showMessageDialog(null,"Area eliminada");
+        }
+    }//GEN-LAST:event_mitemdeleteMousePressed
+
+    private void mitemupdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mitemupdateActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mitemupdateActionPerformed
+
+    private void mcloseMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mcloseMousePressed
+        this.setVisible(false);
+        Utilitarios.Config.OPENWINDOWS =0;
+    }//GEN-LAST:event_mcloseMousePressed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable TblUsu;
-    private javax.swing.JButton btnClose;
-    private javax.swing.JButton btnDelete;
-    private javax.swing.JButton btnRegister;
-    private javax.swing.JButton btnUpdate;
     private javax.swing.JComboBox cboEmp;
     private javax.swing.JComboBox cboEstado;
     private javax.swing.JComboBox cboFilter;
@@ -494,20 +442,19 @@ public class WinUsuario extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblUsu;
-    private javax.swing.JPanel pnlOpciones;
+    private javax.swing.JMenu mclose;
+    private javax.swing.JMenu medit;
+    private javax.swing.JMenu mfile;
+    private javax.swing.JMenuItem mitemclear;
+    private javax.swing.JMenuItem mitemdelete;
+    private javax.swing.JMenuItem mitemregister;
+    private javax.swing.JMenuItem mitemupdate;
     private javax.swing.JPasswordField txtPassword;
     private javax.swing.JPasswordField txtRePassword;
     private javax.swing.JTextField txtUsername;

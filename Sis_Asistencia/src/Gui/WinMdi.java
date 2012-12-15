@@ -23,12 +23,12 @@ public class WinMdi extends javax.swing.JFrame {
 
         jdpContenedor = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
-        menuasi = new javax.swing.JMenu();
-        menujus = new javax.swing.JMenu();
-        menuemp = new javax.swing.JMenu();
-        menuhor = new javax.swing.JMenu();
-        menuvis = new javax.swing.JMenu();
-        menudis = new javax.swing.JMenu();
+        masi = new javax.swing.JMenu();
+        mjus = new javax.swing.JMenu();
+        memp = new javax.swing.JMenu();
+        mhor = new javax.swing.JMenu();
+        mvis = new javax.swing.JMenu();
+        mdis = new javax.swing.JMenu();
         SubmenuCrit = new javax.swing.JMenu();
         JmitemArea = new javax.swing.JMenuItem();
         Jmitememp = new javax.swing.JMenuItem();
@@ -43,52 +43,52 @@ public class WinMdi extends javax.swing.JFrame {
         JmitemDis = new javax.swing.JMenuItem();
         JmiBackup = new javax.swing.JMenuItem();
         Jmitemhelp = new javax.swing.JMenuItem();
-        menurep = new javax.swing.JMenu();
-        menusal = new javax.swing.JMenu();
+        mrep = new javax.swing.JMenu();
+        mclose = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        menuasi.setText("Asistencia");
-        menuasi.addMouseListener(new java.awt.event.MouseAdapter() {
+        masi.setText("Asistencia");
+        masi.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                menuasiMousePressed(evt);
+                masiMousePressed(evt);
             }
         });
-        jMenuBar1.add(menuasi);
+        jMenuBar1.add(masi);
 
-        menujus.setText("Justificaciones");
-        menujus.addMouseListener(new java.awt.event.MouseAdapter() {
+        mjus.setText("Justificaciones");
+        mjus.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                menujusMousePressed(evt);
+                mjusMousePressed(evt);
             }
         });
-        jMenuBar1.add(menujus);
+        jMenuBar1.add(mjus);
 
-        menuemp.setText("Empleados");
-        menuemp.addMouseListener(new java.awt.event.MouseAdapter() {
+        memp.setText("Empleados");
+        memp.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                menuempMousePressed(evt);
+                mempMousePressed(evt);
             }
         });
-        jMenuBar1.add(menuemp);
+        jMenuBar1.add(memp);
 
-        menuhor.setText("Horarios");
-        menuhor.addMouseListener(new java.awt.event.MouseAdapter() {
+        mhor.setText("Horarios");
+        mhor.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                menuhorMousePressed(evt);
+                mhorMousePressed(evt);
             }
         });
-        jMenuBar1.add(menuhor);
+        jMenuBar1.add(mhor);
 
-        menuvis.setText("Consulta");
-        menuvis.addMouseListener(new java.awt.event.MouseAdapter() {
+        mvis.setText("Consulta");
+        mvis.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                menuvisMousePressed(evt);
+                mvisMousePressed(evt);
             }
         });
-        jMenuBar1.add(menuvis);
+        jMenuBar1.add(mvis);
 
-        menudis.setText("Configuraciones");
+        mdis.setText("Configuraciones");
 
         SubmenuCrit.setText("Criterios");
 
@@ -154,7 +154,7 @@ public class WinMdi extends javax.swing.JFrame {
         });
         SubmenuCrit.add(jMenuItem3);
 
-        menudis.add(SubmenuCrit);
+        mdis.add(SubmenuCrit);
 
         JmitemUsu.setText("Usuarios");
         JmitemUsu.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -162,7 +162,7 @@ public class WinMdi extends javax.swing.JFrame {
                 JmitemUsuMousePressed(evt);
             }
         });
-        menudis.add(JmitemUsu);
+        mdis.add(JmitemUsu);
 
         JmitemDis.setText("Diseño");
         JmitemDis.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -170,31 +170,31 @@ public class WinMdi extends javax.swing.JFrame {
                 JmitemDisMousePressed(evt);
             }
         });
-        menudis.add(JmitemDis);
+        mdis.add(JmitemDis);
 
         JmiBackup.setText("Backup");
-        menudis.add(JmiBackup);
+        mdis.add(JmiBackup);
 
         Jmitemhelp.setText("Help");
-        menudis.add(Jmitemhelp);
+        mdis.add(Jmitemhelp);
 
-        jMenuBar1.add(menudis);
+        jMenuBar1.add(mdis);
 
-        menurep.setText("Reportes");
-        menurep.addMouseListener(new java.awt.event.MouseAdapter() {
+        mrep.setText("Reportes");
+        mrep.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                menurepMousePressed(evt);
+                mrepMousePressed(evt);
             }
         });
-        jMenuBar1.add(menurep);
+        jMenuBar1.add(mrep);
 
-        menusal.setText("Salir");
-        menusal.addMouseListener(new java.awt.event.MouseAdapter() {
+        mclose.setText("Salir");
+        mclose.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                menusalMousePressed(evt);
+                mcloseMousePressed(evt);
             }
         });
-        jMenuBar1.add(menusal);
+        jMenuBar1.add(mclose);
 
         setJMenuBar(jMenuBar1);
 
@@ -206,13 +206,13 @@ public class WinMdi extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jdpContenedor, javax.swing.GroupLayout.DEFAULT_SIZE, 289, Short.MAX_VALUE)
+            .addComponent(jdpContenedor, javax.swing.GroupLayout.DEFAULT_SIZE, 297, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void menusalMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menusalMousePressed
+    private void mcloseMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mcloseMousePressed
     WinLogin objusuario;
     int i;
     i= JOptionPane.showConfirmDialog(null,"¿Desea salir del sistema?","Aviso",JOptionPane.OK_CANCEL_OPTION,JOptionPane.WARNING_MESSAGE);
@@ -222,7 +222,7 @@ public class WinMdi extends javax.swing.JFrame {
         objusuario.setLocationRelativeTo(this);
         this.dispose();
         }
-    }//GEN-LAST:event_menusalMousePressed
+    }//GEN-LAST:event_mcloseMousePressed
 
     private void JmitemAreaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JmitemAreaMousePressed
 
@@ -242,7 +242,7 @@ public class WinMdi extends javax.swing.JFrame {
        
     }//GEN-LAST:event_JmitemAreaMousePressed
 
-    private void menuasiMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuasiMousePressed
+    private void masiMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_masiMousePressed
         WinAsistencia objAsis = new WinAsistencia();
         val = new Validators();
         objAsis.setResizable(true);
@@ -255,9 +255,9 @@ public class WinMdi extends javax.swing.JFrame {
        } else {
            JOptionPane.showMessageDialog(null,"Cierre la ventana abierta para abrir otra");
        }
-    }//GEN-LAST:event_menuasiMousePressed
+    }//GEN-LAST:event_masiMousePressed
 
-    private void menujusMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menujusMousePressed
+    private void mjusMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mjusMousePressed
         WinJustificacion objJus = new WinJustificacion();
         val = new Validators();
         objJus.setResizable(true);
@@ -271,9 +271,9 @@ public class WinMdi extends javax.swing.JFrame {
            JOptionPane.showMessageDialog(null,"Cierre la ventana abierta para abrir otra");
        }
         
-    }//GEN-LAST:event_menujusMousePressed
+    }//GEN-LAST:event_mjusMousePressed
 
-    private void menuhorMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuhorMousePressed
+    private void mhorMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mhorMousePressed
         WinHorarios objHor = new WinHorarios();
         val = new Validators();
         objHor.setResizable(true);
@@ -286,9 +286,9 @@ public class WinMdi extends javax.swing.JFrame {
            JOptionPane.showMessageDialog(null,"Cierre la ventana abierta para abrir otra");
        }
 
-    }//GEN-LAST:event_menuhorMousePressed
+    }//GEN-LAST:event_mhorMousePressed
 
-    private void menuvisMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuvisMousePressed
+    private void mvisMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mvisMousePressed
         WinConsulta objCon = new WinConsulta();
         val = new Validators();
         objCon.setResizable(true);
@@ -301,9 +301,9 @@ public class WinMdi extends javax.swing.JFrame {
            JOptionPane.showMessageDialog(null,"Cierre la ventana abierta para abrir otra");
        }
         
-    }//GEN-LAST:event_menuvisMousePressed
+    }//GEN-LAST:event_mvisMousePressed
 
-    private void menurepMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menurepMousePressed
+    private void mrepMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mrepMousePressed
         WinReportes objRep = new WinReportes();
         val = new Validators();
         objRep.setResizable(true);
@@ -316,7 +316,7 @@ public class WinMdi extends javax.swing.JFrame {
            JOptionPane.showMessageDialog(null,"Cierre la ventana abierta para abrir otra");
        }
           
-    }//GEN-LAST:event_menurepMousePressed
+    }//GEN-LAST:event_mrepMousePressed
 
     private void JmitemempMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JmitemempMousePressed
        WinEmpresa objEmpresa= new WinEmpresa();
@@ -392,7 +392,7 @@ public class WinMdi extends javax.swing.JFrame {
     }//GEN-LAST:event_JmitemUsuMousePressed
 
 
-    private void menuempMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuempMousePressed
+    private void mempMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mempMousePressed
         WinEmpleado objEmp= new WinEmpleado();
         val = new Validators();
         objEmp.setResizable(true);
@@ -405,7 +405,7 @@ public class WinMdi extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(null,"Cierre la ventana abierta para abrir otra");
         }
-    }//GEN-LAST:event_menuempMousePressed
+    }//GEN-LAST:event_mempMousePressed
 
     private void JmitemCiudadMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JmitemCiudadMousePressed
         WinCiudad objUsu= new WinCiudad();
@@ -502,13 +502,13 @@ public class WinMdi extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     public static javax.swing.JDesktopPane jdpContenedor;
-    private javax.swing.JMenu menuasi;
-    private javax.swing.JMenu menudis;
-    private javax.swing.JMenu menuemp;
-    private javax.swing.JMenu menuhor;
-    private javax.swing.JMenu menujus;
-    private javax.swing.JMenu menurep;
-    private javax.swing.JMenu menusal;
-    private javax.swing.JMenu menuvis;
+    private javax.swing.JMenu masi;
+    private javax.swing.JMenu mclose;
+    private javax.swing.JMenu mdis;
+    private javax.swing.JMenu memp;
+    private javax.swing.JMenu mhor;
+    private javax.swing.JMenu mjus;
+    private javax.swing.JMenu mrep;
+    private javax.swing.JMenu mvis;
     // End of variables declaration//GEN-END:variables
 }
