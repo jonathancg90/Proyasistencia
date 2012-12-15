@@ -423,8 +423,8 @@ public class WinHorarios extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable2;
-<<<<<<< HEAD
-    private javax.swing.JTextField jTextField1;
+
+    
     private javax.swing.JMenu mclose;
     private javax.swing.JMenu medit;
     private javax.swing.JMenu mfile;
@@ -432,12 +432,6 @@ public class WinHorarios extends javax.swing.JInternalFrame {
     private javax.swing.JMenuItem mitemdelete;
     private javax.swing.JMenuItem mitemregister;
     private javax.swing.JMenuItem mitemupdate;
-=======
-    private javax.swing.JMenu menuarc;
-    private javax.swing.JMenu menuedit;
-    private javax.swing.JMenu menusal;
-    private javax.swing.JTable tblhora;
-    private javax.swing.JTextField txtnombre;
->>>>>>> b78996f0653b3b10e2b9041ac447a329d99b5c2e
+
     // End of variables declaration//GEN-END:variables
 }

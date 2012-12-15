@@ -274,7 +274,7 @@ public class WinMdi extends javax.swing.JFrame {
     }//GEN-LAST:event_mjusMousePressed
 
     private void mhorMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mhorMousePressed
-        WinHorarios objHor = new WinHorarios();
+        WinHorario objHor = new WinHorario();
         val = new Validators();
         objHor.setResizable(true);
         objHor.setMaximizable(true);
