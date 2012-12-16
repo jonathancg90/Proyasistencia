@@ -94,7 +94,6 @@ public class EmpleadoDAO extends ConexionBd{
             hp = new Helpers();
             qs = new Query();
             String now = hp.getDateNow();
-            
             objEmpl = new Empleado( idemp,  nombres, apellidos, dni,  telefono, now, 1,now, now, idare, idtip, idest,  idcar,  idempr,idsuc);
             //Iniciando consulta y asignando valores
             pt = qs.sqlRegister(_table);
@@ -103,7 +102,7 @@ public class EmpleadoDAO extends ConexionBd{
             pt.setString(2,objEmpl.getApellidos());
             pt.setString(3, objEmpl.getDni());
             pt.setString(4, objEmpl.getTelefono());
-            pt.setDate(5,date.valueOf(objEmpl.getRetiro()));
+            pt.setDate(5,Date.valueOf(objEmpl.getRetiro()));
             pt.setNull(6,java.sql.Types.VARBINARY);
             pt.setDate(7,date.valueOf(objEmpl.getCreated()));
             pt.setDate(8,date.valueOf(objEmpl.getModified()));
@@ -115,6 +114,7 @@ public class EmpleadoDAO extends ConexionBd{
             pt.setInt(14, objEmpl.getIdsuc());
             //Ejecucion y cierre
             i= pt.executeUpdate();
+            System.out.println("---->"+i);
             pt.close();
             closeConexion();
             return i;
@@ -204,12 +204,22 @@ public class EmpleadoDAO extends ConexionBd{
             //Preparando
             String campos[] = new String[15];
             campos = qs.getRecords("Empleado",idemp);
-            objEmpl.setIdemp(Integer.parseInt(campos[1]));
+            
             objEmpl.setNombres(campos[2]);
             objEmpl.setApellidos(campos[3]);
             objEmpl.setDni(campos[4]);
             objEmpl.setTelefono(campos[5]);
-            objEmpl.setIdcar(Integer.parseInt(campos[4]));
+            objEmpl.setRetiro(campos[6]);
+            objEmpl.setHuella(Integer.parseInt(campos[7]));
+            objEmpl.setCreated(campos[8]);
+            objEmpl.setModified(campos[9]);
+            objEmpl.setIdare(Integer.parseInt(campos[10]));
+            objEmpl.setIdtip(Integer.parseInt(campos[11]));
+            objEmpl.setIdest(Integer.parseInt(campos[12]));
+            objEmpl.setIdcar(Integer.parseInt(campos[13]));
+            objEmpl.setIdempr(Integer.parseInt(campos[14]));
+            objEmpl.setIdsuc(Integer.parseInt(campos[15]));
+            
             return objEmpl;
         }
         catch(Exception e){

@@ -10,7 +10,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 
-public class WinEmpleado extends javax.swing.JInternalFrame {
+public  class WinEmpleado extends javax.swing.JInternalFrame {
     private EmpleadoDAO objempl;
     private Query qs;
     
@@ -26,18 +26,20 @@ public class WinEmpleado extends javax.swing.JInternalFrame {
     /**
      * Formulario para el mantenimiento de las areas de la empresa.
      */
-    public void cargaForm(){
+    public final void cargaForm(){
         try {
             objempl = new EmpleadoDAO();
             qs = new Query();
+            objempl.getTableAll(tblEmpleado);
             qs.loadState(cboEstado,false);
+            qs.loadChoice(cboAreaFilter,"area","nombre");
             qs.loadChoice(cboEmpresa,"empresa","nombre");
             qs.loadChoice(cboArea,"area","nombre");
             qs.loadChoice(cboTipo,"tipoempleado","nombre");
             qs.loadChoice(cboSucursal,"sucursal","nombre");
             qs.loadChoice(cboCargo,"cargo","nombre");
-            qs.loadChoice(cboAreaFilter,"area","nombre");
-            objempl.getTableAll(tblEmpleado);
+            
+            
 
         } catch (Exception e) {
             System.out.println("Gui_Win_area: " + e);
@@ -234,7 +236,7 @@ public class WinEmpleado extends javax.swing.JInternalFrame {
                     .addComponent(cboAreaFilter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jCheckBox1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -292,6 +294,11 @@ public class WinEmpleado extends javax.swing.JInternalFrame {
 
         mitemclear.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.CTRL_MASK));
         mitemclear.setText("Limpiar");
+        mitemclear.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                mitemclearMousePressed(evt);
+            }
+        });
         medit.add(mitemclear);
 
         jMenuBar1.add(medit);
@@ -336,19 +343,21 @@ public class WinEmpleado extends javax.swing.JInternalFrame {
         String dni=txtdni.getText();
         String apellido=txtapellidos.getText();
         String telefono=txttelefono.getText();
+        int empresa = cboEmpresa.getSelectedIndex();
         int  area = cboArea.getSelectedIndex();
-        int cargo = cboCargo.getSelectedIndex();
         int tipo = cboTipo.getSelectedIndex();
         int sucursal = cboSucursal.getSelectedIndex();
-        int empresa = cboEmpresa.getSelectedIndex();
+        int cargo = cboCargo.getSelectedIndex();
         
         qs = new Query();
+        int idemp = qs.idChoice("empleado","nombres", nombre);
         //boolean estate = Boolean.valueOf(dt.G_BOOLEAN[cboEstado.getSelectedIndex()]);
         int estate=cboEstado.getSelectedIndex();
         //int rol = qs.idChoice("roles","nombre",String.valueOf(cboRol.getSelectedItem()));
        
         objempl = new EmpleadoDAO();
         int i = objempl.saveEmpleado(0,nombre,apellido,dni, telefono,area, tipo, estate,cargo,empresa,sucursal);
+        
         if (i == 0) {
             JOptionPane.showMessageDialog(null,"No se pudo grabar datos");
         }
@@ -404,8 +413,13 @@ public class WinEmpleado extends javax.swing.JInternalFrame {
                 txtapellidos.setText(modemp.getApellidos());
                 txtdni.setText(modemp.getDni());
                 txttelefono.setText(modemp.getTelefono());
-                qs.loadChoiceDefault(cboCargo,"cargo","nombre",modemp.getIdcar());
+                qs.loadChoiceDefault(cboArea,"area","nombre",modemp.getIdare());
+                qs.loadChoiceDefault(cboTipo,"tipoempleado","nombre",modemp.getIdtip());
                 qs.loadState(cboEstado,Boolean.valueOf(""+modemp.getIdest()));
+                qs.loadChoiceDefault(cboCargo,"cargo","nombre",modemp.getIdcar());
+                qs.loadChoiceDefault(cboEmpresa,"empresa","nombre",modemp.getIdempr());
+                qs.loadChoiceDefault(cboSucursal,"sucursal","nombre",modemp.getIdsuc());
+               
                 }
             catch (Exception e) {
                 System.out.println("Gui_Win_area: " + e);
@@ -453,6 +467,10 @@ public class WinEmpleado extends javax.swing.JInternalFrame {
 
         objvacaciones.setVisible(true); 
     }//GEN-LAST:event_mvacMousePressed
+
+    private void mitemclearMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemclearMousePressed
+        cleanBox();
+    }//GEN-LAST:event_mitemclearMousePressed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox cboArea;
