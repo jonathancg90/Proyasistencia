@@ -17,11 +17,21 @@ public class TipoHorarioDAO extends ConexionBd{
     private Helpers hp;
     private String filter[][] = new String[0][0];
     private Usuario objUsu;
-    private String _table = "tipohorario";
+    private String _table;
     private Validators objVal;
-    private String _error = "Dao_Tipohorario_";
+    private String _error;
+    private String campos[];
     
     PreparedStatement  pt = null;
+    
+    public TipoHorarioDAO(){
+        _table = "tipohorario";
+        _error = "Dao_Tipohorario_";
+        filter = new String[0][0];
+        campos = new String[2];
+        campos[0]="idtipohor";
+        campos[1]="nombre";
+    }
     
     public void getTableAll(JTable tblDatos){
         try{
@@ -29,16 +39,12 @@ public class TipoHorarioDAO extends ConexionBd{
             qs = new Query();            
             if (filter.length <= 0){
                 filter = new String[0][0];
-            } 
-            String campos[] = new String[2];
-            campos[0]="idtipohor";
-            campos[1]="nombre";
+            }
             String Table = this._table;
             datos = qs.getAll(campos,Table,filter);
             tblDatos.setModel(datos);   
         }
-        catch(Exception e)
-        {
+        catch(Exception e){
             System.out.println(_error + "getTableAll: "+e);
         }
     
