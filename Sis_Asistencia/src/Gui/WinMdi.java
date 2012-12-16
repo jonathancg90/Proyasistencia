@@ -39,6 +39,7 @@ public class WinMdi extends javax.swing.JFrame {
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
+        jmItemModulos = new javax.swing.JMenuItem();
         JmitemUsu = new javax.swing.JMenuItem();
         JmitemDis = new javax.swing.JMenuItem();
         JmiBackup = new javax.swing.JMenuItem();
@@ -154,6 +155,14 @@ public class WinMdi extends javax.swing.JFrame {
         });
         SubmenuCrit.add(jMenuItem3);
 
+        jmItemModulos.setText("Modulos");
+        jmItemModulos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jmItemModulosMousePressed(evt);
+            }
+        });
+        SubmenuCrit.add(jmItemModulos);
+
         mdis.add(SubmenuCrit);
 
         JmitemUsu.setText("Usuarios");
@@ -206,7 +215,7 @@ public class WinMdi extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jdpContenedor, javax.swing.GroupLayout.DEFAULT_SIZE, 297, Short.MAX_VALUE)
+            .addComponent(jdpContenedor, javax.swing.GroupLayout.DEFAULT_SIZE, 301, Short.MAX_VALUE)
         );
 
         pack();
@@ -452,6 +461,21 @@ public class WinMdi extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jMenuItem3MousePressed
 
+    private void jmItemModulosMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmItemModulosMousePressed
+        WinModulos objmod= new WinModulos();
+        val = new Validators();
+        objmod.setResizable(true);
+        objmod.setMaximizable(true);
+        objmod.setIconifiable(true);
+        //obj_Asis.setClosable(true);
+        jdpContenedor.add(objmod);
+        if(val.EntryForms()){
+            objmod.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(null,"Cierre la ventana abierta para abrir otra");
+        }
+    }//GEN-LAST:event_jmItemModulosMousePressed
+
 
     public static void main(String args[]) {
         
@@ -502,6 +526,7 @@ public class WinMdi extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     public static javax.swing.JDesktopPane jdpContenedor;
+    private javax.swing.JMenuItem jmItemModulos;
     private javax.swing.JMenu masi;
     private javax.swing.JMenu mclose;
     private javax.swing.JMenu mdis;
