@@ -17,11 +17,22 @@ public class EmpresaDAO extends ConexionBd{
     private Query qs;
     private Empresa objEmpresa;
     private Helpers hp;
-    private String filter[][] = new String[0][0];
+    private String filter[][];
+    private String campos[];
     private Validators objVal;
+    private String _table;
+    private String _error;
    
-    
     PreparedStatement  pt = null;
+    
+    public EmpresaDAO(){
+        _table = "empresa";
+        _error = "Dao_CiudadDAO_";
+        filter = new String[0][0];
+        campos = new String[2];
+        campos[0]="idempr";
+        campos[1]="nombre";
+    }
     
     public void getTableAll(JTable tblDatos){
         try{
@@ -30,16 +41,11 @@ public class EmpresaDAO extends ConexionBd{
             if (filter.length <= 0){
                 filter = new String[0][0];
             }           
-
-            String campos[] = new String[2];
-            campos[0]="idempr";
-            campos[1]="nombre";
-            String Table = "empresa";
+            String Table = _table;
             datos = qs.getAll(campos,Table, filter);
             tblDatos.setModel(datos);   
         }
-        catch(Exception e)
-        {
+        catch(Exception e){
             System.out.println("Dao_EmpresaDao: "+e);
         }
     
@@ -55,7 +61,7 @@ public class EmpresaDAO extends ConexionBd{
             getConexion();
             hp = new Helpers();
             qs= new Query();
-            String Table = "empresa";
+            String Table = _table;
             String now = hp.getDateNow();
             
             objEmpresa = new Empresa(0,name,ruc,statem,now,now,trabajadores,mon);
@@ -92,7 +98,7 @@ public class EmpresaDAO extends ConexionBd{
             getConexion();
             hp = new Helpers();
             qs= new Query();
-            String Table = "empresa";
+            String Table = _table;
             String now = hp.getDateNow();
             
             objEmpresa = new Empresa(id,name,ruc,state,now,now,trabajadores,mon);
@@ -128,7 +134,7 @@ public class EmpresaDAO extends ConexionBd{
             objEmpresa = new Empresa();
             hp = new Helpers();
             qs= new Query();
-            String Table = "empresa";
+            String Table = _table;
             
             objEmpresa.setIdempr(id);
             pt = qs.sqlDelete(Table);
@@ -150,7 +156,7 @@ public class EmpresaDAO extends ConexionBd{
             if(!"".equals(name)){
                 filter = new String[1][2];
                 filter[0][0] = "nombre";
-                filter[0][1] = name; 
+                filter[0][1] = name.toUpperCase(); 
             }
             getTableAll(tblDatos);
         }

@@ -20,11 +20,21 @@ public class CargosDAO extends ConexionBd{
     private Helpers hp;
     private Validators objVal;
     
-    private String filter[][] = new String[0][0];
-    private String _table = "cargo";
-    private String _error = "Dao_CargoDao_";
+    private String filter[][];
+    private String _table;
+    private String _error;
+    private String campos[];
     
     PreparedStatement  pt = null;
+    
+     public CargosDAO(){
+        _table = "cargo";
+        _error = "Dao_CargoDao_";
+        filter = new String[0][0];
+        campos = new String[2];
+        campos[0]="idcar";
+        campos[1]="nombre";
+    }
     
     public void getTableAll(JTable tblDatos){
         try{
@@ -33,9 +43,6 @@ public class CargosDAO extends ConexionBd{
             if (filter.length <= 0){
                 filter = new String[0][0];
             }
-            String campos[] = new String[2];
-            campos[0]="idcar";
-            campos[1]="nombre";
             datos = qs.getAll(campos,this._table,filter);
             tblDatos.setModel(datos);   
         }
@@ -54,6 +61,7 @@ public class CargosDAO extends ConexionBd{
             if(!"".equals(idare)){
                 filter = new String[1][2];
                 filter[0][0] = "int_idare";
+                
                 filter[0][1] = idare;
             }
             getTableAll(tblDatos);

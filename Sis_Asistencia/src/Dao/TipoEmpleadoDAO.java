@@ -19,9 +19,22 @@ public class TipoEmpleadoDAO extends ConexionBd{
     private Usuario objUsu;
     private Helpers hp;
     private Validators objVal;
-    private String filter[][] = new String[0][0];
+    private String filter[][];
+    private String campos[];
+    private String _table;
+    private String _error;
     
     PreparedStatement  pt = null;
+    
+    public TipoEmpleadoDAO(){
+        _table = "tipoempleado";
+        _error = "Dao_TipoEmpleadoDAO_";
+        filter = new String[0][0];
+        campos = new String[2];
+        campos[0]="idtip";
+        campos[1]="nombre";
+    }
+    
     /*
      * Middleware mostrar nombres de los tipos de empleados
      */
@@ -33,16 +46,13 @@ public class TipoEmpleadoDAO extends ConexionBd{
             if (filter.length <= 0){
                 filter = new String[0][0];
             }
-            String campos[] = new String[2];
-            campos[0]="idtip";
-            campos[1]="nombre";
-            String Table = "tipoempleado";
+            String Table = _table;
             datos = qs.getAll(campos,Table,filter);
             tblDatos.setModel(datos);   
         }
         catch(Exception e)
         {
-            System.out.println("Dao_TipoEmpleadoDAO_getTableAll: "+e);
+            System.out.println(_error + "getTableAll: "+e);
         }
     
     }
@@ -74,7 +84,7 @@ public class TipoEmpleadoDAO extends ConexionBd{
             return i;
         }
         catch(Exception e){
-            System.out.println("Dao_TipoEmpleadoDAO_save: "+e);
+            System.out.println(_error + "save: "+e);
             return i;
         }
     }
@@ -106,7 +116,7 @@ public class TipoEmpleadoDAO extends ConexionBd{
             return i;
         }
         catch(Exception e){
-            System.out.println("Dao_TipoEmpleadoDAO_update: "+e);
+            System.out.println(_error + "update: "+e);
             return i;
         }
     }
@@ -132,7 +142,7 @@ public class TipoEmpleadoDAO extends ConexionBd{
             return i;
         }
         catch(Exception e){
-            System.out.println("Dao_TipoEmpleadoDAO_delete: "+e);
+            System.out.println(_error + "delete: "+e);
             return i;
         }
     }
@@ -143,12 +153,12 @@ public class TipoEmpleadoDAO extends ConexionBd{
             if(!"".equals(name)){
                 filter = new String[1][2];
                 filter[0][0] = "nombre";
-                filter[0][1] = name; 
+                filter[0][1] = name.toUpperCase(); 
             }
             getTableAll(tblDatos);
         }
         catch(Exception e){
-            System.out.println("Dao_TipoEmpleadoDAO_find : "+e);
+            System.out.println(_error + "find : "+e);
         }
         return i;
     }
@@ -174,7 +184,7 @@ public class TipoEmpleadoDAO extends ConexionBd{
             return objtipoemp;
         }
         catch(Exception e){
-            System.out.println("Dao_AreaDAO_getValues: "+e);
+            System.out.println(_error + "getValues: "+e);
             return objtipoemp;
         }
     }

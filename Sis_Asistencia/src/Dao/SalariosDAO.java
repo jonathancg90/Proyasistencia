@@ -42,7 +42,6 @@ public class SalariosDAO extends ConexionBd {
      }
     
     public void getTableAll(JTable tblDatos){
-        
         try{
             
             DefaultTableModel datos;
@@ -54,8 +53,7 @@ public class SalariosDAO extends ConexionBd {
             datos = qs.getAll(this.campos,Table,filter);
             tblDatos.setModel(datos);   
         }
-        catch(Exception e)
-        {
+        catch(Exception e){
             System.out.println(_error + "getTableAll: "+e);
         }
     

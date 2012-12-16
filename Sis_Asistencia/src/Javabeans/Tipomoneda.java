@@ -9,7 +9,7 @@ public class Tipomoneda {
      */
     public Tipomoneda(int idtipmon, String name) {
         this.idtipmon = idtipmon;
-        this.name = name;
+        this.name = name.toUpperCase();
     }
     
     /* Constructor por omisión
@@ -45,7 +45,7 @@ public class Tipomoneda {
      * @param name the name to set
      */
     public void setName(String name) {
-        this.name = name;
+        this.name = name.toUpperCase();
     }
     
     

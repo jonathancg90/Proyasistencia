@@ -10,7 +10,7 @@ public class Ciudad {
      */
     public Ciudad(int idciu, String name) {
         this.idciu = idciu;
-        this.name = name;
+        this.name = name.toUpperCase();
     }
     
     /* Constructor por omisión
@@ -43,7 +43,7 @@ public class Ciudad {
      * @param name the name to set
      */
     public void setName(String name) {
-        this.name = name;
+        this.name = name.toUpperCase();
     }
     
 }

@@ -23,8 +23,8 @@ public class Empleado {
 
     public Empleado(int idemp, String nombres, String apellidos, String dni, String telefono, String retiro, int huella, String created, String modified, int idare, int idtip, int idest, int idcar, int idempr, int idsuc) {
         this.idemp = idemp;
-        this.nombres = nombres;
-        this.apellidos = apellidos;
+        this.nombres = nombres.toUpperCase();
+        this.apellidos = apellidos.toUpperCase();
         this.dni = dni;
         this.telefono = telefono;
         this.retiro = retiro;
@@ -64,7 +64,7 @@ public class Empleado {
      * @param nombres the nombres to set
      */
     public void setNombres(String nombres) {
-        this.nombres = nombres;
+        this.nombres = nombres.toUpperCase();
     }
 
     /**
@@ -78,7 +78,7 @@ public class Empleado {
      * @param apellidos the apellidos to set
      */
     public void setApellidos(String apellidos) {
-        this.apellidos = apellidos;
+        this.apellidos = apellidos.toUpperCase();
     }
 
     /**

@@ -16,29 +16,42 @@ public class RolesDAO extends ConexionBd{
     private Roles objRoles;
     private Helpers hp;
     private String filter[][] = new String[0][0];
+    private String campos[];
+    private int witdhcolum[];
     private Usuario objUsu;
-        private String _table = "roles";
+    private String _table;
+    private String _error;
     private Validators objVal;
+    
+    public RolesDAO(){
+        _table = "roles";
+        _error = "Dao_Roles_";
+        filter = new String[0][0];
+        campos = new String[2];
+        campos[0]="idrol";
+        campos[1]="nombre";
+        witdhcolum = new int[1];
+        witdhcolum[0]=50;
+    }
     
     PreparedStatement  pt = null;
     
     public void getTableAll(JTable tblDatos){
         try{
             DefaultTableModel datos;
-            qs = new Query();            
+            qs = new Query();
+            hp = new Helpers();
             if (filter.length <= 0){
                 filter = new String[0][0];
             } 
-            String campos[] = new String[2];
-            campos[0]="idrol";
-            campos[1]="nombre";
-            String Table = this._table;
+            String Table = _table;
             datos = qs.getAll(campos,Table,filter);
-            tblDatos.setModel(datos);   
+            tblDatos.setModel(datos);
+            hp.setWidthJtable(tblDatos,witdhcolum);
         }
         catch(Exception e)
         {
-            System.out.println("Dao_Roles: "+e);
+            System.out.println(_error + "getTableAll: "+e);
         }
     
     }
@@ -49,23 +62,20 @@ public class RolesDAO extends ConexionBd{
     public int save(String name){
        int i=0;
         try{
-            //Preparando
             getConexion();
             hp = new Helpers();
             qs= new Query();
-            String Table = "roles";
+            String Table = _table;
             objRoles = new Roles(0,name);
-            //Iniciando consulta y asignando valores
             pt = qs.sqlRegister(Table);
             pt.setString(1,objRoles.getName());
-            //Ejecucion y cierre
             i= pt.executeUpdate();
             pt.close();
             closeConexion();
             return i;
         }
         catch(Exception e){
-            System.out.println("Dao_RolesDAO_save: "+e);
+            System.out.println(_error + "save: "+e);
             return i;
         }
     }
@@ -80,20 +90,18 @@ public class RolesDAO extends ConexionBd{
             getConexion();
             hp = new Helpers();
             qs= new Query();
-            String Table = "roles";
+            String Table = _table;
             objRoles = new Roles(id,name);
-            //Iniciando consulta y asignando valores
             pt = qs.sqlUpdate(Table);
             pt.setInt(2,objRoles.getIdrol());           
             pt.setString(1,objRoles.getName());
-            //Ejecucion y cierre
             i= pt.executeUpdate();
             pt.close();
             closeConexion();
             return i;
         }
         catch(Exception e){
-            System.out.println("Dao_RolesDAO: "+e);
+            System.out.println(_error + "update: "+e);
             return i;
         }
     }
@@ -109,7 +117,7 @@ public class RolesDAO extends ConexionBd{
             objRoles = new Roles();
             hp = new Helpers();
             qs= new Query();
-            String Table = "roles";
+            String Table = _table;
             
             objRoles.setIdrol(id);
             pt = qs.sqlDelete(Table);
@@ -120,7 +128,7 @@ public class RolesDAO extends ConexionBd{
             return i;
         }
         catch(Exception e){
-            System.out.println("Dao_RolesDAO: "+e);
+            System.out.println(_error + "delete: "+e);
             return i;
         }
     }
@@ -130,12 +138,12 @@ public class RolesDAO extends ConexionBd{
             if(!"".equals(name)){
                 filter = new String[1][2];
                 filter[0][0] = "nombre";
-                filter[0][1] = name; 
+                filter[0][1] = name.toUpperCase(); 
             }
             getTableAll(tblDatos);
         }
         catch(Exception e){
-            System.out.println("Dao_RolesDAO_find : "+e);
+            System.out.println(_error + "find : "+e);
         }
         return i;
     }
@@ -148,15 +156,14 @@ public class RolesDAO extends ConexionBd{
        objRoles =  new Roles();
        try{           
             qs= new Query();
-            //Preparando
             String campos[] = new String[1];
-            campos = qs.getRecords("roles",idrol);
+            campos = qs.getRecords(_table,idrol);
             objRoles.setName(campos[2]);
             
             return objRoles;
         }
         catch(Exception e){
-            System.out.println("Dao_RolesDAO_delete: "+e);
+            System.out.println(_error + "getValues: "+e);
             return objRoles;
         }
     }

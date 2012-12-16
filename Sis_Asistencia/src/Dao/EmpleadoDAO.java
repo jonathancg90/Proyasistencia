@@ -202,9 +202,11 @@ public class EmpleadoDAO extends ConexionBd{
         try{
             qs= new Query();
             //Preparando
-            String campos[] = new String[15];
+            String campos[] = new String[16];
             campos = qs.getRecords("Empleado",idemp);
-            
+            for(int i=0;i<campos.length;i++){
+                System.out.println(campos[i]);
+            }
             objEmpl.setNombres(campos[2]);
             objEmpl.setApellidos(campos[3]);
             objEmpl.setDni(campos[4]);

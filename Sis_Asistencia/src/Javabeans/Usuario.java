@@ -13,7 +13,7 @@ public class Usuario {
 
     public Usuario(int idusu, String username, String password, int idemp, String created, String modified, boolean estado, int rol) {
         this.idusu = idusu;
-        this.username = username;
+        this.username = username.toUpperCase();
         this.password = password;
         this.idemp = idemp;
         this.created = created;
@@ -50,7 +50,7 @@ public class Usuario {
      * @param username the username to set
      */
     public void setUsername(String username) {
-        this.username = username;
+        this.username = username.toUpperCase();
     }
 
     /**

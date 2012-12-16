@@ -3,6 +3,7 @@ package Utilitarios;
 
 import java.io.*;
 import java.util.Calendar;
+import javax.swing.JTable;
 
 
 public class Helpers{
@@ -28,8 +29,7 @@ public class Helpers{
     /*
      * Obtener la fecha actual
      */
-    public String getDateNow()
-    {
+    public String getDateNow(){
         String date;
         
         Calendar c = Calendar.getInstance();
@@ -39,6 +39,16 @@ public class Helpers{
         date = annio+"-"+mes+"-"+dia;
                 
         return date;
+    }
+     /*
+     * Tamaño de columnas de los Jtable
+     */
+    public void setWidthJtable(JTable tblDatos, int[] args){
+        for(int i=0;i<args.length;i++){
+            tblDatos.getColumnModel().getColumn(i).setPreferredWidth(args[i]);
+            tblDatos.getColumnModel().getColumn(i).setMinWidth(args[i]);
+            tblDatos.getColumnModel().getColumn(i).setMaxWidth(args[i]);    
+        }
     }
      /*
      * Formateo de fecha

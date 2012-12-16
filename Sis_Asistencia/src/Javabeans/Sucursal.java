@@ -13,8 +13,8 @@ public class Sucursal {
      */
     public Sucursal(int idsuc, String name, String direccion, int idciu, int idempr) {
         this.idsuc = idsuc;
-        this.name = name;
-        this.direccion = direccion;
+        this.name = name.toUpperCase();
+        this.direccion = direccion.toUpperCase();
         this.idciu = idciu;
         this.idempr = idempr;
     }
@@ -49,7 +49,7 @@ public class Sucursal {
      * @param name the name to set
      */
     public void setName(String name) {
-        this.name = name;
+        this.name = name.toUpperCase();
     }
 
     /**
@@ -63,7 +63,7 @@ public class Sucursal {
      * @param direccion the direccion to set
      */
     public void setDireccion(String direccion) {
-        this.direccion = direccion;
+        this.direccion = direccion.toUpperCase();
     }
 
     /**

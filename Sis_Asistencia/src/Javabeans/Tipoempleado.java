@@ -13,7 +13,7 @@ public class Tipoempleado {
      */
     public Tipoempleado(int idtip, String name, String created, String modified, boolean estado) {
         this.idtip = idtip;
-        this.name = name;
+        this.name = name.toUpperCase();
         this.estado = estado;
         this.created = created;
         this.modified = modified;
@@ -49,7 +49,7 @@ public class Tipoempleado {
      * @param name the name to set
      */
     public void setName(String name) {
-        this.name = name;
+        this.name = name.toUpperCase();
     }
 
     /**

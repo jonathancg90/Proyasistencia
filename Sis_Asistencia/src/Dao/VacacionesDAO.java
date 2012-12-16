@@ -16,8 +16,7 @@ import Gui.WinVacaciones;
 
 public class VacacionesDAO extends ConexionBd {
     
-    
-     private Query qs;
+    private Query qs;
     private Vacaciones objVacaciones;
     private Helpers hp;
     private String filter[][] = new String[0][0];

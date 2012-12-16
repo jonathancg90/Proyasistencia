@@ -10,7 +10,7 @@ public class Estadoemp {
      */
     public Estadoemp(int idest, String name) {
         this.idest = idest;
-        this.name = name;
+        this.name = name.toUpperCase();
     }
     
     /* Constructor por omisión
@@ -43,7 +43,7 @@ public class Estadoemp {
      * @param name the name to set
      */
     public void setName(String name) {
-        this.name = name;
+        this.name = name.toUpperCase();
     }
     
 }

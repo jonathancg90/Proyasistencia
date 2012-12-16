@@ -230,6 +230,7 @@ public class Query extends ConexionBd{
                 }
                 datos.addRow(fila);
             }
+            
                 
            //Cerrando conexion
            rs.close();
@@ -300,6 +301,7 @@ public class Query extends ConexionBd{
               MChoice.addElement(rs.getString(Campo));
             }
             rs = s.executeQuery("select " +Campo+ " from " +Tbl + " where " + identify + "!=" +value);
+            
             while(rs.next()) {
               MChoice.addElement(rs.getString(Campo));
             } 
@@ -350,10 +352,14 @@ public class Query extends ConexionBd{
             ResultSetMetaData meta = rs.getMetaData();
             int nCols = meta.getColumnCount();
             campos = new String[nCols+1];
-            int i=1;
+            
             rs.next();
-            for(;i<=nCols;i++){
+            for(int i=1;i<=nCols;i++){
+                if(campos[i]==null){
+                campos[i]="holaaaaa";
+                }
                 campos[i]=rs.getString(i);
+                
             }
             rs.close();
             closeConexion(); 

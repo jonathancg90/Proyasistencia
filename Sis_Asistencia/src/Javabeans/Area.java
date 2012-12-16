@@ -14,7 +14,7 @@ public class Area {
      */
     public Area(int idarea, String name, String created, String modified, boolean state) {
         this.idare = idarea;
-        this.name = name;
+        this.name = name.toUpperCase();
         this.state = state;
         this.created = created;
         this.modified = modified;
@@ -51,7 +51,7 @@ public class Area {
      * @param name the name to set
      */
     public void setName(String name) {
-        this.name = name;
+        this.name = name.toUpperCase();
     }
 
     /**

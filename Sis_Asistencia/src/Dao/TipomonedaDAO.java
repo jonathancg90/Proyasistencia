@@ -20,8 +20,19 @@ public class TipomonedaDAO extends ConexionBd{
     private Usuario objUsu;
     private String _table = "moneda";
     private Validators objVal;
+    private String _error;
+    private String campos[];
     
     PreparedStatement  pt = null;
+    
+    public TipomonedaDAO(){
+        _table = "moneda";
+        _error = "Dao_Tipomoneda_";
+        filter = new String[0][0];
+        campos = new String[2];
+        campos[0]="idtipmon";
+        campos[1]="nombre";
+    }
     
     public void getTableAll(JTable tblDatos){
         try{
@@ -30,16 +41,13 @@ public class TipomonedaDAO extends ConexionBd{
             if (filter.length <= 0){
                 filter = new String[0][0];
             } 
-            String campos[] = new String[2];
-            campos[0]="idtipmon";
-            campos[1]="nombre";
             String Table = this._table;
             datos = qs.getAll(campos,Table,filter);
             tblDatos.setModel(datos);   
         }
         catch(Exception e)
         {
-            System.out.println("Dao_Tipomoneda: "+e);
+            System.out.println(_error + "getTableAll: "+e);
         }
     
     }
@@ -66,7 +74,7 @@ public class TipomonedaDAO extends ConexionBd{
             return i;
         }
         catch(Exception e){
-            System.out.println("Dao_TipomonedaDAO_save: "+e);
+            System.out.println(_error + "save: "+e);
             return i;
         }
     }
@@ -94,7 +102,7 @@ public class TipomonedaDAO extends ConexionBd{
             return i;
         }
         catch(Exception e){
-            System.out.println("Dao_TipomonedaDAO: "+e);
+            System.out.println(_error + "update: "+e);
             return i;
         }
     }
@@ -121,7 +129,7 @@ public class TipomonedaDAO extends ConexionBd{
             return i;
         }
         catch(Exception e){
-            System.out.println("Dao_TipomonedaDAO: "+e);
+            System.out.println(_error + "delete: "+e);
             return i;
         }
     }
@@ -131,12 +139,12 @@ public class TipomonedaDAO extends ConexionBd{
             if(!"".equals(name)){
                 filter = new String[1][2];
                 filter[0][0] = "nombre";
-                filter[0][1] = name; 
+                filter[0][1] = name.toUpperCase(); 
             }
             getTableAll(tblDatos);
         }
         catch(Exception e){
-            System.out.println("Dao_TipomonedaDAO_find : "+e);
+            System.out.println(_error + "find : "+e);
         }
         return i;
     }
@@ -157,7 +165,7 @@ public class TipomonedaDAO extends ConexionBd{
             return objmoneda;
         }
         catch(Exception e){
-            System.out.println("Dao_TipomonedaDAO_delete: "+e);
+            System.out.println(_error + "getValues: "+e);
             return objmoneda;
         }
     }

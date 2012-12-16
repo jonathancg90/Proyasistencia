@@ -47,7 +47,8 @@ public class AreaDAO extends ConexionBd{
             }
             String Table = this._table;
             datos = qs.getAll(this.campos,Table,filter);
-            tblDatos.setModel(datos);   
+            tblDatos.setModel(datos);
+
         }
         catch(Exception e)
         {
@@ -156,7 +157,7 @@ public class AreaDAO extends ConexionBd{
             if(!"".equals(name)){
                 filter = new String[1][2];
                 filter[0][0] = "nombre";
-                filter[0][1] = name; 
+                filter[0][1] = name.toUpperCase(); 
             }
             getTableAll(tblDatos);
         }

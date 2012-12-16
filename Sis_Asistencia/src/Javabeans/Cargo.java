@@ -14,7 +14,7 @@ public class Cargo {
     public Cargo(int idcar, String name, int idare, String created, String modified) {
         this.idcar = idcar;
         this.idare = idare;
-        this.name = name;
+        this.name = name.toUpperCase();
         this.created = created;
         this.modified = modified;
     }
@@ -49,7 +49,7 @@ public class Cargo {
      * @param name the name to set
      */
     public void setName(String name) {
-        this.name = name;
+        this.name = name.toUpperCase();
     }
 
     /**

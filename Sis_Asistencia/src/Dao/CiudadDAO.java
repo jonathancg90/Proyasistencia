@@ -16,13 +16,23 @@ public class CiudadDAO extends ConexionBd{
     private Query qs;
     private Ciudad objCiudad;
     private Helpers hp;
-    private String filter[][] = new String[0][0];
+    private String filter[][];
+    String campos[];
     private Usuario objUsu;
-    private String _table = "ciudad";
+    private String _table;
     private Validators objVal;
-    private String _error = "Dao_CiudadDAO_";
+    private String _error;
     
     PreparedStatement  pt = null;
+    
+     public CiudadDAO(){
+        _table = "ciudad";
+        _error = "Dao_CiudadDAO_";
+        filter = new String[0][0];
+        campos = new String[2];
+        campos[0]="idciu";
+        campos[1]="nombre";
+    }
     
     public void getTableAll(JTable tblDatos){
         try{
@@ -31,9 +41,7 @@ public class CiudadDAO extends ConexionBd{
             if (filter.length <= 0){
                 filter = new String[0][0];
             } 
-            String campos[] = new String[2];
-            campos[0]="idciu";
-            campos[1]="nombre";
+            
             String Table = this._table;
             datos = qs.getAll(campos,Table,filter);
             tblDatos.setModel(datos);   
@@ -130,7 +138,7 @@ public class CiudadDAO extends ConexionBd{
             if(!"".equals(name)){
                 filter = new String[1][2];
                 filter[0][0] = "nombre";
-                filter[0][1] = name; 
+                filter[0][1] = name.toUpperCase(); 
             }
             getTableAll(tblDatos);
         }

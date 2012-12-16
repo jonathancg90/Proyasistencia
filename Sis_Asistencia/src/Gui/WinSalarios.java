@@ -24,8 +24,10 @@ public class WinSalarios extends javax.swing.JInternalFrame {
     private Config cg;
     private Helpers hp;
     private DateFormat format;
-    private Date date,date2;
-    private Calendar calendar,calendar2;
+    private Date date;
+    private Date date2;
+    private Calendar calendar;
+    private Calendar calendar2;
     
     
     public WinSalarios() {

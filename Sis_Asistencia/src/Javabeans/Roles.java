@@ -11,7 +11,7 @@ public class Roles {
 
     public Roles(int idrol, String name) {
         this.idrol = idrol;
-        this.name = name;
+        this.name = name.toUpperCase();
     }
 
     /**
@@ -39,7 +39,7 @@ public class Roles {
      * @param name the name to set
      */
     public void setName(String name) {
-        this.name = name;
+        this.name = name.toUpperCase();
     }
     
     

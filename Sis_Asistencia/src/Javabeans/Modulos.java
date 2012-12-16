@@ -11,7 +11,7 @@ public class Modulos {
 
     public Modulos(int idmod, String name) {
         this.idmod = idmod;
-        this.name = name;
+        this.name = name.toUpperCase();
     }
 
     public int getIdmod() {
@@ -27,7 +27,7 @@ public class Modulos {
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.name = name.toUpperCase();
     }
     
     

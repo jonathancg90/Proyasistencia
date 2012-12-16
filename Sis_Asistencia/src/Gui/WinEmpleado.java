@@ -343,11 +343,15 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
         String dni=txtdni.getText();
         String apellido=txtapellidos.getText();
         String telefono=txttelefono.getText();
-        int empresa = cboEmpresa.getSelectedIndex();
-        int  area = cboArea.getSelectedIndex();
-        int tipo = cboTipo.getSelectedIndex();
-        int sucursal = cboSucursal.getSelectedIndex();
-        int cargo = cboCargo.getSelectedIndex();
+        int empresa =  qs.idChoice("empresa","nombre",String.valueOf(cboEmpresa.getSelectedItem()));
+        int area =  qs.idChoice("area","nombre",String.valueOf(cboArea.getSelectedItem()));
+        int tipo =  qs.idChoice("tipoempleado","nombre",String.valueOf(cboTipo.getSelectedItem()));
+        int sucursal =  qs.idChoice("sucursal","nombre",String.valueOf(cboSucursal.getSelectedItem()));
+        int cargo =  qs.idChoice("cargo","nombre",String.valueOf(cboCargo.getSelectedItem()));
+        
+        
+        
+        
         
         qs = new Query();
         int idemp = qs.idChoice("empleado","nombres", nombre);
@@ -374,11 +378,11 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
         String dni=txtdni.getText();
         String apellido=txtapellidos.getText();
         String telefono=txttelefono.getText();
-        int  area = cboArea.getSelectedIndex();
-        int cargo = cboCargo.getSelectedIndex();
-        int tipo = cboTipo.getSelectedIndex();
-        int sucursal = cboSucursal.getSelectedIndex();
-        int empresa = cboEmpresa.getSelectedIndex();
+        int empresa =  qs.idChoice("empresa","nombre",String.valueOf(cboEmpresa.getSelectedItem()));
+        int area =  qs.idChoice("area","nombre",String.valueOf(cboArea.getSelectedItem()));
+        int tipo =  qs.idChoice("tipoempleado","nombre",String.valueOf(cboTipo.getSelectedItem()));
+        int sucursal =  qs.idChoice("sucursal","nombre",String.valueOf(cboSucursal.getSelectedItem()));
+        int cargo =  qs.idChoice("cargo","nombre",String.valueOf(cboCargo.getSelectedItem()));
         
         qs = new Query();
         //boolean estate = Boolean.valueOf(dt.G_BOOLEAN[cboEstado.getSelectedIndex()]);
@@ -404,7 +408,7 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
                 DefaultTableModel m = new DefaultTableModel();
                 m = (DefaultTableModel) this.tblEmpleado.getModel();
                 String idEmp = String.valueOf(m.getValueAt(fsel, 0));
-                
+                System.out.println(idEmp);
                 //crear objeto modusu
                 modemp = objempl.getValues(Integer.parseInt(idEmp));
                 //Asigando valores obtenidos

@@ -18,11 +18,21 @@ public class ModulosDAO extends ConexionBd{
     private Helpers hp;
     private String filter[][] = new String[0][0];
     private Usuario objUsu;
-    private String _table = "modulos";
+    private String _table;
     private Validators objVal;
-    private String _error = "Dao_ModulosDAO_";
+    private String _error;
+    private String campos[];
     
     PreparedStatement  pt = null;
+    
+    public ModulosDAO(){
+        _table = "modulos";
+        _error = "Dao_ModulosDAO_";
+        filter = new String[0][0];
+        campos = new String[2];
+        campos[0]="idmod";
+        campos[1]="nombre";
+    }
     
     public void getTableAll(JTable tblDatos){
         try{
@@ -31,9 +41,6 @@ public class ModulosDAO extends ConexionBd{
             if (filter.length <= 0){
                 filter = new String[0][0];
             } 
-            String campos[] = new String[2];
-            campos[0]="idmod";
-            campos[1]="nombre";
             String Table = this._table;
             datos = qs.getAll(campos,Table,filter);
             tblDatos.setModel(datos);   
@@ -132,7 +139,7 @@ public class ModulosDAO extends ConexionBd{
             if(!"".equals(name)){
                 filter = new String[1][2];
                 filter[0][0] = "nombre";
-                filter[0][1] = name; 
+                filter[0][1] = name.toUpperCase(); 
             }
             getTableAll(tblDatos);
         }

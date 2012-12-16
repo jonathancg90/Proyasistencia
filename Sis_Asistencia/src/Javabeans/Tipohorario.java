@@ -11,7 +11,7 @@ public class Tipohorario {
 
     public Tipohorario(int idtiphor, String name) {
         this.idtiphor = idtiphor;
-        this.name = name;
+        this.name = name.toUpperCase();
     }
 
     public int getIdtiphor() {
@@ -27,7 +27,7 @@ public class Tipohorario {
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.name = name.toUpperCase();
     }
     
     

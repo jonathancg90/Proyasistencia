@@ -24,8 +24,20 @@ public class SucursalDao extends ConexionBd{
     private String filter[][] = new String[0][0];
     private Usuario objUsu;
     private Validators objVal;
+    private String _table;
+    private String _error;
+    private String campos[];
     
     PreparedStatement  pt = null;
+    
+    public SucursalDao(){
+        _table = "sucursal";
+        _error = "Dao_Sucursal_";
+        filter = new String[0][0];
+        campos = new String[2];
+        campos[0]="idsuc";
+        campos[1]="nombre";
+    }
     
      public void getTableAll(JTable tblDatos){
         try{
@@ -34,16 +46,13 @@ public class SucursalDao extends ConexionBd{
             if (filter.length <= 0){
                 filter = new String[0][0];
             } 
-            String campos[] = new String[2];
-            campos[0]="idsuc";
-            campos[1]="nombre";
-            String Table = "sucursal";
+            String Table = _table;
             datos = qs.getAll(campos,Table,filter);
             tblDatos.setModel(datos);   
         }
         catch(Exception e)
         {
-            System.out.println("Dao_Sucursal: "+e);
+            System.out.println(_error + "getTableAll: "+e);
         }
     
     }
@@ -59,7 +68,7 @@ public class SucursalDao extends ConexionBd{
             getConexion();
             hp = new Helpers();
             qs= new Query();
-            String Table = "sucursal";
+            String Table = _table;
             String now = hp.getDateNow();
             
             objSucursal = new Sucursal(0,name,direccion,idciu,idempr);
@@ -76,7 +85,7 @@ public class SucursalDao extends ConexionBd{
             return i;
         }
         catch(Exception e){
-            System.out.println("Dao_SucursalDAO_save: "+e);
+            System.out.println(_error + "save: "+e);
             return i;
         }
     }
@@ -92,7 +101,7 @@ public class SucursalDao extends ConexionBd{
             getConexion();
             hp = new Helpers();
             qs= new Query();
-            String Table = "sucursal";
+            String Table = _table;
             String now = hp.getDateNow();
             
             objSucursal = new Sucursal(0,name,direccion,idciu,idempr);
@@ -110,7 +119,7 @@ public class SucursalDao extends ConexionBd{
             return i;
         }
         catch(Exception e){
-            System.out.println("Dao_SucursalDAO: "+e);
+            System.out.println(_error + "update: "+e);
             return i;
         }
     }
@@ -126,7 +135,7 @@ public class SucursalDao extends ConexionBd{
             objSucursal = new Sucursal();
             hp = new Helpers();
             qs= new Query();
-            String Table = "sucursal";
+            String Table = _table;
             
             objSucursal.setIdsuc(id);
             pt = qs.sqlDelete(Table);
@@ -137,7 +146,7 @@ public class SucursalDao extends ConexionBd{
             return i;
         }
         catch(Exception e){
-            System.out.println("Dao_SucursalDAO: "+e);
+            System.out.println(_error + "delete: "+e);
             return i;
         }
     }
@@ -147,12 +156,12 @@ public class SucursalDao extends ConexionBd{
             if(!"".equals(name)){
                 filter = new String[1][2];
                 filter[0][0] = "nombre";
-                filter[0][1] = name; 
+                filter[0][1] = name.toUpperCase(); 
             }
             getTableAll(tblDatos);
         }
         catch(Exception e){
-            System.out.println("Dao_SucursalDAO_find : "+e);
+            System.out.println(_error + "find : "+e);
         }
         return i;
     }
@@ -167,7 +176,7 @@ public class SucursalDao extends ConexionBd{
             qs= new Query();
             //Preparando
             String campos[] = new String[4];
-            campos = qs.getRecords("sucursal",idusu);
+            campos = qs.getRecords(_table,idusu);
             objSucursal.setName(campos[2]);
             objSucursal.setDireccion(campos[3]);
             objSucursal.setIdciu(Integer.valueOf(campos[1]));
@@ -176,7 +185,7 @@ public class SucursalDao extends ConexionBd{
             return objSucursal;
         }
         catch(Exception e){
-            System.out.println("Dao_SucursalDAO_delete: "+e);
+            System.out.println(_error + "getValues: "+e);
             return objSucursal;
         }
     }

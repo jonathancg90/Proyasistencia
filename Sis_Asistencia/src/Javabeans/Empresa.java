@@ -18,7 +18,7 @@ public class Empresa {
     public Empresa(int idempr, String name, String ruc, boolean estado, String created,
             String modified,int trabajadores,int idmon) {
         this.idempr = idempr;
-        this.name = name;
+        this.name = name.toUpperCase();
         this.ruc = ruc;
         this.estado = estado;
         this.created = created;
@@ -57,7 +57,7 @@ public class Empresa {
      * @param name the name to set
      */
     public void setName(String name) {
-        this.name = name;
+        this.name = name.toUpperCase();
     }
 
     /**

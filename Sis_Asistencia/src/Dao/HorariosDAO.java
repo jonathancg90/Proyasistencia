@@ -22,7 +22,7 @@ public class HorariosDAO {
     
     PreparedStatement  pt = null;
     
-        public HorariosDAO(){
+     public HorariosDAO(){
         _table = "horarios";
         _error = "Dao_HorariosDAO_";
         filter = new String[0][0];
