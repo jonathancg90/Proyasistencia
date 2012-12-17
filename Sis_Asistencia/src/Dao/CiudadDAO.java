@@ -17,7 +17,8 @@ public class CiudadDAO extends ConexionBd{
     private Ciudad objCiudad;
     private Helpers hp;
     private String filter[][];
-    String campos[];
+    private String campos[];
+    private int witdhcolum[];
     private Usuario objUsu;
     private String _table;
     private Validators objVal;
@@ -32,6 +33,8 @@ public class CiudadDAO extends ConexionBd{
         campos = new String[2];
         campos[0]="idciu";
         campos[1]="nombre";
+        witdhcolum = new int[1];
+        witdhcolum[0]=50;
     }
     
     public void getTableAll(JTable tblDatos){

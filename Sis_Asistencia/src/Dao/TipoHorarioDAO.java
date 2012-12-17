@@ -15,7 +15,8 @@ public class TipoHorarioDAO extends ConexionBd{
     private Query qs;
     private Tipohorario objtiphor;
     private Helpers hp;
-    private String filter[][] = new String[0][0];
+    private String filter[][];
+    private int witdhcolum[];
     private Usuario objUsu;
     private String _table;
     private Validators objVal;
@@ -31,6 +32,8 @@ public class TipoHorarioDAO extends ConexionBd{
         campos = new String[2];
         campos[0]="idtipohor";
         campos[1]="nombre";
+        witdhcolum = new int[1];
+        witdhcolum[0]=50;
     }
     
     public void getTableAll(JTable tblDatos){

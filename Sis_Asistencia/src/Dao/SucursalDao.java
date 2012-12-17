@@ -21,7 +21,8 @@ public class SucursalDao extends ConexionBd{
     private Query qs;
     private Sucursal objSucursal;
     private Helpers hp;
-    private String filter[][] = new String[0][0];
+    private String filter[][];
+    private int witdhcolum[];
     private Usuario objUsu;
     private Validators objVal;
     private String _table;
@@ -37,6 +38,8 @@ public class SucursalDao extends ConexionBd{
         campos = new String[2];
         campos[0]="idsuc";
         campos[1]="nombre";
+        witdhcolum = new int[1];
+        witdhcolum[0]=50;
     }
     
      public void getTableAll(JTable tblDatos){

@@ -19,8 +19,8 @@ public class VacacionesDAO extends ConexionBd {
     private Query qs;
     private Vacaciones objVacaciones;
     private Helpers hp;
-    private String filter[][] = new String[0][0];
-    
+    private String filter[][];
+    private int witdhcolum[];
     private Validators objVal;
     String campos[];
     private String _error;
@@ -33,11 +33,12 @@ public class VacacionesDAO extends ConexionBd {
         _table = "vacaciones";
         _error = "Dao_VacacionesDAO_";
         filter = new String[0][0];
-        
         campos = new String[3];
         campos[0]="idvacaciones";
         campos[1]="f_inicio";
         campos[2]="f_final";
+        witdhcolum = new int[1];
+        witdhcolum[0]=50;
         
      }
     

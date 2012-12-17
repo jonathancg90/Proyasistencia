@@ -20,6 +20,7 @@ public class TipoEmpleadoDAO extends ConexionBd{
     private Helpers hp;
     private Validators objVal;
     private String filter[][];
+    private int witdhcolum[];
     private String campos[];
     private String _table;
     private String _error;
@@ -33,6 +34,8 @@ public class TipoEmpleadoDAO extends ConexionBd{
         campos = new String[2];
         campos[0]="idtip";
         campos[1]="nombre";
+        witdhcolum = new int[1];
+        witdhcolum[0]=50;
     }
     
     /*

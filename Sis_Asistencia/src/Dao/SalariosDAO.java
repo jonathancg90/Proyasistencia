@@ -20,9 +20,9 @@ public class SalariosDAO extends ConexionBd {
     private Salarios objSalarios;
     private Helpers hp;
     private String filter[][] = new String[0][0];
-    
+    private int witdhcolum[];
     private Validators objVal;
-    String campos[];
+    private String campos[];
     private String _error;
     private String _table;
     
@@ -33,12 +33,13 @@ public class SalariosDAO extends ConexionBd {
         _table = "salarios";
         _error = "Dao_SalariosDAO_";
         filter = new String[0][0];
-        
         campos = new String[4];
         campos[0]="idsalario";
         campos[1]="f_inicio";
         campos[2]="f_final";
         campos[3]="monto";
+        witdhcolum = new int[1];
+        witdhcolum[0]=50;
      }
     
     public void getTableAll(JTable tblDatos){

@@ -16,8 +16,9 @@ public class TipomonedaDAO extends ConexionBd{
     private Query qs;
     private Tipomoneda objmoneda;
     private Helpers hp;
-    private String filter[][] = new String[0][0];
+    private String filter[][];
     private Usuario objUsu;
+    private int witdhcolum[];
     private String _table = "moneda";
     private Validators objVal;
     private String _error;
@@ -32,6 +33,8 @@ public class TipomonedaDAO extends ConexionBd{
         campos = new String[2];
         campos[0]="idtipmon";
         campos[1]="nombre";
+        witdhcolum = new int[1];
+        witdhcolum[0]=50;
     }
     
     public void getTableAll(JTable tblDatos){

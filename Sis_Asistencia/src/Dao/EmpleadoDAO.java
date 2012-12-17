@@ -18,8 +18,9 @@ public class EmpleadoDAO extends ConexionBd{
     private Query qs;
     private Empleado objEmpl;
     private Helpers hp;
-    private String filter[][] = new String[0][0];
-    String campos[];
+    private String filter[][];
+    private String campos[];
+    private int witdhcolum[];
     private String _table;
     private String _error;
     PreparedStatement  pt = null;
@@ -36,6 +37,8 @@ public class EmpleadoDAO extends ConexionBd{
         campos[1]="nombres";
         campos[2]="apellidos";
         campos[3]="idcar";
+        witdhcolum = new int[1];
+        witdhcolum[0]=50;
     }
     public void getTableAll(JTable tblDatos){
         try{

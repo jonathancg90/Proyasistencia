@@ -21,6 +21,7 @@ public class CargosDAO extends ConexionBd{
     private Validators objVal;
     
     private String filter[][];
+    private int witdhcolum[];
     private String _table;
     private String _error;
     private String campos[];
@@ -34,6 +35,8 @@ public class CargosDAO extends ConexionBd{
         campos = new String[2];
         campos[0]="idcar";
         campos[1]="nombre";
+        witdhcolum = new int[1];
+        witdhcolum[0]=50;
     }
     
     public void getTableAll(JTable tblDatos){

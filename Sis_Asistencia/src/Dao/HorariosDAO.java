@@ -16,7 +16,8 @@ public class HorariosDAO {
     private Helpers hp;
     private Validators objVal;
     private String filter[][];
-    String campos[];
+    private String campos[];
+    private int witdhcolum[];
     private String _table;
     private String _error;
     
@@ -29,6 +30,8 @@ public class HorariosDAO {
         campos = new String[2];
         campos[0]="idhor";
         campos[1]="nombre";
+        witdhcolum = new int[1];
+        witdhcolum[0]=50;
     }
     
 }

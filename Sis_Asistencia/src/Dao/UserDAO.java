@@ -21,6 +21,7 @@ public class UserDAO extends ConexionBd{
     private Helpers hp;
     private String filter[][];
     private String campos[];
+    private int witdhcolum[];
     private String _error;
     private String _table;
     
@@ -35,6 +36,8 @@ public class UserDAO extends ConexionBd{
         campos = new String[2];
         campos[0]="idusu";
         campos[1]="username";
+        witdhcolum = new int[1];
+        witdhcolum[0]=50;
     }
     
     /*

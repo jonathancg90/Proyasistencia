@@ -18,6 +18,7 @@ public class ModulosDAO extends ConexionBd{
     private Helpers hp;
     private String filter[][] = new String[0][0];
     private Usuario objUsu;
+    private int witdhcolum[];
     private String _table;
     private Validators objVal;
     private String _error;
@@ -32,6 +33,8 @@ public class ModulosDAO extends ConexionBd{
         campos = new String[2];
         campos[0]="idmod";
         campos[1]="nombre";
+        witdhcolum = new int[1];
+        witdhcolum[0]=50;
     }
     
     public void getTableAll(JTable tblDatos){
