@@ -356,7 +356,7 @@ public class WinArea extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_mitemeliminarMousePressed
 
     private void mitemupdateMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemupdateMousePressed
-         dt = new Data();
+        dt = new Data();
         int id = Integer.valueOf(lblId.getText());
         String name = txtName.getText();
         boolean estate = Boolean.valueOf(dt.G_BOOLEAN[cmbEstate.getSelectedIndex()]);

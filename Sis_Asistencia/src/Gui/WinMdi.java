@@ -38,7 +38,6 @@ public class WinMdi extends javax.swing.JFrame {
         JmitemCiudad = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
         jmItemModulos = new javax.swing.JMenuItem();
         JmitemUsu = new javax.swing.JMenuItem();
         JmitemDis = new javax.swing.JMenuItem();
@@ -147,14 +146,6 @@ public class WinMdi extends javax.swing.JFrame {
         jMenuItem2.setText("Dias no laborables");
         SubmenuCrit.add(jMenuItem2);
 
-        jMenuItem3.setText("Tipo de horario");
-        jMenuItem3.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jMenuItem3MousePressed(evt);
-            }
-        });
-        SubmenuCrit.add(jMenuItem3);
-
         jmItemModulos.setText("Modulos");
         jmItemModulos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -215,7 +206,7 @@ public class WinMdi extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jdpContenedor, javax.swing.GroupLayout.DEFAULT_SIZE, 309, Short.MAX_VALUE)
+            .addComponent(jdpContenedor, javax.swing.GroupLayout.DEFAULT_SIZE, 313, Short.MAX_VALUE)
         );
 
         pack();
@@ -446,21 +437,6 @@ public class WinMdi extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_JmitemtpmonMousePressed
 
-    private void jMenuItem3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem3MousePressed
-        WinTipo_Horario objtiphor= new WinTipo_Horario();
-        val = new Validators();
-        objtiphor.setResizable(true);
-        objtiphor.setMaximizable(true);
-        objtiphor.setIconifiable(true);
-        //obj_Asis.setClosable(true);
-        jdpContenedor.add(objtiphor);
-        if(val.EntryForms()){
-            objtiphor.setVisible(true);
-        } else {
-            JOptionPane.showMessageDialog(null,"Cierre la ventana abierta para abrir otra");
-        }
-    }//GEN-LAST:event_jMenuItem3MousePressed
-
     private void jmItemModulosMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmItemModulosMousePressed
         WinModulos objmod= new WinModulos();
         val = new Validators();
@@ -524,7 +500,6 @@ public class WinMdi extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
     public static javax.swing.JDesktopPane jdpContenedor;
     private javax.swing.JMenuItem jmItemModulos;
     private javax.swing.JMenu masi;

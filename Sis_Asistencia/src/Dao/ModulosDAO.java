@@ -7,6 +7,7 @@ import Utilitarios.ConexionBd;
 import Utilitarios.Helpers;
 import Utilitarios.Query;
 import Utilitarios.Validators;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -59,18 +60,23 @@ public class ModulosDAO extends ConexionBd{
     /*
      * Registro de modulos
      */
-    public int save(String name){
+    public int save(String name,boolean state){
        int i=0;
         try{
             //Preparando
+            Date date = new Date(0000-00-00);
             getConexion();
             hp = new Helpers();
             qs= new Query();
+            String now = hp.getDateNow();
             String Table = this._table;
-            objmod = new Modulos(0,name);
+            objmod = new Modulos(0,name,state,now,now);
             //Iniciando consulta y asignando valores
             pt = qs.sqlRegister(Table);
             pt.setString(1,objmod.getName());
+            pt.setDate(2,date.valueOf(objmod.getCreated()));
+            pt.setDate(3,date.valueOf(objmod.getModified()));
+            pt.setBoolean(4,objmod.isState());
             //Ejecucion y cierre
             i= pt.executeUpdate();
             pt.close();
@@ -78,7 +84,7 @@ public class ModulosDAO extends ConexionBd{
             return i;
         }
         catch(Exception e){
-            System.out.println(_error + "_save: "+e);
+            System.out.println(_error + "save: "+e);
             return i;
         }
     }
@@ -86,18 +92,23 @@ public class ModulosDAO extends ConexionBd{
     /*
      * Actualizacion de los modulos
      */
-    public int update(int id, String name){
+    public int update(int id, String name, boolean state){
        int i=0;
         try{           
             //Preparando
             getConexion();
+            Date date = new Date(0000-00-00);
             hp = new Helpers();
             qs= new Query();
             String Table = this._table;
-            objmod = new Modulos(id,name);
+            String now = hp.getDateNow();
+            objmod = new Modulos(id,name,state,now,now);
             //Iniciando consulta y asignando valores
             pt = qs.sqlUpdate(Table);
-            pt.setInt(2,objmod.getIdmod());           
+            
+            pt.setInt(4,objmod.getIdmod());
+            pt.setDate(2,date.valueOf(objmod.getModified()));
+            pt.setBoolean(3,objmod.isState());
             pt.setString(1,objmod.getName());
             //Ejecucion y cierre
             i= pt.executeUpdate();
@@ -165,6 +176,8 @@ public class ModulosDAO extends ConexionBd{
             String campos[] = new String[1];
             campos = qs.getRecords(this._table,idmod);
             objmod.setName(campos[2]);
+            objmod.setModified(campos[4]);
+            objmod.setState(Boolean.valueOf(campos[5]));
             
             return objmod;
         }
