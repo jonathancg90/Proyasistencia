@@ -80,7 +80,7 @@
                 </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="Jmitemtpmon">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Tipo de Moneda"/>
+                    <Property name="text" type="java.lang.String" value="Monedas"/>
                   </Properties>
                   <Events>
                     <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="JmitemtpmonMousePressed"/>
@@ -204,7 +204,7 @@
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jdpContenedor" alignment="0" pref="301" max="32767" attributes="0"/>
+          <Component id="jdpContenedor" alignment="0" pref="305" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>

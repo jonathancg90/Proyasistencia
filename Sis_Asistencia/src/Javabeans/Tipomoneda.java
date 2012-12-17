@@ -3,50 +3,72 @@ package Javabeans;
 
 public class Tipomoneda {
     private int idtipmon;
-    private String name;
+    private String nombre;
+    private String simbol;
+    private boolean por_defecto;
+    private String created;
+    private String modified;
 
-     /* Constructor final
-     */
-    public Tipomoneda(int idtipmon, String name) {
+    public Tipomoneda(int idtipmon, String nombre, String simbol, boolean por_defecto, String created, String modified) {
         this.idtipmon = idtipmon;
-        this.name = name.toUpperCase();
-    }
-    
-    /* Constructor por omisión
-     */
-
-    public Tipomoneda() 
-    {
-        
+        this.nombre = nombre.toUpperCase(); 
+        this.simbol = simbol.toUpperCase(); 
+        this.por_defecto = por_defecto;
+        this.created = created;
+        this.modified = modified;
     }
 
-    /**
-     * @return the idtipmon
-     */
+    public Tipomoneda() {
+    }
+
     public int getIdtipmon() {
         return idtipmon;
     }
 
-    /**
-     * @param idtipmon the idtipmon to set
-     */
+    public String getNombre() {
+        return nombre;
+    }
+
+    public String getSimbol() {
+        return simbol;
+    }
+
+    public boolean isPor_defecto() {
+        return por_defecto;
+    }
+
+    public String getCreated() {
+        return created;
+    }
+
+    public String getModified() {
+        return modified;
+    }
+
     public void setIdtipmon(int idtipmon) {
         this.idtipmon = idtipmon;
     }
 
-    /**
-     * @return the name
-     */
-    public String getName() {
-        return name;
+    public void setNombre(String nombre) {
+        this.nombre = nombre.toUpperCase(); 
     }
 
-    /**
-     * @param name the name to set
-     */
-    public void setName(String name) {
-        this.name = name.toUpperCase();
+    public void setSimbol(String simbol) {
+        this.simbol = simbol.toUpperCase(); 
     }
-    
+
+    public void setPor_defecto(boolean por_defecto) {
+        this.por_defecto = por_defecto;
+    }
+
+    public void setCreated(String created) {
+        this.created = created;
+    }
+
+    public void setModified(String modified) {
+        this.modified = modified;
+    }
+
+
     
 }

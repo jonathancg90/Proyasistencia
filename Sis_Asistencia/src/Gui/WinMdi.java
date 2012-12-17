@@ -117,7 +117,7 @@ public class WinMdi extends javax.swing.JFrame {
         });
         SubmenuCrit.add(JmitemTipo);
 
-        Jmitemtpmon.setText("Tipo de Moneda");
+        Jmitemtpmon.setText("Monedas");
         Jmitemtpmon.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 JmitemtpmonMousePressed(evt);
@@ -215,7 +215,7 @@ public class WinMdi extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jdpContenedor, javax.swing.GroupLayout.DEFAULT_SIZE, 301, Short.MAX_VALUE)
+            .addComponent(jdpContenedor, javax.swing.GroupLayout.DEFAULT_SIZE, 305, Short.MAX_VALUE)
         );
 
         pack();

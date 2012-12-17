@@ -7,6 +7,7 @@ import Utilitarios.Query;
 import Javabeans.Tipomoneda;
 import Javabeans.Usuario;
 import Utilitarios.Validators;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -31,7 +32,7 @@ public class TipomonedaDAO extends ConexionBd{
         _error = "Dao_Tipomoneda_";
         filter = new String[0][0];
         campos = new String[2];
-        campos[0]="idtipmon";
+        campos[0]="idmon";
         campos[1]="nombre";
         witdhcolum = new int[1];
         witdhcolum[0]=50;
@@ -59,18 +60,25 @@ public class TipomonedaDAO extends ConexionBd{
     /*
      * Registro de Ciudad
      */
-    public int save(String name){
+    public int save(String name,String simbol,boolean def){
        int i=0;
         try{
             //Preparando
+            Date date = new Date(0000-00-00);
             getConexion();
             hp = new Helpers();
             qs= new Query();
-            String Table = "moneda";
-            objmoneda = new Tipomoneda(0,name);
+            String Table = _table;
+            String now = hp.getDateNow();
+            
+            objmoneda = new Tipomoneda(0,name,simbol,def,now,now);
             //Iniciando consulta y asignando valores
             pt = qs.sqlRegister(Table);
-            pt.setString(1,objmoneda.getName());
+            pt.setString(1,objmoneda.getNombre());
+            pt.setString(2,objmoneda.getSimbol());
+            pt.setBoolean(3,objmoneda.isPor_defecto());
+            pt.setDate(4,date.valueOf(objmoneda.getCreated()));
+            pt.setDate(5,date.valueOf(objmoneda.getModified()));
             //Ejecucion y cierre
             i= pt.executeUpdate();
             pt.close();
@@ -86,19 +94,25 @@ public class TipomonedaDAO extends ConexionBd{
     /*
      * Actualizacion de los Ciudad
      */
-    public int update(int id, String name){
+    public int update(int id, String name,String simbol, boolean def){
        int i=0;
         try{           
             //Preparando
             getConexion();
+            Date date = new Date(0000-00-00);
             hp = new Helpers();
             qs= new Query();
-            String Table = "moneda";
-            objmoneda = new Tipomoneda(id,name);
+            String Table = _table;
+            String now = hp.getDateNow();
+            objmoneda = new Tipomoneda(id,name,simbol,def,now,now);
             //Iniciando consulta y asignando valores
             pt = qs.sqlUpdate(Table);
-            pt.setInt(2,objmoneda.getIdtipmon());           
-            pt.setString(1,objmoneda.getName());
+            pt.setString(1,objmoneda.getNombre());
+            pt.setString(2,objmoneda.getSimbol());
+            pt.setBoolean(3,objmoneda.isPor_defecto());
+            pt.setDate(4,date.valueOf(objmoneda.getCreated()));
+            pt.setDate(5,date.valueOf(objmoneda.getModified()));
+            pt.setInt(6,objmoneda.getIdtipmon());
             //Ejecucion y cierre
             i= pt.executeUpdate();
             pt.close();
@@ -122,7 +136,7 @@ public class TipomonedaDAO extends ConexionBd{
             objmoneda = new Tipomoneda();
             hp = new Helpers();
             qs= new Query();
-            String Table = "moneda";
+            String Table = _table;
             
             objmoneda.setIdtipmon(id);
             pt = qs.sqlDelete(Table);
@@ -163,8 +177,11 @@ public class TipomonedaDAO extends ConexionBd{
             qs= new Query();
             //Preparando
             String campos[] = new String[1];
-            campos = qs.getRecords("moneda",idtipmon);
-            objmoneda.setName(campos[2]);
+            campos = qs.getRecords(_table,idtipmon);
+            objmoneda.setNombre(campos[2]);
+            objmoneda.setSimbol(campos[3]);
+            objmoneda.setPor_defecto(Boolean.parseBoolean(campos[4]));
+            objmoneda.setModified(campos[5]);
             
             return objmoneda;
         }
