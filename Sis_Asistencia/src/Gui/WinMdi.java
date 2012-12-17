@@ -109,7 +109,7 @@ public class WinMdi extends javax.swing.JFrame {
         });
         SubmenuCrit.add(Jmitememp);
 
-        JmitemTipo.setText("Tipo empleado");
+        JmitemTipo.setText("Tipo empleado(contrato)");
         JmitemTipo.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 JmitemTipoMousePressed(evt);
@@ -141,7 +141,7 @@ public class WinMdi extends javax.swing.JFrame {
         });
         SubmenuCrit.add(JmitemCiudad);
 
-        jMenuItem1.setText("Est. Empleado");
+        jMenuItem1.setText("Estado. Empleado");
         SubmenuCrit.add(jMenuItem1);
 
         jMenuItem2.setText("Dias no laborables");
@@ -215,7 +215,7 @@ public class WinMdi extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jdpContenedor, javax.swing.GroupLayout.DEFAULT_SIZE, 305, Short.MAX_VALUE)
+            .addComponent(jdpContenedor, javax.swing.GroupLayout.DEFAULT_SIZE, 309, Short.MAX_VALUE)
         );
 
         pack();

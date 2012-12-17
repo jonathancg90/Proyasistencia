@@ -72,7 +72,7 @@
                 </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="JmitemTipo">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Tipo empleado"/>
+                    <Property name="text" type="java.lang.String" value="Tipo empleado(contrato)"/>
                   </Properties>
                   <Events>
                     <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="JmitemTipoMousePressed"/>
@@ -104,7 +104,7 @@
                 </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="jMenuItem1">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Est. Empleado"/>
+                    <Property name="text" type="java.lang.String" value="Estado. Empleado"/>
                   </Properties>
                 </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="jMenuItem2">
@@ -204,7 +204,7 @@
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jdpContenedor" alignment="0" pref="305" max="32767" attributes="0"/>
+          <Component id="jdpContenedor" alignment="0" pref="309" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
