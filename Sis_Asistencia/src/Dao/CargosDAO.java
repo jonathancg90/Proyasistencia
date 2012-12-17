@@ -43,14 +43,15 @@ public class CargosDAO extends ConexionBd{
         try{
             DefaultTableModel datos;
             qs= new Query();
+            hp = new Helpers();
             if (filter.length <= 0){
                 filter = new String[0][0];
             }
             datos = qs.getAll(campos,this._table,filter);
-            tblDatos.setModel(datos);   
+            tblDatos.setModel(datos);
+            hp.setWidthJtable(tblDatos,witdhcolum);
         }
-        catch(Exception e)
-        {
+        catch(Exception e){
             System.out.println(_error+"getTableAll: "+e);
         }
     

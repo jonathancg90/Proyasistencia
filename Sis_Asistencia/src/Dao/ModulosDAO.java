@@ -40,16 +40,17 @@ public class ModulosDAO extends ConexionBd{
     public void getTableAll(JTable tblDatos){
         try{
             DefaultTableModel datos;
-            qs = new Query();            
+            qs = new Query();
+            hp = new Helpers();
             if (filter.length <= 0){
                 filter = new String[0][0];
             } 
             String Table = this._table;
             datos = qs.getAll(campos,Table,filter);
-            tblDatos.setModel(datos);   
+            tblDatos.setModel(datos);
+            hp.setWidthJtable(tblDatos,witdhcolum);
         }
-        catch(Exception e)
-        {
+        catch(Exception e){
             System.out.println(_error + "getTableAll: "+e);
         }
     

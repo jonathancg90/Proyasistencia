@@ -22,7 +22,7 @@ public class VacacionesDAO extends ConexionBd {
     private String filter[][];
     private int witdhcolum[];
     private Validators objVal;
-    String campos[];
+    private String campos[];
     private String _error;
     private String _table;
     
@@ -48,15 +48,16 @@ public class VacacionesDAO extends ConexionBd {
             
             DefaultTableModel datos;
             qs= new Query();
+            hp = new Helpers();
             if (filter.length <= 0){
                 filter = new String[0][0];
             }
             String Table = this._table;
             datos = qs.getAll(this.campos,Table,filter);
-            tblDatos.setModel(datos);   
+            tblDatos.setModel(datos);
+            hp.setWidthJtable(tblDatos,witdhcolum);
         }
-        catch(Exception e)
-        {
+        catch(Exception e){
             System.out.println(_error + "getTableAll: "+e);
         }
     
@@ -149,7 +150,6 @@ public class VacacionesDAO extends ConexionBd {
             objVacaciones.setF_final(campos[4]);
             objVacaciones.setCreated(campos[5]);
             objVacaciones.setModified(campos[6]);
-            
             
             return objVacaciones;
         }

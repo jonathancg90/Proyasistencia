@@ -45,16 +45,16 @@ public class AreaDAO extends ConexionBd{
         try{
             DefaultTableModel datos;
             qs= new Query();
+            hp = new Helpers();
             if (filter.length <= 0){
                 filter = new String[0][0];
             }
             String Table = this._table;
             datos = qs.getAll(this.campos,Table,filter);
             tblDatos.setModel(datos);
-
+            hp.setWidthJtable(tblDatos,witdhcolum);
         }
-        catch(Exception e)
-        {
+        catch(Exception e){
             System.out.println(_error + "getTableAll: "+e);
         }
     

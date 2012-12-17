@@ -112,7 +112,7 @@ public class WinArea extends javax.swing.JInternalFrame {
                             .add(txtName)
                             .add(pnlOpcionesLayout.createSequentialGroup()
                                 .add(lblId, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 50, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                                .add(30, 180, Short.MAX_VALUE))))
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                     .add(org.jdesktop.layout.GroupLayout.TRAILING, pnlOpcionesLayout.createSequentialGroup()
                         .add(pnlOpcionesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                             .add(jLabel3)
@@ -121,7 +121,7 @@ public class WinArea extends javax.swing.JInternalFrame {
                         .add(pnlOpcionesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                             .add(cmbEstate, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 146, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                             .add(lblModified, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 170, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                        .add(0, 0, Short.MAX_VALUE)))
+                        .add(0, 21, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         pnlOpcionesLayout.setVerticalGroup(
@@ -143,27 +143,27 @@ public class WinArea extends javax.swing.JInternalFrame {
                 .add(pnlOpcionesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(jLabel3)
                     .add(lblModified, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 32, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(75, Short.MAX_VALUE))
+                .addContainerGap(65, Short.MAX_VALUE))
         );
 
         org.jdesktop.layout.GroupLayout pnlMantenimientoLayout = new org.jdesktop.layout.GroupLayout(pnlMantenimiento);
         pnlMantenimiento.setLayout(pnlMantenimientoLayout);
         pnlMantenimientoLayout.setHorizontalGroup(
             pnlMantenimientoLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(org.jdesktop.layout.GroupLayout.TRAILING, pnlMantenimientoLayout.createSequentialGroup()
+            .add(pnlMantenimientoLayout.createSequentialGroup()
                 .addContainerGap()
-                .add(pnlOpciones, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .add(pnlOpciones, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(24, Short.MAX_VALUE))
         );
         pnlMantenimientoLayout.setVerticalGroup(
             pnlMantenimientoLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(pnlMantenimientoLayout.createSequentialGroup()
                 .addContainerGap()
-                .add(pnlOpciones, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .add(pnlOpciones, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        getContentPane().add(pnlMantenimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(275, 12, -1, -1));
+        getContentPane().add(pnlMantenimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(275, 12, 350, 260));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Busqueda de areas"));
 
@@ -264,6 +264,11 @@ public class WinArea extends javax.swing.JInternalFrame {
 
         mitemclear.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.CTRL_MASK));
         mitemclear.setText("Limpiar");
+        mitemclear.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                mitemclearMousePressed(evt);
+            }
+        });
         medit.add(mitemclear);
 
         jMenuBar1.add(medit);
@@ -327,10 +332,6 @@ public class WinArea extends javax.swing.JInternalFrame {
         objarea.find(name, tblArea);
     }//GEN-LAST:event_btnFindActionPerformed
 
-    private void cmbEstateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbEstateActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cmbEstateActionPerformed
-
     private void mcloseMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mcloseMousePressed
         this.setVisible(false);
         Utilitarios.Config.OPENWINDOWS =0;
@@ -391,6 +392,8 @@ public class WinArea extends javax.swing.JInternalFrame {
     private void mañaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mañaMousePressed
         if(!"".equals(lblId.getText())){
             WinArea_Cargos objCargo= new WinArea_Cargos();
+            objCargo.lblidArea.setText(lblId.getText());
+            objCargo.lblArea.setText(txtName.getText());
             objCargo.setResizable(true);
             objCargo.setMaximizable(false);
             objCargo.setIconifiable(true);
@@ -409,6 +412,14 @@ public class WinArea extends javax.swing.JInternalFrame {
     private void mcloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mcloseActionPerformed
    
     }//GEN-LAST:event_mcloseActionPerformed
+
+    private void cmbEstateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbEstateActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbEstateActionPerformed
+
+    private void mitemclearMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemclearMousePressed
+      cleanBox();
+    }//GEN-LAST:event_mitemclearMousePressed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnFind;

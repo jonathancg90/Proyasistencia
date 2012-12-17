@@ -16,6 +16,7 @@ public class WinArea_Cargos extends javax.swing.JInternalFrame {
     
     public WinArea_Cargos() {
         initComponents();
+        lblidArea.setVisible(false);
         
     }
 
@@ -27,7 +28,7 @@ public class WinArea_Cargos extends javax.swing.JInternalFrame {
             objCar = new CargosDAO();
             qs = new Query();
             
-            objCar.find(lblArea.getText(),TblCargos);
+            objCar.find(lblidArea.getText(),TblCargos);
         } catch (Exception e) {
             System.out.println(_error + "Cargos: " + e);
         }
@@ -45,10 +46,11 @@ public class WinArea_Cargos extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        lblArea = new javax.swing.JLabel();
+        lblidArea = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         txtname = new javax.swing.JTextField();
+        lblArea = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         mfile = new javax.swing.JMenu();
         mitemregister = new javax.swing.JMenuItem();
@@ -95,7 +97,7 @@ public class WinArea_Cargos extends javax.swing.JInternalFrame {
 
         jLabel3.setText("Area >> ");
 
-        lblArea.setText("0");
+        lblidArea.setText("0");
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Nuevo cargo"));
 
@@ -121,7 +123,7 @@ public class WinArea_Cargos extends javax.swing.JInternalFrame {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(25, Short.MAX_VALUE)
+                .addContainerGap(27, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(txtname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -201,8 +203,10 @@ public class WinArea_Cargos extends javax.swing.JInternalFrame {
                 .addGap(27, 27, 27)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblArea)
-                .addContainerGap())
+                .addComponent(lblArea, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblidArea)
+                .addGap(103, 103, 103))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -212,13 +216,15 @@ public class WinArea_Cargos extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(25, 25, 25)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(lblArea))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblArea, javax.swing.GroupLayout.DEFAULT_SIZE, 18, Short.MAX_VALUE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel3)
+                        .addComponent(lblidArea)))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 177, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
@@ -244,14 +250,14 @@ public class WinArea_Cargos extends javax.swing.JInternalFrame {
 
     private void mitemregisterMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemregisterMousePressed
     String name = txtname.getText();
-        int idArea = Integer.parseInt(lblArea.getText());
+        int idArea = Integer.parseInt(lblidArea.getText());
         objCar = new CargosDAO();
         int i = objCar.save(idArea,name);
         if (i == 0) {
             JOptionPane.showInputDialog(null,"No se pudo grabar datos");
         }
         else {
-            objCar.find(lblArea.getText(),TblCargos);
+            objCar.find(lblidArea.getText(),TblCargos);
             cleanBox();
             JOptionPane.showMessageDialog(null,"Nuevo cargo registrado");      
         }     
@@ -278,7 +284,7 @@ public class WinArea_Cargos extends javax.swing.JInternalFrame {
                        JOptionPane.showMessageDialog(null,"No se pudo eliminar el area");
                    }
                    else {
-                       objCar.find(lblArea.getText(),TblCargos);
+                       objCar.find(lblidArea.getText(),TblCargos);
                        cleanBox();
                    } 
                 }                       
@@ -301,7 +307,7 @@ public class WinArea_Cargos extends javax.swing.JInternalFrame {
                    m = (DefaultTableModel) this.TblCargos.getModel();
                    int id = Integer.parseInt(String.valueOf(m.getValueAt(fsel, 0)));
                    String name = String.valueOf(m.getValueAt(fsel, 1));
-                   int idarea = Integer.parseInt(lblArea.getText());
+                   int idarea = Integer.parseInt(lblidArea.getText());
                    objCar = new CargosDAO();
                    
                    int i = objCar.update(id,idarea,name);
@@ -309,11 +315,9 @@ public class WinArea_Cargos extends javax.swing.JInternalFrame {
                        JOptionPane.showMessageDialog(null,"No se pudo actualizar el cargo");
                    }
                    else {
-                       objCar.find(lblArea.getText(),TblCargos);
+                       objCar.find(lblidArea.getText(),TblCargos);
                        cleanBox();
                    } 
-
-                   
                 }                       
             catch(NumberFormatException | HeadlessException e) {
                 
@@ -323,7 +327,6 @@ public class WinArea_Cargos extends javax.swing.JInternalFrame {
 
     private void mcloseMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mcloseMousePressed
         this.setVisible(false);
-        Utilitarios.Config.OPENWINDOWS =0;
     }//GEN-LAST:event_mcloseMousePressed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -336,6 +339,7 @@ public class WinArea_Cargos extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     public javax.swing.JLabel lblArea;
+    public javax.swing.JLabel lblidArea;
     private javax.swing.JMenu mclose;
     private javax.swing.JMenu medit;
     private javax.swing.JMenu mfile;
