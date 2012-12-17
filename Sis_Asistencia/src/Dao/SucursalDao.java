@@ -49,7 +49,7 @@ public class SucursalDao extends ConexionBd{
             hp = new Helpers();
             if (filter.length <= 0){
                 filter = new String[0][0];
-            } 
+            }
             String Table = _table;
             datos = qs.getAll(campos,Table,filter);
             tblDatos.setModel(datos);
@@ -108,14 +108,14 @@ public class SucursalDao extends ConexionBd{
             String Table = _table;
             String now = hp.getDateNow();
             
-            objSucursal = new Sucursal(0,name,direccion,idciu,idempr);
+            objSucursal = new Sucursal(id,name,direccion,idciu,idempr);
             //Iniciando consulta y asignando valores
             pt = qs.sqlUpdate(Table);
-            pt.setString(3,objSucursal.getName());
-            pt.setString(4,objSucursal.getDireccion());
-            pt.setInt(2,objSucursal.getIdciu());
-            pt.setInt(5,objSucursal.getIdempr());
-            pt.setInt(1,objSucursal.getIdsuc());
+            pt.setInt(1,objSucursal.getIdciu());
+            pt.setString(2,objSucursal.getName());
+            pt.setString(3,objSucursal.getDireccion());
+            pt.setInt(4,objSucursal.getIdempr());
+            pt.setInt(5,objSucursal.getIdsuc());
             //Ejecucion y cierre
             i= pt.executeUpdate();
             pt.close();
@@ -154,18 +154,35 @@ public class SucursalDao extends ConexionBd{
             return i;
         }
     }
-    public int find(String name,JTable tblDatos) {
+    public int findName(String name,String id, JTable tblDatos) {
         int i = 0;
         try {
             if(!"".equals(name)){
-                filter = new String[1][2];
+                filter = new String[2][2];
                 filter[0][0] = "nombre";
-                filter[0][1] = name.toUpperCase(); 
+                filter[0][1] = name.toUpperCase();
+                filter[1][0] = "int_idempr";
+                filter[1][1] = id;
             }
             getTableAll(tblDatos);
         }
         catch(Exception e){
-            System.out.println(_error + "find : "+e);
+            System.out.println(_error + "findName : "+e);
+        }
+        return i;
+    }
+    public int findId(String id,JTable tblDatos) {
+        int i = 0;
+        try {
+            if(!"".equals(id)){
+                filter = new String[1][2];
+                filter[0][0] = "int_idempr";
+                filter[0][1] = id;
+            }
+            getTableAll(tblDatos);
+        }
+        catch(Exception e){
+            System.out.println(_error + "findId : "+e);
         }
         return i;
     }

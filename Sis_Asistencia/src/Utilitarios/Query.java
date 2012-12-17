@@ -206,7 +206,6 @@ public class Query extends ConexionBd{
             
             s = conexion.createStatement();
             String qs = getQueryList(args,Table, Filter);
-            
             rs = s.executeQuery(qs);
             
             //Llenado Cabecera Jtable

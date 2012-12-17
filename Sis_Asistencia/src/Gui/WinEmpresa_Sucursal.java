@@ -16,13 +16,12 @@ public class WinEmpresa_Sucursal extends javax.swing.JInternalFrame {
     
     public WinEmpresa_Sucursal() {
         initComponents();
-        cargaForm();
     }
     public void cargaForm(){
         try {
             objsucursal = new SucursalDao();
             qs = new Query();
-            objsucursal.getTableAll(tblSucursal);
+            objsucursal.findId(lblIdemp.getText(), tblSucursal);
             qs.loadChoice(cmbCiudad,"ciudad","nombre");
             lblIdemp.setVisible(false);
         } catch (Exception e) {
@@ -67,6 +66,24 @@ public class WinEmpresa_Sucursal extends javax.swing.JInternalFrame {
         medit = new javax.swing.JMenu();
         mitemclear = new javax.swing.JMenuItem();
         mclose = new javax.swing.JMenu();
+
+        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameOpened(evt);
+            }
+        });
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Lista"));
 
@@ -184,9 +201,7 @@ public class WinEmpresa_Sucursal extends javax.swing.JInternalFrame {
                 .addGap(27, 27, 27)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(jPanel3Layout.createSequentialGroup()
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(lblId, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(lblIdemp, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -205,7 +220,7 @@ public class WinEmpresa_Sucursal extends javax.swing.JInternalFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(cmbCiudad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(87, Short.MAX_VALUE))
         );
 
         mfile.setText("Archivo");
@@ -243,6 +258,11 @@ public class WinEmpresa_Sucursal extends javax.swing.JInternalFrame {
 
         mitemclear.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.CTRL_MASK));
         mitemclear.setText("Limpiar");
+        mitemclear.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                mitemclearMousePressed(evt);
+            }
+        });
         medit.add(mitemclear);
 
         jMenuBar1.add(medit);
@@ -288,8 +308,9 @@ public class WinEmpresa_Sucursal extends javax.swing.JInternalFrame {
 
     private void btnFindActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFindActionPerformed
         String name = txtFilter.getText();
+        String id = lblIdemp.getText();
         objsucursal = new SucursalDao();
-        objsucursal.find(name, tblSucursal);
+        objsucursal.findName(name, id, tblSucursal);
     }//GEN-LAST:event_btnFindActionPerformed
 
     private void tblSucursalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblSucursalMouseClicked
@@ -308,7 +329,8 @@ public class WinEmpresa_Sucursal extends javax.swing.JInternalFrame {
                 sucursal = objsucursal.getValues(Integer.parseInt(idsucursal));
                 txtName.setText(sucursal.getName());
                 txtdireccion.setText(sucursal.getDireccion());
-                
+                qs.loadChoiceDefault(cmbCiudad,"ciudad","nombre",sucursal.getIdciu());
+
             }
             catch(Exception e){
                 System.out.println("Gui_Win_sucursal: "+e);
@@ -322,14 +344,13 @@ public class WinEmpresa_Sucursal extends javax.swing.JInternalFrame {
         String direccion=txtdireccion.getText();
         int ciudad = qs.idChoice("ciudad", "nombre", String.valueOf(cmbCiudad.getSelectedItem()));
         int emp = Integer.parseInt(lblIdemp.getText());
-        //int idempr = Integer.valueOf(lblidemp.getText());
         objsucursal = new SucursalDao();
         int i = objsucursal.save(name,direccion, ciudad,emp);
         if (i == 0) {
             JOptionPane.showInputDialog(null,"No se pudo grabar datos");
         }
         else {
-            objsucursal.getTableAll(tblSucursal);
+            objsucursal.findId(lblIdemp.getText(), tblSucursal);
             cleanBox();
             JOptionPane.showMessageDialog(null,"Nueva area registrada");
         }
@@ -339,17 +360,16 @@ public class WinEmpresa_Sucursal extends javax.swing.JInternalFrame {
         int id = Integer.valueOf(lblId.getText());
         String name = txtName.getText();
         String direccion=txtdireccion.getText();
-        int ciudad = cmbCiudad.getSelectedIndex();
-        int idempr = Integer.valueOf(lblidemp.getText());
+        int ciudad = qs.idChoice("ciudad", "nombre", String.valueOf(cmbCiudad.getSelectedItem()));
+        int idempr = Integer.valueOf(lblIdemp.getText());
         objsucursal = new SucursalDao();
-        System.out.println("ID: "+id);
         int i = objsucursal.update(id,name,direccion, ciudad,idempr);
         if (i == 0) {
 
             JOptionPane.showMessageDialog(null, "No se pudo actualizar datos");
         }
         else {
-            objsucursal.getTableAll(tblSucursal);
+            objsucursal.findId(lblIdemp.getText(), tblSucursal);
             cleanBox();
             JOptionPane.showMessageDialog(null, "Sucursal actualizada");
         }
@@ -364,7 +384,7 @@ public class WinEmpresa_Sucursal extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null,"No se pudo eliminar la sucursal");
         }
         else {
-            objsucursal.getTableAll(tblSucursal);
+            objsucursal.findId(lblIdemp.getText(), tblSucursal);
             cleanBox();
             JOptionPane.showMessageDialog(null,"Sucursal eliminada");
         }
@@ -376,8 +396,15 @@ public class WinEmpresa_Sucursal extends javax.swing.JInternalFrame {
 
     private void mcloseMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mcloseMousePressed
         this.setVisible(false);
-        Utilitarios.Config.OPENWINDOWS =0;
     }//GEN-LAST:event_mcloseMousePressed
+
+    private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
+     cargaForm();
+    }//GEN-LAST:event_formInternalFrameOpened
+
+    private void mitemclearMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemclearMousePressed
+     cleanBox();
+    }//GEN-LAST:event_mitemclearMousePressed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnFind;

@@ -65,7 +65,6 @@ public class CargosDAO extends ConexionBd{
             if(!"".equals(idare)){
                 filter = new String[1][2];
                 filter[0][0] = "int_idare";
-                
                 filter[0][1] = idare;
             }
             getTableAll(tblDatos);
