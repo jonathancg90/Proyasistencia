@@ -339,16 +339,21 @@ public class WinEmpresa extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnFindActionPerformed
 
     private void mañoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mañoMousePressed
-        WinEmpresa_Sucursal objsucursal= new WinEmpresa_Sucursal();
+        if(!"".equals(this.lblId.getText())){
+            WinEmpresa_Sucursal objsucursal= new WinEmpresa_Sucursal();
 
-        objsucursal.setResizable(true);
-        objsucursal.lblidemp.setText(txtName.getText());
-        
-        objsucursal.setMaximizable(true);
-        objsucursal.setIconifiable(true);
-        WinMdi.jdpContenedor.add(objsucursal);
+            objsucursal.setResizable(true);
+            objsucursal.lblidemp.setText(txtName.getText());
+            objsucursal.lblIdemp.setText(lblId.getText());
 
-        objsucursal.setVisible(true);
+            objsucursal.setMaximizable(true);
+            objsucursal.setIconifiable(true);
+            WinMdi.jdpContenedor.add(objsucursal);
+
+            objsucursal.setVisible(true);   
+        } else {
+            JOptionPane.showMessageDialog(null,"Debe de seleccionar una empresa para poder ingresar sus sucursales");
+        }
     }//GEN-LAST:event_mañoMousePressed
 
     private void mcloseMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mcloseMousePressed

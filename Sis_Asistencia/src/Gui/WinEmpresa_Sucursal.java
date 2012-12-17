@@ -24,6 +24,7 @@ public class WinEmpresa_Sucursal extends javax.swing.JInternalFrame {
             qs = new Query();
             objsucursal.getTableAll(tblSucursal);
             qs.loadChoice(cmbCiudad,"ciudad","nombre");
+            lblIdemp.setVisible(false);
         } catch (Exception e) {
             System.out.println("Gui_WinMdi: " + e);
         }
@@ -31,7 +32,7 @@ public class WinEmpresa_Sucursal extends javax.swing.JInternalFrame {
     public void cleanBox(){
         lblId.setText("");
         txtName.setText("");
-        lblidemp.setText("");
+        txtdireccion.setText("");
         txtFilter.setText("");
     }
 
@@ -57,6 +58,7 @@ public class WinEmpresa_Sucursal extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         lblId = new javax.swing.JLabel();
+        lblIdemp = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         mfile = new javax.swing.JMenu();
         mitemregister = new javax.swing.JMenuItem();
@@ -141,6 +143,8 @@ public class WinEmpresa_Sucursal extends javax.swing.JInternalFrame {
 
         lblId.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
+        lblIdemp.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -151,8 +155,10 @@ public class WinEmpresa_Sucursal extends javax.swing.JInternalFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addGap(89, 89, 89)
-                        .addComponent(lblId, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(37, Short.MAX_VALUE))
+                        .addComponent(lblId, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(lblIdemp, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel5)
@@ -162,27 +168,27 @@ public class WinEmpresa_Sucursal extends javax.swing.JInternalFrame {
                             .addComponent(txtdireccion)
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(cmbCiudad, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))))
+                                .addGap(0, 61, Short.MAX_VALUE))))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
                             .addComponent(jLabel3))
                         .addGap(40, 40, 40)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(lblidemp, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap())
-                            .addComponent(txtName)))))
+                            .addComponent(txtName)
+                            .addComponent(lblidemp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(27, 27, 27)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(lblId, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel3Layout.createSequentialGroup()
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(lblId, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblIdemp, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
@@ -315,9 +321,10 @@ public class WinEmpresa_Sucursal extends javax.swing.JInternalFrame {
     String name = txtName.getText();
         String direccion=txtdireccion.getText();
         int ciudad = qs.idChoice("ciudad", "nombre", String.valueOf(cmbCiudad.getSelectedItem()));
+        int emp = Integer.parseInt(lblIdemp.getText());
         //int idempr = Integer.valueOf(lblidemp.getText());
         objsucursal = new SucursalDao();
-        int i = objsucursal.save(name,direccion, ciudad,1);
+        int i = objsucursal.save(name,direccion, ciudad,emp);
         if (i == 0) {
             JOptionPane.showInputDialog(null,"No se pudo grabar datos");
         }
@@ -386,6 +393,7 @@ public class WinEmpresa_Sucursal extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     public javax.swing.JLabel lblId;
+    public javax.swing.JLabel lblIdemp;
     public javax.swing.JLabel lblidemp;
     private javax.swing.JMenu mclose;
     private javax.swing.JMenu medit;

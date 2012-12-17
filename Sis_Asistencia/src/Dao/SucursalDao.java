@@ -181,10 +181,10 @@ public class SucursalDao extends ConexionBd{
             //Preparando
             String campos[] = new String[4];
             campos = qs.getRecords(_table,idusu);
-            objSucursal.setName(campos[2]);
-            objSucursal.setDireccion(campos[3]);
-            objSucursal.setIdciu(Integer.valueOf(campos[1]));
-            objSucursal.setIdempr(Integer.valueOf(campos[4]));
+            objSucursal.setName(campos[3]);
+            objSucursal.setDireccion(campos[4]);
+            objSucursal.setIdciu(Integer.valueOf(campos[2]));
+            objSucursal.setIdempr(Integer.valueOf(campos[5]));
             
             return objSucursal;
         }
