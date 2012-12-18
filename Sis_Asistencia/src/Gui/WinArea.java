@@ -338,20 +338,20 @@ public class WinArea extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_mcloseMousePressed
 
     private void mitemeliminarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemeliminarMousePressed
-        int i;
-        i= JOptionPane.showConfirmDialog(null,"¿Esta seguro de eliminar este registro?","Aviso",JOptionPane.OK_CANCEL_OPTION,JOptionPane.WARNING_MESSAGE);
-        if(i==0){
+
             int id = Integer.valueOf(lblId.getText());
 
             objarea = new AreaDAO();
-            i = objarea.delete(id);
+            int i = objarea.delete(id);
             if(i==0) {
                 JOptionPane.showMessageDialog(null,"No se pudo eliminar el area");
+                
             }
             else {
+                JOptionPane.showMessageDialog(null,"Area eliminada");
                 objarea.getTableAll(tblArea);
                 cleanBox();
-            } 
+           
          }
     }//GEN-LAST:event_mitemeliminarMousePressed
 
@@ -380,7 +380,7 @@ public class WinArea extends javax.swing.JInternalFrame {
         objarea = new AreaDAO();
         int i = objarea.save(name, estate);
         if (i == 0) {
-            JOptionPane.showInputDialog(null,"No se pudo grabar datos");
+            JOptionPane.showMessageDialog(null,"No se pudo grabar datos");
         }
         else {
             objarea.getTableAll(tblArea);

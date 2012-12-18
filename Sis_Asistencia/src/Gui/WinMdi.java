@@ -141,6 +141,11 @@ public class WinMdi extends javax.swing.JFrame {
         SubmenuCrit.add(JmitemCiudad);
 
         jMenuItem1.setText("Estado. Empleado");
+        jMenuItem1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jMenuItem1MousePressed(evt);
+            }
+        });
         SubmenuCrit.add(jMenuItem1);
 
         jMenuItem2.setText("Dias no laborables");
@@ -206,7 +211,7 @@ public class WinMdi extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jdpContenedor, javax.swing.GroupLayout.DEFAULT_SIZE, 313, Short.MAX_VALUE)
+            .addComponent(jdpContenedor, javax.swing.GroupLayout.DEFAULT_SIZE, 317, Short.MAX_VALUE)
         );
 
         pack();
@@ -451,6 +456,21 @@ public class WinMdi extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null,"Cierre la ventana abierta para abrir otra");
         }
     }//GEN-LAST:event_jmItemModulosMousePressed
+
+    private void jMenuItem1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem1MousePressed
+        WinEstadoEmpleado objest= new WinEstadoEmpleado();
+        val = new Validators();
+        objest.setResizable(true);
+        objest.setMaximizable(true);
+        objest.setIconifiable(true);
+        //obj_Asis.setClosable(true);
+        jdpContenedor.add(objest);
+        if(val.EntryForms()){
+            objest.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(null,"Cierre la ventana abierta para abrir otra");
+        }
+    }//GEN-LAST:event_jMenuItem1MousePressed
 
 
     public static void main(String args[]) {
