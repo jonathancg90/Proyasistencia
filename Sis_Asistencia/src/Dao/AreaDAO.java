@@ -1,12 +1,11 @@
 
 package Dao;
 
+import Javabeans.Area;
 import Utilitarios.ConexionBd;
 import Utilitarios.Helpers;
 import Utilitarios.Query;
 import Utilitarios.Validators;
-import Javabeans.Area;
-import Javabeans.Usuario;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import javax.swing.JTable;
