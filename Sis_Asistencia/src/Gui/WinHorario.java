@@ -17,7 +17,7 @@ public class WinHorario extends javax.swing.JInternalFrame {
         try {
             objhora = new HorariosDAO();
             qs = new Query();
-            //objhora.getTableAll(tblhora);
+            objhora.getTableAll(tblhora);
             qs.loadState(cbofindestado,false);
             qs.loadState(cboestado,false);
             qs.loadType(cbofindtipo,0);
