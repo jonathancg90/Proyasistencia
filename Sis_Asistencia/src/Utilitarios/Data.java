@@ -22,9 +22,9 @@ public class Data {
         G_BOOLEAN[0]="false";
         G_BOOLEAN[1]="true";
         
-        G_TYPEHOR[0]="FULL TIME";
-        G_TYPEHOR[1]="PART TIME";
-        G_TYPEHOR[2]="NIGHT TIME";
+        G_TYPEHOR[0]="Full time";
+        G_TYPEHOR[1]="Part time";
+        G_TYPEHOR[2]="Night time";
         
         G_EXCLUDE[0]="created";
     }

@@ -1,22 +1,12 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Gui;
 
 import Dao.HorariosDAO;
 import Utilitarios.Query;
 
-/**
- *
- * @author platano
- */
 public class WinHorario extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form WinHorario
-     */
-     Query qs;
+    Query qs;
     HorariosDAO objhora;
 
     public WinHorario() {
@@ -30,8 +20,8 @@ public class WinHorario extends javax.swing.JInternalFrame {
             //objhora.getTableAll(tblhora);
             qs.loadState(cbofindestado,false);
             qs.loadState(cboestado,false);
-            qs.loadChoice(cbofindtipo,"tipohorario","nombre");
-            qs.loadChoice(cbotipo,"tipohorario","nombre");
+            qs.loadType(cbofindtipo,0);
+            qs.loadType(cbotipo,0);
         } catch (Exception e) {
             System.out.println("Gui_WinHorarios_cargaForm: " + e);
         }

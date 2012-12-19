@@ -265,6 +265,23 @@ public class Query extends ConexionBd{
             System.out.println(_error+"loadState: "+e);
         }
     }
+    public void loadType(JComboBox cmbType, int value){
+        try{
+            dt = new Data();
+            MChoice = new DefaultComboBoxModel();
+            MChoice.addElement(dt.G_TYPEHOR[value]);
+            for(int i=0;i<dt.G_TYPEHOR.length;i++){
+                if(value!=i){
+                  MChoice.addElement(dt.G_TYPEHOR[i]);  
+                }
+            }
+
+            cmbType.setModel(MChoice);   
+        }
+        catch(Exception e){
+            System.out.println(_error+"loadType: "+e);
+        }
+    }
      /*
      * Autocarga de los combos
      */
