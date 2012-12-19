@@ -5,6 +5,7 @@ import Dao.AreaDAO;
 import Javabeans.Area;
 import Utilitarios.Data;
 import Utilitarios.Query;
+import Utilitarios.Validators;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -17,6 +18,7 @@ public class WinArea extends javax.swing.JInternalFrame {
     private Area area;
     private Query qs;
     private Data dt;
+    private Validators val;
     
     public WinArea() {
         initComponents();
@@ -42,7 +44,6 @@ public class WinArea extends javax.swing.JInternalFrame {
         lblModified.setText("");
         txtFilter.setText("");
     }
-            
    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -110,9 +111,7 @@ public class WinArea extends javax.swing.JInternalFrame {
                         .add(42, 42, 42)
                         .add(pnlOpcionesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                             .add(txtName)
-                            .add(pnlOpcionesLayout.createSequentialGroup()
-                                .add(lblId, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 50, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .add(lblId, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 50, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
                     .add(org.jdesktop.layout.GroupLayout.TRAILING, pnlOpcionesLayout.createSequentialGroup()
                         .add(pnlOpcionesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                             .add(jLabel3)
@@ -153,7 +152,7 @@ public class WinArea extends javax.swing.JInternalFrame {
             .add(pnlMantenimientoLayout.createSequentialGroup()
                 .addContainerGap()
                 .add(pnlOpciones, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnlMantenimientoLayout.setVerticalGroup(
             pnlMantenimientoLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -338,24 +337,30 @@ public class WinArea extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_mcloseMousePressed
 
     private void mitemeliminarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemeliminarMousePressed
-
+    val = new Validators();    
+    Object[] datos = {lblId.getText()};
+    if(val.validar(datos)){ 
             int id = Integer.valueOf(lblId.getText());
 
             objarea = new AreaDAO();
             int i = objarea.delete(id);
             if(i==0) {
                 JOptionPane.showMessageDialog(null,"No se pudo eliminar el area");
-                
             }
             else {
                 JOptionPane.showMessageDialog(null,"Area eliminada");
                 objarea.getTableAll(tblArea);
                 cleanBox();
-           
          }
     }//GEN-LAST:event_mitemeliminarMousePressed
-
+    else {
+        JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
+    }
+}
     private void mitemupdateMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemupdateMousePressed
+    val = new Validators();    
+    Object[] datos = {txtName.getText(),lblId.getText()};
+    if(val.validar(datos)){    
         dt = new Data();
         int id = Integer.valueOf(lblId.getText());
         String name = txtName.getText();
@@ -363,30 +368,40 @@ public class WinArea extends javax.swing.JInternalFrame {
         objarea = new AreaDAO();
         int i = objarea.update(id,name,estate);
         if (i == 0) {
-            
             JOptionPane.showMessageDialog(null, "No se pudo actualizar datos");
         }
         else {
             objarea.getTableAll(tblArea);
             cleanBox();
             JOptionPane.showMessageDialog(null, "Area actualizada");
-        } 
+        }
+        
     }//GEN-LAST:event_mitemupdateMousePressed
-
+    else {
+        JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
+    }
+}
     private void mitemregisterMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemregisterMousePressed
-        dt = new Data();
-        String name = txtName.getText();
-        boolean estate = Boolean.valueOf(dt.G_BOOLEAN[cmbEstate.getSelectedIndex()]);
-        objarea = new AreaDAO();
-        int i = objarea.save(name, estate);
-        if (i == 0) {
-            JOptionPane.showMessageDialog(null,"No se pudo grabar datos");
+    val = new Validators();    
+    Object[] datos = {txtName.getText()};
+        if(val.validar(datos)){
+            dt = new Data();
+            String name = txtName.getText();
+            boolean estate = Boolean.valueOf(dt.G_BOOLEAN[cmbEstate.getSelectedIndex()]);
+            objarea = new AreaDAO();
+            int i = objarea.save(name, estate);
+            if (i == 0) {
+                JOptionPane.showMessageDialog(null,"No se pudo grabar datos");
+            }
+            else {
+                objarea.getTableAll(tblArea);
+                cleanBox();
+                JOptionPane.showMessageDialog(null,"Nueva area registrada");      
+            }
         }
         else {
-            objarea.getTableAll(tblArea);
-            cleanBox();
-            JOptionPane.showMessageDialog(null,"Nueva area registrada");      
-        }
+            JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
+        }  
     }//GEN-LAST:event_mitemregisterMousePressed
 
     private void mañaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mañaMousePressed
