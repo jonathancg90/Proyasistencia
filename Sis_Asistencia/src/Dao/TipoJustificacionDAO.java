@@ -28,11 +28,11 @@ public class TipoJustificacionDAO extends ConexionBd{
     PreparedStatement  pt = null;
     
     public TipoJustificacionDAO(){
-        _table = "tipjustificacion";
+        _table = "tipo_justificaciones";
         _error = "Dao_JustificacionesDAO_";
         filter = new String[0][0];
         campos = new String[2];
-        campos[0]="idjus";
+        campos[0]="idtip_jus";
         campos[1]="nombre";
         witdhcolum = new int[1];
         witdhcolum[0]=50;
@@ -60,23 +60,18 @@ public class TipoJustificacionDAO extends ConexionBd{
     /*
      * Registro de TipoJustificacion
      */
-    public int save(String name,boolean state){
+    public int save(String name){
        int i=0;
         try{
             //Preparando
-            Date date = new Date(0000-00-00);
             getConexion();
             hp = new Helpers();
             qs= new Query();
-            String now = hp.getDateNow();
             String Table = this._table;
-            objjus = new TipoJustificacion(0,name,state,now,now);
+            objjus = new TipoJustificacion(0,name);
             //Iniciando consulta y asignando valores
             pt = qs.sqlRegister(Table);
             pt.setString(1,objjus.getName());
-            pt.setDate(2,date.valueOf(objjus.getCreated()));
-            pt.setDate(3,date.valueOf(objjus.getModified()));
-            pt.setBoolean(4,objjus.isState());
             //Ejecucion y cierre
             i= pt.executeUpdate();
             pt.close();
@@ -92,23 +87,19 @@ public class TipoJustificacionDAO extends ConexionBd{
     /*
      * Actualizacion de los TipoJustificacion
      */
-    public int update(int id, String name, boolean state){
+    public int update(int id, String name){
        int i=0;
         try{           
             //Preparando
             getConexion();
-            Date date = new Date(0000-00-00);
             hp = new Helpers();
             qs= new Query();
             String Table = this._table;
-            String now = hp.getDateNow();
-            objjus = new TipoJustificacion(id,name,state,now,now);
+            objjus = new TipoJustificacion(id,name);
             //Iniciando consulta y asignando valores
             pt = qs.sqlUpdate(Table);
             
-            pt.setInt(4,objjus.getIdjus());
-            pt.setDate(2,date.valueOf(objjus.getModified()));
-            pt.setBoolean(3,objjus.isState());
+            pt.setInt(2,objjus.getIdjus());
             pt.setString(1,objjus.getName());
             //Ejecucion y cierre
             i= pt.executeUpdate();
@@ -176,8 +167,6 @@ public class TipoJustificacionDAO extends ConexionBd{
             String campos[] = new String[1];
             campos = qs.getRecords(this._table,idjus);
             objjus.setName(campos[2]);
-            objjus.setModified(campos[4]);
-            objjus.setState(Boolean.valueOf(campos[5]));
             
             return objjus;
         }
