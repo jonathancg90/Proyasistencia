@@ -187,4 +187,20 @@ public class SalariosDAO extends ConexionBd {
         }
         
     }
+    
+    public int findId(String id,JTable tblDatos) {
+        int i = 0;
+        try {
+            if(!"".equals(id)){
+                filter = new String[1][2];
+                filter[0][0] = "int_idemp";
+                filter[0][1] = id;
+            }
+            getTableAll(tblDatos);
+        }
+        catch(Exception e){
+            System.out.println(_error + "findId : "+e);
+        }
+        return i;
+    }
 }

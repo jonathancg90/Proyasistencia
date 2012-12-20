@@ -84,6 +84,7 @@ public class WinEmpresa extends javax.swing.JInternalFrame {
         medit = new javax.swing.JMenu();
         mitemclear = new javax.swing.JMenuItem();
         maño = new javax.swing.JMenu();
+        nolaborables = new javax.swing.JMenu();
         mclose = new javax.swing.JMenu();
 
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -284,13 +285,18 @@ public class WinEmpresa extends javax.swing.JInternalFrame {
         });
         jMenuBar1.add(maño);
 
+        nolaborables.setText("añadir dias no laborables");
+        nolaborables.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                nolaborablesMousePressed(evt);
+            }
+        });
+        jMenuBar1.add(nolaborables);
+
         mclose.setText("Cerrar");
         mclose.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 mcloseMousePressed(evt);
-            }
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                mcloseMouseReleased(evt);
             }
         });
         jMenuBar1.add(mclose);
@@ -423,9 +429,22 @@ public class WinEmpresa extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_mitemregisterMousePressed
 
-    private void mcloseMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mcloseMouseReleased
-        // TODO add your handling code here:
-    }//GEN-LAST:event_mcloseMouseReleased
+    private void nolaborablesMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nolaborablesMousePressed
+       if(!"".equals(this.lblId.getText())){
+            WinNolaborables objnolaborables= new WinNolaborables();
+
+            objnolaborables.setResizable(true);
+            objnolaborables.lblIdempr.setText(lblId.getText());
+
+            objnolaborables.setMaximizable(true);
+            objnolaborables.setIconifiable(true);
+            WinMdi.jdpContenedor.add(objnolaborables);
+
+            objnolaborables.setVisible(true);   
+        } else {
+            JOptionPane.showMessageDialog(null,"Debe de seleccionar una empresa para poder ingresar sus dias no laborables");
+        }
+    }//GEN-LAST:event_nolaborablesMousePressed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnFind;
@@ -453,6 +472,7 @@ public class WinEmpresa extends javax.swing.JInternalFrame {
     private javax.swing.JMenuItem mitemdelete;
     private javax.swing.JMenuItem mitemregister;
     private javax.swing.JMenuItem mitemupdate;
+    private javax.swing.JMenu nolaborables;
     private javax.swing.JTable tblempresa;
     private javax.swing.JTextField txtCantTrab;
     private javax.swing.JTextField txtFilter;

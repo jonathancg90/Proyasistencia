@@ -1,65 +1,59 @@
 
 package Gui;
 
-
-import Dao.VacacionesDAO;
-import Javabeans.Vacaciones;
+import Dao.NolaborablesDAO;
+import Javabeans.Nolaborables;
 import Utilitarios.Config;
 import Utilitarios.Query;
-
+import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import Utilitarios.Helpers;
-
 import java.text.DateFormat;
 import java.util.Calendar;
 
-import java.util.Date;
+import Utilitarios.Helpers;
 import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
 
-public class WinVacaciones extends javax.swing.JInternalFrame {
+public class WinNolaborables extends javax.swing.JInternalFrame {
 
-    private VacacionesDAO objVacaciones;
-    private Vacaciones Vacaciones;
+    private NolaborablesDAO objNolaborables;
+    private Nolaborables Nolaborables;
     private Query qs;
     private Config cg;
     private Helpers hp;
     private DateFormat format;
-    private Date date,date2;
-    private Calendar calendar,calendar2;
+    private Date date;
+    private Date date2;
+    private Calendar calendar;
+    private Calendar calendar2;
     
-    
-    public WinVacaciones() {
+    public WinNolaborables() {
         initComponents();
-        
         format=new SimpleDateFormat("yyyy-MM-dd");
-        cboF_inicio.setDateFormat(format);
-        cboF_final.setDateFormat(format);
+        cboFecha.setDateFormat(format);
         
     }
-    
-    
-     public void cargaForm(){
+
+    public void cargaForm(){
         try {
-            objVacaciones = new VacacionesDAO();
+            objNolaborables = new NolaborablesDAO();
             qs = new Query();
-            objVacaciones.findId(lblIdemp.getText(), tblVacaciones);
-            lblIdemp.setVisible(false);
+            objNolaborables.findId(lblIdempr.getText(), tblNolaborable);
+            lblIdempr.setVisible(false);
         } catch (Exception e) {
-            System.out.println("Gui_WinVacaciones: " + e);
+            System.out.println("Gui_WinNolaborales: " + e);
         }
     }
     
     public void cleanBox(){
         
-        lblIdvacaciones.setText("");
+        lblIdnolaborable.setText("");
         lblMod.setText("");
-        cboF_inicio.setSelectedDate(null);
-        cboF_final.setSelectedDate(null);
+        cboFecha.setSelectedDate(null);
         
     }
-
+    
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -67,17 +61,16 @@ public class WinVacaciones extends javax.swing.JInternalFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
-        tblVacaciones = new javax.swing.JTable();
+        tblNolaborable = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        lblIdemp = new javax.swing.JLabel();
-        lblIdvacaciones = new javax.swing.JLabel();
+        lblIdempr = new javax.swing.JLabel();
+        lblIdnolaborable = new javax.swing.JLabel();
+        jCheckBox1 = new javax.swing.JCheckBox();
         jLabel5 = new javax.swing.JLabel();
         lblMod = new javax.swing.JLabel();
-        cboF_inicio = new datechooser.beans.DateChooserCombo();
+        cboFecha = new datechooser.beans.DateChooserCombo();
         jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        cboF_final = new datechooser.beans.DateChooserCombo();
         jMenuBar1 = new javax.swing.JMenuBar();
         mfile = new javax.swing.JMenu();
         mitemregister = new javax.swing.JMenuItem();
@@ -105,9 +98,9 @@ public class WinVacaciones extends javax.swing.JInternalFrame {
             }
         });
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Lista de vacaciones", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, null, java.awt.Color.black));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Lista de dias no laborables", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, null, java.awt.Color.black));
 
-        tblVacaciones.setModel(new javax.swing.table.DefaultTableModel(
+        tblNolaborable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
                 {},
@@ -118,12 +111,12 @@ public class WinVacaciones extends javax.swing.JInternalFrame {
 
             }
         ));
-        tblVacaciones.addMouseListener(new java.awt.event.MouseAdapter() {
+        tblNolaborable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tblVacacionesMouseClicked(evt);
+                tblNolaborableMouseClicked(evt);
             }
         });
-        jScrollPane4.setViewportView(tblVacaciones);
+        jScrollPane4.setViewportView(tblNolaborable);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -138,25 +131,25 @@ public class WinVacaciones extends javax.swing.JInternalFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 251, Short.MAX_VALUE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 247, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Ingreso de vacaciones"));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Ingreso de dias no laborables"));
 
-        jLabel2.setText("idvacaciones");
+        jLabel2.setText("idNolaborable");
 
-        lblIdemp.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        lblIdempr.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        lblIdvacaciones.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        lblIdnolaborable.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        jCheckBox1.setText("Status");
 
         jLabel5.setText("Modificado");
 
         lblMod.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jLabel7.setText("Fecha de inicio");
-
-        jLabel8.setText("Fecha final");
+        jLabel7.setText("Fecha ");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -166,53 +159,46 @@ public class WinVacaciones extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addGap(47, 47, 47)
-                        .addComponent(lblMod, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblIdempr, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel8)
-                            .addComponent(jLabel2))
-                        .addGap(29, 29, 29)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(lblIdvacaciones, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(lblIdemp, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(cboF_inicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cboF_final, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel7))
+                                .addGap(47, 47, 47)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(cboFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblMod, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblIdnolaborable, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jCheckBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 5, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(jLabel2))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(3, 3, 3)
-                        .addComponent(lblIdvacaciones, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(lblIdemp, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(19, 19, 19)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addGap(3, 3, 3)
+                            .addComponent(jLabel2))
+                        .addComponent(lblIdempr, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblIdnolaborable, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jCheckBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cboF_inicio, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
-                        .addComponent(cboF_final, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(28, 28, 28)))
+                    .addComponent(cboFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel5)
                     .addComponent(lblMod, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(107, 107, 107))
+                .addGap(71, 71, 71))
         );
 
         mfile.setText("Archivo");
@@ -269,86 +255,80 @@ public class WinVacaciones extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(0, 12, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(24, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(22, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void tblVacacionesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblVacacionesMouseClicked
+    private void tblNolaborableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblNolaborableMouseClicked
         date = new Date();
         date2=new Date();
         calendar= new GregorianCalendar();
         calendar2= new GregorianCalendar();
         int fsel;
-        fsel = this.tblVacaciones.getSelectedRow();
+        fsel = this.tblNolaborable.getSelectedRow();
         if (fsel == -1) {
             //No se ha seleccionado registo en Jtable
         }
         else {
             try {
-                Vacaciones = new Vacaciones();
+                Nolaborables = new Nolaborables();
                 DefaultTableModel m = new DefaultTableModel();
-                m = (DefaultTableModel) this.tblVacaciones.getModel();
-                String idVacaciones = String.valueOf(m.getValueAt(fsel, 0));
+                m = (DefaultTableModel) this.tblNolaborable.getModel();
+                String idNolaborables = String.valueOf(m.getValueAt(fsel, 0));
                 //Asigando valores obtenidos
-                lblIdvacaciones.setText(idVacaciones);
-                Vacaciones = objVacaciones.getValues(Integer.parseInt(idVacaciones));
+                lblIdnolaborable.setText(idNolaborables);
+                Nolaborables = objNolaborables.getValues(Integer.parseInt(idNolaborables));
                 
-                lblIdemp.setText(String.valueOf(Vacaciones.getIdemp()));
-                lblMod.setText(Vacaciones.getModified());
-                
-                date=format.parse(Vacaciones.getF_ini());
+                lblIdempr.setText(String.valueOf(Nolaborables.getIdempr()));
+                lblMod.setText(Nolaborables.getModified());
+                date=format.parse(Nolaborables.getFecha());
                 calendar.setTime(date);
-                cboF_inicio.setSelectedDate(calendar);
+                cboFecha.setSelectedDate(calendar);
+
                 
-                date2=format.parse(Vacaciones.getF_final());
-                calendar2.setTime(date2);
-                cboF_final.setSelectedDate(calendar2);
 
             }
             catch (Exception e) {
-                System.out.println("Gui_Win_Vacaciones " + e);
+                System.out.println("Gui_Win_Nolaborables " + e);
             }
 
         }
 
-    }//GEN-LAST:event_tblVacacionesMouseClicked
+    }//GEN-LAST:event_tblNolaborableMouseClicked
 
     private void mitemregisterMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemregisterMousePressed
         try{
             hp = new Helpers();
-            String F_inicio=cboF_inicio.getText();
-            String F_final=cboF_final.getText();
-            System.out.println(F_inicio +" - " +F_final);
+            String Fecha=cboFecha.getText();
             
             
-            int idemp=Integer.valueOf(lblIdemp.getText());
+            boolean status=jCheckBox1.isSelected();
+            
+            int idempr=Integer.valueOf(lblIdempr.getText());
 
-            int i = objVacaciones.save(F_inicio,F_final,idemp);
+            int i = objNolaborables.save(Fecha,status,idempr);
             if (i == 0) {
                 JOptionPane.showMessageDialog(null,"No se pudo grabar datos");
             }
             else {
-                objVacaciones.findId(lblIdemp.getText(), tblVacaciones);
+                objNolaborables.findId(lblIdempr.getText(), tblNolaborable);
                 cleanBox();
-                JOptionPane.showMessageDialog(null,"Nueva vacacion registrado");
+                JOptionPane.showMessageDialog(null,"Nueva dia no laborable registrado");
             }
         }catch(Exception e){System.out.println(""+e);}
 
@@ -357,22 +337,23 @@ public class WinVacaciones extends javax.swing.JInternalFrame {
     private void mitemupdateMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemupdateMousePressed
 
         hp = new Helpers();
-        int idsalario=Integer.parseInt(lblIdvacaciones.getText());
-        int idemp=Integer.parseInt(lblIdemp.getText());
-        String F_inicio=cboF_inicio.getText();
-        String F_final=cboF_final.getText();
-
+        int idnolaborables=Integer.parseInt(lblIdnolaborable.getText());
+        int idempr=Integer.parseInt(lblIdempr.getText());
+        String Fecha=cboFecha.getText();
         
 
-        int i = objVacaciones.update(idsalario,F_inicio,F_final,idemp);
+        boolean status=jCheckBox1.isSelected();
+        
+
+        int i = objNolaborables.update(idnolaborables,Fecha,status,idempr);
         if (i == 0) {
 
             JOptionPane.showMessageDialog(null, "No se pudo actualizar datos");
         }
         else {
-            objVacaciones.findId(lblIdemp.getText(), tblVacaciones);
+            objNolaborables.findId(lblIdempr.getText(), tblNolaborable);
             cleanBox();
-            JOptionPane.showMessageDialog(null, "Vacacion actualizado");
+            JOptionPane.showMessageDialog(null, "dia no laborable actualizado");
         }
     }//GEN-LAST:event_mitemupdateMousePressed
 
@@ -381,14 +362,14 @@ public class WinVacaciones extends javax.swing.JInternalFrame {
         int i;
         i= JOptionPane.showConfirmDialog(null,"¿Esta seguro de eliminar este registro?","Aviso",JOptionPane.OK_CANCEL_OPTION,JOptionPane.WARNING_MESSAGE);
         if(i==0){
-            int id = Integer.valueOf(lblIdvacaciones.getText());
+            int id = Integer.valueOf(lblIdnolaborable.getText());
 
-            i = objVacaciones.delete(id);
+            i = objNolaborables.delete(id);
             if(i==0) {
-                JOptionPane.showMessageDialog(null,"No se pudo eliminar la vacacion");
+                JOptionPane.showMessageDialog(null,"No se pudo eliminar el dia no laborable");
             }
             else {
-                objVacaciones.findId(lblIdemp.getText(), tblVacaciones);
+                objNolaborables.findId(lblIdempr.getText(), tblNolaborable);
                 cleanBox();
             }
         }
@@ -404,18 +385,17 @@ public class WinVacaciones extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_formInternalFrameOpened
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private datechooser.beans.DateChooserCombo cboF_final;
-    private datechooser.beans.DateChooserCombo cboF_inicio;
+    private datechooser.beans.DateChooserCombo cboFecha;
+    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane4;
-    public javax.swing.JLabel lblIdemp;
-    private javax.swing.JLabel lblIdvacaciones;
+    public javax.swing.JLabel lblIdempr;
+    private javax.swing.JLabel lblIdnolaborable;
     private javax.swing.JLabel lblMod;
     private javax.swing.JMenu mclose;
     private javax.swing.JMenu medit;
@@ -424,6 +404,6 @@ public class WinVacaciones extends javax.swing.JInternalFrame {
     private javax.swing.JMenuItem mitemdelete;
     private javax.swing.JMenuItem mitemregister;
     private javax.swing.JMenuItem mitemupdate;
-    private javax.swing.JTable tblVacaciones;
+    private javax.swing.JTable tblNolaborable;
     // End of variables declaration//GEN-END:variables
 }

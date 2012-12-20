@@ -67,13 +67,20 @@
             <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="ma&#xf1;oMousePressed"/>
           </Events>
         </Menu>
+        <Menu class="javax.swing.JMenu" name="nolaborables">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="a&#xf1;adir dias no laborables"/>
+          </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="nolaborablesMousePressed"/>
+          </Events>
+        </Menu>
         <Menu class="javax.swing.JMenu" name="mclose">
           <Properties>
             <Property name="text" type="java.lang.String" value="Cerrar"/>
           </Properties>
           <Events>
             <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="mcloseMousePressed"/>
-            <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="mcloseMouseReleased"/>
           </Events>
         </Menu>
       </SubComponents>

@@ -5,19 +5,19 @@ import Utilitarios.ConexionBd;
 import Utilitarios.Helpers;
 import Utilitarios.Query;
 
-import Javabeans.Vacaciones;
+import Javabeans.Nolaborables;
 import Utilitarios.Validators;
 import java.math.BigDecimal;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import Gui.WinVacaciones;
+import Gui.WinNolaborables;
 
-public class VacacionesDAO extends ConexionBd {
+public class NolaborablesDAO extends ConexionBd{
     
     private Query qs;
-    private Vacaciones objVacaciones;
+    private Nolaborables objNolaborables;
     private Helpers hp;
     private String filter[][];
     private int witdhcolum[];
@@ -29,14 +29,13 @@ public class VacacionesDAO extends ConexionBd {
     PreparedStatement  pt = null;
     
      
-     public VacacionesDAO(){
-        _table = "vacaciones";
-        _error = "Dao_VacacionesDAO_";
+     public NolaborablesDAO(){
+        _table = "nolaborables";
+        _error = "Dao_NolaborablesDAO_";
         filter = new String[0][0];
-        campos = new String[3];
-        campos[0]="idvac";
-        campos[1]="f_ini";
-        campos[2]="f_final";
+        campos = new String[2];
+        campos[0]="idnolab";
+        campos[1]="fecha";
         witdhcolum = new int[1];
         witdhcolum[0]=50;
         
@@ -66,7 +65,7 @@ public class VacacionesDAO extends ConexionBd {
     /*
      * Registro de Salarios
      */
-    public int save(String f_inicio,String f_final,int idemp){
+    public int save(String fecha,boolean status,int idempr){
        int i=0;
         try{
             Date date = new Date(0000-00-00);
@@ -80,16 +79,15 @@ public class VacacionesDAO extends ConexionBd {
             qs = new Query();
             
             String now = hp.getDateNow();
-            objVacaciones = new Vacaciones(0,idemp,f_inicio,f_final,now,now);
+            objNolaborables = new Nolaborables(0,idempr,status,fecha,now,now);
             //Iniciando consulta y asignando 
 
             pt = qs.sqlRegister(_table);
-            pt.setInt(1,objVacaciones.getIdemp());
-            pt.setDate(2,date.valueOf(objVacaciones.getF_ini()));
-            pt.setDate(3,date.valueOf(objVacaciones.getF_final()));
-            pt.setDate(4,date.valueOf(objVacaciones.getCreated()));
-            pt.setDate(5,date.valueOf(objVacaciones.getModified()));
-            
+            pt.setDate(1,date.valueOf(objNolaborables.getFecha()));
+            pt.setBoolean(2,objNolaborables.isStatus());
+            pt.setDate(3,date.valueOf(objNolaborables.getCreated()));
+            pt.setDate(4,date.valueOf(objNolaborables.getModified()));
+            pt.setInt(5,objNolaborables.getIdempr());
             
             //Ejecucion y cierre
             
@@ -106,7 +104,7 @@ public class VacacionesDAO extends ConexionBd {
     /*
      * Actualizacion de tipo de empleados
      */
-    public int update(int idsalario,String f_inicio,String f_final,int idemp){
+    public int update(int idnolaborables,String fecha,boolean status ,int idempr){
        int i=0;
         try{
             Date date = new Date(0000-00-00);
@@ -117,14 +115,14 @@ public class VacacionesDAO extends ConexionBd {
             String Table = this._table;
             String now = hp.getDateNow();
             
-            objVacaciones = new Vacaciones(idsalario,idemp,f_inicio,f_final,now,now);
+            objNolaborables = new Nolaborables(idnolaborables,idempr,status,fecha,now,now);
             //Iniciando consulta y asignando valores
             pt = qs.sqlUpdate(Table);
-            pt.setInt(1,objVacaciones.getIdemp());
-            pt.setDate(2,date.valueOf(objVacaciones.getF_ini()));
-            pt.setDate(3,date.valueOf(objVacaciones.getF_final()));
-            pt.setDate(4,date.valueOf(objVacaciones.getModified()));
-            pt.setInt(5,objVacaciones.getIdvac());
+            pt.setDate(1,date.valueOf(objNolaborables.getFecha()));
+            pt.setBoolean(2,objNolaborables.isStatus());
+            pt.setDate(3,date.valueOf(objNolaborables.getModified()));
+            pt.setInt(4,objNolaborables.getIdempr());
+            pt.setInt(5,objNolaborables.getIdnolab());
             //Ejecucion y cierre
             i= pt.executeUpdate();
             pt.close();
@@ -137,25 +135,25 @@ public class VacacionesDAO extends ConexionBd {
         }
     }
     
-    public Vacaciones getValues(int idVacaciones){
-       objVacaciones =  new Vacaciones();
+    public Nolaborables getValues(int idnolaborables){
+       objNolaborables =  new Nolaborables();
+       objVal = new Validators();
        
         try{
             qs= new Query();
             //Preparando
             String campos[] = new String[7];
-            campos = qs.getRecords(_table,idVacaciones);
-            objVacaciones.setIdemp(Integer.parseInt(campos[2]));
-            objVacaciones.setF_ini(campos[3]);
-            objVacaciones.setF_final(campos[4]);
-            objVacaciones.setCreated(campos[5]);
-            objVacaciones.setModified(campos[6]);
-            
-            return objVacaciones;
+            campos = qs.getRecords(_table,idnolaborables);
+            objNolaborables.setFecha((campos[2]));
+            objNolaborables.setStatus(objVal.StringToBoolean(campos[3]));
+            objNolaborables.setCreated(campos[4]);
+            objNolaborables.setModified(campos[5]);
+            objNolaborables.setIdempr(Integer.parseInt(campos[6]));
+            return objNolaborables;
         }
         catch(Exception e){
             System.out.println(_error + "getValues: "+e);
-            return objVacaciones;
+            return objNolaborables;
         }
     }
     
@@ -164,14 +162,14 @@ public class VacacionesDAO extends ConexionBd {
         try{
             //Preparando
             getConexion();
-            objVacaciones = new Vacaciones();
-            hp = new Helpers();
+            objNolaborables = new Nolaborables();
+            
             qs= new Query();
             String Table = this._table;
             
-            objVacaciones.setIdvac(id);
+            objNolaborables.setIdnolab(id);
             pt = qs.sqlDelete(Table);
-            pt.setInt(1,objVacaciones.getIdvac());
+            pt.setInt(1,objNolaborables.getIdnolab());
             i= pt.executeUpdate();
             pt.close();
             closeConexion();
@@ -189,7 +187,7 @@ public class VacacionesDAO extends ConexionBd {
         try {
             if(!"".equals(id)){
                 filter = new String[1][2];
-                filter[0][0] = "int_idemp";
+                filter[0][0] = "int_idempr";
                 filter[0][1] = id;
             }
             getTableAll(tblDatos);
