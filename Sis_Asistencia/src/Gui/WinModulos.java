@@ -336,6 +336,7 @@ public class WinModulos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_mitemregisterMousePressed
 
     private void mitemupdateMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemupdateMousePressed
+        dt = new Data();
         int id = Integer.valueOf(lblId.getText());
         String name = txtName.getText();
         boolean estate = Boolean.valueOf(dt.G_BOOLEAN[cmbState.getSelectedIndex()]);

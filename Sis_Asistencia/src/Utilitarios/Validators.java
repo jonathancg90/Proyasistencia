@@ -87,4 +87,12 @@ public class Validators {
         }
         
     }
+    public boolean validar(Object[] datos) {
+    for (int i = 0; i <= datos.length - 1; i++) {
+        if (datos[i].toString().isEmpty()) {
+            return false;
+        }
+        }
+    return true;
+    }   
 }

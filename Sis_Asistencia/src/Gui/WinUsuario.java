@@ -371,7 +371,6 @@ public class WinUsuario extends javax.swing.JInternalFrame {
         int rol = qs.idChoice("roles","nombre",String.valueOf(cboRol.getSelectedItem()));
        
         objUser = new UserDAO();
-        System.out.println(""+rol);
         int i = objUser.saveUsuario(username,password,idemp,estate,rol);
         if (i == 0) {
             JOptionPane.showMessageDialog(null,"No se pudo grabar datos");

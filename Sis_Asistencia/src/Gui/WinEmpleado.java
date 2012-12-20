@@ -6,6 +6,7 @@ import Dao.EmpleadoDAO;
 import Javabeans.Empleado;
 import Utilitarios.Data;
 import Utilitarios.Query;
+import Utilitarios.Validators;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -13,7 +14,7 @@ import javax.swing.table.DefaultTableModel;
 public  class WinEmpleado extends javax.swing.JInternalFrame {
     private EmpleadoDAO objempl;
     private Query qs;
-    
+    private Validators val;
     private Empleado modemp;
     private Data dt ;
     
@@ -31,7 +32,7 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
             objempl = new EmpleadoDAO();
             qs = new Query();
             objempl.getTableAll(tblEmpleado);
-            qs.loadState(cboEstado,false);
+            qs.loadChoice(cboEstado,"estadoemp","nombre");
             qs.loadChoice(cboAreaFilter,"area","nombre");
             qs.loadChoice(cboEmpresa,"empresa","nombre");
             qs.loadChoice(cboArea,"area","nombre");
@@ -236,7 +237,7 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
                     .addComponent(cboAreaFilter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jCheckBox1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -272,6 +273,11 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
         jMenuBar1.add(mfile);
 
         mhor.setText("Horarios");
+        mhor.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                mhorMousePressed(evt);
+            }
+        });
         jMenuBar1.add(mhor);
 
         msue.setText("Salarios");
@@ -338,6 +344,10 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void mitemregisterMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemregisterMousePressed
+   val = new Validators();    
+   Object[] datos = {txtnombres.getText(),txtapellidos.getText(),
+                     txtdni.getText(),txttelefono.getText()};
+   if(val.validar(datos)){ 
         Data dt = new Data();
         String nombre = txtnombres.getText();
         String dni=txtdni.getText();
@@ -348,10 +358,6 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
         int tipo =  qs.idChoice("tipoempleado","nombre",String.valueOf(cboTipo.getSelectedItem()));
         int sucursal =  qs.idChoice("sucursal","nombre",String.valueOf(cboSucursal.getSelectedItem()));
         int cargo =  qs.idChoice("cargo","nombre",String.valueOf(cboCargo.getSelectedItem()));
-        
-        
-        
-        
         
         qs = new Query();
         int idemp = qs.idChoice("empleado","nombres", nombre);
@@ -369,10 +375,17 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
             objempl.getTableAll(tblEmpleado);
             cleanBox();
             JOptionPane.showMessageDialog(null,"Nuevo usuario registrado");
-        }        // TODO add your handling code here:
+        }
+    } else {
+        JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
+    }
     }//GEN-LAST:event_mitemregisterMousePressed
 
     private void mitemupdateMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemupdateMousePressed
+    val = new Validators();    
+    Object[] datos = {txtnombres.getText(),txtapellidos.getText(),
+                      txtdni.getText(),txttelefono.getText(),lblidempleado.getText()};
+    if(val.validar(datos)){ 
         Data dt = new Data();
         String nombre = txtnombres.getText();
         String dni=txtdni.getText();
@@ -398,7 +411,11 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
             objempl.getTableAll(tblEmpleado);
             cleanBox();
             JOptionPane.showMessageDialog(null,"Nuevo usuario actualizado");
-        }     
+        }   
+        }                                          
+    else {
+        JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
+    }
     }//GEN-LAST:event_mitemupdateMousePressed
 
     private void tblEmpleadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblEmpleadoMouseClicked
@@ -431,22 +448,30 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_tblEmpleadoMouseClicked
 
     private void mitemdeleteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemdeleteMousePressed
-     int id = Integer.valueOf(lblidempleado.getText());
+    val = new Validators();    
+    Object[] datos = {lblidempleado.getText()};
+    if(val.validar(datos)){ 
+        int id = Integer.valueOf(lblidempleado.getText());
 
         objempl = new EmpleadoDAO();
         int i = objempl.deleteEmpleado(id);
         if(i==0) {
-            JOptionPane.showMessageDialog(null,"No se pudo eliminar el area");
+            JOptionPane.showMessageDialog(null,"No se pudo eliminar el area(Se cambio su esatdo a inactivo)");
+            //TODO: IMPLEMENTAR CAMBIO DE ESTADO (INACTIVO)
         }
         else {
             objempl.getTableAll(tblEmpleado);
             cleanBox();
-            JOptionPane.showMessageDialog(null,"Area eliminada");
-        }  
+            JOptionPane.showMessageDialog(null,"Empleado eliminada");
+        }
+        } else {
+           JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
+       }
     }//GEN-LAST:event_mitemdeleteMousePressed
 
     private void msueMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_msueMousePressed
-       WinSalarios objsalarios= new WinSalarios();
+    if(!"".equals(lblidempleado.getText())){
+        WinSalarios objsalarios= new WinSalarios();
         objsalarios.lblIdemp.setText(lblidempleado.getText());
         objsalarios.setResizable(true);
         objsalarios.setMaximizable(true);
@@ -454,6 +479,9 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
         WinMdi.jdpContenedor.add(objsalarios);
 
         objsalarios.setVisible(true);
+     } else {
+           JOptionPane.showMessageDialog(null,"Debe de seleccionar un empleado para poder asignarle sus salarios");
+     }
     }//GEN-LAST:event_msueMousePressed
 
     private void mcloseMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mcloseMousePressed
@@ -462,7 +490,8 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_mcloseMousePressed
 
     private void mvacMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mvacMousePressed
-       WinVacaciones objvacaciones= new WinVacaciones();
+    if(!"".equals(lblidempleado.getText())){
+        WinVacaciones objvacaciones= new WinVacaciones();
         objvacaciones.lblIdemp.setText(lblidempleado.getText());
         objvacaciones.setResizable(true);
         objvacaciones.setMaximizable(true);
@@ -470,11 +499,22 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
         WinMdi.jdpContenedor.add(objvacaciones);
 
         objvacaciones.setVisible(true); 
+    } else {
+           JOptionPane.showMessageDialog(null,"Debe de seleccionar un empleado para poder asignarle vacaciones");
+    }
     }//GEN-LAST:event_mvacMousePressed
 
     private void mitemclearMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemclearMousePressed
         cleanBox();
     }//GEN-LAST:event_mitemclearMousePressed
+
+    private void mhorMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mhorMousePressed
+      if(!"".equals(lblidempleado.getText())){
+      
+      } else {
+           JOptionPane.showMessageDialog(null,"Debe de seleccionar un empelado para poder asignarle sus horarios");
+       }
+    }//GEN-LAST:event_mhorMousePressed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox cboArea;
