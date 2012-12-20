@@ -142,7 +142,9 @@ public class EmpleadoDAO extends ConexionBd{
             qs = new Query();
             String now = hp.getDateNow();
             
-            objEmpl = new Empleado( idemp,  nombres, apellidos, dni,  telefono, now, 1,now, now, idare, idtip, idest,  idcar,  idempr,idsuc);
+            objEmpl = new Empleado( idemp,  nombres, apellidos, dni,  
+                    telefono, now, 1,now, now, idare, idtip, idest,  
+                    idcar,  idempr,idsuc);
             //Iniciando consulta y asignando valores
             pt = qs.sqlUpdate(_table);
             

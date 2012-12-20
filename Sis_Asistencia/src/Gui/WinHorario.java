@@ -441,7 +441,8 @@ public class WinHorario extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_mitemregisterMousePressed
 
     private void tblhoraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblhoraMouseClicked
-         try {       int fsel;
+         try {       
+             int fsel;
                 fsel = this.tblhora.getSelectedRow();
                 objhora = new HorariosDAO();
                 DefaultTableModel m = new DefaultTableModel();
@@ -454,7 +455,7 @@ public class WinHorario extends javax.swing.JInternalFrame {
                 lblId.setText(idUsu);
                 txtnombre.setText(hora.getNombre());
                 lblModified.setText(hora.getModified());
-                //qs.loadChoiceDefault(cboRol,"roles","nombre",modusu.getRol());
+                qs.loadType(cbotipo,hora.getIddet_hor());
                 qs.loadState(cboestado,hora.isEstado());
                 }
             catch (Exception e) {
@@ -467,7 +468,6 @@ public class WinHorario extends javax.swing.JInternalFrame {
         int id = Integer.valueOf(lblId.getText());
         String name = txtnombre.getText();
         boolean estate = Boolean.valueOf(dt.G_BOOLEAN[cboestado.getSelectedIndex()]);
-        System.out.println("-->"+estate);
         int tipo=1;
         int iddet_hor=1;
         

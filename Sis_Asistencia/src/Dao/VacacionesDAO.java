@@ -34,8 +34,8 @@ public class VacacionesDAO extends ConexionBd {
         _error = "Dao_VacacionesDAO_";
         filter = new String[0][0];
         campos = new String[3];
-        campos[0]="idvacaciones";
-        campos[1]="f_inicio";
+        campos[0]="idvac";
+        campos[1]="f_ini";
         campos[2]="f_final";
         witdhcolum = new int[1];
         witdhcolum[0]=50;
