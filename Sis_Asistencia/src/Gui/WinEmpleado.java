@@ -35,10 +35,12 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
             qs.loadChoice(cboEstado,"estadoemp","nombre");
             qs.loadChoice(cboAreaFilter,"area","nombre");
             qs.loadChoice(cboEmpresa,"empresa","nombre");
+            qs.setIdentify("idempr");
+            qs.loadChoiceDefault(cboSucursal,"sucursal","nombre",qs.idChoice("empresa","nombre",String.valueOf(cboEmpresa.getSelectedItem())));
             qs.loadChoice(cboArea,"area","nombre");
+            qs.setIdentify("idare");
+            qs.loadChoiceDefault(cboCargo,"cargo","nombre",qs.idChoice("area","nombre",String.valueOf(cboArea.getSelectedItem())));
             qs.loadChoice(cboTipo,"tipoempleado","nombre");
-            qs.loadChoice(cboSucursal,"sucursal","nombre");
-            qs.loadChoice(cboCargo,"cargo","nombre");
             
             
 
@@ -49,8 +51,8 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
     public void cleanBox(){
         txtapellidos.setText("");
         txtdni.setText("");
-        //txtdni.setm
-        //txtnombres.setText("");
+        txtdni.setText("");
+        txtnombres.setText("");
         txttelefono.setText("");
         cboArea.setSelectedIndex(0);
         cboCargo.setSelectedIndex(0);
@@ -95,6 +97,7 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
         jLabel3 = new javax.swing.JLabel();
         cboAreaFilter = new javax.swing.JComboBox();
         jCheckBox1 = new javax.swing.JCheckBox();
+        jButton1 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         mfile = new javax.swing.JMenu();
         mitemregister = new javax.swing.JMenuItem();
@@ -150,6 +153,11 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
         pnlMantenimiento.add(lblidempleado);
         lblidempleado.setBounds(120, 30, 70, 30);
 
+        cboEmpresa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboEmpresaActionPerformed(evt);
+            }
+        });
         pnlMantenimiento.add(cboEmpresa);
         cboEmpresa.setBounds(120, 160, 160, 27);
 
@@ -168,6 +176,11 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
         pnlMantenimiento.add(jLabel10);
         jLabel10.setBounds(10, 210, 70, 17);
 
+        cboArea.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboAreaActionPerformed(evt);
+            }
+        });
         pnlMantenimiento.add(cboArea);
         cboArea.setBounds(120, 200, 160, 27);
 
@@ -212,6 +225,8 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
 
         jCheckBox1.setText("Activos");
 
+        jButton1.setText("Ok");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -220,14 +235,17 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 535, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addGap(29, 29, 29)
                         .addComponent(cboAreaFilter, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(198, 198, 198)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jCheckBox1)
-                        .addGap(0, 45, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1))
-                .addContainerGap())
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1)
+                        .addGap(26, 26, 26))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -235,9 +253,10 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(cboAreaFilter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jCheckBox1))
+                    .addComponent(jCheckBox1)
+                    .addComponent(jButton1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -349,6 +368,7 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
                      txtdni.getText(),txttelefono.getText()};
    if(val.validar(datos)){ 
         Data dt = new Data();
+        qs = new Query();
         String nombre = txtnombres.getText();
         String dni=txtdni.getText();
         String apellido=txtapellidos.getText();
@@ -358,13 +378,8 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
         int tipo =  qs.idChoice("tipoempleado","nombre",String.valueOf(cboTipo.getSelectedItem()));
         int sucursal =  qs.idChoice("sucursal","nombre",String.valueOf(cboSucursal.getSelectedItem()));
         int cargo =  qs.idChoice("cargo","nombre",String.valueOf(cboCargo.getSelectedItem()));
-        
-        qs = new Query();
-        int idemp = qs.idChoice("empleado","nombres", nombre);
-        //boolean estate = Boolean.valueOf(dt.G_BOOLEAN[cboEstado.getSelectedIndex()]);
-        int estate=cboEstado.getSelectedIndex();
-        //int rol = qs.idChoice("roles","nombre",String.valueOf(cboRol.getSelectedItem()));
-       
+        int estate =  qs.idChoice("estadoemp","nombre",String.valueOf(cboEstado.getSelectedItem()));
+
         objempl = new EmpleadoDAO();
         int i = objempl.saveEmpleado(0,nombre,apellido,dni, telefono,area, tipo, estate,cargo,empresa,sucursal);
         
@@ -387,6 +402,8 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
                       txtdni.getText(),txttelefono.getText(),lblidempleado.getText()};
     if(val.validar(datos)){ 
         Data dt = new Data();
+        qs = new Query();
+        int id = Integer.parseInt(lblidempleado.getText());
         String nombre = txtnombres.getText();
         String dni=txtdni.getText();
         String apellido=txtapellidos.getText();
@@ -396,14 +413,10 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
         int tipo =  qs.idChoice("tipoempleado","nombre",String.valueOf(cboTipo.getSelectedItem()));
         int sucursal =  qs.idChoice("sucursal","nombre",String.valueOf(cboSucursal.getSelectedItem()));
         int cargo =  qs.idChoice("cargo","nombre",String.valueOf(cboCargo.getSelectedItem()));
-        
-        qs = new Query();
-        //boolean estate = Boolean.valueOf(dt.G_BOOLEAN[cboEstado.getSelectedIndex()]);
-        int estate=cboEstado.getSelectedIndex();
-        //int rol = qs.idChoice("roles","nombre",String.valueOf(cboRol.getSelectedItem()));
+        int estate =  qs.idChoice("estadoemp","nombre",String.valueOf(cboEstado.getSelectedItem()));
        
         objempl = new EmpleadoDAO();
-        int i = objempl.updateEmpleado(0,nombre,apellido,dni, telefono,area, tipo, estate,cargo,empresa,sucursal);
+        int i = objempl.updateEmpleado(id,nombre,apellido,dni, telefono,area, tipo, estate,cargo,empresa,sucursal);
         if (i == 0) {
             JOptionPane.showMessageDialog(null,"No se pudo grabar datos");
         }
@@ -516,6 +529,18 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
        }
     }//GEN-LAST:event_mhorMousePressed
 
+    private void cboEmpresaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboEmpresaActionPerformed
+    qs = new Query();
+    qs.setIdentify("idempr");
+    qs.loadChoiceDefault(cboSucursal,"sucursal","nombre",qs.idChoice("empresa","nombre",String.valueOf(cboEmpresa.getSelectedItem())));
+    }//GEN-LAST:event_cboEmpresaActionPerformed
+
+    private void cboAreaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboAreaActionPerformed
+    qs = new Query();
+    qs.setIdentify("idare");
+    qs.loadChoiceDefault(cboCargo,"cargo","nombre",qs.idChoice("area","nombre",String.valueOf(cboArea.getSelectedItem())));
+    }//GEN-LAST:event_cboAreaActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox cboArea;
     private javax.swing.JComboBox cboAreaFilter;
@@ -524,6 +549,7 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox cboEstado;
     private javax.swing.JComboBox cboSucursal;
     private javax.swing.JComboBox cboTipo;
+    private javax.swing.JButton jButton1;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;

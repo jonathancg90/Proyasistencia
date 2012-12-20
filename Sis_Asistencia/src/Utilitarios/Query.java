@@ -11,16 +11,20 @@ import javax.swing.table.DefaultTableModel;
 public class Query extends ConexionBd{
     
     
-    DefaultTableModel datos; 
-    ResultSet rs = null;
-    Statement s = null;
-    PreparedStatement  pt = null;
-    DefaultComboBoxModel MChoice;
-    Data dt;
-    String _error = "Utilitarios_Query_";
+    private DefaultTableModel datos; 
+    private ResultSet rs = null;
+    private Statement s = null;
+    private PreparedStatement  pt = null;
+    private DefaultComboBoxModel MChoice;
+    private Data dt;
+    private String _error = "Utilitarios_Query_";
+    private String identify;
     /*
      * Arma registro
      */
+    public void setIdentify(String identify){
+        this.identify = identify;
+    }
     public  PreparedStatement sqlRegister(String Table){
         pt = null;
         try{
@@ -45,7 +49,6 @@ public class Query extends ConexionBd{
                     }
                 }
             }
-           
             query= "insert into "+Table+" ("+campos+") values("+values+")";
             
             pt  = conexion.prepareStatement(query);
@@ -57,7 +60,6 @@ public class Query extends ConexionBd{
             System.out.println(_error+"sqlRegister: "+e);
             return pt;
         }
-        
     }
     /*
      * Arma busqueda
@@ -197,11 +199,10 @@ public class Query extends ConexionBd{
      * Clase generica para realizar consulas en Jtable
      */
     public  DefaultTableModel  getAll(String[] args, String Table, String[][] Filter){
-        try
-        {
+        try{
             datos = new DefaultTableModel();
             getConexion();
-            
+            String id;
             Object[] fila; 
             
             s = conexion.createStatement();
@@ -212,32 +213,25 @@ public class Query extends ConexionBd{
             ResultSetMetaData meta = rs.getMetaData();
             int nCols = meta.getColumnCount();
             
-            
-            for(int i=0; i<nCols; ++i)
-            {    
+            for(int i=0; i<nCols; ++i){    
                 datos.addColumn(meta.getColumnName(i+1));
+                id = meta.getColumnName(i+1).substring(0, 2);
             }
             
             //Llenado registro Jtable
             fila = new Object[nCols];
-            while(rs.next())
-            {
-                
-                for(int i=0; i<nCols; ++i)
-                {   
+            while(rs.next()){
+                for(int i=0; i<nCols; ++i){   
                     fila[i] = rs.getObject(i+1);
                 }
                 datos.addRow(fila);
             }
-            
-                
            //Cerrando conexion
            rs.close();
            closeConexion(); 
            
         }
-        catch(Exception e)
-        {
+        catch(Exception e){
             System.out.println(_error+"getAll: "+e);
         }
         
@@ -307,21 +301,25 @@ public class Query extends ConexionBd{
      */
     public void loadChoiceDefault(JComboBox cmbChoice, String Tbl, String Campo, int value){
         try{
+            boolean op = false;
             getConexion();
             MChoice = new DefaultComboBoxModel();
             s = conexion.createStatement();
-            String identify = getIdentify(Tbl);
-            
-            rs = s.executeQuery("select " +Campo+ " from " +Tbl + " where " + identify + "=" +value);
+            if("".equals(this.identify)){
+                this.identify = getIdentify(Tbl);
+                op = true;
+            }
+            rs = s.executeQuery("select " +Campo+ " from " +Tbl + " where " + this.identify + "=" +value);
             while(rs.next()) {
               MChoice.addElement(rs.getString(Campo));
             }
-            rs = s.executeQuery("select " +Campo+ " from " +Tbl + " where " + identify + "!=" +value);
-            
-            while(rs.next()) {
-              MChoice.addElement(rs.getString(Campo));
-            } 
-            
+            if(op){
+                rs = s.executeQuery("select " +Campo+ " from " +Tbl + " where " + this.identify + "!=" +value);
+                while(rs.next()) {
+                  MChoice.addElement(rs.getString(Campo));
+                } 
+            }
+            this.identify = "";
             cmbChoice.setModel(MChoice);   
             closeConexion(); 
         }

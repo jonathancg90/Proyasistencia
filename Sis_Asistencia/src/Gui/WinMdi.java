@@ -39,6 +39,7 @@ public class WinMdi extends javax.swing.JFrame {
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         jmItemModulos = new javax.swing.JMenuItem();
+        JmitemJustificacion = new javax.swing.JMenuItem();
         JmitemUsu = new javax.swing.JMenuItem();
         JmitemDis = new javax.swing.JMenuItem();
         JmiBackup = new javax.swing.JMenuItem();
@@ -158,6 +159,14 @@ public class WinMdi extends javax.swing.JFrame {
             }
         });
         SubmenuCrit.add(jmItemModulos);
+
+        JmitemJustificacion.setText("Tipo justificacion");
+        JmitemJustificacion.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                JmitemJustificacionMousePressed(evt);
+            }
+        });
+        SubmenuCrit.add(JmitemJustificacion);
 
         mdis.add(SubmenuCrit);
 
@@ -457,6 +466,22 @@ public class WinMdi extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jmItemModulosMousePressed
 
+
+    private void JmitemJustificacionMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JmitemJustificacionMousePressed
+        WinTipo_Justificacion objjus= new WinTipo_Justificacion();
+        val = new Validators();
+        objjus.setResizable(true);
+        objjus.setMaximizable(true);
+        objjus.setIconifiable(true);
+        //obj_Asis.setClosable(true);
+        jdpContenedor.add(objjus);
+        if(val.EntryForms()){
+            objjus.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(null,"Cierre la ventana abierta para abrir otra");
+        }
+    }//GEN-LAST:event_JmitemJustificacionMousePressed
+
     private void jMenuItem1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem1MousePressed
         WinEstadoEmpleado objest= new WinEstadoEmpleado();
         val = new Validators();
@@ -471,6 +496,7 @@ public class WinMdi extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null,"Cierre la ventana abierta para abrir otra");
         }
     }//GEN-LAST:event_jMenuItem1MousePressed
+
 
 
     public static void main(String args[]) {
@@ -510,6 +536,7 @@ public class WinMdi extends javax.swing.JFrame {
     private javax.swing.JMenuItem JmitemArea;
     private javax.swing.JMenuItem JmitemCiudad;
     private javax.swing.JMenuItem JmitemDis;
+    private javax.swing.JMenuItem JmitemJustificacion;
     private javax.swing.JMenuItem JmitemRoles;
     private javax.swing.JMenuItem JmitemTipo;
     private javax.swing.JMenuItem JmitemUsu;
