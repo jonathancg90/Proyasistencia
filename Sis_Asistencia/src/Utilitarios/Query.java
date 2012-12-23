@@ -7,9 +7,7 @@ import java.sql.*;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
-
-public class Query extends ConexionBd{
-    
+public class Query extends ConexionBd{    
     
     private DefaultTableModel datos; 
     private ResultSet rs = null;
@@ -19,12 +17,11 @@ public class Query extends ConexionBd{
     private Data dt;
     private String _error = "Utilitarios_Query_";
     private String identify="";
-    /*
-     * Arma registro
-     */
+
     public void setIdentify(String identify){
         this.identify = identify;
     }
+    
     public  PreparedStatement sqlRegister(String Table){
         pt = null;
         try{
@@ -97,7 +94,6 @@ public class Query extends ConexionBd{
                             query = query + meta.getColumnName(i)+ "=?,";
                         }
                     }  
-
                 }
                 else{
                     id =  meta.getColumnName(i);
@@ -192,12 +188,10 @@ public class Query extends ConexionBd{
         
         return qs;
     }
-    
-    
     /*
      * Clase generica para realizar consulas en Jtable
      */
-    public  DefaultTableModel  getAll(String[] args, String Table, String[][] Filter){
+    public  DefaultTableModel getAll(String[] args, String Table, String[][] Filter){
         try{
             datos = new DefaultTableModel();
             getConexion();
@@ -310,10 +304,8 @@ public class Query extends ConexionBd{
                 op = true;
             }
             rs = s.executeQuery("select " +Campo+ " from " +Tbl + " where " + this.identify + "=" +value);
-            System.out.println("select" +Campo+ " +from " +Tbl + " where " + this.identify + "=" +value);
             while(rs.next()) {
               MChoice.addElement(rs.getString(Campo));
-              System.out.println("Id1DFGDFGDFGDFGDFG: "+rs.getString(Campo));
               
             }
             if(op){
@@ -338,7 +330,12 @@ public class Query extends ConexionBd{
         int id=0;
         try{
             getConexion();
-            String identify = getIdentify(Tbl);
+            String identify = "";
+            if("".equals(this.identify)){
+                identify = getIdentify(Tbl);
+            } else {
+                identify = this.identify;
+            }
             MChoice = new DefaultComboBoxModel();
             s = conexion.createStatement();
             rs = s.executeQuery("select " +identify+ " from " +Tbl+ " where " +Campo+ " = '"+value+"'");
@@ -388,6 +385,7 @@ public class Query extends ConexionBd{
         private  String getIdentify(String Table){
             String identify="id";
             try{  
+                getConexion();
                 Statement s = null;
 
                 s = conexion.createStatement();
@@ -397,12 +395,12 @@ public class Query extends ConexionBd{
                 int nCols = meta.getColumnCount();
                 
                 for(int i=1;i<=nCols;i++){
-
                     if(meta.isAutoIncrement(i)){
 
                         identify = meta.getColumnName(i);
                     }
                 }
+                rs.close();
             }
             catch(Exception e){
                 System.out.println(_error+"getIdentify: "+e);
@@ -413,23 +411,29 @@ public class Query extends ConexionBd{
         /*
          * Obtener la cantidad de registros en una tabla
          */
-        private  int getCountRegister(String query){
+        public  int getCountRegister(String[] args){
             int cant=0;
             try{  
                 Statement s = null;
-
                 s = conexion.createStatement();
-                rs = s.executeQuery("select count(*) from "+query);
-                rs.next();
-                cant = rs.getInt(1); 
+                String query="";
+                if(args.length>0){
+                    if(args.length==1){
+                        query = "select count(*) from "+args[0];
+                    }
+                    else if(args.length==3){
+                        query = "select count(*) from "+args[0]+" where "+args[1]+" = "+args[2];
+                    }
+                    rs = s.executeQuery(query);
+                    rs.next();
+                    cant = rs.getInt(1);
+                }
+                
             }catch(Exception e){
                 System.out.println(_error+"getCountRegister"+e);
             }
             return cant;
          }
-
-   
-            
-        }
+    }
         
 

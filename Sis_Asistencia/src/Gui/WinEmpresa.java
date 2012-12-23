@@ -70,7 +70,6 @@ public class WinEmpresa extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         txtruc = new javax.swing.JTextField();
-        txtCantTrab = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         cboMon = new javax.swing.JComboBox();
@@ -78,6 +77,7 @@ public class WinEmpresa extends javax.swing.JInternalFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         lblModified = new javax.swing.JLabel();
+        txtCantTrab = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         mfile = new javax.swing.JMenu();
         mitemregister = new javax.swing.JMenuItem();
@@ -169,6 +169,8 @@ public class WinEmpresa extends javax.swing.JInternalFrame {
 
         lblModified.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
+        txtCantTrab.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -201,7 +203,7 @@ public class WinEmpresa extends javax.swing.JInternalFrame {
                                     .addComponent(cboMon, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(cmbEstate, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(lblModified, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtCantTrab, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(txtCantTrab, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
@@ -221,10 +223,10 @@ public class WinEmpresa extends javax.swing.JInternalFrame {
                     .addComponent(jLabel5)
                     .addComponent(txtruc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel8)
-                    .addComponent(txtCantTrab, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(txtCantTrab, javax.swing.GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
                     .addComponent(cboMon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -436,7 +438,7 @@ public class WinEmpresa extends javax.swing.JInternalFrame {
                 String ruc = txtruc.getText();
                 boolean estate = Boolean.valueOf(dt.G_BOOLEAN[cmbEstate.getSelectedIndex()]);
                 //int estate = Integer.parseInt(txtCantTrab.getText());
-                int trab = Integer.parseInt(txtCantTrab.getText());
+                int trab = 0;
                 int mon = qs.idChoice("moneda","nombre",String.valueOf(cboMon.getSelectedItem()));
 
                 objempresa = new EmpresaDAO();
@@ -501,7 +503,7 @@ public class WinEmpresa extends javax.swing.JInternalFrame {
     private javax.swing.JMenuItem mitemupdate;
     private javax.swing.JMenu nolaborables;
     private javax.swing.JTable tblempresa;
-    private javax.swing.JTextField txtCantTrab;
+    private javax.swing.JLabel txtCantTrab;
     private javax.swing.JTextField txtFilter;
     private javax.swing.JTextField txtName;
     private javax.swing.JTextField txtruc;

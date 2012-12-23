@@ -3,6 +3,7 @@ package Dao;
 
 
 import Javabeans.Empleado;
+import Javabeans.Empresa;
 import Utilitarios.ConexionBd;
 import Utilitarios.Helpers;
 import Utilitarios.Query;
@@ -16,6 +17,7 @@ public class EmpleadoDAO extends ConexionBd{
     ResultSet rs = null;
     Statement s = null;
     private Query qs;
+    private Empresa objEmpr;
     private Empleado objEmpl;
     private Helpers hp;
     private String filter[][];
@@ -70,8 +72,8 @@ public class EmpleadoDAO extends ConexionBd{
             hp = new Helpers();
             qs = new Query();
             String now = hp.getDateNow();
+            //Grabar datos del empleado
             objEmpl = new Empleado( idemp,  nombres, apellidos, dni,  telefono, now, 1,now, now, idare, idtip, idest,  idcar,  idempr,idsuc);
-            //Iniciando consulta y asignando valores
             pt = qs.sqlRegister(_table);
            
             pt.setString(1,objEmpl.getNombres());
@@ -91,6 +93,10 @@ public class EmpleadoDAO extends ConexionBd{
             //Ejecucion y cierre
             i= pt.executeUpdate();
             pt.close();
+            if(i>0){
+            //Actualizar cantidad de empleados por empresa
+                i= UpdateEmpresa(objEmpl.getIdempr());
+            }
             closeConexion();
             return i;
         }
@@ -98,6 +104,35 @@ public class EmpleadoDAO extends ConexionBd{
             System.out.println(_error+"save: "+e);
             return i;
         }
+    }
+    public int UpdateEmpresa(int empresa){
+        int i=0;
+        try {
+            if(empresa<0) {
+                empresa = empresa * -1;
+                qs.setIdentify("idempr");
+                empresa = qs.idChoice(_table,"idemp", ""+empresa);
+            }
+            objEmpr = new Empresa();
+            String args[] = new String[3];
+            args[0]="empleado";
+            args[1]="idempr";
+            args[2]=""+empresa;
+            System.out.println("1 : upd: "+qs.getCountRegister(args));
+            objEmpr.setTrabajadores(qs.getCountRegister(args));
+            System.out.println("2 : "+ qs.getCountRegister(args));
+            String query = "update empresa set trabajadores = ? where idempr = ?";
+            pt = conexion.prepareStatement(query);
+            System.out.println("3: pt");
+            pt.setInt(1, objEmpr.getTrabajadores());
+            pt.setInt(2, empresa);
+            i= pt.executeUpdate();
+            System.out.println("4");
+            pt.close();
+        } catch(Exception e) {
+            System.out.println(_error + "UpdateEmpresa: "+e);
+        }
+        return i;
     }
     /*
      * Actualizacion de Usuario
@@ -136,6 +171,10 @@ public class EmpleadoDAO extends ConexionBd{
             //Ejecucion y cierre
             i= pt.executeUpdate();
             pt.close();
+            if(i>0){
+            //Actualizar cantidad de empleados por empresa
+                i= UpdateEmpresa(objEmpl.getIdempr());
+            }
             closeConexion();
             return i;
         }
@@ -155,12 +194,19 @@ public class EmpleadoDAO extends ConexionBd{
             objEmpl = new Empleado();
             hp = new Helpers();
             qs= new Query();
-            String Table = "Empleado";
+            String Table = _table;
             
             objEmpl.setIdemp(idemp);
+            qs.setIdentify("idempr");
+            objEmpl.setIdempr(qs.idChoice(_table,"idemp", ""+idemp));
+            
             pt = qs.sqlDelete(Table);
             pt.setInt(1,objEmpl.getIdemp());
             i= pt.executeUpdate();
+            if(i>0){
+            //Actualizar cantidad de empleados por empresa
+                i= UpdateEmpresa(objEmpl.getIdempr());
+            }
             pt.close();
             closeConexion();
             return i;

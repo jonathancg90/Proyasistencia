@@ -415,6 +415,7 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
         int estate =  qs.idChoice("estadoemp","nombre",String.valueOf(cboEstado.getSelectedItem()));
        
         objempl = new EmpleadoDAO();
+        objempl.UpdateEmpresa(id*-1);
         int i = objempl.updateEmpleado(id,nombre,apellido,dni, telefono,area, tipo, estate,cargo,empresa,sucursal);
         if (i == 0) {
             JOptionPane.showMessageDialog(null,"No se pudo grabar datos");
