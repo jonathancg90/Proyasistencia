@@ -5,6 +5,7 @@ import Dao.UserDAO;
 import Javabeans.Usuario;
 import Utilitarios.Data;
 import Utilitarios.Query;
+import Utilitarios.Validators;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -14,6 +15,7 @@ public class WinUsuario extends javax.swing.JInternalFrame {
     private Query qs;
     private Usuario modusu;
     private Data dt ;
+    private Validators val;
     /**
      * Creates new form WinUsuario
      */
@@ -296,65 +298,86 @@ public class WinUsuario extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void mitemregisterMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemregisterMousePressed
-        dt = new Data();
-        String username = txtUsername.getText();
-        String password=String.valueOf(txtPassword.getPassword());
-        String nomemp = String.valueOf(cboEmp.getSelectedItem());
-        
-        qs = new Query();
-        int idemp = qs.idChoice("empleado","nombres", nomemp);
-        boolean estate = Boolean.valueOf(dt.G_BOOLEAN[cboEstado.getSelectedIndex()]);
-        int rol = qs.idChoice("roles","nombre",String.valueOf(cboRol.getSelectedItem()));
-        String correo = Txtcorreo.getText();
-        objUser = new UserDAO();
-        int i = objUser.saveUsuario(username,password,idemp,estate,rol,correo);
-        if (i == 0) {
-            JOptionPane.showMessageDialog(null,"No se pudo grabar datos");
-        }
+        val = new Validators();    
+        Object[] datos = {txtUsername.getText(),Txtcorreo.getText(),txtPassword.getPassword()};
+        if(val.validar(datos)){     
+            dt = new Data();
+            String username = txtUsername.getText();
+            String password=String.valueOf(txtPassword.getPassword());
+            String nomemp = String.valueOf(cboEmp.getSelectedItem());
+
+            qs = new Query();
+            int idemp = qs.idChoice("empleado","nombres", nomemp);
+            boolean estate = Boolean.valueOf(dt.G_BOOLEAN[cboEstado.getSelectedIndex()]);
+            int rol = qs.idChoice("roles","nombre",String.valueOf(cboRol.getSelectedItem()));
+            String correo = Txtcorreo.getText();
+            objUser = new UserDAO();
+            int i = objUser.saveUsuario(username,password,idemp,estate,rol,correo);
+            if (i == 0) {
+                JOptionPane.showMessageDialog(null,"No se pudo grabar datos");
+            }
+            else {
+                objUser.getTableAll(TblUsu);
+                cleanBox();
+                JOptionPane.showMessageDialog(null,"Nuevo usuario registrado");
+            }
+        }                                          
         else {
-            objUser.getTableAll(TblUsu);
-            cleanBox();
-            JOptionPane.showMessageDialog(null,"Nuevo usuario registrado");
+            JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
         }
     }//GEN-LAST:event_mitemregisterMousePressed
 
     private void mitemupdateMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemupdateMousePressed
-        dt = new Data();
-        int id = Integer.parseInt(lblUsu.getText());
-        String username = txtUsername.getText();
-        String password=String.valueOf(txtPassword.getPassword());
-        String nomemp = String.valueOf(cboEmp.getSelectedItem());
-        
-        qs = new Query();
-        int idemp = qs.idChoice("empleado","nombres", nomemp);
-        
-        boolean estate = Boolean.valueOf(dt.G_BOOLEAN[cboEstado.getSelectedIndex()]);
-        int rol = qs.idChoice("roles","nombre",String.valueOf(cboRol.getSelectedItem()));
-        String correo = Txtcorreo.getText();
-        objUser = new UserDAO();
-        int i = objUser.updateUsuario(id,username,password,idemp,estate,rol,correo);
-        if (i == 0) {
-            JOptionPane.showMessageDialog(null,"No se pudo grabar datos");
-        }
+        val = new Validators();    
+        Object[] datos = {txtUsername.getText(),Txtcorreo.getText(),txtPassword.getPassword(),lblUsu.getText()};
+        if(val.validar(datos)){     
+            dt = new Data();
+            int id = Integer.parseInt(lblUsu.getText());
+            String username = txtUsername.getText();
+            String password=String.valueOf(txtPassword.getPassword());
+            String nomemp = String.valueOf(cboEmp.getSelectedItem());
+
+            qs = new Query();
+            int idemp = qs.idChoice("empleado","nombres", nomemp);
+
+            boolean estate = Boolean.valueOf(dt.G_BOOLEAN[cboEstado.getSelectedIndex()]);
+            int rol = qs.idChoice("roles","nombre",String.valueOf(cboRol.getSelectedItem()));
+            String correo = Txtcorreo.getText();
+            objUser = new UserDAO();
+            int i = objUser.updateUsuario(id,username,password,idemp,estate,rol,correo);
+            if (i == 0) {
+                JOptionPane.showMessageDialog(null,"No se pudo grabar datos");
+            }
+            else {
+                objUser.getTableAll(TblUsu);
+                cleanBox();
+                JOptionPane.showMessageDialog(null,"usuario actualizado");
+            }
+        }                                          
         else {
-            objUser.getTableAll(TblUsu);
-            cleanBox();
-            JOptionPane.showMessageDialog(null,"usuario actualizado");
+            JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
         }
     }//GEN-LAST:event_mitemupdateMousePressed
 
     private void mitemdeleteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemdeleteMousePressed
-        int id = Integer.valueOf(lblUsu.getText());
+        val = new Validators();    
+        Object[] datos = {txtUsername.getText(),Txtcorreo.getText(),txtPassword.getPassword(),lblUsu.getText()};
+        if(val.validar(datos)){    
+            int id = Integer.valueOf(lblUsu.getText());
 
-        objUser = new UserDAO();
-        int i = objUser.deleteUsuario(id);
-        if(i==0) {
-            JOptionPane.showMessageDialog(null,"No se pudo eliminar el area");
-        }
+            objUser = new UserDAO();
+            int i = objUser.deleteUsuario(id);
+            if(i==0) {
+                JOptionPane.showMessageDialog(null,"No se pudo eliminar el area");
+            }
+            else {
+                objUser.getTableAll(TblUsu);
+                cleanBox();
+                JOptionPane.showMessageDialog(null,"Area eliminada");
+            }
+        }                                          
         else {
-            objUser.getTableAll(TblUsu);
-            cleanBox();
-            JOptionPane.showMessageDialog(null,"Area eliminada");
+            JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
         }
     }//GEN-LAST:event_mitemdeleteMousePressed
 

@@ -12,6 +12,7 @@ import java.text.DateFormat;
 import java.util.Calendar;
 
 import Utilitarios.Helpers;
+import Utilitarios.Validators;
 import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
 
@@ -28,7 +29,7 @@ public class WinSalarios extends javax.swing.JInternalFrame {
     private Date date2;
     private Calendar calendar;
     private Calendar calendar2;
-    
+    private Validators val;
     
     public WinSalarios() {
         initComponents();
@@ -290,72 +291,87 @@ public class WinSalarios extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void mitemregisterMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemregisterMousePressed
-        try{
-        hp = new Helpers();
-        String F_inicio=cboF_inicio.getText();
-        String F_final=cboF_final.getText();
-        System.out.println(F_inicio +" - " +F_final);
-        boolean por_defecto=jCheckBox1.isSelected();
-        double monto=Double.parseDouble(txtMonto.getText());
-        int idemp=Integer.valueOf(lblIdemp.getText());
-        
-        int i = objSalarios.save(F_inicio,F_final,por_defecto,idemp,monto);
-        if (i == 0) {
-            JOptionPane.showMessageDialog(null,"No se pudo grabar datos");
-        }
+        val = new Validators();    
+        Object[] datos = {txtMonto.getText()};
+        if(val.validar(datos)){    
+            try{
+                hp = new Helpers();
+                String F_inicio=cboF_inicio.getText();
+                String F_final=cboF_final.getText();
+                System.out.println(F_inicio +" - " +F_final);
+                boolean por_defecto=jCheckBox1.isSelected();
+                double monto=Double.parseDouble(txtMonto.getText());
+                int idemp=Integer.valueOf(lblIdemp.getText());
+
+                int i = objSalarios.save(F_inicio,F_final,por_defecto,idemp,monto);
+                if (i == 0) {
+                    JOptionPane.showMessageDialog(null,"No se pudo grabar datos");
+                }
+                else {
+                    objSalarios.findId(lblIdemp.getText(), tblSalarios);
+                    cleanBox();
+                    JOptionPane.showMessageDialog(null,"Nueva salario registrado");
+                }
+            }catch(Exception e){System.out.println(""+e);}
+        }                                          
         else {
-            objSalarios.findId(lblIdemp.getText(), tblSalarios);
-            cleanBox();
-            JOptionPane.showMessageDialog(null,"Nueva salario registrado");
+            JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
         }
-        }catch(Exception e){System.out.println(""+e);}
-        
-        
         
     }//GEN-LAST:event_mitemregisterMousePressed
 
     private void mitemupdateMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemupdateMousePressed
+        val = new Validators();    
+        Object[] datos = {txtMonto.getText()};
+        if(val.validar(datos)){
+            hp = new Helpers();
+            int idsalario=Integer.parseInt(lblIdsalario.getText());
+            int idemp=Integer.parseInt(lblIdemp.getText());
+            String F_inicio=cboF_inicio.getText();
+            String F_final=cboF_final.getText();
 
-        
-        hp = new Helpers();
-        int idsalario=Integer.parseInt(lblIdsalario.getText());
-        int idemp=Integer.parseInt(lblIdemp.getText());
-        String F_inicio=cboF_inicio.getText();
-        String F_final=cboF_final.getText();
-        
-        boolean por_defecto=jCheckBox1.isSelected();
-        double monto=Double.parseDouble(txtMonto.getText());
-        
-        int i = objSalarios.update(idsalario,F_inicio,F_final,por_defecto,idemp,monto);
-        if (i == 0) {
-            
-            JOptionPane.showMessageDialog(null, "No se pudo actualizar datos");
-        }
-        else {
-            objSalarios.findId(lblIdemp.getText(), tblSalarios);
-            cleanBox();
-            JOptionPane.showMessageDialog(null, "Salario actualizado");
-        } 
-    }//GEN-LAST:event_mitemupdateMousePressed
+            boolean por_defecto=jCheckBox1.isSelected();
+            double monto=Double.parseDouble(txtMonto.getText());
 
-    private void mitemdeleteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemdeleteMousePressed
-        
-        int i;
-        i= JOptionPane.showConfirmDialog(null,"¿Esta seguro de eliminar este registro?","Aviso",JOptionPane.OK_CANCEL_OPTION,JOptionPane.WARNING_MESSAGE);
-        if(i==0){
-            int id = Integer.valueOf(lblIdsalario.getText());
+            int i = objSalarios.update(idsalario,F_inicio,F_final,por_defecto,idemp,monto);
+            if (i == 0) {
 
-            
-            i = objSalarios.delete(id);
-            if(i==0) {
-                JOptionPane.showMessageDialog(null,"No se pudo eliminar el salario");
+                JOptionPane.showMessageDialog(null, "No se pudo actualizar datos");
             }
             else {
                 objSalarios.findId(lblIdemp.getText(), tblSalarios);
                 cleanBox();
+                JOptionPane.showMessageDialog(null, "Salario actualizado");
             } 
-         }
-        
+        }                                          
+        else {
+            JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
+        }
+    }//GEN-LAST:event_mitemupdateMousePressed
+
+    private void mitemdeleteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemdeleteMousePressed
+        val = new Validators();    
+        Object[] datos = {txtMonto.getText()};
+        if(val.validar(datos)){
+            int i;
+            i= JOptionPane.showConfirmDialog(null,"¿Esta seguro de eliminar este registro?","Aviso",JOptionPane.OK_CANCEL_OPTION,JOptionPane.WARNING_MESSAGE);
+            if(i==0){
+                int id = Integer.valueOf(lblIdsalario.getText());
+
+
+                i = objSalarios.delete(id);
+                if(i==0) {
+                    JOptionPane.showMessageDialog(null,"No se pudo eliminar el salario");
+                }
+                else {
+                    objSalarios.findId(lblIdemp.getText(), tblSalarios);
+                    cleanBox();
+                } 
+             }
+        }                                          
+        else {
+            JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
+        }
         
         
     }//GEN-LAST:event_mitemdeleteMousePressed

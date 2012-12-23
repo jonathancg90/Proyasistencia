@@ -6,6 +6,7 @@ import Javabeans.TipoJustificacion;
 import Utilitarios.Config;
 import Utilitarios.Data;
 import Utilitarios.Query;
+import Utilitarios.Validators;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -16,6 +17,7 @@ public class WinTipoJustificacion extends javax.swing.JInternalFrame {
     private Query qs;
     private Config cg;
     private Data dt;
+    private Validators val;
     
     public WinTipoJustificacion() {
         initComponents();
@@ -271,48 +273,69 @@ public class WinTipoJustificacion extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_tbljusMouseClicked
 
     private void mitemregisterMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemregisterMousePressed
-        dt = new Data();
-        String name = txtName.getText();
-        objjus = new TipoJustificacionDAO();
-        int i = objjus.save(name);
-        if (i == 0) {
-            JOptionPane.showMessageDialog(null,"No se pudo grabar datos");
-        }
+        val = new Validators();    
+        Object[] datos = {txtName.getText()};
+        if(val.validar(datos)){     
+            dt = new Data();
+            String name = txtName.getText();
+            objjus = new TipoJustificacionDAO();
+            int i = objjus.save(name);
+            if (i == 0) {
+                JOptionPane.showMessageDialog(null,"No se pudo grabar datos");
+            }
+            else {
+                objjus.getTableAll(tbljus);
+                cleanBox();
+                JOptionPane.showMessageDialog(null,"Nueva justificacion registrado");
+            }
+         }                                          
         else {
-            objjus.getTableAll(tbljus);
-            cleanBox();
-            JOptionPane.showMessageDialog(null,"Nueva justificacion registrado");
+            JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
         }
     }//GEN-LAST:event_mitemregisterMousePressed
 
     private void mitemupdateMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemupdateMousePressed
-        int id = Integer.valueOf(lblId.getText());
-        String name = txtName.getText();
-        objjus = new TipoJustificacionDAO();
-        int i = objjus.update(id,name);
-        if (i == 0) {
+        val = new Validators();    
+        Object[] datos = {txtName.getText(),lblId.getText()};
+        if(val.validar(datos)){    
+            int id = Integer.valueOf(lblId.getText());
+            String name = txtName.getText();
+            objjus = new TipoJustificacionDAO();
+            int i = objjus.update(id,name);
+            if (i == 0) {
 
-            JOptionPane.showMessageDialog(null, "No se pudo actualizar datos");
-        }
+                JOptionPane.showMessageDialog(null, "No se pudo actualizar datos");
+            }
+            else {
+                objjus.getTableAll(tbljus);
+                cleanBox();
+                JOptionPane.showMessageDialog(null, "justificaciones actualizadas");
+            }
+        }                                          
         else {
-            objjus.getTableAll(tbljus);
-            cleanBox();
-            JOptionPane.showMessageDialog(null, "justificaciones actualizadas");
+            JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
         }
     }//GEN-LAST:event_mitemupdateMousePressed
 
     private void mitemdeleteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemdeleteMousePressed
-        int id = Integer.valueOf(lblId.getText());
+        val = new Validators();    
+        Object[] datos = {txtName.getText(),lblId.getText()};
+        if(val.validar(datos)){     
+            int id = Integer.valueOf(lblId.getText());
 
-        objjus = new TipoJustificacionDAO();
-        int i = objjus.delete(id);
-        if(i==0) {
-            JOptionPane.showMessageDialog(null,"No se pudo eliminar el modulo");
+            objjus = new TipoJustificacionDAO();
+            int i = objjus.delete(id);
+            if(i==0) {
+                JOptionPane.showMessageDialog(null,"No se pudo eliminar el modulo");
+            }
+            else {
+                objjus.getTableAll(tbljus);
+                cleanBox();
+                JOptionPane.showMessageDialog(null,"justificacion eliminado");
+            }
         }
         else {
-            objjus.getTableAll(tbljus);
-            cleanBox();
-            JOptionPane.showMessageDialog(null,"justificacion eliminado");
+            JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
         }
     }//GEN-LAST:event_mitemdeleteMousePressed
 

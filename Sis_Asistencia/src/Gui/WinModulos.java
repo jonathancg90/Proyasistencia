@@ -6,6 +6,7 @@ import Javabeans.Modulos;
 import Utilitarios.Config;
 import Utilitarios.Data;
 import Utilitarios.Query;
+import Utilitarios.Validators;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -15,6 +16,7 @@ public class WinModulos extends javax.swing.JInternalFrame {
     private Query qs;
     private Config cg;
     private Data dt;
+    private Validators val;
     
     public WinModulos() {
         initComponents();
@@ -320,51 +322,72 @@ public class WinModulos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_tblmodMouseClicked
 
     private void mitemregisterMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemregisterMousePressed
-        dt = new Data();
-        String name = txtName.getText();
-        boolean estate = Boolean.valueOf(dt.G_BOOLEAN[cmbState.getSelectedIndex()]);
-        objmod = new ModulosDAO();
-        int i = objmod.save(name,estate);
-        if (i == 0) {
-            JOptionPane.showMessageDialog(null,"No se pudo grabar datos");
-        }
+        val = new Validators();    
+        Object[] datos = {txtName.getText()};
+        if(val.validar(datos)){    
+            dt = new Data();
+            String name = txtName.getText();
+            boolean estate = Boolean.valueOf(dt.G_BOOLEAN[cmbState.getSelectedIndex()]);
+            objmod = new ModulosDAO();
+            int i = objmod.save(name,estate);
+            if (i == 0) {
+                JOptionPane.showMessageDialog(null,"No se pudo grabar datos");
+            }
+            else {
+                objmod.getTableAll(tblmod);
+                cleanBox();
+                JOptionPane.showMessageDialog(null,"Nuevo modulo registrado");
+            }
+        }                                          
         else {
-            objmod.getTableAll(tblmod);
-            cleanBox();
-            JOptionPane.showMessageDialog(null,"Nuevo modulo registrado");
+            JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
         }
     }//GEN-LAST:event_mitemregisterMousePressed
 
     private void mitemupdateMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemupdateMousePressed
-        dt = new Data();
-        int id = Integer.valueOf(lblId.getText());
-        String name = txtName.getText();
-        boolean estate = Boolean.valueOf(dt.G_BOOLEAN[cmbState.getSelectedIndex()]);
-        objmod = new ModulosDAO();
-        int i = objmod.update(id,name,estate);
-        if (i == 0) {
+        val = new Validators();    
+        Object[] datos = {txtName.getText(),lblId.getText()};
+        if(val.validar(datos)){    
+            dt = new Data();
+            int id = Integer.valueOf(lblId.getText());
+            String name = txtName.getText();
+            boolean estate = Boolean.valueOf(dt.G_BOOLEAN[cmbState.getSelectedIndex()]);
+            objmod = new ModulosDAO();
+            int i = objmod.update(id,name,estate);
+            if (i == 0) {
 
-            JOptionPane.showMessageDialog(null, "No se pudo actualizar datos");
-        }
+                JOptionPane.showMessageDialog(null, "No se pudo actualizar datos");
+            }
+            else {
+                objmod.getTableAll(tblmod);
+                cleanBox();
+                JOptionPane.showMessageDialog(null, "modulos actualizados");
+            }
+        }                                          
         else {
-            objmod.getTableAll(tblmod);
-            cleanBox();
-            JOptionPane.showMessageDialog(null, "modulos actualizados");
+            JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
         }
     }//GEN-LAST:event_mitemupdateMousePressed
 
     private void mitemdeleteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemdeleteMousePressed
-        int id = Integer.valueOf(lblId.getText());
+        val = new Validators();    
+        Object[] datos = {txtName.getText(),lblId.getText()};
+        if(val.validar(datos)){    
+            int id = Integer.valueOf(lblId.getText());
 
-        objmod = new ModulosDAO();
-        int i = objmod.delete(id);
-        if(i==0) {
-            JOptionPane.showMessageDialog(null,"No se pudo eliminar el modulo");
-        }
+            objmod = new ModulosDAO();
+            int i = objmod.delete(id);
+            if(i==0) {
+                JOptionPane.showMessageDialog(null,"No se pudo eliminar el modulo");
+            }
+            else {
+                objmod.getTableAll(tblmod);
+                cleanBox();
+                JOptionPane.showMessageDialog(null,"modulo eliminado");
+            }
+        }                                          
         else {
-            objmod.getTableAll(tblmod);
-            cleanBox();
-            JOptionPane.showMessageDialog(null,"modulo eliminado");
+            JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
         }
     }//GEN-LAST:event_mitemdeleteMousePressed
 
