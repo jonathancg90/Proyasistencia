@@ -5,6 +5,7 @@ import Dao.CiudadDAO;
 import Javabeans.Ciudad;
 import Utilitarios.Config;
 import Utilitarios.Query;
+import Utilitarios.Validators;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -15,6 +16,7 @@ public class WinCiudad extends javax.swing.JInternalFrame {
     private Ciudad ciudad;
     private Query qs;
     private Config cg;
+    private Validators val;
 
     
     public WinCiudad() {
@@ -271,48 +273,69 @@ public class WinCiudad extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_tblciudadMouseClicked
 
     private void mitemregisterMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemregisterMousePressed
-        String name = txtName.getText();
-        objciudad = new CiudadDAO();
-        int i = objciudad.save(name);
-        if (i == 0) {
-            JOptionPane.showInputDialog(null,"No se pudo grabar datos");
-        }
+        val = new Validators();    
+        Object[] datos = {txtName.getText()};
+        if(val.validar(datos)){ 
+            String name = txtName.getText();
+            objciudad = new CiudadDAO();
+            int i = objciudad.save(name);
+            if (i == 0) {
+                JOptionPane.showInputDialog(null,"No se pudo grabar datos");
+            }
+            else {
+                objciudad.getTableAll(tblciudad);
+                cleanBox();
+                JOptionPane.showMessageDialog(null,"Nueva ciudad registrada");
+            }
+        }                                          
         else {
-            objciudad.getTableAll(tblciudad);
-            cleanBox();
-            JOptionPane.showMessageDialog(null,"Nueva ciudad registrada");
+            JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
         }
     }//GEN-LAST:event_mitemregisterMousePressed
 
     private void mitemupdateMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemupdateMousePressed
-        int id = Integer.valueOf(lblId.getText());
-        String name = txtName.getText();
-        objciudad = new CiudadDAO();
-        System.out.println("ID: "+id);
-        int i = objciudad.update(id,name);
-        if (i == 0) {
+        val = new Validators();    
+        Object[] datos = {txtName.getText(),lblId.getText()};
+        if(val.validar(datos)){ 
+            int id = Integer.valueOf(lblId.getText());
+            String name = txtName.getText();
+            objciudad = new CiudadDAO();
+            System.out.println("ID: "+id);
+            int i = objciudad.update(id,name);
+            if (i == 0) {
 
-            JOptionPane.showMessageDialog(null, "No se pudo actualizar datos");
-        }
+                JOptionPane.showMessageDialog(null, "No se pudo actualizar datos");
+            }
+            else {
+                objciudad.getTableAll(tblciudad);
+                cleanBox();
+                JOptionPane.showMessageDialog(null, "ciudad actualizadas");
+            }
+        }                                          
         else {
-            objciudad.getTableAll(tblciudad);
-            cleanBox();
-            JOptionPane.showMessageDialog(null, "ciudad actualizadas");
+            JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
         }
     }//GEN-LAST:event_mitemupdateMousePressed
 
     private void mitemdeleteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemdeleteMousePressed
-        int id = Integer.valueOf(lblId.getText());
+        val = new Validators();    
+        Object[] datos = {txtName.getText(),lblId.getText()};
+        if(val.validar(datos)){
+            int id = Integer.valueOf(lblId.getText());
 
-        objciudad = new CiudadDAO();
-        int i = objciudad.delete(id);
-        if(i==0) {
-            JOptionPane.showMessageDialog(null,"No se pudo eliminar la ciudad");
-        }
+            objciudad = new CiudadDAO();
+            int i = objciudad.delete(id);
+            if(i==0) {
+                JOptionPane.showMessageDialog(null,"No se pudo eliminar la ciudad");
+            }
+            else {
+                objciudad.getTableAll(tblciudad);
+                cleanBox();
+                JOptionPane.showMessageDialog(null,"Ciudad eliminada");
+            }
+        }                                          
         else {
-            objciudad.getTableAll(tblciudad);
-            cleanBox();
-            JOptionPane.showMessageDialog(null,"Ciudad eliminada");
+            JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
         }
     }//GEN-LAST:event_mitemdeleteMousePressed
 

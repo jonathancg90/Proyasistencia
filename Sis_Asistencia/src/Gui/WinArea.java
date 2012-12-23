@@ -337,10 +337,11 @@ public class WinArea extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_mcloseMousePressed
 
     private void mitemeliminarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemeliminarMousePressed
+
     val = new Validators();    
     Object[] datos = {lblId.getText()};
     if(val.validar(datos)){ 
-            int id = Integer.valueOf(lblId.getText());
+            int id = Integer.valueOf(lblId.getText());  
 
             objarea = new AreaDAO();
             int i = objarea.delete(id);
@@ -375,7 +376,6 @@ public class WinArea extends javax.swing.JInternalFrame {
             cleanBox();
             JOptionPane.showMessageDialog(null, "Area actualizada");
         }
-        
     }//GEN-LAST:event_mitemupdateMousePressed
     else {
         JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");

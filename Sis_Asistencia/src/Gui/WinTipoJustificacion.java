@@ -9,7 +9,7 @@ import Utilitarios.Query;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-public class WinTipo_Justificacion extends javax.swing.JInternalFrame {
+public class WinTipoJustificacion extends javax.swing.JInternalFrame {
 
     private TipoJustificacionDAO objjus;
     private TipoJustificacion justificacion;
@@ -17,7 +17,7 @@ public class WinTipo_Justificacion extends javax.swing.JInternalFrame {
     private Config cg;
     private Data dt;
     
-    public WinTipo_Justificacion() {
+    public WinTipoJustificacion() {
         initComponents();
         cargaForm();
     }

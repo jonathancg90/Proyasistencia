@@ -27,6 +27,7 @@ public class Data {
         G_TYPEHOR[2]="Night time";
         
         G_EXCLUDE[0]="created";
+        
     }
     
 }

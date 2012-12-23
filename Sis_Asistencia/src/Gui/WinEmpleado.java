@@ -382,7 +382,6 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
 
         objempl = new EmpleadoDAO();
         int i = objempl.saveEmpleado(0,nombre,apellido,dni, telefono,area, tipo, estate,cargo,empresa,sucursal);
-        
         if (i == 0) {
             JOptionPane.showMessageDialog(null,"No se pudo grabar datos");
         }
@@ -435,6 +434,7 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
      try {       int fsel;
                 fsel = this.tblEmpleado.getSelectedRow();
                 objempl = new EmpleadoDAO();
+                modemp = new Empleado();
                 DefaultTableModel m = new DefaultTableModel();
                 m = (DefaultTableModel) this.tblEmpleado.getModel();
                 String idEmp = String.valueOf(m.getValueAt(fsel, 0));

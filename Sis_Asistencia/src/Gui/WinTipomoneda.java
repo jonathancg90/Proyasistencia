@@ -9,14 +9,14 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 
-public class WinTipo_moneda extends javax.swing.JInternalFrame {
+public class WinTipomoneda extends javax.swing.JInternalFrame {
 
     private TipomonedaDAO objmoneda;
     private Tipomoneda moneda;
     private Query qs;
     private Config cg;
 
-    public WinTipo_moneda() {
+    public WinTipomoneda() {
         initComponents();
         cargaForm();
     }

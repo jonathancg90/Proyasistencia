@@ -58,33 +58,6 @@ public class EmpleadoDAO extends ConexionBd{
         }
     
     }
-    /* 
-     * Validacion de ingreso de usuarios al sistema
-     */
-    public boolean userAuth(String user, String pas){
-        boolean result;
-        try{
-            getConexion();
-           
-            s = conexion.createStatement();
-            String qs = "select * from usuario "
-                    + "where username='"+user+"' "
-                    + "and password='"+pas+"'";
-
-            rs = s.executeQuery(qs);
-            result = rs.next();
-            
-            closeConexion();
-            rs.close();
-            
-            return result;
-
-        }
-        catch(Exception e){
-            System.out.println("UserDAO_Auth: "+e);
-            return false;
-        }
-    }     
     /*
      * Registro de usuarios
      */
@@ -92,7 +65,6 @@ public class EmpleadoDAO extends ConexionBd{
        int i=0;
         try{
             Date date = new Date(0000-00-00);
-            
             //Preparando
             getConexion();
             hp = new Helpers();
@@ -114,11 +86,10 @@ public class EmpleadoDAO extends ConexionBd{
             pt.setInt(10, objEmpl.getIdtip());
             pt.setInt(11, objEmpl.getIdest());
             pt.setInt(12, objEmpl.getIdcar());
-            pt.setInt(13, objEmpl.getIdemp());
+            pt.setInt(13, objEmpl.getIdempr());
             pt.setInt(14, objEmpl.getIdsuc());
             //Ejecucion y cierre
             i= pt.executeUpdate();
-            System.out.println("---->"+i);
             pt.close();
             closeConexion();
             return i;
@@ -210,15 +181,12 @@ public class EmpleadoDAO extends ConexionBd{
             //Preparando
             String campos[] = new String[16];
             campos = qs.getRecords("Empleado",idemp);
-            for(int i=0;i<campos.length;i++){
-                System.out.println(campos[i]);
-            }
+            
             objEmpl.setNombres(campos[2]);
             objEmpl.setApellidos(campos[3]);
             objEmpl.setDni(campos[4]);
             objEmpl.setTelefono(campos[5]);
             objEmpl.setRetiro(campos[6]);
-            objEmpl.setHuella(Integer.parseInt(campos[7]));
             objEmpl.setCreated(campos[8]);
             objEmpl.setModified(campos[9]);
             objEmpl.setIdare(Integer.parseInt(campos[10]));

@@ -6,6 +6,7 @@ import Javabeans.Empresa;
 import Utilitarios.Config;
 import Utilitarios.Data;
 import Utilitarios.Query;
+import Utilitarios.Validators;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -16,6 +17,7 @@ public class WinEmpresa extends javax.swing.JInternalFrame {
     private Query qs;
     private Config cg;
     private Data dt;
+    private Validators val;
     
     public WinEmpresa() {
         initComponents();
@@ -368,65 +370,90 @@ public class WinEmpresa extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_mcloseMousePressed
 
     private void mitemdeleteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemdeleteMousePressed
-        int i;      
-        i= JOptionPane.showConfirmDialog(null,"¿Esta seguro de eliminar este registro?","Aviso",JOptionPane.OK_CANCEL_OPTION,JOptionPane.WARNING_MESSAGE);
-        
-        if(i==0) {
-            int id = Integer.valueOf(lblId.getText());
-            objempresa = new EmpresaDAO();
-            i = objempresa.delete(id);          
-            if(i==0) {
-                  JOptionPane.showMessageDialog(null,"No se pudo eliminar la Empresa");
-            } 
-            else {
-                  objempresa.getTableAll(tblempresa);
-                  cleanBox();
+        val = new Validators();
+        Object[] datos = {txtName.getText(),txtruc.getText()};
+            if (val.validar(datos))
+            {
+                int i;      
+                i= JOptionPane.showConfirmDialog(null,"¿Esta seguro de eliminar este registro?","Aviso",JOptionPane.OK_CANCEL_OPTION,JOptionPane.WARNING_MESSAGE);
+
+                if(i==0) {
+                    int id = Integer.valueOf(lblId.getText());
+                    objempresa = new EmpresaDAO();
+                    i = objempresa.delete(id);          
+                    if(i==0) {
+                          JOptionPane.showMessageDialog(null,"No se pudo eliminar la Empresa");
+                    } 
+                    else {
+                          objempresa.getTableAll(tblempresa);
+                          cleanBox();
+                    }
+                }
             }
-        }
+            else {
+                JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
+            }
     }//GEN-LAST:event_mitemdeleteMousePressed
 
     private void mitemupdateMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemupdateMousePressed
-        dt = new Data();
-        int id = Integer.valueOf(lblId.getText());
-        String name = txtName.getText();
-        String ruc = txtruc.getText();
-        boolean estate = Boolean.valueOf(dt.G_BOOLEAN[cmbEstate.getSelectedIndex()]);
-        //int estate = cmbEstate.getSelectedIndex();
-        int trab = Integer.parseInt(txtCantTrab.getText());
-        int mon = qs.idChoice("moneda","nombre",String.valueOf(cboMon.getSelectedItem()));
+        val = new Validators();
+        Object[] datos = {txtName.getText(),txtruc.getText()};
+            if (val.validar(datos))
+            {
+                dt = new Data();
+                int id = Integer.valueOf(lblId.getText());
+                String name = txtName.getText();
+                String ruc = txtruc.getText();
+                boolean estate = Boolean.valueOf(dt.G_BOOLEAN[cmbEstate.getSelectedIndex()]);
+                //int estate = cmbEstate.getSelectedIndex();
+                int trab = Integer.parseInt(txtCantTrab.getText());
+                int mon = qs.idChoice("moneda","nombre",String.valueOf(cboMon.getSelectedItem()));
 
-        objempresa = new EmpresaDAO();
-        System.out.println("ID: "+id);
-        int i = objempresa.update(id,name,ruc,estate,trab,mon);
-        if(i==0) {
-            JOptionPane.showMessageDialog(null,"No se pudo actualizar datos");
-        }
-        else {
-            objempresa.getTableAll(tblempresa);
-            cleanBox();
-            JOptionPane.showMessageDialog(null,"Nueva empresa registrada");
-        }
+                objempresa = new EmpresaDAO();
+                System.out.println("ID: "+id);
+                int i = objempresa.update(id,name,ruc,estate,trab,mon);
+                if(i==0) {
+                    JOptionPane.showMessageDialog(null,"No se pudo actualizar datos");
+                }
+                else {
+                    objempresa.getTableAll(tblempresa);
+                    cleanBox();
+                    JOptionPane.showMessageDialog(null,"Nueva empresa registrada");
+                }
+            }
+            else {
+                JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
+            } 
     }//GEN-LAST:event_mitemupdateMousePressed
 
     private void mitemregisterMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemregisterMousePressed
-        dt = new Data();
-        String name = txtName.getText();
-        String ruc = txtruc.getText();
-        boolean estate = Boolean.valueOf(dt.G_BOOLEAN[cmbEstate.getSelectedIndex()]);
-        //int estate = Integer.parseInt(txtCantTrab.getText());
-        int trab = Integer.parseInt(txtCantTrab.getText());
-        int mon = qs.idChoice("moneda","nombre",String.valueOf(cboMon.getSelectedItem()));
+        val = new Validators();
+        Object[] datos = {txtName.getText(),txtruc.getText()};
+            if (val.validar(datos))
+            {
+                dt = new Data();
+                String name = txtName.getText();
+                String ruc = txtruc.getText();
+                boolean estate = Boolean.valueOf(dt.G_BOOLEAN[cmbEstate.getSelectedIndex()]);
+                //int estate = Integer.parseInt(txtCantTrab.getText());
+                int trab = Integer.parseInt(txtCantTrab.getText());
+                int mon = qs.idChoice("moneda","nombre",String.valueOf(cboMon.getSelectedItem()));
+
+                objempresa = new EmpresaDAO();
+                int i = objempresa.save(name,ruc,estate,trab,mon);
+                if(i==0) {
+                    JOptionPane.showMessageDialog(null,"No se pudo grabar datos");
+                }
+                else {
+                    objempresa.getTableAll(tblempresa);
+                    cleanBox();
+                    JOptionPane.showMessageDialog(null,"Nueva empresa registrada");
+                }
+            }
+            else {
+                JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
+            } 
         
-        objempresa = new EmpresaDAO();
-        int i = objempresa.save(name,ruc,estate,trab,mon);
-        if(i==0) {
-            JOptionPane.showMessageDialog(null,"No se pudo grabar datos");
-        }
-        else {
-            objempresa.getTableAll(tblempresa);
-            cleanBox();
-            JOptionPane.showMessageDialog(null,"Nueva empresa registrada");
-        }
     }//GEN-LAST:event_mitemregisterMousePressed
 
     private void nolaborablesMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nolaborablesMousePressed

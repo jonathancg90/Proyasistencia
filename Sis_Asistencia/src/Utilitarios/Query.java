@@ -18,7 +18,7 @@ public class Query extends ConexionBd{
     private DefaultComboBoxModel MChoice;
     private Data dt;
     private String _error = "Utilitarios_Query_";
-    private String identify;
+    private String identify="";
     /*
      * Arma registro
      */
@@ -50,7 +50,6 @@ public class Query extends ConexionBd{
                 }
             }
             query= "insert into "+Table+" ("+campos+") values("+values+")";
-            
             pt  = conexion.prepareStatement(query);
             rs.close();
             return pt;
@@ -305,13 +304,17 @@ public class Query extends ConexionBd{
             getConexion();
             MChoice = new DefaultComboBoxModel();
             s = conexion.createStatement();
+            
             if("".equals(this.identify)){
                 this.identify = getIdentify(Tbl);
                 op = true;
             }
             rs = s.executeQuery("select " +Campo+ " from " +Tbl + " where " + this.identify + "=" +value);
+            System.out.println("select" +Campo+ " +from " +Tbl + " where " + this.identify + "=" +value);
             while(rs.next()) {
               MChoice.addElement(rs.getString(Campo));
+              System.out.println("Id1DFGDFGDFGDFGDFG: "+rs.getString(Campo));
+              
             }
             if(op){
                 rs = s.executeQuery("select " +Campo+ " from " +Tbl + " where " + this.identify + "!=" +value);
@@ -369,11 +372,7 @@ public class Query extends ConexionBd{
             
             rs.next();
             for(int i=1;i<=nCols;i++){
-                if(campos[i]==null){
-                campos[i]="holaaaaa";
-                }
-                campos[i]=rs.getString(i);
-                
+                    campos[i]=rs.getString(i);
             }
             rs.close();
             closeConexion(); 

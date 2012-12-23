@@ -10,8 +10,11 @@ public class Usuario {
     private String modified;
     private boolean estado;
     private int rol;
+    private String correo;
 
-    public Usuario(int idusu, String username, String password, int idemp, String created, String modified, boolean estado, int rol) {
+    public Usuario(int idusu, String username, String password, int idemp, 
+            String created, String modified, boolean estado, int rol,
+            String correo) {
         this.idusu = idusu;
         this.username = username.toUpperCase();
         this.password = password;
@@ -20,6 +23,15 @@ public class Usuario {
         this.modified = modified;
         this.estado = estado;
         this.rol = rol;
+        this.correo = correo.toUpperCase();
+    }
+
+    public String getCorreo() {
+        return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo.toUpperCase();
     }
 
     public Usuario() {
