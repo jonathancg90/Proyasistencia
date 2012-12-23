@@ -139,7 +139,7 @@ public class WinLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btningresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btningresarActionPerformed
-        String user=txtusername.getText();
+        String user=txtusername.getText().toUpperCase();
         String pas=txtpassword.getText();
         us= new UserDAO();
         if(us.userAuth(user, pas)==true){
