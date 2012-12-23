@@ -321,17 +321,22 @@ public class WinCiudad extends javax.swing.JInternalFrame {
         val = new Validators();    
         Object[] datos = {txtName.getText(),lblId.getText()};
         if(val.validar(datos)){
-            int id = Integer.valueOf(lblId.getText());
+            int i;      
+            i= JOptionPane.showConfirmDialog(null,"¿Esta seguro de eliminar este registro?","Aviso",JOptionPane.OK_CANCEL_OPTION,JOptionPane.WARNING_MESSAGE);
 
-            objciudad = new CiudadDAO();
-            int i = objciudad.delete(id);
-            if(i==0) {
-                JOptionPane.showMessageDialog(null,"No se pudo eliminar la ciudad");
-            }
-            else {
-                objciudad.getTableAll(tblciudad);
-                cleanBox();
-                JOptionPane.showMessageDialog(null,"Ciudad eliminada");
+            if(i==0) {    
+                int id = Integer.valueOf(lblId.getText());
+
+                objciudad = new CiudadDAO();
+                i = objciudad.delete(id);
+                if(i==0) {
+                    JOptionPane.showMessageDialog(null,"No se pudo eliminar la ciudad");
+                }
+                else {
+                    objciudad.getTableAll(tblciudad);
+                    cleanBox();
+                    JOptionPane.showMessageDialog(null,"Ciudad eliminada");
+                }
             }
         }                                          
         else {

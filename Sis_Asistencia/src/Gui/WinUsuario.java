@@ -363,17 +363,22 @@ public class WinUsuario extends javax.swing.JInternalFrame {
         val = new Validators();    
         Object[] datos = {txtUsername.getText(),Txtcorreo.getText(),txtPassword.getPassword(),lblUsu.getText()};
         if(val.validar(datos)){    
-            int id = Integer.valueOf(lblUsu.getText());
+            int i;      
+            i= JOptionPane.showConfirmDialog(null,"¿Esta seguro de eliminar este registro?","Aviso",JOptionPane.OK_CANCEL_OPTION,JOptionPane.WARNING_MESSAGE);
 
-            objUser = new UserDAO();
-            int i = objUser.deleteUsuario(id);
-            if(i==0) {
-                JOptionPane.showMessageDialog(null,"No se pudo eliminar el area");
-            }
-            else {
-                objUser.getTableAll(TblUsu);
-                cleanBox();
-                JOptionPane.showMessageDialog(null,"Area eliminada");
+            if(i==0) {    
+                int id = Integer.valueOf(lblUsu.getText());
+
+                objUser = new UserDAO();
+                i = objUser.deleteUsuario(id);
+                if(i==0) {
+                    JOptionPane.showMessageDialog(null,"No se pudo eliminar el area");
+                }
+                else {
+                    objUser.getTableAll(TblUsu);
+                    cleanBox();
+                    JOptionPane.showMessageDialog(null,"Area eliminada");
+                }
             }
         }                                          
         else {

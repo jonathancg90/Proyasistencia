@@ -373,17 +373,22 @@ public class WinModulos extends javax.swing.JInternalFrame {
         val = new Validators();    
         Object[] datos = {txtName.getText(),lblId.getText()};
         if(val.validar(datos)){    
-            int id = Integer.valueOf(lblId.getText());
+            int i;      
+            i= JOptionPane.showConfirmDialog(null,"¿Esta seguro de eliminar este registro?","Aviso",JOptionPane.OK_CANCEL_OPTION,JOptionPane.WARNING_MESSAGE);
 
-            objmod = new ModulosDAO();
-            int i = objmod.delete(id);
-            if(i==0) {
-                JOptionPane.showMessageDialog(null,"No se pudo eliminar el modulo");
-            }
-            else {
-                objmod.getTableAll(tblmod);
-                cleanBox();
-                JOptionPane.showMessageDialog(null,"modulo eliminado");
+            if(i==0) {    
+                int id = Integer.valueOf(lblId.getText());
+
+                objmod = new ModulosDAO();
+                i = objmod.delete(id);
+                if(i==0) {
+                    JOptionPane.showMessageDialog(null,"No se pudo eliminar el modulo");
+                }
+                else {
+                    objmod.getTableAll(tblmod);
+                    cleanBox();
+                    JOptionPane.showMessageDialog(null,"modulo eliminado");
+                }
             }
         }                                          
         else {

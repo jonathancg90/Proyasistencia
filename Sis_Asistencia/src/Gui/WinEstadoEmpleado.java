@@ -255,20 +255,25 @@ public class WinEstadoEmpleado extends javax.swing.JInternalFrame {
         val = new Validators();    
         Object[] datos = {txtName.getText(),lblId.getText()};
         if(val.validar(datos)){ 
-            if( !"".equals(lblId.getText())){    
-                dt = new Data();
-                int id = Integer.parseInt(lblId.getText());
-                objest = new EstadoEmpleadoDAO();
-                int i = objest.delete(id);
-                if (i == 0) {
-                    JOptionPane.showInputDialog(null,"No se pudo eliminar el estado");
+             int i;      
+             i= JOptionPane.showConfirmDialog(null,"¿Esta seguro de eliminar este registro?","Aviso",JOptionPane.OK_CANCEL_OPTION,JOptionPane.WARNING_MESSAGE);
+
+             if(i==0) {   
+                if( !"".equals(lblId.getText())){    
+                    dt = new Data();
+                    int id = Integer.parseInt(lblId.getText());
+                    objest = new EstadoEmpleadoDAO();
+                    i = objest.delete(id);
+                    if (i == 0) {
+                        JOptionPane.showInputDialog(null,"No se pudo eliminar el estado");
+                    }
+                    else {
+                        objest.getTableAll(tblest);
+                        cleanBox();
+                        JOptionPane.showMessageDialog(null,"Estado eliminado");      
+                    }
                 }
-                else {
-                    objest.getTableAll(tblest);
-                    cleanBox();
-                    JOptionPane.showMessageDialog(null,"Estado eliminado");      
-                }
-            }
+             }
         }                                          
         else {
             JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");

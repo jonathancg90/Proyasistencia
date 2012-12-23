@@ -300,21 +300,26 @@ public class WinRoles extends javax.swing.JInternalFrame {
         val = new Validators();    
         Object[] datos = {txtName.getText(),lblId.getText()};
         if(val.validar(datos)){    
-            if(!"".equals(lblId.getText())){
-                int id = Integer.valueOf(lblId.getText());
-                objroles = new RolesDAO();
-                int i = objroles.delete(id);
-                if(i==0) {
-                    JOptionPane.showMessageDialog(null,"No se pudo eliminar el rol");
-                }
+            int i;      
+            i= JOptionPane.showConfirmDialog(null,"¿Esta seguro de eliminar este registro?","Aviso",JOptionPane.OK_CANCEL_OPTION,JOptionPane.WARNING_MESSAGE);
+
+            if(i==0) {    
+                if(!"".equals(lblId.getText())){
+                    int id = Integer.valueOf(lblId.getText());
+                    objroles = new RolesDAO();
+                    i = objroles.delete(id);
+                    if(i==0) {
+                        JOptionPane.showMessageDialog(null,"No se pudo eliminar el rol");
+                    }
+                    else {
+                        objroles.getTableAll(tblroles);
+                        cleanBox();
+                        JOptionPane.showMessageDialog(null,"Rol eliminado");
+                    }
+                } 
                 else {
-                    objroles.getTableAll(tblroles);
-                    cleanBox();
-                    JOptionPane.showMessageDialog(null,"Rol eliminado");
+                    JOptionPane.showMessageDialog(null, "Seleccione un rol para ejecutar esta accion");
                 }
-            } 
-            else {
-                JOptionPane.showMessageDialog(null, "Seleccione un rol para ejecutar esta accion");
             }
         }                                          
         else {

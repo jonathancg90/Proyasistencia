@@ -403,19 +403,24 @@ public class WinHorario extends javax.swing.JInternalFrame {
         val = new Validators();    
         Object[] datos = {txtnombre.getText(),lblId.getText()};
         if(val.validar(datos)){    
-            int id = Integer.valueOf(lblId.getText());
+            int i;      
+            i= JOptionPane.showConfirmDialog(null,"¿Esta seguro de eliminar este registro?","Aviso",JOptionPane.OK_CANCEL_OPTION,JOptionPane.WARNING_MESSAGE);
 
-            objhora = new HorariosDAO();
-            int i = objhora.delete(id);
-            if(i==0) {
-                JOptionPane.showMessageDialog(null,"No se pudo eliminar el area");
-                
-            }
-            else {
-                JOptionPane.showMessageDialog(null,"Area eliminada");
-                objhora.getTableAll(tblhora);
-                cleanBox();
-           
+            if(i==0) {    
+                int id = Integer.valueOf(lblId.getText());
+
+                objhora = new HorariosDAO();
+                i = objhora.delete(id);
+                if(i==0) {
+                    JOptionPane.showMessageDialog(null,"No se pudo eliminar el area");
+
+                }
+                else {
+                    JOptionPane.showMessageDialog(null,"Area eliminada");
+                    objhora.getTableAll(tblhora);
+                    cleanBox();
+
+                }
             }
         }                                          
         else {
