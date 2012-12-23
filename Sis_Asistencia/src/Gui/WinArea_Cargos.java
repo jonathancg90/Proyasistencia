@@ -3,6 +3,7 @@ package Gui;
 
 import Dao.CargosDAO;
 import Utilitarios.Query;
+import Utilitarios.Validators;
 import java.awt.HeadlessException;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -13,6 +14,7 @@ public class WinArea_Cargos extends javax.swing.JInternalFrame {
     private CargosDAO objCar;
     private Query qs;
     private String _error = "Gui_WinArea_";
+    private Validators val;
     
     public WinArea_Cargos() {
         initComponents();
@@ -249,79 +251,100 @@ public class WinArea_Cargos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_mcloseActionPerformed
 
     private void mitemregisterMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemregisterMousePressed
-    String name = txtname.getText();
-        int idArea = Integer.parseInt(lblidArea.getText());
-        objCar = new CargosDAO();
-        int i = objCar.save(idArea,name);
-        if (i == 0) {
-            JOptionPane.showInputDialog(null,"No se pudo grabar datos");
-        }
-        else {
-            objCar.find(lblidArea.getText(),TblCargos);
-            cleanBox();
-            JOptionPane.showMessageDialog(null,"Nuevo cargo registrado");      
-        }     
+     val = new Validators();    
+     Object[] datos = {txtname.getText()};
+     if(val.validar(datos)){   
+        String name = txtname.getText();
+            int idArea = Integer.parseInt(lblidArea.getText());
+            objCar = new CargosDAO();
+            int i = objCar.save(idArea,name);
+            if (i == 0) {
+                JOptionPane.showInputDialog(null,"No se pudo grabar datos");
+            }
+            else {
+                objCar.find(lblidArea.getText(),TblCargos);
+                cleanBox();
+                JOptionPane.showMessageDialog(null,"Nuevo cargo registrado");      
+            } 
+      }                                          
+      else {
+            JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
+      }
     }//GEN-LAST:event_mitemregisterMousePressed
 
     private void mitemdeleteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemdeleteMousePressed
-    int fsel;
-        fsel = this.TblCargos.getSelectedRow();
-        if (fsel == -1) {
-            //No se ha seleccionado registo en Jtable
-        } 
-        else {
-            try {
-               int i;
-               i= JOptionPane.showConfirmDialog(null,"¿Esta seguro de eliminar este registro?","Aviso",JOptionPane.OK_CANCEL_OPTION,JOptionPane.WARNING_MESSAGE);
-               if(i==0){
-                   DefaultTableModel m = new DefaultTableModel();
-                   m = (DefaultTableModel) this.TblCargos.getModel();
-                   int id = Integer.parseInt(String.valueOf(m.getValueAt(fsel, 0)));
+    val = new Validators();    
+    Object[] datos = {txtname.getText()};
+    if(val.validar(datos)){   
+        int fsel;
+            fsel = this.TblCargos.getSelectedRow();
+            if (fsel == -1) {
+                //No se ha seleccionado registo en Jtable
+            } 
+            else {
+                try {
+                   int i;
+                   i= JOptionPane.showConfirmDialog(null,"¿Esta seguro de eliminar este registro?","Aviso",JOptionPane.OK_CANCEL_OPTION,JOptionPane.WARNING_MESSAGE);
+                   if(i==0){
+                       DefaultTableModel m = new DefaultTableModel();
+                       m = (DefaultTableModel) this.TblCargos.getModel();
+                       int id = Integer.parseInt(String.valueOf(m.getValueAt(fsel, 0)));
 
-                   objCar = new CargosDAO();
-                   i = objCar.delete(id);
-                   if(i==0) {
-                       JOptionPane.showMessageDialog(null,"No se pudo eliminar el area");
-                   }
-                   else {
-                       objCar.find(lblidArea.getText(),TblCargos);
-                       cleanBox();
-                   } 
-                }                       
-            }catch(HeadlessException | NumberFormatException e) {
-                
+                       objCar = new CargosDAO();
+                       i = objCar.delete(id);
+                       if(i==0) {
+                           JOptionPane.showMessageDialog(null,"No se pudo eliminar el area");
+                       }
+                       else {
+                           objCar.find(lblidArea.getText(),TblCargos);
+                           cleanBox();
+                       } 
+                    }                       
+                }catch(HeadlessException | NumberFormatException e) {
+
+                }
             }
-        }
+        }                                          
+    else {
+        JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
+    }
     }//GEN-LAST:event_mitemdeleteMousePressed
 
     private void mitemupdateMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemupdateMousePressed
-    int fsel;
-        fsel = this.TblCargos.getSelectedRow();
-        if (fsel == -1) {
-            //No se ha seleccionado registo en Jtable
-        } 
-        else {
+        val = new Validators();    
+        Object[] datos = {txtname.getText()};
+        if(val.validar(datos)){    
+            int fsel;
+                fsel = this.TblCargos.getSelectedRow();
+                if (fsel == -1) {
+                    //No se ha seleccionado registo en Jtable
+                } 
+                else {
 
-            try { 
-                   DefaultTableModel m = new DefaultTableModel();
-                   m = (DefaultTableModel) this.TblCargos.getModel();
-                   int id = Integer.parseInt(String.valueOf(m.getValueAt(fsel, 0)));
-                   String name = String.valueOf(m.getValueAt(fsel, 1));
-                   int idarea = Integer.parseInt(lblidArea.getText());
-                   objCar = new CargosDAO();
-                   
-                   int i = objCar.update(id,idarea,name);
-                   if(i==0) {
-                       JOptionPane.showMessageDialog(null,"No se pudo actualizar el cargo");
-                   }
-                   else {
-                       objCar.find(lblidArea.getText(),TblCargos);
-                       cleanBox();
-                   } 
-                }                       
-            catch(NumberFormatException | HeadlessException e) {
-                
-            }
+                    try { 
+                           DefaultTableModel m = new DefaultTableModel();
+                           m = (DefaultTableModel) this.TblCargos.getModel();
+                           int id = Integer.parseInt(String.valueOf(m.getValueAt(fsel, 0)));
+                           String name = String.valueOf(m.getValueAt(fsel, 1));
+                           int idarea = Integer.parseInt(lblidArea.getText());
+                           objCar = new CargosDAO();
+
+                           int i = objCar.update(id,idarea,name);
+                           if(i==0) {
+                               JOptionPane.showMessageDialog(null,"No se pudo actualizar el cargo");
+                           }
+                           else {
+                               objCar.find(lblidArea.getText(),TblCargos);
+                               cleanBox();
+                           } 
+                        }                       
+                    catch(NumberFormatException | HeadlessException e) {
+
+                    }
+                }
+        }                                          
+        else {
+            JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
         }
     }//GEN-LAST:event_mitemupdateMousePressed
 

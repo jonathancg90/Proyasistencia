@@ -4,6 +4,7 @@ import Dao.RolesDAO;
 import Javabeans.Roles;
 import Utilitarios.Config;
 import Utilitarios.Query;
+import Utilitarios.Validators;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -12,6 +13,7 @@ public class WinRoles extends javax.swing.JInternalFrame {
     private Roles roles;
     private Query qs;
     private Config cg;
+    private Validators val;
 
     public WinRoles() {
         initComponents();
@@ -247,55 +249,82 @@ public class WinRoles extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_mcloseActionPerformed
 
     private void mitemregisterMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemregisterMousePressed
-        String name = txtName.getText();
-        objroles = new RolesDAO();
-        int i = objroles.save(name);
-        if (i == 0) {
-            JOptionPane.showMessageDialog(null,"No se pudo grabar datos");
-        }
-        else {
-            objroles.getTableAll(tblroles);
-            cleanBox();
-            JOptionPane.showMessageDialog(null,"Nueva rol registrado");
-        }
-    }//GEN-LAST:event_mitemregisterMousePressed
-
-    private void mitemupdateMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemupdateMousePressed
-     if(!"".equals(lblId.getText())){
-        int id = Integer.valueOf(lblId.getText());
-        String name = txtName.getText();
-        objroles = new RolesDAO();
-        int i = objroles.update(id,name);
-        if (i == 0) {
-
-            JOptionPane.showMessageDialog(null, "No se pudo actualizar datos");
-        }
-        else {
-            objroles.getTableAll(tblroles);
-            cleanBox();
-            JOptionPane.showMessageDialog(null, "roles actualizados");
-        }   
-     } else {
-            JOptionPane.showMessageDialog(null, "Seleccione un rol para ejecutar esta accion");
-     }
-    }//GEN-LAST:event_mitemupdateMousePressed
-
-    private void mitemdeleteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemdeleteMousePressed
-        if(!"".equals(lblId.getText())){
-            int id = Integer.valueOf(lblId.getText());
+        val = new Validators();    
+        Object[] datos = {txtName.getText()};
+        if(val.validar(datos)){     
+            String name = txtName.getText();
             objroles = new RolesDAO();
-            int i = objroles.delete(id);
-            if(i==0) {
-                JOptionPane.showMessageDialog(null,"No se pudo eliminar el rol");
+            int i = objroles.save(name);
+            if (i == 0) {
+                JOptionPane.showMessageDialog(null,"No se pudo grabar datos");
             }
             else {
                 objroles.getTableAll(tblroles);
                 cleanBox();
-                JOptionPane.showMessageDialog(null,"Rol eliminado");
+                JOptionPane.showMessageDialog(null,"Nueva rol registrado");
             }
-        } else {
-            JOptionPane.showMessageDialog(null, "Seleccione un rol para ejecutar esta accion");
-     }
+        }                                          
+        else {
+            JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
+        }
+    }//GEN-LAST:event_mitemregisterMousePressed
+
+    private void mitemupdateMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemupdateMousePressed
+        val = new Validators();    
+        Object[] datos = {txtName.getText(),lblId.getText()};
+        if(val.validar(datos)){     
+            if(!"".equals(lblId.getText())){
+               int id = Integer.valueOf(lblId.getText());
+               String name = txtName.getText();
+               objroles = new RolesDAO();
+               int i = objroles.update(id,name);
+               if (i == 0) {
+
+                   JOptionPane.showMessageDialog(null, "No se pudo actualizar datos");
+               }
+               else {
+                   objroles.getTableAll(tblroles);
+                   cleanBox();
+                   JOptionPane.showMessageDialog(null, "roles actualizados");
+               }   
+            } else {
+                   JOptionPane.showMessageDialog(null, "Seleccione un rol para ejecutar esta accion");
+            }
+        }                                          
+        else {
+            JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
+        }
+    }//GEN-LAST:event_mitemupdateMousePressed
+
+    private void mitemdeleteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemdeleteMousePressed
+        val = new Validators();    
+        Object[] datos = {txtName.getText(),lblId.getText()};
+        if(val.validar(datos)){    
+            int i;      
+            i= JOptionPane.showConfirmDialog(null,"¿Esta seguro de eliminar este registro?","Aviso",JOptionPane.OK_CANCEL_OPTION,JOptionPane.WARNING_MESSAGE);
+
+            if(i==0) {    
+                if(!"".equals(lblId.getText())){
+                    int id = Integer.valueOf(lblId.getText());
+                    objroles = new RolesDAO();
+                    i = objroles.delete(id);
+                    if(i==0) {
+                        JOptionPane.showMessageDialog(null,"No se pudo eliminar el rol");
+                    }
+                    else {
+                        objroles.getTableAll(tblroles);
+                        cleanBox();
+                        JOptionPane.showMessageDialog(null,"Rol eliminado");
+                    }
+                } 
+                else {
+                    JOptionPane.showMessageDialog(null, "Seleccione un rol para ejecutar esta accion");
+                }
+            }
+        }                                          
+        else {
+            JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
+        }
     }//GEN-LAST:event_mitemdeleteMousePressed
 
     private void mcloseMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mcloseMousePressed

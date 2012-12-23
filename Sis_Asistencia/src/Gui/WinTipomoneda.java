@@ -5,6 +5,7 @@ import Dao.TipomonedaDAO;
 import Javabeans.Tipomoneda;
 import Utilitarios.Config;
 import Utilitarios.Query;
+import Utilitarios.Validators;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -15,6 +16,7 @@ public class WinTipomoneda extends javax.swing.JInternalFrame {
     private Tipomoneda moneda;
     private Query qs;
     private Config cg;
+    private Validators val;
 
     public WinTipomoneda() {
         initComponents();
@@ -314,51 +316,77 @@ public class WinTipomoneda extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_tblmonedaMouseClicked
 
     private void mitemregisterMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemregisterMousePressed
-        String name = txtName.getText();
-        String simbol = txtsimbolo.getText();
-        boolean def = chkdefault.isSelected();
-        objmoneda = new TipomonedaDAO();
-        int i = objmoneda.save(name,simbol,def);
-        if (i == 0) {
-            JOptionPane.showMessageDialog(null,"No se pudo grabar datos");
-        }
+        val = new Validators();    
+        Object[] datos = {txtName.getText(),txtsimbolo.getText()};
+        if(val.validar(datos)){     
+            String name = txtName.getText();
+            String simbol = txtsimbolo.getText();
+            boolean def = chkdefault.isSelected();
+            objmoneda = new TipomonedaDAO();
+            int i = objmoneda.save(name,simbol,def);
+            if (i == 0) {
+                JOptionPane.showMessageDialog(null,"No se pudo grabar datos");
+            }
+            else {
+                objmoneda.getTableAll(tblmoneda);
+                cleanBox();
+                JOptionPane.showMessageDialog(null,"Nueva moneda registrada");
+            }
+        }                                          
         else {
-            objmoneda.getTableAll(tblmoneda);
-            cleanBox();
-            JOptionPane.showMessageDialog(null,"Nueva moneda registrada");
+            JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
         }
     }//GEN-LAST:event_mitemregisterMousePressed
 
     private void mitemupdateMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemupdateMousePressed
-        int id = Integer.valueOf(lblId.getText());
-        String name = txtName.getText();
-        String simbol = txtsimbolo.getText();
-        boolean def = chkdefault.isSelected();
-        objmoneda = new TipomonedaDAO();
-        int i = objmoneda.update(id,name,simbol,def);
-        if (i == 0) {
+        val = new Validators();    
+        Object[] datos = {txtName.getText(),txtsimbolo.getText(),lblId.getText()};
+        if(val.validar(datos)){      
+            int id = Integer.valueOf(lblId.getText());
+            String name = txtName.getText();
+            String simbol = txtsimbolo.getText();
+            boolean def = chkdefault.isSelected();
+            objmoneda = new TipomonedaDAO();
+            int i = objmoneda.update(id,name,simbol,def);
+            if (i == 0) {
 
-            JOptionPane.showMessageDialog(null, "No se pudo actualizar datos");
-        }
+                JOptionPane.showMessageDialog(null, "No se pudo actualizar datos");
+            }
+            else {
+                objmoneda.getTableAll(tblmoneda);
+                cleanBox();
+                JOptionPane.showMessageDialog(null, "moneda actualizadas");
+            }
+        }                                          
         else {
-            objmoneda.getTableAll(tblmoneda);
-            cleanBox();
-            JOptionPane.showMessageDialog(null, "moneda actualizadas");
+            JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
         }
     }//GEN-LAST:event_mitemupdateMousePressed
 
     private void mitemdeleteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemdeleteMousePressed
-        int id = Integer.valueOf(lblId.getText());
+         val = new Validators();    
+        Object[] datos = {txtName.getText(),txtsimbolo.getText(),lblId.getText()};
+        if(val.validar(datos)){    
+            int i;      
+            i= JOptionPane.showConfirmDialog(null,"¿Esta seguro de eliminar este registro?","Aviso",JOptionPane.OK_CANCEL_OPTION,JOptionPane.WARNING_MESSAGE);
 
-        objmoneda = new TipomonedaDAO();
-        int i = objmoneda.delete(id);
-        if(i==0) {
-            JOptionPane.showMessageDialog(null,"No se pudo eliminar la moneda");
-        }
+            if(i==0) {    
+                int id = Integer.valueOf(lblId.getText());
+
+                objmoneda = new TipomonedaDAO();
+                i = objmoneda.delete(id);
+                if(i==0) {
+                    JOptionPane.showMessageDialog(null,"No se pudo eliminar la moneda");
+                }
+                else {
+                    objmoneda.getTableAll(tblmoneda);
+                    cleanBox();
+                    JOptionPane.showMessageDialog(null,"moneda eliminada");
+                }
+            }
+        }                                          
         else {
-            objmoneda.getTableAll(tblmoneda);
-            cleanBox();
-            JOptionPane.showMessageDialog(null,"moneda eliminada");
+            JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
         }
     }//GEN-LAST:event_mitemdeleteMousePressed
 

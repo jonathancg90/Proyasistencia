@@ -465,22 +465,27 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
     val = new Validators();    
     Object[] datos = {lblidempleado.getText()};
     if(val.validar(datos)){ 
-        int id = Integer.valueOf(lblidempleado.getText());
+        int i;      
+        i= JOptionPane.showConfirmDialog(null,"¿Esta seguro de eliminar este registro?","Aviso",JOptionPane.OK_CANCEL_OPTION,JOptionPane.WARNING_MESSAGE);
 
-        objempl = new EmpleadoDAO();
-        int i = objempl.deleteEmpleado(id);
-        if(i==0) {
-            JOptionPane.showMessageDialog(null,"No se pudo eliminar el area(Se cambio su esatdo a inactivo)");
-            //TODO: IMPLEMENTAR CAMBIO DE ESTADO (INACTIVO)
+        if(i==0) {    
+            int id = Integer.valueOf(lblidempleado.getText());
+
+            objempl = new EmpleadoDAO();
+            i = objempl.deleteEmpleado(id);
+            if(i==0) {
+                JOptionPane.showMessageDialog(null,"No se pudo eliminar el area(Se cambio su esatdo a inactivo)");
+                //TODO: IMPLEMENTAR CAMBIO DE ESTADO (INACTIVO)
+            }
+            else {
+                objempl.getTableAll(tblEmpleado);
+                cleanBox();
+                JOptionPane.showMessageDialog(null,"Empleado eliminada");
+            }
         }
-        else {
-            objempl.getTableAll(tblEmpleado);
-            cleanBox();
-            JOptionPane.showMessageDialog(null,"Empleado eliminada");
-        }
-        } else {
-           JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
-       }
+    } else {
+        JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
+    }
     }//GEN-LAST:event_mitemdeleteMousePressed
 
     private void msueMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_msueMousePressed
