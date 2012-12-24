@@ -5,18 +5,20 @@ import Javabeans.Tipoempleado;
 import Utilitarios.Config;
 import Utilitarios.Data;
 import Utilitarios.Query;
+import Utilitarios.Validators;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-public class WinTipo_Empleado extends javax.swing.JInternalFrame {
+public class WinTipoEmpleado extends javax.swing.JInternalFrame {
 
     private TipoEmpleadoDAO objtipoemp;
     private Tipoempleado tipoemp;
     private Query qs;
     private Config cg;
     private Data dt;
+    private Validators val;
     
-    public WinTipo_Empleado() {
+    public WinTipoEmpleado() {
         initComponents();
         cargaForm();
         
@@ -311,54 +313,78 @@ public class WinTipo_Empleado extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_cmbEstateActionPerformed
 
     private void mitemregisterMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemregisterMousePressed
-        dt = new Data();
-        String name = txtName.getText();
-        boolean estate = Boolean.valueOf(dt.G_BOOLEAN[cmbEstate.getSelectedIndex()]);
-        objtipoemp = new TipoEmpleadoDAO();
-        int i = objtipoemp.save(name, estate);
-        if (i == 0) {
-            JOptionPane.showInputDialog(null,"No se pudo grabar datos");
-        }
-        else {
-            objtipoemp.getTableAll(tblTipoemp);
-            cleanBox();
-            JOptionPane.showMessageDialog(null,"Nuevo tipo empleado registrado");
-        }
-    }//GEN-LAST:event_mitemregisterMousePressed
-
-    private void mitemupdateMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemupdateMousePressed
-        dt = new Data();
-        int id = Integer.valueOf(lblId.getText());
-        String name = txtName.getText();
-        boolean estate = Boolean.valueOf(dt.G_BOOLEAN[cmbEstate.getSelectedIndex()]);
-        objtipoemp = new TipoEmpleadoDAO();
-        int i = objtipoemp.update(id,name,estate);
-        if (i == 0) {
-
-            JOptionPane.showMessageDialog(null, "No se pudo actualizar datos");
-        }
-        else {
-            objtipoemp.getTableAll(tblTipoemp);
-            cleanBox();
-            JOptionPane.showMessageDialog(null, "tipo de empleado actualizado");
-        }
-    }//GEN-LAST:event_mitemupdateMousePressed
-
-    private void mitemdeleteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemdeleteMousePressed
-        int i;
-        i= JOptionPane.showConfirmDialog(null,"¿Esta seguro de eliminar este registro?","Aviso",JOptionPane.OK_CANCEL_OPTION,JOptionPane.WARNING_MESSAGE);
-        if(i==0){
-            int id = Integer.valueOf(lblId.getText());
-
+        val = new Validators();    
+        Object[] datos = {txtName.getText()};
+        if(val.validar(datos))
+        { 
+            dt = new Data();
+            String name = txtName.getText();
+            boolean estate = Boolean.valueOf(dt.G_BOOLEAN[cmbEstate.getSelectedIndex()]);
             objtipoemp = new TipoEmpleadoDAO();
-            i = objtipoemp.delete(id);
-            if(i==0) {
-                JOptionPane.showMessageDialog(null,"No se pudo eliminar el area");
+            int i = objtipoemp.save(name, estate);
+            if (i == 0) {
+                JOptionPane.showInputDialog(null,"No se pudo grabar datos");
             }
             else {
                 objtipoemp.getTableAll(tblTipoemp);
                 cleanBox();
+                JOptionPane.showMessageDialog(null,"Nuevo tipo empleado registrado");
             }
+         }                                          
+        else {
+            JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
+             }
+    }//GEN-LAST:event_mitemregisterMousePressed
+
+    private void mitemupdateMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemupdateMousePressed
+        val = new Validators();    
+        Object[] datos = {txtName.getText(),lblId.getText()};
+        if(val.validar(datos))
+        {
+            dt = new Data();
+            int id = Integer.valueOf(lblId.getText());
+            String name = txtName.getText();
+            boolean estate = Boolean.valueOf(dt.G_BOOLEAN[cmbEstate.getSelectedIndex()]);
+            objtipoemp = new TipoEmpleadoDAO();
+            int i = objtipoemp.update(id,name,estate);
+            if (i == 0) {
+
+                JOptionPane.showMessageDialog(null, "No se pudo actualizar datos");
+            }
+            else {
+                objtipoemp.getTableAll(tblTipoemp);
+                cleanBox();
+                JOptionPane.showMessageDialog(null, "tipo de empleado actualizado");
+            }
+         }                                          
+    else {
+            JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
+         }
+    }//GEN-LAST:event_mitemupdateMousePressed
+
+    private void mitemdeleteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemdeleteMousePressed
+        val = new Validators();    
+        Object[] datos = {txtName.getText(),lblId.getText()};
+        if(val.validar(datos))
+        {
+            int i;
+            i= JOptionPane.showConfirmDialog(null,"¿Esta seguro de eliminar este registro?","Aviso",JOptionPane.OK_CANCEL_OPTION,JOptionPane.WARNING_MESSAGE);
+            if(i==0){
+                int id = Integer.valueOf(lblId.getText());
+
+                objtipoemp = new TipoEmpleadoDAO();
+                i = objtipoemp.delete(id);
+                if(i==0) {
+                    JOptionPane.showMessageDialog(null,"No se pudo eliminar el area");
+                }
+                else {
+                    objtipoemp.getTableAll(tblTipoemp);
+                    cleanBox();
+                }
+            }
+        }
+        else {
+            JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
         }
     }//GEN-LAST:event_mitemdeleteMousePressed
 

@@ -4,6 +4,7 @@ import Dao.RolesDAO;
 import Javabeans.Roles;
 import Utilitarios.Config;
 import Utilitarios.Query;
+import Utilitarios.Validators;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -12,6 +13,7 @@ public class WinRoles extends javax.swing.JInternalFrame {
     private Roles roles;
     private Query qs;
     private Config cg;
+    private Validators val;
 
     public WinRoles() {
         initComponents();
@@ -96,15 +98,14 @@ public class WinRoles extends javax.swing.JInternalFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtFilter, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnFind)
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtFilter, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnFind))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -214,6 +215,11 @@ public class WinRoles extends javax.swing.JInternalFrame {
         jMenuBar1.add(medit);
 
         jMenu1.setText("Permisos");
+        jMenu1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jMenu1MousePressed(evt);
+            }
+        });
         jMenuBar1.add(jMenu1);
 
         mclose.setText("Cerrar");
@@ -243,55 +249,82 @@ public class WinRoles extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_mcloseActionPerformed
 
     private void mitemregisterMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemregisterMousePressed
-        String name = txtName.getText();
-        objroles = new RolesDAO();
-        int i = objroles.save(name);
-        if (i == 0) {
-            JOptionPane.showMessageDialog(null,"No se pudo grabar datos");
-        }
-        else {
-            objroles.getTableAll(tblroles);
-            cleanBox();
-            JOptionPane.showMessageDialog(null,"Nueva rol registrado");
-        }
-    }//GEN-LAST:event_mitemregisterMousePressed
-
-    private void mitemupdateMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemupdateMousePressed
-     if(!"".equals(lblId.getText())){
-        int id = Integer.valueOf(lblId.getText());
-        String name = txtName.getText();
-        objroles = new RolesDAO();
-        int i = objroles.update(id,name);
-        if (i == 0) {
-
-            JOptionPane.showMessageDialog(null, "No se pudo actualizar datos");
-        }
-        else {
-            objroles.getTableAll(tblroles);
-            cleanBox();
-            JOptionPane.showMessageDialog(null, "roles actualizados");
-        }   
-     } else {
-            JOptionPane.showMessageDialog(null, "Seleccione un rol para ejecutar esta accion");
-     }
-    }//GEN-LAST:event_mitemupdateMousePressed
-
-    private void mitemdeleteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemdeleteMousePressed
-        if(!"".equals(lblId.getText())){
-            int id = Integer.valueOf(lblId.getText());
+        val = new Validators();    
+        Object[] datos = {txtName.getText()};
+        if(val.validar(datos)){     
+            String name = txtName.getText();
             objroles = new RolesDAO();
-            int i = objroles.delete(id);
-            if(i==0) {
-                JOptionPane.showMessageDialog(null,"No se pudo eliminar el rol");
+            int i = objroles.save(name);
+            if (i == 0) {
+                JOptionPane.showMessageDialog(null,"No se pudo grabar datos");
             }
             else {
                 objroles.getTableAll(tblroles);
                 cleanBox();
-                JOptionPane.showMessageDialog(null,"Rol eliminado");
+                JOptionPane.showMessageDialog(null,"Nueva rol registrado");
             }
-        } else {
-            JOptionPane.showMessageDialog(null, "Seleccione un rol para ejecutar esta accion");
-     }
+        }                                          
+        else {
+            JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
+        }
+    }//GEN-LAST:event_mitemregisterMousePressed
+
+    private void mitemupdateMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemupdateMousePressed
+        val = new Validators();    
+        Object[] datos = {txtName.getText(),lblId.getText()};
+        if(val.validar(datos)){     
+            if(!"".equals(lblId.getText())){
+               int id = Integer.valueOf(lblId.getText());
+               String name = txtName.getText();
+               objroles = new RolesDAO();
+               int i = objroles.update(id,name);
+               if (i == 0) {
+
+                   JOptionPane.showMessageDialog(null, "No se pudo actualizar datos");
+               }
+               else {
+                   objroles.getTableAll(tblroles);
+                   cleanBox();
+                   JOptionPane.showMessageDialog(null, "roles actualizados");
+               }   
+            } else {
+                   JOptionPane.showMessageDialog(null, "Seleccione un rol para ejecutar esta accion");
+            }
+        }                                          
+        else {
+            JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
+        }
+    }//GEN-LAST:event_mitemupdateMousePressed
+
+    private void mitemdeleteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemdeleteMousePressed
+        val = new Validators();    
+        Object[] datos = {txtName.getText(),lblId.getText()};
+        if(val.validar(datos)){    
+            int i;      
+            i= JOptionPane.showConfirmDialog(null,"¿Esta seguro de eliminar este registro?","Aviso",JOptionPane.OK_CANCEL_OPTION,JOptionPane.WARNING_MESSAGE);
+
+            if(i==0) {    
+                if(!"".equals(lblId.getText())){
+                    int id = Integer.valueOf(lblId.getText());
+                    objroles = new RolesDAO();
+                    i = objroles.delete(id);
+                    if(i==0) {
+                        JOptionPane.showMessageDialog(null,"No se pudo eliminar el rol");
+                    }
+                    else {
+                        objroles.getTableAll(tblroles);
+                        cleanBox();
+                        JOptionPane.showMessageDialog(null,"Rol eliminado");
+                    }
+                } 
+                else {
+                    JOptionPane.showMessageDialog(null, "Seleccione un rol para ejecutar esta accion");
+                }
+            }
+        }                                          
+        else {
+            JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
+        }
     }//GEN-LAST:event_mitemdeleteMousePressed
 
     private void mcloseMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mcloseMousePressed
@@ -332,6 +365,23 @@ public class WinRoles extends javax.swing.JInternalFrame {
     private void mitemclearMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemclearMousePressed
     cleanBox();
     }//GEN-LAST:event_mitemclearMousePressed
+
+    private void jMenu1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu1MousePressed
+      if(!"".equals(lblId.getText())){
+            WinRoles_Permisos objPermisos= new WinRoles_Permisos();
+            objPermisos.lblRol.setText(txtName.getText());
+            objPermisos.lblidrol.setText(lblId.getText());
+            objPermisos.setResizable(true);
+            objPermisos.setMaximizable(false);
+            objPermisos.setIconifiable(true);
+            objPermisos.setClosable(true);
+            WinMdi.jdpContenedor.add(objPermisos);
+            objPermisos.setVisible(true);
+       } else {
+           JOptionPane.showMessageDialog(null,"Debe de seleccionar un usuario para poder asignarle permisos");
+       }
+        
+    }//GEN-LAST:event_jMenu1MousePressed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnFind;

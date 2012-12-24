@@ -7,6 +7,7 @@ import javax.swing.table.DefaultTableModel;
 import Dao.HorariosDAO;
 import Javabeans.Horarios;
 import Utilitarios.Query;
+import Utilitarios.Validators;
 
 public class WinHorario extends javax.swing.JInternalFrame {
 
@@ -14,6 +15,8 @@ public class WinHorario extends javax.swing.JInternalFrame {
     HorariosDAO objhora;
     private Horarios hora;
     private Data dt;
+    private Validators val;
+    
     public WinHorario() {
         initComponents();
         cargaForm();
@@ -397,20 +400,32 @@ public class WinHorario extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void mitemdeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mitemdeleteActionPerformed
-            int id = Integer.valueOf(lblId.getText());
+        val = new Validators();    
+        Object[] datos = {txtnombre.getText(),lblId.getText()};
+        if(val.validar(datos)){    
+            int i;      
+            i= JOptionPane.showConfirmDialog(null,"¿Esta seguro de eliminar este registro?","Aviso",JOptionPane.OK_CANCEL_OPTION,JOptionPane.WARNING_MESSAGE);
 
-            objhora = new HorariosDAO();
-            int i = objhora.delete(id);
-            if(i==0) {
-                JOptionPane.showMessageDialog(null,"No se pudo eliminar el area");
-                
+            if(i==0) {    
+                int id = Integer.valueOf(lblId.getText());
+
+                objhora = new HorariosDAO();
+                i = objhora.delete(id);
+                if(i==0) {
+                    JOptionPane.showMessageDialog(null,"No se pudo eliminar el area");
+
+                }
+                else {
+                    JOptionPane.showMessageDialog(null,"Area eliminada");
+                    objhora.getTableAll(tblhora);
+                    cleanBox();
+
+                }
             }
-            else {
-                JOptionPane.showMessageDialog(null,"Area eliminada");
-                objhora.getTableAll(tblhora);
-                cleanBox();
-           
-         }
+        }                                          
+        else {
+            JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
+        }
     }//GEN-LAST:event_mitemdeleteActionPerformed
 
     private void mcloseMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mcloseMousePressed
@@ -423,20 +438,27 @@ public class WinHorario extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_mcloseActionPerformed
 
     private void mitemregisterMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemregisterMousePressed
-        dt = new Data();
-        String name = txtnombre.getText();
-        boolean estate = Boolean.valueOf(dt.G_BOOLEAN[cboestado.getSelectedIndex()]);
-        int tipo=1;
-        int iddet_hor=1;
-        objhora = new HorariosDAO();
-        int i = objhora.save(name, estate,tipo,iddet_hor);
-        if (i == 0) {
-            JOptionPane.showMessageDialog(null,"No se pudo grabar datos");
-        }
+        val = new Validators();    
+        Object[] datos = {txtnombre.getText()};
+        if(val.validar(datos)){    
+            dt = new Data();
+            String name = txtnombre.getText();
+            boolean estate = Boolean.valueOf(dt.G_BOOLEAN[cboestado.getSelectedIndex()]);
+            int tipo=1;
+            int iddet_hor=1;
+            objhora = new HorariosDAO();
+            int i = objhora.save(name, estate,tipo,iddet_hor);
+            if (i == 0) {
+                JOptionPane.showMessageDialog(null,"No se pudo grabar datos");
+            }
+            else {
+                objhora.getTableAll(tblhora);
+                cleanBox();
+                JOptionPane.showMessageDialog(null,"Nueva area registrada");      
+            }
+        }                                          
         else {
-            objhora.getTableAll(tblhora);
-            cleanBox();
-            JOptionPane.showMessageDialog(null,"Nueva area registrada");      
+            JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
         }
     }//GEN-LAST:event_mitemregisterMousePressed
 
@@ -464,24 +486,31 @@ public class WinHorario extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_tblhoraMouseClicked
 
     private void mitemupdateMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemupdateMousePressed
-        dt = new Data();
-        int id = Integer.valueOf(lblId.getText());
-        String name = txtnombre.getText();
-        boolean estate = Boolean.valueOf(dt.G_BOOLEAN[cboestado.getSelectedIndex()]);
-        int tipo=1;
-        int iddet_hor=1;
-        
-        objhora = new HorariosDAO();
-        int i = objhora.update(id,name,tipo,estate,iddet_hor);
-        if (i == 0) {
-            
-            JOptionPane.showMessageDialog(null, "No se pudo actualizar datos");
-        }
+        val = new Validators();    
+        Object[] datos = {txtnombre.getText(),lblId.getText()};
+        if(val.validar(datos)){    
+            dt = new Data();
+            int id = Integer.valueOf(lblId.getText());
+            String name = txtnombre.getText();
+            boolean estate = Boolean.valueOf(dt.G_BOOLEAN[cboestado.getSelectedIndex()]);
+            int tipo=1;
+            int iddet_hor=1;
+
+            objhora = new HorariosDAO();
+            int i = objhora.update(id,name,tipo,estate,iddet_hor);
+            if (i == 0) {
+
+                JOptionPane.showMessageDialog(null, "No se pudo actualizar datos");
+            }
+            else {
+                objhora.getTableAll(tblhora);
+                cleanBox();
+                JOptionPane.showMessageDialog(null, "Area actualizada");
+            } 
+        }                                          
         else {
-            objhora.getTableAll(tblhora);
-            cleanBox();
-            JOptionPane.showMessageDialog(null, "Area actualizada");
-        } 
+            JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
+        }
     }//GEN-LAST:event_mitemupdateMousePressed
 
     private void btnfindMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnfindMouseClicked

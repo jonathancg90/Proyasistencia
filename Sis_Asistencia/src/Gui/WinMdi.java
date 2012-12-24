@@ -364,7 +364,7 @@ public class WinMdi extends javax.swing.JFrame {
     }//GEN-LAST:event_JmitemRolesMousePressed
 
     private void JmitemTipoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JmitemTipoMousePressed
-        WinTipo_Empleado objtipo= new WinTipo_Empleado();
+        WinTipoEmpleado objtipo= new WinTipoEmpleado();
         val = new Validators();
         objtipo.setResizable(true);
         objtipo.setMaximizable(true);
@@ -437,7 +437,7 @@ public class WinMdi extends javax.swing.JFrame {
     }//GEN-LAST:event_JmitemCiudadMousePressed
 
     private void JmitemtpmonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JmitemtpmonMousePressed
-        WinTipo_moneda objmon= new WinTipo_moneda();
+        WinTipomoneda objmon= new WinTipomoneda();
         val = new Validators();
         objmon.setResizable(true);
         objmon.setMaximizable(true);
@@ -468,7 +468,7 @@ public class WinMdi extends javax.swing.JFrame {
 
 
     private void JmitemJustificacionMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JmitemJustificacionMousePressed
-        WinTipo_Justificacion objjus= new WinTipo_Justificacion();
+        WinTipoJustificacion objjus= new WinTipoJustificacion();
         val = new Validators();
         objjus.setResizable(true);
         objjus.setMaximizable(true);

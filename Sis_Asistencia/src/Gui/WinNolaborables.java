@@ -358,21 +358,22 @@ public class WinNolaborables extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_mitemupdateMousePressed
 
     private void mitemdeleteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemdeleteMousePressed
+        
+        int i;          
+            i= JOptionPane.showConfirmDialog(null,"¿Esta seguro de eliminar este registro?","Aviso",JOptionPane.OK_CANCEL_OPTION,JOptionPane.WARNING_MESSAGE);
+            if(i==0){
+                int id = Integer.valueOf(lblIdnolaborable.getText());
 
-        int i;
-        i= JOptionPane.showConfirmDialog(null,"¿Esta seguro de eliminar este registro?","Aviso",JOptionPane.OK_CANCEL_OPTION,JOptionPane.WARNING_MESSAGE);
-        if(i==0){
-            int id = Integer.valueOf(lblIdnolaborable.getText());
-
-            i = objNolaborables.delete(id);
-            if(i==0) {
-                JOptionPane.showMessageDialog(null,"No se pudo eliminar el dia no laborable");
+                i = objNolaborables.delete(id);
+                if(i==0) {
+                    JOptionPane.showMessageDialog(null,"No se pudo eliminar el dia no laborable");
+                }
+                else {
+                    objNolaborables.findId(lblIdempr.getText(), tblNolaborable);
+                    cleanBox();
+                }
             }
-            else {
-                objNolaborables.findId(lblIdempr.getText(), tblNolaborable);
-                cleanBox();
-            }
-        }
+        
 
     }//GEN-LAST:event_mitemdeleteMousePressed
 

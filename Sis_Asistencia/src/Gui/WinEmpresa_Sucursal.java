@@ -4,6 +4,7 @@ import Dao.SucursalDao;
 import Javabeans.Sucursal;
 import Utilitarios.Config;
 import Utilitarios.Query;
+import Utilitarios.Validators;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -12,6 +13,7 @@ public class WinEmpresa_Sucursal extends javax.swing.JInternalFrame {
     private Sucursal sucursal;
     private Query qs;
     private Config cg;
+    private Validators val;
 
     
     public WinEmpresa_Sucursal() {
@@ -340,54 +342,82 @@ public class WinEmpresa_Sucursal extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_tblSucursalMouseClicked
 
     private void mitemregisterMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemregisterMousePressed
-    String name = txtName.getText();
-        String direccion=txtdireccion.getText();
-        int ciudad = qs.idChoice("ciudad", "nombre", String.valueOf(cmbCiudad.getSelectedItem()));
-        int emp = Integer.parseInt(lblIdemp.getText());
-        objsucursal = new SucursalDao();
-        int i = objsucursal.save(name,direccion, ciudad,emp);
-        if (i == 0) {
-            JOptionPane.showInputDialog(null,"No se pudo grabar datos");
-        }
-        else {
-            objsucursal.findId(lblIdemp.getText(), tblSucursal);
-            cleanBox();
-            JOptionPane.showMessageDialog(null,"Nueva area registrada");
-        }
+      val = new Validators();    
+      Object[] datos = {txtName.getText(),txtdireccion.getText()};
+      if(val.validar(datos)){  
+            String name = txtName.getText();
+            String direccion=txtdireccion.getText();
+            int ciudad = qs.idChoice("ciudad", "nombre", String.valueOf(cmbCiudad.getSelectedItem()));
+            int emp = Integer.parseInt(lblIdemp.getText());
+            objsucursal = new SucursalDao();
+            int i = objsucursal.save(name,direccion, ciudad,emp);
+            if (i == 0) {
+                JOptionPane.showInputDialog(null,"No se pudo grabar datos");
+            }
+            else {
+                objsucursal.findId(lblIdemp.getText(), tblSucursal);
+                cleanBox();
+                JOptionPane.showMessageDialog(null,"Nueva area registrada");
+            }
+     }                                          
+     else {
+            JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
+     }
     }//GEN-LAST:event_mitemregisterMousePressed
 
     private void mitemupdateMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemupdateMousePressed
-        int id = Integer.valueOf(lblId.getText());
-        String name = txtName.getText();
-        String direccion=txtdireccion.getText();
-        int ciudad = qs.idChoice("ciudad", "nombre", String.valueOf(cmbCiudad.getSelectedItem()));
-        int idempr = Integer.valueOf(lblIdemp.getText());
-        objsucursal = new SucursalDao();
-        int i = objsucursal.update(id,name,direccion, ciudad,idempr);
-        if (i == 0) {
+       val = new Validators();    
+       Object[] datos = {txtName.getText(),txtdireccion.getText(),lblId.getText()};
+       if(val.validar(datos))
+       {  
+            int id = Integer.valueOf(lblId.getText());
+            String name = txtName.getText();
+            String direccion=txtdireccion.getText();
+            int ciudad = qs.idChoice("ciudad", "nombre", String.valueOf(cmbCiudad.getSelectedItem()));
+            int idempr = Integer.valueOf(lblIdemp.getText());
+            objsucursal = new SucursalDao();
+            int i = objsucursal.update(id,name,direccion, ciudad,idempr);
+            if (i == 0) {
 
-            JOptionPane.showMessageDialog(null, "No se pudo actualizar datos");
-        }
+                JOptionPane.showMessageDialog(null, "No se pudo actualizar datos");
+            }
+            else {
+                objsucursal.findId(lblIdemp.getText(), tblSucursal);
+                cleanBox();
+                JOptionPane.showMessageDialog(null, "Sucursal actualizada");
+            }
+        }                                          
         else {
-            objsucursal.findId(lblIdemp.getText(), tblSucursal);
-            cleanBox();
-            JOptionPane.showMessageDialog(null, "Sucursal actualizada");
+            JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
         }
     }//GEN-LAST:event_mitemupdateMousePressed
 
     private void mitemdeleteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemdeleteMousePressed
-        int id = Integer.valueOf(lblId.getText());
+       val = new Validators();    
+       Object[] datos = {txtName.getText(),txtdireccion.getText(),lblId.getText()};
+       if(val.validar(datos))
+       { 
+            int i;      
+            i= JOptionPane.showConfirmDialog(null,"¿Esta seguro de eliminar este registro?","Aviso",JOptionPane.OK_CANCEL_OPTION,JOptionPane.WARNING_MESSAGE);
 
-        objsucursal = new SucursalDao();
-        int i = objsucursal.delete(id);
-        if(i==0) {
-            JOptionPane.showMessageDialog(null,"No se pudo eliminar la sucursal");
-        }
+            if(i==0) {    
+                int id = Integer.valueOf(lblId.getText());
+
+                objsucursal = new SucursalDao();
+                i = objsucursal.delete(id);
+                if(i==0) {
+                    JOptionPane.showMessageDialog(null,"No se pudo eliminar la sucursal");
+                }
+                else {
+                    objsucursal.findId(lblIdemp.getText(), tblSucursal);
+                    cleanBox();
+                    JOptionPane.showMessageDialog(null,"Sucursal eliminada");
+                }
+            }
+       }                                          
         else {
-            objsucursal.findId(lblIdemp.getText(), tblSucursal);
-            cleanBox();
-            JOptionPane.showMessageDialog(null,"Sucursal eliminada");
-        }
+            JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
+       } 
     }//GEN-LAST:event_mitemdeleteMousePressed
 
     private void mcloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mcloseActionPerformed

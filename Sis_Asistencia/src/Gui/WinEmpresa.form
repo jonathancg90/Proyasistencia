@@ -241,7 +241,7 @@
                                       <Component id="cboMon" min="-2" pref="146" max="-2" attributes="0"/>
                                       <Component id="cmbEstate" alignment="0" min="-2" pref="146" max="-2" attributes="0"/>
                                       <Component id="lblModified" alignment="0" min="-2" pref="170" max="-2" attributes="0"/>
-                                      <Component id="txtCantTrab" alignment="0" min="-2" pref="83" max="-2" attributes="0"/>
+                                      <Component id="txtCantTrab" min="-2" pref="93" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                               </Group>
@@ -271,11 +271,11 @@
                       <Component id="txtruc" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtCantTrab" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtCantTrab" pref="23" max="32767" attributes="0"/>
                   </Group>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel9" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="cboMon" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -323,8 +323,6 @@
         </Component>
         <Component class="javax.swing.JTextField" name="txtruc">
         </Component>
-        <Component class="javax.swing.JTextField" name="txtCantTrab">
-        </Component>
         <Component class="javax.swing.JLabel" name="jLabel8">
           <Properties>
             <Property name="text" type="java.lang.String" value="Cant. Trab"/>
@@ -360,6 +358,15 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="lblModified">
+          <Properties>
+            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+              <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                <LineBorder/>
+              </Border>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="txtCantTrab">
           <Properties>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">

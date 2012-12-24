@@ -384,7 +384,6 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
 
         objempl = new EmpleadoDAO();
         int i = objempl.saveEmpleado(0,nombre,apellido,dni, telefono,area, tipo, estate,cargo,empresa,sucursal);
-        
         if (i == 0) {
             JOptionPane.showMessageDialog(null,"No se pudo grabar datos");
         }
@@ -418,6 +417,7 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
         int estate =  qs.idChoice("estadoemp","nombre",String.valueOf(cboEstado.getSelectedItem()));
        
         objempl = new EmpleadoDAO();
+        objempl.UpdateEmpresa(id*-1);
         int i = objempl.updateEmpleado(id,nombre,apellido,dni, telefono,area, tipo, estate,cargo,empresa,sucursal);
         if (i == 0) {
             JOptionPane.showMessageDialog(null,"No se pudo grabar datos");
@@ -436,8 +436,10 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
     private void tblEmpleadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblEmpleadoMouseClicked
      try {       int fsel;
                 fsel = this.tblEmpleado.getSelectedRow();
-               
-                modemp = new  Empleado();
+
+                objempl = new EmpleadoDAO();
+                modemp = new Empleado();
+
                 DefaultTableModel m = new DefaultTableModel();
                 m = (DefaultTableModel) this.tblEmpleado.getModel();
                 String idEmp = String.valueOf(m.getValueAt(fsel, 0));
@@ -467,22 +469,27 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
     val = new Validators();    
     Object[] datos = {lblidempleado.getText()};
     if(val.validar(datos)){ 
-        int id = Integer.valueOf(lblidempleado.getText());
+        int i;      
+        i= JOptionPane.showConfirmDialog(null,"¿Esta seguro de eliminar este registro?","Aviso",JOptionPane.OK_CANCEL_OPTION,JOptionPane.WARNING_MESSAGE);
 
-        objempl = new EmpleadoDAO();
-        int i = objempl.deleteEmpleado(id);
-        if(i==0) {
-            JOptionPane.showMessageDialog(null,"No se pudo eliminar el area(Se cambio su esatdo a inactivo)");
-            //TODO: IMPLEMENTAR CAMBIO DE ESTADO (INACTIVO)
+        if(i==0) {    
+            int id = Integer.valueOf(lblidempleado.getText());
+
+            objempl = new EmpleadoDAO();
+            i = objempl.deleteEmpleado(id);
+            if(i==0) {
+                JOptionPane.showMessageDialog(null,"No se pudo eliminar el area(Se cambio su esatdo a inactivo)");
+                //TODO: IMPLEMENTAR CAMBIO DE ESTADO (INACTIVO)
+            }
+            else {
+                objempl.getTableAll(tblEmpleado);
+                cleanBox();
+                JOptionPane.showMessageDialog(null,"Empleado eliminada");
+            }
         }
-        else {
-            objempl.getTableAll(tblEmpleado);
-            cleanBox();
-            JOptionPane.showMessageDialog(null,"Empleado eliminada");
-        }
-        } else {
-           JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
-       }
+    } else {
+        JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
+    }
     }//GEN-LAST:event_mitemdeleteMousePressed
 
     private void msueMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_msueMousePressed

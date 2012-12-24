@@ -6,6 +6,7 @@ import Javabeans.Empresa;
 import Utilitarios.Config;
 import Utilitarios.Data;
 import Utilitarios.Query;
+import Utilitarios.Validators;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -16,6 +17,7 @@ public class WinEmpresa extends javax.swing.JInternalFrame {
     private Query qs;
     private Config cg;
     private Data dt;
+    private Validators val;
     
     public WinEmpresa() {
         initComponents();
@@ -68,7 +70,6 @@ public class WinEmpresa extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         txtruc = new javax.swing.JTextField();
-        txtCantTrab = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         cboMon = new javax.swing.JComboBox();
@@ -76,6 +77,7 @@ public class WinEmpresa extends javax.swing.JInternalFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         lblModified = new javax.swing.JLabel();
+        txtCantTrab = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         mfile = new javax.swing.JMenu();
         mitemregister = new javax.swing.JMenuItem();
@@ -167,6 +169,8 @@ public class WinEmpresa extends javax.swing.JInternalFrame {
 
         lblModified.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
+        txtCantTrab.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -199,7 +203,7 @@ public class WinEmpresa extends javax.swing.JInternalFrame {
                                     .addComponent(cboMon, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(cmbEstate, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(lblModified, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtCantTrab, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(txtCantTrab, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
@@ -219,10 +223,10 @@ public class WinEmpresa extends javax.swing.JInternalFrame {
                     .addComponent(jLabel5)
                     .addComponent(txtruc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel8)
-                    .addComponent(txtCantTrab, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(txtCantTrab, javax.swing.GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
                     .addComponent(cboMon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -368,65 +372,90 @@ public class WinEmpresa extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_mcloseMousePressed
 
     private void mitemdeleteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemdeleteMousePressed
-        int i;      
-        i= JOptionPane.showConfirmDialog(null,"¿Esta seguro de eliminar este registro?","Aviso",JOptionPane.OK_CANCEL_OPTION,JOptionPane.WARNING_MESSAGE);
-        
-        if(i==0) {
-            int id = Integer.valueOf(lblId.getText());
-            objempresa = new EmpresaDAO();
-            i = objempresa.delete(id);          
-            if(i==0) {
-                  JOptionPane.showMessageDialog(null,"No se pudo eliminar la Empresa");
-            } 
-            else {
-                  objempresa.getTableAll(tblempresa);
-                  cleanBox();
+        val = new Validators();
+        Object[] datos = {txtName.getText(),txtruc.getText()};
+            if (val.validar(datos))
+            {
+                int i;      
+                i= JOptionPane.showConfirmDialog(null,"¿Esta seguro de eliminar este registro?","Aviso",JOptionPane.OK_CANCEL_OPTION,JOptionPane.WARNING_MESSAGE);
+
+                if(i==0) {
+                    int id = Integer.valueOf(lblId.getText());
+                    objempresa = new EmpresaDAO();
+                    i = objempresa.delete(id);          
+                    if(i==0) {
+                          JOptionPane.showMessageDialog(null,"No se pudo eliminar la Empresa");
+                    } 
+                    else {
+                          objempresa.getTableAll(tblempresa);
+                          cleanBox();
+                    }
+                }
             }
-        }
+            else {
+                JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
+            }
     }//GEN-LAST:event_mitemdeleteMousePressed
 
     private void mitemupdateMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemupdateMousePressed
-        dt = new Data();
-        int id = Integer.valueOf(lblId.getText());
-        String name = txtName.getText();
-        String ruc = txtruc.getText();
-        boolean estate = Boolean.valueOf(dt.G_BOOLEAN[cmbEstate.getSelectedIndex()]);
-        //int estate = cmbEstate.getSelectedIndex();
-        int trab = Integer.parseInt(txtCantTrab.getText());
-        int mon = qs.idChoice("moneda","nombre",String.valueOf(cboMon.getSelectedItem()));
+        val = new Validators();
+        Object[] datos = {txtName.getText(),txtruc.getText()};
+            if (val.validar(datos))
+            {
+                dt = new Data();
+                int id = Integer.valueOf(lblId.getText());
+                String name = txtName.getText();
+                String ruc = txtruc.getText();
+                boolean estate = Boolean.valueOf(dt.G_BOOLEAN[cmbEstate.getSelectedIndex()]);
+                //int estate = cmbEstate.getSelectedIndex();
+                int trab = Integer.parseInt(txtCantTrab.getText());
+                int mon = qs.idChoice("moneda","nombre",String.valueOf(cboMon.getSelectedItem()));
 
-        objempresa = new EmpresaDAO();
-        System.out.println("ID: "+id);
-        int i = objempresa.update(id,name,ruc,estate,trab,mon);
-        if(i==0) {
-            JOptionPane.showMessageDialog(null,"No se pudo actualizar datos");
-        }
-        else {
-            objempresa.getTableAll(tblempresa);
-            cleanBox();
-            JOptionPane.showMessageDialog(null,"Nueva empresa registrada");
-        }
+                objempresa = new EmpresaDAO();
+                System.out.println("ID: "+id);
+                int i = objempresa.update(id,name,ruc,estate,trab,mon);
+                if(i==0) {
+                    JOptionPane.showMessageDialog(null,"No se pudo actualizar datos");
+                }
+                else {
+                    objempresa.getTableAll(tblempresa);
+                    cleanBox();
+                    JOptionPane.showMessageDialog(null,"Nueva empresa registrada");
+                }
+            }
+            else {
+                JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
+            } 
     }//GEN-LAST:event_mitemupdateMousePressed
 
     private void mitemregisterMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemregisterMousePressed
-        dt = new Data();
-        String name = txtName.getText();
-        String ruc = txtruc.getText();
-        boolean estate = Boolean.valueOf(dt.G_BOOLEAN[cmbEstate.getSelectedIndex()]);
-        //int estate = Integer.parseInt(txtCantTrab.getText());
-        int trab = Integer.parseInt(txtCantTrab.getText());
-        int mon = qs.idChoice("moneda","nombre",String.valueOf(cboMon.getSelectedItem()));
+        val = new Validators();
+        Object[] datos = {txtName.getText(),txtruc.getText()};
+            if (val.validar(datos))
+            {
+                dt = new Data();
+                String name = txtName.getText();
+                String ruc = txtruc.getText();
+                boolean estate = Boolean.valueOf(dt.G_BOOLEAN[cmbEstate.getSelectedIndex()]);
+                //int estate = Integer.parseInt(txtCantTrab.getText());
+                int trab = 0;
+                int mon = qs.idChoice("moneda","nombre",String.valueOf(cboMon.getSelectedItem()));
+
+                objempresa = new EmpresaDAO();
+                int i = objempresa.save(name,ruc,estate,trab,mon);
+                if(i==0) {
+                    JOptionPane.showMessageDialog(null,"No se pudo grabar datos");
+                }
+                else {
+                    objempresa.getTableAll(tblempresa);
+                    cleanBox();
+                    JOptionPane.showMessageDialog(null,"Nueva empresa registrada");
+                }
+            }
+            else {
+                JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
+            } 
         
-        objempresa = new EmpresaDAO();
-        int i = objempresa.save(name,ruc,estate,trab,mon);
-        if(i==0) {
-            JOptionPane.showMessageDialog(null,"No se pudo grabar datos");
-        }
-        else {
-            objempresa.getTableAll(tblempresa);
-            cleanBox();
-            JOptionPane.showMessageDialog(null,"Nueva empresa registrada");
-        }
     }//GEN-LAST:event_mitemregisterMousePressed
 
     private void nolaborablesMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nolaborablesMousePressed
@@ -474,7 +503,7 @@ public class WinEmpresa extends javax.swing.JInternalFrame {
     private javax.swing.JMenuItem mitemupdate;
     private javax.swing.JMenu nolaborables;
     private javax.swing.JTable tblempresa;
-    private javax.swing.JTextField txtCantTrab;
+    private javax.swing.JLabel txtCantTrab;
     private javax.swing.JTextField txtFilter;
     private javax.swing.JTextField txtName;
     private javax.swing.JTextField txtruc;

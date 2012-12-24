@@ -36,11 +36,11 @@ public class ConexionBd {
            Class.forName("org.postgresql.Driver");
            conexion = DriverManager.getConnection(url,user,password);
            if (conexion !=null){
-               System.out.println("Conexion establecida");
+               //System.out.println("Conexion establecida");
            }
         }
         catch (Exception e) {   
-            System.out.println("ConexionBd_getConexion: "+e);
+            //System.out.println("ConexionBd_getConexion: "+e);
         }
     }
     /*Metodo para cerrar la conexion hacia el motor de Bd 
@@ -48,10 +48,10 @@ public class ConexionBd {
     public void closeConexion(){
         try{
             conexion.close();
-            System.out.println("Conexion cerrada");
+            //System.out.println("Conexion cerrada");
         }
         catch(Exception e){
-            System.out.println("ConexionBd_closeConexion: "+e);
+            //System.out.println("ConexionBd_closeConexion: "+e);
         }
     }
 }
