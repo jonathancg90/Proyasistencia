@@ -36,10 +36,12 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
             qs.loadChoice(cboAreaFilter,"area","nombre");
             qs.loadChoice(cboEmpresa,"empresa","nombre");
             qs.setIdentify("idempr");
-            qs.loadChoiceDefault(cboSucursal,"sucursal","nombre",qs.idChoice("empresa","nombre",String.valueOf(cboEmpresa.getSelectedItem())));
+            qs.loadChoiceDefault(cboSucursal,"sucursal","nombre",
+            qs.idChoice("empresa","nombre",String.valueOf(cboEmpresa.getSelectedItem())));
             qs.loadChoice(cboArea,"area","nombre");
             qs.setIdentify("idare");
-            qs.loadChoiceDefault(cboCargo,"cargo","nombre",qs.idChoice("area","nombre",String.valueOf(cboArea.getSelectedItem())));
+            qs.loadChoiceDefault(cboCargo,"cargo","nombre",
+            qs.idChoice("area","nombre",String.valueOf(cboArea.getSelectedItem())));
             qs.loadChoice(cboTipo,"tipoempleado","nombre");
             
             
@@ -434,12 +436,14 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
     private void tblEmpleadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblEmpleadoMouseClicked
      try {       int fsel;
                 fsel = this.tblEmpleado.getSelectedRow();
-                objempl = new EmpleadoDAO();
+               
+                modemp = new  Empleado();
                 DefaultTableModel m = new DefaultTableModel();
                 m = (DefaultTableModel) this.tblEmpleado.getModel();
                 String idEmp = String.valueOf(m.getValueAt(fsel, 0));
                 System.out.println(idEmp);
                 //crear objeto modusu
+                
                 modemp = objempl.getValues(Integer.parseInt(idEmp));
                 //Asigando valores obtenidos
                 lblidempleado.setText(idEmp);
@@ -453,7 +457,6 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
                 qs.loadChoiceDefault(cboCargo,"cargo","nombre",modemp.getIdcar());
                 qs.loadChoiceDefault(cboEmpresa,"empresa","nombre",modemp.getIdempr());
                 qs.loadChoiceDefault(cboSucursal,"sucursal","nombre",modemp.getIdsuc());
-               
                 }
             catch (Exception e) {
                 System.out.println("Gui_Win_area: " + e);
