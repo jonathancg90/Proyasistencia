@@ -98,8 +98,8 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
         tblEmpleado = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
         cboAreaFilter = new javax.swing.JComboBox();
-        jCheckBox1 = new javax.swing.JCheckBox();
-        jButton1 = new javax.swing.JButton();
+        chkactivo = new javax.swing.JCheckBox();
+        btnFiltro = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         mfile = new javax.swing.JMenu();
         mitemregister = new javax.swing.JMenuItem();
@@ -225,9 +225,14 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
 
         jLabel3.setText("Area");
 
-        jCheckBox1.setText("Activos");
+        chkactivo.setText("Activos");
 
-        jButton1.setText("Ok");
+        btnFiltro.setText("Ok");
+        btnFiltro.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnFiltroMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -244,9 +249,9 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
                         .addGap(29, 29, 29)
                         .addComponent(cboAreaFilter, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jCheckBox1)
+                        .addComponent(chkactivo)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1)
+                        .addComponent(btnFiltro)
                         .addGap(26, 26, 26))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -255,10 +260,10 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(cboAreaFilter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jCheckBox1)
-                    .addComponent(jButton1))
+                    .addComponent(chkactivo)
+                    .addComponent(btnFiltro))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -551,7 +556,15 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
     qs.loadChoiceDefault(cboCargo,"cargo","nombre",qs.idChoice("area","nombre",String.valueOf(cboArea.getSelectedItem())));
     }//GEN-LAST:event_cboAreaActionPerformed
 
+    private void btnFiltroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFiltroMouseClicked
+        dt = new Data();
+        String  idarea = String.valueOf(cboAreaFilter.getSelectedIndex()+1);
+        objempl = new EmpleadoDAO();
+        objempl.find(idarea, tblEmpleado);
+    }//GEN-LAST:event_btnFiltroMouseClicked
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnFiltro;
     private javax.swing.JComboBox cboArea;
     private javax.swing.JComboBox cboAreaFilter;
     private javax.swing.JComboBox cboCargo;
@@ -559,8 +572,7 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox cboEstado;
     private javax.swing.JComboBox cboSucursal;
     private javax.swing.JComboBox cboTipo;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JCheckBox jCheckBox1;
+    private javax.swing.JCheckBox chkactivo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

@@ -439,11 +439,9 @@
                       <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
-<<<<<<< HEAD
+
                   <Component id="jScrollPane1" pref="157" max="32767" attributes="0"/>
-=======
-                  <Component id="jScrollPane1" pref="156" max="32767" attributes="0"/>
->>>>>>> 99ddfef2ad1b36d10ea07834166c488d75910605
+
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>

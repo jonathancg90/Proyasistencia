@@ -9,6 +9,7 @@ public class Data {
     public String G_BOOLEAN[] = new String[2];      //Valores de los estados para la base de datos
     public String G_TYPEHOR[] = new String[3];      //Valores de los estados para la base de datos
     public static String G_EXCLUDE[] = new String[1];      //Datos excluidos para la actualizacion de registros
+    public String G_AREA[] = new String[3];
     
     public Data()
     {
@@ -21,6 +22,10 @@ public class Data {
         
         G_BOOLEAN[0]="false";
         G_BOOLEAN[1]="true";
+        
+        G_AREA[0]="PRODUCCION";
+        G_AREA[1]="ADMINISTRACION";
+        G_AREA[2]="SISTEMAS";
         
         G_TYPEHOR[0]="Full time";
         G_TYPEHOR[1]="Part time";

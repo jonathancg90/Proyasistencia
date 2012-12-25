@@ -47,7 +47,7 @@ public class EmpleadoDAO extends ConexionBd{
             DefaultTableModel datos;
             qs= new Query();
             hp = new Helpers();
-            if (filter.length <= 0){
+            if (filter.length == 0){
                 filter = new String[0][0];
             }
             
@@ -118,9 +118,7 @@ public class EmpleadoDAO extends ConexionBd{
             args[0]="empleado";
             args[1]="idempr";
             args[2]=""+empresa;
-            System.out.println("1 : upd: "+qs.getCountRegister(args));
             objEmpr.setTrabajadores(qs.getCountRegister(args));
-            System.out.println("2 : "+ qs.getCountRegister(args));
             String query = "update empresa set trabajadores = ? where idempr = ?";
             pt = conexion.prepareStatement(query);
             System.out.println("3: pt");
@@ -135,7 +133,7 @@ public class EmpleadoDAO extends ConexionBd{
         return i;
     }
     /*
-     * Actualizacion de Usuario
+     * Actualizacion de Empleado
      */
     public int updateEmpleado(int idemp,String nombres, String apellidos, String dni, String telefono, int idare, int idtip, int idest, int idcar, int idempr,int idsuc){
        int i=0;
@@ -216,7 +214,25 @@ public class EmpleadoDAO extends ConexionBd{
             return i;
         }
     }
-     /*
+    /*
+     * Filtros de busqueda
+     */
+    public int find(String idarea,JTable tblDatos) {
+        int i = 0;
+        try {
+            if(!"".equals(idarea)){
+                filter = new String[1][3];
+                filter[0][0] = "equ_idare";
+                filter[0][1] = idarea; 
+            }
+            getTableAll(tblDatos);
+        }
+        catch(Exception e){
+        }
+        return i;
+    }
+    
+    /*
      * Cargar valores de busqueda al modelo 
      */
     public Empleado getValues(int idemp){
