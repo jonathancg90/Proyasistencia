@@ -164,7 +164,6 @@ public class Query extends ConexionBd{
         
         if(Filter.length>0){
             qs = qs + " where ";
-            System.out.println("---ZZZ"+Filter.length);
             for(int i=0;i<Filter.length;i++)
             {
                 type = Filter[i][0].substring(0, 3);
@@ -180,7 +179,6 @@ public class Query extends ConexionBd{
                          break;
                     
                 }
-                System.out.println("---2)-->"+qs);
                 if(Filter.length!=i+1){ 
                     qs = qs + "and";
                 }

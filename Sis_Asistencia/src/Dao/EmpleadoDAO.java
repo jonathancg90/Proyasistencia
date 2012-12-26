@@ -217,13 +217,13 @@ public class EmpleadoDAO extends ConexionBd{
     /*
      * Filtros de busqueda
      */
-    public int find(String idarea,JTable tblDatos) {
+    public int find(String idareaactivo,JTable tblDatos) {
         int i = 0;
         try {
-            if(!"".equals(idarea)){
+            if(!"".equals(idareaactivo)){
                 filter = new String[1][3];
                 filter[0][0] = "equ_idare";
-                filter[0][1] = idarea; 
+                filter[0][1] = idareaactivo; 
             }
             getTableAll(tblDatos);
         }
