@@ -28,8 +28,11 @@ public class WinHorario extends javax.swing.JInternalFrame {
             objhora.getTableAll(tblhora);
             qs.loadState(cbofindestado,false);
             qs.loadState(cboestado,false);
-            qs.loadType(cbofindtipo,1);
-            qs.loadType(cbotipo,1);
+            qs.loadGlobal(1,cbofindtipo,1);
+            qs.loadGlobal(1,cbotipo,1);
+            //Detalles de horarios
+            qs.loadGlobal(2,cboDia,1);
+
         } catch (Exception e) {
             System.out.println("Gui_WinHorarios_cargaForm: " + e);
         }
@@ -73,7 +76,7 @@ public class WinHorario extends javax.swing.JInternalFrame {
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        cmbDia = new javax.swing.JComboBox();
+        cboDia = new javax.swing.JComboBox();
         jLabel11 = new javax.swing.JLabel();
         jComboBox12 = new javax.swing.JComboBox();
         timePanel1 = new com.lavantech.gui.comp.TimePanel();
@@ -263,7 +266,7 @@ public class WinHorario extends javax.swing.JInternalFrame {
                         .addGap(90, 90, 90)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(cmbDia, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(cboDia, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jComboBox12, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -275,7 +278,7 @@ public class WinHorario extends javax.swing.JInternalFrame {
                 .addGap(12, 12, 12)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(cmbDia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cboDia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel11)
@@ -393,7 +396,7 @@ public class WinHorario extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addContainerGap(42, Short.MAX_VALUE))
         );
 
         pack();
@@ -444,7 +447,7 @@ public class WinHorario extends javax.swing.JInternalFrame {
             dt = new Data();
             String name = txtnombre.getText();
             boolean estate = Boolean.valueOf(dt.G_BOOLEAN[cboestado.getSelectedIndex()]);
-            int tipo= qs.loadType(cbotipo,0);
+            int tipo= qs.loadGlobal(1,cbotipo,0);
             objhora = new HorariosDAO();
             int i = objhora.save(name, estate,tipo);
             if (i == 0) {
@@ -476,7 +479,7 @@ public class WinHorario extends javax.swing.JInternalFrame {
                 lblId.setText(idUsu);
                 txtnombre.setText(hora.getNombre());
                 lblModified.setText(hora.getModified());
-                qs.loadType(cbotipo,hora.getTipo());
+                qs.loadGlobal(1,cbotipo,hora.getTipo());
                 qs.loadState(cboestado,hora.isEstado());
               }
             catch (Exception e) {
@@ -492,7 +495,7 @@ public class WinHorario extends javax.swing.JInternalFrame {
             int id = Integer.valueOf(lblId.getText());
             String name = txtnombre.getText();
             boolean estate = Boolean.valueOf(dt.G_BOOLEAN[cboestado.getSelectedIndex()]);
-            int tipo= qs.loadType(cbotipo,0);
+            int tipo= qs.loadGlobal(1,cbotipo,0);
 
             objhora = new HorariosDAO();
             int i = objhora.update(id,name,tipo,estate);
@@ -520,11 +523,11 @@ public class WinHorario extends javax.swing.JInternalFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnfind;
+    private javax.swing.JComboBox cboDia;
     private javax.swing.JComboBox cboestado;
     private javax.swing.JComboBox cbofindestado;
     private javax.swing.JComboBox cbofindtipo;
     private javax.swing.JComboBox cbotipo;
-    private javax.swing.JComboBox cmbDia;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JCheckBox jCheckBox1;

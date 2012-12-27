@@ -10,6 +10,7 @@ public class Data {
     public String G_TYPEHOR[] = new String[4];      //Valores de los estados para la base de datos
     public static String G_EXCLUDE[] = new String[1];      //Datos excluidos para la actualizacion de registros
     public String G_AREA[] = new String[3];
+    public String G_DIAS[] = new String[8];
     
     public Data()
     {
@@ -33,6 +34,13 @@ public class Data {
         
         G_EXCLUDE[0]="created";
         
+        G_DIAS[1]="Lunes";
+        G_DIAS[2]="Martes";
+        G_DIAS[3]="MIercoles";
+        G_DIAS[4]="JUeves";
+        G_DIAS[5]="Viernes";
+        G_DIAS[6]="Sabado";
+        G_DIAS[7]="Domingo";
     }
     
 }

@@ -250,16 +250,34 @@ public class Query extends ConexionBd{
             System.out.println(_error+"loadState: "+e);
         }
     }
-    public int loadType(JComboBox cmbType, int value){
+    
+    public int loadGlobal(int op, JComboBox cmbType, int value){
         int id = 0;
         try{
             dt = new Data();
+            int tamaño=0;
+            String G_global[];
+                switch(op){
+                    case 1:
+                        tamaño = dt.G_TYPEHOR.length;
+                        G_global = new String[tamaño];
+                        G_global = dt.G_TYPEHOR;
+                            ;break;
+                    case 2: 
+                        tamaño = dt.G_DIAS.length;
+                        G_global = new String[tamaño];
+                        G_global = dt.G_DIAS;
+                        ;break;
+                    default : G_global = new String[0];
+                    break;
+                }
             if(value > 0){
-               MChoice = new DefaultComboBoxModel();
-                MChoice.addElement(dt.G_TYPEHOR[value]);
-                for(int i=1;i<dt.G_TYPEHOR.length;i++){
+                MChoice = new DefaultComboBoxModel();
+                MChoice.addElement(G_global[value]);
+                
+                for(int i=1;i<G_global.length;i++){
                     if(value!=i){
-                      MChoice.addElement(dt.G_TYPEHOR[i]);  
+                      MChoice.addElement(G_global[i]);  
                     }
                 }
                 cmbType.setModel(MChoice);     
