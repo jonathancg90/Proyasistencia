@@ -8,6 +8,7 @@ import Utilitarios.Query;
 import Utilitarios.Validators;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import Utilitarios.Data;
 
     /**
      * Formulario para el mantenimiento de las areas de la empresa.olaaaa
@@ -19,6 +20,7 @@ public class WinArea extends javax.swing.JInternalFrame {
     private Query qs;
     private Data dt;
     private Validators val;
+    private Data data;
     
     public WinArea() {
         initComponents();
@@ -272,7 +274,7 @@ public class WinArea extends javax.swing.JInternalFrame {
 
         jMenuBar1.add(medit);
 
-        maña.setText("Añadir cargos");
+        maña.setText("Cargos");
         maña.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 mañaMousePressed(evt);
@@ -410,7 +412,10 @@ public class WinArea extends javax.swing.JInternalFrame {
 
     private void mañaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mañaMousePressed
         if(!"".equals(lblId.getText())){
+            data= new Data();
+            String titulo=data.G_TITULOS[9];
             WinArea_Cargos objCargo= new WinArea_Cargos();
+            objCargo.setTitle(titulo);
             objCargo.lblidArea.setText(lblId.getText());
             objCargo.lblArea.setText(txtName.getText());
             objCargo.setResizable(true);

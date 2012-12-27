@@ -2,10 +2,12 @@
 package Gui;
 
 import Utilitarios.Validators;
+import Utilitarios.Data;
 import javax.swing.*;
 
 public class WinMdi extends javax.swing.JFrame {
     Validators val;
+    Data data;
     /*
      * Creacion del WinMdi
      */
@@ -175,11 +177,6 @@ public class WinMdi extends javax.swing.JFrame {
         mdis.add(JmitemUsu);
 
         JmitemDis.setText("Diseño");
-        JmitemDis.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                JmitemDisMousePressed(evt);
-            }
-        });
         mdis.add(JmitemDis);
 
         JmiBackup.setText("Backup");
@@ -216,7 +213,7 @@ public class WinMdi extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jdpContenedor, javax.swing.GroupLayout.DEFAULT_SIZE, 321, Short.MAX_VALUE)
+            .addComponent(jdpContenedor, javax.swing.GroupLayout.DEFAULT_SIZE, 329, Short.MAX_VALUE)
         );
 
         pack();
@@ -235,10 +232,12 @@ public class WinMdi extends javax.swing.JFrame {
     }//GEN-LAST:event_mcloseMousePressed
 
     private void JmitemAreaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JmitemAreaMousePressed
-
+       data= new Data();
+       String titulo=data.G_TITULOS[0];
        WinArea objArea= new WinArea();
        val = new Validators();
     
+       objArea.setTitle(titulo);
        objArea.setResizable(true);
        objArea.setMaximizable(true);
        objArea.setIconifiable(true);
@@ -254,7 +253,10 @@ public class WinMdi extends javax.swing.JFrame {
 
     private void masiMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_masiMousePressed
         WinAsistencia objAsis = new WinAsistencia();
+        data= new Data();
+        String titulo=data.G_TITULOS[22];
         val = new Validators();
+        objAsis.setTitle(titulo);
         objAsis.setResizable(true);
         objAsis.setMaximizable(true);
         objAsis.setIconifiable(true);
@@ -269,7 +271,11 @@ public class WinMdi extends javax.swing.JFrame {
 
     private void mjusMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mjusMousePressed
         WinJustificacion objJus = new WinJustificacion();
+        
+        data= new Data();
+        String titulo=data.G_TITULOS[21];
         val = new Validators();
+        objJus.setTitle(titulo);
         objJus.setResizable(true);
         objJus.setMaximizable(true);
         objJus.setIconifiable(true);
@@ -285,7 +291,10 @@ public class WinMdi extends javax.swing.JFrame {
 
     private void mhorMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mhorMousePressed
         WinHorario objHor = new WinHorario();
+        data= new Data();
+        String titulo=data.G_TITULOS[16];
         val = new Validators();
+        objHor.setTitle(titulo);
         objHor.setResizable(true);
         objHor.setMaximizable(true);
         objHor.setIconifiable(true);
@@ -300,7 +309,10 @@ public class WinMdi extends javax.swing.JFrame {
 
     private void mvisMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mvisMousePressed
         WinConsulta objCon = new WinConsulta();
+        data= new Data();
+        String titulo=data.G_TITULOS[15];
         val = new Validators();
+        objCon.setTitle(titulo);
         objCon.setResizable(true);
         objCon.setMaximizable(true);
         objCon.setIconifiable(true);
@@ -315,7 +327,10 @@ public class WinMdi extends javax.swing.JFrame {
 
     private void mrepMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mrepMousePressed
         WinReportes objRep = new WinReportes();
+        data= new Data();
+        String titulo=data.G_TITULOS[14];
         val = new Validators();
+        objRep.setTitle(titulo);
         objRep.setResizable(true);
         objRep.setMaximizable(true);
         objRep.setIconifiable(true);
@@ -330,7 +345,10 @@ public class WinMdi extends javax.swing.JFrame {
 
     private void JmitemempMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JmitemempMousePressed
        WinEmpresa objEmpresa= new WinEmpresa();
+       data= new Data();
+       String titulo=data.G_TITULOS[1];
        val = new Validators();
+       objEmpresa.setTitle(titulo);
        objEmpresa.setResizable(true);
        objEmpresa.setMaximizable(true);
        objEmpresa.setIconifiable(true);
@@ -346,7 +364,10 @@ public class WinMdi extends javax.swing.JFrame {
 
     private void JmitemRolesMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JmitemRolesMousePressed
         WinRoles objsucursal= new WinRoles();
+        data= new Data();
+        String titulo=data.G_TITULOS[4];
         val = new Validators();
+        objsucursal.setTitle(titulo);
         objsucursal.setResizable(true);
         objsucursal.setMaximizable(true);
         objsucursal.setIconifiable(true);
@@ -361,7 +382,10 @@ public class WinMdi extends javax.swing.JFrame {
 
     private void JmitemTipoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JmitemTipoMousePressed
         WinTipoEmpleado objtipo= new WinTipoEmpleado();
+        data= new Data();
+        String titulo=data.G_TITULOS[2];
         val = new Validators();
+        objtipo.setTitle(titulo);
         objtipo.setResizable(true);
         objtipo.setMaximizable(true);
         objtipo.setIconifiable(true);
@@ -370,25 +394,12 @@ public class WinMdi extends javax.swing.JFrame {
         objtipo.setVisible(true);
     }//GEN-LAST:event_JmitemTipoMousePressed
 
-    private void JmitemDisMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JmitemDisMousePressed
-        WinArea objUsu= new WinArea();
-        val = new Validators();
-        objUsu.setResizable(true);
-        objUsu.setMaximizable(true);
-        objUsu.setIconifiable(true);
-        //obj_Asis.setClosable(true);
-        jdpContenedor.add(objUsu);
-        if(val.EntryForms()){
-            objUsu.setVisible(true);
-        } else {
-            JOptionPane.showMessageDialog(null,"Cierre la ventana abierta para abrir otra");
-        }
-
-    }//GEN-LAST:event_JmitemDisMousePressed
-
     private void JmitemUsuMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JmitemUsuMousePressed
         WinUsuario objUsu= new WinUsuario();
+        data= new Data();
+        String titulo=data.G_TITULOS[13];
         val = new Validators();
+        objUsu.setTitle(titulo);
         objUsu.setResizable(true);
         objUsu.setMaximizable(true);
         objUsu.setIconifiable(true);
@@ -403,8 +414,11 @@ public class WinMdi extends javax.swing.JFrame {
 
 
     private void mempMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mempMousePressed
-        WinEmpleado objEmp= new WinEmpleado();
+        WinEmpleado objEmp= new WinEmpleado(); 
+        data= new Data();
+        String titulo=data.G_TITULOS[17];
         val = new Validators();
+        objEmp.setTitle(titulo);
         objEmp.setResizable(true);
         objEmp.setMaximizable(true);
         objEmp.setIconifiable(true);
@@ -419,7 +433,10 @@ public class WinMdi extends javax.swing.JFrame {
 
     private void JmitemCiudadMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JmitemCiudadMousePressed
         WinCiudad objUsu= new WinCiudad();
+        data= new Data();
+        String titulo=data.G_TITULOS[5];
         val = new Validators();
+        objUsu.setTitle(titulo);
         objUsu.setResizable(true);
         objUsu.setMaximizable(true);
         objUsu.setIconifiable(true);
@@ -434,7 +451,10 @@ public class WinMdi extends javax.swing.JFrame {
 
     private void JmitemtpmonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JmitemtpmonMousePressed
         WinTipomoneda objmon= new WinTipomoneda();
+        data= new Data();
+        String titulo=data.G_TITULOS[3];
         val = new Validators();
+        objmon.setTitle(titulo);
         objmon.setResizable(true);
         objmon.setMaximizable(true);
         objmon.setIconifiable(true);
@@ -449,7 +469,10 @@ public class WinMdi extends javax.swing.JFrame {
 
     private void jmItemModulosMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmItemModulosMousePressed
         WinModulos objmod= new WinModulos();
+        data= new Data();
+        String titulo=data.G_TITULOS[7];
         val = new Validators();
+        objmod.setTitle(titulo);
         objmod.setResizable(true);
         objmod.setMaximizable(true);
         objmod.setIconifiable(true);
@@ -465,7 +488,10 @@ public class WinMdi extends javax.swing.JFrame {
 
     private void JmitemJustificacionMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JmitemJustificacionMousePressed
         WinTipoJustificacion objjus= new WinTipoJustificacion();
+        data= new Data();
+        String titulo=data.G_TITULOS[8];
         val = new Validators();
+        objjus.setTitle(titulo);
         objjus.setResizable(true);
         objjus.setMaximizable(true);
         objjus.setIconifiable(true);
@@ -480,7 +506,10 @@ public class WinMdi extends javax.swing.JFrame {
 
     private void jMenuItem1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem1MousePressed
         WinEstadoEmpleado objest= new WinEstadoEmpleado();
+        data= new Data();
+        String titulo=data.G_TITULOS[6];
         val = new Validators();
+        objest.setTitle(titulo);
         objest.setResizable(true);
         objest.setMaximizable(true);
         objest.setIconifiable(true);

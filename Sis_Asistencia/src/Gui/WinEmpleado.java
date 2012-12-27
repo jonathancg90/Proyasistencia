@@ -499,7 +499,10 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
 
     private void msueMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_msueMousePressed
     if(!"".equals(lblidempleado.getText())){
+        dt= new Data();
+        String titulo=dt.G_TITULOS[19];
         WinSalarios objsalarios= new WinSalarios();
+        objsalarios.setTitle(titulo);
         objsalarios.lblIdemp.setText(lblidempleado.getText());
         objsalarios.setResizable(true);
         objsalarios.setMaximizable(true);
@@ -519,7 +522,10 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
 
     private void mvacMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mvacMousePressed
     if(!"".equals(lblidempleado.getText())){
+        dt= new Data();
+        String titulo=dt.G_TITULOS[20];
         WinVacaciones objvacaciones= new WinVacaciones();
+        objvacaciones.setTitle(titulo);
         objvacaciones.lblIdemp.setText(lblidempleado.getText());
         objvacaciones.setResizable(true);
         objvacaciones.setMaximizable(true);
@@ -539,7 +545,10 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
     private void mhorMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mhorMousePressed
       
         if(!"".equals(lblidempleado.getText())){
+        dt= new Data();
+        String titulo=dt.G_TITULOS[18];
         WinEmpleado_has_horarios objEmpleado_has_horarios= new WinEmpleado_has_horarios();
+        objEmpleado_has_horarios.setTitle(titulo);
         objEmpleado_has_horarios.lblIdemp.setText(lblidempleado.getText());
         objEmpleado_has_horarios.setResizable(true);
         objEmpleado_has_horarios.setMaximizable(true);

@@ -3,6 +3,7 @@ package Gui;
 import Dao.RolesDAO;
 import Javabeans.Roles;
 import Utilitarios.Config;
+import Utilitarios.Data;
 import Utilitarios.Query;
 import Utilitarios.Validators;
 import javax.swing.JOptionPane;
@@ -14,6 +15,7 @@ public class WinRoles extends javax.swing.JInternalFrame {
     private Query qs;
     private Config cg;
     private Validators val;
+    private Data data;
 
     public WinRoles() {
         initComponents();
@@ -368,7 +370,10 @@ public class WinRoles extends javax.swing.JInternalFrame {
 
     private void jMenu1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu1MousePressed
       if(!"".equals(lblId.getText())){
+            data= new Data();
+            String titulo=data.G_TITULOS[12];
             WinRoles_Permisos objPermisos= new WinRoles_Permisos();
+            objPermisos.setTitle(titulo);
             objPermisos.lblRol.setText(txtName.getText());
             objPermisos.lblidrol.setText(lblId.getText());
             objPermisos.setResizable(true);

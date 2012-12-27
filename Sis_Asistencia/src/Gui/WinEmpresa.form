@@ -61,7 +61,7 @@
         </Menu>
         <Menu class="javax.swing.JMenu" name="ma&#xf1;o">
           <Properties>
-            <Property name="text" type="java.lang.String" value="A&#xf1;adir sucursales"/>
+            <Property name="text" type="java.lang.String" value="Sucursales"/>
           </Properties>
           <Events>
             <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="ma&#xf1;oMousePressed"/>
@@ -69,7 +69,7 @@
         </Menu>
         <Menu class="javax.swing.JMenu" name="nolaborables">
           <Properties>
-            <Property name="text" type="java.lang.String" value="a&#xf1;adir dias no laborables"/>
+            <Property name="text" type="java.lang.String" value="Dias no laborables"/>
           </Properties>
           <Events>
             <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="nolaborablesMousePressed"/>

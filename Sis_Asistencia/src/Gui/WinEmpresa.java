@@ -281,7 +281,7 @@ public class WinEmpresa extends javax.swing.JInternalFrame {
 
         jMenuBar1.add(medit);
 
-        maño.setText("Añadir sucursales");
+        maño.setText("Sucursales");
         maño.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 mañoMousePressed(evt);
@@ -289,7 +289,7 @@ public class WinEmpresa extends javax.swing.JInternalFrame {
         });
         jMenuBar1.add(maño);
 
-        nolaborables.setText("añadir dias no laborables");
+        nolaborables.setText("Dias no laborables");
         nolaborables.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 nolaborablesMousePressed(evt);
@@ -348,7 +348,9 @@ public class WinEmpresa extends javax.swing.JInternalFrame {
     private void mañoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mañoMousePressed
         if(!"".equals(this.lblId.getText())){
             WinEmpresa_Sucursal objsucursal= new WinEmpresa_Sucursal();
-
+            dt= new Data();
+            String titulo=dt.G_TITULOS[10];
+            objsucursal.setTitle(titulo);
             objsucursal.setResizable(true);
             objsucursal.lblidemp.setText(txtName.getText());
             objsucursal.lblIdemp.setText(lblId.getText());
@@ -456,8 +458,10 @@ public class WinEmpresa extends javax.swing.JInternalFrame {
 
     private void nolaborablesMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nolaborablesMousePressed
        if(!"".equals(this.lblId.getText())){
+           dt= new Data();
+            String titulo=dt.G_TITULOS[11];
             WinNolaborables objnolaborables= new WinNolaborables();
-
+            objnolaborables.setTitle(titulo);
             objnolaborables.setResizable(true);
             objnolaborables.lblIdempr.setText(lblId.getText());
 
