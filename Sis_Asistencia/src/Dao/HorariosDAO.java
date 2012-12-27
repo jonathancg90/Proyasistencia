@@ -60,7 +60,7 @@ public class HorariosDAO extends ConexionBd{
     /*
      * Registro de areas
      */
-    public int save(String name, boolean state,int tipo,int iddet_hor){
+    public int save(String name, boolean state,int tipo){
        int i=0;
         try{
             Date date = new Date(0000-00-00);
@@ -71,7 +71,7 @@ public class HorariosDAO extends ConexionBd{
             String Table = this._table;
             String now = hp.getDateNow();
             
-            objHor = new Horarios(0,name,tipo,state,now,now,iddet_hor);
+            objHor = new Horarios(0,name,tipo,state,now,now);
             //Iniciando consulta y asignando valores
             pt = qs.sqlRegister(Table);
             pt.setString(1,objHor.getNombre());
@@ -79,7 +79,6 @@ public class HorariosDAO extends ConexionBd{
             pt.setBoolean(3,objHor.isEstado());
             pt.setDate(4,date.valueOf(objHor.getCreated()));
             pt.setDate(5,date.valueOf(objHor.getModified()));
-            pt.setInt(6,objHor.getIddet_hor());
             //Ejecucion y cierre
             i= pt.executeUpdate();
             pt.close();
@@ -94,7 +93,7 @@ public class HorariosDAO extends ConexionBd{
     /*
      * Actualizacion de areas
      */
-    public int update(int id,String name,int tipo,boolean state,int iddet_hor){
+    public int update(int id,String name,int tipo,boolean state){
        int i=0;
         try{
             Date date = new Date(0000-00-00);
@@ -105,15 +104,14 @@ public class HorariosDAO extends ConexionBd{
             String Table = this._table;
             String now = hp.getDateNow();
             
-            objHor = new Horarios(id,name,tipo,state,now,now,iddet_hor);
+            objHor = new Horarios(id,name,tipo,state,now,now);
             //Iniciando consulta y asignando valores
             pt = qs.sqlUpdate(Table);
-             pt.setString(1,objHor.getNombre());
+            pt.setString(1,objHor.getNombre());
             pt.setInt(2,objHor.getTipo());
             pt.setBoolean(3,objHor.isEstado());
-            pt.setDate(4,date.valueOf(objHor.getCreated()));
-            pt.setDate(5,date.valueOf(objHor.getModified()));
-            pt.setInt(6,objHor.getIddet_hor());
+            pt.setDate(4,date.valueOf(objHor.getModified()));
+            pt.setInt(5, objHor.getIdhora());
             //Ejecucion y cierre
             i= pt.executeUpdate();
             pt.close();
@@ -187,9 +185,9 @@ public class HorariosDAO extends ConexionBd{
             String campos[] = new String[6];
             campos = qs.getRecords(_table,idusu);
             objHor.setNombre(campos[2]);
-            objHor.setEstado(objVal.StringToBoolean(campos[3]));
-            objHor.setCreated(campos[4]);
-            objHor.setModified(campos[5]);
+            objHor.setTipo(Integer.parseInt(campos[3]));
+            objHor.setEstado(objVal.StringToBoolean(campos[4]));
+            objHor.setModified(campos[6]);
             
             return objHor;
         }

@@ -330,9 +330,6 @@ public class WinEmpresa extends javax.swing.JInternalFrame {
                 lblModified.setText(empresa.getModified());                
                 txtCantTrab.setText(String.valueOf(empresa.getTrabajadores()));
                 qs.loadChoiceDefault(cboMon,"moneda","nombre",empresa.getMon());
-                //cboMon.setText(empresa.getName());
-
-                System.out.println(empresa.isEstado());
                 qs.loadState(cmbEstate,empresa.isEstado());
             }
             catch(Exception e){
@@ -412,7 +409,6 @@ public class WinEmpresa extends javax.swing.JInternalFrame {
                 int mon = qs.idChoice("moneda","nombre",String.valueOf(cboMon.getSelectedItem()));
 
                 objempresa = new EmpresaDAO();
-                System.out.println("ID: "+id);
                 int i = objempresa.update(id,name,ruc,estate,trab,mon);
                 if(i==0) {
                     JOptionPane.showMessageDialog(null,"No se pudo actualizar datos");

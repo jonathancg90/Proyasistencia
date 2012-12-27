@@ -9,19 +9,17 @@ public class Horarios {
     private boolean estado;
     private String created;
     private String modified;
-    private int iddet_hor;
 
     public Horarios() {
     }
 
-    public Horarios(int idhora, String nombre, int tipo, boolean estado, String created, String modified, int iddet_hor) {
+    public Horarios(int idhora, String nombre, int tipo, boolean estado, String created, String modified) {
         this.idhora = idhora;
         this.nombre = nombre;
         this.tipo = tipo;
         this.estado = estado;
         this.created = created;
         this.modified = modified;
-        this.iddet_hor = iddet_hor;
     }
 
     /**
@@ -107,19 +105,4 @@ public class Horarios {
     public void setModified(String modified) {
         this.modified = modified;
     }
-
-    /**
-     * @return the iddet_hor
-     */
-    public int getIddet_hor() {
-        return iddet_hor;
-    }
-
-    /**
-     * @param iddet_hor the iddet_hor to set
-     */
-    public void setIddet_hor(int iddet_hor) {
-        this.iddet_hor = iddet_hor;
-    }
-    
 }

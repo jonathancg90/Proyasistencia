@@ -28,8 +28,8 @@ public class WinHorario extends javax.swing.JInternalFrame {
             objhora.getTableAll(tblhora);
             qs.loadState(cbofindestado,false);
             qs.loadState(cboestado,false);
-            qs.loadType(cbofindtipo,0);
-            qs.loadType(cbotipo,0);
+            qs.loadType(cbofindtipo,1);
+            qs.loadType(cbotipo,1);
         } catch (Exception e) {
             System.out.println("Gui_WinHorarios_cargaForm: " + e);
         }
@@ -444,10 +444,9 @@ public class WinHorario extends javax.swing.JInternalFrame {
             dt = new Data();
             String name = txtnombre.getText();
             boolean estate = Boolean.valueOf(dt.G_BOOLEAN[cboestado.getSelectedIndex()]);
-            int tipo=1;
-            int iddet_hor=1;
+            int tipo= qs.loadType(cbotipo,0);
             objhora = new HorariosDAO();
-            int i = objhora.save(name, estate,tipo,iddet_hor);
+            int i = objhora.save(name, estate,tipo);
             if (i == 0) {
                 JOptionPane.showMessageDialog(null,"No se pudo grabar datos");
             }
@@ -464,7 +463,7 @@ public class WinHorario extends javax.swing.JInternalFrame {
 
     private void tblhoraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblhoraMouseClicked
          try {       
-             int fsel;
+                int fsel;
                 fsel = this.tblhora.getSelectedRow();
                 objhora = new HorariosDAO();
                 DefaultTableModel m = new DefaultTableModel();
@@ -477,11 +476,11 @@ public class WinHorario extends javax.swing.JInternalFrame {
                 lblId.setText(idUsu);
                 txtnombre.setText(hora.getNombre());
                 lblModified.setText(hora.getModified());
-                qs.loadType(cbotipo,hora.getIddet_hor());
+                qs.loadType(cbotipo,hora.getTipo());
                 qs.loadState(cboestado,hora.isEstado());
-                }
+              }
             catch (Exception e) {
-                System.out.println("Gui_Win_area: " + e);
+                System.out.println("Gui_WinHorario: " + e);
             }
     }//GEN-LAST:event_tblhoraMouseClicked
 
@@ -493,11 +492,10 @@ public class WinHorario extends javax.swing.JInternalFrame {
             int id = Integer.valueOf(lblId.getText());
             String name = txtnombre.getText();
             boolean estate = Boolean.valueOf(dt.G_BOOLEAN[cboestado.getSelectedIndex()]);
-            int tipo=1;
-            int iddet_hor=1;
+            int tipo= qs.loadType(cbotipo,0);
 
             objhora = new HorariosDAO();
-            int i = objhora.update(id,name,tipo,estate,iddet_hor);
+            int i = objhora.update(id,name,tipo,estate);
             if (i == 0) {
 
                 JOptionPane.showMessageDialog(null, "No se pudo actualizar datos");
@@ -505,7 +503,7 @@ public class WinHorario extends javax.swing.JInternalFrame {
             else {
                 objhora.getTableAll(tblhora);
                 cleanBox();
-                JOptionPane.showMessageDialog(null, "Area actualizada");
+                JOptionPane.showMessageDialog(null, "Horario actualizado");
             } 
         }                                          
         else {
