@@ -37,7 +37,6 @@ public class WinMdi extends javax.swing.JFrame {
         JmitemRoles = new javax.swing.JMenuItem();
         JmitemCiudad = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
         jmItemModulos = new javax.swing.JMenuItem();
         JmitemJustificacion = new javax.swing.JMenuItem();
         JmitemUsu = new javax.swing.JMenuItem();
@@ -149,9 +148,6 @@ public class WinMdi extends javax.swing.JFrame {
         });
         SubmenuCrit.add(jMenuItem1);
 
-        jMenuItem2.setText("Dias no laborables");
-        SubmenuCrit.add(jMenuItem2);
-
         jmItemModulos.setText("Modulos");
         jmItemModulos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -220,7 +216,7 @@ public class WinMdi extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jdpContenedor, javax.swing.GroupLayout.DEFAULT_SIZE, 317, Short.MAX_VALUE)
+            .addComponent(jdpContenedor, javax.swing.GroupLayout.DEFAULT_SIZE, 321, Short.MAX_VALUE)
         );
 
         pack();
@@ -546,7 +542,6 @@ public class WinMdi extends javax.swing.JFrame {
     private javax.swing.JMenu SubmenuCrit;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
     public static javax.swing.JDesktopPane jdpContenedor;
     private javax.swing.JMenuItem jmItemModulos;
     private javax.swing.JMenu masi;

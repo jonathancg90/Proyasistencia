@@ -537,10 +537,16 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_mitemclearMousePressed
 
     private void mhorMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mhorMousePressed
-      if(!"".equals(lblidempleado.getText())){
       
+        if(!"".equals(lblidempleado.getText())){
+        WinEmpleado_has_horarios objEmpleado_has_horarios= new WinEmpleado_has_horarios();
+        objEmpleado_has_horarios.lblIdemp.setText(lblidempleado.getText());
+        objEmpleado_has_horarios.setResizable(true);
+        objEmpleado_has_horarios.setMaximizable(true);
+        objEmpleado_has_horarios.setIconifiable(true);
+        WinMdi.jdpContenedor.add(objEmpleado_has_horarios);
       } else {
-           JOptionPane.showMessageDialog(null,"Debe de seleccionar un empelado para poder asignarle sus horarios");
+           JOptionPane.showMessageDialog(null,"Debe de seleccionar un empleado para poder asignarle sus horarios");
        }
     }//GEN-LAST:event_mhorMousePressed
 
