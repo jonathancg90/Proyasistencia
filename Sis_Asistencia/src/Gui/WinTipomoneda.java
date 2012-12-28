@@ -8,6 +8,7 @@ import Utilitarios.Query;
 import Utilitarios.Validators;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import Utilitarios.Helpers;
 
 
 public class WinTipomoneda extends javax.swing.JInternalFrame {
@@ -17,6 +18,7 @@ public class WinTipomoneda extends javax.swing.JInternalFrame {
     private Query qs;
     private Config cg;
     private Validators val;
+    private Helpers hp;
 
     public WinTipomoneda() {
         initComponents();
@@ -290,6 +292,7 @@ public class WinTipomoneda extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnFindActionPerformed
 
     private void tblmonedaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblmonedaMouseClicked
+        hp=new Helpers();
         int fsel;
         fsel= this.tblmoneda.getSelectedRow();
         if(fsel==-1){
@@ -305,7 +308,7 @@ public class WinTipomoneda extends javax.swing.JInternalFrame {
                 moneda = objmoneda.getValues(Integer.parseInt(idTipmon));
                 txtName.setText(moneda.getNombre());
                 txtsimbolo.setText(moneda.getSimbol());
-                lblmodified.setText(moneda.getModified());
+                lblmodified.setText(hp.getFormatDate(moneda.getModified()));
 
             }
             catch(Exception e){

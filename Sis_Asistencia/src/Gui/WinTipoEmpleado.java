@@ -8,6 +8,7 @@ import Utilitarios.Query;
 import Utilitarios.Validators;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import Utilitarios.Helpers;
 
 public class WinTipoEmpleado extends javax.swing.JInternalFrame {
 
@@ -17,6 +18,7 @@ public class WinTipoEmpleado extends javax.swing.JInternalFrame {
     private Config cg;
     private Data dt;
     private Validators val;
+    private Helpers hp;
     
     public WinTipoEmpleado() {
         initComponents();
@@ -283,6 +285,7 @@ public class WinTipoEmpleado extends javax.swing.JInternalFrame {
 
     private void tblTipoempMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblTipoempMouseClicked
         int fsel;
+        hp=new Helpers();
         fsel = this.tblTipoemp.getSelectedRow();
         if (fsel == -1) {
             //No se ha seleccionado registo en Jtable
@@ -297,7 +300,7 @@ public class WinTipoEmpleado extends javax.swing.JInternalFrame {
                 lblId.setText(idArea);
                 tipoemp = objtipoemp.getValues(Integer.parseInt(idArea));
                 txtName.setText(tipoemp.getName());
-                lblModified.setText(tipoemp.getModified());
+                lblModified.setText(hp.getFormatDate(tipoemp.getModified()));
                 System.out.println(tipoemp.isEstado());
                 qs.loadState(cmbEstate,tipoemp.isEstado());
             }

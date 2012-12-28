@@ -9,6 +9,7 @@ import Utilitarios.Query;
 import Utilitarios.Validators;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import Utilitarios.Helpers;
 
 public class WinEmpresa extends javax.swing.JInternalFrame {
 
@@ -18,6 +19,7 @@ public class WinEmpresa extends javax.swing.JInternalFrame {
     private Config cg;
     private Data dt;
     private Validators val;
+    private Helpers hp;
     
     public WinEmpresa() {
         initComponents();
@@ -311,6 +313,7 @@ public class WinEmpresa extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tblempresaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblempresaMouseClicked
+        hp=new Helpers();
         int fsel;
         fsel= this.tblempresa.getSelectedRow();
         if(fsel==-1){
@@ -327,7 +330,7 @@ public class WinEmpresa extends javax.swing.JInternalFrame {
                 empresa = objempresa.getValues(Integer.parseInt(idEmpresa));
                 txtName.setText(empresa.getName());                
                 txtruc.setText(empresa.getRuc());
-                lblModified.setText(empresa.getModified());                
+                lblModified.setText(hp.getFormatDate(empresa.getModified()));                
                 txtCantTrab.setText(String.valueOf(empresa.getTrabajadores()));
                 qs.loadChoiceDefault(cboMon,"moneda","nombre",empresa.getMon());
                 qs.loadState(cmbEstate,empresa.isEstado());

@@ -55,13 +55,13 @@ public class Helpers{
      */
     
     
-    /*public String getFormatDate(String fecha)
+    public String getFormatDate(String fecha)
     {
         String date;
         String [] arrayfecha = fecha.split("-");
         date = arrayfecha[2]+"-"+arrayfecha[1]+"-"+arrayfecha[0];
         return date;
-    }*/
+    }
      
     /*
      * Encriptador

@@ -33,7 +33,7 @@ public class WinEmpleado_has_horarios extends javax.swing.JInternalFrame {
     public WinEmpleado_has_horarios() {
         initComponents();
         
-        format=new SimpleDateFormat("yyyy-MM-dd");
+        format=new SimpleDateFormat("dd-MM-yyyy");
         cboF_inicio.setDateFormat(format);
         cboF_final.setDateFormat(format);
         
@@ -246,6 +246,11 @@ public class WinEmpleado_has_horarios extends javax.swing.JInternalFrame {
 
         mitemclear.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.CTRL_MASK));
         mitemclear.setText("Limpiar");
+        mitemclear.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                mitemclearMousePressed(evt);
+            }
+        });
         medit.add(mitemclear);
 
         jMenuBar1.add(medit);
@@ -278,13 +283,14 @@ public class WinEmpleado_has_horarios extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(43, Short.MAX_VALUE))
+                .addContainerGap(55, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void tblEmpleado_has_horariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblEmpleado_has_horariosMouseClicked
+        hp=new Helpers();
         date = new Date();
         date2=new Date();
         calendar= new GregorianCalendar();
@@ -306,11 +312,11 @@ public class WinEmpleado_has_horarios extends javax.swing.JInternalFrame {
                 
                 lblIdemp.setText(String.valueOf(Emphorarios.getIdemp()));
                 
-                date=format.parse(Emphorarios.getInicio());
+                date=format.parse(hp.getFormatDate(Emphorarios.getInicio()));
                 calendar.setTime(date);
                 cboF_inicio.setSelectedDate(calendar);
 
-                date2=format.parse(Emphorarios.getFin());
+                date2=format.parse(hp.getFormatDate(Emphorarios.getFin()));
                 calendar2.setTime(date2);
                 cboF_final.setSelectedDate(calendar2);
                 
@@ -326,11 +332,11 @@ public class WinEmpleado_has_horarios extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_tblEmpleado_has_horariosMouseClicked
 
     private void mitemregisterMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemregisterMousePressed
-        
+        hp=new Helpers();
             try{
-                hp = new Helpers();
-                String F_inicio=cboF_inicio.getText();
-                String F_final=cboF_final.getText();
+                
+                String F_inicio=hp.getFormatDate(cboF_inicio.getText());
+                String F_final=hp.getFormatDate(cboF_final.getText());
                 int horario =  qs.idChoice("horarios","nombre",String.valueOf(cbo_Horario.getSelectedItem()));
                 
                 int idemp=Integer.valueOf(lblIdemp.getText());
@@ -356,8 +362,8 @@ public class WinEmpleado_has_horarios extends javax.swing.JInternalFrame {
             int idhorarios=Integer.parseInt(lblIdemp_horarios.getText());
             int horario =  qs.idChoice("horarios","nombre",String.valueOf(cbo_Horario.getSelectedItem()));
             int idemp=Integer.parseInt(lblIdemp.getText());
-            String F_inicio=cboF_inicio.getText();
-            String F_final=cboF_final.getText();
+            String F_inicio=hp.getFormatDate(cboF_inicio.getText());
+            String F_final=hp.getFormatDate(cboF_final.getText());
 
             
 
@@ -402,6 +408,10 @@ public class WinEmpleado_has_horarios extends javax.swing.JInternalFrame {
     private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
         cargaForm();
     }//GEN-LAST:event_formInternalFrameOpened
+
+    private void mitemclearMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemclearMousePressed
+        cleanBox();
+    }//GEN-LAST:event_mitemclearMousePressed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private datechooser.beans.DateChooserCombo cboF_final;

@@ -8,6 +8,7 @@ import Dao.HorariosDAO;
 import Javabeans.Horarios;
 import Utilitarios.Query;
 import Utilitarios.Validators;
+import Utilitarios.Helpers;
 
 public class WinHorario extends javax.swing.JInternalFrame {
 
@@ -16,6 +17,7 @@ public class WinHorario extends javax.swing.JInternalFrame {
     private Horarios hora;
     private Data dt;
     private Validators val;
+    private Helpers hp;
     
     public WinHorario() {
         initComponents();
@@ -465,7 +467,9 @@ public class WinHorario extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_mitemregisterMousePressed
 
     private void tblhoraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblhoraMouseClicked
-         try {       
+        hp=new Helpers(); 
+        
+        try {       
                 int fsel;
                 fsel = this.tblhora.getSelectedRow();
                 objhora = new HorariosDAO();
@@ -478,7 +482,7 @@ public class WinHorario extends javax.swing.JInternalFrame {
                 //Asigando valores obtenidos
                 lblId.setText(idUsu);
                 txtnombre.setText(hora.getNombre());
-                lblModified.setText(hora.getModified());
+                lblModified.setText(hp.getFormatDate(hora.getModified()));
                 qs.loadGlobal(1,cbotipo,hora.getTipo());
                 qs.loadState(cboestado,hora.isEstado());
               }
