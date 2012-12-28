@@ -1,19 +1,27 @@
 
 package Gui;
+import java.sql.Time;
 import Utilitarios.Data;
 import Utilitarios.Query;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import Dao.HorariosDAO;
+import Dao.DetailHorarioDAO;
 import Javabeans.Horarios;
 import Utilitarios.Query;
 import Utilitarios.Validators;
+<<<<<<< HEAD
 import Utilitarios.Helpers;
+=======
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+>>>>>>> 9c93f9b82c7bfaf9b4a6fbfb2627bf8a4f3b970c
 
 public class WinHorario extends javax.swing.JInternalFrame {
 
-    Query qs;
-    HorariosDAO objhora;
+    private Query qs;
+    private HorariosDAO objhora;
+    private DetailHorarioDAO objdetail;
     private Horarios hora;
     private Data dt;
     private Validators val;
@@ -23,7 +31,7 @@ public class WinHorario extends javax.swing.JInternalFrame {
         initComponents();
         cargaForm();
     }
-    public void cargaForm(){
+    private void cargaForm(){
         try {
             objhora = new HorariosDAO();
             qs = new Query();
@@ -34,11 +42,18 @@ public class WinHorario extends javax.swing.JInternalFrame {
             qs.loadGlobal(1,cbotipo,1);
             //Detalles de horarios
             qs.loadGlobal(2,cboDia,1);
+            qs.loadGlobal(3,cbotipoReg,1);
 
         } catch (Exception e) {
             System.out.println("Gui_WinHorarios_cargaForm: " + e);
         }
-    }public void cleanBox(){
+    }
+    private void cargaDetalle(){
+        objdetail = new DetailHorarioDAO();
+        objdetail.getTableAll(JtblDetail);
+    }
+    
+    private void cleanBox(){
         lblId.setText("");
         txtnombre.setText("");
         lblModified.setText("");
@@ -72,7 +87,7 @@ public class WinHorario extends javax.swing.JInternalFrame {
         lblId = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        JtblDetail = new javax.swing.JTable();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
@@ -80,9 +95,9 @@ public class WinHorario extends javax.swing.JInternalFrame {
         jLabel10 = new javax.swing.JLabel();
         cboDia = new javax.swing.JComboBox();
         jLabel11 = new javax.swing.JLabel();
-        jComboBox12 = new javax.swing.JComboBox();
-        timePanel1 = new com.lavantech.gui.comp.TimePanel();
-        timePanel2 = new com.lavantech.gui.comp.TimePanel();
+        cbotipoReg = new javax.swing.JComboBox();
+        TimSalida = new com.lavantech.gui.comp.TimePanel();
+        TimIngreso = new com.lavantech.gui.comp.TimePanel();
         jMenuBar1 = new javax.swing.JMenuBar();
         mfile = new javax.swing.JMenu();
         mitemregister = new javax.swing.JMenuItem();
@@ -201,7 +216,7 @@ public class WinHorario extends javax.swing.JInternalFrame {
 
         jTabbedPane1.addTab("Datos principales", jPanel1);
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        JtblDetail.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
                 {},
@@ -212,9 +227,14 @@ public class WinHorario extends javax.swing.JInternalFrame {
 
             }
         ));
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(JtblDetail);
 
         jButton2.setText("Agregar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Eliminar");
 
@@ -226,11 +246,11 @@ public class WinHorario extends javax.swing.JInternalFrame {
 
         jLabel11.setText("Tipo");
 
-        timePanel1.setDisplayAnalog(false);
-        timePanel1.setSecDisplayed(false);
+        TimSalida.setDisplayAnalog(false);
+        TimSalida.setSecDisplayed(false);
 
-        timePanel2.setDisplayAnalog(false);
-        timePanel2.setSecDisplayed(false);
+        TimIngreso.setDisplayAnalog(false);
+        TimIngreso.setSecDisplayed(false);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -258,8 +278,8 @@ public class WinHorario extends javax.swing.JInternalFrame {
                             .addComponent(jLabel10))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(timePanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(timePanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(TimSalida, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(TimIngreso, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap())
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -271,7 +291,7 @@ public class WinHorario extends javax.swing.JInternalFrame {
                                 .addComponent(cboDia, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jComboBox12, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(cbotipoReg, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE))))))
         );
         jPanel2Layout.setVerticalGroup(
@@ -284,10 +304,10 @@ public class WinHorario extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel11)
-                    .addComponent(jComboBox12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbotipoReg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(1, 1, 1)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(timePanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(TimIngreso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(33, 33, 33)
                         .addComponent(jLabel9)))
@@ -297,7 +317,7 @@ public class WinHorario extends javax.swing.JInternalFrame {
                         .addComponent(jLabel10))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(timePanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(TimSalida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -398,7 +418,7 @@ public class WinHorario extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(42, Short.MAX_VALUE))
+                .addContainerGap(48, Short.MAX_VALUE))
         );
 
         pack();
@@ -485,6 +505,7 @@ public class WinHorario extends javax.swing.JInternalFrame {
                 lblModified.setText(hp.getFormatDate(hora.getModified()));
                 qs.loadGlobal(1,cbotipo,hora.getTipo());
                 qs.loadState(cboestado,hora.isEstado());
+                cargaDetalle();
               }
             catch (Exception e) {
                 System.out.println("Gui_WinHorario: " + e);
@@ -525,17 +546,43 @@ public class WinHorario extends javax.swing.JInternalFrame {
         objhora.find(state, tblhora);
     }//GEN-LAST:event_btnfindMouseClicked
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+            dt = new Data();
+            objdetail = new DetailHorarioDAO();
+            
+            SimpleDateFormat fhora = new SimpleDateFormat("HH:mm:ss");
+            
+            int id = Integer.parseInt(lblId.getText());
+            int dia  = qs.loadGlobal(2,cboDia,0);
+            int tipo = qs.loadGlobal(3,cboDia,0);
+            Calendar ingreso = TimIngreso.getCalendar();
+            Calendar salida = TimSalida.getCalendar();
+            
+            String ing = ""+fhora.format(ingreso.getTime());
+            String sal = ""+fhora.format(salida.getTime());
+            
+            
+            int i = objdetail.save(dia, tipo, ing, sal, id);
+            if (i == 0) {
+                JOptionPane.showMessageDialog(null,"No se pudo grabar el detalle");
+            }
+            cargaDetalle();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable JtblDetail;
+    private com.lavantech.gui.comp.TimePanel TimIngreso;
+    private com.lavantech.gui.comp.TimePanel TimSalida;
     private javax.swing.JButton btnfind;
     private javax.swing.JComboBox cboDia;
     private javax.swing.JComboBox cboestado;
     private javax.swing.JComboBox cbofindestado;
     private javax.swing.JComboBox cbofindtipo;
     private javax.swing.JComboBox cbotipo;
+    private javax.swing.JComboBox cbotipoReg;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JComboBox jComboBox12;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -555,7 +602,6 @@ public class WinHorario extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable2;
     private javax.swing.JLabel lblId;
     private javax.swing.JLabel lblModified;
     private javax.swing.JMenu mclose;
@@ -566,8 +612,6 @@ public class WinHorario extends javax.swing.JInternalFrame {
     private javax.swing.JMenuItem mitemregister;
     private javax.swing.JMenuItem mitemupdate;
     private javax.swing.JTable tblhora;
-    private com.lavantech.gui.comp.TimePanel timePanel1;
-    private com.lavantech.gui.comp.TimePanel timePanel2;
     private javax.swing.JTextField txtnombre;
     // End of variables declaration//GEN-END:variables
 }
