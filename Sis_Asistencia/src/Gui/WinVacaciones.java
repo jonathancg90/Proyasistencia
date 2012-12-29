@@ -10,6 +10,7 @@ import Utilitarios.Query;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import Utilitarios.Helpers;
+import Utilitarios.Validators;
 
 import java.text.DateFormat;
 import java.util.Calendar;
@@ -28,6 +29,7 @@ public class WinVacaciones extends javax.swing.JInternalFrame {
     private DateFormat format;
     private Date date,date2;
     private Calendar calendar,calendar2;
+    private Validators val;
     
     
     public WinVacaciones() {
@@ -343,48 +345,67 @@ public class WinVacaciones extends javax.swing.JInternalFrame {
 
     private void mitemregisterMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemregisterMousePressed
         hp = new Helpers();
-        try{
-            
-            String F_inicio=hp.getFormatDate(cboF_inicio.getText());
-            String F_final=hp.getFormatDate(cboF_final.getText());
-            
-            
-            
-            int idemp=Integer.valueOf(lblIdemp.getText());
+        val = new Validators(); 
+        if(val.validarFechas(tblVacaciones, hp.getFormatDate(cboF_inicio.getText()), hp.getFormatDate(cboF_final.getText()))){
+                
+            try{
 
-            int i = objVacaciones.save(F_inicio,F_final,idemp);
-            if (i == 0) {
-                JOptionPane.showMessageDialog(null,"No se pudo grabar datos");
+                String F_inicio=hp.getFormatDate(cboF_inicio.getText());
+                String F_final=hp.getFormatDate(cboF_final.getText());
+
+
+
+                int idemp=Integer.valueOf(lblIdemp.getText());
+
+                int i = objVacaciones.save(F_inicio,F_final,idemp);
+                if (i == 0) {
+                    JOptionPane.showMessageDialog(null,"No se pudo grabar datos");
+                }
+                else {
+                    objVacaciones.findId(lblIdemp.getText(), tblVacaciones);
+                    cleanBox();
+                    JOptionPane.showMessageDialog(null,"Nueva vacacion registrado");
+                }
+            }catch(Exception e){System.out.println(""+e);}
             }
-            else {
-                objVacaciones.findId(lblIdemp.getText(), tblVacaciones);
-                cleanBox();
-                JOptionPane.showMessageDialog(null,"Nueva vacacion registrado");
-            }
-        }catch(Exception e){System.out.println(""+e);}
+        
+        else
+            {
+                JOptionPane.showMessageDialog(null,"Conflicto en fechas");
+            } 
+        
+        
 
     }//GEN-LAST:event_mitemregisterMousePressed
 
     private void mitemupdateMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemupdateMousePressed
-
+        val= new Validators();
         hp = new Helpers();
-        int idsalario=Integer.parseInt(lblIdvacaciones.getText());
-        int idemp=Integer.parseInt(lblIdemp.getText());
-        String F_inicio=hp.getFormatDate(cboF_inicio.getText());
-        String F_final=hp.getFormatDate(cboF_final.getText());
-
         
+        if(val.validarFechas(tblVacaciones, hp.getFormatDate(cboF_inicio.getText()), hp.getFormatDate(cboF_final.getText()))){
 
-        int i = objVacaciones.update(idsalario,F_inicio,F_final,idemp);
-        if (i == 0) {
+            int idsalario=Integer.parseInt(lblIdvacaciones.getText());
+            int idemp=Integer.parseInt(lblIdemp.getText());
+            String F_inicio=hp.getFormatDate(cboF_inicio.getText());
+            String F_final=hp.getFormatDate(cboF_final.getText());
 
-            JOptionPane.showMessageDialog(null, "No se pudo actualizar datos");
+
+
+            int i = objVacaciones.update(idsalario,F_inicio,F_final,idemp);
+            if (i == 0) {
+
+                JOptionPane.showMessageDialog(null, "No se pudo actualizar datos");
+            }
+            else {
+                objVacaciones.findId(lblIdemp.getText(), tblVacaciones);
+                cleanBox();
+                JOptionPane.showMessageDialog(null, "Vacacion actualizado");
+            }
         }
-        else {
-            objVacaciones.findId(lblIdemp.getText(), tblVacaciones);
-            cleanBox();
-            JOptionPane.showMessageDialog(null, "Vacacion actualizado");
-        }
+        else
+            {
+                JOptionPane.showMessageDialog(null,"Conflicto en fechas");
+            }     
     }//GEN-LAST:event_mitemupdateMousePressed
 
     private void mitemdeleteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemdeleteMousePressed

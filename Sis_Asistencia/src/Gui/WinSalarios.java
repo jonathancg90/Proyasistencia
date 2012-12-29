@@ -299,26 +299,37 @@ public class WinSalarios extends javax.swing.JInternalFrame {
         hp=new Helpers();
         val = new Validators();    
         Object[] datos = {txtMonto.getText()};
+        
+        
         if(val.validar(datos)){    
-            try{
-                
-                String F_inicio=hp.getFormatDate(cboF_inicio.getText());
-                String F_final=hp.getFormatDate(cboF_final.getText());
-                
-                boolean por_defecto=jCheckBox1.isSelected();
-                double monto=Double.parseDouble(txtMonto.getText());
-                int idemp=Integer.valueOf(lblIdemp.getText());
+            if(val.validarFechas(tblSalarios, hp.getFormatDate(cboF_inicio.getText()), hp.getFormatDate(cboF_final.getText()))){
+            
+                try{
 
-                int i = objSalarios.save(F_inicio,F_final,por_defecto,idemp,monto);
-                if (i == 0) {
-                    JOptionPane.showMessageDialog(null,"No se pudo grabar datos");
-                }
-                else {
-                    objSalarios.findId(lblIdemp.getText(), tblSalarios);
-                    cleanBox();
-                    JOptionPane.showMessageDialog(null,"Nueva salario registrado");
-                }
-            }catch(Exception e){System.out.println(""+e);}
+                    String F_inicio=hp.getFormatDate(cboF_inicio.getText());
+                    String F_final=hp.getFormatDate(cboF_final.getText());
+
+                    boolean por_defecto=jCheckBox1.isSelected();
+                    double monto=Double.parseDouble(txtMonto.getText());
+                    int idemp=Integer.valueOf(lblIdemp.getText());
+
+                    int i = objSalarios.save(F_inicio,F_final,por_defecto,idemp,monto);
+                    if (i == 0) {
+                        JOptionPane.showMessageDialog(null,"No se pudo grabar datos");
+                    }
+                    else {
+                        objSalarios.findId(lblIdemp.getText(), tblSalarios);
+                        cleanBox();
+                        JOptionPane.showMessageDialog(null,"Nueva salario registrado");
+                    }
+                }catch(Exception e){System.out.println(""+e);}
+            }
+            
+            else
+            {
+                JOptionPane.showMessageDialog(null,"Conflicto en fechas");
+            }
+            
         }                                          
         else {
             JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
@@ -331,25 +342,31 @@ public class WinSalarios extends javax.swing.JInternalFrame {
         hp = new Helpers();
         Object[] datos = {txtMonto.getText()};
         if(val.validar(datos)){
-            
-            int idsalario=Integer.parseInt(lblIdsalario.getText());
-            int idemp=Integer.parseInt(lblIdemp.getText());
-            String F_inicio=hp.getFormatDate(cboF_inicio.getText());
-            String F_final=hp.getFormatDate(cboF_final.getText());
-            
-            boolean por_defecto=jCheckBox1.isSelected();
-            double monto=Double.parseDouble(txtMonto.getText());
+                if(val.validarFechas(tblSalarios, hp.getFormatDate(cboF_inicio.getText()), hp.getFormatDate(cboF_final.getText()))){
+                int idsalario=Integer.parseInt(lblIdsalario.getText());
+                int idemp=Integer.parseInt(lblIdemp.getText());
+                String F_inicio=hp.getFormatDate(cboF_inicio.getText());
+                String F_final=hp.getFormatDate(cboF_final.getText());
 
-            int i = objSalarios.update(idsalario,F_inicio,F_final,por_defecto,idemp,monto);
-            if (i == 0) {
+                boolean por_defecto=jCheckBox1.isSelected();
+                double monto=Double.parseDouble(txtMonto.getText());
 
-                JOptionPane.showMessageDialog(null, "No se pudo actualizar datos");
+                int i = objSalarios.update(idsalario,F_inicio,F_final,por_defecto,idemp,monto);
+                if (i == 0) {
+
+                    JOptionPane.showMessageDialog(null, "No se pudo actualizar datos");
+                }
+                else {
+                    objSalarios.findId(lblIdemp.getText(), tblSalarios);
+                    cleanBox();
+                    JOptionPane.showMessageDialog(null, "Salario actualizado");
+                }
             }
-            else {
-                objSalarios.findId(lblIdemp.getText(), tblSalarios);
-                cleanBox();
-                JOptionPane.showMessageDialog(null, "Salario actualizado");
-            } 
+                
+            else
+            {
+                JOptionPane.showMessageDialog(null,"Conflicto en fechas");
+            }    
         }                                          
         else {
             JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");

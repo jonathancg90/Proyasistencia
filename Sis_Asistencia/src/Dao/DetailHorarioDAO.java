@@ -9,6 +9,7 @@ import Utilitarios.Validators;
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.sql.PreparedStatement;
+import java.sql.Time;
 import java.util.Calendar;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -65,7 +66,7 @@ public class DetailHorarioDAO extends ConexionBd{
     /*
      * Registro de los detalles
      */
-    public int save(int dia, int idtip_reg, String ingreso, String salida, int horario){
+    public int save(int dia, int idtip_reg, Time ingreso, Time salida, int horario){
        int i=0;
         try{
             //Preparando
@@ -79,8 +80,8 @@ public class DetailHorarioDAO extends ConexionBd{
             pt = qs.sqlRegister(Table);
             pt.setInt(1,objDetail.getDia());
             pt.setInt(2,objDetail.getIdtip_reg());
-            pt.setTimestamp(3,Timestamp.valueOf(objDetail.getIngreso()));
-            pt.setTimestamp(4,Timestamp.valueOf(objDetail.getSalida()));
+            pt.setTime(3,objDetail.getIngreso());
+            pt.setTime(4,objDetail.getSalida());
             pt.setInt(5,objDetail.getHorarios_idhor());
             //Ejecucion y cierre
             i= pt.executeUpdate();
@@ -124,13 +125,13 @@ public class DetailHorarioDAO extends ConexionBd{
      * int_ = Busqueda de entero
      * equ_ = busca exactamente la plabra
      */
-    public int find(String name,JTable tblDatos) {
+    public int find(String horario,JTable tblDatos) {
         int i = 0;
         try {
-            if(!"".equals(name)){
+            if(!"".equals(horario)){
                 filter = new String[1][2];
-                filter[0][0] = "nombre";
-                filter[0][1] = name.toUpperCase(); 
+                filter[0][0] = "int_horarios_idhor";
+                filter[0][1] = horario; 
             }
             getTableAll(tblDatos);
         }

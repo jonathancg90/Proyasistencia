@@ -1,16 +1,18 @@
 package Javabeans;
 
+import java.sql.Time;
+
 
 public class DetailHorario {
     
     private int iddet_hor;
     private int dia;
     private int idtip_reg;
-    private String ingreso;
-    private String salida;
+    private Time ingreso;
+    private Time salida;
     private int horarios_idhor;
 
-    public DetailHorario(int iddet_hor, int dia, int idtip_reg, String ingreso, String salida, int horarios_idhor) {
+    public DetailHorario(int iddet_hor, int dia, int idtip_reg, Time ingreso, Time salida, int horarios_idhor) {
         this.iddet_hor = iddet_hor;
         this.dia = dia;
         this.idtip_reg = idtip_reg;
@@ -34,11 +36,11 @@ public class DetailHorario {
         this.idtip_reg = idtip_reg;
     }
 
-    public void setIngreso(String ingreso) {
+    public void setIngreso(Time ingreso) {
         this.ingreso = ingreso;
     }
 
-    public void setSalida(String salida) {
+    public void setSalida(Time salida) {
         this.salida = salida;
     }
 
@@ -58,11 +60,11 @@ public class DetailHorario {
         return idtip_reg;
     }
 
-    public String getIngreso() {
+    public Time getIngreso() {
         return ingreso;
     }
 
-    public String getSalida() {
+    public Time getSalida() {
         return salida;
     }
 

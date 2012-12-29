@@ -332,7 +332,12 @@ public class WinEmpleado_has_horarios extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_tblEmpleado_has_horariosMouseClicked
 
     private void mitemregisterMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemregisterMousePressed
+        val = new Validators();   
+        
         hp=new Helpers();
+        
+        if(val.validarFechas(tblEmpleado_has_horarios, hp.getFormatDate(cboF_inicio.getText()), hp.getFormatDate(cboF_final.getText()))){
+ 
             try{
                 
                 String F_inicio=hp.getFormatDate(cboF_inicio.getText());
@@ -351,31 +356,44 @@ public class WinEmpleado_has_horarios extends javax.swing.JInternalFrame {
                     JOptionPane.showMessageDialog(null,"Nueva Horario registrado");
                 }
             }catch(Exception e){System.out.println(""+e);}
-       
+        }
+        else
+            {
+                JOptionPane.showMessageDialog(null,"Conflicto en fechas");
+            }
+        
         
 
     }//GEN-LAST:event_mitemregisterMousePressed
 
     private void mitemupdateMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemupdateMousePressed
-        
+            val=new Validators();
             hp = new Helpers();
-            int idhorarios=Integer.parseInt(lblIdemp_horarios.getText());
-            int horario =  qs.idChoice("horarios","nombre",String.valueOf(cbo_Horario.getSelectedItem()));
-            int idemp=Integer.parseInt(lblIdemp.getText());
-            String F_inicio=hp.getFormatDate(cboF_inicio.getText());
-            String F_final=hp.getFormatDate(cboF_final.getText());
-
+            if(val.validarFechas(tblEmpleado_has_horarios, hp.getFormatDate(cboF_inicio.getText()), hp.getFormatDate(cboF_final.getText()))){
             
+                int idhorarios=Integer.parseInt(lblIdemp_horarios.getText());
+                int horario =  qs.idChoice("horarios","nombre",String.valueOf(cbo_Horario.getSelectedItem()));
+                int idemp=Integer.parseInt(lblIdemp.getText());
+                String F_inicio=hp.getFormatDate(cboF_inicio.getText());
+                String F_final=hp.getFormatDate(cboF_final.getText());
 
-            int i = objEmphorarios.update(idhorarios,F_inicio,F_final,horario,idemp);
-            if (i == 0) {
 
-                JOptionPane.showMessageDialog(null, "No se pudo actualizar datos");
+
+                int i = objEmphorarios.update(idhorarios,F_inicio,F_final,horario,idemp);
+                if (i == 0) {
+
+                    JOptionPane.showMessageDialog(null, "No se pudo actualizar datos");
+                }
+                else {
+                    objEmphorarios.findId(lblIdemp.getText(), tblEmpleado_has_horarios);
+                    cleanBox();
+                    JOptionPane.showMessageDialog(null, "Horario actualizado");
+                }
+            
             }
-            else {
-                objEmphorarios.findId(lblIdemp.getText(), tblEmpleado_has_horarios);
-                cleanBox();
-                JOptionPane.showMessageDialog(null, "Horario actualizado");
+            else
+            {
+                JOptionPane.showMessageDialog(null,"Conflicto en fechas");
             }
         
         

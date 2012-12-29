@@ -1,5 +1,7 @@
 package Utilitarios;
-
+import javax.swing.JTable;
+import javax.swing.table.TableModel;
+import java.sql.Date;
 
 public class Validators {
     
@@ -94,5 +96,33 @@ public class Validators {
         }
         }
     return true;
-    }   
+    }  
+    
+    public boolean validarFechas(JTable tbldatos,String inicio,String fin){
+        Date date = new Date(0000-00-00);
+        
+        boolean value;
+        value=true;
+        
+        TableModel tablemodel=tbldatos.getModel();
+        int rows= tablemodel.getRowCount();
+        
+        for(int i=0;i<rows;i++){
+            
+            if(date.valueOf(inicio).equals(date.valueOf(String.valueOf(tablemodel.getValueAt(i,1)))) ||
+               date.valueOf(fin).equals(date.valueOf(String.valueOf(tablemodel.getValueAt(i,2)))) ||
+               date.valueOf(inicio).after(date.valueOf(String.valueOf(tablemodel.getValueAt(i,1)))) &&
+               date.valueOf(inicio).before(date.valueOf(String.valueOf(tablemodel.getValueAt(i,2)))) ||  
+               date.valueOf(fin).after(date.valueOf(String.valueOf(tablemodel.getValueAt(i,1)))) &&
+               date.valueOf(fin).before(date.valueOf(String.valueOf(tablemodel.getValueAt(i,1))))     
+                    ){
+                
+                value=false;
+            }
+        
+        }
+        
+      
+        return value;
+    }
 }
