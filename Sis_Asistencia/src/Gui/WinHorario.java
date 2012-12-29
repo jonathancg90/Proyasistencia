@@ -1,6 +1,7 @@
 
 package Gui;
 import java.sql.Time;
+import java.sql.Timestamp;
 import Utilitarios.Data;
 import Utilitarios.Query;
 import javax.swing.JOptionPane;
@@ -10,12 +11,9 @@ import Dao.DetailHorarioDAO;
 import Javabeans.Horarios;
 import Utilitarios.Query;
 import Utilitarios.Validators;
-<<<<<<< HEAD
 import Utilitarios.Helpers;
-=======
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
->>>>>>> 9c93f9b82c7bfaf9b4a6fbfb2627bf8a4f3b970c
 
 public class WinHorario extends javax.swing.JInternalFrame {
 
@@ -50,7 +48,9 @@ public class WinHorario extends javax.swing.JInternalFrame {
     }
     private void cargaDetalle(){
         objdetail = new DetailHorarioDAO();
-        objdetail.getTableAll(JtblDetail);
+        String horario = lblId.getText();
+        objdetail.find(horario,JtblDetail);
+       //objdetail.getTableAll(JtblDetail);
     }
     
     private void cleanBox(){
@@ -88,8 +88,8 @@ public class WinHorario extends javax.swing.JInternalFrame {
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         JtblDetail = new javax.swing.JTable();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        BtnAgree = new javax.swing.JButton();
+        BtnRemove = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
@@ -229,14 +229,19 @@ public class WinHorario extends javax.swing.JInternalFrame {
         ));
         jScrollPane2.setViewportView(JtblDetail);
 
-        jButton2.setText("Agregar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        BtnAgree.setText("Agregar");
+        BtnAgree.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                BtnAgreeActionPerformed(evt);
             }
         });
 
-        jButton3.setText("Eliminar");
+        BtnRemove.setText("Eliminar");
+        BtnRemove.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnRemoveActionPerformed(evt);
+            }
+        });
 
         jLabel8.setText("Dia");
 
@@ -263,9 +268,9 @@ public class WinHorario extends javax.swing.JInternalFrame {
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(20, 20, 20)
-                        .addComponent(jButton2)
+                        .addComponent(BtnAgree)
                         .addGap(37, 37, 37)
-                        .addComponent(jButton3)))
+                        .addComponent(BtnRemove)))
                 .addContainerGap(22, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(22, 22, 22)
@@ -322,8 +327,8 @@ public class WinHorario extends javax.swing.JInternalFrame {
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3))
+                    .addComponent(BtnAgree)
+                    .addComponent(BtnRemove))
                 .addGap(50, 50, 50))
         );
 
@@ -418,7 +423,7 @@ public class WinHorario extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(48, Short.MAX_VALUE))
+                .addContainerGap(50, Short.MAX_VALUE))
         );
 
         pack();
@@ -546,30 +551,61 @@ public class WinHorario extends javax.swing.JInternalFrame {
         objhora.find(state, tblhora);
     }//GEN-LAST:event_btnfindMouseClicked
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-            dt = new Data();
-            objdetail = new DetailHorarioDAO();
+    private void BtnAgreeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAgreeActionPerformed
+    int id = Integer.parseInt(lblId.getText());
+    val = new Validators();    
+    Object[] datos = {lblId.getText()};
+    if(val.validar(datos)){ 
+        dt = new Data();
+        objdetail = new DetailHorarioDAO();
             
-            SimpleDateFormat fhora = new SimpleDateFormat("HH:mm:ss");
+        SimpleDateFormat fhora = new SimpleDateFormat("HH:mm:ss");
+        int dia  = qs.loadGlobal(2,cboDia,0);
+        int tipo = qs.loadGlobal(3,cbotipoReg,0);
+        Calendar ingreso = TimIngreso.getCalendar();
+        Calendar salida = TimSalida.getCalendar();
+        Time ing =  Time.valueOf(fhora.format(ingreso.getTime()));
+        Time sal =  Time.valueOf(fhora.format(salida.getTime()));
             
-            int id = Integer.parseInt(lblId.getText());
-            int dia  = qs.loadGlobal(2,cboDia,0);
-            int tipo = qs.loadGlobal(3,cboDia,0);
-            Calendar ingreso = TimIngreso.getCalendar();
-            Calendar salida = TimSalida.getCalendar();
-            
-            String ing = ""+fhora.format(ingreso.getTime());
-            String sal = ""+fhora.format(salida.getTime());
-            
-            
-            int i = objdetail.save(dia, tipo, ing, sal, id);
-            if (i == 0) {
-                JOptionPane.showMessageDialog(null,"No se pudo grabar el detalle");
-            }
+        int i = objdetail.save(dia, tipo, ing, sal, id);
+        if (i == 0) {
+            JOptionPane.showMessageDialog(null,"No se pudo grabar el detalle");
+         }
             cargaDetalle();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    } else {
+        JOptionPane.showMessageDialog(null,"Seleccione un horario para poder ingresar sus detalles");
+            }
+    }//GEN-LAST:event_BtnAgreeActionPerformed
+
+    private void BtnRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnRemoveActionPerformed
+       hp=new Helpers(); 
+        try {       
+                int fsel;
+                fsel = this.JtblDetail.getSelectedRow();
+                
+                if (fsel == -1) {
+                    JOptionPane.showMessageDialog(null,"Seleccione un detalle para proceder a eliminarlo");
+                } 
+                else {
+                    objdetail = new DetailHorarioDAO();
+                    DefaultTableModel m = new DefaultTableModel();
+                    m = (DefaultTableModel) this.JtblDetail.getModel();
+                    int iddetail = Integer.parseInt(String.valueOf(m.getValueAt(fsel, 0)));
+                    int i = objdetail.delete(iddetail);
+                    if (i == 0) {
+                        JOptionPane.showMessageDialog(null,"No se pudo eliminar su registro");
+                    }
+                    cargaDetalle();
+                }
+        } catch(Exception e){
+           
+        }
+       
+    }//GEN-LAST:event_BtnRemoveActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BtnAgree;
+    private javax.swing.JButton BtnRemove;
     private javax.swing.JTable JtblDetail;
     private com.lavantech.gui.comp.TimePanel TimIngreso;
     private com.lavantech.gui.comp.TimePanel TimSalida;
@@ -580,8 +616,6 @@ public class WinHorario extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox cbofindtipo;
     private javax.swing.JComboBox cbotipo;
     private javax.swing.JComboBox cbotipoReg;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
