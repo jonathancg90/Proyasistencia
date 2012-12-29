@@ -378,7 +378,7 @@ public class WinTipoEmpleado extends javax.swing.JInternalFrame {
                 objtipoemp = new TipoEmpleadoDAO();
                 i = objtipoemp.delete(id);
                 if(i==0) {
-                    JOptionPane.showMessageDialog(null,"No se pudo eliminar el area");
+                    JOptionPane.showMessageDialog(null,"No se pudo eliminar el tipo de empleado");
                 }
                 else {
                     objtipoemp.getTableAll(tblTipoemp);

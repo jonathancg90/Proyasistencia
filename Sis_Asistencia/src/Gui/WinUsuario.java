@@ -372,12 +372,12 @@ public class WinUsuario extends javax.swing.JInternalFrame {
                 objUser = new UserDAO();
                 i = objUser.deleteUsuario(id);
                 if(i==0) {
-                    JOptionPane.showMessageDialog(null,"No se pudo eliminar el area");
+                    JOptionPane.showMessageDialog(null,"No se pudo eliminar el usuario");
                 }
                 else {
                     objUser.getTableAll(TblUsu);
                     cleanBox();
-                    JOptionPane.showMessageDialog(null,"Area eliminada");
+                    JOptionPane.showMessageDialog(null,"usuario eliminado");
                 }
             }
         }                                          

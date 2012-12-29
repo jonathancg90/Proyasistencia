@@ -10,12 +10,9 @@ import Dao.DetailHorarioDAO;
 import Javabeans.Horarios;
 import Utilitarios.Query;
 import Utilitarios.Validators;
-<<<<<<< HEAD
 import Utilitarios.Helpers;
-=======
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
->>>>>>> 9c93f9b82c7bfaf9b4a6fbfb2627bf8a4f3b970c
 
 public class WinHorario extends javax.swing.JInternalFrame {
 
@@ -437,11 +434,11 @@ public class WinHorario extends javax.swing.JInternalFrame {
                 objhora = new HorariosDAO();
                 i = objhora.delete(id);
                 if(i==0) {
-                    JOptionPane.showMessageDialog(null,"No se pudo eliminar el area");
+                    JOptionPane.showMessageDialog(null,"No se pudo eliminar el horario");
 
                 }
                 else {
-                    JOptionPane.showMessageDialog(null,"Area eliminada");
+                    JOptionPane.showMessageDialog(null,"Horario eliminado");
                     objhora.getTableAll(tblhora);
                     cleanBox();
 

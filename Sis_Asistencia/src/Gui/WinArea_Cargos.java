@@ -293,7 +293,7 @@ public class WinArea_Cargos extends javax.swing.JInternalFrame {
                        objCar = new CargosDAO();
                        i = objCar.delete(id);
                        if(i==0) {
-                           JOptionPane.showMessageDialog(null,"No se pudo eliminar el area");
+                           JOptionPane.showMessageDialog(null,"No se pudo eliminar el cargo");
                        }
                        else {
                            objCar.find(lblidArea.getText(),TblCargos);
