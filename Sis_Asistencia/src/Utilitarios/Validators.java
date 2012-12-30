@@ -87,7 +87,7 @@ public class Validators {
         }
         
     }
-    public boolean validar(Object[] datos) {
+    public boolean validar(Object[] datos,Object[] tipos) {
     for (int i = 0; i <= datos.length - 1; i++) {
         if (datos[i].toString().isEmpty()) {
             return false;

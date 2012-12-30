@@ -342,7 +342,8 @@ public class WinArea extends javax.swing.JInternalFrame {
 
     val = new Validators();    
     Object[] datos = {lblId.getText()};
-    if(val.validar(datos)){ 
+    
+    if(val.validar(datos,datos)){ 
         int i;      
         i= JOptionPane.showConfirmDialog(null,"¿Esta seguro de eliminar este registro?","Aviso",JOptionPane.OK_CANCEL_OPTION,JOptionPane.WARNING_MESSAGE);
 
@@ -367,7 +368,7 @@ public class WinArea extends javax.swing.JInternalFrame {
     private void mitemupdateMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemupdateMousePressed
     val = new Validators();    
     Object[] datos = {txtName.getText(),lblId.getText()};
-    if(val.validar(datos)){    
+    if(val.validar(datos,datos)){    
         dt = new Data();
         int id = Integer.valueOf(lblId.getText());
         String name = txtName.getText();
@@ -390,7 +391,7 @@ public class WinArea extends javax.swing.JInternalFrame {
     private void mitemregisterMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemregisterMousePressed
     val = new Validators();    
     Object[] datos = {txtName.getText()};
-        if(val.validar(datos)){
+        if(val.validar(datos,datos)){
             dt = new Data();
             String name = txtName.getText();
             boolean estate = Boolean.valueOf(dt.G_BOOLEAN[cmbEstate.getSelectedIndex()]);

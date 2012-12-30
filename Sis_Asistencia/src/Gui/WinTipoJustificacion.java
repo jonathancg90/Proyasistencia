@@ -275,7 +275,8 @@ public class WinTipoJustificacion extends javax.swing.JInternalFrame {
     private void mitemregisterMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemregisterMousePressed
         val = new Validators();    
         Object[] datos = {txtName.getText()};
-        if(val.validar(datos)){     
+        Object[] tipos = {"nombre"};
+        if(val.validar(datos,tipos)){     
             dt = new Data();
             String name = txtName.getText();
             objjus = new TipoJustificacionDAO();
@@ -297,7 +298,8 @@ public class WinTipoJustificacion extends javax.swing.JInternalFrame {
     private void mitemupdateMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemupdateMousePressed
         val = new Validators();    
         Object[] datos = {txtName.getText(),lblId.getText()};
-        if(val.validar(datos)){    
+        Object[] tipos = {"nombre"};
+        if(val.validar(datos,tipos)){    
             int id = Integer.valueOf(lblId.getText());
             String name = txtName.getText();
             objjus = new TipoJustificacionDAO();
@@ -320,7 +322,8 @@ public class WinTipoJustificacion extends javax.swing.JInternalFrame {
     private void mitemdeleteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemdeleteMousePressed
         val = new Validators();    
         Object[] datos = {txtName.getText(),lblId.getText()};
-        if(val.validar(datos)){     
+        Object[] tipos = {"nombre"};
+        if(val.validar(datos,tipos)){     
             int i;      
             i= JOptionPane.showConfirmDialog(null,"¿Esta seguro de eliminar este registro?","Aviso",JOptionPane.OK_CANCEL_OPTION,JOptionPane.WARNING_MESSAGE);
 

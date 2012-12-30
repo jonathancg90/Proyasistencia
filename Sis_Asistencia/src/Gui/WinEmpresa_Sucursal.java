@@ -344,7 +344,8 @@ public class WinEmpresa_Sucursal extends javax.swing.JInternalFrame {
     private void mitemregisterMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemregisterMousePressed
       val = new Validators();    
       Object[] datos = {txtName.getText(),txtdireccion.getText()};
-      if(val.validar(datos)){  
+      Object[] tipos = {"nombre","direccion"};
+      if(val.validar(datos,tipos)){  
             String name = txtName.getText();
             String direccion=txtdireccion.getText();
             int ciudad = qs.idChoice("ciudad", "nombre", String.valueOf(cmbCiudad.getSelectedItem()));
@@ -368,7 +369,8 @@ public class WinEmpresa_Sucursal extends javax.swing.JInternalFrame {
     private void mitemupdateMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemupdateMousePressed
        val = new Validators();    
        Object[] datos = {txtName.getText(),txtdireccion.getText(),lblId.getText()};
-       if(val.validar(datos))
+       Object[] tipos = {"nombre","direccion"};
+       if(val.validar(datos,tipos))
        {  
             int id = Integer.valueOf(lblId.getText());
             String name = txtName.getText();
@@ -395,7 +397,8 @@ public class WinEmpresa_Sucursal extends javax.swing.JInternalFrame {
     private void mitemdeleteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemdeleteMousePressed
        val = new Validators();    
        Object[] datos = {txtName.getText(),txtdireccion.getText(),lblId.getText()};
-       if(val.validar(datos))
+       Object[] tipos = {"nombre","direccion"};
+       if(val.validar(datos,tipos))
        { 
             int i;      
             i= JOptionPane.showConfirmDialog(null,"¿Esta seguro de eliminar este registro?","Aviso",JOptionPane.OK_CANCEL_OPTION,JOptionPane.WARNING_MESSAGE);

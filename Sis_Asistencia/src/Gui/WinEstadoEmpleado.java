@@ -203,7 +203,8 @@ public class WinEstadoEmpleado extends javax.swing.JInternalFrame {
     private void mitemRegistrarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemRegistrarMousePressed
         val = new Validators();    
         Object[] datos = {txtName.getText()};
-        if(val.validar(datos)){    
+        Object[] tipos = {"nombre"};
+        if(val.validar(datos,tipos)){    
             dt = new Data();
             String name = txtName.getText();
             objest = new EstadoEmpleadoDAO();
@@ -229,7 +230,8 @@ public class WinEstadoEmpleado extends javax.swing.JInternalFrame {
     private void mitemUpdateMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemUpdateMousePressed
         val = new Validators();    
         Object[] datos = {txtName.getText(),lblId.getText()};
-        if(val.validar(datos)){      
+        Object[] tipos = {"nombre"};
+        if(val.validar(datos,tipos)){      
             if( !"".equals(lblId.getText())){
                 dt = new Data();
                 int id = Integer.parseInt(lblId.getText());
@@ -254,7 +256,8 @@ public class WinEstadoEmpleado extends javax.swing.JInternalFrame {
     private void jmitemDeleteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmitemDeleteMousePressed
         val = new Validators();    
         Object[] datos = {txtName.getText(),lblId.getText()};
-        if(val.validar(datos)){ 
+        Object[] tipos = {"nombre"};
+        if(val.validar(datos,tipos)){ 
              int i;      
              i= JOptionPane.showConfirmDialog(null,"¿Esta seguro de eliminar este registro?","Aviso",JOptionPane.OK_CANCEL_OPTION,JOptionPane.WARNING_MESSAGE);
 

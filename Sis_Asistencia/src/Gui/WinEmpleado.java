@@ -111,6 +111,7 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
         medit = new javax.swing.JMenu();
         mitemclear = new javax.swing.JMenuItem();
         mclose = new javax.swing.JMenu();
+        jMenu1 = new javax.swing.JMenu();
 
         jMenuItem1.setText("jMenuItem1");
 
@@ -263,7 +264,7 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
                     .addComponent(chkactivo)
                     .addComponent(btnFiltro))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -343,6 +344,14 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
         });
         jMenuBar1.add(mclose);
 
+        jMenu1.setText("Extra-descuento");
+        jMenu1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jMenu1MousePressed(evt);
+            }
+        });
+        jMenuBar1.add(jMenu1);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -373,7 +382,8 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
    val = new Validators();    
    Object[] datos = {txtnombres.getText(),txtapellidos.getText(),
                      txtdni.getText(),txttelefono.getText()};
-   if(val.validar(datos)){ 
+   Object[] tipos = {"nombre","apellido","dni","telefono"};
+   if(val.validar(datos,tipos)){ 
         Data dt = new Data();
         qs = new Query();
         String nombre = txtnombres.getText();
@@ -406,7 +416,8 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
     val = new Validators();    
     Object[] datos = {txtnombres.getText(),txtapellidos.getText(),
                       txtdni.getText(),txttelefono.getText(),lblidempleado.getText()};
-    if(val.validar(datos)){ 
+    Object[] tipos = {"nombre","apellido","dni","telefono"};
+    if(val.validar(datos,tipos)){ 
         Data dt = new Data();
         qs = new Query();
         int id = Integer.parseInt(lblidempleado.getText());
@@ -473,7 +484,8 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
     private void mitemdeleteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemdeleteMousePressed
     val = new Validators();    
     Object[] datos = {lblidempleado.getText()};
-    if(val.validar(datos)){ 
+    
+    if(val.validar(datos,datos)){ 
         int i;      
         i= JOptionPane.showConfirmDialog(null,"¿Esta seguro de eliminar este registro?","Aviso",JOptionPane.OK_CANCEL_OPTION,JOptionPane.WARNING_MESSAGE);
 
@@ -578,6 +590,25 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
         objempl.find(idarea, tblEmpleado);
     }//GEN-LAST:event_btnFiltroMouseClicked
 
+    private void jMenu1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu1MousePressed
+        if(!"".equals(this.lblidempleado.getText())){
+           dt= new Data();
+            String titulo=dt.G_TITULOS[21];
+            WinExtra_descuento objextra= new WinExtra_descuento();
+            objextra.setTitle(titulo);
+            objextra.setResizable(true);
+            //objextra.lblId.setText(lblidempleado.getText());
+
+            objextra.setMaximizable(true);
+            objextra.setIconifiable(true);
+            WinMdi.jdpContenedor.add(objextra);
+
+            objextra.setVisible(true);   
+        } else {
+            JOptionPane.showMessageDialog(null,"Debe de seleccionar una empresa para poder ingresar sus dias no laborables");
+        }
+    }//GEN-LAST:event_jMenu1MousePressed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnFiltro;
     private javax.swing.JComboBox cboArea;
@@ -600,6 +631,7 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;

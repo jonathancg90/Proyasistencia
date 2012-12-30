@@ -18,7 +18,7 @@ public class WinExtra_descuento extends javax.swing.JInternalFrame {
         txtName = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        lblId = new javax.swing.JLabel();
+        lblid = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         txtName1 = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
@@ -27,13 +27,13 @@ public class WinExtra_descuento extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblest = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
+        mfile = new javax.swing.JMenu();
         mitemRegistrar = new javax.swing.JMenuItem();
         mitemUpdate = new javax.swing.JMenuItem();
         jmitemDelete = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
+        medit = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
-        jMenu3 = new javax.swing.JMenu();
+        mclose = new javax.swing.JMenu();
 
         PnlDatos.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Datos de los estados (empleados)", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, null, java.awt.Color.black));
 
@@ -41,7 +41,7 @@ public class WinExtra_descuento extends javax.swing.JInternalFrame {
 
         jLabel2.setText("Tipo");
 
-        lblId.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        lblid.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jLabel3.setText("Date");
 
@@ -61,7 +61,7 @@ public class WinExtra_descuento extends javax.swing.JInternalFrame {
                         .addGroup(PnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(PnlDatosLayout.createSequentialGroup()
                                 .addGap(29, 29, 29)
-                                .addComponent(lblId, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lblid, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 96, Short.MAX_VALUE))
                             .addGroup(PnlDatosLayout.createSequentialGroup()
                                 .addGap(33, 33, 33)
@@ -85,7 +85,7 @@ public class WinExtra_descuento extends javax.swing.JInternalFrame {
                         .addComponent(jLabel1)
                         .addGap(20, 20, 20))
                     .addGroup(PnlDatosLayout.createSequentialGroup()
-                        .addComponent(lblId, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblid, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                 .addGroup(PnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -138,7 +138,7 @@ public class WinExtra_descuento extends javax.swing.JInternalFrame {
                 .addContainerGap())
         );
 
-        jMenu1.setText("Archivo");
+        mfile.setText("Archivo");
 
         mitemRegistrar.setText("Registrar");
         mitemRegistrar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -146,7 +146,7 @@ public class WinExtra_descuento extends javax.swing.JInternalFrame {
                 mitemRegistrarMousePressed(evt);
             }
         });
-        jMenu1.add(mitemRegistrar);
+        mfile.add(mitemRegistrar);
 
         mitemUpdate.setText("Actualizar");
         mitemUpdate.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -154,7 +154,7 @@ public class WinExtra_descuento extends javax.swing.JInternalFrame {
                 mitemUpdateMousePressed(evt);
             }
         });
-        jMenu1.add(mitemUpdate);
+        mfile.add(mitemUpdate);
 
         jmitemDelete.setText("Eliminar");
         jmitemDelete.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -162,11 +162,11 @@ public class WinExtra_descuento extends javax.swing.JInternalFrame {
                 jmitemDeleteMousePressed(evt);
             }
         });
-        jMenu1.add(jmitemDelete);
+        mfile.add(jmitemDelete);
 
-        jMenuBar1.add(jMenu1);
+        jMenuBar1.add(mfile);
 
-        jMenu2.setText("Edit");
+        medit.setText("Edit");
 
         jMenuItem4.setText("Limpiar todo");
         jMenuItem4.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -174,17 +174,17 @@ public class WinExtra_descuento extends javax.swing.JInternalFrame {
                 jMenuItem4MousePressed(evt);
             }
         });
-        jMenu2.add(jMenuItem4);
+        medit.add(jMenuItem4);
 
-        jMenuBar1.add(jMenu2);
+        jMenuBar1.add(medit);
 
-        jMenu3.setText("Cerrar");
-        jMenu3.addMouseListener(new java.awt.event.MouseAdapter() {
+        mclose.setText("Cerrar");
+        mclose.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                jMenu3MousePressed(evt);
+                mcloseMousePressed(evt);
             }
         });
-        jMenuBar1.add(jMenu3);
+        jMenuBar1.add(mclose);
 
         setJMenuBar(jMenuBar1);
 
@@ -203,14 +203,14 @@ public class WinExtra_descuento extends javax.swing.JInternalFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 253, Short.MAX_VALUE)
+            .addGap(0, 257, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 24, Short.MAX_VALUE)
+                    .addGap(0, 26, Short.MAX_VALUE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(pnlListado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(PnlDatos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGap(0, 25, Short.MAX_VALUE)))
+                    .addGap(0, 27, Short.MAX_VALUE)))
         );
 
         pack();
@@ -236,10 +236,10 @@ public class WinExtra_descuento extends javax.swing.JInternalFrame {
        
     }//GEN-LAST:event_jMenuItem4MousePressed
 
-    private void jMenu3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu3MousePressed
+    private void mcloseMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mcloseMousePressed
         this.setVisible(false);
         Utilitarios.Config.OPENWINDOWS =0;
-    }//GEN-LAST:event_jMenu3MousePressed
+    }//GEN-LAST:event_mcloseMousePressed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PnlDatos;
@@ -247,14 +247,14 @@ public class WinExtra_descuento extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JMenuItem jmitemDelete;
-    private javax.swing.JLabel lblId;
+    private javax.swing.JLabel lblid;
+    private javax.swing.JMenu mclose;
+    private javax.swing.JMenu medit;
+    private javax.swing.JMenu mfile;
     private javax.swing.JMenuItem mitemRegistrar;
     private javax.swing.JMenuItem mitemUpdate;
     private javax.swing.JPanel pnlListado;

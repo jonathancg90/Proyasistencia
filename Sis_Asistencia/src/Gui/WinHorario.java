@@ -405,7 +405,8 @@ public class WinHorario extends javax.swing.JInternalFrame {
     private void mitemdeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mitemdeleteActionPerformed
         val = new Validators();    
         Object[] datos = {txtnombre.getText(),lblId.getText()};
-        if(val.validar(datos)){    
+        Object[] tipos = {"nombre","id"};
+        if(val.validar(datos,tipos)){    
             int i;      
             i= JOptionPane.showConfirmDialog(null,"¿Esta seguro de eliminar este registro?","Aviso",JOptionPane.OK_CANCEL_OPTION,JOptionPane.WARNING_MESSAGE);
 
@@ -443,7 +444,8 @@ public class WinHorario extends javax.swing.JInternalFrame {
     private void mitemregisterMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemregisterMousePressed
         val = new Validators();    
         Object[] datos = {txtnombre.getText()};
-        if(val.validar(datos)){    
+        Object[] tipos = {"nombre","id"};
+        if(val.validar(datos,tipos)){    
             dt = new Data();
             String name = txtnombre.getText();
             boolean estate = Boolean.valueOf(dt.G_BOOLEAN[cboestado.getSelectedIndex()]);
@@ -490,7 +492,8 @@ public class WinHorario extends javax.swing.JInternalFrame {
     private void mitemupdateMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemupdateMousePressed
         val = new Validators();    
         Object[] datos = {txtnombre.getText(),lblId.getText()};
-        if(val.validar(datos)){    
+        Object[] tipos = {"nombre","id"};
+        if(val.validar(datos,tipos)){    
             dt = new Data();
             int id = Integer.valueOf(lblId.getText());
             String name = txtnombre.getText();

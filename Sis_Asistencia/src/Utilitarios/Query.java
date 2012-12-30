@@ -459,6 +459,13 @@ public class Query extends ConexionBd{
             }
             return cant;
          }
+        /*
+         * Validar si es integer or String
+         */
+        public int tipodato(){
+            int i=0;
+        return i;
+        }
     }
         
 

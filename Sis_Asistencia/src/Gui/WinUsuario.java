@@ -275,7 +275,7 @@ public class WinUsuario extends javax.swing.JInternalFrame {
                 //crear objeto modusu
                 modusu = objUser.getValues(Integer.parseInt(idUsu));
                 //Asigando valores obtenidos
-                lblUsu.setText(idUsu);
+                lblUsu.setText(idUsu);   
                 txtUsername.setText(modusu.getUsername());
                 txtPassword.setText(modusu.getPassword());
                 txtRePassword.setText(modusu.getPassword());
@@ -300,7 +300,8 @@ public class WinUsuario extends javax.swing.JInternalFrame {
     private void mitemregisterMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemregisterMousePressed
         val = new Validators();    
         Object[] datos = {txtUsername.getText(),Txtcorreo.getText(),txtPassword.getPassword()};
-        if(val.validar(datos)){     
+        Object[] tipos = {"username","correo","password"};
+        if(val.validar(datos,tipos)){     
             dt = new Data();
             String username = txtUsername.getText();
             String password=String.valueOf(txtPassword.getPassword());
@@ -330,7 +331,8 @@ public class WinUsuario extends javax.swing.JInternalFrame {
     private void mitemupdateMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemupdateMousePressed
         val = new Validators();    
         Object[] datos = {txtUsername.getText(),Txtcorreo.getText(),txtPassword.getPassword(),lblUsu.getText()};
-        if(val.validar(datos)){     
+        Object[] tipos = {"username","correo","password"};
+        if(val.validar(datos,tipos)){     
             dt = new Data();
             int id = Integer.parseInt(lblUsu.getText());
             String username = txtUsername.getText();
@@ -362,7 +364,8 @@ public class WinUsuario extends javax.swing.JInternalFrame {
     private void mitemdeleteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemdeleteMousePressed
         val = new Validators();    
         Object[] datos = {txtUsername.getText(),Txtcorreo.getText(),txtPassword.getPassword(),lblUsu.getText()};
-        if(val.validar(datos)){    
+        Object[] tipos = {"username","correo","password"};
+        if(val.validar(datos,tipos)){    
             int i;      
             i= JOptionPane.showConfirmDialog(null,"¿Esta seguro de eliminar este registro?","Aviso",JOptionPane.OK_CANCEL_OPTION,JOptionPane.WARNING_MESSAGE);
 

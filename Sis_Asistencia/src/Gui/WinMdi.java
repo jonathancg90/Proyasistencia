@@ -254,7 +254,7 @@ public class WinMdi extends javax.swing.JFrame {
     private void masiMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_masiMousePressed
         WinAsistencia objAsis = new WinAsistencia();
         data= new Data();
-        String titulo=data.G_TITULOS[22];
+        String titulo=data.G_TITULOS[23];
         val = new Validators();
         objAsis.setTitle(titulo);
         objAsis.setResizable(true);
@@ -273,7 +273,7 @@ public class WinMdi extends javax.swing.JFrame {
         WinJustificacion objJus = new WinJustificacion();
         
         data= new Data();
-        String titulo=data.G_TITULOS[21];
+        String titulo=data.G_TITULOS[22];
         val = new Validators();
         objJus.setTitle(titulo);
         objJus.setResizable(true);

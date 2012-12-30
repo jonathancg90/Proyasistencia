@@ -253,7 +253,8 @@ public class WinArea_Cargos extends javax.swing.JInternalFrame {
     private void mitemregisterMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemregisterMousePressed
      val = new Validators();    
      Object[] datos = {txtname.getText()};
-     if(val.validar(datos)){   
+     Object[] tipos = {"nombre"};
+     if(val.validar(datos,tipos)){   
         String name = txtname.getText();
             int idArea = Integer.parseInt(lblidArea.getText());
             objCar = new CargosDAO();
@@ -275,7 +276,8 @@ public class WinArea_Cargos extends javax.swing.JInternalFrame {
     private void mitemdeleteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemdeleteMousePressed
     val = new Validators();    
     Object[] datos = {txtname.getText()};
-    if(val.validar(datos)){   
+    Object[] tipos = {"nombre"};
+    if(val.validar(datos,tipos)){   
         int fsel;
             fsel = this.TblCargos.getSelectedRow();
             if (fsel == -1) {
@@ -313,7 +315,8 @@ public class WinArea_Cargos extends javax.swing.JInternalFrame {
     private void mitemupdateMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemupdateMousePressed
         val = new Validators();    
         Object[] datos = {txtname.getText()};
-        if(val.validar(datos)){    
+        Object[] tipos = {"nombre"};
+        if(val.validar(datos,tipos)){    
             int fsel;
                 fsel = this.TblCargos.getSelectedRow();
                 if (fsel == -1) {

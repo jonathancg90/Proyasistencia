@@ -318,7 +318,8 @@ public class WinTipomoneda extends javax.swing.JInternalFrame {
     private void mitemregisterMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemregisterMousePressed
         val = new Validators();    
         Object[] datos = {txtName.getText(),txtsimbolo.getText()};
-        if(val.validar(datos)){     
+        Object[] tipos = {"nombre","simbolo"};
+        if(val.validar(datos,tipos)){     
             String name = txtName.getText();
             String simbol = txtsimbolo.getText();
             boolean def = chkdefault.isSelected();
@@ -341,7 +342,8 @@ public class WinTipomoneda extends javax.swing.JInternalFrame {
     private void mitemupdateMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemupdateMousePressed
         val = new Validators();    
         Object[] datos = {txtName.getText(),txtsimbolo.getText(),lblId.getText()};
-        if(val.validar(datos)){      
+        Object[] tipos = {"nombre","simbolo"};
+        if(val.validar(datos,tipos)){      
             int id = Integer.valueOf(lblId.getText());
             String name = txtName.getText();
             String simbol = txtsimbolo.getText();
@@ -366,7 +368,8 @@ public class WinTipomoneda extends javax.swing.JInternalFrame {
     private void mitemdeleteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemdeleteMousePressed
          val = new Validators();    
         Object[] datos = {txtName.getText(),txtsimbolo.getText(),lblId.getText()};
-        if(val.validar(datos)){    
+        Object[] tipos = {"nombre","simbolo"};
+        if(val.validar(datos,tipos)){    
             int i;      
             i= JOptionPane.showConfirmDialog(null,"¿Esta seguro de eliminar este registro?","Aviso",JOptionPane.OK_CANCEL_OPTION,JOptionPane.WARNING_MESSAGE);
 

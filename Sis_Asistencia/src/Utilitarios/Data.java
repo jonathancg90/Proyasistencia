@@ -12,6 +12,8 @@ public class Data {
     public String G_AREA[] = new String[3];
     public String G_DIAS[] = new String[8];
     public String G_TITULOS[]= new String[27];
+    public String TYPEDATE[]= new String[2];
+    public int DIMENTION[]= new int[9];
     
     public Data()
     {
@@ -64,8 +66,25 @@ public class Data {
         G_TITULOS[18]="Empleado: Horarios";
         G_TITULOS[19]="Empleado: Salarios";
         G_TITULOS[20]="Empleado: Vacaciones";
-        G_TITULOS[21]="Justificaciones";
-        G_TITULOS[22]="Asistencia";
+        G_TITULOS[21]="Empleado: Extra-descuento";
+        G_TITULOS[22]="Justificaciones";
+        G_TITULOS[23]="Asistencia";
+        
+        TYPEDATE[0]="String";
+        TYPEDATE[1]="integer";
+        
+        DIMENTION[0]=8;//dni,telefono
+        DIMENTION[1]=10;//ruc,simbol
+        DIMENTION[2]=15;//recibo,ipcliente
+        DIMENTION[3]=30;//nombre -->area,cargo,ciudad,empresa,estadoemp,modulos,moneda,permisos,roles,sucursal,tipoempleado,tipohorario,tiporeg
+        DIMENTION[4]=30;//username,pass
+        DIMENTION[5]=50;//nombre -->empleado,horarios,tipojustificaciones
+        DIMENTION[6]=50;//apellidos,ubicacion,direccion,correo
+        DIMENTION[7]=150;//motivo
+        DIMENTION[8]=200;//nombre -->exception
+        
+        
+        
     }
     
 }
