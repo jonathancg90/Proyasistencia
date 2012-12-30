@@ -1,5 +1,11 @@
 package Utilitarios;
+<<<<<<< HEAD
 import Utilitarios.Data;
+=======
+import javax.swing.JTable;
+import javax.swing.table.TableModel;
+import java.sql.Date;
+>>>>>>> b0e12efe963a703c7430e34180b79735f84bccf0
 
 public class Validators {
     Data objdato;
@@ -116,5 +122,33 @@ public class Validators {
     System.out.println(tipos[1].toString()+"<-->"+objdato.DIMENTION[3]+"<-->"+tipos[1].toString().length());
         
     return true;
-    }   
+    }  
+    
+    public boolean validarFechas(JTable tbldatos,String inicio,String fin){
+        Date date = new Date(0000-00-00);
+        
+        boolean value;
+        value=true;
+        
+        TableModel tablemodel=tbldatos.getModel();
+        int rows= tablemodel.getRowCount();
+        
+        for(int i=0;i<rows;i++){
+            
+            if(date.valueOf(inicio).equals(date.valueOf(String.valueOf(tablemodel.getValueAt(i,1)))) ||
+               date.valueOf(fin).equals(date.valueOf(String.valueOf(tablemodel.getValueAt(i,2)))) ||
+               date.valueOf(inicio).after(date.valueOf(String.valueOf(tablemodel.getValueAt(i,1)))) &&
+               date.valueOf(inicio).before(date.valueOf(String.valueOf(tablemodel.getValueAt(i,2)))) ||  
+               date.valueOf(fin).after(date.valueOf(String.valueOf(tablemodel.getValueAt(i,1)))) &&
+               date.valueOf(fin).before(date.valueOf(String.valueOf(tablemodel.getValueAt(i,1))))     
+                    ){
+                
+                value=false;
+            }
+        
+        }
+        
+      
+        return value;
+    }
 }

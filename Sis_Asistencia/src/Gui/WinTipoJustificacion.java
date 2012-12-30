@@ -333,7 +333,7 @@ public class WinTipoJustificacion extends javax.swing.JInternalFrame {
                 objjus = new TipoJustificacionDAO();
                 i = objjus.delete(id);
                 if(i==0) {
-                    JOptionPane.showMessageDialog(null,"No se pudo eliminar el modulo");
+                    JOptionPane.showMessageDialog(null,"No se pudo eliminar el tipo de justificacion");
                 }
                 else {
                     objjus.getTableAll(tbljus);

@@ -110,7 +110,11 @@
                   <Component id="jPanel3" max="32767" attributes="0"/>
                   <Component id="jPanel1" max="32767" attributes="0"/>
               </Group>
+<<<<<<< HEAD
               <EmptySpace pref="16" max="32767" attributes="0"/>
+=======
+              <EmptySpace pref="18" max="32767" attributes="0"/>
+>>>>>>> b0e12efe963a703c7430e34180b79735f84bccf0
           </Group>
       </Group>
     </DimensionLayout>

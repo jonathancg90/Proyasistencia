@@ -36,9 +36,9 @@ public class Empleado_has_horariosDAO extends ConexionBd {
         filter = new String[0][0];
         campos = new String[4];
         campos[0]="nmid";
-        campos[1]="idhor";
-        campos[2]="inicio";
-        campos[3]="fin";
+        campos[1]="inicio";
+        campos[2]="fin";
+        campos[3]="idhor";
         witdhcolum = new int[1];
         witdhcolum[0]=50;
      }

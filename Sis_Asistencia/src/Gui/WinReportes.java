@@ -1,13 +1,24 @@
 
 package Gui;
+import java.text.DateFormat;
+import java.util.Calendar;
+
+import java.util.Date;
+import java.text.SimpleDateFormat;
+import java.util.GregorianCalendar;
 
 public class WinReportes extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form WinReportes2
-     */
+    private DateFormat format;
+    private Date date,date2;
+    private Calendar calendar,calendar2;
+    
     public WinReportes() {
         initComponents();
+        format=new SimpleDateFormat("dd-MM-yyyy");
+        CmbF_De.setDateFormat(format);
+        CmbF_Hasta.setDateFormat(format);
+        
     }
 
    

@@ -268,6 +268,11 @@ public class Query extends ConexionBd{
                         G_global = new String[tamaño];
                         G_global = dt.G_DIAS;
                         ;break;
+                    case 3: 
+                        tamaño = dt.G_TIPOH.length;
+                        G_global = new String[tamaño];
+                        G_global = dt.G_TIPOH;
+                        ;break;
                     default : G_global = new String[0];
                     break;
                 }
@@ -282,8 +287,8 @@ public class Query extends ConexionBd{
                 }
                 cmbType.setModel(MChoice);     
             } else {
-                for(int i=1;i<dt.G_TYPEHOR.length;i++){
-                    if(cmbType.getSelectedItem() == dt.G_TYPEHOR[i]){
+                for(int i=1;i<G_global.length;i++){
+                    if(cmbType.getSelectedItem() == G_global[i]){
                         return i;
                     }
                 }

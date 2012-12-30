@@ -35,7 +35,7 @@ public class WinSalarios extends javax.swing.JInternalFrame {
         initComponents();
         
         
-        format=new SimpleDateFormat("yyyy-MM-dd");
+        format=new SimpleDateFormat("dd-MM-yyyy");
         cboF_inicio.setDateFormat(format);
         cboF_final.setDateFormat(format);
         
@@ -273,6 +273,11 @@ public class WinSalarios extends javax.swing.JInternalFrame {
 
         mitemclear.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.CTRL_MASK));
         mitemclear.setText("Limpiar");
+        mitemclear.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                mitemclearMousePressed(evt);
+            }
+        });
         medit.add(mitemclear);
 
         jMenuBar1.add(medit);
@@ -291,8 +296,10 @@ public class WinSalarios extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void mitemregisterMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemregisterMousePressed
+        hp=new Helpers();
         val = new Validators();    
         Object[] datos = {txtMonto.getText()};
+<<<<<<< HEAD
         Object[] tipos = {"monto"};
         if(val.validar(datos,tipos)){    
             try{
@@ -314,6 +321,39 @@ public class WinSalarios extends javax.swing.JInternalFrame {
                     JOptionPane.showMessageDialog(null,"Nueva salario registrado");
                 }
             }catch(Exception e){System.out.println(""+e);}
+=======
+        
+        
+        if(val.validar(datos)){    
+            if(val.validarFechas(tblSalarios, hp.getFormatDate(cboF_inicio.getText()), hp.getFormatDate(cboF_final.getText()))){
+            
+                try{
+
+                    String F_inicio=hp.getFormatDate(cboF_inicio.getText());
+                    String F_final=hp.getFormatDate(cboF_final.getText());
+
+                    boolean por_defecto=jCheckBox1.isSelected();
+                    double monto=Double.parseDouble(txtMonto.getText());
+                    int idemp=Integer.valueOf(lblIdemp.getText());
+
+                    int i = objSalarios.save(F_inicio,F_final,por_defecto,idemp,monto);
+                    if (i == 0) {
+                        JOptionPane.showMessageDialog(null,"No se pudo grabar datos");
+                    }
+                    else {
+                        objSalarios.findId(lblIdemp.getText(), tblSalarios);
+                        cleanBox();
+                        JOptionPane.showMessageDialog(null,"Nueva salario registrado");
+                    }
+                }catch(Exception e){System.out.println(""+e);}
+            }
+            
+            else
+            {
+                JOptionPane.showMessageDialog(null,"Conflicto en fechas");
+            }
+            
+>>>>>>> b0e12efe963a703c7430e34180b79735f84bccf0
         }                                          
         else {
             JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
@@ -322,8 +362,10 @@ public class WinSalarios extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_mitemregisterMousePressed
 
     private void mitemupdateMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemupdateMousePressed
-        val = new Validators();    
+        val = new Validators();  
+        hp = new Helpers();
         Object[] datos = {txtMonto.getText()};
+<<<<<<< HEAD
         Object[] tipos = {"monto"};
         if(val.validar(datos,tipos)){
             hp = new Helpers();
@@ -331,20 +373,34 @@ public class WinSalarios extends javax.swing.JInternalFrame {
             int idemp=Integer.parseInt(lblIdemp.getText());
             String F_inicio=cboF_inicio.getText();
             String F_final=cboF_final.getText();
+=======
+        if(val.validar(datos)){
+                if(val.validarFechas(tblSalarios, hp.getFormatDate(cboF_inicio.getText()), hp.getFormatDate(cboF_final.getText()))){
+                int idsalario=Integer.parseInt(lblIdsalario.getText());
+                int idemp=Integer.parseInt(lblIdemp.getText());
+                String F_inicio=hp.getFormatDate(cboF_inicio.getText());
+                String F_final=hp.getFormatDate(cboF_final.getText());
+>>>>>>> b0e12efe963a703c7430e34180b79735f84bccf0
 
-            boolean por_defecto=jCheckBox1.isSelected();
-            double monto=Double.parseDouble(txtMonto.getText());
+                boolean por_defecto=jCheckBox1.isSelected();
+                double monto=Double.parseDouble(txtMonto.getText());
 
-            int i = objSalarios.update(idsalario,F_inicio,F_final,por_defecto,idemp,monto);
-            if (i == 0) {
+                int i = objSalarios.update(idsalario,F_inicio,F_final,por_defecto,idemp,monto);
+                if (i == 0) {
 
-                JOptionPane.showMessageDialog(null, "No se pudo actualizar datos");
+                    JOptionPane.showMessageDialog(null, "No se pudo actualizar datos");
+                }
+                else {
+                    objSalarios.findId(lblIdemp.getText(), tblSalarios);
+                    cleanBox();
+                    JOptionPane.showMessageDialog(null, "Salario actualizado");
+                }
             }
-            else {
-                objSalarios.findId(lblIdemp.getText(), tblSalarios);
-                cleanBox();
-                JOptionPane.showMessageDialog(null, "Salario actualizado");
-            } 
+                
+            else
+            {
+                JOptionPane.showMessageDialog(null,"Conflicto en fechas");
+            }    
         }                                          
         else {
             JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
@@ -388,6 +444,7 @@ public class WinSalarios extends javax.swing.JInternalFrame {
         date2=new Date();
         calendar= new GregorianCalendar();
         calendar2= new GregorianCalendar();
+        hp=new Helpers();
         int fsel;
         fsel = this.tblSalarios.getSelectedRow();
         if (fsel == -1) {
@@ -404,12 +461,12 @@ public class WinSalarios extends javax.swing.JInternalFrame {
                 Salarios = objSalarios.getValues(Integer.parseInt(idSalarios));
                 txtMonto.setText(String.valueOf(Salarios.getMonto()));
                 lblIdemp.setText(String.valueOf(Salarios.getIdemp()));
-                lblMod.setText(Salarios.getModified());
-                date=format.parse(Salarios.getF_inicio());
+                lblMod.setText(hp.getFormatDate(Salarios.getModified()));
+                date=format.parse(hp.getFormatDate(Salarios.getF_inicio()));
                 calendar.setTime(date);
                 cboF_inicio.setSelectedDate(calendar);
                 
-                date2=format.parse(Salarios.getF_final());
+                date2=format.parse(hp.getFormatDate(Salarios.getF_final()));
                 calendar2.setTime(date2);
                 cboF_final.setSelectedDate(calendar2);
                 
@@ -426,6 +483,10 @@ public class WinSalarios extends javax.swing.JInternalFrame {
     private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
         cargaForm();
     }//GEN-LAST:event_formInternalFrameOpened
+
+    private void mitemclearMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemclearMousePressed
+        cleanBox();
+    }//GEN-LAST:event_mitemclearMousePressed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private datechooser.beans.DateChooserCombo cboF_final;

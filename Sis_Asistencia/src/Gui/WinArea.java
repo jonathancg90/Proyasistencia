@@ -8,7 +8,7 @@ import Utilitarios.Query;
 import Utilitarios.Validators;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import Utilitarios.Data;
+import Utilitarios.Helpers;
 
     /**
      * Formulario para el mantenimiento de las areas de la empresa.olaaaa
@@ -21,6 +21,7 @@ public class WinArea extends javax.swing.JInternalFrame {
     private Data dt;
     private Validators val;
     private Data data;
+    private Helpers hp;
     
     public WinArea() {
         initComponents();
@@ -301,8 +302,10 @@ public class WinArea extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tblAreaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblAreaMouseClicked
+        hp=new Helpers();
         int fsel;
         fsel = this.tblArea.getSelectedRow();
+        
         if (fsel == -1) {
             //No se ha seleccionado registo en Jtable
         } 
@@ -316,6 +319,7 @@ public class WinArea extends javax.swing.JInternalFrame {
                 lblId.setText(idArea);
                 area = objarea.getValues(Integer.parseInt(idArea));
                 txtName.setText(area.getName());
+                
                 lblModified.setText(area.getModified());
                 
                 qs.loadState(cmbEstate,area.getState());

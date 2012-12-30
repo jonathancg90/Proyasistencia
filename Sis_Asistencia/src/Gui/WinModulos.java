@@ -9,6 +9,7 @@ import Utilitarios.Query;
 import Utilitarios.Validators;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import Utilitarios.Helpers;
 
 public class WinModulos extends javax.swing.JInternalFrame {
     private ModulosDAO objmod;
@@ -17,6 +18,7 @@ public class WinModulos extends javax.swing.JInternalFrame {
     private Config cg;
     private Data dt;
     private Validators val;
+    private Helpers hp;
     
     public WinModulos() {
         initComponents();
@@ -297,6 +299,7 @@ public class WinModulos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnFindActionPerformed
 
     private void tblmodMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblmodMouseClicked
+        hp=new Helpers();
         int fsel;
         fsel= this.tblmod.getSelectedRow();
         if(fsel==-1){
@@ -310,7 +313,7 @@ public class WinModulos extends javax.swing.JInternalFrame {
                 lblId.setText(idrol);
                 modulo = objmod.getValues(Integer.parseInt(idrol));
                 txtName.setText(modulo.getName());
-                lblModified.setText(modulo.getModified());
+                lblModified.setText(hp.getFormatDate(modulo.getModified()));
                 qs.loadState(cmbState,modulo.isState());
 
             }

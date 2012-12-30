@@ -24,13 +24,13 @@ public class WinNolaborables extends javax.swing.JInternalFrame {
     private Helpers hp;
     private DateFormat format;
     private Date date;
-    private Date date2;
+    
     private Calendar calendar;
-    private Calendar calendar2;
+    
     
     public WinNolaborables() {
         initComponents();
-        format=new SimpleDateFormat("yyyy-MM-dd");
+        format=new SimpleDateFormat("dd-MM-yyyy");
         cboFecha.setDateFormat(format);
         
     }
@@ -236,6 +236,11 @@ public class WinNolaborables extends javax.swing.JInternalFrame {
 
         mitemclear.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.CTRL_MASK));
         mitemclear.setText("Limpiar");
+        mitemclear.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                mitemclearMousePressed(evt);
+            }
+        });
         medit.add(mitemclear);
 
         jMenuBar1.add(medit);
@@ -264,7 +269,7 @@ public class WinNolaborables extends javax.swing.JInternalFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(22, Short.MAX_VALUE)
+                .addContainerGap(30, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -276,9 +281,9 @@ public class WinNolaborables extends javax.swing.JInternalFrame {
 
     private void tblNolaborableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblNolaborableMouseClicked
         date = new Date();
-        date2=new Date();
+        hp=new Helpers();
         calendar= new GregorianCalendar();
-        calendar2= new GregorianCalendar();
+        
         int fsel;
         fsel = this.tblNolaborable.getSelectedRow();
         if (fsel == -1) {
@@ -295,8 +300,8 @@ public class WinNolaborables extends javax.swing.JInternalFrame {
                 Nolaborables = objNolaborables.getValues(Integer.parseInt(idNolaborables));
                 
                 lblIdempr.setText(String.valueOf(Nolaborables.getIdempr()));
-                lblMod.setText(Nolaborables.getModified());
-                date=format.parse(Nolaborables.getFecha());
+                lblMod.setText(hp.getFormatDate(Nolaborables.getModified()));
+                date=format.parse(hp.getFormatDate(Nolaborables.getFecha()));
                 calendar.setTime(date);
                 cboFecha.setSelectedDate(calendar);
 
@@ -312,11 +317,11 @@ public class WinNolaborables extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_tblNolaborableMouseClicked
 
     private void mitemregisterMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemregisterMousePressed
+       hp=new Helpers();
         try{
             hp = new Helpers();
-            String Fecha=cboFecha.getText();
-            
-            
+            String Fecha=hp.getFormatDate(cboFecha.getText());
+                    
             boolean status=jCheckBox1.isSelected();
             
             int idempr=Integer.valueOf(lblIdempr.getText());
@@ -339,7 +344,7 @@ public class WinNolaborables extends javax.swing.JInternalFrame {
         hp = new Helpers();
         int idnolaborables=Integer.parseInt(lblIdnolaborable.getText());
         int idempr=Integer.parseInt(lblIdempr.getText());
-        String Fecha=cboFecha.getText();
+        String Fecha=hp.getFormatDate(cboFecha.getText());
         
 
         boolean status=jCheckBox1.isSelected();
@@ -384,6 +389,10 @@ public class WinNolaborables extends javax.swing.JInternalFrame {
     private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
         cargaForm();
     }//GEN-LAST:event_formInternalFrameOpened
+
+    private void mitemclearMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemclearMousePressed
+        cleanBox();
+    }//GEN-LAST:event_mitemclearMousePressed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private datechooser.beans.DateChooserCombo cboFecha;

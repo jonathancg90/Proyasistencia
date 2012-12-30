@@ -447,7 +447,11 @@
                       <Component id="btnFiltro" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
+<<<<<<< HEAD
                   <Component id="jScrollPane1" pref="173" max="32767" attributes="0"/>
+=======
+                  <Component id="jScrollPane1" pref="168" max="32767" attributes="0"/>
+>>>>>>> b0e12efe963a703c7430e34180b79735f84bccf0
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>

@@ -1,14 +1,24 @@
 
 package Gui;
 
+import java.text.DateFormat;
+import java.util.Calendar;
+
+import java.util.Date;
+import java.text.SimpleDateFormat;
+import java.util.GregorianCalendar;
 
 public class WinConsulta extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form WinConsulta
-     */
+    private DateFormat format;
+    private Date date,date2;
+    private Calendar calendar,calendar2;
+    
     public WinConsulta() {
         initComponents();
+        format=new SimpleDateFormat("dd-MM-yyyy");
+        dateChooserCombo2.setDateFormat(format);
+        dateChooserCombo1.setDateFormat(format);
     }
 
    

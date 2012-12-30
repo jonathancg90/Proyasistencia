@@ -495,7 +495,7 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
             objempl = new EmpleadoDAO();
             i = objempl.deleteEmpleado(id);
             if(i==0) {
-                JOptionPane.showMessageDialog(null,"No se pudo eliminar el area(Se cambio su esatdo a inactivo)");
+                JOptionPane.showMessageDialog(null,"No se pudo eliminar el empleado(Se cambio su esatdo a inactivo)");
                 //TODO: IMPLEMENTAR CAMBIO DE ESTADO (INACTIVO)
             }
             else {
