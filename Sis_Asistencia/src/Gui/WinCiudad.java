@@ -273,9 +273,10 @@ public class WinCiudad extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_tblciudadMouseClicked
 
     private void mitemregisterMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemregisterMousePressed
-        val = new Validators();    
+        try{
+        val = new Validators("ciudad");    
         Object[] datos = {txtName.getText()};
-        Object[] tipos = {"nombre"};
+        Object[] tipos={2};
         if(val.validar(datos,tipos)){ 
             String name = txtName.getText();
             objciudad = new CiudadDAO();
@@ -292,12 +293,14 @@ public class WinCiudad extends javax.swing.JInternalFrame {
         else {
             JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
         }
+        }catch(Exception e){}
     }//GEN-LAST:event_mitemregisterMousePressed
 
     private void mitemupdateMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemupdateMousePressed
-        val = new Validators();    
+        try{
+        val = new Validators("ciudad");    
         Object[] datos = {txtName.getText(),lblId.getText()};
-        Object[] tipos = {"nombre"};
+        Object[] tipos={2};
         if(val.validar(datos,tipos)){ 
             int id = Integer.valueOf(lblId.getText());
             String name = txtName.getText();
@@ -317,12 +320,14 @@ public class WinCiudad extends javax.swing.JInternalFrame {
         else {
             JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
         }
+        }catch(Exception e){}
     }//GEN-LAST:event_mitemupdateMousePressed
 
     private void mitemdeleteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemdeleteMousePressed
-        val = new Validators();    
-        Object[] datos = {txtName.getText(),lblId.getText()};
-        Object[] tipos = {"nombre"};
+        try{
+        val = new Validators("ciudad");    
+        Object[] datos = {lblId.getText()};
+        Object[] tipos = {};
         if(val.validar(datos,tipos)){
             int i;      
             i= JOptionPane.showConfirmDialog(null,"¿Esta seguro de eliminar este registro?","Aviso",JOptionPane.OK_CANCEL_OPTION,JOptionPane.WARNING_MESSAGE);
@@ -345,6 +350,7 @@ public class WinCiudad extends javax.swing.JInternalFrame {
         else {
             JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
         }
+        }catch(Exception e){}
     }//GEN-LAST:event_mitemdeleteMousePressed
 
     private void mcloseMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mcloseMousePressed

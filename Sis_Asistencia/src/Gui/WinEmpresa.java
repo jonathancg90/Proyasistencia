@@ -374,36 +374,41 @@ public class WinEmpresa extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_mcloseMousePressed
 
     private void mitemdeleteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemdeleteMousePressed
-        val = new Validators();
-        Object[] datos = {txtName.getText(),txtruc.getText()};
-        Object[] tipos = {"nombre","ruc"};
-            if (val.validar(datos,tipos))
-            {
-                int i;      
-                i= JOptionPane.showConfirmDialog(null,"¿Esta seguro de eliminar este registro?","Aviso",JOptionPane.OK_CANCEL_OPTION,JOptionPane.WARNING_MESSAGE);
+        try {
+            val = new Validators("empresa");
+            Object[] datos = {txtName.getText(),txtruc.getText()};
+            Object[] tipos = {};
+                if (val.validar(datos,tipos))
+                {
+                    int i;      
+                    i= JOptionPane.showConfirmDialog(null,"¿Esta seguro de eliminar este registro?","Aviso",JOptionPane.OK_CANCEL_OPTION,JOptionPane.WARNING_MESSAGE);
 
-                if(i==0) {
-                    int id = Integer.valueOf(lblId.getText());
-                    objempresa = new EmpresaDAO();
-                    i = objempresa.delete(id);          
                     if(i==0) {
-                          JOptionPane.showMessageDialog(null,"No se pudo eliminar la Empresa");
-                    } 
-                    else {
-                          objempresa.getTableAll(tblempresa);
-                          cleanBox();
+                        int id = Integer.valueOf(lblId.getText());
+                        objempresa = new EmpresaDAO();
+                        i = objempresa.delete(id);          
+                        if(i==0) {
+                              JOptionPane.showMessageDialog(null,"No se pudo eliminar la Empresa");
+                        } 
+                        else {
+                              objempresa.getTableAll(tblempresa);
+                              cleanBox();
+                        }
                     }
                 }
-            }
-            else {
-                JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
-            }
+                else {
+                    JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
+                }
+        }catch(Exception e){
+            System.out.println("");
+        }
     }//GEN-LAST:event_mitemdeleteMousePressed
 
     private void mitemupdateMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemupdateMousePressed
-        val = new Validators();
+        try{
+        val = new Validators("empresa");
         Object[] datos = {txtName.getText(),txtruc.getText()};
-        Object[] tipos = {"nombre","ruc"};
+        Object[] tipos = {2,3};
             if (val.validar(datos,tipos))
             {
                 dt = new Data();
@@ -429,12 +434,14 @@ public class WinEmpresa extends javax.swing.JInternalFrame {
             else {
                 JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
             } 
+            }catch(Exception e){}
     }//GEN-LAST:event_mitemupdateMousePressed
 
     private void mitemregisterMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemregisterMousePressed
-        val = new Validators();
+        try{
+        val = new Validators("empresa");
         Object[] datos = {txtName.getText(),txtruc.getText()};
-        Object[] tipos = {"nombre","ruc"};
+        Object[] tipos={2,3};
             if (val.validar(datos,tipos))
             {
                 dt = new Data();
@@ -459,6 +466,7 @@ public class WinEmpresa extends javax.swing.JInternalFrame {
             else {
                 JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
             } 
+            }catch(Exception e){}
         
     }//GEN-LAST:event_mitemregisterMousePressed
 

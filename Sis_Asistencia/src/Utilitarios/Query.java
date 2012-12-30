@@ -199,16 +199,13 @@ public class Query extends ConexionBd{
             s = conexion.createStatement();
             String qs = getQueryList(args,Table, Filter);
             rs = s.executeQuery(qs);
-            
             //Llenado Cabecera Jtable
             ResultSetMetaData meta = rs.getMetaData();
             int nCols = meta.getColumnCount();
-            
             for(int i=0; i<nCols; ++i){    
                 datos.addColumn(meta.getColumnName(i+1));
                 id = meta.getColumnName(i+1).substring(0, 2);
             }
-            
             //Llenado registro Jtable
             fila = new Object[nCols];
             while(rs.next()){
@@ -470,6 +467,17 @@ public class Query extends ConexionBd{
         public int tipodato(){
             int i=0;
         return i;
+        }
+        public int gettamColumn(String table,int pos) throws SQLException{
+            getConexion();
+            Statement s = null;
+            s = conexion.createStatement();
+            rs = s.executeQuery("select * from "+table +" LIMIT 1 ");
+            ResultSetMetaData meta = rs.getMetaData();
+            System.out.println("Column: "+meta.getColumnName(pos));
+            int pres = meta.getPrecision(pos);
+            return pres;
+            
         }
     }
         

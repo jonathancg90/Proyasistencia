@@ -63,8 +63,8 @@ public class DetailHorarioDAOTest {
         int horario = 0;
         DetailHorarioDAO instance = new DetailHorarioDAO();
         int expResult = 0;
-        int result = instance.save(dia, idtip_reg, ingreso, salida, horario);
-        assertEquals(expResult, result);
+        //int result = instance.save(dia, idtip_reg, ingreso, salida, horario);
+        //assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }

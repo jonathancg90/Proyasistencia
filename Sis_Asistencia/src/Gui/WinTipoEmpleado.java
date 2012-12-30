@@ -316,9 +316,10 @@ public class WinTipoEmpleado extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_cmbEstateActionPerformed
 
     private void mitemregisterMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemregisterMousePressed
-        val = new Validators();    
+        try{
+        val = new Validators("tipoempleado");    
         Object[] datos = {txtName.getText()};
-        Object[] tipos = {"nombre"};
+        Object[] tipos = {2};
         if(val.validar(datos,tipos))
         { 
             dt = new Data();
@@ -338,12 +339,14 @@ public class WinTipoEmpleado extends javax.swing.JInternalFrame {
         else {
             JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
              }
+        }catch(Exception e){}
     }//GEN-LAST:event_mitemregisterMousePressed
 
     private void mitemupdateMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemupdateMousePressed
-        val = new Validators();    
+        try{
+        val = new Validators("tipoempleado");    
         Object[] datos = {txtName.getText(),lblId.getText()};
-        Object[] tipos = {"nombre"};
+        Object[] tipos = {2};
         if(val.validar(datos,tipos))
         {
             dt = new Data();
@@ -365,12 +368,14 @@ public class WinTipoEmpleado extends javax.swing.JInternalFrame {
     else {
             JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
          }
+        }catch(Exception e){}
     }//GEN-LAST:event_mitemupdateMousePressed
 
     private void mitemdeleteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemdeleteMousePressed
-        val = new Validators();    
+        try{
+        val = new Validators("tipoempleado");    
         Object[] datos = {txtName.getText(),lblId.getText()};
-        Object[] tipos = {"nombre"};
+        Object[] tipos = {};
         if(val.validar(datos,tipos))
         {
             int i;
@@ -392,6 +397,7 @@ public class WinTipoEmpleado extends javax.swing.JInternalFrame {
         else {
             JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
         }
+        }catch(Exception e){}
     }//GEN-LAST:event_mitemdeleteMousePressed
 
     private void mcloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mcloseActionPerformed

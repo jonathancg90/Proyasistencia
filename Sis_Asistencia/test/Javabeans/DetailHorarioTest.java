@@ -83,7 +83,7 @@ public class DetailHorarioTest {
         System.out.println("setIngreso");
         String ingreso = "";
         DetailHorario instance = new DetailHorario();
-        instance.setIngreso(ingreso);
+        //instance.setIngreso(ingreso);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
@@ -96,7 +96,7 @@ public class DetailHorarioTest {
         System.out.println("setSalida");
         String salida = "";
         DetailHorario instance = new DetailHorario();
-        instance.setSalida(salida);
+        //instance.setSalida(salida);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
@@ -164,8 +164,8 @@ public class DetailHorarioTest {
         System.out.println("getIngreso");
         DetailHorario instance = new DetailHorario();
         String expResult = "";
-        String result = instance.getIngreso();
-        assertEquals(expResult, result);
+        //String result = instance.getIngreso();
+        //assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
@@ -178,8 +178,8 @@ public class DetailHorarioTest {
         System.out.println("getSalida");
         DetailHorario instance = new DetailHorario();
         String expResult = "";
-        String result = instance.getSalida();
-        assertEquals(expResult, result);
+        //String result = instance.getSalida();
+        //assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }

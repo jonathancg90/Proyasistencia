@@ -342,9 +342,10 @@ public class WinEmpresa_Sucursal extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_tblSucursalMouseClicked
 
     private void mitemregisterMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemregisterMousePressed
-      val = new Validators();    
+      try{
+        val = new Validators("sucursal");    
       Object[] datos = {txtName.getText(),txtdireccion.getText()};
-      Object[] tipos = {"nombre","direccion"};
+      Object[] tipos={3,4};
       if(val.validar(datos,tipos)){  
             String name = txtName.getText();
             String direccion=txtdireccion.getText();
@@ -364,12 +365,14 @@ public class WinEmpresa_Sucursal extends javax.swing.JInternalFrame {
      else {
             JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
      }
+      }catch(Exception e){}
     }//GEN-LAST:event_mitemregisterMousePressed
 
     private void mitemupdateMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemupdateMousePressed
-       val = new Validators();    
+       try{
+        val = new Validators("sucursal");    
        Object[] datos = {txtName.getText(),txtdireccion.getText(),lblId.getText()};
-       Object[] tipos = {"nombre","direccion"};
+       Object[] tipos={2,3};
        if(val.validar(datos,tipos))
        {  
             int id = Integer.valueOf(lblId.getText());
@@ -392,12 +395,14 @@ public class WinEmpresa_Sucursal extends javax.swing.JInternalFrame {
         else {
             JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
         }
+       }catch(Exception e){}
     }//GEN-LAST:event_mitemupdateMousePressed
 
     private void mitemdeleteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemdeleteMousePressed
-       val = new Validators();    
+       try{
+        val = new Validators("sucursal");    
        Object[] datos = {txtName.getText(),txtdireccion.getText(),lblId.getText()};
-       Object[] tipos = {"nombre","direccion"};
+       Object[] tipos = {};
        if(val.validar(datos,tipos))
        { 
             int i;      
@@ -421,6 +426,7 @@ public class WinEmpresa_Sucursal extends javax.swing.JInternalFrame {
         else {
             JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
        } 
+       }catch(Exception e){}
     }//GEN-LAST:event_mitemdeleteMousePressed
 
     private void mcloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mcloseActionPerformed

@@ -201,9 +201,10 @@ public class WinEstadoEmpleado extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jMenu3MousePressed
 
     private void mitemRegistrarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemRegistrarMousePressed
-        val = new Validators();    
+        try{
+        val = new Validators("estadoemp");    
         Object[] datos = {txtName.getText()};
-        Object[] tipos = {"nombre"};
+        Object[] tipos = {2};
         if(val.validar(datos,tipos)){    
             dt = new Data();
             String name = txtName.getText();
@@ -221,6 +222,7 @@ public class WinEstadoEmpleado extends javax.swing.JInternalFrame {
         else {
             JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
         }
+        }catch(Exception e){}
     }//GEN-LAST:event_mitemRegistrarMousePressed
 
     private void jMenuItem4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem4MousePressed
@@ -228,9 +230,10 @@ public class WinEstadoEmpleado extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jMenuItem4MousePressed
 
     private void mitemUpdateMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemUpdateMousePressed
-        val = new Validators();    
+        try{
+        val = new Validators("estadoemp");    
         Object[] datos = {txtName.getText(),lblId.getText()};
-        Object[] tipos = {"nombre"};
+        Object[] tipos = {2};
         if(val.validar(datos,tipos)){      
             if( !"".equals(lblId.getText())){
                 dt = new Data();
@@ -251,12 +254,14 @@ public class WinEstadoEmpleado extends javax.swing.JInternalFrame {
         else {
             JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
         }
+        }catch(Exception e){}
     }//GEN-LAST:event_mitemUpdateMousePressed
 
     private void jmitemDeleteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmitemDeleteMousePressed
-        val = new Validators();    
+        try{
+        val = new Validators("estadoemp");    
         Object[] datos = {txtName.getText(),lblId.getText()};
-        Object[] tipos = {"nombre"};
+        Object[] tipos = {};
         if(val.validar(datos,tipos)){ 
              int i;      
              i= JOptionPane.showConfirmDialog(null,"¿Esta seguro de eliminar este registro?","Aviso",JOptionPane.OK_CANCEL_OPTION,JOptionPane.WARNING_MESSAGE);
@@ -281,6 +286,7 @@ public class WinEstadoEmpleado extends javax.swing.JInternalFrame {
         else {
             JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
         }
+        }catch(Exception e){}
     }//GEN-LAST:event_jmitemDeleteMousePressed
 
     private void tblestMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblestMousePressed

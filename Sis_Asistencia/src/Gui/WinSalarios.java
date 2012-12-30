@@ -296,35 +296,13 @@ public class WinSalarios extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void mitemregisterMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemregisterMousePressed
+        try{
         hp=new Helpers();
         val = new Validators();    
         Object[] datos = {txtMonto.getText()};
-<<<<<<< HEAD
-        Object[] tipos = {"monto"};
+        Object[] tipos = {1};
+    
         if(val.validar(datos,tipos)){    
-            try{
-                hp = new Helpers();
-                String F_inicio=cboF_inicio.getText();
-                String F_final=cboF_final.getText();
-                System.out.println(F_inicio +" - " +F_final);
-                boolean por_defecto=jCheckBox1.isSelected();
-                double monto=Double.parseDouble(txtMonto.getText());
-                int idemp=Integer.valueOf(lblIdemp.getText());
-
-                int i = objSalarios.save(F_inicio,F_final,por_defecto,idemp,monto);
-                if (i == 0) {
-                    JOptionPane.showMessageDialog(null,"No se pudo grabar datos");
-                }
-                else {
-                    objSalarios.findId(lblIdemp.getText(), tblSalarios);
-                    cleanBox();
-                    JOptionPane.showMessageDialog(null,"Nueva salario registrado");
-                }
-            }catch(Exception e){System.out.println(""+e);}
-=======
-        
-        
-        if(val.validar(datos)){    
             if(val.validarFechas(tblSalarios, hp.getFormatDate(cboF_inicio.getText()), hp.getFormatDate(cboF_final.getText()))){
             
                 try{
@@ -353,43 +331,37 @@ public class WinSalarios extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(null,"Conflicto en fechas");
             }
             
->>>>>>> b0e12efe963a703c7430e34180b79735f84bccf0
+
         }                                          
         else {
             JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
         }
+        }catch(Exception e){}
         
     }//GEN-LAST:event_mitemregisterMousePressed
 
     private void mitemupdateMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemupdateMousePressed
+        try{
         val = new Validators();  
         hp = new Helpers();
         Object[] datos = {txtMonto.getText()};
-<<<<<<< HEAD
         Object[] tipos = {"monto"};
         if(val.validar(datos,tipos)){
-            hp = new Helpers();
-            int idsalario=Integer.parseInt(lblIdsalario.getText());
-            int idemp=Integer.parseInt(lblIdemp.getText());
-            String F_inicio=cboF_inicio.getText();
-            String F_final=cboF_final.getText();
-=======
-        if(val.validar(datos)){
                 if(val.validarFechas(tblSalarios, hp.getFormatDate(cboF_inicio.getText()), hp.getFormatDate(cboF_final.getText()))){
-                int idsalario=Integer.parseInt(lblIdsalario.getText());
-                int idemp=Integer.parseInt(lblIdemp.getText());
-                String F_inicio=hp.getFormatDate(cboF_inicio.getText());
-                String F_final=hp.getFormatDate(cboF_final.getText());
->>>>>>> b0e12efe963a703c7430e34180b79735f84bccf0
+                    int idsalario=Integer.parseInt(lblIdsalario.getText());
+                    int idemp=Integer.parseInt(lblIdemp.getText());
+                    String F_inicio=hp.getFormatDate(cboF_inicio.getText());
+                    String F_final=hp.getFormatDate(cboF_final.getText());
 
-                boolean por_defecto=jCheckBox1.isSelected();
-                double monto=Double.parseDouble(txtMonto.getText());
 
-                int i = objSalarios.update(idsalario,F_inicio,F_final,por_defecto,idemp,monto);
-                if (i == 0) {
+                    boolean por_defecto=jCheckBox1.isSelected();
+                    double monto=Double.parseDouble(txtMonto.getText());
 
-                    JOptionPane.showMessageDialog(null, "No se pudo actualizar datos");
-                }
+                    int i = objSalarios.update(idsalario,F_inicio,F_final,por_defecto,idemp,monto);
+                    if (i == 0) {
+
+                        JOptionPane.showMessageDialog(null, "No se pudo actualizar datos");
+                    }
                 else {
                     objSalarios.findId(lblIdemp.getText(), tblSalarios);
                     cleanBox();
@@ -405,9 +377,11 @@ public class WinSalarios extends javax.swing.JInternalFrame {
         else {
             JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
         }
+        }catch(Exception e){}
     }//GEN-LAST:event_mitemupdateMousePressed
 
     private void mitemdeleteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemdeleteMousePressed
+        try{
         val = new Validators();    
         Object[] datos = {txtMonto.getText()};
         Object[] tipos = {"monto"};
@@ -431,7 +405,7 @@ public class WinSalarios extends javax.swing.JInternalFrame {
         else {
             JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
         }
-        
+        }catch(Exception e){}
         
     }//GEN-LAST:event_mitemdeleteMousePressed
 

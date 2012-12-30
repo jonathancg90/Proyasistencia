@@ -17,6 +17,10 @@ public class ConexionBd {
         x.closeConexion();
 
     }
+
+    public Connection getConetion() {
+        return conexion;
+    }
     
     /*
      * Metodo de conexion por Jdbc al motor de Bd

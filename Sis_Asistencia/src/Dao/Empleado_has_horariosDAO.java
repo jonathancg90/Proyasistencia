@@ -35,7 +35,7 @@ public class Empleado_has_horariosDAO extends ConexionBd {
         _error = "Dao_Empleado_has_horariosDAO_";
         filter = new String[0][0];
         campos = new String[4];
-        campos[0]="nmid";
+        campos[0]="\"NMID\"";
         campos[1]="inicio";
         campos[2]="fin";
         campos[3]="idhor";
@@ -45,7 +45,7 @@ public class Empleado_has_horariosDAO extends ConexionBd {
     
     public void getTableAll(JTable tblDatos){
         try{
-            
+            System.out.println("llego1");
             DefaultTableModel datos;
             qs= new Query();
             hp = new Helpers();

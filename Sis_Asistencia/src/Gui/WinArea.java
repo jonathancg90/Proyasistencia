@@ -343,36 +343,40 @@ public class WinArea extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_mcloseMousePressed
 
     private void mitemeliminarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemeliminarMousePressed
+        try{
+        val = new Validators("area");    
+        Object[] datos = {lblId.getText()};
+        Object[] tipos = {};
+        if(val.validar(datos,tipos)){ 
+            int i;      
+            i= JOptionPane.showConfirmDialog(null,"¿Esta seguro de eliminar este registro?","Aviso",JOptionPane.OK_CANCEL_OPTION,JOptionPane.WARNING_MESSAGE);
 
-    val = new Validators();    
-    Object[] datos = {lblId.getText()};
-    
-    if(val.validar(datos,datos)){ 
-        int i;      
-        i= JOptionPane.showConfirmDialog(null,"¿Esta seguro de eliminar este registro?","Aviso",JOptionPane.OK_CANCEL_OPTION,JOptionPane.WARNING_MESSAGE);
-
-        if(i==0) {    
-            int id = Integer.valueOf(lblId.getText());  
-            objarea = new AreaDAO();
-            i = objarea.delete(id);
-            if(i==0) {
-                JOptionPane.showMessageDialog(null,"No se pudo eliminar el area");
-            }
-            else {
-                JOptionPane.showMessageDialog(null,"Area eliminada");
-                objarea.getTableAll(tblArea);
-                cleanBox();
+            if(i==0) {    
+                int id = Integer.valueOf(lblId.getText());  
+                objarea = new AreaDAO();
+                i = objarea.delete(id);
+                if(i==0) {
+                    JOptionPane.showMessageDialog(null,"No se pudo eliminar el area");
+                }
+                else {
+                    JOptionPane.showMessageDialog(null,"Area eliminada");
+                    objarea.getTableAll(tblArea);
+                    cleanBox();
             }
         }
     }//GEN-LAST:event_mitemeliminarMousePressed
     else {
         JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
     }
+    }
+    catch(Exception e){}
 }
     private void mitemupdateMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemupdateMousePressed
-    val = new Validators();    
+    try{
+    val = new Validators("area");
     Object[] datos = {txtName.getText(),lblId.getText()};
-    if(val.validar(datos,datos)){    
+    Object[] tipos={1,0};
+    if(val.validar(datos,tipos)){    
         dt = new Data();
         int id = Integer.valueOf(lblId.getText());
         String name = txtName.getText();
@@ -391,11 +395,14 @@ public class WinArea extends javax.swing.JInternalFrame {
     else {
         JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
     }
+    }catch(Exception e){}
 }
     private void mitemregisterMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemregisterMousePressed
-    val = new Validators();    
-    Object[] datos = {txtName.getText()};
-        if(val.validar(datos,datos)){
+    try{
+        val = new Validators("area");    
+        Object[] datos = {txtName.getText()};
+        Object[] tipos={2};
+        if(val.validar(datos,tipos)){
             dt = new Data();
             String name = txtName.getText();
             boolean estate = Boolean.valueOf(dt.G_BOOLEAN[cmbEstate.getSelectedIndex()]);
@@ -413,6 +420,9 @@ public class WinArea extends javax.swing.JInternalFrame {
         else {
             JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
         }  
+        }catch(Exception e){
+        System.out.println("Gui_Win_area: " + e);
+        }
     }//GEN-LAST:event_mitemregisterMousePressed
 
     private void mañaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mañaMousePressed

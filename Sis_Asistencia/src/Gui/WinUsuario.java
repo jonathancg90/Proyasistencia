@@ -298,9 +298,10 @@ public class WinUsuario extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void mitemregisterMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemregisterMousePressed
+        try{
         val = new Validators();    
         Object[] datos = {txtUsername.getText(),Txtcorreo.getText(),txtPassword.getPassword()};
-        Object[] tipos = {"username","correo","password"};
+        Object[] tipos = {1,2,3};
         if(val.validar(datos,tipos)){     
             dt = new Data();
             String username = txtUsername.getText();
@@ -326,9 +327,11 @@ public class WinUsuario extends javax.swing.JInternalFrame {
         else {
             JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
         }
+        }catch(Exception e){}
     }//GEN-LAST:event_mitemregisterMousePressed
 
     private void mitemupdateMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemupdateMousePressed
+        try{
         val = new Validators();    
         Object[] datos = {txtUsername.getText(),Txtcorreo.getText(),txtPassword.getPassword(),lblUsu.getText()};
         Object[] tipos = {"username","correo","password"};
@@ -359,9 +362,11 @@ public class WinUsuario extends javax.swing.JInternalFrame {
         else {
             JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
         }
+        }catch(Exception e){}
     }//GEN-LAST:event_mitemupdateMousePressed
 
     private void mitemdeleteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemdeleteMousePressed
+        try{
         val = new Validators();    
         Object[] datos = {txtUsername.getText(),Txtcorreo.getText(),txtPassword.getPassword(),lblUsu.getText()};
         Object[] tipos = {"username","correo","password"};
@@ -387,6 +392,7 @@ public class WinUsuario extends javax.swing.JInternalFrame {
         else {
             JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
         }
+        }catch(Exception e){}
     }//GEN-LAST:event_mitemdeleteMousePressed
 
     private void mitemupdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mitemupdateActionPerformed

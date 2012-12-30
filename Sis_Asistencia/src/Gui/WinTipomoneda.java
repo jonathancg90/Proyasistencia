@@ -319,9 +319,10 @@ public class WinTipomoneda extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_tblmonedaMouseClicked
 
     private void mitemregisterMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemregisterMousePressed
-        val = new Validators();    
+        try{
+        val = new Validators("moneda");    
         Object[] datos = {txtName.getText(),txtsimbolo.getText()};
-        Object[] tipos = {"nombre","simbolo"};
+        Object[] tipos = {2,3};
         if(val.validar(datos,tipos)){     
             String name = txtName.getText();
             String simbol = txtsimbolo.getText();
@@ -340,12 +341,14 @@ public class WinTipomoneda extends javax.swing.JInternalFrame {
         else {
             JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
         }
+        }catch(Exception e){}
     }//GEN-LAST:event_mitemregisterMousePressed
 
     private void mitemupdateMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemupdateMousePressed
-        val = new Validators();    
+        try{
+        val = new Validators("moneda");    
         Object[] datos = {txtName.getText(),txtsimbolo.getText(),lblId.getText()};
-        Object[] tipos = {"nombre","simbolo"};
+        Object[] tipos = {2,3};
         if(val.validar(datos,tipos)){      
             int id = Integer.valueOf(lblId.getText());
             String name = txtName.getText();
@@ -366,12 +369,14 @@ public class WinTipomoneda extends javax.swing.JInternalFrame {
         else {
             JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
         }
+        }catch(Exception e){}
     }//GEN-LAST:event_mitemupdateMousePressed
 
     private void mitemdeleteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemdeleteMousePressed
-         val = new Validators();    
+        try{ 
+        val = new Validators("moneda");    
         Object[] datos = {txtName.getText(),txtsimbolo.getText(),lblId.getText()};
-        Object[] tipos = {"nombre","simbolo"};
+        Object[] tipos = {};
         if(val.validar(datos,tipos)){    
             int i;      
             i= JOptionPane.showConfirmDialog(null,"¿Esta seguro de eliminar este registro?","Aviso",JOptionPane.OK_CANCEL_OPTION,JOptionPane.WARNING_MESSAGE);
@@ -394,6 +399,7 @@ public class WinTipomoneda extends javax.swing.JInternalFrame {
         else {
             JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
         }
+        }catch(Exception e){}
     }//GEN-LAST:event_mitemdeleteMousePressed
 
     private void mcloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mcloseActionPerformed

@@ -1,14 +1,32 @@
 package Utilitarios;
-<<<<<<< HEAD
-import Utilitarios.Data;
-=======
+import Utilitarios.ConexionBd;
+import Utilitarios.Query;
+
 import javax.swing.JTable;
 import javax.swing.table.TableModel;
 import java.sql.Date;
->>>>>>> b0e12efe963a703c7430e34180b79735f84bccf0
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
+import java.sql.Statement;
+
 
 public class Validators {
     Data objdato;
+    private ResultSet rs = null;
+    private Statement s = null;
+    private String Table;
+    private Query qs;
+
+    public void setTable(String Table) {
+        this.Table = Table;
+    }
+    public Validators(String table){
+        this.Table = table;
+    }
+
+    public Validators() {
+    }
     
     /**
      * Gestor de validaciones de formulario
@@ -93,33 +111,23 @@ public class Validators {
         }
         
     }
-    public boolean validar(Object[] datos,Object[] tipos) {
-        objdato= new Data();
+    public boolean validar(Object[] datos,Object[] tipos) throws SQLException {
+    objdato= new Data();
+    qs = new Query();
     for (int i = 0; i <= datos.length - 1; i++) {
         if (datos[i].toString().isEmpty()) {
-            String a =tipos[i].toString();
-            switch(a){
-                    case "nombre":
-                    case "apellido":
-                    case "ubicacion":
-                    case "direccion":
-                    case "correo":if(a.length()<=objdato.DIMENTION[3]){return false;}break;
-                    case "dni":
-                    case "telefono":if(a.length()!=objdato.DIMENTION[0]){return false;}break;
-                    case "ruc":
-                    case "simbolo":if(a.length()!=objdato.DIMENTION[1]){return false;}break;
-                    case "recibo":
-                    case "ipcliente":if(a.length()!=objdato.DIMENTION[2]){return false;}break; 
-                    case "username":
-                    case "password":if(a.length()<=objdato.DIMENTION[4]){return false;}break;
-                    case "motivo":if(a.length()!=objdato.DIMENTION[7]){return false;}break;
-                    case "exception":if(a.length()<=objdato.DIMENTION[8]){return false;};
+           return false;
+        } 
+        else {
+            if(tipos.length != 0){
+                String a =tipos[i].toString();
+                int pres = qs.gettamColumn(this.Table,Integer.parseInt(tipos[i].toString()));
+                if(datos[i].toString().length() > pres){
+                    return false;
+                }
             }
-            
          }
-        
         }
-    System.out.println(tipos[1].toString()+"<-->"+objdato.DIMENTION[3]+"<-->"+tipos[1].toString().length());
         
     return true;
     }  

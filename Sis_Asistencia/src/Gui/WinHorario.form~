@@ -103,14 +103,10 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
 <<<<<<< HEAD
-              <EmptySpace pref="49" max="32767" attributes="0"/>
-=======
-<<<<<<< HEAD
-              <EmptySpace pref="48" max="32767" attributes="0"/>
+              <EmptySpace pref="44" max="32767" attributes="0"/>
 =======
               <EmptySpace pref="50" max="32767" attributes="0"/>
->>>>>>> 5aa044373859cfd2ead64881601cbf0cd315412d
->>>>>>> f06f785036fbf6f688f1dbb94469c7388f397c46
+>>>>>>> b0e12efe963a703c7430e34180b79735f84bccf0
           </Group>
       </Group>
     </DimensionLayout>

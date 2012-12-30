@@ -36,9 +36,7 @@ public class WinEmpleado_has_horarios extends javax.swing.JInternalFrame {
         format=new SimpleDateFormat("dd-MM-yyyy");
         cboF_inicio.setDateFormat(format);
         cboF_final.setDateFormat(format);
-        
-        
-        
+        cargaForm();
     }
     
     public void cargaForm(){
@@ -424,7 +422,7 @@ public class WinEmpleado_has_horarios extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_mcloseMousePressed
 
     private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
-        cargaForm();
+        
     }//GEN-LAST:event_formInternalFrameOpened
 
     private void mitemclearMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemclearMousePressed

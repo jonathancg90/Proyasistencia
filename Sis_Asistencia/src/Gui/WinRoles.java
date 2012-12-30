@@ -251,6 +251,7 @@ public class WinRoles extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_mcloseActionPerformed
 
     private void mitemregisterMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemregisterMousePressed
+        try{
         val = new Validators();    
         Object[] datos = {txtName.getText()};
         Object[] tipos = {"nombre"};
@@ -270,9 +271,11 @@ public class WinRoles extends javax.swing.JInternalFrame {
         else {
             JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
         }
+        }catch(Exception e){}
     }//GEN-LAST:event_mitemregisterMousePressed
 
     private void mitemupdateMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemupdateMousePressed
+        try{
         val = new Validators();    
         Object[] datos = {txtName.getText(),lblId.getText()};
         Object[] tipos = {"nombre"};
@@ -298,9 +301,11 @@ public class WinRoles extends javax.swing.JInternalFrame {
         else {
             JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
         }
+        }catch(Exception e){}
     }//GEN-LAST:event_mitemupdateMousePressed
 
     private void mitemdeleteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemdeleteMousePressed
+        try{
         val = new Validators();    
         Object[] datos = {txtName.getText(),lblId.getText()};
         Object[] tipos = {"nombre"};
@@ -330,6 +335,7 @@ public class WinRoles extends javax.swing.JInternalFrame {
         else {
             JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
         }
+        }catch(Exception e){}
     }//GEN-LAST:event_mitemdeleteMousePressed
 
     private void mcloseMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mcloseMousePressed

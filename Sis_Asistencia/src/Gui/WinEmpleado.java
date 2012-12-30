@@ -110,8 +110,8 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
         mvac = new javax.swing.JMenu();
         medit = new javax.swing.JMenu();
         mitemclear = new javax.swing.JMenuItem();
-        mclose = new javax.swing.JMenu();
         jMenu1 = new javax.swing.JMenu();
+        mclose = new javax.swing.JMenu();
 
         jMenuItem1.setText("jMenuItem1");
 
@@ -264,7 +264,7 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
                     .addComponent(chkactivo)
                     .addComponent(btnFiltro))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -336,6 +336,14 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
 
         jMenuBar1.add(medit);
 
+        jMenu1.setText("Calculos");
+        jMenu1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jMenu1MousePressed(evt);
+            }
+        });
+        jMenuBar1.add(jMenu1);
+
         mclose.setText("Cerrar");
         mclose.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -343,14 +351,6 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
             }
         });
         jMenuBar1.add(mclose);
-
-        jMenu1.setText("Extra-descuento");
-        jMenu1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jMenu1MousePressed(evt);
-            }
-        });
-        jMenuBar1.add(jMenu1);
 
         setJMenuBar(jMenuBar1);
 
@@ -379,10 +379,11 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void mitemregisterMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemregisterMousePressed
-   val = new Validators();    
+   try{
+        val = new Validators("empleado");    
    Object[] datos = {txtnombres.getText(),txtapellidos.getText(),
                      txtdni.getText(),txttelefono.getText()};
-   Object[] tipos = {"nombre","apellido","dni","telefono"};
+   Object[] tipos = {2,3,4,5};
    if(val.validar(datos,tipos)){ 
         Data dt = new Data();
         qs = new Query();
@@ -410,13 +411,15 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
     } else {
         JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
     }
+   }catch(Exception e){}
     }//GEN-LAST:event_mitemregisterMousePressed
 
     private void mitemupdateMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemupdateMousePressed
-    val = new Validators();    
+    try{
+        val = new Validators("empleado");    
     Object[] datos = {txtnombres.getText(),txtapellidos.getText(),
                       txtdni.getText(),txttelefono.getText(),lblidempleado.getText()};
-    Object[] tipos = {"nombre","apellido","dni","telefono"};
+    Object[] tipos = {2,3,4,5};
     if(val.validar(datos,tipos)){ 
         Data dt = new Data();
         qs = new Query();
@@ -447,6 +450,7 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
     else {
         JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
     }
+    }catch(Exception e){}
     }//GEN-LAST:event_mitemupdateMousePressed
 
     private void tblEmpleadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblEmpleadoMouseClicked
@@ -482,10 +486,11 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_tblEmpleadoMouseClicked
 
     private void mitemdeleteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemdeleteMousePressed
-    val = new Validators();    
+    try{
+        val = new Validators("empleado");    
     Object[] datos = {lblidempleado.getText()};
-    
-    if(val.validar(datos,datos)){ 
+    Object[] tipos = {};
+    if(val.validar(datos,tipos)){ 
         int i;      
         i= JOptionPane.showConfirmDialog(null,"¿Esta seguro de eliminar este registro?","Aviso",JOptionPane.OK_CANCEL_OPTION,JOptionPane.WARNING_MESSAGE);
 
@@ -507,6 +512,7 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
     } else {
         JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
     }
+    }catch(Exception e){}
     }//GEN-LAST:event_mitemdeleteMousePressed
 
     private void msueMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_msueMousePressed
@@ -555,17 +561,17 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_mitemclearMousePressed
 
     private void mhorMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mhorMousePressed
-      
-        if(!"".equals(lblidempleado.getText())){
+   if(!"".equals(lblidempleado.getText())){
         dt= new Data();
-        String titulo=dt.G_TITULOS[18];
         WinEmpleado_has_horarios objEmpleado_has_horarios= new WinEmpleado_has_horarios();
-        objEmpleado_has_horarios.setTitle(titulo);
+        objEmpleado_has_horarios.setTitle(dt.G_TITULOS[18]);
         objEmpleado_has_horarios.lblIdemp.setText(lblidempleado.getText());
         objEmpleado_has_horarios.setResizable(true);
         objEmpleado_has_horarios.setMaximizable(true);
         objEmpleado_has_horarios.setIconifiable(true);
         WinMdi.jdpContenedor.add(objEmpleado_has_horarios);
+        objEmpleado_has_horarios.setVisible(true);
+        
       } else {
            JOptionPane.showMessageDialog(null,"Debe de seleccionar un empleado para poder asignarle sus horarios");
        }

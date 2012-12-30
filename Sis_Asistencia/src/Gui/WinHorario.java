@@ -430,9 +430,10 @@ public class WinHorario extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void mitemdeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mitemdeleteActionPerformed
-        val = new Validators();    
+        try{
+             val = new Validators();    
         Object[] datos = {txtnombre.getText(),lblId.getText()};
-        Object[] tipos = {"nombre","id"};
+        Object[] tipos = {1,0};
         if(val.validar(datos,tipos)){    
             int i;      
             i= JOptionPane.showConfirmDialog(null,"¿Esta seguro de eliminar este registro?","Aviso",JOptionPane.OK_CANCEL_OPTION,JOptionPane.WARNING_MESSAGE);
@@ -457,6 +458,9 @@ public class WinHorario extends javax.swing.JInternalFrame {
         else {
             JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
         }
+    }
+    catch(Exception e){}
+       
     }//GEN-LAST:event_mitemdeleteActionPerformed
 
     private void mcloseMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mcloseMousePressed
@@ -469,9 +473,10 @@ public class WinHorario extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_mcloseActionPerformed
 
     private void mitemregisterMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemregisterMousePressed
-        val = new Validators();    
+        try{
+            val = new Validators();    
         Object[] datos = {txtnombre.getText()};
-        Object[] tipos = {"nombre","id"};
+        Object[] tipos = {1};
         if(val.validar(datos,tipos)){    
             dt = new Data();
             String name = txtnombre.getText();
@@ -491,6 +496,9 @@ public class WinHorario extends javax.swing.JInternalFrame {
         else {
             JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
         }
+    }
+    catch(Exception e){}
+        
     }//GEN-LAST:event_mitemregisterMousePressed
 
     private void tblhoraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblhoraMouseClicked
@@ -520,7 +528,8 @@ public class WinHorario extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_tblhoraMouseClicked
 
     private void mitemupdateMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemupdateMousePressed
-        val = new Validators();    
+        try{
+            val = new Validators();    
         Object[] datos = {txtnombre.getText(),lblId.getText()};
         Object[] tipos = {"nombre","id"};
         if(val.validar(datos,tipos)){    
@@ -545,6 +554,9 @@ public class WinHorario extends javax.swing.JInternalFrame {
         else {
             JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
         }
+    }
+    catch(Exception e){}
+        
     }//GEN-LAST:event_mitemupdateMousePressed
 
     private void btnfindMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnfindMouseClicked
@@ -555,29 +567,34 @@ public class WinHorario extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnfindMouseClicked
 
     private void BtnAgreeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAgreeActionPerformed
-    int id = Integer.parseInt(lblId.getText());
-    val = new Validators();    
-    Object[] datos = {lblId.getText()};
-    if(val.validar(datos)){ 
-        dt = new Data();
-        objdetail = new DetailHorarioDAO();
-            
-        SimpleDateFormat fhora = new SimpleDateFormat("HH:mm:ss");
-        int dia  = qs.loadGlobal(2,cboDia,0);
-        int tipo = qs.loadGlobal(3,cbotipoReg,0);
-        Calendar ingreso = TimIngreso.getCalendar();
-        Calendar salida = TimSalida.getCalendar();
-        Time ing =  Time.valueOf(fhora.format(ingreso.getTime()));
-        Time sal =  Time.valueOf(fhora.format(salida.getTime()));
-            
-        int i = objdetail.save(dia, tipo, ing, sal, id);
-        if (i == 0) {
-            JOptionPane.showMessageDialog(null,"No se pudo grabar el detalle");
-         }
-            cargaDetalle();
-    } else {
-        JOptionPane.showMessageDialog(null,"Seleccione un horario para poder ingresar sus detalles");
-            }
+    try{
+        int id = Integer.parseInt(lblId.getText());
+        val = new Validators();    
+        Object[] datos = {lblId.getText()};
+        Object[] tipos={};
+        if(val.validar(datos,tipos)){ 
+            dt = new Data();
+            objdetail = new DetailHorarioDAO();
+
+            SimpleDateFormat fhora = new SimpleDateFormat("HH:mm:ss");
+            int dia  = qs.loadGlobal(2,cboDia,0);
+            int tipo = qs.loadGlobal(3,cbotipoReg,0);
+            Calendar ingreso = TimIngreso.getCalendar();
+            Calendar salida = TimSalida.getCalendar();
+            Time ing =  Time.valueOf(fhora.format(ingreso.getTime()));
+            Time sal =  Time.valueOf(fhora.format(salida.getTime()));
+
+            int i = objdetail.save(dia, tipo, ing, sal, id);
+            if (i == 0) {
+                JOptionPane.showMessageDialog(null,"No se pudo grabar el detalle");
+             }
+                cargaDetalle();
+        } else {
+            JOptionPane.showMessageDialog(null,"Seleccione un horario para poder ingresar sus detalles");
+                }
+        }
+    catch(Exception e){}
+    
     }//GEN-LAST:event_BtnAgreeActionPerformed
 
     private void BtnRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnRemoveActionPerformed
