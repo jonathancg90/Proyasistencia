@@ -1,8 +1,8 @@
 package Utilitarios;
-
+import Utilitarios.Data;
 
 public class Validators {
-    
+    Data objdato;
     
     /**
      * Gestor de validaciones de formulario
@@ -88,11 +88,33 @@ public class Validators {
         
     }
     public boolean validar(Object[] datos,Object[] tipos) {
+        objdato= new Data();
     for (int i = 0; i <= datos.length - 1; i++) {
         if (datos[i].toString().isEmpty()) {
-            return false;
+            String a =tipos[i].toString();
+            switch(a){
+                    case "nombre":
+                    case "apellido":
+                    case "ubicacion":
+                    case "direccion":
+                    case "correo":if(a.length()<=objdato.DIMENTION[3]){return false;}break;
+                    case "dni":
+                    case "telefono":if(a.length()!=objdato.DIMENTION[0]){return false;}break;
+                    case "ruc":
+                    case "simbolo":if(a.length()!=objdato.DIMENTION[1]){return false;}break;
+                    case "recibo":
+                    case "ipcliente":if(a.length()!=objdato.DIMENTION[2]){return false;}break; 
+                    case "username":
+                    case "password":if(a.length()<=objdato.DIMENTION[4]){return false;}break;
+                    case "motivo":if(a.length()!=objdato.DIMENTION[7]){return false;}break;
+                    case "exception":if(a.length()<=objdato.DIMENTION[8]){return false;};
+            }
+            
+         }
+        
         }
-        }
+    System.out.println(tipos[1].toString()+"<-->"+objdato.DIMENTION[3]+"<-->"+tipos[1].toString().length());
+        
     return true;
     }   
 }
