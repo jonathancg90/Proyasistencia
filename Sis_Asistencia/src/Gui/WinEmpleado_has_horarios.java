@@ -330,6 +330,7 @@ public class WinEmpleado_has_horarios extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_tblEmpleado_has_horariosMouseClicked
 
     private void mitemregisterMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemregisterMousePressed
+        try{
         val = new Validators();   
         
         hp=new Helpers();
@@ -359,7 +360,7 @@ public class WinEmpleado_has_horarios extends javax.swing.JInternalFrame {
             {
                 JOptionPane.showMessageDialog(null,"Conflicto en fechas");
             }
-        
+        }catch(Exception e){}
         
 
     }//GEN-LAST:event_mitemregisterMousePressed

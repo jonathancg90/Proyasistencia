@@ -300,8 +300,8 @@ public class WinUsuario extends javax.swing.JInternalFrame {
     private void mitemregisterMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemregisterMousePressed
         try{
         val = new Validators();    
-        Object[] datos = {txtUsername.getText(),Txtcorreo.getText(),txtPassword.getPassword()};
-        Object[] tipos = {1,2,3};
+        Object[] datos = {txtUsername.getText(),txtPassword.getPassword(),Txtcorreo.getText()};
+        Object[] tipos = {3,4,9};
         if(val.validar(datos,tipos)){     
             dt = new Data();
             String username = txtUsername.getText();
@@ -333,8 +333,8 @@ public class WinUsuario extends javax.swing.JInternalFrame {
     private void mitemupdateMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemupdateMousePressed
         try{
         val = new Validators();    
-        Object[] datos = {txtUsername.getText(),Txtcorreo.getText(),txtPassword.getPassword(),lblUsu.getText()};
-        Object[] tipos = {"username","correo","password"};
+        Object[] datos = {txtUsername.getText(),txtPassword.getPassword(),Txtcorreo.getText()};
+        Object[] tipos = {3,4,9};
         if(val.validar(datos,tipos)){     
             dt = new Data();
             int id = Integer.parseInt(lblUsu.getText());
@@ -368,8 +368,8 @@ public class WinUsuario extends javax.swing.JInternalFrame {
     private void mitemdeleteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemdeleteMousePressed
         try{
         val = new Validators();    
-        Object[] datos = {txtUsername.getText(),Txtcorreo.getText(),txtPassword.getPassword(),lblUsu.getText()};
-        Object[] tipos = {"username","correo","password"};
+        Object[] datos = {lblUsu.getText()};
+        Object[] tipos = {};
         if(val.validar(datos,tipos)){    
             int i;      
             i= JOptionPane.showConfirmDialog(null,"¿Esta seguro de eliminar este registro?","Aviso",JOptionPane.OK_CANCEL_OPTION,JOptionPane.WARNING_MESSAGE);

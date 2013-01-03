@@ -374,8 +374,8 @@ public class WinArea extends javax.swing.JInternalFrame {
     private void mitemupdateMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemupdateMousePressed
     try{
     val = new Validators("area");
-    Object[] datos = {txtName.getText(),lblId.getText()};
-    Object[] tipos={1,0};
+    Object[] datos = {txtName.getText()};
+    Object[] tipos={2};
     if(val.validar(datos,tipos)){    
         dt = new Data();
         int id = Integer.valueOf(lblId.getText());

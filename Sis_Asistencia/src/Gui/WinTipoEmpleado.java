@@ -345,7 +345,7 @@ public class WinTipoEmpleado extends javax.swing.JInternalFrame {
     private void mitemupdateMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemupdateMousePressed
         try{
         val = new Validators("tipoempleado");    
-        Object[] datos = {txtName.getText(),lblId.getText()};
+        Object[] datos = {txtName.getText()};
         Object[] tipos = {2};
         if(val.validar(datos,tipos))
         {
@@ -374,7 +374,7 @@ public class WinTipoEmpleado extends javax.swing.JInternalFrame {
     private void mitemdeleteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemdeleteMousePressed
         try{
         val = new Validators("tipoempleado");    
-        Object[] datos = {txtName.getText(),lblId.getText()};
+        Object[] datos = {lblId.getText()};
         Object[] tipos = {};
         if(val.validar(datos,tipos))
         {

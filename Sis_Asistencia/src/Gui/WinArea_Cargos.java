@@ -272,13 +272,13 @@ public class WinArea_Cargos extends javax.swing.JInternalFrame {
       else {
             JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
       }
-     }catch(Exception e){}
+        }catch(Exception e){}
     }//GEN-LAST:event_mitemregisterMousePressed
 
     private void mitemdeleteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemdeleteMousePressed
     try{
         val = new Validators("cargo");    
-    Object[] datos = {txtname.getText()};
+    Object[] datos = {lblidArea.getText()};
     Object[] tipos = {};
     if(val.validar(datos,tipos)){   
         int fsel;

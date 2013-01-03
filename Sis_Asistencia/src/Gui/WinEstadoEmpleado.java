@@ -232,7 +232,7 @@ public class WinEstadoEmpleado extends javax.swing.JInternalFrame {
     private void mitemUpdateMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemUpdateMousePressed
         try{
         val = new Validators("estadoemp");    
-        Object[] datos = {txtName.getText(),lblId.getText()};
+        Object[] datos = {txtName.getText()};
         Object[] tipos = {2};
         if(val.validar(datos,tipos)){      
             if( !"".equals(lblId.getText())){
@@ -260,7 +260,7 @@ public class WinEstadoEmpleado extends javax.swing.JInternalFrame {
     private void jmitemDeleteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmitemDeleteMousePressed
         try{
         val = new Validators("estadoemp");    
-        Object[] datos = {txtName.getText(),lblId.getText()};
+        Object[] datos = {lblId.getText()};
         Object[] tipos = {};
         if(val.validar(datos,tipos)){ 
              int i;      

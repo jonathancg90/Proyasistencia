@@ -39,7 +39,7 @@ public class WinRoles_Permisos extends javax.swing.JInternalFrame {
         lblidrol = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        sitemagregar = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
 
@@ -119,13 +119,13 @@ public class WinRoles_Permisos extends javax.swing.JInternalFrame {
 
         jMenu1.setText("Archivo");
 
-        jMenuItem1.setText("Agregar");
-        jMenuItem1.addMouseListener(new java.awt.event.MouseAdapter() {
+        sitemagregar.setText("Agregar");
+        sitemagregar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                jMenuItem1MousePressed(evt);
+                sitemagregarMousePressed(evt);
             }
         });
-        jMenu1.add(jMenuItem1);
+        jMenu1.add(sitemagregar);
 
         jMenuItem2.setText("Quitar");
         jMenuItem2.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -165,7 +165,7 @@ public class WinRoles_Permisos extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
 
         pack();
@@ -175,13 +175,15 @@ public class WinRoles_Permisos extends javax.swing.JInternalFrame {
      this.setVisible(false);
     }//GEN-LAST:event_jMenu2MousePressed
 
-    private void jMenuItem1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem1MousePressed
+    private void sitemagregarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sitemagregarMousePressed
+       try{
        objPerol = new PermisoshasRolesDAO();
        int idrol = Integer.parseInt(lblidrol.getText());
        int idmod = qs.idChoice("modulos","nombre",String.valueOf(CboModulo.getSelectedItem()));
        objPerol.save(idrol,idmod);
        objPerol.getTableAll(Jtablepermi);
-    }//GEN-LAST:event_jMenuItem1MousePressed
+       }catch(Exception e){}
+    }//GEN-LAST:event_sitemagregarMousePressed
 
     private void jMenuItem2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem2MousePressed
        objPerol = new PermisoshasRolesDAO();
@@ -215,12 +217,12 @@ public class WinRoles_Permisos extends javax.swing.JInternalFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     public javax.swing.JLabel lblRol;
     public javax.swing.JLabel lblidrol;
+    private javax.swing.JMenuItem sitemagregar;
     // End of variables declaration//GEN-END:variables
 }

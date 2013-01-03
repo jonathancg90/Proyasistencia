@@ -376,7 +376,7 @@ public class WinEmpresa extends javax.swing.JInternalFrame {
     private void mitemdeleteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemdeleteMousePressed
         try {
             val = new Validators("empresa");
-            Object[] datos = {txtName.getText(),txtruc.getText()};
+            Object[] datos = {lblId.getText()};
             Object[] tipos = {};
                 if (val.validar(datos,tipos))
                 {
