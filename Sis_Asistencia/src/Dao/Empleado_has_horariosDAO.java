@@ -85,7 +85,7 @@ public class Empleado_has_horariosDAO extends ConexionBd {
 
             pt = qs.sqlRegister(_table);
             pt.setInt(1,objEmp_horarios.getIdemp());
-            pt.setInt(1,objEmp_horarios.getIdhor());
+            pt.setInt(2,objEmp_horarios.getIdhor());
             pt.setDate(3,date.valueOf(objEmp_horarios.getInicio()));
             pt.setDate(4,date.valueOf(objEmp_horarios.getFin()));
             
@@ -120,7 +120,7 @@ public class Empleado_has_horariosDAO extends ConexionBd {
             //Iniciando consulta y asignando valores
             pt = qs.sqlUpdate(Table);
             pt.setInt(1,objEmp_horarios.getIdemp());
-            pt.setInt(1,objEmp_horarios.getIdhor());
+            pt.setInt(2,objEmp_horarios.getIdhor());
             pt.setDate(3,date.valueOf(objEmp_horarios.getInicio()));
             pt.setDate(4,date.valueOf(objEmp_horarios.getFin()));
             pt.setInt(5,objEmp_horarios.getNMID());

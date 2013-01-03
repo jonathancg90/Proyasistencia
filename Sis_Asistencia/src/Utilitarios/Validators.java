@@ -148,7 +148,8 @@ public class Validators {
                date.valueOf(inicio).after(date.valueOf(String.valueOf(tablemodel.getValueAt(i,1)))) &&
                date.valueOf(inicio).before(date.valueOf(String.valueOf(tablemodel.getValueAt(i,2)))) ||  
                date.valueOf(fin).after(date.valueOf(String.valueOf(tablemodel.getValueAt(i,1)))) &&
-               date.valueOf(fin).before(date.valueOf(String.valueOf(tablemodel.getValueAt(i,1))))     
+               date.valueOf(fin).before(date.valueOf(String.valueOf(tablemodel.getValueAt(i,1))))||
+               date.valueOf(fin).before(date.valueOf(inicio))     
                     ){
                 
                 value=false;
