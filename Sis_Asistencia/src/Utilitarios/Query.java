@@ -459,6 +459,7 @@ public class Query extends ConexionBd{
                         }
                         
                     }
+                    System.out.println("Consulta: "+query);
                     rs = s.executeQuery(query);
                     rs.next();
                     cant = rs.getInt(1);

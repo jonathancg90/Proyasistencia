@@ -1,4 +1,5 @@
 package Utilitarios;
+
 import Utilitarios.ConexionBd;
 import Utilitarios.Query;
 import java.sql.Time;
@@ -148,16 +149,16 @@ public class Validators {
         return value;
     }
     /**
-     * Restriccion de maximo registros
+     * Restriccion de maximo registros(Table, condiciones)
      */
-    public boolean MaxRegistro(String Tbale,String criterio, String value, int max){
+    public boolean MaxRegistro(String[] kargs, int max){
         boolean Value = true;//ahun no llego al maximo
         qs = new Query();
         //Obtenemos la cantiad de registros 
         String[] args = new String[3];
-        args[0] = Tbale;
-        args[1] = criterio;
-        args[2] = value;
+        args[0] = kargs[0];
+        args[1] = kargs[1];
+        args[2] = kargs[2];
         
         int cant = qs.getCountRegister(args);
         

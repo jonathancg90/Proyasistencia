@@ -61,12 +61,31 @@ public class WinHorario extends javax.swing.JInternalFrame {
     private boolean HoraValidator(){
         boolean Validator= true;
         val = new Validators();
+        String[] args = new String[3];
+        String[] kargs = new String[5];
+        
+        args[0] = "detailhorario";
+        args[1] = "horarios_idhor";
+        args[2] = lblId.getText();
+        System.out.println("Validator1"+Validator );
         if(Validator){
-            Validator = val.MaxRegistro("detailhorario", title, title, WIDTH);
+            Validator = val.MaxRegistro(args, 14);
         }
+        System.out.println("Validator2"+Validator );
         if(Validator){
-            Validator = val.MaxRegistro(title, title, title, WIDTH);
+            kargs = args;
+            kargs[3] = "dia";
+            for (int i=1;i<=7;i++){
+                System.out.println("Validator3"+Validator );
+                kargs[4] = ""+i;
+                Validator = val.MaxRegistro(args, 2);
+                if(!Validator){
+                    JOptionPane.showMessageDialog(null,"No se permite otro registro de ese mismo dia");
+                    return Validator;
+                }
+            }
         }
+        System.out.println("Validator4"+Validator );
         return Validator;     
                 
     }
@@ -583,28 +602,34 @@ public class WinHorario extends javax.swing.JInternalFrame {
         val = new Validators();    
         Object[] datos = {lblId.getText()};
         Object[] tipos={};
-        if(val.validar(datos,tipos)){ 
-            dt = new Data();
-            objdetail = new DetailHorarioDAO();
+        if(val.validar(datos,tipos)){ //Validacion generica
+            System.out.println("Entro 1");
+            if(HoraValidator()){ //Validacion propia del evento
+                System.out.println("Entro 2 :"+HoraValidator());
+                dt = new Data();
+                objdetail = new DetailHorarioDAO();
 
-            SimpleDateFormat fhora = new SimpleDateFormat("HH:mm:ss");
-            int dia  = qs.loadGlobal(2,cboDia,0);
-            int tipo = qs.loadGlobal(3,cbotipoReg,0);
-            Calendar ingreso = TimIngreso.getCalendar();
-            Calendar salida = TimSalida.getCalendar();
-            Time ing =  Time.valueOf(fhora.format(ingreso.getTime()));
-            Time sal =  Time.valueOf(fhora.format(salida.getTime()));
+                SimpleDateFormat fhora = new SimpleDateFormat("HH:mm:ss");
+                int dia  = qs.loadGlobal(2,cboDia,0);
+                int tipo = qs.loadGlobal(3,cbotipoReg,0);
+                Calendar ingreso = TimIngreso.getCalendar();
+                Calendar salida = TimSalida.getCalendar();
+                Time ing =  Time.valueOf(fhora.format(ingreso.getTime()));
+                Time sal =  Time.valueOf(fhora.format(salida.getTime()));
 
-            int i = objdetail.save(dia, tipo, ing, sal, id);
-            if (i == 0) {
-                JOptionPane.showMessageDialog(null,"No se pudo grabar el detalle");
-             }
+                int i = objdetail.save(dia, tipo, ing, sal, id);
+                if (i == 0) {
+                    JOptionPane.showMessageDialog(null,"No se pudo grabar el detalle");
+                }
                 cargaDetalle();
+            }
         } else {
             JOptionPane.showMessageDialog(null,"Seleccione un horario para poder ingresar sus detalles");
                 }
         }
-    catch(Exception e){}
+    catch(Exception e){
+        System.out.println("Evento registrar: "+e);
+    }
     
     }//GEN-LAST:event_BtnAgreeActionPerformed
 
