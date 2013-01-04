@@ -474,7 +474,6 @@ public class Query extends ConexionBd{
             s = conexion.createStatement();
             rs = s.executeQuery("select * from "+table +" LIMIT 1 ");
             ResultSetMetaData meta = rs.getMetaData();
-            System.out.println("Column: "+meta.getColumnName(pos));
             int pres = meta.getPrecision(pos);
             return pres;
             

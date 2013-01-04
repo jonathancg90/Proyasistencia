@@ -8,8 +8,10 @@ import Utilitarios.Query;
 import Utilitarios.Validators;
 import java.sql.Date;
 import java.sql.PreparedStatement;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import org.postgresql.util.PSQLException;
 
 
 public class AreaDAO extends ConexionBd{
@@ -71,7 +73,6 @@ public class AreaDAO extends ConexionBd{
             qs = new Query();
             String Table = this._table;
             String now = hp.getDateNow();
-            
             objArea = new Area(0,name,now,now,state);
             //Iniciando consulta y asignando valores
             pt = qs.sqlRegister(Table);
@@ -141,12 +142,33 @@ public class AreaDAO extends ConexionBd{
             i= pt.executeUpdate();
             pt.close();
             closeConexion();
-            return i;
+        }
+        catch (PSQLException pg) {
+            try{
+                JOptionPane.showMessageDialog(null,"No se pudo eliminar este registro porque tiene dependencias \n\rSe ha cambiado a inactivo");
+                Date date = new Date(0000-00-00);
+                getConexion();
+                qs= new Query();
+                objArea = new Area();
+                objArea = getValues(id);
+                objArea.setState(false);
+                pt = qs.sqlUpdate(this._table);
+                pt.setString(1,objArea.getName());
+                pt.setBoolean(2,objArea.getState());
+                pt.setDate(3,date.valueOf(objArea.getModified()));
+                pt.setInt(4,id);
+                //Ejecucion y cierre
+                i= pt.executeUpdate();
+                pt.close();
+                closeConexion();
+            } catch(Exception e) {
+                System.out.println(_error + "PSQL_delete: "+e);
+            }
         }
         catch(Exception e){
             System.out.println(_error + "delete: "+e);
-            return i;
         }
+        return i;
     }
     /*
      * Por defecto busca a travez de un like '%%'

@@ -9,6 +9,7 @@ import Utilitarios.Validators;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import Utilitarios.Helpers;
+import org.postgresql.util.PSQLException;
 
     /**
      * Formulario para el mantenimiento de las areas de la empresa.olaaaa
@@ -343,7 +344,7 @@ public class WinArea extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_mcloseMousePressed
 
     private void mitemeliminarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemeliminarMousePressed
-        try{
+    try{
         val = new Validators("area");    
         Object[] datos = {lblId.getText()};
         Object[] tipos = {};
@@ -369,14 +370,16 @@ public class WinArea extends javax.swing.JInternalFrame {
         JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
     }
     }
-    catch(Exception e){}
+    catch(Exception e){
+        System.out.println();
+    }
 }
     private void mitemupdateMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemupdateMousePressed
     try{
     val = new Validators("area");
     Object[] datos = {txtName.getText(),lblId.getText()};
     Object[] tipos={1,0};
-    if(val.validar(datos,tipos)){    
+    if(val.validar(datos,tipos)){
         dt = new Data();
         int id = Integer.valueOf(lblId.getText());
         String name = txtName.getText();
@@ -395,7 +398,9 @@ public class WinArea extends javax.swing.JInternalFrame {
     else {
         JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
     }
-    }catch(Exception e){}
+    }catch(Exception e){
+        System.out.println("Gui_Win_area_Update: " + e);
+    }
 }
     private void mitemregisterMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemregisterMousePressed
     try{

@@ -33,8 +33,14 @@ public class Helpers{
         String date;
         
         Calendar c = Calendar.getInstance();
+        
+        int mesact = c.get(Calendar.MONTH);
+        if(mesact == 0){
+            mesact = mesact +1;
+        }
+        
         String dia = Integer.toString(c.get(Calendar.DATE));
-        String mes = Integer.toString(c.get(Calendar.MONTH));
+        String mes = Integer.toString(mesact);
         String annio = Integer.toString(c.get(Calendar.YEAR));
         date = annio+"-"+mes+"-"+dia;
                 

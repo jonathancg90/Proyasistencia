@@ -1,7 +1,7 @@
 package Utilitarios;
 import Utilitarios.ConexionBd;
 import Utilitarios.Query;
-
+import java.sql.Time;
 import javax.swing.JTable;
 import javax.swing.table.TableModel;
 import java.sql.Date;
@@ -76,16 +76,7 @@ public class Validators {
         
         return acces;
     }
-    
-    
-    /**
-     * Validador de campos vacios
-     */
-    private  boolean validateEmpty(){
-      boolean error=false;
- 
-      return error;
-    }
+   
     /**
      * Validador de solo letras 
      */
@@ -102,7 +93,9 @@ public class Validators {
         
         return error;
     }
-    
+    /**
+     * Conversion de String a boolean
+     */
     public boolean StringToBoolean(String value){
         if("t".equals(value)){
             return true;
@@ -111,6 +104,9 @@ public class Validators {
         }
         
     }
+    /**
+     * Validaciones de formularios
+     */
     public boolean validar(Object[] datos,Object[] tipos) throws SQLException {
     objdato= new Data();
     qs = new Query();
@@ -121,9 +117,11 @@ public class Validators {
         else {
             if(tipos.length != 0){
                 String a =tipos[i].toString();
-                int pres = qs.gettamColumn(this.Table,Integer.parseInt(tipos[i].toString()));
-                if(datos[i].toString().length() > pres){
-                    return false;
+                if(!"0".equals(a)){
+                    int pres = qs.gettamColumn(this.Table,Integer.parseInt(tipos[i].toString()));
+                    if(datos[i].toString().length() > pres){
+                        return false;
+                    }
                 }
             }
          }
@@ -131,7 +129,9 @@ public class Validators {
         
     return true;
     }  
-    
+    /**
+     * Formato de fechas
+     */
     public boolean validarFechas(JTable tbldatos,String inicio,String fin){
         Date date = new Date(0000-00-00);
         
@@ -158,5 +158,41 @@ public class Validators {
         
       
         return value;
+    }
+    /**
+     * Restriccion de maximo registros
+     */
+    public boolean MaxRegistro(String Tbale,String criterio, String value, String max){
+        boolean Value = false;
+        return Value;
+    }
+    /**
+     * Comprobar si la hora es mayor
+     */
+    public boolean horaMayor(Time Ma_Hora, Time Me_Hora){
+        boolean Value = false;
+        return Value;
+    }
+    /**
+     * Comprobar si la fehca es mayor
+     */
+    public boolean fechaMayor(Date Ma_fecha, Date Me_ffecha){
+        boolean Value = false;
+        return Value;
+    }
+    //Helpers
+    /**
+     * Resta dos horas
+     */
+    public boolean restaHoras(Time iHora, Time fHora){
+        boolean Value = false;
+        return Value;
+    }
+    /**
+     * Suma horas
+     */
+    public boolean sumaHoras(Object[] datos){
+        boolean Value = false;
+        return Value;
     }
 }
