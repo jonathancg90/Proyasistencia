@@ -116,7 +116,7 @@ public class Validators {
         } 
         else {
             if(tipos.length != 0){
-                String a =tipos[i].toString();
+                String a =tipos[i].toString();  
                 if(!"0".equals(a)){
                     int pres = qs.gettamColumn(this.Table,Integer.parseInt(tipos[i].toString()));
                     if(datos[i].toString().length() > pres){

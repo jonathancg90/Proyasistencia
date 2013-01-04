@@ -254,7 +254,7 @@ public class WinRoles extends javax.swing.JInternalFrame {
         try{
         val = new Validators();    
         Object[] datos = {txtName.getText()};
-        Object[] tipos = {"nombre"};
+        Object[] tipos = {2};
         if(val.validar(datos,tipos)){     
             String name = txtName.getText();
             objroles = new RolesDAO();
@@ -277,8 +277,8 @@ public class WinRoles extends javax.swing.JInternalFrame {
     private void mitemupdateMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemupdateMousePressed
         try{
         val = new Validators();    
-        Object[] datos = {txtName.getText(),lblId.getText()};
-        Object[] tipos = {"nombre"};
+        Object[] datos = {txtName.getText()};
+        Object[] tipos = {2};
         if(val.validar(datos,tipos)){     
             if(!"".equals(lblId.getText())){
                int id = Integer.valueOf(lblId.getText());
@@ -307,8 +307,8 @@ public class WinRoles extends javax.swing.JInternalFrame {
     private void mitemdeleteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemdeleteMousePressed
         try{
         val = new Validators();    
-        Object[] datos = {txtName.getText(),lblId.getText()};
-        Object[] tipos = {"nombre"};
+        Object[] datos = {lblId.getText()};
+        Object[] tipos = {};
         if(val.validar(datos,tipos)){    
             int i;      
             i= JOptionPane.showConfirmDialog(null,"¿Esta seguro de eliminar este registro?","Aviso",JOptionPane.OK_CANCEL_OPTION,JOptionPane.WARNING_MESSAGE);

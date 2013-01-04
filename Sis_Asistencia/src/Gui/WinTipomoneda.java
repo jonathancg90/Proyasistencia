@@ -375,7 +375,7 @@ public class WinTipomoneda extends javax.swing.JInternalFrame {
     private void mitemdeleteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemdeleteMousePressed
         try{ 
         val = new Validators("moneda");    
-        Object[] datos = {txtName.getText(),txtsimbolo.getText(),lblId.getText()};
+        Object[] datos = {lblId.getText()};
         Object[] tipos = {};
         if(val.validar(datos,tipos)){    
             int i;      

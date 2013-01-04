@@ -300,7 +300,7 @@ public class WinSalarios extends javax.swing.JInternalFrame {
         hp=new Helpers();
         val = new Validators();    
         Object[] datos = {txtMonto.getText()};
-        Object[] tipos = {1};
+        Object[] tipos = {8};
     
         if(val.validar(datos,tipos)){    
             if(val.validarFechas(tblSalarios, hp.getFormatDate(cboF_inicio.getText()), hp.getFormatDate(cboF_final.getText()))){
@@ -345,7 +345,7 @@ public class WinSalarios extends javax.swing.JInternalFrame {
         val = new Validators();  
         hp = new Helpers();
         Object[] datos = {txtMonto.getText()};
-        Object[] tipos = {"monto"};
+        Object[] tipos = {8};
         if(val.validar(datos,tipos)){
                 if(val.validarFechas(tblSalarios, hp.getFormatDate(cboF_inicio.getText()), hp.getFormatDate(cboF_final.getText()))){
                     int idsalario=Integer.parseInt(lblIdsalario.getText());
@@ -383,8 +383,8 @@ public class WinSalarios extends javax.swing.JInternalFrame {
     private void mitemdeleteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemdeleteMousePressed
         try{
         val = new Validators();    
-        Object[] datos = {txtMonto.getText()};
-        Object[] tipos = {"monto"};
+        Object[] datos = {lblIdsalario.getText()};
+        Object[] tipos = {};
         if(val.validar(datos,tipos)){
             int i;
             i= JOptionPane.showConfirmDialog(null,"¿Esta seguro de eliminar este registro?","Aviso",JOptionPane.OK_CANCEL_OPTION,JOptionPane.WARNING_MESSAGE);

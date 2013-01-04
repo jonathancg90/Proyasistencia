@@ -432,8 +432,8 @@ public class WinHorario extends javax.swing.JInternalFrame {
     private void mitemdeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mitemdeleteActionPerformed
         try{
              val = new Validators();    
-        Object[] datos = {txtnombre.getText(),lblId.getText()};
-        Object[] tipos = {1,0};
+        Object[] datos = {lblId.getText()};
+        Object[] tipos = {};
         if(val.validar(datos,tipos)){    
             int i;      
             i= JOptionPane.showConfirmDialog(null,"¿Esta seguro de eliminar este registro?","Aviso",JOptionPane.OK_CANCEL_OPTION,JOptionPane.WARNING_MESSAGE);
@@ -476,7 +476,7 @@ public class WinHorario extends javax.swing.JInternalFrame {
         try{
             val = new Validators();    
         Object[] datos = {txtnombre.getText()};
-        Object[] tipos = {1};
+        Object[] tipos = {2};
         if(val.validar(datos,tipos)){    
             dt = new Data();
             String name = txtnombre.getText();
@@ -530,8 +530,8 @@ public class WinHorario extends javax.swing.JInternalFrame {
     private void mitemupdateMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemupdateMousePressed
         try{
             val = new Validators();    
-        Object[] datos = {txtnombre.getText(),lblId.getText()};
-        Object[] tipos = {"nombre","id"};
+        Object[] datos = {txtnombre.getText()};
+        Object[] tipos = {2};
         if(val.validar(datos,tipos)){    
             dt = new Data();
             int id = Integer.valueOf(lblId.getText());
