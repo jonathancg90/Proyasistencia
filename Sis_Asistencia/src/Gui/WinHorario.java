@@ -1,5 +1,5 @@
-
 package Gui;
+
 import java.sql.Time;
 import java.sql.Timestamp;
 import Utilitarios.Data;
@@ -116,6 +116,7 @@ public class WinHorario extends javax.swing.JInternalFrame {
         lblModified = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         lblId = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         JtblDetail = new javax.swing.JTable();
@@ -245,6 +246,9 @@ public class WinHorario extends javax.swing.JInternalFrame {
         lblId.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel1.add(lblId, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 20, 50, 29));
 
+        jLabel7.setText("asdsadsadsad");
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 280, -1, -1));
+
         jTabbedPane1.addTab("Datos principales", jPanel1);
 
         JtblDetail.setModel(new javax.swing.table.DefaultTableModel(
@@ -260,7 +264,7 @@ public class WinHorario extends javax.swing.JInternalFrame {
         ));
         jScrollPane2.setViewportView(JtblDetail);
 
-        BtnAgree.setText("Agregar");
+        BtnAgree.setText("ASDSADA");
         BtnAgree.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnAgreeActionPerformed(evt);
@@ -454,7 +458,7 @@ public class WinHorario extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(58, Short.MAX_VALUE))
+                .addContainerGap(66, Short.MAX_VALUE))
         );
 
         pack();
@@ -682,6 +686,7 @@ public class WinHorario extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JMenuBar jMenuBar1;
