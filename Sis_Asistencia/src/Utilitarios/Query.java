@@ -387,6 +387,9 @@ public class Query extends ConexionBd{
             String query;
             String identify="";
             identify = getIdentify(Table);
+            if(identify.equals("NMID")){
+            identify="\"NMID\"";
+            }
             query= "select * from "+Table+" where "+ identify +" = "+Id+"";
             s = conexion.createStatement();
             rs = s.executeQuery(query);

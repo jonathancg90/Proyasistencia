@@ -7,7 +7,7 @@ import Utilitarios.Query;
 
 import Javabeans.Empleado_has_horarios;
 import Utilitarios.Validators;
-import java.math.BigDecimal;
+
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import javax.swing.JTable;
@@ -45,7 +45,7 @@ public class Empleado_has_horariosDAO extends ConexionBd {
     
     public void getTableAll(JTable tblDatos){
         try{
-            System.out.println("llego1");
+            
             DefaultTableModel datos;
             qs= new Query();
             hp = new Helpers();
@@ -85,7 +85,7 @@ public class Empleado_has_horariosDAO extends ConexionBd {
 
             pt = qs.sqlRegister(_table);
             pt.setInt(1,objEmp_horarios.getIdemp());
-            pt.setInt(1,objEmp_horarios.getIdhor());
+            pt.setInt(2,objEmp_horarios.getIdhor());
             pt.setDate(3,date.valueOf(objEmp_horarios.getInicio()));
             pt.setDate(4,date.valueOf(objEmp_horarios.getFin()));
             
@@ -120,7 +120,7 @@ public class Empleado_has_horariosDAO extends ConexionBd {
             //Iniciando consulta y asignando valores
             pt = qs.sqlUpdate(Table);
             pt.setInt(1,objEmp_horarios.getIdemp());
-            pt.setInt(1,objEmp_horarios.getIdhor());
+            pt.setInt(2,objEmp_horarios.getIdhor());
             pt.setDate(3,date.valueOf(objEmp_horarios.getInicio()));
             pt.setDate(4,date.valueOf(objEmp_horarios.getFin()));
             pt.setInt(5,objEmp_horarios.getNMID());
@@ -143,12 +143,12 @@ public class Empleado_has_horariosDAO extends ConexionBd {
         try{
             qs= new Query();
             //Preparando
-            String campos[] = new String[9];
+            String campos[] = new String[6];
             campos = qs.getRecords(_table,NMID);
             objEmp_horarios.setIdemp(Integer.parseInt(campos[2]));
             objEmp_horarios.setIdhor(Integer.parseInt(campos[3]));
-            objEmp_horarios.setInicio(campos[3]);
-            objEmp_horarios.setFin(campos[4]);
+            objEmp_horarios.setInicio(campos[4]);
+            objEmp_horarios.setFin(campos[5]);
             
             
             return objEmp_horarios;
