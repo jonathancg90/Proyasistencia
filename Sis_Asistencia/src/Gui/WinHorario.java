@@ -58,7 +58,19 @@ public class WinHorario extends javax.swing.JInternalFrame {
         txtnombre.setText("");
         lblModified.setText("");
     }
-    
+    private boolean HoraValidator(){
+        boolean Validator= true;
+        val = new Validators();
+        if(Validator){
+            Validator = val.MaxRegistro("detailhorario", title, title, WIDTH);
+        }
+        if(Validator){
+            Validator = val.MaxRegistro(title, title, title, WIDTH);
+        }
+        return Validator;     
+                
+    }
+            
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -432,26 +444,25 @@ public class WinHorario extends javax.swing.JInternalFrame {
     private void mitemdeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mitemdeleteActionPerformed
         try{
              val = new Validators();    
-        Object[] datos = {lblId.getText()};
-        Object[] tipos = {};
-        if(val.validar(datos,tipos)){    
-            int i;      
-            i= JOptionPane.showConfirmDialog(null,"¿Esta seguro de eliminar este registro?","Aviso",JOptionPane.OK_CANCEL_OPTION,JOptionPane.WARNING_MESSAGE);
+            Object[] datos = {lblId.getText()};
+            Object[] tipos = {};
+            if(val.validar(datos,tipos)){    
+                int i;      
+                i= JOptionPane.showConfirmDialog(null,"¿Esta seguro de eliminar este registro?","Aviso",JOptionPane.OK_CANCEL_OPTION,JOptionPane.WARNING_MESSAGE);
 
-            if(i==0) {    
-                int id = Integer.valueOf(lblId.getText());
+                if(i==0) {    
+                    int id = Integer.valueOf(lblId.getText());
 
-                objhora = new HorariosDAO();
-                i = objhora.delete(id);
-                if(i==0) {
-                    JOptionPane.showMessageDialog(null,"No se pudo eliminar el horario");
+                    objhora = new HorariosDAO();
+                    i = objhora.delete(id);
+                    if(i==0) {
+                        JOptionPane.showMessageDialog(null,"No se pudo eliminar el horario");
 
-                }
-                else {
-                    JOptionPane.showMessageDialog(null,"Horario eliminado");
-                    objhora.getTableAll(tblhora);
-                    cleanBox();
-
+                    }
+                    else {
+                        JOptionPane.showMessageDialog(null,"Horario eliminado");
+                        objhora.getTableAll(tblhora);
+                        cleanBox();
                 }
             }
         }                                          

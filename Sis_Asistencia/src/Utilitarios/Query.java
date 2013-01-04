@@ -448,8 +448,16 @@ public class Query extends ConexionBd{
                     if(args.length==1){
                         query = "select count(*) from "+args[0];
                     }
-                    else if(args.length==3){
-                        query = "select count(*) from "+args[0]+" where "+args[1]+" = "+args[2];
+                    else if(args.length>=3){
+                        query = "select count(*) from "+args[0]+" where ";
+                        for(int i=1;i<=args.length;i++){
+                            query = query + args[i]+" = "+args[i+1];
+                            if(args.length!=i+1){ 
+                                query = query + " and ";
+                            }
+                            i++;
+                        }
+                        
                     }
                     rs = s.executeQuery(query);
                     rs.next();

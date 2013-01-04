@@ -11,7 +11,14 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 
+
 public class Validators {
+    
+    public static void main(String[] args){
+        Validators val = new Validators();
+
+    }
+    
     Data objdato;
     private ResultSet rs = null;
     private Statement s = null;
@@ -76,23 +83,6 @@ public class Validators {
         
         return acces;
     }
-   
-    /**
-     * Validador de solo letras 
-     */
-    private  boolean validateLeters(){
-        boolean error=false;
-        
-        return error;
-    }
-    /**
-     * Validador solo numeros (enteros o decimal)
-     */
-    private  boolean validateNumber(){
-        boolean error=false;
-        
-        return error;
-    }
     /**
      * Conversion de String a boolean
      */
@@ -155,15 +145,26 @@ public class Validators {
             }
         
         }
-        
-      
         return value;
     }
     /**
      * Restriccion de maximo registros
      */
-    public boolean MaxRegistro(String Tbale,String criterio, String value, String max){
-        boolean Value = false;
+    public boolean MaxRegistro(String Tbale,String criterio, String value, int max){
+        boolean Value = true;//ahun no llego al maximo
+        qs = new Query();
+        //Obtenemos la cantiad de registros 
+        String[] args = new String[3];
+        args[0] = Tbale;
+        args[1] = criterio;
+        args[2] = value;
+        
+        int cant = qs.getCountRegister(args);
+        
+        if(max<=cant){
+            return false;
+        }
+        
         return Value;
     }
     /**
