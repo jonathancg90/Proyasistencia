@@ -221,7 +221,7 @@ public class EmpleadoDAO extends ConexionBd{
         int i = 0;
         try {
             if(!"".equals(idareaactivo)){
-                filter = new String[1][3];
+                filter = new String[1][2];
                 filter[0][0] = "equ_idare";
                 filter[0][1] = idareaactivo; 
             }
@@ -264,6 +264,29 @@ public class EmpleadoDAO extends ConexionBd{
             System.out.println(_error + "getValues: "+e);
             return objEmpl;
         }
+    }
+    
+    public int findAsistencia(String tipo,String empresa,String sucursal,JTable tblDatos){
+        
+        int i=0;
+        try {
+            if(!"".equals(tipo) && !"".equals(empresa)&& !"".equals(sucursal)){
+                filter = new String[3][2];
+                filter[0][0] = "equ_idtip";
+                filter[0][1] =  tipo;
+                filter[1][0] = "equ_idempr";
+                filter[1][1] = empresa;
+                filter[2][0] = "equ_idsuc";
+                filter[2][1] = sucursal;
+            }
+            getTableAll(tblDatos);
+        }
+        catch(Exception e){
+        }
+        
+        
+        
+        return i;
     }
     
 }

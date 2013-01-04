@@ -590,7 +590,7 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_cboAreaActionPerformed
 
     private void btnFiltroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFiltroMouseClicked
-        dt = new Data();
+        
         String  idarea = String.valueOf(cboAreaFilter.getSelectedIndex()+1);
         objempl = new EmpleadoDAO();
         objempl.find(idarea, tblEmpleado);
