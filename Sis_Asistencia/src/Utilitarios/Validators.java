@@ -121,7 +121,7 @@ public class Validators {
     return true;
     }  
     /**
-     * Formato de fechas
+     * Validacion de fechas orden correlativo
      */
     public boolean validarFechas(JTable tbldatos,String inicio,String fin){
         Date date = new Date(0000-00-00);
@@ -141,7 +141,7 @@ public class Validators {
                date.valueOf(fin).after(date.valueOf(String.valueOf(tablemodel.getValueAt(i,1)))) &&
                date.valueOf(fin).before(date.valueOf(String.valueOf(tablemodel.getValueAt(i,1))))||
                date.valueOf(fin).before(date.valueOf(inicio))     
-                    ){
+               ){
                 
                 value=false;
             }
