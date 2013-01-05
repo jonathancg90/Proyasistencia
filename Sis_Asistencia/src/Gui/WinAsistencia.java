@@ -6,6 +6,9 @@ import Javabeans.Empleado;
 
 import Dao.Empleado_has_horariosDAO;
 
+import Dao.RegistroDAO;
+import Javabeans.Registro;
+
 import javax.swing.table.DefaultTableModel;
 
 import Utilitarios.Query;
@@ -17,6 +20,9 @@ import Utilitarios.Helpers;
 import Utilitarios.Validators;
 import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
+import javax.swing.JOptionPane;
+import Utilitarios.Data;
+import java.sql.Time;
 
 public class WinAsistencia extends javax.swing.JInternalFrame {
 
@@ -25,7 +31,12 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
     private EmpleadoDAO objEmpleado;
     private Empleado empleado;
     private Empleado_has_horariosDAO objEmpHor;
+    private Registro registro;
+    private RegistroDAO objRegistro;
     private DateFormat format;
+    private Validators val;
+    private Data dt;
+    private Helpers hp;
     
     public WinAsistencia() {
         initComponents();
@@ -56,13 +67,9 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
     
     }
     
-    public void cleanBox(){
     
-    cbotipo.setSelectedIndex(0);
-    cboempr.setSelectedIndex(0);
-    cbosuc.setSelectedIndex(0);
-    }
 
+    
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -97,11 +104,10 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
         tblempleado = new javax.swing.JTable();
         jPanel6 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblAsistencia = new javax.swing.JTable();
         jPanel9 = new javax.swing.JPanel();
         cboDia = new datechooser.beans.DateChooserCombo();
         jLabel4 = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jButton4 = new javax.swing.JButton();
         TimIngreso = new com.lavantech.gui.comp.TimePanel();
@@ -355,7 +361,7 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
 
         jTabbedPane1.addTab("Lista de empleados", jPanel4);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblAsistencia.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
                 {},
@@ -366,17 +372,20 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
 
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tblAsistencia);
 
         jPanel9.setBorder(javax.swing.BorderFactory.createTitledBorder("Datos de asistencia"));
 
         jLabel4.setText("Dia");
 
-        jButton3.setText("Ver");
-
         jLabel5.setText("Hora");
 
         jButton4.setText("Ok");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         TimIngreso.setDisplayAnalog(false);
         TimIngreso.setSecDisplayed(false);
@@ -398,8 +407,6 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
                     .addGroup(jPanel9Layout.createSequentialGroup()
                         .addGap(22, 22, 22)
                         .addComponent(cboDia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(27, 27, 27)
-                        .addComponent(jButton3)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel9Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -411,8 +418,8 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel9Layout.createSequentialGroup()
+                .addGap(2, 2, 2)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton3)
                     .addComponent(jLabel4)
                     .addComponent(cboDia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -444,7 +451,7 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE)
+                .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -562,11 +569,6 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
                 mcloseMousePressed(evt);
             }
         });
-        mclose.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mcloseActionPerformed(evt);
-            }
-        });
         jMenuBar1.add(mclose);
 
         setJMenuBar(jMenuBar1);
@@ -583,7 +585,7 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 654, Short.MAX_VALUE)
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 658, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -594,10 +596,6 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
         this.setVisible(false);
         Utilitarios.Config.OPENWINDOWS =0;
     }//GEN-LAST:event_mcloseMousePressed
-
-    private void mcloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mcloseActionPerformed
-          
-    }//GEN-LAST:event_mcloseActionPerformed
 
     private void btnbuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnbuscarMouseClicked
        if(jCheckBox1.isSelected()){
@@ -645,9 +643,53 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
             objEmpHor=new Empleado_has_horariosDAO();
             objEmpHor.findId(idempleado, tblHorario);
             
+            objRegistro=new RegistroDAO();
+            objRegistro.findId(lblidEmp.getText(), tblAsistencia);
         }
         
     }//GEN-LAST:event_tblempleadoMouseClicked
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        try{
+        int id = Integer.parseInt(lblidEmp.getText());
+        val = new Validators();    
+        hp=new Helpers();
+        if(!"".equals(lblidEmp.getText())){
+            
+             //Validacion propia del evento
+                
+                dt = new Data();
+                objRegistro= new RegistroDAO();
+
+                SimpleDateFormat fhora = new SimpleDateFormat("HH:mm:ss");
+                
+                Calendar ingreso = TimIngreso.getCalendar();
+                
+                Time ing =  Time.valueOf(fhora.format(ingreso.getTime()));
+                String fecha=hp.getFormatDate(cboDia.getText());
+
+                int i = objRegistro.save(1, ing, fecha, id);
+                if (i == 0) {
+                    JOptionPane.showMessageDialog(null,"No se pudo grabar el detalle");
+                }
+                
+                else {
+                        objRegistro.findId(lblidEmp.getText(), tblAsistencia);
+                        
+                        JOptionPane.showMessageDialog(null,"Nueva asistencia registrado");
+                    }
+                
+            
+        } else {
+            JOptionPane.showMessageDialog(null,"Seleccione un empleado para poder ingresar sus asistencia");
+                }
+        }
+    catch(Exception e){
+        System.out.println("Evento registrar: "+e);
+    }
+        
+        
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.lavantech.gui.comp.TimePanel TimIngreso;
@@ -659,7 +701,6 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox cbosuc;
     private javax.swing.JComboBox cbotipo;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JCheckBox jCheckBox1;
@@ -690,7 +731,6 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable3;
     private javax.swing.JLabel lblApe;
     private javax.swing.JLabel lblDNI;
@@ -701,6 +741,7 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
     private javax.swing.JMenuItem mitemclear;
     private javax.swing.JMenu mman;
     private javax.swing.JMenu mver;
+    private javax.swing.JTable tblAsistencia;
     private javax.swing.JTable tblHorario;
     private javax.swing.JTable tblempleado;
     // End of variables declaration//GEN-END:variables

@@ -47,6 +47,7 @@ public class Query extends ConexionBd{
                 }
             }
             query= "insert into "+Table+" ("+campos+") values("+values+")";
+            
             pt  = conexion.prepareStatement(query);
             rs.close();
             return pt;
