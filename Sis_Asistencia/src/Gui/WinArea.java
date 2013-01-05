@@ -358,11 +358,15 @@ public class WinArea extends javax.swing.JInternalFrame {
                 if(i==0) {
                     JOptionPane.showMessageDialog(null,"No se pudo eliminar el area");
                 }
-                else {
+                else if (i>0){
                     JOptionPane.showMessageDialog(null,"Area eliminada");
                     objarea.getTableAll(tblArea);
                     cleanBox();
-            }
+                }
+                else {
+                    JOptionPane.showMessageDialog(null,"No se pudo eliminar este registro porque tiene dependencias \n\rSe ha cambiado a inactivo");
+                    cleanBox();
+                }
         }
     }//GEN-LAST:event_mitemeliminarMousePressed
     else {

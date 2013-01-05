@@ -444,6 +444,8 @@ public class Query extends ConexionBd{
         public  int getCountRegister(String[] args){
             int cant=0;
             try{  
+                System.out.println("1:"+args.length);
+                getConexion();
                 Statement s = null;
                 s = conexion.createStatement();
                 String query="";
@@ -453,16 +455,16 @@ public class Query extends ConexionBd{
                     }
                     else if(args.length>=3){
                         query = "select count(*) from "+args[0]+" where ";
-                        for(int i=1;i<=args.length;i++){
+                        for(int i=1;i<args.length;i++){
                             query = query + args[i]+" = "+args[i+1];
-                            if(args.length!=i+1){ 
+                            if(args.length!=i+2){ 
                                 query = query + " and ";
                             }
                             i++;
                         }
                         
                     }
-                    System.out.println("Consulta: "+query);
+                    System.out.println(query + "- "+args.length);
                     rs = s.executeQuery(query);
                     rs.next();
                     cant = rs.getInt(1);

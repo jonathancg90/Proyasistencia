@@ -142,10 +142,8 @@ public class Validators {
                date.valueOf(fin).before(date.valueOf(String.valueOf(tablemodel.getValueAt(i,1))))||
                date.valueOf(fin).before(date.valueOf(inicio))     
                ){
-                
                 value=false;
             }
-        
         }
         return value;
     }
@@ -156,13 +154,13 @@ public class Validators {
         boolean Value = true;//ahun no llego al maximo
         qs = new Query();
         //Obtenemos la cantiad de registros 
-        String[] args = new String[3];
-        args[0] = kargs[0];
-        args[1] = kargs[1];
-        args[2] = kargs[2];
-        
+        int ind  = kargs.length;
+        String[] args = new String[ind];
+        for (int i=0;i<ind;i++){
+            args[i] = kargs[i];
+        }
         int cant = qs.getCountRegister(args);
-        
+        System.out.println("Cantidad :"+cant+" max: "+max);
         if(max<=cant){
             return false;
         }

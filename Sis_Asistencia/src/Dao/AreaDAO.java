@@ -7,7 +7,6 @@ import Utilitarios.Query;
 import Utilitarios.Validators;
 import java.sql.Date;
 import java.sql.PreparedStatement;
-import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import org.postgresql.util.PSQLException;
@@ -144,7 +143,6 @@ public class AreaDAO extends ConexionBd{
         }
         catch (PSQLException pg) {
             try{
-                JOptionPane.showMessageDialog(null,"No se pudo eliminar este registro porque tiene dependencias \n\rSe ha cambiado a inactivo");
                 Date date = new Date(0000-00-00);
                 getConexion();
                 qs= new Query();
@@ -158,6 +156,9 @@ public class AreaDAO extends ConexionBd{
                 pt.setInt(4,id);
                 //Ejecucion y cierre
                 i= pt.executeUpdate();
+                if(i>0){
+                    i = -1;
+                }
                 pt.close();
                 closeConexion();
             } catch(Exception e) {

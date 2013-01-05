@@ -63,29 +63,43 @@ public class WinHorario extends javax.swing.JInternalFrame {
         val = new Validators();
         String[] args = new String[3];
         String[] kargs = new String[5];
+        String[] Wargs = new String[7];
         
         args[0] = "detailhorario";
         args[1] = "horarios_idhor";
         args[2] = lblId.getText();
-        System.out.println("Validator1"+Validator );
         if(Validator){
             Validator = val.MaxRegistro(args, 14);
+            if(!Validator){
+               JOptionPane.showMessageDialog(null,"Numero maximo de registros completos");
+               return Validator;
+            }
         }
-        System.out.println("Validator2"+Validator );
         if(Validator){
-            kargs[0] = args[0];
-            kargs[1] = args[1];
-            kargs[2] = args[2];
+            for(int i=0;i<args.length;i++){
+                kargs[i] = args[i];
+            }
             kargs[3] = "dia";
-            System.out.println("Validator3"+Validator );
             kargs[4] = String.valueOf(qs.loadGlobal(2,cboDia,0));
-            Validator = val.MaxRegistro(args, 2);
+            Validator = val.MaxRegistro(kargs, 2);
             if(!Validator){
                JOptionPane.showMessageDialog(null,"No se permite otro registro de ese mismo dia");
                return Validator;
             }
         }
-        System.out.println("Validator4"+Validator );
+        if(Validator){
+            for(int i=0;i<kargs.length;i++){
+                Wargs[i] = kargs[i];
+            }
+            Wargs[5] = "idtip_reg";
+            Wargs[6] = String.valueOf(qs.loadGlobal(3,cbotipoReg,0));
+            Validator = val.MaxRegistro(Wargs, 1);
+            if(!Validator){
+               JOptionPane.showMessageDialog(null,"No se permite otro registro del mismo tipo");
+               return Validator;
+            }
+            
+        }
         return Validator;     
                 
     }
