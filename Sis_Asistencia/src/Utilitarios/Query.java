@@ -491,6 +491,54 @@ public class Query extends ConexionBd{
             return pres;
             
         }
+        
+        
+        public  DefaultTableModel getFechafilter(String[] args, String Table, String inicio,String fin){
+        try{
+            datos = new DefaultTableModel();
+            getConexion();
+            String id;
+            Object[] fila; 
+            s = conexion.createStatement();
+            String qs = "select ";
+            for(int i=0;i<args.length;i++){
+                qs = qs + args[i];
+                qs = qs + ",";
+            }
+            qs = qs +" from "+Table;
+            qs = qs.replace(", "," ");
+            qs = qs + " where ";
+            qs=qs+" (fecha >'"+inicio+"') and (fecha<'"+fin+"')";
+            
+            
+            
+            rs = s.executeQuery(qs);
+            //Llenado Cabecera Jtable
+            ResultSetMetaData meta = rs.getMetaData();
+            int nCols = meta.getColumnCount();
+            for(int i=0; i<nCols; ++i){    
+                datos.addColumn(meta.getColumnName(i+1));
+                id = meta.getColumnName(i+1).substring(0, 2);
+            }
+            //Llenado registro Jtable
+            fila = new Object[nCols];
+            while(rs.next()){
+                for(int i=0; i<nCols; ++i){   
+                    fila[i] = rs.getObject(i+1);
+                }
+                datos.addRow(fila);
+            }
+           //Cerrando conexion
+           rs.close();
+           closeConexion(); 
+           
+        }
+        catch(Exception e){
+            System.out.println(_error+"getFechaFilter: "+e);
+        }
+        
+        return datos;
+        }
     }
         
 

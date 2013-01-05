@@ -108,6 +108,23 @@ public class RegistroDAO extends ConexionBd{
         return i;
     }
     
+    public void getTableFilter(JTable tblDatos,String inicio,String fin){
+        try{
+            DefaultTableModel datos;
+            qs= new Query();
+            hp = new Helpers();
+            String Table = this._table;
+            
+            datos = qs.getFechafilter(this.campos,Table,inicio,fin);
+            tblDatos.setModel(datos);
+            hp.setWidthJtable(tblDatos,witdhcolum);
+        }
+        catch(Exception e){
+            System.out.println(_error + "getTableFechaFilter: "+e);
+        }
+    
+    }
+    
     
     
     

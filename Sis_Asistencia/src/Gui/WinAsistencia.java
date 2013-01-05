@@ -113,7 +113,7 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
         TimIngreso = new com.lavantech.gui.comp.TimePanel();
         jPanel7 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable3 = new javax.swing.JTable();
+        tblFiltroFecha = new javax.swing.JTable();
         jButton2 = new javax.swing.JButton();
         jPanel10 = new javax.swing.JPanel();
         cboIni = new datechooser.beans.DateChooserCombo();
@@ -459,7 +459,7 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
 
         jTabbedPane1.addTab("Registrar asistencia", jPanel6);
 
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+        tblFiltroFecha.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
                 {},
@@ -470,7 +470,7 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
 
             }
         ));
-        jScrollPane3.setViewportView(jTable3);
+        jScrollPane3.setViewportView(tblFiltroFecha);
 
         jButton2.setText("Exportar");
 
@@ -481,6 +481,11 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
         jLabel10.setText("Fecha final ");
 
         jButton5.setText("Buscar");
+        jButton5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton5MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
@@ -585,7 +590,7 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 658, Short.MAX_VALUE)
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 662, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -691,6 +696,25 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
         
     }//GEN-LAST:event_jButton4ActionPerformed
 
+    private void jButton5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MouseClicked
+        java.sql.Date date = new java.sql.Date(0000-00-00);
+        hp=new Helpers();
+        String inicio=hp.getFormatDate(cboIni.getText());
+        String fin=hp.getFormatDate(cboFin.getText());
+        objRegistro= new RegistroDAO();
+        
+        if(date.valueOf(inicio).equals(date.valueOf(fin))||
+                date.valueOf(inicio).after(date.valueOf(fin))){
+            
+            JOptionPane.showMessageDialog(null,"Conflicto de fechas");
+        }
+        else{
+        objRegistro.getTableFilter(tblFiltroFecha, inicio, fin);
+        }
+        
+        
+    }//GEN-LAST:event_jButton5MouseClicked
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.lavantech.gui.comp.TimePanel TimIngreso;
     private javax.swing.JButton btnbuscar;
@@ -731,7 +755,6 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable3;
     private javax.swing.JLabel lblApe;
     private javax.swing.JLabel lblDNI;
     private javax.swing.JLabel lblNombre;
@@ -742,6 +765,7 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
     private javax.swing.JMenu mman;
     private javax.swing.JMenu mver;
     private javax.swing.JTable tblAsistencia;
+    private javax.swing.JTable tblFiltroFecha;
     private javax.swing.JTable tblHorario;
     private javax.swing.JTable tblempleado;
     // End of variables declaration//GEN-END:variables
