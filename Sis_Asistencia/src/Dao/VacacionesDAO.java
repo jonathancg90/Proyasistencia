@@ -12,7 +12,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import Gui.WinVacaciones;
+import Gui.WinEmpleado_Vacaciones;
 
 public class VacacionesDAO extends ConexionBd {
     

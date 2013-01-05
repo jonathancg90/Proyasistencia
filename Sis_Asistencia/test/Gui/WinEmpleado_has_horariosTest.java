@@ -37,24 +37,24 @@ public class WinEmpleado_has_horariosTest {
     }
 
     /**
-     * Test of cargaForm method, of class WinEmpleado_has_horarios.
+     * Test of cargaForm method, of class WinEmpleado_horarios.
      */
     @Test
     public void testCargaForm() {
         System.out.println("cargaForm");
-        WinEmpleado_has_horarios instance = new WinEmpleado_has_horarios();
+        WinEmpleado_horarios instance = new WinEmpleado_horarios();
         instance.cargaForm();
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
 
     /**
-     * Test of cleanBox method, of class WinEmpleado_has_horarios.
+     * Test of cleanBox method, of class WinEmpleado_horarios.
      */
     @Test
     public void testCleanBox() {
         System.out.println("cleanBox");
-        WinEmpleado_has_horarios instance = new WinEmpleado_has_horarios();
+        WinEmpleado_horarios instance = new WinEmpleado_horarios();
         instance.cleanBox();
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");

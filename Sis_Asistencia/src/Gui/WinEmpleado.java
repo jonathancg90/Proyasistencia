@@ -519,7 +519,7 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
     if(!"".equals(lblidempleado.getText())){
         dt= new Data();
         String titulo=dt.G_TITULOS[19];
-        WinSalarios objsalarios= new WinSalarios();
+        WinEmpleado_Salarios objsalarios= new WinEmpleado_Salarios();
         objsalarios.setTitle(titulo);
         objsalarios.lblIdemp.setText(lblidempleado.getText());
         objsalarios.setResizable(true);
@@ -542,7 +542,7 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
     if(!"".equals(lblidempleado.getText())){
         dt= new Data();
         String titulo=dt.G_TITULOS[20];
-        WinVacaciones objvacaciones= new WinVacaciones();
+        WinEmpleado_Vacaciones objvacaciones= new WinEmpleado_Vacaciones();
         objvacaciones.setTitle(titulo);
         objvacaciones.lblIdemp.setText(lblidempleado.getText());
         objvacaciones.setResizable(true);
@@ -563,7 +563,7 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
     private void mhorMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mhorMousePressed
    if(!"".equals(lblidempleado.getText())){
         dt= new Data();
-        WinEmpleado_has_horarios objEmpleado_has_horarios= new WinEmpleado_has_horarios();
+        WinEmpleado_horarios objEmpleado_has_horarios= new WinEmpleado_horarios();
         objEmpleado_has_horarios.setTitle(dt.G_TITULOS[18]);
         objEmpleado_has_horarios.lblIdemp.setText(lblidempleado.getText());
         objEmpleado_has_horarios.setResizable(true);

@@ -12,7 +12,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import Gui.WinEmpleado_has_horarios;
+import Gui.WinEmpleado_horarios;
 
 public class Empleado_has_horariosDAO extends ConexionBd {
     

@@ -17,7 +17,7 @@ import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
 
 
-public class WinSalarios extends javax.swing.JInternalFrame {
+public class WinEmpleado_Salarios extends javax.swing.JInternalFrame {
     
     private SalariosDAO objSalarios;
     private Salarios Salarios;
@@ -31,7 +31,7 @@ public class WinSalarios extends javax.swing.JInternalFrame {
     private Calendar calendar2;
     private Validators val;
     
-    public WinSalarios() {
+    public WinEmpleado_Salarios() {
         initComponents();
         
         

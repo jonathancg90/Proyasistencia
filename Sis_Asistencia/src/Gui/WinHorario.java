@@ -73,16 +73,16 @@ public class WinHorario extends javax.swing.JInternalFrame {
         }
         System.out.println("Validator2"+Validator );
         if(Validator){
-            kargs = args;
+            kargs[0] = args[0];
+            kargs[1] = args[1];
+            kargs[2] = args[2];
             kargs[3] = "dia";
-            for (int i=1;i<=7;i++){
-                System.out.println("Validator3"+Validator );
-                kargs[4] = ""+i;
-                Validator = val.MaxRegistro(args, 2);
-                if(!Validator){
-                    JOptionPane.showMessageDialog(null,"No se permite otro registro de ese mismo dia");
-                    return Validator;
-                }
+            System.out.println("Validator3"+Validator );
+            kargs[4] = String.valueOf(qs.loadGlobal(2,cboDia,0));
+            Validator = val.MaxRegistro(args, 2);
+            if(!Validator){
+               JOptionPane.showMessageDialog(null,"No se permite otro registro de ese mismo dia");
+               return Validator;
             }
         }
         System.out.println("Validator4"+Validator );
@@ -116,7 +116,6 @@ public class WinHorario extends javax.swing.JInternalFrame {
         lblModified = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         lblId = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         JtblDetail = new javax.swing.JTable();
@@ -246,9 +245,6 @@ public class WinHorario extends javax.swing.JInternalFrame {
         lblId.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel1.add(lblId, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 20, 50, 29));
 
-        jLabel7.setText("asdsadsadsad");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 280, -1, -1));
-
         jTabbedPane1.addTab("Datos principales", jPanel1);
 
         JtblDetail.setModel(new javax.swing.table.DefaultTableModel(
@@ -264,7 +260,7 @@ public class WinHorario extends javax.swing.JInternalFrame {
         ));
         jScrollPane2.setViewportView(JtblDetail);
 
-        BtnAgree.setText("ASDSADA");
+        BtnAgree.setText("Registrar");
         BtnAgree.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnAgreeActionPerformed(evt);
@@ -458,7 +454,7 @@ public class WinHorario extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(66, Short.MAX_VALUE))
+                .addContainerGap(70, Short.MAX_VALUE))
         );
 
         pack();
@@ -609,7 +605,7 @@ public class WinHorario extends javax.swing.JInternalFrame {
         if(val.validar(datos,tipos)){ //Validacion generica
             System.out.println("Entro 1");
             if(HoraValidator()){ //Validacion propia del evento
-                System.out.println("Entro 2 :"+HoraValidator());
+                System.out.println("Entro 2 :");
                 dt = new Data();
                 objdetail = new DetailHorarioDAO();
 
@@ -686,7 +682,6 @@ public class WinHorario extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JMenuBar jMenuBar1;

@@ -12,7 +12,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import Gui.WinSalarios;
+import Gui.WinEmpleado_Salarios;
 
 public class SalariosDAO extends ConexionBd {
     

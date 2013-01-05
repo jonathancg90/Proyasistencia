@@ -37,24 +37,24 @@ public class WinVacacionesTest {
     }
 
     /**
-     * Test of cargaForm method, of class WinVacaciones.
+     * Test of cargaForm method, of class WinEmpleado_Vacaciones.
      */
     @Test
     public void testCargaForm() {
         System.out.println("cargaForm");
-        WinVacaciones instance = new WinVacaciones();
+        WinEmpleado_Vacaciones instance = new WinEmpleado_Vacaciones();
         instance.cargaForm();
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
 
     /**
-     * Test of cleanBox method, of class WinVacaciones.
+     * Test of cleanBox method, of class WinEmpleado_Vacaciones.
      */
     @Test
     public void testCleanBox() {
         System.out.println("cleanBox");
-        WinVacaciones instance = new WinVacaciones();
+        WinEmpleado_Vacaciones instance = new WinEmpleado_Vacaciones();
         instance.cleanBox();
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
