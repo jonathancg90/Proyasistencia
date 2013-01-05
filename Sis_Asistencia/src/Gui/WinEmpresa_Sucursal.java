@@ -349,7 +349,7 @@ public class WinEmpresa_Sucursal extends javax.swing.JInternalFrame {
       if(val.validar(datos,tipos)){  
             String name = txtName.getText();
             String direccion=txtdireccion.getText();
-            int ciudad = qs.idChoice("ciudad", "nombre", String.valueOf(cmbCiudad.getSelectedItem()));
+            int ciudad = Integer.parseInt(qs.idChoice("ciudad", "nombre", String.valueOf(cmbCiudad.getSelectedItem())));
             int emp = Integer.parseInt(lblIdemp.getText());
             objsucursal = new SucursalDao();
             int i = objsucursal.save(name,direccion, ciudad,emp);
@@ -378,7 +378,7 @@ public class WinEmpresa_Sucursal extends javax.swing.JInternalFrame {
             int id = Integer.valueOf(lblId.getText());
             String name = txtName.getText();
             String direccion=txtdireccion.getText();
-            int ciudad = qs.idChoice("ciudad", "nombre", String.valueOf(cmbCiudad.getSelectedItem()));
+            int ciudad = Integer.parseInt(qs.idChoice("ciudad", "nombre", String.valueOf(cmbCiudad.getSelectedItem())));
             int idempr = Integer.valueOf(lblIdemp.getText());
             objsucursal = new SucursalDao();
             int i = objsucursal.update(id,name,direccion, ciudad,idempr);

@@ -153,10 +153,21 @@ public class Query extends ConexionBd{
     public String getQueryList(String[] args, String Table, String[][] Filter){
         String type;
         String camp;
+        String[] temp;
+        String[] kargs =  new String[args.length];
+        
+        for(int i=0;i<args.length;i++){
+            kargs[i] = args[i];
+        }
+        
         String qs = "select ";
-        for(int i=0;i<args.length;i++)
+        for(int i=0;i<kargs.length;i++)
         {
-            qs = qs + args[i];
+            temp = kargs[i].split("/");
+            if(temp.length>=1){
+                kargs[i] = temp[0];
+            }
+            qs = qs + kargs[i];
             qs = qs + ",";
         }
         qs = qs +" from "+Table;
@@ -177,7 +188,6 @@ public class Query extends ConexionBd{
                          break;
                     default:qs = qs + " " + Filter[i][0] + " like '%" + Filter[i][1] + "%' ";
                          break;
-                    
                 }
                 if(Filter.length!=i+1){ 
                     qs = qs + "and";
@@ -196,28 +206,38 @@ public class Query extends ConexionBd{
             getConexion();
             String id;
             Object[] fila; 
+            String[] temp;
+            String tbl;
             s = conexion.createStatement();
             String qs = getQueryList(args,Table, Filter);
             rs = s.executeQuery(qs);
             //Llenado Cabecera Jtable
             ResultSetMetaData meta = rs.getMetaData();
             int nCols = meta.getColumnCount();
+            String[] colum = new String[nCols];
             for(int i=0; i<nCols; ++i){    
                 datos.addColumn(meta.getColumnName(i+1));
+                colum[i]=meta.getColumnName(i+1);
                 id = meta.getColumnName(i+1).substring(0, 2);
             }
             //Llenado registro Jtable
             fila = new Object[nCols];
             while(rs.next()){
                 for(int i=0; i<nCols; ++i){   
-                    fila[i] = rs.getObject(i+1);
+                        temp = args[i].split("/");
+                        if(temp.length>1){
+                            tbl = temp[1];
+                            this.identify = "str_"+temp[2];
+                            fila[i] =  idChoice(tbl,colum[i], String.valueOf(rs.getObject(i+1)));
+                        }else {
+                            fila[i] = rs.getObject(i+1);
+                        }
                 }
                 datos.addRow(fila);
             }
            //Cerrando conexion
            rs.close();
            closeConexion(); 
-           
         }
         catch(Exception e){
             System.out.println(_error+"getAll: "+e);
@@ -353,8 +373,9 @@ public class Query extends ConexionBd{
      /*
      * Me devuelve el id de 
      */
-    public int idChoice(String Tbl, String Campo, String value){
-        int id=0;
+    public String idChoice(String Tbl, String Campo, String value){
+        String campo = "0";
+        String type="int";
         try{
             getConexion();
             String identify = "";
@@ -362,12 +383,27 @@ public class Query extends ConexionBd{
                 identify = getIdentify(Tbl);
             } else {
                 identify = this.identify;
+                type = identify.substring(0, 3);
+                switch(type){
+                    case "int":identify = identify.substring(4, identify.length());
+                         break;
+                    case "str":identify =  identify.substring(4, identify.length());
+                         break;
+                    default:type="int";
+                        ;break;
+                        
+                }
             }
             MChoice = new DefaultComboBoxModel();
             s = conexion.createStatement();
             rs = s.executeQuery("select " +identify+ " from " +Tbl+ " where " +Campo+ " = '"+value+"'");
             while(rs.next()) {
-                id = rs.getInt(identify);
+                switch(type){
+                    case "int":campo = String.valueOf(rs.getInt(identify));
+                         break;
+                    case "str":campo =  rs.getString(identify);
+                         break;
+                }
             }     
             
             closeConexion(); 
@@ -375,7 +411,7 @@ public class Query extends ConexionBd{
         catch(Exception e){
             System.out.println(_error+"idChoice: "+e);
         }
-        return id;
+        return campo;
     }
     /*
      * Obtener valores de la tabla 
@@ -426,7 +462,6 @@ public class Query extends ConexionBd{
                 
                 for(int i=1;i<=nCols;i++){
                     if(meta.isAutoIncrement(i)){
-
                         identify = meta.getColumnName(i);
                     }
                 }
@@ -464,7 +499,6 @@ public class Query extends ConexionBd{
                         }
                         
                     }
-                    System.out.println(query + "- "+args.length);
                     rs = s.executeQuery(query);
                     rs.next();
                     cant = rs.getInt(1);

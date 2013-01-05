@@ -309,9 +309,9 @@ public class WinUsuario extends javax.swing.JInternalFrame {
             String nomemp = String.valueOf(cboEmp.getSelectedItem());
 
             qs = new Query();
-            int idemp = qs.idChoice("empleado","nombres", nomemp);
+            int idemp = Integer.parseInt(qs.idChoice("empleado","nombres", nomemp));
             boolean estate = Boolean.valueOf(dt.G_BOOLEAN[cboEstado.getSelectedIndex()]);
-            int rol = qs.idChoice("roles","nombre",String.valueOf(cboRol.getSelectedItem()));
+            int rol = Integer.parseInt(qs.idChoice("roles","nombre",String.valueOf(cboRol.getSelectedItem())));
             String correo = Txtcorreo.getText();
             objUser = new UserDAO();
             int i = objUser.saveUsuario(username,password,idemp,estate,rol,correo);
@@ -343,10 +343,10 @@ public class WinUsuario extends javax.swing.JInternalFrame {
             String nomemp = String.valueOf(cboEmp.getSelectedItem());
 
             qs = new Query();
-            int idemp = qs.idChoice("empleado","nombres", nomemp);
+            int idemp = Integer.parseInt(qs.idChoice("empleado","nombres", nomemp));
 
             boolean estate = Boolean.valueOf(dt.G_BOOLEAN[cboEstado.getSelectedIndex()]);
-            int rol = qs.idChoice("roles","nombre",String.valueOf(cboRol.getSelectedItem()));
+            int rol = Integer.parseInt(qs.idChoice("roles","nombre",String.valueOf(cboRol.getSelectedItem())));
             String correo = Txtcorreo.getText();
             objUser = new UserDAO();
             int i = objUser.updateUsuario(id,username,password,idemp,estate,rol,correo);

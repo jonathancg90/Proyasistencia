@@ -160,7 +160,6 @@ public class Validators {
             args[i] = kargs[i];
         }
         int cant = qs.getCountRegister(args);
-        System.out.println("Cantidad :"+cant+" max: "+max);
         if(max<=cant){
             return false;
         }
@@ -168,17 +167,13 @@ public class Validators {
         return Value;
     }
     /**
-     * Comprobar si la hora es mayor
+     * Comprobar si la hora es mayor(Hayor,Menor)
      */
     public boolean horaMayor(Time Ma_Hora, Time Me_Hora){
         boolean Value = false;
-        return Value;
-    }
-    /**
-     * Comprobar si la fehca es mayor
-     */
-    public boolean fechaMayor(Date Ma_fecha, Date Me_ffecha){
-        boolean Value = false;
+        if(Ma_Hora.compareTo(Me_Hora) > 0){
+            Value = true;
+        }
         return Value;
     }
     //Helpers

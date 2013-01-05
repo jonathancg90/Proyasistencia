@@ -37,11 +37,11 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
             qs.loadChoice(cboEmpresa,"empresa","nombre");
             qs.setIdentify("idempr");
             qs.loadChoiceDefault(cboSucursal,"sucursal","nombre",
-            qs.idChoice("empresa","nombre",String.valueOf(cboEmpresa.getSelectedItem())));
+            Integer.parseInt(qs.idChoice("empresa","nombre",String.valueOf(cboEmpresa.getSelectedItem()))));
             qs.loadChoice(cboArea,"area","nombre");
             qs.setIdentify("idare");
             qs.loadChoiceDefault(cboCargo,"cargo","nombre",
-            qs.idChoice("area","nombre",String.valueOf(cboArea.getSelectedItem())));
+            Integer.parseInt(qs.idChoice("area","nombre",String.valueOf(cboArea.getSelectedItem()))));
             qs.loadChoice(cboTipo,"tipoempleado","nombre");
             
             
@@ -391,12 +391,12 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
         String dni=txtdni.getText();
         String apellido=txtapellidos.getText();
         String telefono=txttelefono.getText();
-        int empresa =  qs.idChoice("empresa","nombre",String.valueOf(cboEmpresa.getSelectedItem()));
-        int area =  qs.idChoice("area","nombre",String.valueOf(cboArea.getSelectedItem()));
-        int tipo =  qs.idChoice("tipoempleado","nombre",String.valueOf(cboTipo.getSelectedItem()));
-        int sucursal =  qs.idChoice("sucursal","nombre",String.valueOf(cboSucursal.getSelectedItem()));
-        int cargo =  qs.idChoice("cargo","nombre",String.valueOf(cboCargo.getSelectedItem()));
-        int estate =  qs.idChoice("estadoemp","nombre",String.valueOf(cboEstado.getSelectedItem()));
+        int empresa =  Integer.parseInt(qs.idChoice("empresa","nombre",String.valueOf(cboEmpresa.getSelectedItem())));
+        int area =  Integer.parseInt(qs.idChoice("area","nombre",String.valueOf(cboArea.getSelectedItem())));
+        int tipo =  Integer.parseInt(qs.idChoice("tipoempleado","nombre",String.valueOf(cboTipo.getSelectedItem())));
+        int sucursal =  Integer.parseInt(qs.idChoice("sucursal","nombre",String.valueOf(cboSucursal.getSelectedItem())));
+        int cargo =  Integer.parseInt(qs.idChoice("cargo","nombre",String.valueOf(cboCargo.getSelectedItem())));
+        int estate =  Integer.parseInt(qs.idChoice("estadoemp","nombre",String.valueOf(cboEstado.getSelectedItem())));
 
         objempl = new EmpleadoDAO();
         int i = objempl.saveEmpleado(0,nombre,apellido,dni, telefono,area, tipo, estate,cargo,empresa,sucursal);
@@ -428,12 +428,12 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
         String dni=txtdni.getText();
         String apellido=txtapellidos.getText();
         String telefono=txttelefono.getText();
-        int empresa =  qs.idChoice("empresa","nombre",String.valueOf(cboEmpresa.getSelectedItem()));
-        int area =  qs.idChoice("area","nombre",String.valueOf(cboArea.getSelectedItem()));
-        int tipo =  qs.idChoice("tipoempleado","nombre",String.valueOf(cboTipo.getSelectedItem()));
-        int sucursal =  qs.idChoice("sucursal","nombre",String.valueOf(cboSucursal.getSelectedItem()));
-        int cargo =  qs.idChoice("cargo","nombre",String.valueOf(cboCargo.getSelectedItem()));
-        int estate =  qs.idChoice("estadoemp","nombre",String.valueOf(cboEstado.getSelectedItem()));
+        int empresa =  Integer.parseInt(qs.idChoice("empresa","nombre",String.valueOf(cboEmpresa.getSelectedItem())));
+        int area =  Integer.parseInt(qs.idChoice("area","nombre",String.valueOf(cboArea.getSelectedItem())));
+        int tipo =  Integer.parseInt(qs.idChoice("tipoempleado","nombre",String.valueOf(cboTipo.getSelectedItem())));
+        int sucursal =  Integer.parseInt(qs.idChoice("sucursal","nombre",String.valueOf(cboSucursal.getSelectedItem())));
+        int cargo =  Integer.parseInt(qs.idChoice("cargo","nombre",String.valueOf(cboCargo.getSelectedItem())));
+        int estate =  Integer.parseInt(qs.idChoice("estadoemp","nombre",String.valueOf(cboEstado.getSelectedItem())));
        
         objempl = new EmpleadoDAO();
         objempl.UpdateEmpresa(id*-1);
@@ -580,13 +580,13 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
     private void cboEmpresaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboEmpresaActionPerformed
     qs = new Query();
     qs.setIdentify("idempr");
-    qs.loadChoiceDefault(cboSucursal,"sucursal","nombre",qs.idChoice("empresa","nombre",String.valueOf(cboEmpresa.getSelectedItem())));
+    qs.loadChoiceDefault(cboSucursal,"sucursal","nombre",Integer.parseInt(qs.idChoice("empresa","nombre",String.valueOf(cboEmpresa.getSelectedItem()))));
     }//GEN-LAST:event_cboEmpresaActionPerformed
 
     private void cboAreaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboAreaActionPerformed
     qs = new Query();
     qs.setIdentify("idare");
-    qs.loadChoiceDefault(cboCargo,"cargo","nombre",qs.idChoice("area","nombre",String.valueOf(cboArea.getSelectedItem())));
+    qs.loadChoiceDefault(cboCargo,"cargo","nombre",Integer.parseInt(qs.idChoice("area","nombre",String.valueOf(cboArea.getSelectedItem()))));
     }//GEN-LAST:event_cboAreaActionPerformed
 
     private void btnFiltroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFiltroMouseClicked

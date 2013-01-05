@@ -341,7 +341,7 @@ public class WinEmpleado_horarios extends javax.swing.JInternalFrame {
                 
                 String F_inicio=hp.getFormatDate(cboF_inicio.getText());
                 String F_final=hp.getFormatDate(cboF_final.getText());
-                int horario =  qs.idChoice("horarios","nombre",String.valueOf(cbo_Horario.getSelectedItem()));
+                int horario =  Integer.parseInt(qs.idChoice("horarios","nombre",String.valueOf(cbo_Horario.getSelectedItem())));
                 
                 int idemp=Integer.valueOf(lblIdemp.getText());
 
@@ -371,7 +371,7 @@ public class WinEmpleado_horarios extends javax.swing.JInternalFrame {
             if(val.validarFechas(tblEmpleado_has_horarios, hp.getFormatDate(cboF_inicio.getText()), hp.getFormatDate(cboF_final.getText()))){
             
                 int idhorarios=Integer.parseInt(lblIdemp_horarios.getText());
-                int horario =  qs.idChoice("horarios","nombre",String.valueOf(cbo_Horario.getSelectedItem()));
+                int horario =  Integer.parseInt(qs.idChoice("horarios","nombre",String.valueOf(cbo_Horario.getSelectedItem())));
                 int idemp=Integer.parseInt(lblIdemp.getText());
                 String F_inicio=hp.getFormatDate(cboF_inicio.getText());
                 String F_final=hp.getFormatDate(cboF_final.getText());

@@ -179,7 +179,7 @@ public class WinRoles_Permisos extends javax.swing.JInternalFrame {
        try{
        objPerol = new PermisoshasRolesDAO();
        int idrol = Integer.parseInt(lblidrol.getText());
-       int idmod = qs.idChoice("modulos","nombre",String.valueOf(CboModulo.getSelectedItem()));
+       int idmod = Integer.parseInt(qs.idChoice("modulos","nombre",String.valueOf(CboModulo.getSelectedItem())));
        objPerol.save(idrol,idmod);
        objPerol.getTableAll(Jtablepermi);
        }catch(Exception e){}

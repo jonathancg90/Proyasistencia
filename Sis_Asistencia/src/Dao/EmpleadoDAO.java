@@ -38,7 +38,7 @@ public class EmpleadoDAO extends ConexionBd{
         campos[0]="idemp";
         campos[1]="nombres";
         campos[2]="apellidos";
-        campos[3]="idcar";
+        campos[3]="idcar/cargo/nombre";
         witdhcolum = new int[1];
         witdhcolum[0]=50;
     }
@@ -50,7 +50,7 @@ public class EmpleadoDAO extends ConexionBd{
             if (filter.length == 0){
                 filter = new String[0][0];
             }
-            
+            System.out.println("Campo: "+campos[3]);
             datos = qs.getAll(campos,_table,filter);
             tblDatos.setModel(datos);
             hp.setWidthJtable(tblDatos,witdhcolum);
@@ -111,7 +111,7 @@ public class EmpleadoDAO extends ConexionBd{
             if(empresa<0) {
                 empresa = empresa * -1;
                 qs.setIdentify("idempr");
-                empresa = qs.idChoice(_table,"idemp", ""+empresa);
+                empresa = Integer.parseInt(qs.idChoice(_table,"idemp", ""+empresa));
             }
             objEmpr = new Empresa();
             String args[] = new String[3];
@@ -196,7 +196,7 @@ public class EmpleadoDAO extends ConexionBd{
             
             objEmpl.setIdemp(idemp);
             qs.setIdentify("idempr");
-            objEmpl.setIdempr(qs.idChoice(_table,"idemp", ""+idemp));
+            objEmpl.setIdempr(Integer.parseInt(qs.idChoice(_table,"idemp", ""+idemp)));
             
             pt = qs.sqlDelete(Table);
             pt.setInt(1,objEmpl.getIdemp());

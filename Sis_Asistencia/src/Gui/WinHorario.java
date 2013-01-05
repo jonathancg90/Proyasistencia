@@ -58,7 +58,7 @@ public class WinHorario extends javax.swing.JInternalFrame {
         txtnombre.setText("");
         lblModified.setText("");
     }
-    private boolean HoraValidator(){
+    private boolean HoraValidator_Delete(){
         boolean Validator= true;
         val = new Validators();
         String[] args = new String[3];
@@ -98,10 +98,20 @@ public class WinHorario extends javax.swing.JInternalFrame {
                JOptionPane.showMessageDialog(null,"No se permite otro registro del mismo tipo");
                return Validator;
             }
-            
         }
-        return Validator;     
-                
+        if(Validator){
+            SimpleDateFormat fhora = new SimpleDateFormat("HH:mm:ss");
+            Calendar ingreso = TimIngreso.getCalendar();
+            Calendar salida = TimSalida.getCalendar();
+            Time ing =  Time.valueOf(fhora.format(ingreso.getTime()));
+            Time sal =  Time.valueOf(fhora.format(salida.getTime()));
+            Validator = val.horaMayor(sal, ing);
+            if(!Validator){
+               JOptionPane.showMessageDialog(null,"Verificar horas seleccionadas");
+               return Validator;
+            }
+        }
+        return Validator;         
     }
             
     @SuppressWarnings("unchecked")
@@ -574,32 +584,31 @@ public class WinHorario extends javax.swing.JInternalFrame {
     private void mitemupdateMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemupdateMousePressed
         try{
             val = new Validators();    
-        Object[] datos = {txtnombre.getText()};
-        Object[] tipos = {2};
-        if(val.validar(datos,tipos)){    
-            dt = new Data();
-            int id = Integer.valueOf(lblId.getText());
-            String name = txtnombre.getText();
-            boolean estate = Boolean.valueOf(dt.G_BOOLEAN[cboestado.getSelectedIndex()]);
-            int tipo= qs.loadGlobal(1,cbotipo,0);
+            Object[] datos = {txtnombre.getText()};
+            Object[] tipos = {2};
+            if(val.validar(datos,tipos)){    
+                dt = new Data();
+                int id = Integer.valueOf(lblId.getText());
+                String name = txtnombre.getText();
+                boolean estate = Boolean.valueOf(dt.G_BOOLEAN[cboestado.getSelectedIndex()]);
+                int tipo= qs.loadGlobal(1,cbotipo,0);
 
-            objhora = new HorariosDAO();
-            int i = objhora.update(id,name,tipo,estate);
-            if (i == 0) {
-
-                JOptionPane.showMessageDialog(null, "No se pudo actualizar datos");
-            }
+                objhora = new HorariosDAO();
+                int i = objhora.update(id,name,tipo,estate);
+                if (i == 0) {
+                    JOptionPane.showMessageDialog(null, "No se pudo actualizar datos");
+                }
+                else {
+                    objhora.getTableAll(tblhora);
+                    cleanBox();
+                    JOptionPane.showMessageDialog(null, "Horario actualizado");
+                } 
+            }                                          
             else {
-                objhora.getTableAll(tblhora);
-                cleanBox();
-                JOptionPane.showMessageDialog(null, "Horario actualizado");
-            } 
-        }                                          
-        else {
-            JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
+                JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
+            }
         }
-    }
-    catch(Exception e){}
+        catch(Exception e){}
         
     }//GEN-LAST:event_mitemupdateMousePressed
 
@@ -617,9 +626,7 @@ public class WinHorario extends javax.swing.JInternalFrame {
         Object[] datos = {lblId.getText()};
         Object[] tipos={};
         if(val.validar(datos,tipos)){ //Validacion generica
-            System.out.println("Entro 1");
-            if(HoraValidator()){ //Validacion propia del evento
-                System.out.println("Entro 2 :");
+            if(HoraValidator_Delete()){ //Validacion propia del evento
                 dt = new Data();
                 objdetail = new DetailHorarioDAO();
 
