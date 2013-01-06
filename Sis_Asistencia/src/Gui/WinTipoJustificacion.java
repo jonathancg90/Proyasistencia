@@ -273,13 +273,17 @@ public class WinTipoJustificacion extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_tbljusMouseClicked
 
     private void mitemregisterMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemregisterMousePressed
+        
         try{
+            
         val = new Validators();    
         Object[] datos = {txtName.getText()};
         Object[] tipos = {2};
-        if(val.validar(datos,tipos)){     
+        if(val.validar(datos,tipos)){ 
+            System.out.println("error 1");
             dt = new Data();
             String name = txtName.getText();
+            
             objjus = new TipoJustificacionDAO();
             int i = objjus.save(name);
             if (i == 0) {
