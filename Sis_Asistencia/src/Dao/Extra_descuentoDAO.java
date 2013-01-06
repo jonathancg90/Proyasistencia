@@ -56,7 +56,7 @@ public class Extra_descuentoDAO extends ConexionBd{
     /*
      * Registro de areas
      */
-    public int save(String name, boolean state,int tipo,int iddet_hor){
+    public int save(String fecha,int tipo,float monto,int idemp){
        int i=0;
         try{
             Date date = new Date(0000-00-00);
@@ -67,7 +67,7 @@ public class Extra_descuentoDAO extends ConexionBd{
             String Table = this._table;
             String now = hp.getDateNow();
             
-            objdes = new Extra_descuento(i, tipo, name, tipo, i);
+            objdes = new Extra_descuento(i, tipo, fecha, monto, idemp);
             //Iniciando consulta y asignando valores
             pt = qs.sqlRegister(Table);
             pt.setInt(1,objdes.getTipo());
@@ -88,18 +88,18 @@ public class Extra_descuentoDAO extends ConexionBd{
     /*
      * Actualizacion de areas
      */
-    public int update(int id,String name,int tipo,boolean state,int iddet_hor){
+    public int update(String fecha,int tipo,float monto,int idemp){
        int i=0;
         try{
             Date date = new Date(0000-00-00);
             //Preparando
             getConexion();
             hp = new Helpers();
-            qs= new Query();
+            qs = new Query();
             String Table = this._table;
             String now = hp.getDateNow();
             
-            objdes = new Extra_descuento(i, tipo, name, tipo, i);
+            objdes = new Extra_descuento(i, tipo, fecha, monto, idemp);
             //Iniciando consulta y asignando valores
             pt = qs.sqlRegister(Table);
             pt.setInt(1,objdes.getTipo());
@@ -148,25 +148,7 @@ public class Extra_descuentoDAO extends ConexionBd{
      * int_ = Busqueda de entero
      * equ_ = busca exactamente la plabra
      */
-   /*
-     * Filtros de busqueda
-     */
-    public int find(String state,JTable tblDatos) {
-        int i = 0;
-        try {
-            if(!"".equals(state)){
-                filter = new String[1][2];
-                filter[0][0] = "equ_estado";
-                filter[0][1] = state; 
-            }
-            getTableAll(tblDatos);
-        }
-        catch(Exception e){
-            System.out.println(_error + "find : "+e);
-        }
-        return i;
-    }
-
+   
     /*
      * Cargar valores de busqueda al modelo 
      */
