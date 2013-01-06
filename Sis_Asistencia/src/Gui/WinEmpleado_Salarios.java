@@ -300,7 +300,7 @@ public class WinEmpleado_Salarios extends javax.swing.JInternalFrame {
         hp=new Helpers();
         val = new Validators();    
         Object[] datos = {txtMonto.getText()};
-        Object[] tipos = {8};
+        Object[] tipos = {0};
     
         if(val.validar(datos,tipos)){    
             if(val.validarFechas(tblSalarios, hp.getFormatDate(cboF_inicio.getText()), hp.getFormatDate(cboF_final.getText()))){
@@ -330,13 +330,13 @@ public class WinEmpleado_Salarios extends javax.swing.JInternalFrame {
             {
                 JOptionPane.showMessageDialog(null,"Conflicto en fechas");
             }
-            
-
         }                                          
         else {
             JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
         }
-        }catch(Exception e){}
+        }catch(Exception e){
+            System.out.println(e);
+        }
         
     }//GEN-LAST:event_mitemregisterMousePressed
 

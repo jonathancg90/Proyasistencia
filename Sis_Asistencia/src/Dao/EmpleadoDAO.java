@@ -108,6 +108,7 @@ public class EmpleadoDAO extends ConexionBd{
     public int UpdateEmpresa(int empresa){
         int i=0;
         try {
+            //Buscamos el id de la empresa a partir de su nombre
             if(empresa<0) {
                 empresa = empresa * -1;
                 qs.setIdentify("idempr");

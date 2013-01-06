@@ -17,7 +17,7 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
     private Validators val;
     private Empleado modemp;
     private Data dt ;
-    
+    private String _error = "Gui_WinEmpleado_";
     
 
     public WinEmpleado() {
@@ -417,72 +417,77 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
     private void mitemupdateMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemupdateMousePressed
     try{
         val = new Validators("empleado");    
-    Object[] datos = {txtnombres.getText(),txtapellidos.getText(),
-                      txtdni.getText(),txttelefono.getText(),lblidempleado.getText()};
-    Object[] tipos = {2,3,4,5};
-    if(val.validar(datos,tipos)){ 
-        Data dt = new Data();
-        qs = new Query();
-        int id = Integer.parseInt(lblidempleado.getText());
-        String nombre = txtnombres.getText();
-        String dni=txtdni.getText();
-        String apellido=txtapellidos.getText();
-        String telefono=txttelefono.getText();
-        int empresa =  Integer.parseInt(qs.idChoice("empresa","nombre",String.valueOf(cboEmpresa.getSelectedItem())));
-        int area =  Integer.parseInt(qs.idChoice("area","nombre",String.valueOf(cboArea.getSelectedItem())));
-        int tipo =  Integer.parseInt(qs.idChoice("tipoempleado","nombre",String.valueOf(cboTipo.getSelectedItem())));
-        int sucursal =  Integer.parseInt(qs.idChoice("sucursal","nombre",String.valueOf(cboSucursal.getSelectedItem())));
-        int cargo =  Integer.parseInt(qs.idChoice("cargo","nombre",String.valueOf(cboCargo.getSelectedItem())));
-        int estate =  Integer.parseInt(qs.idChoice("estadoemp","nombre",String.valueOf(cboEstado.getSelectedItem())));
-       
-        objempl = new EmpleadoDAO();
-        objempl.UpdateEmpresa(id*-1);
-        int i = objempl.updateEmpleado(id,nombre,apellido,dni, telefono,area, tipo, estate,cargo,empresa,sucursal);
-        if (i == 0) {
-            JOptionPane.showMessageDialog(null,"No se pudo grabar datos");
-        }
+        Object[] datos = {txtnombres.getText(),txtapellidos.getText(),
+                          txtdni.getText(),txttelefono.getText(),lblidempleado.getText()};
+        Object[] tipos = {2,3,4,5,0};
+        if(val.validar(datos,tipos)){ 
+            Data dt = new Data();
+            qs = new Query();
+            
+            int id = Integer.parseInt(lblidempleado.getText());
+            String nombre = txtnombres.getText();
+            String dni=txtdni.getText();
+            String apellido=txtapellidos.getText();
+            String telefono=txttelefono.getText();
+            
+            int empresa =  Integer.parseInt(qs.idChoice("empresa","nombre",String.valueOf(cboEmpresa.getSelectedItem())));
+            int area =  Integer.parseInt(qs.idChoice("area","nombre",String.valueOf(cboArea.getSelectedItem())));
+            int tipo =  Integer.parseInt(qs.idChoice("tipoempleado","nombre",String.valueOf(cboTipo.getSelectedItem())));
+            int sucursal =  Integer.parseInt(qs.idChoice("sucursal","nombre",String.valueOf(cboSucursal.getSelectedItem())));
+            int cargo =  Integer.parseInt(qs.idChoice("cargo","nombre",String.valueOf(cboCargo.getSelectedItem())));
+            int estate =  Integer.parseInt(qs.idChoice("estadoemp","nombre",String.valueOf(cboEstado.getSelectedItem())));
+
+            objempl = new EmpleadoDAO();
+            objempl.UpdateEmpresa(id*-1);
+            int i = objempl.updateEmpleado(id,nombre,apellido,dni, telefono,area, tipo, estate,cargo,empresa,sucursal);
+            if (i == 0) {
+                JOptionPane.showMessageDialog(null,"No se pudo grabar datos");
+            }
+            else {
+                objempl.getTableAll(tblEmpleado);
+                cleanBox();
+                JOptionPane.showMessageDialog(null,"Nuevo usuario actualizado");
+            }   
+            }                                          
         else {
-            objempl.getTableAll(tblEmpleado);
-            cleanBox();
-            JOptionPane.showMessageDialog(null,"Nuevo usuario actualizado");
-        }   
-        }                                          
-    else {
-        JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
+            JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
+        }
+    }catch(Exception e){
+        System.out.println(_error + "EvtUpdate : " + e);
     }
-    }catch(Exception e){}
     }//GEN-LAST:event_mitemupdateMousePressed
 
     private void tblEmpleadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblEmpleadoMouseClicked
-     try {       int fsel;
-                fsel = this.tblEmpleado.getSelectedRow();
+     try {       
+         int fsel;
+         fsel = this.tblEmpleado.getSelectedRow();
 
-                objempl = new EmpleadoDAO();
-                modemp = new Empleado();
+         objempl = new EmpleadoDAO();
+         modemp = new Empleado();
 
-                DefaultTableModel m = new DefaultTableModel();
-                m = (DefaultTableModel) this.tblEmpleado.getModel();
-                String idEmp = String.valueOf(m.getValueAt(fsel, 0));
-                System.out.println(idEmp);
+         DefaultTableModel m = new DefaultTableModel();
+         m = (DefaultTableModel) this.tblEmpleado.getModel();
+         String idEmp = String.valueOf(m.getValueAt(fsel, 0));
+         System.out.println(idEmp);
                 //crear objeto modusu
                 
-                modemp = objempl.getValues(Integer.parseInt(idEmp));
+         modemp = objempl.getValues(Integer.parseInt(idEmp));
                 //Asigando valores obtenidos
-                lblidempleado.setText(idEmp);
-                txtnombres.setText(modemp.getNombres());
-                txtapellidos.setText(modemp.getApellidos());
-                txtdni.setText(modemp.getDni());
-                txttelefono.setText(modemp.getTelefono());
-                qs.loadChoiceDefault(cboArea,"area","nombre",modemp.getIdare());
-                qs.loadChoiceDefault(cboTipo,"tipoempleado","nombre",modemp.getIdtip());
-                qs.loadState(cboEstado,Boolean.valueOf(""+modemp.getIdest()));
-                qs.loadChoiceDefault(cboCargo,"cargo","nombre",modemp.getIdcar());
-                qs.loadChoiceDefault(cboEmpresa,"empresa","nombre",modemp.getIdempr());
-                qs.loadChoiceDefault(cboSucursal,"sucursal","nombre",modemp.getIdsuc());
-                }
-            catch (Exception e) {
-                System.out.println("Gui_Win_area: " + e);
-            }     
+         lblidempleado.setText(idEmp);
+         txtnombres.setText(modemp.getNombres());
+         txtapellidos.setText(modemp.getApellidos());
+         txtdni.setText(modemp.getDni());
+         txttelefono.setText(modemp.getTelefono());
+         qs.loadChoiceDefault(cboArea,"area","nombre",modemp.getIdare());
+         qs.loadChoiceDefault(cboTipo,"tipoempleado","nombre",modemp.getIdtip());
+         qs.loadChoiceDefault(cboEstado,"estadoemp","nombre",modemp.getIdest());
+         qs.loadChoiceDefault(cboCargo,"cargo","nombre",modemp.getIdcar());
+         qs.loadChoiceDefault(cboEmpresa,"empresa","nombre",modemp.getIdempr());
+         qs.loadChoiceDefault(cboSucursal,"sucursal","nombre",modemp.getIdsuc());
+         }
+         catch (Exception e) {
+            System.out.println(_error + "EvtClicktblempleado: " + e);
+         }     
     }//GEN-LAST:event_tblEmpleadoMouseClicked
 
     private void mitemdeleteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemdeleteMousePressed

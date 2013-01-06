@@ -56,7 +56,8 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
             qs.loadChoice(cboempr,"empresa","nombre");
             qs.setIdentify("idempr");
             qs.loadChoiceDefault(cbosuc,"sucursal","nombre",
-            qs.idChoice("empresa","nombre",String.valueOf(cboempr.getSelectedItem())));
+                Integer.parseInt(qs.idChoice("empresa","nombre",String.valueOf(cboempr.getSelectedItem())))
+                );
             
         
         }
@@ -622,9 +623,8 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
         qs = new Query();
         qs.setIdentify("idempr");
         qs.loadChoiceDefault(cbosuc,"sucursal","nombre",
-        qs.idChoice("empresa","nombre",String.valueOf(cboempr.getSelectedItem())));
-        
-        
+                Integer.parseInt(qs.idChoice("empresa","nombre",String.valueOf(cboempr.getSelectedItem())))
+                );
     }//GEN-LAST:event_cboemprActionPerformed
 
     private void tblempleadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblempleadoMouseClicked
@@ -634,7 +634,6 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
         if (fsel == -1) {
             //No se ha seleccionado registo en Jtable
         } 
-        
         else{
             empleado=new Empleado();
             DefaultTableModel m = new DefaultTableModel();

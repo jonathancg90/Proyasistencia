@@ -380,6 +380,7 @@ public class Query extends ConexionBd{
         try{
             getConexion();
             String identify = "";
+            String query="";
             if("".equals(this.identify)){
                 identify = getIdentify(Tbl);
             } else {
@@ -397,7 +398,8 @@ public class Query extends ConexionBd{
             }
             MChoice = new DefaultComboBoxModel();
             s = conexion.createStatement();
-            rs = s.executeQuery("select " +identify+ " from " +Tbl+ " where " +Campo+ " = '"+value+"'");
+            query  = "select " +identify+ " from " +Tbl+ " where " +Campo+ " = '"+value+"'";
+            rs = s.executeQuery(query);
             while(rs.next()) {
                 switch(type){
                     case "int":campo = String.valueOf(rs.getInt(identify));
@@ -406,7 +408,7 @@ public class Query extends ConexionBd{
                          break;
                 }
             }     
-            
+            this.identify = "";
             closeConexion(); 
         }
         catch(Exception e){
