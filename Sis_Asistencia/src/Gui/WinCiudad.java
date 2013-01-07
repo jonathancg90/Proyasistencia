@@ -300,7 +300,7 @@ public class WinCiudad extends javax.swing.JInternalFrame {
         try{
         val = new Validators("ciudad");    
         Object[] datos = {txtName.getText(),lblId.getText()};
-        Object[] tipos={2};
+        Object[] tipos={2,0};
         if(val.validar(datos,tipos)){ 
             int id = Integer.valueOf(lblId.getText());
             String name = txtName.getText();

@@ -604,19 +604,16 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_mcloseMousePressed
 
     private void btnbuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnbuscarMouseClicked
-       if(jCheckBox1.isSelected()){
-           objEmpleado=new EmpleadoDAO();
+       if (jCheckBox1.isSelected()) {
+           objEmpleado = new EmpleadoDAO();
            objEmpleado.getTableAll(tblempleado);
-       }
-       
-       else{
-           String tipo= String.valueOf(cbotipo.getSelectedIndex()+1);
-           String empresa= String.valueOf(cboempr.getSelectedIndex()+1);
-           String sucursal=String.valueOf(cbosuc.getSelectedIndex()+1);
-           objEmpleado=new EmpleadoDAO();
+       } else {
+           String tipo = String.valueOf(cbotipo.getSelectedIndex() + 1);
+           String empresa = String.valueOf(cboempr.getSelectedIndex() + 1);
+           String sucursal = String.valueOf(cbosuc.getSelectedIndex() + 1);
+           objEmpleado = new EmpleadoDAO();
            objEmpleado.findAsistencia(tipo, empresa, sucursal, tblempleado);
-       
-       }
+        }
     }//GEN-LAST:event_btnbuscarMouseClicked
 
     private void cboemprActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboemprActionPerformed

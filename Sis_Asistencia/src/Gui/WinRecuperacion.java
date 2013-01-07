@@ -84,6 +84,7 @@ public class WinRecuperacion extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try{
+        cor = new RestauracionDAO();
         String usuario=txtusername.getText();
         String correo = cor.getcorreo(usuario);
         String pass = cor.getpass(usuario);

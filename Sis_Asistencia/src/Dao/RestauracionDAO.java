@@ -16,7 +16,7 @@ public class RestauracionDAO extends ConexionBd{
             try{
                 getConexion();
                 String query;
-                query= "select* from usuario where username = " + "'"+username+"'";
+                query= "select * from usuario where username = '"+username.toUpperCase()+"'";
                 s = conexion.createStatement();
                 rs = s.executeQuery(query);
                 
@@ -29,17 +29,15 @@ public class RestauracionDAO extends ConexionBd{
             catch(Exception e){
                 System.out.println("RestauracionDAO getpass: "+e);
             }
-            System.out.println("el pass es " +pass);
             return pass;
         }
-        
         
         public  String getcorreo(String username){
             String correo="";
             try{
                 getConexion();
                 String query;
-                query= "select* from usuario where username = " + "'"+username+"'";
+                query= "select * from usuario where username = " + "'"+username.toUpperCase()+"'";
                 s = conexion.createStatement();
                 rs = s.executeQuery(query);
 
@@ -52,7 +50,6 @@ public class RestauracionDAO extends ConexionBd{
             catch(Exception e){
                 System.out.println("RestauracionDAO getcorreo: "+e);
             }
-            System.out.println("el correo es " +correo);
             return correo;
         }
 }

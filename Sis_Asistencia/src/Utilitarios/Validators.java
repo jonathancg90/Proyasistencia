@@ -133,7 +133,6 @@ public class Validators {
         int rows= tablemodel.getRowCount();
         
         for(int i=0;i<rows;i++){
-            
             if(date.valueOf(inicio).equals(date.valueOf(String.valueOf(tablemodel.getValueAt(i,1)))) ||
                date.valueOf(fin).equals(date.valueOf(String.valueOf(tablemodel.getValueAt(i,2)))) ||
                date.valueOf(inicio).after(date.valueOf(String.valueOf(tablemodel.getValueAt(i,1)))) &&

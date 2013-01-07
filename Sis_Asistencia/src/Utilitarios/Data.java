@@ -16,12 +16,16 @@ public class Data {
     public String TYPEDATE[]= new String[2];
     public int DIMENTION[]= new int[9];
     public String G_TIPOH[]= new String[3];
+    public String G_TIPOREG[]= new String[3];
     
     public Data()
     {
         
         G_MAIN_WIDTH = "";
         G_MAIN_HEIGHT = "";
+        
+        G_TIPOREG[1]="Entrada";
+        G_TIPOREG[2]="Salida";
         
         G_STATES[0]="Inactivo";
         G_STATES[1]="Activo";

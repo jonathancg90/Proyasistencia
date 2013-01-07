@@ -252,7 +252,7 @@ public class WinRoles extends javax.swing.JInternalFrame {
 
     private void mitemregisterMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemregisterMousePressed
         try{
-        val = new Validators();    
+        val = new Validators("roles");    
         Object[] datos = {txtName.getText()};
         Object[] tipos = {2};
         if(val.validar(datos,tipos)){     

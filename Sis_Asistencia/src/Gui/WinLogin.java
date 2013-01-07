@@ -96,6 +96,11 @@ public class WinLogin extends javax.swing.JFrame {
         });
 
         jLabel4.setText("Olvido contraseña");
+        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel4MousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -175,6 +180,11 @@ public class WinLogin extends javax.swing.JFrame {
             this.dispose();
         }
     }//GEN-LAST:event_jLabel3MousePressed
+
+    private void jLabel4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MousePressed
+        WinRecuperacion objrec =   new WinRecuperacion();
+        objrec.show();
+    }//GEN-LAST:event_jLabel4MousePressed
     
     
     public static void main(String args[]) {
@@ -208,6 +218,7 @@ public class WinLogin extends javax.swing.JFrame {
             public void run() {
                 try {
                     UIManager.setLookAndFeel("com.jtattoo.plaf.texture.TextureLookAndFeel");
+                    //JFrame.
                 } 
                 catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
                     Logger.getLogger(WinLogin.class.getName()).log(Level.SEVERE, null, ex);
