@@ -10,23 +10,24 @@ import javax.swing.table.DefaultTableModel;
 import Utilitarios.Helpers;
 import org.postgresql.util.PSQLException;
 
-    /**
-     * Formulario para el mantenimiento de las areas de la empresa.olaaaa
-     */
-public class WinArea extends javax.swing.JInternalFrame {
-    
+/**
+ * Formulario para el registro de las areas de la empresa.
+ * Cada Empresa estara subdividida por areas
+ * @author Jonathan Carrasco
+ */
+public class WinArea extends javax.swing.JInternalFrame {   
     private AreaDAO objarea;
-    private Area area;
+    private Area area; //aaa
     private Query qs;
     private Data dt;
     private Validators val;
     private Data data;
     private Helpers hp;
+    private String _error = "Gui_WinArea_";
     
     public WinArea() {
         initComponents();
         cargaForm();
-        
     }
     /**
      * Formulario para el mantenimiento de las areas de la empresa.
@@ -36,9 +37,9 @@ public class WinArea extends javax.swing.JInternalFrame {
             objarea = new AreaDAO();
             qs = new Query();
             objarea.getTableAll(tblArea);
-            qs.loadState(cmbEstate,false);
+            qs.loadState(cmbEstate, false);
         } catch (Exception e) {
-            System.out.println("Gui_WinMdi: " + e);
+            System.out.println(_error + "cargaForm" + e);
         }
     }        
     public void cleanBox(){
@@ -302,14 +303,9 @@ public class WinArea extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tblAreaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblAreaMouseClicked
-        hp=new Helpers();
+        hp = new Helpers();
         int fsel;
         fsel = this.tblArea.getSelectedRow();
-        
-        if (fsel == -1) {
-            //No se ha seleccionado registo en Jtable
-        } 
-        else {
             try {
                 area = new Area();
                 DefaultTableModel m = new DefaultTableModel();
@@ -327,8 +323,6 @@ public class WinArea extends javax.swing.JInternalFrame {
             catch (Exception e) {
                 System.out.println("Gui_Win_area: " + e);
             }
-                
-            }
     }//GEN-LAST:event_tblAreaMouseClicked
 
     private void btnFindActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFindActionPerformed
@@ -343,15 +337,14 @@ public class WinArea extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_mcloseMousePressed
 
     private void mitemeliminarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemeliminarMousePressed
-    try{
+    try {
         val = new Validators("area");    
         Object[] datos = {lblId.getText()};
         Object[] tipos = {};
         if(val.validar(datos,tipos)){ 
             int i;      
             i= JOptionPane.showConfirmDialog(null,"¿Esta seguro de eliminar este registro?","Aviso",JOptionPane.OK_CANCEL_OPTION,JOptionPane.WARNING_MESSAGE);
-
-            if(i==0) {    
+            if (i==0) {    
                 int id = Integer.valueOf(lblId.getText());  
                 objarea = new AreaDAO();
                 i = objarea.delete(id);
@@ -378,7 +371,7 @@ public class WinArea extends javax.swing.JInternalFrame {
     }
 }
     private void mitemupdateMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemupdateMousePressed
-    try{
+    try {
     val = new Validators("area");
     Object[] datos = {txtName.getText(),lblId.getText()};
     Object[] tipos={1,0};
@@ -401,7 +394,7 @@ public class WinArea extends javax.swing.JInternalFrame {
     else {
         JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
     }
-    }catch(Exception e){
+    } catch(Exception e) {
         System.out.println("Gui_Win_area_Update: " + e);
     }
 }
