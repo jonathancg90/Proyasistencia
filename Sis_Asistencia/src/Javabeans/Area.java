@@ -8,7 +8,6 @@ public class Area {
     private boolean state;
     private String created;
     private String modified;
-    
     /* 
      * Constructor final
      */
@@ -19,7 +18,6 @@ public class Area {
         this.created = created;
         this.modified = modified;
     }
-    
     /* 
      * Constructor por Omision
      */
@@ -95,5 +93,4 @@ public class Area {
     public void setState(boolean estado) {
         this.state = estado;
     }
-    
 }
