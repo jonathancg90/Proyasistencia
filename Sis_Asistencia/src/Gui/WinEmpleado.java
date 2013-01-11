@@ -1,4 +1,3 @@
-
 package Gui;
 
 
@@ -9,7 +8,10 @@ import Utilitarios.Query;
 import Utilitarios.Validators;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-
+import Utilitarios.JExcel;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import jxl.write.WriteException;
 
 public  class WinEmpleado extends javax.swing.JInternalFrame {
     private EmpleadoDAO objempl;
@@ -17,6 +19,7 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
     private Validators val;
     private Empleado modemp;
     private Data dt ;
+    private JExcel xl;
     private String _error = "Gui_WinEmpleado_";
     
 
@@ -105,12 +108,15 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
         mitemregister = new javax.swing.JMenuItem();
         mitemupdate = new javax.swing.JMenuItem();
         mitemdelete = new javax.swing.JMenuItem();
+        medit = new javax.swing.JMenu();
+        mitemclear = new javax.swing.JMenuItem();
+        miteninfo = new javax.swing.JMenuItem();
+        jmhuella = new javax.swing.JMenu();
         mhor = new javax.swing.JMenu();
         msue = new javax.swing.JMenu();
         mvac = new javax.swing.JMenu();
-        medit = new javax.swing.JMenu();
-        mitemclear = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
+        jmfoto = new javax.swing.JMenu();
         mclose = new javax.swing.JMenu();
 
         jMenuItem1.setText("jMenuItem1");
@@ -126,31 +132,31 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
 
         jLabel2.setText("Apellidos");
         pnlMantenimiento.add(jLabel2);
-        jLabel2.setBounds(300, 90, 63, 17);
+        jLabel2.setBounds(370, 80, 63, 17);
         pnlMantenimiento.add(txtnombres);
-        txtnombres.setBounds(120, 80, 168, 27);
+        txtnombres.setBounds(120, 80, 190, 27);
 
         jLabel4.setText("ID");
         pnlMantenimiento.add(jLabel4);
         jLabel4.setBounds(10, 30, 30, 29);
         pnlMantenimiento.add(txtapellidos);
-        txtapellidos.setBounds(380, 80, 160, 27);
+        txtapellidos.setBounds(450, 80, 190, 27);
 
         jLabel7.setText("DNI");
         pnlMantenimiento.add(jLabel7);
         jLabel7.setBounds(10, 120, 100, 20);
         pnlMantenimiento.add(txtdni);
-        txtdni.setBounds(120, 120, 160, 30);
+        txtdni.setBounds(120, 120, 190, 30);
         pnlMantenimiento.add(txttelefono);
-        txttelefono.setBounds(380, 120, 160, 30);
+        txttelefono.setBounds(450, 120, 190, 30);
 
         jLabel8.setText("Telefono");
         pnlMantenimiento.add(jLabel8);
-        jLabel8.setBounds(300, 120, 70, 20);
+        jLabel8.setBounds(370, 120, 70, 20);
 
         jLabel6.setText("Estado");
         pnlMantenimiento.add(jLabel6);
-        jLabel6.setBounds(310, 40, 48, 17);
+        jLabel6.setBounds(380, 30, 48, 17);
 
         lblidempleado.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         pnlMantenimiento.add(lblidempleado);
@@ -162,10 +168,10 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
             }
         });
         pnlMantenimiento.add(cboEmpresa);
-        cboEmpresa.setBounds(120, 160, 160, 27);
+        cboEmpresa.setBounds(120, 160, 190, 27);
 
         pnlMantenimiento.add(cboSucursal);
-        cboSucursal.setBounds(380, 160, 160, 27);
+        cboSucursal.setBounds(450, 160, 190, 27);
 
         jLabel5.setText("Empresa");
         pnlMantenimiento.add(jLabel5);
@@ -173,7 +179,7 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
 
         jLabel9.setText("Sucursal");
         pnlMantenimiento.add(jLabel9);
-        jLabel9.setBounds(300, 170, 70, 17);
+        jLabel9.setBounds(370, 160, 70, 17);
 
         jLabel10.setText("Area");
         pnlMantenimiento.add(jLabel10);
@@ -185,24 +191,24 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
             }
         });
         pnlMantenimiento.add(cboArea);
-        cboArea.setBounds(120, 200, 160, 27);
+        cboArea.setBounds(120, 200, 190, 27);
 
         jLabel11.setText("Cargo");
         pnlMantenimiento.add(jLabel11);
-        jLabel11.setBounds(300, 210, 49, 17);
+        jLabel11.setBounds(370, 210, 49, 17);
 
         pnlMantenimiento.add(cboCargo);
-        cboCargo.setBounds(380, 200, 160, 27);
+        cboCargo.setBounds(450, 200, 190, 27);
 
         pnlMantenimiento.add(cboEstado);
-        cboEstado.setBounds(380, 40, 160, 27);
+        cboEstado.setBounds(450, 30, 190, 27);
 
         jLabel12.setText("Tipo");
         pnlMantenimiento.add(jLabel12);
         jLabel12.setBounds(10, 250, 30, 17);
 
         pnlMantenimiento.add(cboTipo);
-        cboTipo.setBounds(120, 240, 160, 27);
+        cboTipo.setBounds(120, 240, 190, 27);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Listado", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, null, new java.awt.Color(1, 1, 1)));
 
@@ -243,7 +249,7 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 535, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 627, Short.MAX_VALUE)
                         .addContainerGap())
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel3)
@@ -264,7 +270,7 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
                     .addComponent(chkactivo)
                     .addComponent(btnFiltro))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -299,6 +305,30 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
 
         jMenuBar1.add(mfile);
 
+        medit.setText("Edit");
+
+        mitemclear.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.CTRL_MASK));
+        mitemclear.setText("Limpiar");
+        mitemclear.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                mitemclearMousePressed(evt);
+            }
+        });
+        medit.add(mitemclear);
+
+        miteninfo.setText("Informacion");
+        miteninfo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                miteninfoMousePressed(evt);
+            }
+        });
+        medit.add(miteninfo);
+
+        jMenuBar1.add(medit);
+
+        jmhuella.setText("Huella digital");
+        jMenuBar1.add(jmhuella);
+
         mhor.setText("Horarios");
         mhor.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -323,19 +353,6 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
         });
         jMenuBar1.add(mvac);
 
-        medit.setText("Edit");
-
-        mitemclear.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.CTRL_MASK));
-        mitemclear.setText("Limpiar");
-        mitemclear.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                mitemclearMousePressed(evt);
-            }
-        });
-        medit.add(mitemclear);
-
-        jMenuBar1.add(medit);
-
         jMenu1.setText("Calculos");
         jMenu1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -343,6 +360,9 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
             }
         });
         jMenuBar1.add(jMenu1);
+
+        jmfoto.setText("Foto");
+        jMenuBar1.add(jmfoto);
 
         mclose.setText("Cerrar");
         mclose.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -361,9 +381,9 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(pnlMantenimiento, javax.swing.GroupLayout.DEFAULT_SIZE, 571, Short.MAX_VALUE)
+                    .addComponent(pnlMantenimiento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(52, Short.MAX_VALUE))
+                .addContainerGap(41, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -570,7 +590,7 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
         dt= new Data();
         WinEmpleado_horarios objEmpleado_has_horarios= new WinEmpleado_horarios();
         objEmpleado_has_horarios.setTitle(dt.G_TITULOS[18]);
-        objEmpleado_has_horarios.lblIdemp.setText(lblidempleado.getText());
+        //objEmpleado_has_horarios.lblidempleado.setText(lblidempleado.getText());
         objEmpleado_has_horarios.setResizable(true);
         objEmpleado_has_horarios.setMaximizable(true);
         objEmpleado_has_horarios.setIconifiable(true);
@@ -620,6 +640,18 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jMenu1MousePressed
 
+    private void miteninfoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_miteninfoMousePressed
+        try {
+            String id = lblidempleado.getText();
+            xl = new JExcel();
+            xl.XlsEmpleado_Informacion(id);
+            xl.ExcelTest();
+
+        } catch (Exception ex) {
+            Logger.getLogger(WinEmpleado.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_miteninfoMousePressed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnFiltro;
     private javax.swing.JComboBox cboArea;
@@ -648,6 +680,8 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JMenu jmfoto;
+    private javax.swing.JMenu jmhuella;
     private javax.swing.JLabel lblidempleado;
     private javax.swing.JMenu mclose;
     private javax.swing.JMenu medit;
@@ -657,6 +691,7 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
     private javax.swing.JMenuItem mitemdelete;
     private javax.swing.JMenuItem mitemregister;
     private javax.swing.JMenuItem mitemupdate;
+    private javax.swing.JMenuItem miteninfo;
     private javax.swing.JMenu msue;
     private javax.swing.JMenu mvac;
     private javax.swing.JPanel pnlMantenimiento;

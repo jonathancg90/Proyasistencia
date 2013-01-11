@@ -14,7 +14,7 @@ public class WinUsuario extends javax.swing.JInternalFrame {
     private UserDAO objUser;
     private Query qs;
     private Usuario modusu;
-    private Data dt ;
+    private Data dt;
     private Validators val;
     /**
      * Creates new form WinUsuario
@@ -31,12 +31,11 @@ public class WinUsuario extends javax.swing.JInternalFrame {
             objUser = new UserDAO();
             qs = new Query();
             objUser.getTableAll(TblUsu);
-            qs.loadState(cboEstado,false);
-            qs.loadState(cboFilter,false);
-            qs.loadChoice(cboEmp,"empleado","nombres");
-            qs.loadChoice(cboRol,"roles","nombre");
-            
-        } catch (Exception e) {
+            qs.loadState(cboEstado, false); 
+            qs.loadState(cboFilter, false);
+            qs.loadChoice(cboEmp, "empleado", "nombres");
+            qs.loadChoice(cboRol, "roles", "nombre");
+    } catch (Exception e) {
             System.out.println("Gui_WinMdi: " + e);
         }
     }
@@ -271,63 +270,56 @@ public class WinUsuario extends javax.swing.JInternalFrame {
                 DefaultTableModel m = new DefaultTableModel();
                 m = (DefaultTableModel) this.TblUsu.getModel();
                 String idUsu = String.valueOf(m.getValueAt(fsel, 0));
-                
-                //crear objeto modusu
                 modusu = objUser.getValues(Integer.parseInt(idUsu));
-                //Asigando valores obtenidos
                 lblUsu.setText(idUsu);   
                 txtUsername.setText(modusu.getUsername());
                 txtPassword.setText(modusu.getPassword());
                 txtRePassword.setText(modusu.getPassword());
-                qs.loadChoiceDefault(cboRol,"roles","nombre",modusu.getRol());
-                qs.loadChoiceDefault(cboEmp,"empleado","nombres",modusu.getIdemp());
+                qs.loadChoiceDefault(cboRol, "roles", "nombre", modusu.getRol());
+                qs.loadChoiceDefault(cboEmp, "empleado", "nombres", modusu.getIdemp());
                 Txtcorreo.setText(modusu.getCorreo());
-              
-                qs.loadState(cboEstado,modusu.isEstado());
-                }
-            catch (Exception e) {
+                qs.loadState(cboEstado, modusu.isEstado());
+       } catch (Exception e) {
                 System.out.println("Gui_Win_area: " + e);
             }
     }//GEN-LAST:event_TblUsuMouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         dt = new Data();
-        String  state = dt.G_BOOLEAN[cboFilter.getSelectedIndex()].substring(0,1);
+        String  state = dt.G_BOOLEAN[cboFilter.getSelectedIndex()].substring(0, 1);
         objUser = new UserDAO();
         objUser.find(state, TblUsu);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void mitemregisterMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemregisterMousePressed
         try{
-        val = new Validators("usuario");    
-        Object[] datos = {txtUsername.getText(),txtPassword.getPassword(),Txtcorreo.getText()};
-        Object[] tipos = {3,4,9};
-        if(val.validar(datos,tipos)){     
-            dt = new Data();
-            String username = txtUsername.getText();
-            String password=String.valueOf(txtPassword.getPassword());
-            String nomemp = String.valueOf(cboEmp.getSelectedItem());
-
-            qs = new Query();
-            int idemp = Integer.parseInt(qs.idChoice("empleado","nombres", nomemp));
-            boolean estate = Boolean.valueOf(dt.G_BOOLEAN[cboEstado.getSelectedIndex()]);
-            int rol = Integer.parseInt(qs.idChoice("roles","nombre",String.valueOf(cboRol.getSelectedItem())));
-            String correo = Txtcorreo.getText();
-            objUser = new UserDAO();
-            int i = objUser.saveUsuario(username,password,idemp,estate,rol,correo);
-            if (i == 0) {
-                JOptionPane.showMessageDialog(null,"No se pudo grabar datos");
-            }
-            else {
+            val = new Validators("usuario");    
+            Object[] datos = {txtUsername.getText(), txtPassword.getPassword(), Txtcorreo.getText()};
+            Object[] tipos = {3, 4, 9};
+            if (val.validar(datos, tipos)){     
+                dt = new Data();
+                String username = txtUsername.getText();
+                String password = String.valueOf(txtPassword.getPassword());
+                String nomemp = String.valueOf(cboEmp.getSelectedItem());
+                qs = new Query();
+                int idemp = Integer.parseInt(qs.idChoice("empleado", "nombres", nomemp));
+                boolean estate = Boolean.valueOf(dt.G_BOOLEAN[cboEstado.getSelectedIndex()]);
+                int rol = Integer.parseInt(qs.idChoice("roles", "nombre", String.valueOf(cboRol.getSelectedItem())));
+                String correo = Txtcorreo.getText();
+                objUser = new UserDAO();
+                int i = objUser.saveUsuario(username, password, idemp, estate, rol, correo);
+                if (i == 0) {
+                    JOptionPane.showMessageDialog(null, "No se pudo grabar datos");
+            } else {
                 objUser.getTableAll(TblUsu);
                 cleanBox();
-                JOptionPane.showMessageDialog(null,"Nuevo usuario registrado");
+                JOptionPane.showMessageDialog(null, "Nuevo usuario registrado");
             }
-        }                                          
-        else {
-            JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
+        } else {
+            JOptionPane.showMessageDialog(null, "Campos requeridos incompletos");
+        } } catch(Exception e){
+            System.out.println(e);
         }
-        }catch(Exception e){}
     }//GEN-LAST:event_mitemregisterMousePressed
 
     private void mitemupdateMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemupdateMousePressed

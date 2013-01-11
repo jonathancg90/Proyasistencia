@@ -40,6 +40,7 @@ public class WinEmpleado_Vacaciones extends javax.swing.JInternalFrame {
         cboF_inicio.setDateFormat(format);
         cboF_final.setDateFormat(format);
         
+        
     }
     
     
@@ -338,10 +339,12 @@ public class WinEmpleado_Vacaciones extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_tblVacacionesMouseClicked
 
     private void mitemregisterMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemregisterMousePressed
+        
+        try{
         hp = new Helpers();
+
         val = new Validators("vacaciones"); 
-        if(val.validarFechas(tblVacaciones, hp.getFormatDate(cboF_inicio.getText()), hp.getFormatDate(cboF_final.getText()))){   
-            try{
+        if(val.validarFechas(hp.getFormatDate(cboF_inicio.getText()), hp.getFormatDate(cboF_final.getText()))){   
                 String F_inicio=hp.getFormatDate(cboF_inicio.getText());
                 String F_final=hp.getFormatDate(cboF_final.getText());
 
@@ -356,12 +359,15 @@ public class WinEmpleado_Vacaciones extends javax.swing.JInternalFrame {
                     cleanBox();
                     JOptionPane.showMessageDialog(null,"Nueva vacacion registrado");
                 }
-            }catch(Exception e){System.out.println(""+e);}
-            }
+            
         
-        else{
+       
+        }else{
                 JOptionPane.showMessageDialog(null,"Conflicto en fechas");
             } 
+        }catch(Exception e){System.out.println(""+e);}
+            
+        
     }//GEN-LAST:event_mitemregisterMousePressed
 
     private void mitemupdateMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemupdateMousePressed
@@ -371,11 +377,12 @@ public class WinEmpleado_Vacaciones extends javax.swing.JInternalFrame {
         Object[] datos = {lblIdvacaciones.getText()};
         Object[] tipos = {};
         if(val.validar(datos,tipos)){
-            if(val.validarFechas(tblVacaciones, hp.getFormatDate(cboF_inicio.getText()), hp.getFormatDate(cboF_final.getText()))){
+            if(val.validarFechas(hp.getFormatDate(cboF_inicio.getText()), hp.getFormatDate(cboF_final.getText()))){
                 int idsalario=Integer.parseInt(lblIdvacaciones.getText());
                 int idemp=Integer.parseInt(lblIdemp.getText());
                 String F_inicio=hp.getFormatDate(cboF_inicio.getText());
                 String F_final=hp.getFormatDate(cboF_final.getText());
+
 
                 int i = objVacaciones.update(idsalario,F_inicio,F_final,idemp);
                 if (i == 0) {

@@ -123,29 +123,38 @@ public class Validators {
     /**
      * Validacion de fechas orden correlativo
      */
-    public boolean validarFechas(JTable tbldatos,String inicio,String fin){
+    public boolean validarFechasTablas(JTable tbldatos,String inicio,String fin){
         Date date = new Date(0000-00-00);
         
-        boolean value;
-        value=true;
         
         TableModel tablemodel=tbldatos.getModel();
         int rows= tablemodel.getRowCount();
         
         for(int i=0;i<rows;i++){
-            
             if(date.valueOf(inicio).equals(date.valueOf(String.valueOf(tablemodel.getValueAt(i,1)))) ||
                date.valueOf(fin).equals(date.valueOf(String.valueOf(tablemodel.getValueAt(i,2)))) ||
-               date.valueOf(inicio).after(date.valueOf(String.valueOf(tablemodel.getValueAt(i,1)))) &&
-               date.valueOf(inicio).before(date.valueOf(String.valueOf(tablemodel.getValueAt(i,2)))) ||  
-               date.valueOf(fin).after(date.valueOf(String.valueOf(tablemodel.getValueAt(i,1)))) &&
-               date.valueOf(fin).before(date.valueOf(String.valueOf(tablemodel.getValueAt(i,1))))||
-               date.valueOf(fin).before(date.valueOf(inicio))     
+               (date.valueOf(inicio).after(date.valueOf(String.valueOf(tablemodel.getValueAt(i,1)))) &&
+               date.valueOf(inicio).before(date.valueOf(String.valueOf(tablemodel.getValueAt(i,2))))) ||  
+               (date.valueOf(fin).after(date.valueOf(String.valueOf(tablemodel.getValueAt(i,1)))) &&
+               date.valueOf(fin).before(date.valueOf(String.valueOf(tablemodel.getValueAt(i,2)))))
+               
                ){
-                value=false;
+                
+                
+                return false;
             }
         }
-        return value;
+        return true;
+    }
+    
+    public boolean validarFechas(String inicio,String fin){
+    Date date = new Date(0000-00-00);
+    
+    if (date.valueOf(fin).before(date.valueOf(inicio))||
+        date.valueOf(inicio).equals(date.valueOf(fin))) {
+        return false;
+    }
+    return true;
     }
     /**
      * Restriccion de maximo registros(Table, condiciones)

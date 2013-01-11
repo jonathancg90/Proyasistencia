@@ -158,6 +158,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Olvido contrase&#xf1;a"/>
       </Properties>
+      <Events>
+        <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabel4MousePressed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

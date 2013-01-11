@@ -490,6 +490,11 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
                 jButton5MouseClicked(evt);
             }
         });
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
@@ -609,7 +614,11 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
+<<<<<<< HEAD
                 .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 670, Short.MAX_VALUE)
+=======
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 674, Short.MAX_VALUE)
+>>>>>>> a41d26cb148d30341c5d4fef745e6f1e4aab9962
                 .addContainerGap())
         );
 
@@ -622,19 +631,16 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_mcloseMousePressed
 
     private void btnbuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnbuscarMouseClicked
-       if(jCheckBox1.isSelected()){
-           objEmpleado=new EmpleadoDAO();
+       if (jCheckBox1.isSelected()) {
+           objEmpleado = new EmpleadoDAO();
            objEmpleado.getTableAll(tblempleado);
-       }
-       
-       else{
-           String tipo= String.valueOf(cbotipo.getSelectedIndex()+1);
-           String empresa= String.valueOf(cboempr.getSelectedIndex()+1);
-           String sucursal=String.valueOf(cbosuc.getSelectedIndex()+1);
-           objEmpleado=new EmpleadoDAO();
+       } else {
+           String tipo = String.valueOf(cbotipo.getSelectedIndex() + 1);
+           String empresa = String.valueOf(cboempr.getSelectedIndex() + 1);
+           String sucursal = String.valueOf(cbosuc.getSelectedIndex() + 1);
+           objEmpleado = new EmpleadoDAO();
            objEmpleado.findAsistencia(tipo, empresa, sucursal, tblempleado);
-       
-       }
+        }
     }//GEN-LAST:event_btnbuscarMouseClicked
 
     private void cboemprActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboemprActionPerformed
@@ -736,6 +742,10 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
         System.out.println("Evento registrar: "+e);
     }
     }//GEN-LAST:event_mitemregisterMousePressed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+     
+    }//GEN-LAST:event_jButton5ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.lavantech.gui.comp.TimePanel TimIngreso;

@@ -53,12 +53,12 @@ public class WinEmpleado_Salarios extends javax.swing.JInternalFrame {
     }
     
     public void cleanBox(){
-        
+        Calendar rightNow = Calendar.getInstance();
         lblIdsalario.setText("");
         lblMod.setText("");
         txtMonto.setText("");
-        cboF_inicio.setSelectedDate(null);
-        cboF_final.setSelectedDate(null);
+        cboF_inicio.setSelectedDate(rightNow);
+        cboF_final.setSelectedDate(rightNow);
     }
     
     @SuppressWarnings("unchecked")
@@ -303,7 +303,8 @@ public class WinEmpleado_Salarios extends javax.swing.JInternalFrame {
         Object[] tipos = {8};
     
         if(val.validar(datos,tipos)){    
-            if(val.validarFechas(tblSalarios, hp.getFormatDate(cboF_inicio.getText()), hp.getFormatDate(cboF_final.getText()))){
+            if(val.validarFechasTablas(tblSalarios, hp.getFormatDate(cboF_inicio.getText()), hp.getFormatDate(cboF_final.getText()))&&
+               val.validarFechas(hp.getFormatDate(cboF_inicio.getText()), hp.getFormatDate(cboF_final.getText()))){
             
                 try{
 
@@ -347,7 +348,7 @@ public class WinEmpleado_Salarios extends javax.swing.JInternalFrame {
         Object[] datos = {txtMonto.getText(),lblIdsalario.getText()};
         Object[] tipos = {8};
         if(val.validar(datos,tipos)){
-                if(val.validarFechas(tblSalarios, hp.getFormatDate(cboF_inicio.getText()), hp.getFormatDate(cboF_final.getText()))){
+                if(val.validarFechas(hp.getFormatDate(cboF_inicio.getText()), hp.getFormatDate(cboF_final.getText()))){
                     int idsalario=Integer.parseInt(lblIdsalario.getText());
                     int idemp=Integer.parseInt(lblIdemp.getText());
                     String F_inicio=hp.getFormatDate(cboF_inicio.getText());

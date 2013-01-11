@@ -273,14 +273,12 @@ public class WinTipoJustificacion extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_tbljusMouseClicked
 
     private void mitemregisterMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemregisterMousePressed
-        
-        try{
-            
+    try{
+
         val = new Validators("tipo_justificaciones");    
         Object[] datos = {txtName.getText()};
         Object[] tipos = {2};
         if(val.validar(datos,tipos)){ 
-            System.out.println("error 1");
             dt = new Data();
             String name = txtName.getText();
             
@@ -298,13 +296,16 @@ public class WinTipoJustificacion extends javax.swing.JInternalFrame {
         else {
             JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
         }
-        }catch(Exception e){}
+        }catch(Exception e){
+        System.out.println(e);
+        }
     }//GEN-LAST:event_mitemregisterMousePressed
 
     private void mitemupdateMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemupdateMousePressed
         try{
-        val = new Validators("tipo_justificaciones");    
+        val = new Validators("tipo_justificaciones");  
         Object[] datos = {txtName.getText(),lblId.getText()};
+
         Object[] tipos = {2};
         if(val.validar(datos,tipos)){    
             int id = Integer.valueOf(lblId.getText());

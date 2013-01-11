@@ -100,6 +100,9 @@ public class Query extends ConexionBd{
                     id =  meta.getColumnName(i);
                 }
             }
+            if(id.equals("NMID")){
+            id="\"NMID\"";
+            }
             query = query + " where "+id+"= ?";
             query = query.replace(", "," ");
             pt  = conexion.prepareStatement(query);
@@ -135,6 +138,9 @@ public class Query extends ConexionBd{
                 if(meta.isAutoIncrement(i)){
                     id =  meta.getColumnName(i);
                 }
+            }
+            if(id.equals("NMID")){
+            id="\"NMID\"";
             }
             query = query + id + "=?";
             pt  = conexion.prepareStatement(query);

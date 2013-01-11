@@ -12,7 +12,6 @@ public class Ciudad {
         this.idciu = idciu;
         this.name = name.toUpperCase();
     }
-    
     /* Constructor por omisión
      */
     public Ciudad() {
