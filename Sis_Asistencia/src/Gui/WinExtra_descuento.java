@@ -322,7 +322,7 @@ public class WinExtra_descuento extends javax.swing.JInternalFrame {
         val = new Validators();   
         
         hp=new Helpers();
-        Object[] datos = {cbotipo.getSelectedIndex(),txtMonto.getText()};
+        Object[] datos = {cbotipo.getSelectedIndex(),txtMonto.getText(),lblid.getText()};
         Object[] tipos = {2,4};
         if(val.validar(datos, tipos)){
 
@@ -352,7 +352,12 @@ public class WinExtra_descuento extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_mitemUpdateMousePressed
 
     private void jmitemDeleteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmitemDeleteMousePressed
-       int i;
+       try{
+        val = new Validators(); 
+        Object[] datos = {lblid.getText()};
+        Object[] tipos = {};
+        if(val.validar(datos, tipos)){
+        int i;
             i= JOptionPane.showConfirmDialog(null,"¿Esta seguro de eliminar este registro?","Aviso",JOptionPane.OK_CANCEL_OPTION,JOptionPane.WARNING_MESSAGE);
             if(i==0){
                 int id = Integer.valueOf(lblid.getText());
@@ -366,6 +371,8 @@ public class WinExtra_descuento extends javax.swing.JInternalFrame {
                     cleanBox();
                 }
             }
+        }
+       }catch(Exception e){}
     }//GEN-LAST:event_jmitemDeleteMousePressed
 
     private void jMenuItem4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem4MousePressed

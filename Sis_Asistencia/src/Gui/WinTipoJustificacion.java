@@ -276,7 +276,7 @@ public class WinTipoJustificacion extends javax.swing.JInternalFrame {
         
         try{
             
-        val = new Validators();    
+        val = new Validators("tipo_justificaciones");    
         Object[] datos = {txtName.getText()};
         Object[] tipos = {2};
         if(val.validar(datos,tipos)){ 
@@ -303,8 +303,8 @@ public class WinTipoJustificacion extends javax.swing.JInternalFrame {
 
     private void mitemupdateMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemupdateMousePressed
         try{
-        val = new Validators();    
-        Object[] datos = {txtName.getText()};
+        val = new Validators("tipo_justificaciones");    
+        Object[] datos = {txtName.getText(),lblId.getText()};
         Object[] tipos = {2};
         if(val.validar(datos,tipos)){    
             int id = Integer.valueOf(lblId.getText());
@@ -329,7 +329,7 @@ public class WinTipoJustificacion extends javax.swing.JInternalFrame {
 
     private void mitemdeleteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemdeleteMousePressed
         try{
-        val = new Validators();    
+        val = new Validators("tipo_justificaciones");    
         Object[] datos = {lblId.getText()};
         Object[] tipos = {};
         if(val.validar(datos,tipos)){     

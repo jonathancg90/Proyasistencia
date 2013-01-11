@@ -331,10 +331,12 @@ public class WinEmpleado_horarios extends javax.swing.JInternalFrame {
 
     private void mitemregisterMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemregisterMousePressed
         try{
-        val = new Validators();   
+        val = new Validators("empleado_has_horarios");   
         
         hp=new Helpers();
-        
+        Object[] datos = {lblIdemp_horarios.getText()};
+        Object[] tipos = {};
+        if(val.validar(datos,tipos)){
         if(val.validarFechas(tblEmpleado_has_horarios, hp.getFormatDate(cboF_inicio.getText()), hp.getFormatDate(cboF_final.getText()))){
  
             try{
@@ -360,14 +362,19 @@ public class WinEmpleado_horarios extends javax.swing.JInternalFrame {
             {
                 JOptionPane.showMessageDialog(null,"Conflicto en fechas");
             }
+        }
         }catch(Exception e){}
         
 
     }//GEN-LAST:event_mitemregisterMousePressed
 
     private void mitemupdateMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemupdateMousePressed
-            val=new Validators();
+        try{    
+            val=new Validators("empleado_has_horarios");
             hp = new Helpers();
+            Object[] datos = {lblIdemp_horarios.getText()};
+            Object[] tipos = {};
+            if(val.validar(datos,tipos)){
             if(val.validarFechas(tblEmpleado_has_horarios, hp.getFormatDate(cboF_inicio.getText()), hp.getFormatDate(cboF_final.getText()))){
             
                 int idhorarios=Integer.parseInt(lblIdemp_horarios.getText());
@@ -394,12 +401,19 @@ public class WinEmpleado_horarios extends javax.swing.JInternalFrame {
             {
                 JOptionPane.showMessageDialog(null,"Conflicto en fechas");
             }
+            }
+        }catch(Exception e){}
         
         
     }//GEN-LAST:event_mitemupdateMousePressed
 
     private void mitemdeleteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemdeleteMousePressed
-       
+       try{    
+            val=new Validators("empleado_has_horarios");
+            hp = new Helpers();
+            Object[] datos = {lblIdemp_horarios.getText()};
+            Object[] tipos = {};
+            if(val.validar(datos,tipos)){
             int i;
             i= JOptionPane.showConfirmDialog(null,"¿Esta seguro de eliminar este registro?","Aviso",JOptionPane.OK_CANCEL_OPTION,JOptionPane.WARNING_MESSAGE);
             if(i==0){
@@ -414,6 +428,8 @@ public class WinEmpleado_horarios extends javax.swing.JInternalFrame {
                     cleanBox();
                 }
             }
+            }
+       }catch(Exception e){}
         
 
     }//GEN-LAST:event_mitemdeleteMousePressed

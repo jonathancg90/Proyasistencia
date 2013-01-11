@@ -419,7 +419,7 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
         val = new Validators("empleado");    
         Object[] datos = {txtnombres.getText(),txtapellidos.getText(),
                           txtdni.getText(),txttelefono.getText(),lblidempleado.getText()};
-        Object[] tipos = {2,3,4,5,0};
+        Object[] tipos = {2,3,4,5};
         if(val.validar(datos,tipos)){ 
             Data dt = new Data();
             qs = new Query();

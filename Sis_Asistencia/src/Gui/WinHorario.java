@@ -528,7 +528,7 @@ public class WinHorario extends javax.swing.JInternalFrame {
 
     private void mitemregisterMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemregisterMousePressed
         try{
-            val = new Validators();    
+            val = new Validators("horarios");    
         Object[] datos = {txtnombre.getText()};
         Object[] tipos = {2};
         if(val.validar(datos,tipos)){    
@@ -583,7 +583,7 @@ public class WinHorario extends javax.swing.JInternalFrame {
 
     private void mitemupdateMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemupdateMousePressed
         try{
-            val = new Validators();    
+            val = new Validators("horarios");    
             Object[] datos = {txtnombre.getText()};
             Object[] tipos = {2};
             if(val.validar(datos,tipos)){    
@@ -622,7 +622,7 @@ public class WinHorario extends javax.swing.JInternalFrame {
     private void BtnAgreeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAgreeActionPerformed
     try{
         int id = Integer.parseInt(lblId.getText());
-        val = new Validators();    
+        val = new Validators("horarios");    
         Object[] datos = {lblId.getText()};
         Object[] tipos={};
         if(val.validar(datos,tipos)){ //Validacion generica
@@ -655,7 +655,11 @@ public class WinHorario extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_BtnAgreeActionPerformed
 
     private void BtnRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnRemoveActionPerformed
-       hp=new Helpers(); 
+       try{
+        val = new Validators("horarios");    
+        Object[] datos = {lblId.getText()};
+        Object[] tipos={};
+        if(val.validar(datos,tipos)){
         try {       
                 int fsel;
                 fsel = this.JtblDetail.getSelectedRow();
@@ -677,6 +681,8 @@ public class WinHorario extends javax.swing.JInternalFrame {
         } catch(Exception e){
            
         }
+        }
+       }catch(Exception e){}
        
     }//GEN-LAST:event_BtnRemoveActionPerformed
 

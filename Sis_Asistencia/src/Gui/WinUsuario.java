@@ -299,7 +299,7 @@ public class WinUsuario extends javax.swing.JInternalFrame {
 
     private void mitemregisterMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemregisterMousePressed
         try{
-        val = new Validators();    
+        val = new Validators("usuario");    
         Object[] datos = {txtUsername.getText(),txtPassword.getPassword(),Txtcorreo.getText()};
         Object[] tipos = {3,4,9};
         if(val.validar(datos,tipos)){     
@@ -332,8 +332,8 @@ public class WinUsuario extends javax.swing.JInternalFrame {
 
     private void mitemupdateMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemupdateMousePressed
         try{
-        val = new Validators();    
-        Object[] datos = {txtUsername.getText(),txtPassword.getPassword(),Txtcorreo.getText()};
+        val = new Validators("usuario");    
+        Object[] datos = {txtUsername.getText(),txtPassword.getPassword(),Txtcorreo.getText(),lblUsu.getText()};
         Object[] tipos = {3,4,9};
         if(val.validar(datos,tipos)){     
             dt = new Data();
@@ -367,7 +367,7 @@ public class WinUsuario extends javax.swing.JInternalFrame {
 
     private void mitemdeleteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemdeleteMousePressed
         try{
-        val = new Validators();    
+        val = new Validators("usuario");    
         Object[] datos = {lblUsu.getText()};
         Object[] tipos = {};
         if(val.validar(datos,tipos)){    
