@@ -52,11 +52,11 @@ public class WinEmpleado_horarios extends javax.swing.JInternalFrame {
     }
     
     public void cleanBox(){
-        
+        Calendar rightNow = Calendar.getInstance();
         lblIdemp_horarios.setText("");
         cbo_Horario.setSelectedIndex(0);
-        cboF_inicio.setSelectedDate(null);
-        cboF_final.setSelectedDate(null);
+        cboF_inicio.setSelectedDate(rightNow);
+        cboF_final.setSelectedDate(rightNow);
     }
 
     
@@ -335,7 +335,8 @@ public class WinEmpleado_horarios extends javax.swing.JInternalFrame {
         
         hp=new Helpers();
         
-        if(val.validarFechas(tblEmpleado_has_horarios, hp.getFormatDate(cboF_inicio.getText()), hp.getFormatDate(cboF_final.getText()))){
+        if(val.validarFechasTablas(tblEmpleado_has_horarios, hp.getFormatDate(cboF_inicio.getText()), hp.getFormatDate(cboF_final.getText()))&&
+           val.validarFechas(hp.getFormatDate(cboF_inicio.getText()), hp.getFormatDate(cboF_final.getText()))){
  
             try{
                 
@@ -360,7 +361,7 @@ public class WinEmpleado_horarios extends javax.swing.JInternalFrame {
             {
                 JOptionPane.showMessageDialog(null,"Conflicto en fechas");
             }
-        }catch(Exception e){}
+        }catch(Exception e){System.out.println(e);}
         
 
     }//GEN-LAST:event_mitemregisterMousePressed
@@ -368,7 +369,7 @@ public class WinEmpleado_horarios extends javax.swing.JInternalFrame {
     private void mitemupdateMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemupdateMousePressed
             val=new Validators();
             hp = new Helpers();
-            if(val.validarFechas(tblEmpleado_has_horarios, hp.getFormatDate(cboF_inicio.getText()), hp.getFormatDate(cboF_final.getText()))){
+            if(val.validarFechas(hp.getFormatDate(cboF_inicio.getText()), hp.getFormatDate(cboF_final.getText()))){
             
                 int idhorarios=Integer.parseInt(lblIdemp_horarios.getText());
                 int horario =  Integer.parseInt(qs.idChoice("horarios","nombre",String.valueOf(cbo_Horario.getSelectedItem())));

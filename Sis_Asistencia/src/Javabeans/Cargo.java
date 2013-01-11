@@ -94,5 +94,4 @@ public class Cargo {
         this.modified = modified;
     }
     
-    
 }
