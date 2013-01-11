@@ -70,6 +70,11 @@ public class WinConsulta extends javax.swing.JInternalFrame {
         jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(131, 73, 280, -1));
 
         jLabel5.setText("Buscar");
+        jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel5MouseClicked(evt);
+            }
+        });
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 80, -1, -1));
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Lista de resultados"));
@@ -145,7 +150,7 @@ public class WinConsulta extends javax.swing.JInternalFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 407, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(51, Short.MAX_VALUE))
+                .addContainerGap(55, Short.MAX_VALUE))
         );
 
         pack();
@@ -159,6 +164,18 @@ public class WinConsulta extends javax.swing.JInternalFrame {
     private void mcloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mcloseActionPerformed
 
     }//GEN-LAST:event_mcloseActionPerformed
+
+    private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
+         WinBuscarEmpleado objbus = new WinBuscarEmpleado();
+
+        //objbus.setTitle(titulo);
+        objbus.setResizable(true);
+        objbus.setMaximizable(true);
+        objbus.setIconifiable(true);
+        objbus.setClosable(true);
+        WinMdi.jdpContenedor.add(objbus);
+        objbus.setVisible(true);
+    }//GEN-LAST:event_jLabel5MouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private datechooser.beans.DateChooserCombo dateChooserCombo1;
