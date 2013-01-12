@@ -18,7 +18,14 @@ public class Query extends ConexionBd{
     private String _error = "Utilitarios_Query_";
     private String identify="";
 
-    public void setIdentify(String identify){
+    public Query(){
+        
+    }
+    public Query(String identify){
+        this.identify = identify;
+        System.out.println("VALOR: " + this.identify);
+    }
+    public void setIdentify(String identify) {
         this.identify = identify;
     }
     
@@ -232,18 +239,14 @@ public class Query extends ConexionBd{
             fila = new Object[nCols];
             rs_all = s.executeQuery(qs);
             while(rs_all.next()){
-                System.out.println("Entro");
                 for(int i=0; i<nCols; ++i){   
                         temp = args[i].split("/");
-                        System.out.println("tamaño : "+ temp.length);
                         if(temp.length>1){
                             tbl = temp[1];
                             this.identify = "str_"+temp[2];
                             fila[i] =  idChoice(tbl,colum[i], String.valueOf(rs_all.getObject(i+1)));
-                            System.out.println("Fila : " + fila[i]);
                         }else {
                             fila[i] = rs_all.getObject(i+1);
-                            System.out.println("Fila : " + fila[i]);
                         }
                 }
                 datos.addRow(fila);
@@ -363,6 +366,7 @@ public class Query extends ConexionBd{
                 this.identify = getIdentify(Tbl);
                 op = true;
             }
+            System.out.println("select " +Campo+ " from " +Tbl + " where " + this.identify + "=" +value);
             rs = s.executeQuery("select " +Campo+ " from " +Tbl + " where " + this.identify + "=" +value);
             while(rs.next()) {
               MChoice.addElement(rs.getString(Campo));
