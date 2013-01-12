@@ -58,11 +58,19 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
             qs.loadChoiceDefault(cbosuc,"sucursal","nombre",
                 Integer.parseInt(qs.idChoice("empresa","nombre",String.valueOf(cboempr.getSelectedItem())))
                 );
+            
+        
         }
         catch(Exception e){
             System.out.println("Gui_Asistencia"+ e);
         }
+    
+    
     }
+    
+    
+
+    
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents

@@ -196,12 +196,11 @@ public class Query extends ConexionBd{
                     default:qs = qs + " " + Filter[i][0] + " like '%" + Filter[i][1] + "%' ";
                          break;
                 }
-                if(Filter.length!=i+1){ 
+                if (Filter.length != i+1) { 
                     qs = qs + "and";
                 }
             }
         }
-        
         return qs;
     }
     /*
@@ -209,6 +208,7 @@ public class Query extends ConexionBd{
      */
     public  DefaultTableModel getAll(String[] args, String Table, String[][] Filter){
         try{
+            ResultSet rs_all = null;
             datos = new DefaultTableModel();
             getConexion();
             String id;
@@ -217,33 +217,39 @@ public class Query extends ConexionBd{
             String tbl;
             s = conexion.createStatement();
             String qs = getQueryList(args,Table, Filter);
-            rs = s.executeQuery(qs);
+            System.out.println("Consulta : " + qs);
+            rs_all = s.executeQuery(qs);
             //Llenado Cabecera Jtable
-            ResultSetMetaData meta = rs.getMetaData();
+            ResultSetMetaData meta = rs_all.getMetaData();
             int nCols = meta.getColumnCount();
             String[] colum = new String[nCols];
-            for(int i=0; i<nCols; ++i){    
+            for (int i=0; i<nCols; ++i) {
                 datos.addColumn(meta.getColumnName(i+1));
                 colum[i]=meta.getColumnName(i+1);
                 id = meta.getColumnName(i+1).substring(0, 2);
             }
             //Llenado registro Jtable
             fila = new Object[nCols];
-            while(rs.next()){
+            rs_all = s.executeQuery(qs);
+            while(rs_all.next()){
+                System.out.println("Entro");
                 for(int i=0; i<nCols; ++i){   
                         temp = args[i].split("/");
+                        System.out.println("tamaño : "+ temp.length);
                         if(temp.length>1){
                             tbl = temp[1];
                             this.identify = "str_"+temp[2];
-                            fila[i] =  idChoice(tbl,colum[i], String.valueOf(rs.getObject(i+1)));
+                            fila[i] =  idChoice(tbl,colum[i], String.valueOf(rs_all.getObject(i+1)));
+                            System.out.println("Fila : " + fila[i]);
                         }else {
-                            fila[i] = rs.getObject(i+1);
+                            fila[i] = rs_all.getObject(i+1);
+                            System.out.println("Fila : " + fila[i]);
                         }
                 }
                 datos.addRow(fila);
             }
            //Cerrando conexion
-           rs.close();
+           rs_all.close();
            closeConexion(); 
         }
         catch(Exception e){

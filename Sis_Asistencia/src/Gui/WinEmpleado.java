@@ -46,8 +46,6 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
             qs.loadChoiceDefault(cboCargo,"cargo","nombre",
             Integer.parseInt(qs.idChoice("area","nombre",String.valueOf(cboArea.getSelectedItem()))));
             qs.loadChoice(cboTipo,"tipoempleado","nombre");
-            
-            
 
         } catch (Exception e) {
             System.out.println("Gui_Win_area: " + e);
