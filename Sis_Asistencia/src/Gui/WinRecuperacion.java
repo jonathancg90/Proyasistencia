@@ -3,12 +3,12 @@ package Gui;
 
 import Dao.RestauracionDAO;
 import Utilitarios.JCMail;
-
+import Dao.UserDAO;
 
 public class WinRecuperacion extends javax.swing.JFrame {
     RestauracionDAO  cor;
     JCMail mail = new JCMail();
-
+    private UserDAO objUser;
     public WinRecuperacion() {
         initComponents();
     }
@@ -85,14 +85,16 @@ public class WinRecuperacion extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try{
         cor = new RestauracionDAO();
+        objUser = new UserDAO();
         String usuario=txtusername.getText();
         String correo = cor.getcorreo(usuario);
         String pass = cor.getpass(usuario);
+        String contra = objUser.desencriptar(pass);
         mail.setFrom( "sistemaasistencia@gmail.com" );
         mail.setPassword( "carrascoselacome" );
         mail.setTo( correo );
         mail.setSubject( "recuerdo de contraseña" );
-        mail.setMessage( "tu usuario es:    " + usuario + "    tu contraseña es:   " + pass);
+        mail.setMessage( "tu usuario es:    " + usuario + "    tu contraseña es:   " + contra);
         mail.SEND();
         }
             catch(Exception e){

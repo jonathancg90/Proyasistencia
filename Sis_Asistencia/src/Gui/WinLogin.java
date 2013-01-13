@@ -145,7 +145,7 @@ public class WinLogin extends javax.swing.JFrame {
 
     private void btningresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btningresarActionPerformed
         String user=txtusername.getText().toUpperCase();
-        String pas=txtpassword.getText();
+        String pas=us.encriptar(txtpassword.getText());
         us= new UserDAO();
         if(us.userAuth(user, pas)==true){
             WinMdi objmdi=new WinMdi();
