@@ -19,7 +19,6 @@ public class Query extends ConexionBd{
     private String identify="";
 
     public Query(){
-        
     }
     public Query(String identify){
         this.identify = identify;
@@ -27,6 +26,7 @@ public class Query extends ConexionBd{
     }
     public void setIdentify(String identify) {
         this.identify = identify;
+        System.out.println("VALOR: " + this.identify);
     }
     
     public  PreparedStatement sqlRegister(String Table){
@@ -361,7 +361,7 @@ public class Query extends ConexionBd{
             getConexion();
             MChoice = new DefaultComboBoxModel();
             s = conexion.createStatement();
-            
+            System.out.println("Identificador : "+this.identify);
             if("".equals(this.identify)){
                 this.identify = getIdentify(Tbl);
                 op = true;
