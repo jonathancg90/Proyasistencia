@@ -325,6 +325,7 @@ public class WinUsuario extends javax.swing.JInternalFrame {
 
     private void mitemupdateMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemupdateMousePressed
         try{
+        //objUser = new UserDAO ();
         val = new Validators("usuario");    
         Object[] datos = {txtUsername.getText(),txtPassword.getPassword(),Txtcorreo.getText(),lblUsu.getText()};
         Object[] tipos = {3,4,9};
@@ -332,7 +333,7 @@ public class WinUsuario extends javax.swing.JInternalFrame {
             dt = new Data();
             int id = Integer.parseInt(lblUsu.getText());
             String username = txtUsername.getText();
-            String password=objUser.encriptar(String.valueOf(txtPassword.getPassword()).toLowerCase());
+            //String password=objUser.encriptar(String.valueOf(txtPassword.getPassword()).toLowerCase());
             String nomemp = String.valueOf(cboEmp.getSelectedItem());
 
             qs = new Query();
@@ -342,6 +343,7 @@ public class WinUsuario extends javax.swing.JInternalFrame {
             int rol = Integer.parseInt(qs.idChoice("roles","nombre",String.valueOf(cboRol.getSelectedItem())));
             String correo = Txtcorreo.getText();
             objUser = new UserDAO();
+            String password=objUser.encriptar(String.valueOf(txtPassword.getPassword()).toLowerCase());
             int i = objUser.updateUsuario(id,username,password,idemp,estate,rol,correo);
             if (i == 0) {
                 JOptionPane.showMessageDialog(null,"No se pudo grabar datos");
@@ -355,7 +357,7 @@ public class WinUsuario extends javax.swing.JInternalFrame {
         else {
             JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
         }
-        }catch(Exception e){}
+        }catch(Exception e){System.out.println("mareeee");}
     }//GEN-LAST:event_mitemupdateMousePressed
 
     private void mitemdeleteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemdeleteMousePressed

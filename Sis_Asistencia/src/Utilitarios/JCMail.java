@@ -53,7 +53,6 @@ public class JCMail {
             mimemessage.setContent(multipart);            
             mimemessage.setSentDate(new Date());
             Transport.send(mimemessage);
-            JOptionPane.showMessageDialog(null, "Correo enviado. Enjoy!!!");
         } catch (MessagingException ex) {
             System.out.println(ex);
         }

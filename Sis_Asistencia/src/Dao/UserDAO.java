@@ -289,4 +289,28 @@ public class UserDAO extends ConexionBd{
         info_a_desencriptar = info_desencriptada;
         return info_a_desencriptar;
     }
+    
+    public boolean onlyuserAuth(String user){
+        boolean result;
+        try{
+            getConexion();
+           
+            s = conexion.createStatement();
+            String qs = "select * from usuario "
+                    + "where username='"+user+"'";
+
+            rs = s.executeQuery(qs);
+            result = rs.next();
+            
+            closeConexion();
+            rs.close();
+            
+            return result;
+
+        }
+        catch(Exception e){
+            System.out.println(_error+"userAuth: "+e);
+            return false;
+        }
+    }    
 }
