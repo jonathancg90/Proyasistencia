@@ -8,7 +8,7 @@ import Utilitarios.JCMail;
 public class WinRecuperacion extends javax.swing.JFrame {
     RestauracionDAO  cor;
     JCMail mail = new JCMail();
-
+    private String _error="Gui_Recuperacion";
     public WinRecuperacion() {
         initComponents();
     }
@@ -96,7 +96,7 @@ public class WinRecuperacion extends javax.swing.JFrame {
         mail.SEND();
         }
             catch(Exception e){
-                System.out.println("Winrecuperacion "+e);
+                System.out.println(_error+"_enviarmsm:"+e);
             }
     }//GEN-LAST:event_jButton1ActionPerformed
 

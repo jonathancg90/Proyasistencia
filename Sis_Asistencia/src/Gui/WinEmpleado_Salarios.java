@@ -30,6 +30,7 @@ public class WinEmpleado_Salarios extends javax.swing.JInternalFrame {
     private Calendar calendar;
     private Calendar calendar2;
     private Validators val;
+    private String _error = "Gui_WinEmpleado_Salario_";
     
     public WinEmpleado_Salarios() {
         initComponents();
@@ -48,7 +49,7 @@ public class WinEmpleado_Salarios extends javax.swing.JInternalFrame {
             objSalarios.findId(lblIdemp.getText(), tblSalarios);
             lblIdemp.setVisible(false);
         } catch (Exception e) {
-            System.out.println("Gui_WinSalarios: " + e);
+            System.out.println(_error +"_CargaForm:"+ e);
         }
     }
     
@@ -337,7 +338,7 @@ public class WinEmpleado_Salarios extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
         }
         }catch(Exception e){
-            System.out.println(e);
+            System.out.println(_error+"_Register:"+e);
         }
         
     }//GEN-LAST:event_mitemregisterMousePressed
@@ -380,7 +381,9 @@ public class WinEmpleado_Salarios extends javax.swing.JInternalFrame {
         else {
             JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
         }
-        }catch(Exception e){}
+        }catch(Exception e){
+            System.out.println(_error+"_Update:"+e);
+        }
     }//GEN-LAST:event_mitemupdateMousePressed
 
     private void mitemdeleteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemdeleteMousePressed
@@ -408,7 +411,9 @@ public class WinEmpleado_Salarios extends javax.swing.JInternalFrame {
         else {
             JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
         }
-        }catch(Exception e){}
+        }catch(Exception e){
+            System.out.println(_error+"_Delete:"+e);
+        }
         
     }//GEN-LAST:event_mitemdeleteMousePressed
 
@@ -449,7 +454,7 @@ public class WinEmpleado_Salarios extends javax.swing.JInternalFrame {
                 
                 }
             catch (Exception e) {
-                System.out.println("Gui_Win_Salarios " + e);
+                System.out.println(_error+"_ Tblsalario: "+ e);
             }
                 
             }

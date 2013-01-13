@@ -50,7 +50,7 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
             
 
         } catch (Exception e) {
-            System.out.println("Gui_Win_area: " + e);
+            System.out.println(_error+"_CaragForm:" + e);
         }
     }  
     public void cleanBox(){
@@ -431,7 +431,9 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
     } else {
         JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
     }
-   }catch(Exception e){}
+   }catch(Exception e){
+       System.out.println(_error+"_Register:"+e);
+    }
     }//GEN-LAST:event_mitemregisterMousePressed
 
     private void mitemupdateMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemupdateMousePressed
@@ -473,7 +475,7 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
         }
     }catch(Exception e){
-        System.out.println(_error + "EvtUpdate : " + e);
+        System.out.println(_error + "_Update:" + e);
     }
     }//GEN-LAST:event_mitemupdateMousePressed
 
@@ -506,7 +508,7 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
          qs.loadChoiceDefault(cboSucursal,"sucursal","nombre",modemp.getIdsuc());
          }
          catch (Exception e) {
-            System.out.println(_error + "EvtClicktblempleado: " + e);
+            System.out.println(_error + "tblempleado:" + e);
          }     
     }//GEN-LAST:event_tblEmpleadoMouseClicked
 
@@ -537,7 +539,9 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
     } else {
         JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
     }
-    }catch(Exception e){}
+    }catch(Exception e){
+        System.out.println(_error+"_Delete:"+e);
+    }
     }//GEN-LAST:event_mitemdeleteMousePressed
 
     private void msueMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_msueMousePressed

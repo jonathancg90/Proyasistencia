@@ -14,7 +14,7 @@ public class WinEmpresa_Sucursal extends javax.swing.JInternalFrame {
     private Query qs;
     private Config cg;
     private Validators val;
-
+    private String _error="Gui_Empresa_Sucursal";
     
     public WinEmpresa_Sucursal() {
         initComponents();
@@ -27,7 +27,7 @@ public class WinEmpresa_Sucursal extends javax.swing.JInternalFrame {
             qs.loadChoice(cmbCiudad,"ciudad","nombre");
             lblIdemp.setVisible(false);
         } catch (Exception e) {
-            System.out.println("Gui_WinMdi: " + e);
+            System.out.println(_error+"_CargaForm:"+e);
         }
     }        
     public void cleanBox(){
@@ -335,7 +335,7 @@ public class WinEmpresa_Sucursal extends javax.swing.JInternalFrame {
 
             }
             catch(Exception e){
-                System.out.println("Gui_Win_sucursal: "+e);
+                System.out.println(_error+"_Tblsucursal:"+e);
             }
 
         }
@@ -365,7 +365,9 @@ public class WinEmpresa_Sucursal extends javax.swing.JInternalFrame {
      else {
             JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
      }
-      }catch(Exception e){}
+      }catch(Exception e){
+          System.out.println(_error+"_Register:"+e);
+      }
     }//GEN-LAST:event_mitemregisterMousePressed
 
     private void mitemupdateMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemupdateMousePressed
@@ -395,7 +397,9 @@ public class WinEmpresa_Sucursal extends javax.swing.JInternalFrame {
         else {
             JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
         }
-       }catch(Exception e){}
+       }catch(Exception e){
+           System.out.println(_error+"_Update:"+e);
+       }
     }//GEN-LAST:event_mitemupdateMousePressed
 
     private void mitemdeleteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemdeleteMousePressed
@@ -426,7 +430,9 @@ public class WinEmpresa_Sucursal extends javax.swing.JInternalFrame {
         else {
             JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
        } 
-       }catch(Exception e){}
+       }catch(Exception e){
+           System.out.println(_error+"_Delete:"+e);
+       }
     }//GEN-LAST:event_mitemdeleteMousePressed
 
     private void mcloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mcloseActionPerformed

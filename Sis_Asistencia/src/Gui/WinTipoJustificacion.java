@@ -18,7 +18,7 @@ public class WinTipoJustificacion extends javax.swing.JInternalFrame {
     private Config cg;
     private Data dt;
     private Validators val;
-    
+    private String _error="Gui_TipoJusrificacion";
     public WinTipoJustificacion() {
         initComponents();
         cargaForm();
@@ -30,7 +30,7 @@ public class WinTipoJustificacion extends javax.swing.JInternalFrame {
             qs = new Query();
             objjus.getTableAll(tbljus);
         } catch (Exception e) {
-            System.out.println("Gui_WinMdi: " + e);
+            System.out.println(_error+"_CargaForm:"+e);
         }
     }
     
@@ -266,7 +266,7 @@ public class WinTipoJustificacion extends javax.swing.JInternalFrame {
 
             }
             catch(Exception e){
-                System.out.println("Gui_WinTipo_Justificacion: "+e);
+                System.out.println(_error+"_tbljus:"+e);
             }
 
         }
@@ -297,7 +297,7 @@ public class WinTipoJustificacion extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
         }
         }catch(Exception e){
-        System.out.println(e);
+        System.out.println(_error+"_Register:"+e);
         }
     }//GEN-LAST:event_mitemregisterMousePressed
 
@@ -325,7 +325,9 @@ public class WinTipoJustificacion extends javax.swing.JInternalFrame {
         else {
             JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
         }
-        }catch(Exception e){}
+        }catch(Exception e){
+            System.out.println(_error+"_Update:"+e);
+        }
     }//GEN-LAST:event_mitemupdateMousePressed
 
     private void mitemdeleteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemdeleteMousePressed
@@ -355,7 +357,9 @@ public class WinTipoJustificacion extends javax.swing.JInternalFrame {
         else {
             JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
         }
-        }catch(Exception e){}
+        }catch(Exception e){
+            System.out.println(_error+"_Delete:"+e);
+        }
     }//GEN-LAST:event_mitemdeleteMousePressed
 
     private void mitemclearMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemclearMousePressed

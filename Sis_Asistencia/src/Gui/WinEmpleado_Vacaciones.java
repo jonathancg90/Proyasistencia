@@ -51,7 +51,7 @@ public class WinEmpleado_Vacaciones extends javax.swing.JInternalFrame {
             objVacaciones.findId(lblIdemp.getText(), tblVacaciones);
             lblIdemp.setVisible(false);
         } catch (Exception e) {
-            System.out.println(_error + "cargaForm" + e);
+            System.out.println(_error + "_cargaForm:" + e);
         }
     }
     
@@ -333,7 +333,7 @@ public class WinEmpleado_Vacaciones extends javax.swing.JInternalFrame {
 
             }
             catch (Exception e) {
-                System.out.println(_error + "Evt_Tblvacaciones " + e);
+                System.out.println(_error + "_Tblvacaciones:" + e);
             }
         }
     }//GEN-LAST:event_tblVacacionesMouseClicked
@@ -342,21 +342,12 @@ public class WinEmpleado_Vacaciones extends javax.swing.JInternalFrame {
         
         try{
         hp = new Helpers();
-<<<<<<< HEAD
-        val = new Validators(); 
-        String F_inicio=hp.getFormatDate(cboF_inicio.getText());
-        String F_final=hp.getFormatDate(cboF_final.getText());
-        if(val.validarFechasTablas(tblVacaciones, F_inicio,F_final)&&
-           val.validarFechas(F_inicio, F_final)){   
-            
-                
-=======
 
         val = new Validators("vacaciones"); 
         if(val.validarFechas(hp.getFormatDate(cboF_inicio.getText()), hp.getFormatDate(cboF_final.getText()))){   
                 String F_inicio=hp.getFormatDate(cboF_inicio.getText());
                 String F_final=hp.getFormatDate(cboF_final.getText());
->>>>>>> 2f97fbebeef803a9444c5af179268576856df728
+
 
                 int idemp=Integer.valueOf(lblIdemp.getText());
 
@@ -375,7 +366,8 @@ public class WinEmpleado_Vacaciones extends javax.swing.JInternalFrame {
         }else{
                 JOptionPane.showMessageDialog(null,"Conflicto en fechas");
             } 
-        }catch(Exception e){System.out.println(""+e);}
+        }catch(Exception e)
+        {System.out.println(_error+"_Register:"+e);}
             
         
     }//GEN-LAST:event_mitemregisterMousePressed
@@ -384,15 +376,7 @@ public class WinEmpleado_Vacaciones extends javax.swing.JInternalFrame {
        try{
         val= new Validators("vacaciones");
         hp = new Helpers();
-<<<<<<< HEAD
-        String F_inicio=hp.getFormatDate(cboF_inicio.getText());
-        String F_final=hp.getFormatDate(cboF_final.getText());
-        
-        if(val.validarFechas(F_inicio, F_final)){
-            int idsalario=Integer.parseInt(lblIdvacaciones.getText());
-            int idemp=Integer.parseInt(lblIdemp.getText());
-            
-=======
+
         Object[] datos = {lblIdvacaciones.getText()};
         Object[] tipos = {};
         if(val.validar(datos,tipos)){
@@ -402,7 +386,6 @@ public class WinEmpleado_Vacaciones extends javax.swing.JInternalFrame {
                 String F_inicio=hp.getFormatDate(cboF_inicio.getText());
                 String F_final=hp.getFormatDate(cboF_final.getText());
 
->>>>>>> 2f97fbebeef803a9444c5af179268576856df728
 
                 int i = objVacaciones.update(idsalario,F_inicio,F_final,idemp);
                 if (i == 0) {
@@ -420,6 +403,7 @@ public class WinEmpleado_Vacaciones extends javax.swing.JInternalFrame {
                 }
         }
        }catch(Exception e){
+           System.out.println(_error+"_Update:"+e);
        }
     }//GEN-LAST:event_mitemupdateMousePressed
 
@@ -446,6 +430,7 @@ public class WinEmpleado_Vacaciones extends javax.swing.JInternalFrame {
         }
         }
         }catch(Exception e){
+            System.out.println(_error+"_Delete:"+e);
         }
 
     }//GEN-LAST:event_mitemdeleteMousePressed

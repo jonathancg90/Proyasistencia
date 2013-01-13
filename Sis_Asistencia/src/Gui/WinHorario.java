@@ -24,7 +24,7 @@ public class WinHorario extends javax.swing.JInternalFrame {
     private Data dt;
     private Validators val;
     private Helpers hp;
-    
+    private String _error="Gui_Horario";
     public WinHorario() {
         initComponents();
         cargaForm();
@@ -43,7 +43,7 @@ public class WinHorario extends javax.swing.JInternalFrame {
             qs.loadGlobal(3,cbotipoReg,1);
 
         } catch (Exception e) {
-            System.out.println("Gui_WinHorarios_cargaForm: " + e);
+            System.out.println(_error+"_CargaForm:"+e);
         }
     }
     private void cargaDetalle(){
@@ -513,7 +513,9 @@ public class WinHorario extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
         }
     }
-    catch(Exception e){}
+    catch(Exception e){
+        System.out.println(_error+"_Delete:"+e);
+    }
        
     }//GEN-LAST:event_mitemdeleteActionPerformed
 
@@ -551,7 +553,9 @@ public class WinHorario extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
         }
     }
-    catch(Exception e){}
+    catch(Exception e){
+        System.out.println(_error+"_Register:"+e);
+    }
         
     }//GEN-LAST:event_mitemregisterMousePressed
 
@@ -577,7 +581,7 @@ public class WinHorario extends javax.swing.JInternalFrame {
                 cargaDetalle();
               }
             catch (Exception e) {
-                System.out.println("Gui_WinHorario: " + e);
+                System.out.println(_error+"_tblhora:"+e);
             }
     }//GEN-LAST:event_tblhoraMouseClicked
 
@@ -608,7 +612,9 @@ public class WinHorario extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
             }
         }
-        catch(Exception e){}
+        catch(Exception e){
+            System.out.println(_error+"_Update:"+e);
+        }
         
     }//GEN-LAST:event_mitemupdateMousePressed
 
@@ -649,7 +655,7 @@ public class WinHorario extends javax.swing.JInternalFrame {
                 }
         }
     catch(Exception e){
-        System.out.println("Evento registrar: "+e);
+        System.out.println(_error+"Evento registrar: "+e);
     }
     
     }//GEN-LAST:event_BtnAgreeActionPerformed
@@ -682,7 +688,9 @@ public class WinHorario extends javax.swing.JInternalFrame {
            
         }
         }
-       }catch(Exception e){}
+       }catch(Exception e){
+           System.out.println(_error+"_Remove:"+e);
+        }
        
     }//GEN-LAST:event_BtnRemoveActionPerformed
 

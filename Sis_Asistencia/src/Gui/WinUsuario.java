@@ -16,6 +16,7 @@ public class WinUsuario extends javax.swing.JInternalFrame {
     private Usuario modusu;
     private Data dt;
     private Validators val;
+    private String _error="Gui_Usuario";
     /**
      * Creates new form WinUsuario
      */
@@ -36,7 +37,7 @@ public class WinUsuario extends javax.swing.JInternalFrame {
             qs.loadChoice(cboEmp, "empleado", "nombres");
             qs.loadChoice(cboRol, "roles", "nombre");
     } catch (Exception e) {
-            System.out.println("Gui_WinMdi: " + e);
+            System.out.println(_error+"_CargaForm:"+e);
         }
     }
      public void cleanBox(){
@@ -280,7 +281,7 @@ public class WinUsuario extends javax.swing.JInternalFrame {
                 Txtcorreo.setText(modusu.getCorreo());
                 qs.loadState(cboEstado, modusu.isEstado());
        } catch (Exception e) {
-                System.out.println("Gui_Win_area: " + e);
+                System.out.println(_error+"_tblusu:"+e);
             }
     }//GEN-LAST:event_TblUsuMouseClicked
 
@@ -318,7 +319,7 @@ public class WinUsuario extends javax.swing.JInternalFrame {
         } else {
             JOptionPane.showMessageDialog(null, "Campos requeridos incompletos");
         } } catch(Exception e){
-            System.out.println(e);
+            System.out.println(_error+"_Register:"+e);
         }
     }//GEN-LAST:event_mitemregisterMousePressed
 
@@ -354,7 +355,9 @@ public class WinUsuario extends javax.swing.JInternalFrame {
         else {
             JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
         }
-        }catch(Exception e){}
+        }catch(Exception e){
+            System.out.println(_error+"_Update:"+e);
+        }
     }//GEN-LAST:event_mitemupdateMousePressed
 
     private void mitemdeleteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemdeleteMousePressed
@@ -384,7 +387,9 @@ public class WinUsuario extends javax.swing.JInternalFrame {
         else {
             JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
         }
-        }catch(Exception e){}
+        }catch(Exception e){
+            System.out.println(_error+"_Delete:"+e);
+        }
     }//GEN-LAST:event_mitemdeleteMousePressed
 
     private void mitemupdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mitemupdateActionPerformed

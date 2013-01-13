@@ -20,7 +20,7 @@ public class WinEmpresa extends javax.swing.JInternalFrame {
     private Data dt;
     private Validators val;
     private Helpers hp;
-    
+    private String _error = "Gui_Empresa";
     public WinEmpresa() {
         initComponents();
         cargaForm();
@@ -40,7 +40,7 @@ public class WinEmpresa extends javax.swing.JInternalFrame {
           
         }
         catch(Exception e){
-            System.out.println("Gui_WinMdi: "+e);
+            System.out.println(_error+"_CargaForm:"+e);
         }
     }
     
@@ -336,7 +336,7 @@ public class WinEmpresa extends javax.swing.JInternalFrame {
                 qs.loadState(cmbEstate,empresa.isEstado());
             }
             catch(Exception e){
-                System.out.println("Gui_Win_empresa: "+e);
+                System.out.println(_error+"_Tblempresa:"+e);
             }
 
         }
@@ -400,7 +400,7 @@ public class WinEmpresa extends javax.swing.JInternalFrame {
                     JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
                 }
         }catch(Exception e){
-            System.out.println("");
+            System.out.println(_error+"_Delete:"+e);
         }
     }//GEN-LAST:event_mitemdeleteMousePressed
 
@@ -434,7 +434,9 @@ public class WinEmpresa extends javax.swing.JInternalFrame {
             else {
                 JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
             } 
-            }catch(Exception e){}
+            }catch(Exception e){
+                System.out.println(_error+"_Update:"+e);
+            }
     }//GEN-LAST:event_mitemupdateMousePressed
 
     private void mitemregisterMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemregisterMousePressed
@@ -466,7 +468,9 @@ public class WinEmpresa extends javax.swing.JInternalFrame {
             else {
                 JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
             } 
-            }catch(Exception e){}
+            }catch(Exception e){
+                System.out.println(_error+"_Register:"+e);
+            }
         
     }//GEN-LAST:event_mitemregisterMousePressed
 
