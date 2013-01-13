@@ -38,7 +38,7 @@ public class Empleado_has_horariosDAO extends ConexionBd {
         campos[0]="\"NMID\"";
         campos[1]="inicio";
         campos[2]="fin";
-        campos[3]="idhor";
+        campos[3]="idhor/horarios/nombre";
         witdhcolum = new int[1];
         witdhcolum[0]=50;
      }
@@ -186,6 +186,7 @@ public class Empleado_has_horariosDAO extends ConexionBd {
     
     public int findId(String id,JTable tblDatos) {
         int i = 0;
+        System.out.println(id);
         try {
             if(!"".equals(id)){
                 filter = new String[1][2];

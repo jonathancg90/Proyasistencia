@@ -253,27 +253,29 @@ public class WinMdi extends javax.swing.JFrame {
 
     private void masiMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_masiMousePressed
         WinAsistencia objAsis = new WinAsistencia();
+        
         data= new Data();
-        String titulo=data.G_TITULOS[23];
+        String titulo=data.G_TITULOS[22];
         val = new Validators();
         objAsis.setTitle(titulo);
         objAsis.setResizable(true);
         objAsis.setMaximizable(true);
         objAsis.setIconifiable(true);
-        jdpContenedor.add(objAsis);
         
+        jdpContenedor.add(objAsis);
        if(val.EntryForms()){
             objAsis.setVisible(true);
        } else {
            JOptionPane.showMessageDialog(null,"Cierre la ventana abierta para abrir otra");
        }
+        
     }//GEN-LAST:event_masiMousePressed
 
     private void mjusMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mjusMousePressed
         WinJustificacion objJus = new WinJustificacion();
         
         data= new Data();
-        String titulo=data.G_TITULOS[22];
+        String titulo=data.G_TITULOS[23];
         val = new Validators();
         objJus.setTitle(titulo);
         objJus.setResizable(true);

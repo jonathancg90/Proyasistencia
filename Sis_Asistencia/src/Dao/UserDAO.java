@@ -24,6 +24,7 @@ public class UserDAO extends ConexionBd{
     private int witdhcolum[];
     private String _error;
     private String _table;
+    private String abc1 = "abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQ123456789";
     
     PreparedStatement  pt = null;
     /*
@@ -235,5 +236,57 @@ public class UserDAO extends ConexionBd{
             System.out.println(_error + "getValues: "+e);
             return objUsu;
         }
+    }
+    //función string encriptar
+    public String encriptar(String info_a_encriptar) {
+        String info_encriptada = "" ;
+        //variable
+        Boolean cambio = false;
+        for (int i = 0; i < info_a_encriptar.length(); i++) {
+            for (int j = 0; j < abc1.length(); j++) {
+                if (info_a_encriptar.charAt(i) == abc1.charAt(j)) {
+                    cambio = true;
+                    if ((j == 24) || (j == 25) || (j == 26) || (j == 51)
+                            || (j == 52) || (j == 53)) {
+                        info_encriptada = info_encriptada + abc1.charAt(j - 24);
+                    } else {
+                        info_encriptada = info_encriptada + abc1.charAt(j + 3);
+                    }
+                    j = 53;
+                }
+            }
+            if (!cambio) {
+                info_encriptada = info_encriptada + info_a_encriptar.charAt(i);
+            }
+            cambio = false;
+        }
+        info_a_encriptar = info_encriptada;
+        return info_a_encriptar;
+    }
+
+     //función string desencriptar
+    public String desencriptar(String info_a_desencriptar) {
+        String info_desencriptada = "";
+        Boolean cambio = false;
+
+        for (int i = 0; i < info_a_desencriptar.length(); i++) {
+            for (int j = 0; j < abc1.length(); j++) {
+                if (info_a_desencriptar.charAt(i) == abc1.charAt(j)) {
+                    cambio = true;
+                    if ((j == 0) || (j == 1) || (j == 2) || (j == 27) || (j == 28) || (j == 29)) {
+                        info_desencriptada = info_desencriptada + abc1.charAt(j + 24);
+                    } else {
+                        info_desencriptada = info_desencriptada + abc1.charAt(j - 3);
+                    }
+                    j = 53;
+                }
+            }
+            if (!cambio) {
+                info_desencriptada = info_desencriptada + info_a_desencriptar.charAt(i);
+            }
+            cambio = false;
+        }
+        info_a_desencriptar = info_desencriptada;
+        return info_a_desencriptar;
     }
 }

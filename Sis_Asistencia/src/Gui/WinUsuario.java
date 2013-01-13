@@ -293,13 +293,14 @@ public class WinUsuario extends javax.swing.JInternalFrame {
 
     private void mitemregisterMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemregisterMousePressed
         try{
+            objUser = new UserDAO();
             val = new Validators("usuario");    
             Object[] datos = {txtUsername.getText(), txtPassword.getPassword(), Txtcorreo.getText()};
             Object[] tipos = {3, 4, 9};
             if (val.validar(datos, tipos)){     
                 dt = new Data();
                 String username = txtUsername.getText();
-                String password = String.valueOf(txtPassword.getPassword());
+                String password = objUser.encriptar(String.valueOf(txtPassword.getPassword()).toLowerCase());
                 String nomemp = String.valueOf(cboEmp.getSelectedItem());
                 qs = new Query();
                 int idemp = Integer.parseInt(qs.idChoice("empleado", "nombres", nomemp));
@@ -331,7 +332,7 @@ public class WinUsuario extends javax.swing.JInternalFrame {
             dt = new Data();
             int id = Integer.parseInt(lblUsu.getText());
             String username = txtUsername.getText();
-            String password=String.valueOf(txtPassword.getPassword());
+            String password=objUser.encriptar(String.valueOf(txtPassword.getPassword()).toLowerCase());
             String nomemp = String.valueOf(cboEmp.getSelectedItem());
 
             qs = new Query();

@@ -37,6 +37,10 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
     private Validators val;
     private Data dt;
     private Helpers hp;
+    private Date date;
+    private Date date2;
+    private Calendar calendar;
+    private GregorianCalendar calendar2;
     
     public WinAsistencia() {
         initComponents();
@@ -58,10 +62,18 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
             qs.loadChoiceDefault(cbosuc,"sucursal","nombre",
                 Integer.parseInt(qs.idChoice("empresa","nombre",String.valueOf(cboempr.getSelectedItem())))
                 );
+            qs.loadGlobal(4, cboTiporeg, 1);
         }
         catch(Exception e){
             System.out.println("Gui_Asistencia"+ e);
         }
+    }
+    
+    public void cleanBox(){
+        Calendar rightNow = Calendar.getInstance();
+        lblReg.setText("");
+        lblMod.setText("");
+        cboDia.setSelectedDate(rightNow);
     }
     
     @SuppressWarnings("unchecked")
@@ -102,8 +114,14 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
         cboDia = new datechooser.beans.DateChooserCombo();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jButton4 = new javax.swing.JButton();
         TimIngreso = new com.lavantech.gui.comp.TimePanel();
+        cboTiporeg = new javax.swing.JComboBox();
+        jLabel6 = new javax.swing.JLabel();
+        lblReg = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        lblMod = new javax.swing.JLabel();
+        btnRegister = new javax.swing.JButton();
         jPanel7 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tblFiltroFecha = new javax.swing.JTable();
@@ -113,10 +131,9 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
         cboFin = new datechooser.beans.DateChooserCombo();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        jButton5 = new javax.swing.JButton();
+        btnDateSearch = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         mman = new javax.swing.JMenu();
-        mitemregister = new javax.swing.JMenuItem();
         mitemupdate = new javax.swing.JMenuItem();
         mitemdelete = new javax.swing.JMenuItem();
         mver = new javax.swing.JMenu();
@@ -145,7 +162,7 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 108, Short.MAX_VALUE)
+            .addGap(0, 110, Short.MAX_VALUE)
         );
 
         lblNombre.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -179,14 +196,14 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 311, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
-                .addContainerGap(14, Short.MAX_VALUE)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -206,20 +223,17 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
                             .addComponent(lblNombre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel3))
-                                .addGap(19, 19, 19)
-                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(lblDNI, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE)
-                                    .addComponent(lblApe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                            .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addGap(40, 40, 40)
-                                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addGap(222, 222, 222))
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3))
+                        .addGap(19, 19, 19)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(lblDNI, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE)
+                            .addComponent(lblApe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(101, 101, 101))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -247,7 +261,7 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
                 .addContainerGap())
         );
 
-        jPanel3.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(18, 156, 250, 460));
+        jPanel3.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 370, 500));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Buscar"));
 
@@ -289,19 +303,17 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jCheckBox1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnbuscar)
-                        .addGap(29, 29, 29))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(115, 115, 115)
+                        .addComponent(btnbuscar))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel16)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cbosuc, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(117, Short.MAX_VALUE))))
+                        .addComponent(cbosuc, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(29, 264, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(32, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel16)
@@ -310,15 +322,16 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
                         .addComponent(jLabel13)
                         .addComponent(cbotipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnbuscar)
-                    .addComponent(jLabel15)
-                    .addComponent(cboempr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jCheckBox1))
-                .addContainerGap())
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel15)
+                        .addComponent(cboempr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jCheckBox1))
+                    .addComponent(btnbuscar))
+                .addContainerGap(42, Short.MAX_VALUE))
         );
 
-        jPanel3.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(18, 17, 703, -1));
+        jPanel3.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(18, 17, 850, -1));
 
         tblempleado.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -351,7 +364,7 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 379, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 439, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -368,6 +381,11 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
 
             }
         ));
+        tblAsistencia.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblAsistenciaMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblAsistencia);
 
         jPanel9.setBorder(javax.swing.BorderFactory.createTitledBorder("Datos de asistencia"));
@@ -376,72 +394,118 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
 
         jLabel5.setText("Hora");
 
-        jButton4.setText("Ok");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
-            }
-        });
-
         TimIngreso.setDisplayAnalog(false);
         TimIngreso.setSecDisplayed(false);
+
+        jLabel6.setText("Tipo de registro");
+
+        lblReg.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        jLabel7.setText("ID");
+
+        jLabel8.setText("Modificado");
+
+        lblMod.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        btnRegister.setText("ok");
+        btnRegister.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegisterActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
         jPanel9Layout.setHorizontalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel9Layout.createSequentialGroup()
+                .addGap(24, 24, 24)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel9Layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(jLabel4)
-                        .addGap(12, 12, 12))
+                        .addComponent(jLabel8)
+                        .addGap(47, 47, 47)
+                        .addComponent(lblMod, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(jPanel9Layout.createSequentialGroup()
+                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel9Layout.createSequentialGroup()
+                                .addGap(119, 119, 119)
+                                .addComponent(cboTiporeg, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(jPanel9Layout.createSequentialGroup()
+                                .addComponent(jLabel6)
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(46, 46, 46))))
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel9Layout.createSequentialGroup()
+                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel9Layout.createSequentialGroup()
+                                .addGap(26, 26, 26)
+                                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel9Layout.createSequentialGroup()
+                                        .addComponent(jLabel7)
+                                        .addGap(28, 28, 28)
+                                        .addComponent(lblReg, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jLabel4)))
+                            .addGroup(jPanel9Layout.createSequentialGroup()
+                                .addGap(145, 145, 145)
+                                .addComponent(cboDia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel5)))
-                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel9Layout.createSequentialGroup()
-                        .addGap(22, 22, 22)
-                        .addComponent(cboDia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel9Layout.createSequentialGroup()
+                        .addGap(0, 28, Short.MAX_VALUE)
+                        .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(TimIngreso, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton4)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addComponent(btnRegister)))
+                .addContainerGap())
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel9Layout.createSequentialGroup()
-                .addGap(2, 2, 2)
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel7)
+                    .addComponent(lblReg, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(7, 7, 7)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel4)
                     .addComponent(cboDia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addGap(22, 22, 22))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
-                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jButton4)
-                            .addComponent(TimIngreso, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap())))
+                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel9Layout.createSequentialGroup()
+                        .addGap(1, 1, 1)
+                        .addComponent(cboTiporeg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(15, 15, 15)
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel8)
+                    .addComponent(lblMod, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel9Layout.createSequentialGroup()
+                        .addGap(8, 8, 8)
+                        .addComponent(TimIngreso, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel9Layout.createSequentialGroup()
+                        .addGap(41, 41, 41)
+                        .addComponent(jLabel5))
+                    .addGroup(jPanel9Layout.createSequentialGroup()
+                        .addGap(36, 36, 36)
+                        .addComponent(btnRegister)))
+                .addGap(45, 45, 45))
         );
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 408, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(56, 56, 56))
+                        .addGap(21, 21, 21)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 408, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -449,8 +513,8 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(22, 22, 22))
         );
 
         jTabbedPane1.addTab("Registrar asistencia", jPanel6);
@@ -476,15 +540,10 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
 
         jLabel10.setText("Fecha final ");
 
-        jButton5.setText("Buscar");
-        jButton5.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnDateSearch.setText("Buscar");
+        btnDateSearch.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton5MouseClicked(evt);
-            }
-        });
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
             }
         });
 
@@ -504,7 +563,7 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
                         .addGap(18, 18, 18)
                         .addComponent(cboIni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton5)
+                .addComponent(btnDateSearch)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel10Layout.setVerticalGroup(
@@ -517,11 +576,11 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(cboFin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel10))
-                .addGap(0, 10, Short.MAX_VALUE))
+                .addGap(0, 8, Short.MAX_VALUE))
             .addGroup(jPanel10Layout.createSequentialGroup()
                 .addGap(24, 24, 24)
-                .addComponent(jButton5)
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addComponent(btnDateSearch)
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
@@ -544,7 +603,7 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton2)
@@ -553,22 +612,24 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
 
         jTabbedPane1.addTab("Ver asistencias", jPanel7);
 
-        jPanel3.add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 166, 451, 440));
+        jPanel3.add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 170, 451, 500));
 
         mman.setText("Mantenimiento");
 
-        mitemregister.setText("Registrar");
-        mitemregister.addMouseListener(new java.awt.event.MouseAdapter() {
+        mitemupdate.setText("Actualizar");
+        mitemupdate.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                mitemregisterMousePressed(evt);
+                mitemupdateMousePressed(evt);
             }
         });
-        mman.add(mitemregister);
-
-        mitemupdate.setText("Actualizar");
         mman.add(mitemupdate);
 
         mitemdelete.setText("Eliminar");
+        mitemdelete.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                mitemdeleteMousePressed(evt);
+            }
+        });
         mman.add(mitemdelete);
 
         jMenuBar1.add(mman);
@@ -580,6 +641,11 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
 
         mitemclear.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.CTRL_MASK));
         mitemclear.setText("Limpiar");
+        mitemclear.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                mitemclearMousePressed(evt);
+            }
+        });
         medit.add(mitemclear);
 
         jMenuBar1.add(medit);
@@ -599,15 +665,14 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 736, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 36, Short.MAX_VALUE))
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 883, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 670, Short.MAX_VALUE)
-
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 686, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -667,31 +732,30 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_tblempleadoMouseClicked
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-       
-        
+
         
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MouseClicked
-        java.sql.Date date = new java.sql.Date(0000-00-00);
+ 
         hp=new Helpers();
         String inicio=hp.getFormatDate(cboIni.getText());
         String fin=hp.getFormatDate(cboFin.getText());
+        int id = Integer.parseInt(lblidEmp.getText() );
         objRegistro= new RegistroDAO();
-        
-        if(date.valueOf(inicio).equals(date.valueOf(fin))||
-                date.valueOf(inicio).after(date.valueOf(fin))){
+        val=new Validators();
+        if(val.validarFechas(inicio, fin)){
+            objRegistro.getTableFilter(tblFiltroFecha, inicio, fin,id);
             
-            JOptionPane.showMessageDialog(null,"Conflicto de fechas");
         }
         else{
-        objRegistro.getTableFilter(tblFiltroFecha, inicio, fin);
+        JOptionPane.showMessageDialog(null,"Conflicto de fechas");
         }
         
         
     }//GEN-LAST:event_jButton5MouseClicked
 
-    private void mitemregisterMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemregisterMousePressed
+    private void mitemregisterMousePressed(java.awt.event.MouseEvent evt) {                                           
          try{
         int id = Integer.parseInt(lblidEmp.getText());
         val = new Validators();
@@ -710,15 +774,16 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
                 
                 Time ing =  Time.valueOf(fhora.format(ingreso.getTime()));
                 String fecha=hp.getFormatDate(cboDia.getText());
-
-                int i = objRegistro.save(1, ing, fecha, id);
-                if (i == 0) {
+                int tiporeg=qs.loadGlobal(4, cboTiporeg, 0);
+                int i = objRegistro.save(tiporeg, ing, fecha, id,1);
+                int j = objRegistro.save(tiporeg, ing ,fecha,id ,0);
+                if (i == 0 && j == 0) {
                     JOptionPane.showMessageDialog(null,"No se pudo grabar el detalle");
                 }
                 
                 else {
                         objRegistro.findId(lblidEmp.getText(), tblAsistencia);
-                        
+                        cleanBox();
                         JOptionPane.showMessageDialog(null,"Nueva asistencia registrado");
                     }
                 
@@ -730,24 +795,171 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
     catch(Exception e){
         System.out.println("Evento registrar: "+e);
     }
-    }//GEN-LAST:event_mitemregisterMousePressed
+        
+        
+    }                                           
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-     
-    }//GEN-LAST:event_jButton5ActionPerformed
+    private void btnDateSearchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDateSearchMouseClicked
+       
+    }//GEN-LAST:event_btnDateSearchMouseClicked
+
+    private void tblAsistenciaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblAsistenciaMouseClicked
+        hp=new Helpers();
+        date = new Date();
+        calendar= new GregorianCalendar();
+        calendar2 = new GregorianCalendar();
+        int fsel;
+        fsel=this.tblAsistencia.getSelectedRow();
+        if (fsel == -1) {
+            //No se ha seleccionado registo en Jtable
+        } else {
+            try {
+                    registro = new Registro();
+                    DefaultTableModel m = new DefaultTableModel();
+                    m = (DefaultTableModel) this.tblAsistencia.getModel();
+                    String idAsistencia = String.valueOf(m.getValueAt(fsel, 0));
+                    lblReg.setText(idAsistencia);
+                    registro=objRegistro.getValues(Integer.parseInt(idAsistencia));
+                    date=format.parse(hp.getFormatDate(registro.getFecha()));
+                    calendar.setTime(date);
+                    cboDia.setSelectedDate(calendar);
+                    lblMod.setText(hp.getFormatDate(registro.getModified()));
+                    date2 = new Date(registro.getHora().getTime());
+                    calendar2.setTime(date2);
+                    TimIngreso.setCalendar(calendar2);
+            } catch (Exception e){
+                System.out.println("GUI_Asistencia"+e);
+            }
+        }
+        
+        
+        
+    }//GEN-LAST:event_tblAsistenciaMouseClicked
+
+    private void mitemclearMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemclearMousePressed
+        cleanBox();
+    }//GEN-LAST:event_mitemclearMousePressed
+
+    private void mitemdeleteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemdeleteMousePressed
+
+        int i;
+        i= JOptionPane.showConfirmDialog(null,"¿Esta seguro de eliminar este registro?","Aviso",JOptionPane.OK_CANCEL_OPTION,JOptionPane.WARNING_MESSAGE);
+        if(i==0){
+            int id = Integer.valueOf(lblReg.getText());
+
+            i = objRegistro.delete(id);
+            if(i==0) {
+                JOptionPane.showMessageDialog(null,"No se pudo eliminar el registro de asistencia");
+            }
+            else {
+                objRegistro.findId(lblidEmp.getText(), tblAsistencia);
+                cleanBox();
+            }
+        }
+
+    }//GEN-LAST:event_mitemdeleteMousePressed
+
+    private void mitemupdateMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemupdateMousePressed
+       try{
+        int id = Integer.parseInt(lblidEmp.getText());
+        val = new Validators();    
+        qs=new Query();
+        hp=new Helpers();
+        if(!"".equals(lblidEmp.getText())){
+            
+             //Validacion propia del evento
+                
+                dt = new Data();
+                objRegistro= new RegistroDAO();
+                int idreg = Integer.parseInt(lblReg.getText());
+                SimpleDateFormat fhora = new SimpleDateFormat("HH:mm:ss");
+                
+                Calendar ingreso = TimIngreso.getCalendar();
+                
+                Time ing =  Time.valueOf(fhora.format(ingreso.getTime()));
+                String fecha=hp.getFormatDate(cboDia.getText());
+                int tiporeg=qs.loadGlobal(4, cboTiporeg, 0);
+                int i = objRegistro.update(idreg, tiporeg, ing, fecha, id);
+                
+                if (i == 0 ) {
+                    JOptionPane.showMessageDialog(null,"No se pudo grabar el detalle");
+                }
+                
+                else {
+                        objRegistro.findId(lblidEmp.getText(), tblAsistencia);
+                        cleanBox();
+                        JOptionPane.showMessageDialog(null,"Asistencia actualizada");
+                    }
+                
+            
+        } else {
+            JOptionPane.showMessageDialog(null,"Seleccione un empleado para poder ingresar sus asistencia");
+                }
+        }
+    catch(Exception e){
+        System.out.println("Evento registrar: "+e);
+    } 
+
+    }//GEN-LAST:event_mitemupdateMousePressed
+
+                                       
+
+    private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
+       try{
+        int id = Integer.parseInt(lblidEmp.getText());
+        val = new Validators();    
+        qs=new Query();
+        hp=new Helpers();
+        if(!"".equals(lblidEmp.getText())){
+            
+             //Validacion propia del evento
+                
+                dt = new Data();
+                objRegistro= new RegistroDAO();
+                
+                SimpleDateFormat fhora = new SimpleDateFormat("HH:mm:ss");
+                
+                Calendar ingreso = TimIngreso.getCalendar();
+                
+                Time ing =  Time.valueOf(fhora.format(ingreso.getTime()));
+                String fecha=hp.getFormatDate(cboDia.getText());
+                int tiporeg=qs.loadGlobal(4, cboTiporeg, 0);
+                int i = objRegistro.save(tiporeg, ing, fecha, id,1);
+                int j = objRegistro.save(tiporeg, ing, fecha, id,0);
+                if (i == 0 && j == 0 ) {
+                    JOptionPane.showMessageDialog(null,"No se pudo grabar el detalle");
+                }
+                
+                else {
+                        objRegistro.findId(lblidEmp.getText(), tblAsistencia);
+                        cleanBox();
+                        JOptionPane.showMessageDialog(null,"Asistencia aregistrada");
+                    }
+                
+            
+        } else {
+            JOptionPane.showMessageDialog(null,"Seleccione un empleado para poder ingresar sus asistencia");
+                }
+        }
+    catch(Exception e){
+        System.out.println("Evento registrar: "+e);
+    } 
+    }//GEN-LAST:event_btnRegisterActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.lavantech.gui.comp.TimePanel TimIngreso;
+    private javax.swing.JButton btnDateSearch;
+    private javax.swing.JButton btnRegister;
     private javax.swing.JButton btnbuscar;
     private datechooser.beans.DateChooserCombo cboDia;
     private datechooser.beans.DateChooserCombo cboFin;
     private datechooser.beans.DateChooserCombo cboIni;
+    private javax.swing.JComboBox cboTiporeg;
     private javax.swing.JComboBox cboempr;
     private javax.swing.JComboBox cbosuc;
     private javax.swing.JComboBox cbotipo;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -759,6 +971,9 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
@@ -778,13 +993,14 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel lblApe;
     private javax.swing.JLabel lblDNI;
+    private javax.swing.JLabel lblMod;
     private javax.swing.JLabel lblNombre;
+    public javax.swing.JLabel lblReg;
     private javax.swing.JLabel lblidEmp;
     private javax.swing.JMenu mclose;
     private javax.swing.JMenu medit;
     private javax.swing.JMenuItem mitemclear;
     private javax.swing.JMenuItem mitemdelete;
-    private javax.swing.JMenuItem mitemregister;
     private javax.swing.JMenuItem mitemupdate;
     private javax.swing.JMenu mman;
     private javax.swing.JMenu mver;

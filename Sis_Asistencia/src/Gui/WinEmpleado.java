@@ -588,7 +588,7 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
         dt= new Data();
         WinEmpleado_horarios objEmpleado_has_horarios= new WinEmpleado_horarios();
         objEmpleado_has_horarios.setTitle(dt.G_TITULOS[18]);
-        //objEmpleado_has_horarios.lblidempleado.setText(lblidempleado.getText());
+        objEmpleado_has_horarios.lblIdemp.setText(lblidempleado.getText());
         objEmpleado_has_horarios.setResizable(true);
         objEmpleado_has_horarios.setMaximizable(true);
         objEmpleado_has_horarios.setIconifiable(true);
