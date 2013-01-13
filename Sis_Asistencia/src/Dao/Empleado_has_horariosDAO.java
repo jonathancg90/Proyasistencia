@@ -38,7 +38,7 @@ public class Empleado_has_horariosDAO extends ConexionBd {
         campos[0]="\"NMID\"";
         campos[1]="inicio";
         campos[2]="fin";
-        campos[3]="idhor";
+        campos[3]="idhor/horarios/nombre";
         witdhcolum = new int[1];
         witdhcolum[0]=50;
      }

@@ -302,14 +302,15 @@ public class WinEmpleado_Salarios extends javax.swing.JInternalFrame {
         Object[] datos = {txtMonto.getText()};
         Object[] tipos = {8};
     
-        if(val.validar(datos,tipos)){    
-            if(val.validarFechasTablas(tblSalarios, hp.getFormatDate(cboF_inicio.getText()), hp.getFormatDate(cboF_final.getText()))&&
-               val.validarFechas(hp.getFormatDate(cboF_inicio.getText()), hp.getFormatDate(cboF_final.getText()))){
+        if(val.validar(datos,tipos)){
+            String F_inicio=hp.getFormatDate(cboF_inicio.getText());
+            String F_final=hp.getFormatDate(cboF_final.getText());
+            if(val.validarFechasTablas(tblSalarios, F_inicio, F_final)&&
+               val.validarFechas(F_inicio, F_final)){
             
                 try{
 
-                    String F_inicio=hp.getFormatDate(cboF_inicio.getText());
-                    String F_final=hp.getFormatDate(cboF_final.getText());
+                    
 
                     boolean por_defecto=jCheckBox1.isSelected();
                     double monto=Double.parseDouble(txtMonto.getText());
@@ -348,11 +349,12 @@ public class WinEmpleado_Salarios extends javax.swing.JInternalFrame {
         Object[] datos = {txtMonto.getText(),lblIdsalario.getText()};
         Object[] tipos = {8};
         if(val.validar(datos,tipos)){
-                if(val.validarFechas(hp.getFormatDate(cboF_inicio.getText()), hp.getFormatDate(cboF_final.getText()))){
+            String F_inicio=hp.getFormatDate(cboF_inicio.getText());
+            String F_final=hp.getFormatDate(cboF_final.getText());
+                if(val.validarFechas(F_inicio, F_final)){
                     int idsalario=Integer.parseInt(lblIdsalario.getText());
                     int idemp=Integer.parseInt(lblIdemp.getText());
-                    String F_inicio=hp.getFormatDate(cboF_inicio.getText());
-                    String F_final=hp.getFormatDate(cboF_final.getText());
+                    
 
 
                     boolean por_defecto=jCheckBox1.isSelected();

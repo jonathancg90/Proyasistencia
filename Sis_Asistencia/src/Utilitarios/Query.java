@@ -286,17 +286,22 @@ public class Query extends ConexionBd{
                         tamaño = dt.G_TYPEHOR.length;
                         G_global = new String[tamaño];
                         G_global = dt.G_TYPEHOR;
-                            ;break;
+                        break;
                     case 2: 
                         tamaño = dt.G_DIAS.length;
                         G_global = new String[tamaño];
                         G_global = dt.G_DIAS;
-                        ;break;
+                        break;
                     case 3: 
                         tamaño = dt.G_TIPOH.length;
                         G_global = new String[tamaño];
                         G_global = dt.G_TIPOH;
-                        ;break;
+                        break;
+                    case 4:
+                        tamaño = dt.G_TIPOREG.length;
+                        G_global = new String[tamaño];
+                        G_global = dt.G_TIPOREG;
+                        break;
                     default : G_global = new String[0];
                     break;
                 }
