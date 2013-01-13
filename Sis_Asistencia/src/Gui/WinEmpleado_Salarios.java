@@ -298,9 +298,9 @@ public class WinEmpleado_Salarios extends javax.swing.JInternalFrame {
     private void mitemregisterMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemregisterMousePressed
         try{
         hp=new Helpers();
-        val = new Validators();    
+        val = new Validators("salarios");    
         Object[] datos = {txtMonto.getText()};
-        Object[] tipos = {0};
+        Object[] tipos = {8};
     
         if(val.validar(datos,tipos)){
             String F_inicio=hp.getFormatDate(cboF_inicio.getText());
@@ -344,9 +344,9 @@ public class WinEmpleado_Salarios extends javax.swing.JInternalFrame {
 
     private void mitemupdateMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemupdateMousePressed
         try{
-        val = new Validators();  
+        val = new Validators("salarios");  
         hp = new Helpers();
-        Object[] datos = {txtMonto.getText()};
+        Object[] datos = {txtMonto.getText(),lblIdsalario.getText()};
         Object[] tipos = {8};
         if(val.validar(datos,tipos)){
             String F_inicio=hp.getFormatDate(cboF_inicio.getText());
@@ -385,7 +385,7 @@ public class WinEmpleado_Salarios extends javax.swing.JInternalFrame {
 
     private void mitemdeleteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemdeleteMousePressed
         try{
-        val = new Validators();    
+        val = new Validators("salarios");    
         Object[] datos = {lblIdsalario.getText()};
         Object[] tipos = {};
         if(val.validar(datos,tipos)){

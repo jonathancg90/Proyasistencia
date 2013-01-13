@@ -140,6 +140,10 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
         btnDateSearch = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         mman = new javax.swing.JMenu();
+<<<<<<< HEAD
+=======
+        mitemregister = new javax.swing.JMenuItem();
+>>>>>>> 2f97fbebeef803a9444c5af179268576856df728
         mitemupdate = new javax.swing.JMenuItem();
         mitemdelete = new javax.swing.JMenuItem();
         mver = new javax.swing.JMenu();
@@ -168,7 +172,11 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+<<<<<<< HEAD
             .addGap(0, 110, Short.MAX_VALUE)
+=======
+            .addGap(0, 108, Short.MAX_VALUE)
+>>>>>>> 2f97fbebeef803a9444c5af179268576856df728
         );
 
         lblNombre.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -321,6 +329,10 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+<<<<<<< HEAD
+=======
+                .addContainerGap(32, Short.MAX_VALUE)
+>>>>>>> 2f97fbebeef803a9444c5af179268576856df728
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap(42, Short.MAX_VALUE)
@@ -553,6 +565,11 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
                 btnDateSearchMouseClicked(evt);
             }
         });
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
@@ -623,6 +640,7 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
 
         mman.setText("Mantenimiento");
 
+<<<<<<< HEAD
         mitemupdate.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));
         mitemupdate.setText("Actualizar");
         mitemupdate.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -639,6 +657,20 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
                 mitemdeleteMousePressed(evt);
             }
         });
+=======
+        mitemregister.setText("Registrar");
+        mitemregister.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                mitemregisterMousePressed(evt);
+            }
+        });
+        mman.add(mitemregister);
+
+        mitemupdate.setText("Actualizar");
+        mman.add(mitemupdate);
+
+        mitemdelete.setText("Eliminar");
+>>>>>>> 2f97fbebeef803a9444c5af179268576856df728
         mman.add(mitemdelete);
 
         jMenuBar1.add(mman);
@@ -681,7 +713,15 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
+<<<<<<< HEAD
                 .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 706, Short.MAX_VALUE)
+=======
+<<<<<<< HEAD
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 670, Short.MAX_VALUE)
+=======
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 674, Short.MAX_VALUE)
+>>>>>>> a41d26cb148d30341c5d4fef745e6f1e4aab9962
+>>>>>>> 2f97fbebeef803a9444c5af179268576856df728
                 .addContainerGap())
         );
 
@@ -740,11 +780,44 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
         
     }//GEN-LAST:event_tblempleadoMouseClicked
 
+<<<<<<< HEAD
     private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
         try{
         int id = Integer.parseInt(lblidEmp.getText());
         val = new Validators();    
         qs=new Query();
+=======
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+       
+        
+        
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MouseClicked
+        java.sql.Date date = new java.sql.Date(0000-00-00);
+        hp=new Helpers();
+        String inicio=hp.getFormatDate(cboIni.getText());
+        String fin=hp.getFormatDate(cboFin.getText());
+        objRegistro= new RegistroDAO();
+        
+        if(date.valueOf(inicio).equals(date.valueOf(fin))||
+                date.valueOf(inicio).after(date.valueOf(fin))){
+            
+            JOptionPane.showMessageDialog(null,"Conflicto de fechas");
+        }
+        else{
+        objRegistro.getTableFilter(tblFiltroFecha, inicio, fin);
+        }
+        
+        
+    }//GEN-LAST:event_jButton5MouseClicked
+
+    private void mitemregisterMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemregisterMousePressed
+         try{
+        int id = Integer.parseInt(lblidEmp.getText());
+        val = new Validators();
+        
+>>>>>>> 2f97fbebeef803a9444c5af179268576856df728
         hp=new Helpers();
         if(!"".equals(lblidEmp.getText())){
             
@@ -780,6 +853,7 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
     catch(Exception e){
         System.out.println("Evento registrar: "+e);
     }
+<<<<<<< HEAD
         
         
     }//GEN-LAST:event_btnRegisterActionPerformed
@@ -900,6 +974,13 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
     } 
 
     }//GEN-LAST:event_mitemupdateMousePressed
+=======
+    }//GEN-LAST:event_mitemregisterMousePressed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+     
+    }//GEN-LAST:event_jButton5ActionPerformed
+>>>>>>> 2f97fbebeef803a9444c5af179268576856df728
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.lavantech.gui.comp.TimePanel TimIngreso;
@@ -955,6 +1036,10 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
     private javax.swing.JMenu medit;
     private javax.swing.JMenuItem mitemclear;
     private javax.swing.JMenuItem mitemdelete;
+<<<<<<< HEAD
+=======
+    private javax.swing.JMenuItem mitemregister;
+>>>>>>> 2f97fbebeef803a9444c5af179268576856df728
     private javax.swing.JMenuItem mitemupdate;
     private javax.swing.JMenu mman;
     private javax.swing.JMenu mver;

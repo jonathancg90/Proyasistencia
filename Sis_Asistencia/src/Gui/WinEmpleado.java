@@ -1,4 +1,3 @@
-
 package Gui;
 
 
@@ -440,7 +439,7 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
         val = new Validators("empleado");    
         Object[] datos = {txtnombres.getText(),txtapellidos.getText(),
                           txtdni.getText(),txttelefono.getText(),lblidempleado.getText()};
-        Object[] tipos = {2,3,4,5,0};
+        Object[] tipos = {2,3,4,5};
         if(val.validar(datos,tipos)){ 
             Data dt = new Data();
             qs = new Query();
@@ -591,7 +590,7 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
         dt= new Data();
         WinEmpleado_horarios objEmpleado_has_horarios= new WinEmpleado_horarios();
         objEmpleado_has_horarios.setTitle(dt.G_TITULOS[18]);
-        objEmpleado_has_horarios.lblIdemp.setText(lblidempleado.getText());
+        //objEmpleado_has_horarios.lblidempleado.setText(lblidempleado.getText());
         objEmpleado_has_horarios.setResizable(true);
         objEmpleado_has_horarios.setMaximizable(true);
         objEmpleado_has_horarios.setIconifiable(true);

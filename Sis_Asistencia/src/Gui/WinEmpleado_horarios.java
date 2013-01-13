@@ -331,6 +331,7 @@ public class WinEmpleado_horarios extends javax.swing.JInternalFrame {
 
     private void mitemregisterMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemregisterMousePressed
         try{
+<<<<<<< HEAD
         val = new Validators();  
         hp=new Helpers();
         String F_inicio=hp.getFormatDate(cboF_inicio.getText());
@@ -339,6 +340,16 @@ public class WinEmpleado_horarios extends javax.swing.JInternalFrame {
         
         if(val.validarFechasTablas(tblEmpleado_has_horarios, F_inicio, F_final)&&
            val.validarFechas(F_inicio, F_final)){
+=======
+        val = new Validators("empleado_has_horarios");   
+        
+        hp=new Helpers();
+        Object[] datos = {lblIdemp_horarios.getText()};
+        Object[] tipos = {};
+        if(val.validar(datos,tipos)){
+        if(val.validarFechas(hp.getFormatDate(cboF_inicio.getText()), hp.getFormatDate(cboF_final.getText()))){
+
+>>>>>>> 2f97fbebeef803a9444c5af179268576856df728
  
             try{
                 
@@ -362,17 +373,30 @@ public class WinEmpleado_horarios extends javax.swing.JInternalFrame {
             {
                 JOptionPane.showMessageDialog(null,"Conflicto en fechas");
             }
-        }catch(Exception e){System.out.println(e);}
+
+        }
+        }catch(Exception e){}
+
         
 
     }//GEN-LAST:event_mitemregisterMousePressed
 
     private void mitemupdateMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemupdateMousePressed
-            val=new Validators();
+        try{    
+            val=new Validators("empleado_has_horarios");
             hp = new Helpers();
+<<<<<<< HEAD
             String F_inicio=hp.getFormatDate(cboF_inicio.getText());
             String F_final=hp.getFormatDate(cboF_final.getText());
             if(val.validarFechas(F_inicio, F_final)){
+=======
+
+            Object[] datos = {lblIdemp_horarios.getText()};
+            Object[] tipos = {};
+            if(val.validar(datos,tipos)){
+            if(val.validarFechas(hp.getFormatDate(cboF_inicio.getText()), hp.getFormatDate(cboF_final.getText()))){
+
+>>>>>>> 2f97fbebeef803a9444c5af179268576856df728
             
                 int idhorarios=Integer.parseInt(lblIdemp_horarios.getText());
                 int horario =  Integer.parseInt(qs.idChoice("horarios","nombre",String.valueOf(cbo_Horario.getSelectedItem())));
@@ -394,12 +418,19 @@ public class WinEmpleado_horarios extends javax.swing.JInternalFrame {
             {
                 JOptionPane.showMessageDialog(null,"Conflicto en fechas");
             }
+            }
+        }catch(Exception e){}
         
         
     }//GEN-LAST:event_mitemupdateMousePressed
 
     private void mitemdeleteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemdeleteMousePressed
-       
+       try{    
+            val=new Validators("empleado_has_horarios");
+            hp = new Helpers();
+            Object[] datos = {lblIdemp_horarios.getText()};
+            Object[] tipos = {};
+            if(val.validar(datos,tipos)){
             int i;
             i= JOptionPane.showConfirmDialog(null,"¿Esta seguro de eliminar este registro?","Aviso",JOptionPane.OK_CANCEL_OPTION,JOptionPane.WARNING_MESSAGE);
             if(i==0){
@@ -414,6 +445,8 @@ public class WinEmpleado_horarios extends javax.swing.JInternalFrame {
                     cleanBox();
                 }
             }
+            }
+       }catch(Exception e){}
         
 
     }//GEN-LAST:event_mitemdeleteMousePressed

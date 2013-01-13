@@ -407,7 +407,7 @@ public class WinEmpresa extends javax.swing.JInternalFrame {
     private void mitemupdateMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemupdateMousePressed
         try{
         val = new Validators("empresa");
-        Object[] datos = {txtName.getText(),txtruc.getText()};
+        Object[] datos = {txtName.getText(),txtruc.getText(),lblId.getText()};
         Object[] tipos = {2,3};
             if (val.validar(datos,tipos))
             {

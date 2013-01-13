@@ -371,7 +371,7 @@ public class WinEmpresa_Sucursal extends javax.swing.JInternalFrame {
     private void mitemupdateMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemupdateMousePressed
        try{
         val = new Validators("sucursal");    
-       Object[] datos = {txtName.getText(),txtdireccion.getText()};
+       Object[] datos = {txtName.getText(),txtdireccion.getText(),lblId.getText()};
        Object[] tipos={3,4};
        if(val.validar(datos,tipos))
        {  
@@ -402,7 +402,7 @@ public class WinEmpresa_Sucursal extends javax.swing.JInternalFrame {
        try{
         val = new Validators("sucursal");    
        Object[] datos = {lblId.getText()};
-       Object[] tipos = {1};
+       Object[] tipos = {};
        if(val.validar(datos,tipos))
        { 
             int i;      

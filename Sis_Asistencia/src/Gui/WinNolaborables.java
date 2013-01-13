@@ -12,8 +12,10 @@ import java.text.DateFormat;
 import java.util.Calendar;
 
 import Utilitarios.Helpers;
+import Utilitarios.Validators;
 import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
+import sun.org.mozilla.javascript.internal.ast.CatchClause;
 
 public class WinNolaborables extends javax.swing.JInternalFrame {
 
@@ -24,7 +26,7 @@ public class WinNolaborables extends javax.swing.JInternalFrame {
     private Helpers hp;
     private DateFormat format;
     private Date date;
-    
+    private Validators val;
     private Calendar calendar;
     
     
@@ -317,9 +319,12 @@ public class WinNolaborables extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_tblNolaborableMouseClicked
 
     private void mitemregisterMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemregisterMousePressed
-       hp=new Helpers();
-        try{
-            hp = new Helpers();
+       try{
+        hp=new Helpers();   
+        val = new Validators("nolaborables");    
+        Object[] datos = {};
+        Object[] tipos = {};
+        if(val.validar(datos,tipos)){  
             String Fecha=hp.getFormatDate(cboFecha.getText());
                     
             boolean status=jCheckBox1.isSelected();
@@ -335,13 +340,18 @@ public class WinNolaborables extends javax.swing.JInternalFrame {
                 cleanBox();
                 JOptionPane.showMessageDialog(null,"Nueva dia no laborable registrado");
             }
-        }catch(Exception e){System.out.println(""+e);}
-
+        }
+       
+       }catch(Exception e){};
     }//GEN-LAST:event_mitemregisterMousePressed
 
     private void mitemupdateMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemupdateMousePressed
-
-        hp = new Helpers();
+        try{
+        hp=new Helpers();   
+        val = new Validators("nolaborables");    
+        Object[] datos = {lblIdnolaborable.getText()};
+        Object[] tipos = {};
+        if(val.validar(datos,tipos)){ 
         int idnolaborables=Integer.parseInt(lblIdnolaborable.getText());
         int idempr=Integer.parseInt(lblIdempr.getText());
         String Fecha=hp.getFormatDate(cboFecha.getText());
@@ -360,10 +370,17 @@ public class WinNolaborables extends javax.swing.JInternalFrame {
             cleanBox();
             JOptionPane.showMessageDialog(null, "dia no laborable actualizado");
         }
+        }
+        }catch(Exception e){}
     }//GEN-LAST:event_mitemupdateMousePressed
 
     private void mitemdeleteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemdeleteMousePressed
-        
+        try{
+        hp=new Helpers();   
+        val = new Validators("nolaborables");    
+        Object[] datos = {lblIdnolaborable.getText()};
+        Object[] tipos = {};
+        if(val.validar(datos,tipos)){  
         int i;          
             i= JOptionPane.showConfirmDialog(null,"¿Esta seguro de eliminar este registro?","Aviso",JOptionPane.OK_CANCEL_OPTION,JOptionPane.WARNING_MESSAGE);
             if(i==0){
@@ -378,6 +395,8 @@ public class WinNolaborables extends javax.swing.JInternalFrame {
                     cleanBox();
                 }
             }
+        }
+        }catch(Exception e){}
         
 
     }//GEN-LAST:event_mitemdeleteMousePressed
