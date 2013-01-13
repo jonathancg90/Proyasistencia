@@ -331,17 +331,18 @@ public class WinEmpleado_horarios extends javax.swing.JInternalFrame {
 
     private void mitemregisterMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemregisterMousePressed
         try{
-        val = new Validators();   
-        
+        val = new Validators();  
         hp=new Helpers();
+        String F_inicio=hp.getFormatDate(cboF_inicio.getText());
+        String F_final=hp.getFormatDate(cboF_final.getText());
         
-        if(val.validarFechasTablas(tblEmpleado_has_horarios, hp.getFormatDate(cboF_inicio.getText()), hp.getFormatDate(cboF_final.getText()))&&
-           val.validarFechas(hp.getFormatDate(cboF_inicio.getText()), hp.getFormatDate(cboF_final.getText()))){
+        
+        if(val.validarFechasTablas(tblEmpleado_has_horarios, F_inicio, F_final)&&
+           val.validarFechas(F_inicio, F_final)){
  
             try{
                 
-                String F_inicio=hp.getFormatDate(cboF_inicio.getText());
-                String F_final=hp.getFormatDate(cboF_final.getText());
+                
                 int horario =  Integer.parseInt(qs.idChoice("horarios","nombre",String.valueOf(cbo_Horario.getSelectedItem())));
                 
                 int idemp=Integer.valueOf(lblIdemp.getText());
@@ -369,15 +370,13 @@ public class WinEmpleado_horarios extends javax.swing.JInternalFrame {
     private void mitemupdateMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemupdateMousePressed
             val=new Validators();
             hp = new Helpers();
-            if(val.validarFechas(hp.getFormatDate(cboF_inicio.getText()), hp.getFormatDate(cboF_final.getText()))){
+            String F_inicio=hp.getFormatDate(cboF_inicio.getText());
+            String F_final=hp.getFormatDate(cboF_final.getText());
+            if(val.validarFechas(F_inicio, F_final)){
             
                 int idhorarios=Integer.parseInt(lblIdemp_horarios.getText());
                 int horario =  Integer.parseInt(qs.idChoice("horarios","nombre",String.valueOf(cbo_Horario.getSelectedItem())));
                 int idemp=Integer.parseInt(lblIdemp.getText());
-                String F_inicio=hp.getFormatDate(cboF_inicio.getText());
-                String F_final=hp.getFormatDate(cboF_final.getText());
-
-
 
                 int i = objEmphorarios.update(idhorarios,F_inicio,F_final,horario,idemp);
                 if (i == 0) {

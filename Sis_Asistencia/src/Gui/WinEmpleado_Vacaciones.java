@@ -343,11 +343,12 @@ public class WinEmpleado_Vacaciones extends javax.swing.JInternalFrame {
         try{
         hp = new Helpers();
         val = new Validators(); 
-        if(val.validarFechasTablas(tblVacaciones, hp.getFormatDate(cboF_inicio.getText()), hp.getFormatDate(cboF_final.getText()))&&
-           val.validarFechas(hp.getFormatDate(cboF_inicio.getText()), hp.getFormatDate(cboF_final.getText()))){   
+        String F_inicio=hp.getFormatDate(cboF_inicio.getText());
+        String F_final=hp.getFormatDate(cboF_final.getText());
+        if(val.validarFechasTablas(tblVacaciones, F_inicio,F_final)&&
+           val.validarFechas(F_inicio, F_final)){   
             
-                String F_inicio=hp.getFormatDate(cboF_inicio.getText());
-                String F_final=hp.getFormatDate(cboF_final.getText());
+                
 
                 int idemp=Integer.valueOf(lblIdemp.getText());
 
@@ -373,12 +374,13 @@ public class WinEmpleado_Vacaciones extends javax.swing.JInternalFrame {
     private void mitemupdateMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemupdateMousePressed
         val= new Validators();
         hp = new Helpers();
+        String F_inicio=hp.getFormatDate(cboF_inicio.getText());
+        String F_final=hp.getFormatDate(cboF_final.getText());
         
-        if(val.validarFechas(hp.getFormatDate(cboF_inicio.getText()), hp.getFormatDate(cboF_final.getText()))){
+        if(val.validarFechas(F_inicio, F_final)){
             int idsalario=Integer.parseInt(lblIdvacaciones.getText());
             int idemp=Integer.parseInt(lblIdemp.getText());
-            String F_inicio=hp.getFormatDate(cboF_inicio.getText());
-            String F_final=hp.getFormatDate(cboF_final.getText());
+            
 
             int i = objVacaciones.update(idsalario,F_inicio,F_final,idemp);
             if (i == 0) {
