@@ -344,11 +344,11 @@ public class WinEmpleado_Vacaciones extends javax.swing.JInternalFrame {
         hp = new Helpers();
 
         val = new Validators("vacaciones"); 
-        if(val.validarFechas(hp.getFormatDate(cboF_inicio.getText()), hp.getFormatDate(cboF_final.getText()))){   
-                String F_inicio=hp.getFormatDate(cboF_inicio.getText());
-                String F_final=hp.getFormatDate(cboF_final.getText());
 
-
+        String F_inicio=hp.getFormatDate(cboF_inicio.getText());
+        String F_final=hp.getFormatDate(cboF_final.getText());
+        if(val.validarFechasTablas(tblVacaciones, F_inicio,F_final)&&
+           val.validarFechas(F_inicio, F_final)){   
                 int idemp=Integer.valueOf(lblIdemp.getText());
 
                 int i = objVacaciones.save(F_inicio,F_final,idemp);
@@ -379,14 +379,13 @@ public class WinEmpleado_Vacaciones extends javax.swing.JInternalFrame {
 
         Object[] datos = {lblIdvacaciones.getText()};
         Object[] tipos = {};
-        if(val.validar(datos,tipos)){
-            if(val.validarFechas(hp.getFormatDate(cboF_inicio.getText()), hp.getFormatDate(cboF_final.getText()))){
-                int idsalario=Integer.parseInt(lblIdvacaciones.getText());
-                int idemp=Integer.parseInt(lblIdemp.getText());
-                String F_inicio=hp.getFormatDate(cboF_inicio.getText());
-                String F_final=hp.getFormatDate(cboF_final.getText());
 
-
+        String F_inicio=hp.getFormatDate(cboF_inicio.getText());
+        String F_final=hp.getFormatDate(cboF_final.getText());
+        
+        if(val.validarFechas(F_inicio, F_final)){
+            int idsalario=Integer.parseInt(lblIdvacaciones.getText());
+            int idemp=Integer.parseInt(lblIdemp.getText());
                 int i = objVacaciones.update(idsalario,F_inicio,F_final,idemp);
                 if (i == 0) {
 
@@ -401,7 +400,7 @@ public class WinEmpleado_Vacaciones extends javax.swing.JInternalFrame {
             else {
                     JOptionPane.showMessageDialog(null,"Conflicto en fechas");
                 }
-        }
+        
        }catch(Exception e){
            System.out.println(_error+"_Update:"+e);
        }

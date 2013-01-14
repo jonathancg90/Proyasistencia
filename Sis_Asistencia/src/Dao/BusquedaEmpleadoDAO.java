@@ -54,24 +54,32 @@ public class BusquedaEmpleadoDAO {
         }
     
     }
-    public int find(String apellidos,String idcar,String idemp,
+    public int find(String apellidos,String idare, String idcar,String idemp,
             String idsuc,String state, JTable tblDatos) {
         int i = 0;
         try {
+            i = 0;
             if(!"".equals(apellidos)){
-                filter = new String[1][2];
-                filter[0][0] = "apellidos";
-                filter[0][1] = apellidos.toUpperCase();
-                filter[1][0] = "idare";
-                filter[1][1] = apellidos.toUpperCase(); 
-                filter[2][0] = "idsuc";
-                filter[2][1] = apellidos.toUpperCase(); 
-                filter[3][0] = "idcar";
-                filter[3][1] = apellidos.toUpperCase();
-                filter[4][0] = "idest";
-                filter[4][1] = apellidos.toUpperCase(); 
+                filter = new String[6][2];
+                filter[i][0] = "apellidos";
+                filter[i][1] = apellidos.toUpperCase();
+                i++;
+            } else{
+                filter = new String[5][2];
+                filter[i][0] = "int_idare";
+                filter[i][1] = idare; i++;
+                filter[i][0] = "int_idsuc";
+                filter[i][1] = idsuc; i++;
+                filter[i][0] = "int_idcar";
+                filter[i][1] = idcar;i++;
+                filter[i][0] = "int_idest";
+                filter[i][1] = state;i++;
+                filter[i][0] = "int_idempr";
+                filter[i][1] = idemp; 
             }
+            System.out.println("Tamaño: "+ filter.length);
             getTableAll(tblDatos);
+            
         }
         catch(Exception e){
             System.out.println(_error + "find : "+e);
