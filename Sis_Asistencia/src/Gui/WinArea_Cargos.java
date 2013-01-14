@@ -13,7 +13,7 @@ public class WinArea_Cargos extends javax.swing.JInternalFrame {
 
     private CargosDAO objCar;
     private Query qs;
-    private String _error = "Gui_WinArea_";
+    private String _error = "Gui_WinAreaCargos_";
     private Validators val;
     
     public WinArea_Cargos() {
@@ -32,7 +32,7 @@ public class WinArea_Cargos extends javax.swing.JInternalFrame {
             
             objCar.find(lblidArea.getText(),TblCargos);
         } catch (Exception e) {
-            System.out.println(_error + "Cargos: " + e);
+            System.out.println(_error + "_Cargos: " + e);
         }
     }                 
     public void cleanBox(){
@@ -272,7 +272,9 @@ public class WinArea_Cargos extends javax.swing.JInternalFrame {
       else {
             JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
       }
-        }catch(Exception e){}
+        }catch(Exception e){
+            System.out.println(_error + "_Register: " + e);
+        }
     }//GEN-LAST:event_mitemregisterMousePressed
 
     private void mitemdeleteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemdeleteMousePressed
@@ -313,7 +315,9 @@ public class WinArea_Cargos extends javax.swing.JInternalFrame {
     else {
         JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
     }
-    }catch(Exception e){}
+    }catch(Exception e){
+        System.out.println(_error + "_Delete: " + e);
+    }
     }//GEN-LAST:event_mitemdeleteMousePressed
 
     private void mitemupdateMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemupdateMousePressed
@@ -354,7 +358,9 @@ public class WinArea_Cargos extends javax.swing.JInternalFrame {
         else {
             JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
         }
-        }catch(Exception e){}
+        }catch(Exception e){
+            System.out.println(_error + "_Update: " + e);
+        }
     }//GEN-LAST:event_mitemupdateMousePressed
 
     private void mcloseMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mcloseMousePressed

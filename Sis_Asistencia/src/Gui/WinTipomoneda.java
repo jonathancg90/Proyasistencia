@@ -19,7 +19,7 @@ public class WinTipomoneda extends javax.swing.JInternalFrame {
     private Config cg;
     private Validators val;
     private Helpers hp;
-
+    private String _error="Gui_Tipomoneda";
     public WinTipomoneda() {
         initComponents();
         cargaForm();
@@ -31,7 +31,7 @@ public class WinTipomoneda extends javax.swing.JInternalFrame {
             qs = new Query();
             objmoneda.getTableAll(tblmoneda);
         } catch (Exception e) {
-            System.out.println("Gui_WinMdi: " + e);
+            System.out.println(_error+"_CargaForm:"+e);
         }
     }
     
@@ -312,7 +312,7 @@ public class WinTipomoneda extends javax.swing.JInternalFrame {
 
             }
             catch(Exception e){
-                System.out.println("Gui_WinTipo_moneda: "+e);
+                System.out.println(_error+"_tblmoneda:"+e);
             }
 
         }
@@ -341,7 +341,9 @@ public class WinTipomoneda extends javax.swing.JInternalFrame {
         else {
             JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
         }
-        }catch(Exception e){}
+        }catch(Exception e){
+            System.out.println(_error+"_Register:"+e);
+        }
     }//GEN-LAST:event_mitemregisterMousePressed
 
     private void mitemupdateMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemupdateMousePressed
@@ -369,7 +371,9 @@ public class WinTipomoneda extends javax.swing.JInternalFrame {
         else {
             JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
         }
-        }catch(Exception e){}
+        }catch(Exception e){
+            System.out.println(_error+"_Update:"+e);
+        }
     }//GEN-LAST:event_mitemupdateMousePressed
 
     private void mitemdeleteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemdeleteMousePressed
@@ -399,7 +403,9 @@ public class WinTipomoneda extends javax.swing.JInternalFrame {
         else {
             JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
         }
-        }catch(Exception e){}
+        }catch(Exception e){
+            System.out.println(_error+"_Delete:"+e);
+        }
     }//GEN-LAST:event_mitemdeleteMousePressed
 
     private void mcloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mcloseActionPerformed

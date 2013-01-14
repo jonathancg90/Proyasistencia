@@ -29,6 +29,8 @@ public class WinExtra_descuento extends javax.swing.JInternalFrame {
     private Calendar calendar;
     private Calendar calendar2;
     private Validators val;
+    private String _error="Gui_Extra_descuento";
+    
     public WinExtra_descuento() {
         initComponents();
         format=new SimpleDateFormat("dd-MM-yyyy");
@@ -41,7 +43,7 @@ public class WinExtra_descuento extends javax.swing.JInternalFrame {
             qs = new Query();
             qs.loadChoice(cbotipo,"extra_descuento","tipo");
         } catch (Exception e) {
-            System.out.println("Gui_WinExtra_descuento: " + e);
+            System.out.println(_error+"_CargaForm:"+e);
         }
     }
     
@@ -277,7 +279,7 @@ public class WinExtra_descuento extends javax.swing.JInternalFrame {
 
             }
             catch (Exception e) {
-                System.out.println("Gui_Win_Empleado_has_horarios " + e);
+                System.out.println(_error+"_tblextra:"+e);
             }
 
         }
@@ -314,7 +316,9 @@ public class WinExtra_descuento extends javax.swing.JInternalFrame {
             {
                 JOptionPane.showMessageDialog(null,"Conflicto en tamaño de datos");
             }
-        }catch(Exception e){}
+        }catch(Exception e){
+            System.out.println(_error+"_Register:"+e);
+        }
     }//GEN-LAST:event_mitemRegistrarMousePressed
 
     private void mitemUpdateMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemUpdateMousePressed
@@ -348,7 +352,9 @@ public class WinExtra_descuento extends javax.swing.JInternalFrame {
             {
                 JOptionPane.showMessageDialog(null,"Conflicto en tamaño de datos");
             }
-        }catch(Exception e){}
+        }catch(Exception e){
+            System.out.println(_error+"_Update:"+e);
+        }
     }//GEN-LAST:event_mitemUpdateMousePressed
 
     private void jmitemDeleteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmitemDeleteMousePressed
@@ -372,7 +378,9 @@ public class WinExtra_descuento extends javax.swing.JInternalFrame {
                 }
             }
         }
-       }catch(Exception e){}
+       }catch(Exception e){
+           System.out.println(_error+"_Delete:"+e);
+       }
     }//GEN-LAST:event_jmitemDeleteMousePressed
 
     private void jMenuItem4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem4MousePressed

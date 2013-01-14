@@ -29,14 +29,14 @@ public class WinEmpleado_horarios extends javax.swing.JInternalFrame {
     private Calendar calendar;
     private Calendar calendar2;
     private Validators val;
-    
+    private String _error = "Gui_Empleado_has_horarios";
     public WinEmpleado_horarios() {
         initComponents();
         
         format=new SimpleDateFormat("dd-MM-yyyy");
         cboF_inicio.setDateFormat(format);
         cboF_final.setDateFormat(format);
-        cargaForm();
+        
     }
     
     public void cargaForm(){
@@ -47,7 +47,7 @@ public class WinEmpleado_horarios extends javax.swing.JInternalFrame {
             lblIdemp.setVisible(false);
             qs.loadChoice(cbo_Horario,"horarios","nombre");
         } catch (Exception e) {
-            System.out.println("Gui_WinEmpleado_has_horarios: " + e);
+            System.out.println(_error+"_CargaForm:"+ e);
         }
     }
     
@@ -322,7 +322,7 @@ public class WinEmpleado_horarios extends javax.swing.JInternalFrame {
 
             }
             catch (Exception e) {
-                System.out.println("Gui_Win_Empleado_has_horarios " + e);
+                System.out.println(_error+"_TblEmpleado_has_horarios:"+ e);
             }
 
         }
@@ -330,35 +330,24 @@ public class WinEmpleado_horarios extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_tblEmpleado_has_horariosMouseClicked
 
     private void mitemregisterMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemregisterMousePressed
+
         try{
-<<<<<<< HEAD
-        val = new Validators();  
-        hp=new Helpers();
-        String F_inicio=hp.getFormatDate(cboF_inicio.getText());
-        String F_final=hp.getFormatDate(cboF_final.getText());
-        
-        
-        if(val.validarFechasTablas(tblEmpleado_has_horarios, F_inicio, F_final)&&
-           val.validarFechas(F_inicio, F_final)){
-=======
+
         val = new Validators("empleado_has_horarios");   
         
-        hp=new Helpers();
-        Object[] datos = {lblIdemp_horarios.getText()};
-        Object[] tipos = {};
-        if(val.validar(datos,tipos)){
-        if(val.validarFechas(hp.getFormatDate(cboF_inicio.getText()), hp.getFormatDate(cboF_final.getText()))){
+       hp=new Helpers();
+        String F_inicio=hp.getFormatDate(cboF_inicio.getText());
+        String F_final=hp.getFormatDate(cboF_final.getText());
+        if(val.validarFechasTablas(tblEmpleado_has_horarios, F_inicio, F_final)&&
+           val.validarFechas(F_inicio, F_final)){
+     
 
->>>>>>> 2f97fbebeef803a9444c5af179268576856df728
- 
             try{
-                
-                
                 int horario =  Integer.parseInt(qs.idChoice("horarios","nombre",String.valueOf(cbo_Horario.getSelectedItem())));
                 
                 int idemp=Integer.valueOf(lblIdemp.getText());
 
-                int i = objEmphorarios.save(F_inicio,F_final,horario,idemp);
+                int i = objEmphorarios.save(cboF_inicio.getText(),cboF_final.getText(),horario,idemp);
                 if (i == 0) {
                     JOptionPane.showMessageDialog(null,"No se pudo grabar datos");
                 }
@@ -374,10 +363,11 @@ public class WinEmpleado_horarios extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(null,"Conflicto en fechas");
             }
 
-        }
-        }catch(Exception e){}
 
-        
+        }
+        catch(Exception e){
+            System.out.println(_error+"_Register:" + e);
+        }
 
     }//GEN-LAST:event_mitemregisterMousePressed
 
@@ -385,24 +375,17 @@ public class WinEmpleado_horarios extends javax.swing.JInternalFrame {
         try{    
             val=new Validators("empleado_has_horarios");
             hp = new Helpers();
-<<<<<<< HEAD
+
             String F_inicio=hp.getFormatDate(cboF_inicio.getText());
             String F_final=hp.getFormatDate(cboF_final.getText());
             if(val.validarFechas(F_inicio, F_final)){
-=======
 
-            Object[] datos = {lblIdemp_horarios.getText()};
-            Object[] tipos = {};
-            if(val.validar(datos,tipos)){
-            if(val.validarFechas(hp.getFormatDate(cboF_inicio.getText()), hp.getFormatDate(cboF_final.getText()))){
 
->>>>>>> 2f97fbebeef803a9444c5af179268576856df728
-            
                 int idhorarios=Integer.parseInt(lblIdemp_horarios.getText());
                 int horario =  Integer.parseInt(qs.idChoice("horarios","nombre",String.valueOf(cbo_Horario.getSelectedItem())));
                 int idemp=Integer.parseInt(lblIdemp.getText());
 
-                int i = objEmphorarios.update(idhorarios,F_inicio,F_final,horario,idemp);
+                int i = objEmphorarios.update(idhorarios,cboF_inicio.getText(),cboF_final.getText(),horario,idemp);
                 if (i == 0) {
 
                     JOptionPane.showMessageDialog(null, "No se pudo actualizar datos");
@@ -418,8 +401,9 @@ public class WinEmpleado_horarios extends javax.swing.JInternalFrame {
             {
                 JOptionPane.showMessageDialog(null,"Conflicto en fechas");
             }
-            }
-        }catch(Exception e){}
+        }catch(Exception e){
+            System.out.println(_error+"__Update:"+e);
+        }
         
         
     }//GEN-LAST:event_mitemupdateMousePressed
@@ -446,7 +430,9 @@ public class WinEmpleado_horarios extends javax.swing.JInternalFrame {
                 }
             }
             }
-       }catch(Exception e){}
+       }catch(Exception e){
+           System.out.println(_error+"_Delete:"+e);
+       }
         
 
     }//GEN-LAST:event_mitemdeleteMousePressed
@@ -456,7 +442,7 @@ public class WinEmpleado_horarios extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_mcloseMousePressed
 
     private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
-        
+        cargaForm();
     }//GEN-LAST:event_formInternalFrameOpened
 
     private void mitemclearMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemclearMousePressed

@@ -186,6 +186,7 @@ public class Empleado_has_horariosDAO extends ConexionBd {
     
     public int findId(String id,JTable tblDatos) {
         int i = 0;
+        System.out.println(id);
         try {
             if(!"".equals(id)){
                 filter = new String[1][2];

@@ -1,13 +1,29 @@
 
 package Gui;
+import java.net.*;
 
 import Dao.RestauracionDAO;
+import Utilitarios.jcThread;
 import Utilitarios.JCMail;
-
+import Dao.UserDAO;
+import Javabeans.Restauracion;
+import java.io.PrintWriter;
+import javax.swing.JOptionPane;
 
 public class WinRecuperacion extends javax.swing.JFrame {
     RestauracionDAO  cor;
+    Restauracion  res;
     JCMail mail = new JCMail();
+
+    private String _error="Gui_Recuperacion";
+
+    private UserDAO objUser;
+    String ip = null; // IP del cliente
+    int i=0;
+    void limpiar(){
+        txtusername.setText("");
+        txtusername.requestFocus();
+    }
 
     public WinRecuperacion() {
         initComponents();
@@ -20,6 +36,7 @@ public class WinRecuperacion extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         txtusername = new javax.swing.JTextField();
+        jProgressBar1 = new javax.swing.JProgressBar();
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -33,11 +50,16 @@ public class WinRecuperacion extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addGap(41, 41, 41)
-                .addComponent(txtusername, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel1)
+                        .addGap(41, 41, 41)
+                        .addComponent(txtusername, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(49, 49, 49)
+                        .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -46,7 +68,9 @@ public class WinRecuperacion extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txtusername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(37, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jButton1.setText("Recuperar contraseña");
@@ -65,9 +89,9 @@ public class WinRecuperacion extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
-                .addGap(135, 135, 135)
+                .addGap(153, 153, 153)
                 .addComponent(jButton1)
-                .addContainerGap(176, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -83,21 +107,52 @@ public class WinRecuperacion extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        try{
-        cor = new RestauracionDAO();
-        String usuario=txtusername.getText();
-        String correo = cor.getcorreo(usuario);
-        String pass = cor.getpass(usuario);
-        mail.setFrom( "sistemaasistencia@gmail.com" );
-        mail.setPassword( "carrascoselacome" );
-        mail.setTo( correo );
-        mail.setSubject( "recuerdo de contraseña" );
-        mail.setMessage( "tu usuario es:    " + usuario + "    tu contraseña es:   " + pass);
-        mail.SEND();
-        }
-            catch(Exception e){
-                System.out.println("Winrecuperacion "+e);
+        objUser = new UserDAO ();
+        String user=txtusername.getText().toUpperCase();
+        if(objUser.onlyuserAuth(user)==true){
+            try{
+                cor = new RestauracionDAO();
+                //objUser = new UserDAO();
+                String usuario=txtusername.getText();
+                String correo = cor.getcorreo(usuario);
+                String pass = cor.getpass(usuario);
+                String contra = objUser.desencriptar(pass);
+                String From = "sistemaasistencia@gmail.com";
+                String Password = "carrascoselacome" ;
+                String To = correo ;
+                String Subject = "recuerdo de contraseña" ;
+                String Message = "tu usuario es:    " + usuario + "    tu contraseña es:   " + contra;
+
+                new Thread(new Restauracion(Password,From,To,Subject,Message)).start();
+                // animacion de jProgressBar
+                new Thread(new jcThread( this.jProgressBar1 ) ).start();
+
             }
+            catch(Exception e){
+
+                System.out.println(_error+"_enviarmsm:"+e);
+
+            }
+        }
+        else {
+            JOptionPane.showMessageDialog(null,"No existe el usuario");
+            limpiar();
+            try {
+                    InetAddress address = InetAddress.getByName( "nereida.deioc.ull.es" );
+                    System.out.println( "-> Direccion IP actual de LocalHost" );
+                    address = InetAddress.getLocalHost();
+                    System.out.println( address );
+            } 
+            catch( UnknownHostException e ) {
+              System.out.println( e );
+              System.out.println( "Debes estar conectado para que esto funcione bien." );
+            }
+        }
+        i++;
+        if(i==3){
+            JOptionPane.showMessageDialog(null, "Te equivocastes 3 veces","Alerta",1);
+            limpiar();this.dispose();
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -138,6 +193,7 @@ public class WinRecuperacion extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JTextField txtusername;
     // End of variables declaration//GEN-END:variables
 }

@@ -15,7 +15,7 @@ import Utilitarios.Helpers;
 import Utilitarios.Validators;
 import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
-import sun.org.mozilla.javascript.internal.ast.CatchClause;
+//import sun.org.mozilla.javascript.internal.ast.CatchClause;
 
 public class WinNolaborables extends javax.swing.JInternalFrame {
 
@@ -28,7 +28,7 @@ public class WinNolaborables extends javax.swing.JInternalFrame {
     private Date date;
     private Validators val;
     private Calendar calendar;
-    
+    private String _error="Gui_Nolaborables";
     
     public WinNolaborables() {
         initComponents();
@@ -44,7 +44,7 @@ public class WinNolaborables extends javax.swing.JInternalFrame {
             objNolaborables.findId(lblIdempr.getText(), tblNolaborable);
             lblIdempr.setVisible(false);
         } catch (Exception e) {
-            System.out.println("Gui_WinNolaborales: " + e);
+            System.out.println(_error+"_CargaForm:"+e);
         }
     }
     
@@ -311,7 +311,7 @@ public class WinNolaborables extends javax.swing.JInternalFrame {
 
             }
             catch (Exception e) {
-                System.out.println("Gui_Win_Nolaborables " + e);
+                System.out.println(_error+"_tblNolaborables:"+e);
             }
 
         }
@@ -342,7 +342,9 @@ public class WinNolaborables extends javax.swing.JInternalFrame {
             }
         }
        
-       }catch(Exception e){};
+       }catch(Exception e){
+           System.out.println(_error+"_Register:"+e);
+       };
     }//GEN-LAST:event_mitemregisterMousePressed
 
     private void mitemupdateMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemupdateMousePressed
@@ -371,7 +373,9 @@ public class WinNolaborables extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "dia no laborable actualizado");
         }
         }
-        }catch(Exception e){}
+        }catch(Exception e){
+            System.out.println(_error+"_Update:"+e);
+        }
     }//GEN-LAST:event_mitemupdateMousePressed
 
     private void mitemdeleteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemdeleteMousePressed
@@ -396,7 +400,9 @@ public class WinNolaborables extends javax.swing.JInternalFrame {
                 }
             }
         }
-        }catch(Exception e){}
+        }catch(Exception e){
+            System.out.println(_error+"_Delete:"+e);
+        }
         
 
     }//GEN-LAST:event_mitemdeleteMousePressed

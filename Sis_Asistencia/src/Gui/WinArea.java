@@ -39,7 +39,7 @@ public class WinArea extends javax.swing.JInternalFrame {
             objarea.getTableAll(tblArea);
             qs.loadState(cmbEstate, false);
         } catch (Exception e) {
-            System.out.println(_error + "cargaForm" + e);
+            System.out.println(_error + "_cargaForm:" + e);
         }
     }        
     public void cleanBox(){
@@ -321,7 +321,7 @@ public class WinArea extends javax.swing.JInternalFrame {
                 qs.loadState(cmbEstate,area.getState());
                 }
             catch (Exception e) {
-                System.out.println("Gui_Win_area: " + e);
+                System.out.println(_error +"_tblArea:"+ e);
             }
     }//GEN-LAST:event_tblAreaMouseClicked
 
@@ -367,7 +367,7 @@ public class WinArea extends javax.swing.JInternalFrame {
     }
     }
     catch(Exception e){
-        System.out.println();
+        System.out.println(_error +"_Delete:"+ e);
     }
 }
     private void mitemupdateMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemupdateMousePressed
@@ -395,7 +395,7 @@ public class WinArea extends javax.swing.JInternalFrame {
         JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
     }
     } catch(Exception e) {
-        System.out.println("Gui_Win_area_Update: " + e);
+        System.out.println(_error+"_Update: " + e);
     }
 }
     private void mitemregisterMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemregisterMousePressed
@@ -422,7 +422,7 @@ public class WinArea extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
         }  
         }catch(Exception e){
-        System.out.println("Gui_Win_area: " + e);
+        System.out.println(_error+"_Register:" + e);
         }
     }//GEN-LAST:event_mitemregisterMousePressed
 

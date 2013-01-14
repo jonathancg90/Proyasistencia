@@ -9,8 +9,12 @@ import Utilitarios.Validators;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import Utilitarios.JExcel;
+import java.awt.Image;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFileChooser;
+import javax.swing.ImageIcon;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import jxl.write.WriteException;
 
 public  class WinEmpleado extends javax.swing.JInternalFrame {
@@ -21,6 +25,8 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
     private Data dt ;
     private JExcel xl;
     private String _error = "Gui_WinEmpleado_";
+    private JFileChooser fileChooser;
+    private FileNameExtensionFilter fl;
     
 
     public WinEmpleado() {
@@ -46,11 +52,9 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
             qs.loadChoiceDefault(cboCargo,"cargo","nombre",
             Integer.parseInt(qs.idChoice("area","nombre",String.valueOf(cboArea.getSelectedItem()))));
             qs.loadChoice(cboTipo,"tipoempleado","nombre");
-            
-            
 
         } catch (Exception e) {
-            System.out.println("Gui_Win_area: " + e);
+            System.out.println(_error+"_CaragForm:" + e);
         }
     }  
     public void cleanBox(){
@@ -96,6 +100,7 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
         cboEstado = new javax.swing.JComboBox();
         jLabel12 = new javax.swing.JLabel();
         cboTipo = new javax.swing.JComboBox();
+        lblFoto = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblEmpleado = new javax.swing.JTable();
@@ -117,6 +122,7 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
         mvac = new javax.swing.JMenu();
         jMenu1 = new javax.swing.JMenu();
         jmfoto = new javax.swing.JMenu();
+        mAbrirFoto = new javax.swing.JMenuItem();
         mclose = new javax.swing.JMenu();
 
         jMenuItem1.setText("jMenuItem1");
@@ -210,6 +216,10 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
         pnlMantenimiento.add(cboTipo);
         cboTipo.setBounds(120, 240, 190, 27);
 
+        lblFoto.setBorder(javax.swing.BorderFactory.createTitledBorder("Foto"));
+        pnlMantenimiento.add(lblFoto);
+        lblFoto.setBounds(670, 60, 140, 170);
+
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Listado", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, null, new java.awt.Color(1, 1, 1)));
 
         tblEmpleado.setModel(new javax.swing.table.DefaultTableModel(
@@ -270,7 +280,7 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
                     .addComponent(chkactivo)
                     .addComponent(btnFiltro))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -362,6 +372,15 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
         jMenuBar1.add(jMenu1);
 
         jmfoto.setText("Foto");
+
+        mAbrirFoto.setText("Abrir");
+        mAbrirFoto.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                mAbrirFotoMousePressed(evt);
+            }
+        });
+        jmfoto.add(mAbrirFoto);
+
         jMenuBar1.add(jmfoto);
 
         mclose.setText("Cerrar");
@@ -380,10 +399,12 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(pnlMantenimiento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(41, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 174, Short.MAX_VALUE))
+                    .addComponent(pnlMantenimiento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -417,7 +438,7 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
         int sucursal =  Integer.parseInt(qs.idChoice("sucursal","nombre",String.valueOf(cboSucursal.getSelectedItem())));
         int cargo =  Integer.parseInt(qs.idChoice("cargo","nombre",String.valueOf(cboCargo.getSelectedItem())));
         int estate =  Integer.parseInt(qs.idChoice("estadoemp","nombre",String.valueOf(cboEstado.getSelectedItem())));
-
+        
         objempl = new EmpleadoDAO();
         int i = objempl.saveEmpleado(0,nombre,apellido,dni, telefono,area, tipo, estate,cargo,empresa,sucursal);
         if (i == 0) {
@@ -431,7 +452,9 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
     } else {
         JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
     }
-   }catch(Exception e){}
+   }catch(Exception e){
+       System.out.println(_error+"_Register:"+e);
+    }
     }//GEN-LAST:event_mitemregisterMousePressed
 
     private void mitemupdateMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemupdateMousePressed
@@ -473,7 +496,7 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
         }
     }catch(Exception e){
-        System.out.println(_error + "EvtUpdate : " + e);
+        System.out.println(_error + "_Update:" + e);
     }
     }//GEN-LAST:event_mitemupdateMousePressed
 
@@ -506,7 +529,7 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
          qs.loadChoiceDefault(cboSucursal,"sucursal","nombre",modemp.getIdsuc());
          }
          catch (Exception e) {
-            System.out.println(_error + "EvtClicktblempleado: " + e);
+            System.out.println(_error + "tblempleado:" + e);
          }     
     }//GEN-LAST:event_tblEmpleadoMouseClicked
 
@@ -537,7 +560,9 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
     } else {
         JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
     }
-    }catch(Exception e){}
+    }catch(Exception e){
+        System.out.println(_error+"_Delete:"+e);
+    }
     }//GEN-LAST:event_mitemdeleteMousePressed
 
     private void msueMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_msueMousePressed
@@ -590,7 +615,7 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
         dt= new Data();
         WinEmpleado_horarios objEmpleado_has_horarios= new WinEmpleado_horarios();
         objEmpleado_has_horarios.setTitle(dt.G_TITULOS[18]);
-        //objEmpleado_has_horarios.lblidempleado.setText(lblidempleado.getText());
+        objEmpleado_has_horarios.lblIdemp.setText(lblidempleado.getText());
         objEmpleado_has_horarios.setResizable(true);
         objEmpleado_has_horarios.setMaximizable(true);
         objEmpleado_has_horarios.setIconifiable(true);
@@ -636,7 +661,7 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
 
             objextra.setVisible(true);   
         } else {
-            JOptionPane.showMessageDialog(null,"Debe de seleccionar una empresa para poder ingresar sus dias no laborables");
+            JOptionPane.showMessageDialog(null,"Debe de seleccionar una empleado para poder ingresar sus dias no laborables");
         }
     }//GEN-LAST:event_jMenu1MousePressed
 
@@ -651,6 +676,32 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
             Logger.getLogger(WinEmpleado.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_miteninfoMousePressed
+
+    private void mAbrirFotoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mAbrirFotoMousePressed
+        if(!"".equals(this.lblidempleado.getText())){
+            fileChooser= new JFileChooser();
+            fl= new FileNameExtensionFilter("jpg & png", "jpg", "png");
+            fileChooser.setAcceptAllFileFilterUsed(false);
+            fileChooser.setFileFilter(fl);
+            int imagenElegida= fileChooser.showOpenDialog(this);
+            if(imagenElegida == JFileChooser.APPROVE_OPTION) 
+                {
+                    String file= fileChooser.getSelectedFile().getAbsolutePath();
+                    //Modificando la imagen
+                    ImageIcon icon = new ImageIcon(file);
+                    // se extrae la imagen del icono
+                    Image img = icon.getImage();
+                    //Se modifica su tamaño
+                    Image newimg = img.getScaledInstance(140,170,java.awt.Image.SCALE_SMOOTH);
+                    // se genera el Image icon con la nueva imagen
+                    ImageIcon newIcon = new ImageIcon(newimg);
+                    lblFoto.setIcon(newIcon); // se coloca el nuevo icono modificado
+                    lblFoto.setSize(140,170); // se cambia el tamaño de la etiqueta
+                }
+        } else {
+            JOptionPane.showMessageDialog(null,"Debe de seleccionar una empleado para poder ingresar sus dias no laborables");
+        }
+    }//GEN-LAST:event_mAbrirFotoMousePressed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnFiltro;
@@ -682,7 +733,9 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JMenu jmfoto;
     private javax.swing.JMenu jmhuella;
+    private javax.swing.JLabel lblFoto;
     private javax.swing.JLabel lblidempleado;
+    private javax.swing.JMenuItem mAbrirFoto;
     private javax.swing.JMenu mclose;
     private javax.swing.JMenu medit;
     private javax.swing.JMenu mfile;

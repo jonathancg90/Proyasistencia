@@ -144,8 +144,9 @@ public class WinLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btningresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btningresarActionPerformed
+        us = new UserDAO ();
         String user=txtusername.getText().toUpperCase();
-        String pas=txtpassword.getText();
+        String pas = us.encriptar(txtpassword.getText());
         us= new UserDAO();
         if(us.userAuth(user, pas)==true){
             WinMdi objmdi=new WinMdi();
@@ -188,7 +189,7 @@ public class WinLogin extends javax.swing.JFrame {
     
     
     public static void main(String args[]) {
-        
+       
        
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -217,6 +218,7 @@ public class WinLogin extends javax.swing.JFrame {
             @Override
             public void run() {
                 try {
+                    
                     UIManager.setLookAndFeel("com.jtattoo.plaf.texture.TextureLookAndFeel");
                     //JFrame.
                 } 
@@ -224,6 +226,7 @@ public class WinLogin extends javax.swing.JFrame {
                     Logger.getLogger(WinLogin.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 new WinLogin().setVisible(true);
+                    
             }
         });
     }

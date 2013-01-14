@@ -17,7 +17,7 @@ public class WinCiudad extends javax.swing.JInternalFrame {
     private Query qs;
     private Config cg;
     private Validators val;
-
+    private String _error = "Gui_WinCiudad_";
     
     public WinCiudad() {
         initComponents();
@@ -30,7 +30,7 @@ public class WinCiudad extends javax.swing.JInternalFrame {
             qs = new Query();
             objciudad.getTableAll(tblciudad);
         } catch (Exception e) {
-            System.out.println("Gui_WinCiudad: " + e);
+            System.out.println(_error+"_CargaForm:" + e);
         }
     }
     
@@ -266,7 +266,7 @@ public class WinCiudad extends javax.swing.JInternalFrame {
 
             }
             catch(Exception e){
-                System.out.println("Gui_WinCiudad: "+e);
+                System.out.println(_error+"_Tblciudad:"+e);
             }
 
         }
@@ -293,7 +293,9 @@ public class WinCiudad extends javax.swing.JInternalFrame {
         else {
             JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
         }
-        }catch(Exception e){}
+        }catch(Exception e){
+            System.out.println(_error+"_Register:"+e);
+        }
     }//GEN-LAST:event_mitemregisterMousePressed
 
     private void mitemupdateMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemupdateMousePressed
@@ -320,7 +322,9 @@ public class WinCiudad extends javax.swing.JInternalFrame {
         else {
             JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
         }
-        }catch(Exception e){}
+        }catch(Exception e){
+            System.out.println(_error+"_Update:"+e);
+        }
     }//GEN-LAST:event_mitemupdateMousePressed
 
     private void mitemdeleteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemdeleteMousePressed
@@ -350,7 +354,9 @@ public class WinCiudad extends javax.swing.JInternalFrame {
         else {
             JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
         }
-        }catch(Exception e){}
+        }catch(Exception e){
+            System.out.println(_error+"_Delete:"+e);
+        }
     }//GEN-LAST:event_mitemdeleteMousePressed
 
     private void mcloseMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mcloseMousePressed

@@ -15,7 +15,7 @@ public class WinEstadoEmpleado extends javax.swing.JInternalFrame {
     private Data dt;
     private EstadoEmp est;
     private Validators val;
-
+    private String _error="Gui_Estado_Empleado";
     public WinEstadoEmpleado() {
         initComponents();
         cargaForm();
@@ -29,7 +29,7 @@ public class WinEstadoEmpleado extends javax.swing.JInternalFrame {
             qs = new Query();
             objest.getTableAll(tblest);
         } catch (Exception e) {
-            System.out.println("Gui_WinWinEstadoEmpleado_cargaForm: " + e);
+            System.out.println(_error+"_CargaForm:"+e);
         }
     }        
     public void cleanBox(){
@@ -222,7 +222,9 @@ public class WinEstadoEmpleado extends javax.swing.JInternalFrame {
         else {
             JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
         }
-        }catch(Exception e){}
+        }catch(Exception e){
+            System.out.println(_error+"_Register:"+e);
+        }
     }//GEN-LAST:event_mitemRegistrarMousePressed
 
     private void jMenuItem4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem4MousePressed
@@ -254,7 +256,9 @@ public class WinEstadoEmpleado extends javax.swing.JInternalFrame {
         else {
             JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
         }
-        }catch(Exception e){}
+        }catch(Exception e){
+            System.out.println(_error+"_Update:"+e);
+        }
     }//GEN-LAST:event_mitemUpdateMousePressed
 
     private void jmitemDeleteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmitemDeleteMousePressed
@@ -286,7 +290,9 @@ public class WinEstadoEmpleado extends javax.swing.JInternalFrame {
         else {
             JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
         }
-        }catch(Exception e){}
+        }catch(Exception e){
+            System.out.println(_error+"_Delete:"+e);
+        }
     }//GEN-LAST:event_jmitemDeleteMousePressed
 
     private void tblestMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblestMousePressed
