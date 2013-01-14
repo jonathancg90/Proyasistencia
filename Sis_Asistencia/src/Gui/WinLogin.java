@@ -5,11 +5,13 @@ import Dao.UserDAO;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.*;
+import Utilitarios.Data;
 
 
 public class WinLogin extends javax.swing.JFrame {
     UserDAO  us;
     int i=0;
+    private Data dt ;
     void limpiar(){
         txtusername.setText("");
         txtpassword.setText("");
@@ -20,6 +22,9 @@ public class WinLogin extends javax.swing.JFrame {
      */
     public WinLogin() {
         initComponents();this.setLocationRelativeTo(this);
+        dt= new Data();
+        String titulo=dt.G_TITULOS[24];
+        this.setTitle(titulo);
     }
 
     
@@ -184,6 +189,9 @@ public class WinLogin extends javax.swing.JFrame {
 
     private void jLabel4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MousePressed
         WinRecuperacion objrec =   new WinRecuperacion();
+        dt= new Data();
+        String titulo=dt.G_TITULOS[26];
+        objrec.setTitle(titulo);
         objrec.show();
     }//GEN-LAST:event_jLabel4MousePressed
     

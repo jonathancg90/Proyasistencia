@@ -15,6 +15,9 @@ public class WinMdi extends javax.swing.JFrame {
         initComponents();
         jdpContenedor.setSize(this.getWidth(), this.getHeight());
         setExtendedState(JFrame.MAXIMIZED_BOTH);
+        data= new Data();
+        String titulo=data.G_TITULOS[25];
+        this.setTitle(titulo);
 
     }
     
