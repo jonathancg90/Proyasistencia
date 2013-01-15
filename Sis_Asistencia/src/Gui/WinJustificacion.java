@@ -1,9 +1,17 @@
 
 package Gui;
 
+import Appi.JExcel;
+import java.io.File;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
 
 public class WinJustificacion extends javax.swing.JInternalFrame {
 
+    private JExcel xls;
+    
     public WinJustificacion() {
         initComponents();
     }
@@ -54,6 +62,7 @@ public class WinJustificacion extends javax.swing.JInternalFrame {
         mitemdelete = new javax.swing.JMenuItem();
         medit = new javax.swing.JMenu();
         mitemclear = new javax.swing.JMenuItem();
+        ItemExportar = new javax.swing.JMenuItem();
         mclose = new javax.swing.JMenu();
 
         jLabel2.setText("Tipo ");
@@ -268,6 +277,14 @@ public class WinJustificacion extends javax.swing.JInternalFrame {
         mitemclear.setText("Limpiar");
         medit.add(mitemclear);
 
+        ItemExportar.setText("Exportar");
+        ItemExportar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                ItemExportarMousePressed(evt);
+            }
+        });
+        medit.add(ItemExportar);
+
         jMenuBar1.add(medit);
 
         mclose.setText("Cerrar");
@@ -303,7 +320,7 @@ public class WinJustificacion extends javax.swing.JInternalFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         pack();
@@ -322,6 +339,45 @@ public class WinJustificacion extends javax.swing.JInternalFrame {
         Utilitarios.Config.OPENWINDOWS =0;
     }//GEN-LAST:event_mcloseMousePressed
 
+    private void ItemExportarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ItemExportarMousePressed
+  try {
+        JFileChooser Obj=new JFileChooser();
+        xls = new JExcel();
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("Excel xls", "xls","xlsx");
+        Obj.setFileFilter(filter);
+        Obj.setDialogTitle("Guardar reporte");
+        int seleccion=Obj.showSaveDialog(TblJusti);
+        //Guardar
+        if(seleccion == JFileChooser.APPROVE_OPTION){
+            File fichero = Obj.getSelectedFile();
+            String filePath = fichero.getPath();
+            if(!filePath.toLowerCase().endsWith(".xls")){
+                fichero = new File(filePath + ".xls");
+            }
+            boolean Confirma;
+            if((fichero).exists()) {
+                if(JOptionPane.OK_OPTION == JOptionPane.showConfirmDialog(this,"El fichero existe,deseas reemplazarlo?","Reemplazar",JOptionPane.YES_NO_OPTION));{
+                    Confirma=xls.ExportJtable(TblJusti, fichero, "Cargos");
+                }
+            } 
+            else{
+                Confirma=xls.ExportJtable(TblJusti, fichero, "Cargos");
+            }
+                if(Confirma==true){
+                    JOptionPane.showMessageDialog(null, "El documento se grabo exitosamente","Confirmacion",JOptionPane.INFORMATION_MESSAGE);
+                }
+                else{
+                    JOptionPane.showMessageDialog(null, "No se pudo grabar el documento", "Confirmacion", JOptionPane.INFORMATION_MESSAGE);
+                }
+        }
+    }
+    catch(Exception e)
+    {
+        JOptionPane.showMessageDialog(null, "Ha ocurrido un error durante la exportacion del documento","Error",JOptionPane.ERROR_MESSAGE);
+        System.out.println(_error + "Exportar :"+e);
+    }
+    }//GEN-LAST:event_ItemExportarMousePressed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private datechooser.beans.DateChooserCombo Calen_Fecha;
     private javax.swing.JComboBox Cmb_Empleado;
@@ -332,6 +388,7 @@ public class WinJustificacion extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox Cmb_MinR;
     private javax.swing.JComboBox Cmb_MinS;
     private javax.swing.JComboBox Cmb_horarioS;
+    private javax.swing.JMenuItem ItemExportar;
     private javax.swing.JLabel Lblarea;
     private javax.swing.JLabel Lblcargo;
     private javax.swing.JTable TblJusti;
