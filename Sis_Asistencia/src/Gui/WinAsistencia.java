@@ -1,6 +1,7 @@
 
 package Gui;
 
+import Appi.JExcel;
 import Dao.EmpleadoDAO;
 import Javabeans.Empleado;
 
@@ -22,7 +23,10 @@ import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
 import javax.swing.JOptionPane;
 import Utilitarios.Data;
+import java.io.File;
 import java.sql.Time;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class WinAsistencia extends javax.swing.JInternalFrame {
 
@@ -41,6 +45,8 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
     private Date date2;
     private Calendar calendar;
     private GregorianCalendar calendar2;
+    private JExcel xls;
+    
     
     public WinAsistencia() {
         initComponents();
@@ -136,9 +142,10 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
         mman = new javax.swing.JMenu();
         mitemupdate = new javax.swing.JMenuItem();
         mitemdelete = new javax.swing.JMenuItem();
-        mver = new javax.swing.JMenu();
         medit = new javax.swing.JMenu();
         mitemclear = new javax.swing.JMenuItem();
+        ItemExportar = new javax.swing.JMenuItem();
+        mver = new javax.swing.JMenu();
         mclose = new javax.swing.JMenu();
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Asistencias"));
@@ -190,7 +197,7 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -625,9 +632,6 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
 
         jMenuBar1.add(mman);
 
-        mver.setText("Ver asistencias");
-        jMenuBar1.add(mver);
-
         medit.setText("Edit");
 
         mitemclear.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.CTRL_MASK));
@@ -639,7 +643,18 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
         });
         medit.add(mitemclear);
 
+        ItemExportar.setText("Exportar");
+        ItemExportar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                ItemExportarMousePressed(evt);
+            }
+        });
+        medit.add(ItemExportar);
+
         jMenuBar1.add(medit);
+
+        mver.setText("Ver asistencias");
+        jMenuBar1.add(mver);
 
         mclose.setText("Cerrar");
         mclose.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -663,7 +678,7 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 694, Short.MAX_VALUE)
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 698, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -936,8 +951,48 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
     } 
     }//GEN-LAST:event_btnRegisterActionPerformed
 
+    private void ItemExportarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ItemExportarMousePressed
+  try {
+        JFileChooser Obj=new JFileChooser();
+        xls = new JExcel();
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("Excel xls", "xls","xlsx");
+        Obj.setFileFilter(filter);
+        Obj.setDialogTitle("Guardar reporte");
+        int seleccion=Obj.showSaveDialog(tblempleado);
+        //Guardar
+        if(seleccion == JFileChooser.APPROVE_OPTION){
+            File fichero = Obj.getSelectedFile();
+            String filePath = fichero.getPath();
+            if(!filePath.toLowerCase().endsWith(".xls")){
+                fichero = new File(filePath + ".xls");
+            }
+            boolean Confirma;
+            if((fichero).exists()) {
+                if(JOptionPane.OK_OPTION == JOptionPane.showConfirmDialog(this,"El fichero existe,deseas reemplazarlo?","Reemplazar",JOptionPane.YES_NO_OPTION));{
+                    Confirma=xls.ExportJtable(tblempleado, fichero, "Asistencia");
+                }
+            } 
+            else{
+                Confirma=xls.ExportJtable(tblempleado, fichero, "Asistencia");
+            }
+                if(Confirma==true){
+                    JOptionPane.showMessageDialog(null, "El documento se grabo exitosamente","Confirmacion",JOptionPane.INFORMATION_MESSAGE);
+                }
+                else{
+                    JOptionPane.showMessageDialog(null, "No se pudo grabar el documento", "Confirmacion", JOptionPane.INFORMATION_MESSAGE);
+                }
+        }
+    }
+    catch(Exception e)
+    {
+        JOptionPane.showMessageDialog(null, "Ha ocurrido un error durante la exportacion del documento","Error",JOptionPane.ERROR_MESSAGE);
+        System.out.println(_error + "Exportar :"+e);
+    }
+    }//GEN-LAST:event_ItemExportarMousePressed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem ItemExportar;
     private com.lavantech.gui.comp.TimePanel TimIngreso;
     private javax.swing.JButton btnDateSearch;
     private javax.swing.JButton btnRegister;

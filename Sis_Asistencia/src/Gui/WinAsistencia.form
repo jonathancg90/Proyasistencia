@@ -27,11 +27,6 @@
             </MenuItem>
           </SubComponents>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="mver">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Ver asistencias"/>
-          </Properties>
-        </Menu>
         <Menu class="javax.swing.JMenu" name="medit">
           <Properties>
             <Property name="text" type="java.lang.String" value="Edit"/>
@@ -48,7 +43,20 @@
                 <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="mitemclearMousePressed"/>
               </Events>
             </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="ItemExportar">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Exportar"/>
+              </Properties>
+              <Events>
+                <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="ItemExportarMousePressed"/>
+              </Events>
+            </MenuItem>
           </SubComponents>
+        </Menu>
+        <Menu class="javax.swing.JMenu" name="mver">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Ver asistencias"/>
+          </Properties>
         </Menu>
         <Menu class="javax.swing.JMenu" name="mclose">
           <Properties>
@@ -90,7 +98,7 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jPanel3" pref="694" max="32767" attributes="0"/>
+              <Component id="jPanel3" pref="698" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -277,7 +285,7 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jScrollPane4" pref="148" max="32767" attributes="0"/>
+                          <Component id="jScrollPane4" pref="144" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
