@@ -1,5 +1,5 @@
 
-package Utilitarios;
+package Appi;
 import javax.mail.Authenticator;
 import javax.mail.PasswordAuthentication;
 public class SMTPAuthenticator extends Authenticator {

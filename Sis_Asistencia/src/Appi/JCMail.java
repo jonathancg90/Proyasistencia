@@ -1,5 +1,5 @@
 
-package Utilitarios;
+package Appi;
 import java.util.Date;
 import javax.mail.Message;
 import javax.mail.Session;

@@ -3,8 +3,8 @@ package Gui;
 import java.net.*;
 
 import Dao.RestauracionDAO;
-import Utilitarios.jcThread;
-import Utilitarios.JCMail;
+import Appi.jcThread;
+import Appi.JCMail;
 import Dao.UserDAO;
 import Javabeans.Restauracion;
 import java.io.PrintWriter;

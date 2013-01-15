@@ -8,7 +8,7 @@ import Utilitarios.Query;
 import Utilitarios.Validators;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import Utilitarios.JExcel;
+import Appi.JExcel;
 import java.awt.Image;
 import java.util.logging.Level;
 import java.util.logging.Logger;

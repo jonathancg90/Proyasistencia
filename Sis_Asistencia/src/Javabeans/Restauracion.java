@@ -1,6 +1,6 @@
 
 package Javabeans;
-import Utilitarios.JCMail;
+import Appi.JCMail;
 
 public class Restauracion implements Runnable{
     JCMail mail = new JCMail();
