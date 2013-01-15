@@ -477,35 +477,35 @@ public class WinArea extends javax.swing.JInternalFrame {
 
     private void jMenuItem1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem1MousePressed
   try {
-    JFileChooser Obj=new JFileChooser();
-    xls = new JExcel();
-    FileNameExtensionFilter filter = new FileNameExtensionFilter("Excel xls", "xls","xlsx");
-    Obj.setFileFilter(filter);
-    Obj.setDialogTitle("Guardar reporte");
-    int seleccion=Obj.showSaveDialog(tblArea);
-    //Guardar
-    if(seleccion == JFileChooser.APPROVE_OPTION){
-        File fichero = Obj.getSelectedFile();
-        String filePath = fichero.getPath();
-        if(!filePath.toLowerCase().endsWith(".xls")){
-            fichero = new File(filePath + ".xls");
-        }
-        boolean Confirma;
-        if((fichero).exists()) {
-            if(JOptionPane.OK_OPTION == JOptionPane.showConfirmDialog(this,"El fichero existe,deseas reemplazarlo?","Reemplazar",JOptionPane.YES_NO_OPTION));{
+        JFileChooser Obj=new JFileChooser();
+        xls = new JExcel();
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("Excel xls", "xls","xlsx");
+        Obj.setFileFilter(filter);
+        Obj.setDialogTitle("Guardar reporte");
+        int seleccion=Obj.showSaveDialog(tblArea);
+        //Guardar
+        if(seleccion == JFileChooser.APPROVE_OPTION){
+            File fichero = Obj.getSelectedFile();
+            String filePath = fichero.getPath();
+            if(!filePath.toLowerCase().endsWith(".xls")){
+                fichero = new File(filePath + ".xls");
+            }
+            boolean Confirma;
+            if((fichero).exists()) {
+                if(JOptionPane.OK_OPTION == JOptionPane.showConfirmDialog(this,"El fichero existe,deseas reemplazarlo?","Reemplazar",JOptionPane.YES_NO_OPTION));{
+                    Confirma=xls.ExportJtable(tblArea, fichero, "Asistencia");
+                }
+            } 
+            else{
                 Confirma=xls.ExportJtable(tblArea, fichero, "Asistencia");
             }
-        } 
-        else{
-            Confirma=xls.ExportJtable(tblArea, fichero, "Asistencia");
+                if(Confirma==true){
+                    JOptionPane.showMessageDialog(null, "El documento se grabo exitosamente","Confirmacion",JOptionPane.INFORMATION_MESSAGE);
+                }
+                else{
+                    JOptionPane.showMessageDialog(null, "No se pudo grabar el documento", "Confirmacion", JOptionPane.INFORMATION_MESSAGE);
+                }
         }
-            if(Confirma==true){
-                JOptionPane.showMessageDialog(null, "El documento se grabo exitosamente","Confirmacion",JOptionPane.INFORMATION_MESSAGE);
-            }
-            else{
-                JOptionPane.showMessageDialog(null, "No se pudo grabar el documento", "Confirmacion", JOptionPane.INFORMATION_MESSAGE);
-            }
-    }
     }
     catch(Exception e)
     {

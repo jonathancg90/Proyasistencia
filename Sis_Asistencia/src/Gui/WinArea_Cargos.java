@@ -1,11 +1,15 @@
 
 package Gui;
 
+import Appi.JExcel;
 import Dao.CargosDAO;
 import Utilitarios.Query;
 import Utilitarios.Validators;
 import java.awt.HeadlessException;
+import java.io.File;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 
 
@@ -15,6 +19,7 @@ public class WinArea_Cargos extends javax.swing.JInternalFrame {
     private Query qs;
     private String _error = "Gui_WinAreaCargos_";
     private Validators val;
+    private JExcel xls;
     
     public WinArea_Cargos() {
         initComponents();
@@ -60,6 +65,7 @@ public class WinArea_Cargos extends javax.swing.JInternalFrame {
         mitemdelete = new javax.swing.JMenuItem();
         medit = new javax.swing.JMenu();
         mitemclear = new javax.swing.JMenuItem();
+        ItemExportar = new javax.swing.JMenuItem();
         mclose = new javax.swing.JMenu();
 
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
@@ -125,7 +131,7 @@ public class WinArea_Cargos extends javax.swing.JInternalFrame {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(27, Short.MAX_VALUE)
+                .addContainerGap(29, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(txtname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -167,6 +173,14 @@ public class WinArea_Cargos extends javax.swing.JInternalFrame {
         mitemclear.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.CTRL_MASK));
         mitemclear.setText("Limpiar");
         medit.add(mitemclear);
+
+        ItemExportar.setText("Exportar");
+        ItemExportar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                ItemExportarMousePressed(evt);
+            }
+        });
+        medit.add(ItemExportar);
 
         jMenuBar1.add(medit);
 
@@ -219,14 +233,14 @@ public class WinArea_Cargos extends javax.swing.JInternalFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblArea, javax.swing.GroupLayout.DEFAULT_SIZE, 18, Short.MAX_VALUE)
+                    .addComponent(lblArea, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel3)
                         .addComponent(lblidArea)))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
@@ -367,7 +381,47 @@ public class WinArea_Cargos extends javax.swing.JInternalFrame {
         this.setVisible(false);
     }//GEN-LAST:event_mcloseMousePressed
 
+    private void ItemExportarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ItemExportarMousePressed
+  try {
+        JFileChooser Obj=new JFileChooser();
+        xls = new JExcel();
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("Excel xls", "xls","xlsx");
+        Obj.setFileFilter(filter);
+        Obj.setDialogTitle("Guardar reporte");
+        int seleccion=Obj.showSaveDialog(TblCargos);
+        //Guardar
+        if(seleccion == JFileChooser.APPROVE_OPTION){
+            File fichero = Obj.getSelectedFile();
+            String filePath = fichero.getPath();
+            if(!filePath.toLowerCase().endsWith(".xls")){
+                fichero = new File(filePath + ".xls");
+            }
+            boolean Confirma;
+            if((fichero).exists()) {
+                if(JOptionPane.OK_OPTION == JOptionPane.showConfirmDialog(this,"El fichero existe,deseas reemplazarlo?","Reemplazar",JOptionPane.YES_NO_OPTION));{
+                    Confirma=xls.ExportJtable(TblCargos, fichero, "Asistencia");
+                }
+            } 
+            else{
+                Confirma=xls.ExportJtable(TblCargos, fichero, "Asistencia");
+            }
+                if(Confirma==true){
+                    JOptionPane.showMessageDialog(null, "El documento se grabo exitosamente","Confirmacion",JOptionPane.INFORMATION_MESSAGE);
+                }
+                else{
+                    JOptionPane.showMessageDialog(null, "No se pudo grabar el documento", "Confirmacion", JOptionPane.INFORMATION_MESSAGE);
+                }
+        }
+    }
+    catch(Exception e)
+    {
+        JOptionPane.showMessageDialog(null, "Ha ocurrido un error durante la exportacion del documento","Error",JOptionPane.ERROR_MESSAGE);
+        System.out.println(_error + "Exportar :"+e);
+    }
+    }//GEN-LAST:event_ItemExportarMousePressed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem ItemExportar;
     private javax.swing.JTable TblCargos;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
