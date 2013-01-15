@@ -1,6 +1,7 @@
 
 package Gui;
 
+import Appi.JExcel;
 import Dao.SalariosDAO;
 import Javabeans.Salarios;
 import Utilitarios.Config;
@@ -13,8 +14,11 @@ import java.util.Calendar;
 
 import Utilitarios.Helpers;
 import Utilitarios.Validators;
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 
 public class WinEmpleado_Salarios extends javax.swing.JInternalFrame {
