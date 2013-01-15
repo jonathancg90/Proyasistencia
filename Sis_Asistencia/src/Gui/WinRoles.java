@@ -1,12 +1,16 @@
 
 package Gui;
+import Appi.JExcel;
 import Dao.RolesDAO;
 import Javabeans.Roles;
 import Utilitarios.Config;
 import Utilitarios.Data;
 import Utilitarios.Query;
 import Utilitarios.Validators;
+import java.io.File;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 
 public class WinRoles extends javax.swing.JInternalFrame {
@@ -16,7 +20,9 @@ public class WinRoles extends javax.swing.JInternalFrame {
     private Config cg;
     private Validators val;
     private Data data;
-    private String _error="Gui_Roles";
+    private String _error="Gui_Roles_";
+    private JExcel xls;
+    
     public WinRoles() {
         initComponents();
         cargaForm();
@@ -28,7 +34,7 @@ public class WinRoles extends javax.swing.JInternalFrame {
             qs = new Query();
             objroles.getTableAll(tblroles);
         } catch (Exception e) {
-            System.out.println(_error+"_CargaForm:"+e);
+            System.out.println(_error+"CargaForm:"+e);
         }
     }
     
@@ -60,6 +66,7 @@ public class WinRoles extends javax.swing.JInternalFrame {
         mitemdelete = new javax.swing.JMenuItem();
         medit = new javax.swing.JMenu();
         mitemclear = new javax.swing.JMenuItem();
+        ItemExportar = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         mclose = new javax.swing.JMenu();
 
@@ -213,6 +220,14 @@ public class WinRoles extends javax.swing.JInternalFrame {
             }
         });
         medit.add(mitemclear);
+
+        ItemExportar.setText("Exportar");
+        ItemExportar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                ItemExportarMousePressed(evt);
+            }
+        });
+        medit.add(ItemExportar);
 
         jMenuBar1.add(medit);
 
@@ -403,7 +418,47 @@ public class WinRoles extends javax.swing.JInternalFrame {
         
     }//GEN-LAST:event_jMenu1MousePressed
 
+    private void ItemExportarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ItemExportarMousePressed
+  try {
+        JFileChooser Obj=new JFileChooser();
+        xls = new JExcel();
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("Excel xls", "xls","xlsx");
+        Obj.setFileFilter(filter);
+        Obj.setDialogTitle("Guardar reporte");
+        int seleccion=Obj.showSaveDialog(tblroles);
+        //Guardar
+        if(seleccion == JFileChooser.APPROVE_OPTION){
+            File fichero = Obj.getSelectedFile();
+            String filePath = fichero.getPath();
+            if(!filePath.toLowerCase().endsWith(".xls")){
+                fichero = new File(filePath + ".xls");
+            }
+            boolean Confirma;
+            if((fichero).exists()) {
+                if(JOptionPane.OK_OPTION == JOptionPane.showConfirmDialog(this,"El fichero existe,deseas reemplazarlo?","Reemplazar",JOptionPane.YES_NO_OPTION));{
+                    Confirma=xls.ExportJtable(tblroles, fichero, "Roles");
+                }
+            } 
+            else{
+                Confirma=xls.ExportJtable(tblroles, fichero, "Roles");
+            }
+                if(Confirma==true){
+                    JOptionPane.showMessageDialog(null, "El documento se grabo exitosamente","Confirmacion",JOptionPane.INFORMATION_MESSAGE);
+                }
+                else{
+                    JOptionPane.showMessageDialog(null, "No se pudo grabar el documento", "Confirmacion", JOptionPane.INFORMATION_MESSAGE);
+                }
+        }
+    }
+    catch(Exception e)
+    {
+        JOptionPane.showMessageDialog(null, "Ha ocurrido un error durante la exportacion del documento","Error",JOptionPane.ERROR_MESSAGE);
+        System.out.println(_error + "Exportar :"+e);
+    }
+    }//GEN-LAST:event_ItemExportarMousePressed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem ItemExportar;
     private javax.swing.JButton btnFind;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;

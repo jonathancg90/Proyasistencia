@@ -1,6 +1,7 @@
 
 package Gui;
 
+import Appi.JExcel;
 import Dao.NolaborablesDAO;
 import Javabeans.Nolaborables;
 import Utilitarios.Config;
@@ -13,8 +14,11 @@ import java.util.Calendar;
 
 import Utilitarios.Helpers;
 import Utilitarios.Validators;
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
 //import sun.org.mozilla.javascript.internal.ast.CatchClause;
 
 public class WinNolaborables extends javax.swing.JInternalFrame {
@@ -28,7 +32,8 @@ public class WinNolaborables extends javax.swing.JInternalFrame {
     private Date date;
     private Validators val;
     private Calendar calendar;
-    private String _error="Gui_Nolaborables";
+    private String _error="Gui_Nolaborables_";
+    private JExcel xls;
     
     public WinNolaborables() {
         initComponents();
@@ -80,6 +85,7 @@ public class WinNolaborables extends javax.swing.JInternalFrame {
         mitemdelete = new javax.swing.JMenuItem();
         medit = new javax.swing.JMenu();
         mitemclear = new javax.swing.JMenuItem();
+        ItemExportar = new javax.swing.JMenuItem();
         mclose = new javax.swing.JMenu();
 
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
@@ -245,6 +251,14 @@ public class WinNolaborables extends javax.swing.JInternalFrame {
         });
         medit.add(mitemclear);
 
+        ItemExportar.setText("Exportar");
+        ItemExportar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                ItemExportarMousePressed(evt);
+            }
+        });
+        medit.add(ItemExportar);
+
         jMenuBar1.add(medit);
 
         mclose.setText("Cerrar");
@@ -271,7 +285,7 @@ public class WinNolaborables extends javax.swing.JInternalFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(30, Short.MAX_VALUE)
+                .addContainerGap(36, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -419,7 +433,47 @@ public class WinNolaborables extends javax.swing.JInternalFrame {
         cleanBox();
     }//GEN-LAST:event_mitemclearMousePressed
 
+    private void ItemExportarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ItemExportarMousePressed
+  try {
+        JFileChooser Obj=new JFileChooser();
+        xls = new JExcel();
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("Excel xls", "xls","xlsx");
+        Obj.setFileFilter(filter);
+        Obj.setDialogTitle("Guardar reporte");
+        int seleccion=Obj.showSaveDialog(tblNolaborable);
+        //Guardar
+        if(seleccion == JFileChooser.APPROVE_OPTION){
+            File fichero = Obj.getSelectedFile();
+            String filePath = fichero.getPath();
+            if(!filePath.toLowerCase().endsWith(".xls")){
+                fichero = new File(filePath + ".xls");
+            }
+            boolean Confirma;
+            if((fichero).exists()) {
+                if(JOptionPane.OK_OPTION == JOptionPane.showConfirmDialog(this,"El fichero existe,deseas reemplazarlo?","Reemplazar",JOptionPane.YES_NO_OPTION));{
+                    Confirma=xls.ExportJtable(tblNolaborable, fichero, "Dias no laborables");
+                }
+            } 
+            else{
+                Confirma=xls.ExportJtable(tblNolaborable, fichero, "Dias no laborables");
+            }
+                if(Confirma==true){
+                    JOptionPane.showMessageDialog(null, "El documento se grabo exitosamente","Confirmacion",JOptionPane.INFORMATION_MESSAGE);
+                }
+                else{
+                    JOptionPane.showMessageDialog(null, "No se pudo grabar el documento", "Confirmacion", JOptionPane.INFORMATION_MESSAGE);
+                }
+        }
+    }
+    catch(Exception e)
+    {
+        JOptionPane.showMessageDialog(null, "Ha ocurrido un error durante la exportacion del documento","Error",JOptionPane.ERROR_MESSAGE);
+        System.out.println(_error + "Exportar :"+e);
+    }
+    }//GEN-LAST:event_ItemExportarMousePressed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem ItemExportar;
     private datechooser.beans.DateChooserCombo cboFecha;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel2;

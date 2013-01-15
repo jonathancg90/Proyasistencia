@@ -11,6 +11,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 public class WinJustificacion extends javax.swing.JInternalFrame {
 
     private JExcel xls;
+    private String _error = "Gui_WinJustificacion_";
     
     public WinJustificacion() {
         initComponents();
@@ -357,11 +358,11 @@ public class WinJustificacion extends javax.swing.JInternalFrame {
             boolean Confirma;
             if((fichero).exists()) {
                 if(JOptionPane.OK_OPTION == JOptionPane.showConfirmDialog(this,"El fichero existe,deseas reemplazarlo?","Reemplazar",JOptionPane.YES_NO_OPTION));{
-                    Confirma=xls.ExportJtable(TblJusti, fichero, "Cargos");
+                    Confirma=xls.ExportJtable(TblJusti, fichero, "Justificaciones");
                 }
             } 
             else{
-                Confirma=xls.ExportJtable(TblJusti, fichero, "Cargos");
+                Confirma=xls.ExportJtable(TblJusti, fichero, "Justificaciones");
             }
                 if(Confirma==true){
                     JOptionPane.showMessageDialog(null, "El documento se grabo exitosamente","Confirmacion",JOptionPane.INFORMATION_MESSAGE);
