@@ -46,7 +46,7 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
     private Calendar calendar;
     private GregorianCalendar calendar2;
     private JExcel xls;
-    
+    private String _error =  "Gui_WinAsistencia_";
     
     public WinAsistencia() {
         initComponents();

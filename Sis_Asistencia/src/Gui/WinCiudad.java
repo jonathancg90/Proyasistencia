@@ -1,12 +1,16 @@
 
 package Gui;
 
+import Appi.JExcel;
 import Dao.CiudadDAO;
 import Javabeans.Ciudad;
 import Utilitarios.Config;
 import Utilitarios.Query;
 import Utilitarios.Validators;
+import java.io.File;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 
 
@@ -18,6 +22,7 @@ public class WinCiudad extends javax.swing.JInternalFrame {
     private Config cg;
     private Validators val;
     private String _error = "Gui_WinCiudad_";
+    private JExcel xls;
     
     public WinCiudad() {
         initComponents();
@@ -64,6 +69,7 @@ public class WinCiudad extends javax.swing.JInternalFrame {
         mitemdelete = new javax.swing.JMenuItem();
         medit = new javax.swing.JMenu();
         mitemclear = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
         mclose = new javax.swing.JMenu();
 
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -222,6 +228,14 @@ public class WinCiudad extends javax.swing.JInternalFrame {
         });
         medit.add(mitemclear);
 
+        jMenuItem1.setText("Exportar");
+        jMenuItem1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jMenuItem1MousePressed(evt);
+            }
+        });
+        medit.add(jMenuItem1);
+
         jMenuBar1.add(medit);
 
         mclose.setText("Cerrar");
@@ -372,12 +386,52 @@ public class WinCiudad extends javax.swing.JInternalFrame {
         cleanBox();
     }//GEN-LAST:event_mitemclearMousePressed
 
+    private void jMenuItem1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem1MousePressed
+  try {
+        JFileChooser Obj=new JFileChooser();
+        xls = new JExcel();
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("Excel xls", "xls","xlsx");
+        Obj.setFileFilter(filter);
+        Obj.setDialogTitle("Guardar reporte");
+        int seleccion=Obj.showSaveDialog(tblciudad);
+        //Guardar
+        if(seleccion == JFileChooser.APPROVE_OPTION){
+            File fichero = Obj.getSelectedFile();
+            String filePath = fichero.getPath();
+            if(!filePath.toLowerCase().endsWith(".xls")){
+                fichero = new File(filePath + ".xls");
+            }
+            boolean Confirma;
+            if((fichero).exists()) {
+                if(JOptionPane.OK_OPTION == JOptionPane.showConfirmDialog(this,"El fichero existe,deseas reemplazarlo?","Reemplazar",JOptionPane.YES_NO_OPTION));{
+                    Confirma=xls.ExportJtable(tblciudad, fichero, "Ciudades");
+                }
+            } 
+            else{
+                Confirma=xls.ExportJtable(tblciudad, fichero, "Ciudades");
+            }
+                if(Confirma==true){
+                    JOptionPane.showMessageDialog(null, "El documento se grabo exitosamente","Confirmacion",JOptionPane.INFORMATION_MESSAGE);
+                }
+                else{
+                    JOptionPane.showMessageDialog(null, "No se pudo grabar el documento", "Confirmacion", JOptionPane.INFORMATION_MESSAGE);
+                }
+        }
+    }
+    catch(Exception e)
+    {
+        JOptionPane.showMessageDialog(null, "Ha ocurrido un error durante la exportacion del documento","Error",JOptionPane.ERROR_MESSAGE);
+        System.out.println(_error + "Exportar :"+e);
+    }
+    }//GEN-LAST:event_jMenuItem1MousePressed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnFind;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
