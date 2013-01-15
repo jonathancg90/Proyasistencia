@@ -1,9 +1,12 @@
 package Appi;
+import java.io.DataOutputStream;
 import java.io.File; 
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Calendar;
 
 import java.util.Date; 
+import javax.swing.JTable;
 import jxl.*; 
 import jxl.write.*; 
 import jxl.write.Number;
@@ -109,6 +112,34 @@ public class JExcel {
             System.out.println("XlsEmpleado_Informacion" + e);
         }
 
-   
+    }
+    
+    public boolean ExportJtable(JTable table,File file,String nombreTab){
+    try{
+        DataOutputStream out=new DataOutputStream(new FileOutputStream(file));
+
+        WritableWorkbook w = Workbook.createWorkbook(out);
+        WritableSheet s = w.createSheet(nombreTab, 0);  
+        
+        for(int i=0;i< table.getColumnCount();i++){
+            s.addCell(new Label(i, 0, String.valueOf(table.getColumnName(i)))); 
+            for(int j=0;j<table.getRowCount();j++){
+                Object objeto=table.getValueAt(j,i);
+                if(objeto==null){
+                    objeto=" ";
+                }
+                s.addCell(new Label(i, j+1, String.valueOf(objeto)));
+            }
+        }
+
+        w.write();
+        w.close();
+        out.close();
+    return true;
+    }
+    catch(IOException ex){ex.printStackTrace();}
+    catch(WriteException ex){ex.printStackTrace();}
+
+    return false;
     }
 }
