@@ -1,18 +1,26 @@
 
 package Gui;
 
+import Appi.JExcel;
+import java.io.File;
 import java.text.DateFormat;
 import java.util.Calendar;
 
 import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class WinConsulta extends javax.swing.JInternalFrame {
 
     private DateFormat format;
     private Date date,date2;
     private Calendar calendar,calendar2;
+    private JExcel xls;
+    private String _error = "Gui_WinConsulta_";
+
     
     public WinConsulta() {
         initComponents();
@@ -39,10 +47,11 @@ public class WinConsulta extends javax.swing.JInternalFrame {
         jLabel5 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        JtblConsulta = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
         medit = new javax.swing.JMenu();
         mitemclear = new javax.swing.JMenuItem();
+        ItemExportar = new javax.swing.JMenuItem();
         mclose = new javax.swing.JMenu();
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Lista de reportes", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, null, java.awt.Color.black));
@@ -79,7 +88,7 @@ public class WinConsulta extends javax.swing.JInternalFrame {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Lista de resultados"));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        JtblConsulta.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
                 {},
@@ -90,7 +99,7 @@ public class WinConsulta extends javax.swing.JInternalFrame {
 
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(JtblConsulta);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -114,6 +123,14 @@ public class WinConsulta extends javax.swing.JInternalFrame {
         mitemclear.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.CTRL_MASK));
         mitemclear.setText("Limpiar");
         medit.add(mitemclear);
+
+        ItemExportar.setText("Exportar");
+        ItemExportar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                ItemExportarMousePressed(evt);
+            }
+        });
+        medit.add(ItemExportar);
 
         jMenuBar1.add(medit);
 
@@ -150,7 +167,7 @@ public class WinConsulta extends javax.swing.JInternalFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 407, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(55, Short.MAX_VALUE))
+                .addContainerGap(59, Short.MAX_VALUE))
         );
 
         pack();
@@ -177,7 +194,48 @@ public class WinConsulta extends javax.swing.JInternalFrame {
         objbus.setVisible(true);
     }//GEN-LAST:event_jLabel5MouseClicked
 
+    private void ItemExportarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ItemExportarMousePressed
+  try {
+        JFileChooser Obj=new JFileChooser();
+        xls = new JExcel();
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("Excel xls", "xls","xlsx");
+        Obj.setFileFilter(filter);
+        Obj.setDialogTitle("Guardar reporte");
+        int seleccion=Obj.showSaveDialog(JtblConsulta);
+        //Guardar
+        if(seleccion == JFileChooser.APPROVE_OPTION){
+            File fichero = Obj.getSelectedFile();
+            String filePath = fichero.getPath();
+            if(!filePath.toLowerCase().endsWith(".xls")){
+                fichero = new File(filePath + ".xls");
+            }
+            boolean Confirma;
+            if((fichero).exists()) {
+                if(JOptionPane.OK_OPTION == JOptionPane.showConfirmDialog(this,"El fichero existe,deseas reemplazarlo?","Reemplazar",JOptionPane.YES_NO_OPTION));{
+                    Confirma=xls.ExportJtable(JtblConsulta, fichero, "Cargos");
+                }
+            } 
+            else{
+                Confirma=xls.ExportJtable(JtblConsulta, fichero, "Cargos");
+            }
+                if(Confirma==true){
+                    JOptionPane.showMessageDialog(null, "El documento se grabo exitosamente","Confirmacion",JOptionPane.INFORMATION_MESSAGE);
+                }
+                else{
+                    JOptionPane.showMessageDialog(null, "No se pudo grabar el documento", "Confirmacion", JOptionPane.INFORMATION_MESSAGE);
+                }
+        }
+    }
+    catch(Exception e)
+    {
+        JOptionPane.showMessageDialog(null, "Ha ocurrido un error durante la exportacion del documento","Error",JOptionPane.ERROR_MESSAGE);
+        System.out.println(_error + "Exportar :"+e);
+    }
+    }//GEN-LAST:event_ItemExportarMousePressed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem ItemExportar;
+    private javax.swing.JTable JtblConsulta;
     private datechooser.beans.DateChooserCombo dateChooserCombo1;
     private datechooser.beans.DateChooserCombo dateChooserCombo2;
     private javax.swing.JButton jButton1;
@@ -191,7 +249,6 @@ public class WinConsulta extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JMenu mclose;
     private javax.swing.JMenu medit;

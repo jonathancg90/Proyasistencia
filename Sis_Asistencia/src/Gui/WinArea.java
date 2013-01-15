@@ -493,11 +493,11 @@ public class WinArea extends javax.swing.JInternalFrame {
             boolean Confirma;
             if((fichero).exists()) {
                 if(JOptionPane.OK_OPTION == JOptionPane.showConfirmDialog(this,"El fichero existe,deseas reemplazarlo?","Reemplazar",JOptionPane.YES_NO_OPTION));{
-                    Confirma=xls.ExportJtable(tblArea, fichero, "Asistencia");
+                    Confirma=xls.ExportJtable(tblArea, fichero, "Areas");
                 }
             } 
             else{
-                Confirma=xls.ExportJtable(tblArea, fichero, "Asistencia");
+                Confirma=xls.ExportJtable(tblArea, fichero, "Areas");
             }
                 if(Confirma==true){
                     JOptionPane.showMessageDialog(null, "El documento se grabo exitosamente","Confirmacion",JOptionPane.INFORMATION_MESSAGE);

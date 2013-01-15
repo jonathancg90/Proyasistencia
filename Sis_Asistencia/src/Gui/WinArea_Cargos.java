@@ -399,11 +399,11 @@ public class WinArea_Cargos extends javax.swing.JInternalFrame {
             boolean Confirma;
             if((fichero).exists()) {
                 if(JOptionPane.OK_OPTION == JOptionPane.showConfirmDialog(this,"El fichero existe,deseas reemplazarlo?","Reemplazar",JOptionPane.YES_NO_OPTION));{
-                    Confirma=xls.ExportJtable(TblCargos, fichero, "Asistencia");
+                    Confirma=xls.ExportJtable(TblCargos, fichero, "Cargos");
                 }
             } 
             else{
-                Confirma=xls.ExportJtable(TblCargos, fichero, "Asistencia");
+                Confirma=xls.ExportJtable(TblCargos, fichero, "Cargos");
             }
                 if(Confirma==true){
                     JOptionPane.showMessageDialog(null, "El documento se grabo exitosamente","Confirmacion",JOptionPane.INFORMATION_MESSAGE);
