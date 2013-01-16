@@ -26,7 +26,6 @@ public class WinBuscarEmpleado extends javax.swing.JInternalFrame {
         qs.loadChoiceDefault(CboSucursal,"sucursal","nombre",
             Integer.parseInt(qs.idChoice("empresa","nombre",String.valueOf(CboEmpresa.getSelectedItem()))));
 
-
         buscar();
     }
     private void buscar(){
@@ -41,7 +40,6 @@ public class WinBuscarEmpleado extends javax.swing.JInternalFrame {
         Bus.find(apellidos,idarea,idcargo,idemp,idsuc,estado,Tblbuscador);
     }
           
-
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
