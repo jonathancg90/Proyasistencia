@@ -2,11 +2,13 @@
 package Gui;
 import Dao.BusquedaEmpleadoDAO;
 import Utilitarios.Query;
+import javax.swing.table.DefaultTableModel;
 
 
 public class WinBuscarEmpleado extends javax.swing.JInternalFrame {
     private BusquedaEmpleadoDAO Bus;
     private Query qs;
+    public int Form;
 
     public WinBuscarEmpleado() {
         initComponents();
@@ -19,7 +21,9 @@ public class WinBuscarEmpleado extends javax.swing.JInternalFrame {
         qs.loadChoice(CboEstado,"estadoemp","nombre");
         
         qs.loadChoice(Cboarea,"area","nombre");
-        qs.loadChoice(CboCargo,"cargo","nombre");
+        qs.setIdentify("idare");
+        qs.loadChoiceDefault(CboCargo,"cargo","nombre",
+            Integer.parseInt(qs.idChoice("area","nombre",String.valueOf(Cboarea.getSelectedItem()))));
         
         qs.loadChoice(CboEmpresa,"empresa","nombre");
         qs.setIdentify("idempr");
@@ -85,6 +89,12 @@ public class WinBuscarEmpleado extends javax.swing.JInternalFrame {
         });
 
         jLabel5.setText("Area");
+
+        Cboarea.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CboareaActionPerformed(evt);
+            }
+        });
 
         jLabel6.setText("Estado");
 
@@ -157,6 +167,11 @@ public class WinBuscarEmpleado extends javax.swing.JInternalFrame {
 
             }
         ));
+        Tblbuscador.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                TblbuscadorMousePressed(evt);
+            }
+        });
         jScrollPane1.setViewportView(Tblbuscador);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -179,7 +194,7 @@ public class WinBuscarEmpleado extends javax.swing.JInternalFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 374, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -191,11 +206,34 @@ public class WinBuscarEmpleado extends javax.swing.JInternalFrame {
 
     private void CboEmpresaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CboEmpresaActionPerformed
         qs = new Query();
-        System.out.println("variable");
         qs.setIdentify("idempr");
         qs.loadChoiceDefault(CboSucursal,"sucursal","nombre",
             Integer.parseInt(qs.idChoice("empresa","nombre",String.valueOf(CboEmpresa.getSelectedItem()))));
     }//GEN-LAST:event_CboEmpresaActionPerformed
+
+    private void CboareaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CboareaActionPerformed
+        qs = new Query();
+        qs.setIdentify("idare");
+        qs.loadChoiceDefault(CboCargo,"cargo","nombre",
+            Integer.parseInt(qs.idChoice("area","nombre",String.valueOf(Cboarea.getSelectedItem()))));
+    }//GEN-LAST:event_CboareaActionPerformed
+
+    private void TblbuscadorMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TblbuscadorMousePressed
+        int fsel;
+        fsel = this.Tblbuscador.getSelectedRow();
+        DefaultTableModel m = new DefaultTableModel();
+        m = (DefaultTableModel) this.Tblbuscador.getModel();
+        String idEmp = String.valueOf(m.getValueAt(fsel, 0));
+        String Nomape = String.valueOf(m.getValueAt(fsel, 1));
+        System.out.println("Hola"+ Form + " - " + Nomape);
+        switch(Form){
+            case 1:
+                WinConsulta con = new WinConsulta();
+                con.TxtName.setText(Nomape);
+                ;break;
+            
+        }
+    }//GEN-LAST:event_TblbuscadorMousePressed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox CboCargo;

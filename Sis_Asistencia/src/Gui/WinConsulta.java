@@ -43,7 +43,7 @@ public class WinConsulta extends javax.swing.JInternalFrame {
         dateChooserCombo1 = new datechooser.beans.DateChooserCombo();
         dateChooserCombo2 = new datechooser.beans.DateChooserCombo();
         jButton1 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
+        TxtName = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -76,7 +76,7 @@ public class WinConsulta extends javax.swing.JInternalFrame {
 
         jButton1.setText("Consultar");
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(491, 31, -1, 69));
-        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(131, 73, 280, -1));
+        jPanel1.add(TxtName, new org.netbeans.lib.awtextra.AbsoluteConstraints(131, 73, 280, -1));
 
         jLabel5.setText("Buscar");
         jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -167,7 +167,7 @@ public class WinConsulta extends javax.swing.JInternalFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 407, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(59, Short.MAX_VALUE))
+                .addContainerGap(63, Short.MAX_VALUE))
         );
 
         pack();
@@ -184,7 +184,7 @@ public class WinConsulta extends javax.swing.JInternalFrame {
 
     private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
          WinBuscarEmpleado objbus = new WinBuscarEmpleado();
-
+         objbus.Form = 1;
         //objbus.setTitle(titulo);
         objbus.setResizable(true);
         objbus.setMaximizable(true);
@@ -236,6 +236,7 @@ public class WinConsulta extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem ItemExportar;
     private javax.swing.JTable JtblConsulta;
+    public javax.swing.JTextField TxtName;
     private datechooser.beans.DateChooserCombo dateChooserCombo1;
     private datechooser.beans.DateChooserCombo dateChooserCombo2;
     private javax.swing.JButton jButton1;
@@ -249,7 +250,6 @@ public class WinConsulta extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JMenu mclose;
     private javax.swing.JMenu medit;
     private javax.swing.JMenuItem mitemclear;

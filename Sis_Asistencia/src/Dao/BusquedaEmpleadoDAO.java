@@ -77,7 +77,6 @@ public class BusquedaEmpleadoDAO {
                 filter[i][0] = "int_idempr";
                 filter[i][1] = idemp; 
             }
-            System.out.println("Tamaño: "+ filter.length);
             getTableAll(tblDatos);
             
         }

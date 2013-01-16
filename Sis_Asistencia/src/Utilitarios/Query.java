@@ -17,15 +17,10 @@ public class Query extends ConexionBd{
     private Data dt;
     private String _error = "Utilitarios_Query_";
     private String identify="";
+    private String idcamp="";
 
-    public Query(){
-    }
-    public Query(String identify){
-        this.identify = identify;
-        System.out.println("VALOR: " + this.identify);
-    }
     public void setIdentify(String identify) {
-        this.identify = identify;
+        this.idcamp = identify;
         System.out.println("VALOR: " + this.identify);
     }
     
@@ -366,24 +361,22 @@ public class Query extends ConexionBd{
             getConexion();
             MChoice = new DefaultComboBoxModel();
             s = conexion.createStatement();
-            System.out.println("Identificador : "+this.identify);
-            if("".equals(this.identify)){
-                this.identify = getIdentify(Tbl);
+            if("".equals(this.idcamp)){
+                this.idcamp = getIdentify(Tbl);
                 op = true;
             }
-            System.out.println("select " +Campo+ " from " +Tbl + " where " + this.identify + "=" +value);
-            rs = s.executeQuery("select " +Campo+ " from " +Tbl + " where " + this.identify + "=" +value);
+            rs = s.executeQuery("select " +Campo+ " from " +Tbl + " where " + this.idcamp + "=" +value);
             while(rs.next()) {
               MChoice.addElement(rs.getString(Campo));
               
             }
             if(op){
-                rs = s.executeQuery("select " +Campo+ " from " +Tbl + " where " + this.identify + "!=" +value);
+                rs = s.executeQuery("select " +Campo+ " from " +Tbl + " where " + this.idcamp + "!=" +value);
                 while(rs.next()) {
                   MChoice.addElement(rs.getString(Campo));
                 } 
             }
-            this.identify = "";
+            this.idcamp = "";
             cmbChoice.setModel(MChoice);   
             closeConexion(); 
         }
