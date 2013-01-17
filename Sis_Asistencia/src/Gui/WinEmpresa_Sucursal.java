@@ -374,7 +374,7 @@ public class WinEmpresa_Sucursal extends javax.swing.JInternalFrame {
        try{
         val = new Validators("sucursal");    
        Object[] datos = {txtName.getText(),txtdireccion.getText(),lblId.getText()};
-       Object[] tipos={3,4};
+       Object[] tipos={3,4,1};
        if(val.validar(datos,tipos))
        {  
             int id = Integer.valueOf(lblId.getText());

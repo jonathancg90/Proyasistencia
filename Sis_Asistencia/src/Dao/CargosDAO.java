@@ -119,7 +119,6 @@ public class CargosDAO extends ConexionBd{
             qs= new Query();
             String Table = this._table;
             String now = hp.getDateNow();
-            
             objCargo = new Cargo(id,name,idArea,now,now);
             //Iniciando consulta y asignando valores
             pt = qs.sqlUpdate(Table);
@@ -129,6 +128,7 @@ public class CargosDAO extends ConexionBd{
             pt.setInt(4,objCargo.getIdcar());
             //Ejecucion y cierre
             i= pt.executeUpdate();
+            
             pt.close();
             closeConexion();
             return i;
@@ -162,6 +162,24 @@ public class CargosDAO extends ConexionBd{
         catch(Exception e){
             System.out.println(_error + "delete: "+e);
             return i;
+        }
+    }
+    public Cargo getValues(int id){
+       objCargo =  new Cargo();
+       objVal = new Validators();
+        try{
+            qs= new Query();
+            //Preparando
+            String campos[] = new String[6];
+            campos = qs.getRecords(_table,id);
+            objCargo.setName(campos[3]);
+            objCargo.setModified(campos[5]);
+            
+            return objCargo;
+        }
+        catch(Exception e){
+            System.out.println(_error + "getValues: "+e);
+            return objCargo;
         }
     }
 

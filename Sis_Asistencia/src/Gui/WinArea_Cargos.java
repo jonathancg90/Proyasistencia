@@ -3,10 +3,12 @@ package Gui;
 
 import Appi.JExcel;
 import Dao.CargosDAO;
+import Javabeans.Cargo;
 import Utilitarios.Query;
 import Utilitarios.Validators;
 import java.awt.HeadlessException;
 import java.io.File;
+import Utilitarios.Helpers;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -16,10 +18,12 @@ import javax.swing.table.DefaultTableModel;
 public class WinArea_Cargos extends javax.swing.JInternalFrame {
 
     private CargosDAO objCar;
+    private Cargo cargo;
     private Query qs;
     private String _error = "Gui_WinAreaCargos_";
     private Validators val;
     private JExcel xls;
+    private Helpers hp;
     
     public WinArea_Cargos() {
         initComponents();
@@ -42,6 +46,8 @@ public class WinArea_Cargos extends javax.swing.JInternalFrame {
     }                 
     public void cleanBox(){
         txtname.setText("");
+        lblID.setText("");
+        lblMod.setText("");
 
     }
     @SuppressWarnings("unchecked")
@@ -57,6 +63,10 @@ public class WinArea_Cargos extends javax.swing.JInternalFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         txtname = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        lblID = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        lblMod = new javax.swing.JLabel();
         lblArea = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         mfile = new javax.swing.JMenu();
@@ -97,6 +107,11 @@ public class WinArea_Cargos extends javax.swing.JInternalFrame {
 
             }
         ));
+        TblCargos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TblCargosMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(TblCargos);
 
         jLabel1.setText("Total ");
@@ -105,17 +120,17 @@ public class WinArea_Cargos extends javax.swing.JInternalFrame {
 
         jLabel3.setText("Area >> ");
 
-        lblidArea.setText("0");
-
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Nuevo cargo"));
 
         jLabel5.setText("Nombre");
 
-        txtname.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtnameActionPerformed(evt);
-            }
-        });
+        jLabel4.setText("ID");
+
+        lblID.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        jLabel6.setText("Modificado");
+
+        lblMod.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -123,19 +138,39 @@ public class WinArea_Cargos extends javax.swing.JInternalFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel5)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtname, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(184, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(txtname, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(lblID, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(119, 119, 119)
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lblMod, javax.swing.GroupLayout.DEFAULT_SIZE, 92, Short.MAX_VALUE))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(29, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblID, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel6))
+                        .addGap(0, 4, Short.MAX_VALUE))
+                    .addComponent(lblMod, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(txtname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
+
+        lblArea.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         mfile.setText("Archivo");
 
@@ -172,6 +207,11 @@ public class WinArea_Cargos extends javax.swing.JInternalFrame {
 
         mitemclear.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.CTRL_MASK));
         mitemclear.setText("Limpiar");
+        mitemclear.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                mitemclearMousePressed(evt);
+            }
+        });
         medit.add(mitemclear);
 
         ItemExportar.setText("Exportar");
@@ -219,10 +259,10 @@ public class WinArea_Cargos extends javax.swing.JInternalFrame {
                 .addGap(27, 27, 27)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblArea, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblArea, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lblidArea)
-                .addGap(103, 103, 103))
+                .addComponent(lblidArea, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(84, 84, 84))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -231,13 +271,14 @@ public class WinArea_Cargos extends javax.swing.JInternalFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblArea, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel3)
-                        .addComponent(lblidArea)))
-                .addGap(18, 18, 18)
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(lblidArea, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(3, 3, 3))
+                    .addComponent(lblArea, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)
@@ -250,10 +291,6 @@ public class WinArea_Cargos extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void txtnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtnameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtnameActionPerformed
 
     private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
      cargaForm();
@@ -338,20 +375,14 @@ public class WinArea_Cargos extends javax.swing.JInternalFrame {
         try{
         val = new Validators("cargo");
         Object[] datos = {txtname.getText(),lblidArea.getText()};
-        Object[] tipos={3};
+        Object[] tipos={3,1};
         if(val.validar(datos,tipos)){    
-            int fsel;
-                fsel = this.TblCargos.getSelectedRow();
-                if (fsel == -1) {
-                    //No se ha seleccionado registo en Jtable
-                } 
-                else {
+            
 
                     try { 
-                           DefaultTableModel m = new DefaultTableModel();
-                           m = (DefaultTableModel) this.TblCargos.getModel();
-                           int id = Integer.parseInt(String.valueOf(m.getValueAt(fsel, 0)));
-                           String name = String.valueOf(m.getValueAt(fsel, 1));
+                           
+                           int id = Integer.parseInt(lblID.getText());
+                           String name = txtname.getText();
                            int idarea = Integer.parseInt(lblidArea.getText());
                            objCar = new CargosDAO();
 
@@ -365,13 +396,11 @@ public class WinArea_Cargos extends javax.swing.JInternalFrame {
                            } 
                         }                       
                     catch(NumberFormatException | HeadlessException e) {
+                        System.out.println(e+ "error al actualizar");
 
                     }
                 }
-        }                                          
-        else {
-            JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
-        }
+        
         }catch(Exception e){
             System.out.println(_error + "_Update: " + e);
         }
@@ -420,17 +449,45 @@ public class WinArea_Cargos extends javax.swing.JInternalFrame {
     }
     }//GEN-LAST:event_ItemExportarMousePressed
 
+    private void TblCargosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TblCargosMouseClicked
+       hp = new Helpers();
+        int fsel;
+        fsel = this.TblCargos.getSelectedRow();
+            try {
+                cargo = new Cargo();
+                DefaultTableModel m = new DefaultTableModel();
+                m = (DefaultTableModel) this.TblCargos.getModel();
+                String idCargo = String.valueOf(m.getValueAt(fsel, 0));
+                //Asigando valores obtenidos
+                lblID.setText(idCargo);
+                cargo = objCar.getValues(Integer.parseInt(idCargo));
+                txtname.setText(cargo.getName());
+                lblMod.setText(hp.getFormatDate(cargo.getModified()));
+                }
+            catch (Exception e) {
+                System.out.println(_error +"_tblCargo:"+ e);
+            }
+    }//GEN-LAST:event_TblCargosMouseClicked
+
+    private void mitemclearMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemclearMousePressed
+        cleanBox();
+    }//GEN-LAST:event_mitemclearMousePressed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem ItemExportar;
     private javax.swing.JTable TblCargos;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     public javax.swing.JLabel lblArea;
+    private javax.swing.JLabel lblID;
+    private javax.swing.JLabel lblMod;
     public javax.swing.JLabel lblidArea;
     private javax.swing.JMenu mclose;
     private javax.swing.JMenu medit;
