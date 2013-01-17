@@ -1,7 +1,5 @@
-
 package Control;
 
-import sis_asistencia.*;
 import com.digitalpersona.onetouch.DPFPDataPurpose;
 import com.digitalpersona.onetouch.DPFPFeatureSet;
 import com.digitalpersona.onetouch.DPFPGlobal;
@@ -25,7 +23,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
-import Clases.Cls_Conexion;
 import com.digitalpersona.onetouch.verification.DPFPVerificationResult;
 import java.beans.Statement;
 import java.io.ByteArrayInputStream;
@@ -36,34 +33,37 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import Clases.Cls_Registra;
-import Clases.Cls_Retornos;
-
-
 import java.io.*;
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-
-
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-public class Identificacion extends javax.swing.JFrame implements Runnable{
+import Utilitarios.Helpers;
+import Utilitarios.Conexion;
+import DAO.RegistroDAO;
 
-
-    Cls_Conexion Obj_Con = new Cls_Conexion();
-    Cls_Registra Obj_reg = new Cls_Registra();
-    Cls_Retornos Obj_ret = new Cls_Retornos();
+public class WinIdentificacion extends javax.swing.JFrame implements Runnable{
+    //Instancias
+    private Helpers hp;
+    private Conexion cn;
+    private RegistroDAO reg;
+    //Variables locales
+    private String fechaActual;
+    private String hora;
+    private String minutos;
+    private String segundos;
+    private String ampm;
+    private Calendar calendario;
+    private Thread h1;
+    private String _error = "Identificacion_Utilitarios_WinIdentificacion";
     
-    String fechaActual,hora,minutos,segundos,ampm;
-    Calendar calendario;    
-    Thread h1;
-    
-    public Identificacion() 
-    {
+    //Inicializacion
+    public WinIdentificacion() {
+        hp = new Helpers();
         initComponents();
         this.setResizable(false);
         h1 = new Thread(this);
@@ -71,32 +71,10 @@ public class Identificacion extends javax.swing.JFrame implements Runnable{
         
         setLocationRelativeTo(null);
         setVisible(true);
-        ObtenerFecha();
+        LblFecha.setText(hp.ObtenerFecha());
     }
-    
-    public void ObtenerFecha()
-    {
-        Calendar Cal= Calendar.getInstance();
-        String StrDia=String.valueOf(Cal.get(Cal.DATE));
-        String StrMes=String.valueOf(Cal.get(Cal.MONTH)+1);
-        String StrAnho=String.valueOf(Cal.get(Cal.YEAR));
-        
-        if(StrMes.length()==1)
-        {
-            StrMes="0"+StrMes;
-        }
-        if(StrDia.length()==1)
-        {
-            StrDia="0"+StrDia;
-        }
-        
-        String fec= StrDia+"/"+StrMes+"/"+StrAnho;
-        
-        LblFecha.setText(fec);
-    }
-    
-    public void run()
-    {
+    //Segundero(Real time)
+    public void run(){
         Thread ct = Thread.currentThread();
         while(ct == h1) {   
             calcula();
@@ -107,8 +85,7 @@ public class Identificacion extends javax.swing.JFrame implements Runnable{
             catch(InterruptedException e) {}
         }
     }
-    public void calcula () 
-    {        
+    public void calcula () {        
         Calendar calendario = new GregorianCalendar();
         Date fechaHoraActual = new Date();
 
@@ -124,75 +101,53 @@ public class Identificacion extends javax.swing.JFrame implements Runnable{
         segundos = calendario.get(Calendar.SECOND)>9?""+calendario.get(Calendar.SECOND):"0"+calendario.get(Calendar.SECOND); 
     }
     
-   public void  Llenar_Datos(String Id)
-   {
-       
+   public void  Llenar_Datos(String Id){
        LblCodigo.setText(Id);
-       
-       try
-       {
-       Obj_Con.estableceConexion();
+       cn = new Conexion();
+       try{
+       cn.getConexion();
        
         ResultSet rs = null;
-        rs = Obj_Con.Ejec_Consultas("select nombre,idarea,idcargo from personal where idpers='"+Id+"'");
+        rs = hp.Ejec_Consultas("select nombres,idare,idcar from empleado where idemp='"+Id+"'");
         rs.next();
         
         String StrNombre=rs.getString("nombre");
-        String StrArea=rs.getString("idarea");
-        String StrCargo=rs.getString("idcargo");
+        String StrArea=rs.getString("idare");
+        String StrCargo=rs.getString("idcar");
         
         
-        Obj_Con.cierraConexion();
+        cn.closeConexion();
         
         
        LblNombres.setText(StrNombre);
-       LblArea.setText(Obj_ret.Hallar_criterio("item_desc","001","id_item",StrArea));
-       LblCargo.setText(Obj_ret.Hallar_criterio("item_desc","002","id_item",StrCargo));
+       //TODO:Verificar 
+       //LblArea.setText(Obj_ret.Hallar_criterio("item_desc","001","id_item",StrArea));
+       //LblCargo.setText(Obj_ret.Hallar_criterio("item_desc","002","id_item",StrCargo));
        }
        catch(Exception e)
        {
            JOptionPane.showMessageDialog(null, "No se pudo extraer los datos del trabajador","Verificacion de Huella", JOptionPane.INFORMATION_MESSAGE);
        }
    }
-  //=================================================
   //Identificar huella  
-  //=================================================
-  public void identificarHuella() throws IOException
-  {
+ public void identificarHuella() throws IOException{
    try {
-       //Establece los valores para la sentencia SQL
-       Obj_Con.estableceConexion();
-
-       //Obtiene todas las huellas de la bd
-       PreparedStatement identificarStmt = Obj_Con.conexion.prepareStatement("SELECT idpers,huehuella FROM somhue");
+       cn.getConexion();
+       PreparedStatement identificarStmt = cn.conexion.prepareStatement("SELECT idemp,huella FROM empleado");
        ResultSet rs = identificarStmt.executeQuery();
-
-       //Si se encuentra el nombre en la base de datos
        while(rs.next()){
-       //Lee la plantilla de la base de datos
-       byte templateBuffer[] = rs.getBytes("huehuella");
-       String nombre=rs.getString("idpers");
-       //Crea una nueva plantilla a partir de la guardada en la base de datos
-       DPFPTemplate referenceTemplate = DPFPGlobal.getTemplateFactory().createTemplate(templateBuffer);
-       //Envia la plantilla creada al objeto contendor de Template del componente de huella digital
-       setTemplate(referenceTemplate);
-
-       // Compara las caracteriticas de la huella recientemente capturda con la
-       // alguna plantilla guardada en la base de datos que coincide con ese tipo
-       DPFPVerificationResult result = Verificador.verify(featuresverificacion, getTemplate());
-
-       //compara las plantilas (actual vs bd)
-       //Si encuentra correspondencia dibuja el mapa
-       //e indica el nombre de la persona que coincidió.
-       if (result.isVerified())
-       {
-           Llenar_Datos(nombre);
-       //crea la imagen de los datos guardado de las huellas guardadas en la base de datos
-       //JOptionPane.showMessageDialog(null, "Las huella capturada es de "+nombre,"Verificacion de Huella", JOptionPane.INFORMATION_MESSAGE);
-       return;
+            byte templateBuffer[] = rs.getBytes("huella");
+            String nombre=rs.getString("idemp");
+            //Crear `lantilla
+            DPFPTemplate referenceTemplate = DPFPGlobal.getTemplateFactory().createTemplate(templateBuffer);
+            setTemplate(referenceTemplate);
+            //Comparacion
+            DPFPVerificationResult result = Verificador.verify(featuresverificacion, getTemplate());
+            if (result.isVerified()){
+                Llenar_Datos(nombre);
+            return;
+            }
        }
-       }
-       //Si no encuentra alguna huella correspondiente al nombre lo indica con un mensaje
        JOptionPane.showMessageDialog(null, "No existe ningún registro que coincida con la huella", "Verificacion de Huella", JOptionPane.ERROR_MESSAGE);
        
        BtnRegistrar.setEnabled(false);
@@ -201,17 +156,12 @@ public class Identificacion extends javax.swing.JFrame implements Runnable{
        
        setTemplate(null);
        } catch (SQLException e) {
-       //Si ocurre un error lo indica en la consola
-       System.err.println("Error al identificar huella dactilar."+e.getMessage());
+            System.err.println("Error al identificar huella dactilar."+e.getMessage());
        }finally{
-       Obj_Con.cierraConexion();
+            cn.closeConexion();
        }  
-  
-  
   }
-  public void Limpiar_Todo()
-  {
-
+public void CleanBox(){
       LblCodigo.setText("");
       txtArea.append("");
       LblNombres.setText("");
@@ -225,9 +175,6 @@ public class Identificacion extends javax.swing.JFrame implements Runnable{
       lblImagenHuella.setIcon(null);
       //start();
   }
-    
-
-
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -405,7 +352,7 @@ public class Identificacion extends javax.swing.JFrame implements Runnable{
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblImagenHuella, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
+            .addComponent(lblImagenHuella, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE)
         );
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 274, -1, 160));
@@ -434,59 +381,51 @@ public class Identificacion extends javax.swing.JFrame implements Runnable{
     }// </editor-fold>//GEN-END:initComponents
 
 private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        Iniciar();
-	start();
-        EstadoHuellas();
+   Iniciar();
+   start();
+   EstadoHuellas();
     
-BtnConsultar.setEnabled(false);
-BtnRegistrar.setEnabled(false);
+   BtnConsultar.setEnabled(false);
+   BtnRegistrar.setEnabled(false);
 }//GEN-LAST:event_formWindowOpened
 
 private void BtnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnRegistrarActionPerformed
-    
-    try
-    {
-    String StrHora=lbHora.getText();
-    String StrFecha=LblFecha.getText();
-    String StrCodigo=LblCodigo.getText();
-            
-    String StrDia=StrFecha.substring(0,2);
-    String StrMes=StrFecha.substring(3,5);
-    String StrAnho=StrFecha.substring(6,10);
-    StrFecha=StrAnho+StrMes+StrDia;     
-    
-    int ICantReg=Obj_ret.Hallar_Cant_Reg(StrFecha,StrCodigo);
-    System.out.println(ICantReg);
-    if(ICantReg<4)
-    {
-    
-    int ITipo=Obj_ret.Hallar_Tipo_Reg(StrCodigo,StrFecha);
-    
-    String StrTipo=String.valueOf(ITipo);
-            
-    Obj_reg.Reg_registro("I","",StrCodigo,StrTipo,StrFecha,StrHora);
-    
-    
-    txtArea.setText("");
-    EnviarTexto("Registro ingresado con exito");
-    EnviarTexto("Sensor activado: coloque su huella");
-    
-    Limpiar_Todo();       
-    }
-    else
-    {
-        EnviarTexto("Ya tienes ingresado las 4 marcas permitidas al dia\nConsulta tus entradas");  
+//TODO:Verificar 
+    /*    try {
+        
+        String StrHora=lbHora.getText();
+        String StrFecha=LblFecha.getText();
+        String StrCodigo=LblCodigo.getText();
+
+        String StrDia=StrFecha.substring(0,2);
+        String StrMes=StrFecha.substring(3,5);
+        String StrAnho=StrFecha.substring(6,10);
+        StrFecha=StrAnho+StrMes+StrDia;     
+
+        int ICantReg=hp.Hallar_Cant_Reg(StrFecha,StrCodigo);
+        System.out.println(ICantReg);
+        if(ICantReg<4){
+        int ITipo=hp.Hallar_Tipo_Reg(StrCodigo,StrFecha);
+
+        String StrTipo=String.valueOf(ITipo);
+        
+        Obj_reg.Reg_registro("I","",StrCodigo,StrTipo,StrFecha,StrHora);
+
+        txtArea.setText("");
+        EnviarTexto("Registro ingresado con exito");
         EnviarTexto("Sensor activado: coloque su huella");
-        Limpiar_Todo(); 
+
+        CleanBox();       
+        }
+        else{
+            EnviarTexto("Ya tienes ingresado las 4 marcas permitidas al dia\nConsulta tus entradas");  
+            EnviarTexto("Sensor activado: coloque su huella");
+            CleanBox(); 
+        }
     }
-    }
-    catch(Exception e)
-    {
+    catch(Exception e){
         System.out.println("Error en el registro: "+e);
-    }
-    
-    
-    
+    }*/
 }//GEN-LAST:event_BtnRegistrarActionPerformed
 
 private void BtnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnConsultarActionPerformed
@@ -502,22 +441,17 @@ private void BtnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
     
     String mensaje="";
     String Consulta="select fecha,hora from registro where fecha='"+StrFecha+"' and idpers='"+StrCodigo+"'";
-    try
-    {
-        Obj_Con.estableceConexion();
+    try{
+        cn.getConexion();
         ResultSet rs = null;
-        rs = Obj_Con.Ejec_Consultas(Consulta);
+        rs = hp.Ejec_Consultas(Consulta);
         int i=1;
-        while(rs.next()) 
-        {
+        while(rs.next()) {
             mensaje=mensaje+"\n"+i+") "+rs.getString("hora");
             i++;
         }
-        Obj_Con.cierraConexion();
-
+        cn.closeConexion();
         EnviarTexto(mensaje);
-       
-
     }
     catch(Exception e)
     {
@@ -526,22 +460,9 @@ private void BtnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
 }//GEN-LAST:event_BtnConsultarActionPerformed
 
 
-
-
-//Varible que permite iniciar el dispositivo de lector de huella conectado
-// con sus distintos metodos.
 private DPFPCapture Lector = DPFPGlobal.getCaptureFactory().createCapture();
-
-//Varible que permite establecer las capturas de la huellas, para determina sus caracteristicas
-// y poder estimar la creacion de un template de la huella para luego poder guardarla
 private DPFPEnrollment Reclutador = DPFPGlobal.getEnrollmentFactory().createEnrollment();
-
-//Esta variable tambien captura una huella del lector y crea sus caracteristcas para auntetificarla
-// o verificarla con alguna guardada en la BD
 private DPFPVerification Verificador = DPFPGlobal.getVerificationFactory().createVerification();
-
-//Variable que para crear el template de la huella luego de que se hallan creado las caracteriticas
-// necesarias de la huella si no ha ocurrido ningun problema
 private DPFPTemplate template;
 public static String TEMPLATE_PROPERTY = "template";
 
@@ -598,50 +519,42 @@ protected void Iniciar(){
  // Comprobar la calidad de la muestra de la huella y lo añade a su reclutador si es bueno
  if (featuresinscripcion != null)
      try{
-     System.out.println("Las Caracteristicas de la Huella han sido creada");
-     Reclutador.addFeatures(featuresinscripcion);// Agregar las caracteristicas de la huella a la plantilla a crear
+        System.out.println("Las Caracteristicas de la Huella han sido creada");
+        Reclutador.addFeatures(featuresinscripcion);// Agregar las caracteristicas de la huella a la plantilla a crear
 
-     // Dibuja la huella dactilar capturada.
-     Image image=CrearImagenHuella(sample);
-     DibujarHuella(image);
-     
-     BtnRegistrar.setEnabled(true);
-     BtnConsultar.setEnabled(true);
-     try
-     {
-     identificarHuella();
-     }
-     catch(Exception e)
-     {
-     }
-     
+        // Dibuja la huella dactilar capturada.
+        Image image=CrearImagenHuella(sample);
+        DibujarHuella(image);
+
+        BtnRegistrar.setEnabled(true);
+        BtnConsultar.setEnabled(true);
+        try{
+           identificarHuella();
+        }
+        catch(Exception e){
+        }
      }catch (DPFPImageQualityException ex) {
-     System.err.println("Error: "+ex.getMessage());
+        System.err.println("Error: "+ex.getMessage());
      }
-
      finally {
-     EstadoHuellas();
-     // Comprueba si la plantilla se ha creado.
-	switch(Reclutador.getTemplateStatus())
-        {
-            case TEMPLATE_STATUS_READY:	// informe de éxito y detiene  la captura de huellas
-	    stop();
-            setTemplate(Reclutador.getTemplate());
-	    //EnviarTexto("Sistema de asistencia, por favor coloque su huella");
-            break;
+        EstadoHuellas();
+           switch(Reclutador.getTemplateStatus()){
+               case TEMPLATE_STATUS_READY:	// informe de éxito y detiene  la captura de huellas
+                   stop();
+                   setTemplate(Reclutador.getTemplate());
+                   break;
 
-	    case TEMPLATE_STATUS_FAILED: // informe de fallas y reiniciar la captura de huellas
-	    Reclutador.clear();
-            stop();
-	    EstadoHuellas();
-	    setTemplate(null);
-	    JOptionPane.showMessageDialog(Identificacion.this, "La Plantilla de la Huella no pudo ser creada, Repita el Proceso", "Inscripcion de Huellas Dactilares", JOptionPane.ERROR_MESSAGE);
-	    start();
-	    break;
-	}
-	     }
+               case TEMPLATE_STATUS_FAILED: // informe de fallas y reiniciar la captura de huellas
+                   Reclutador.clear();
+                   stop();
+                   EstadoHuellas();
+                   setTemplate(null);
+                   JOptionPane.showMessageDialog(WinIdentificacion.this, "La Plantilla de la Huella no pudo ser creada, Repita el Proceso", "Inscripcion de Huellas Dactilares", JOptionPane.ERROR_MESSAGE);
+                   start();
+                   break;
+           }
+     }
 }
-
  public  DPFPFeatureSet extraerCaracteristicas(DPFPSample sample, DPFPDataPurpose purpose){
      DPFPFeatureExtraction extractor = DPFPGlobal.getFeatureExtractionFactory().createFeatureExtraction();
      try {
@@ -663,7 +576,7 @@ protected void Iniciar(){
 
 public  void EstadoHuellas()
 {
-	//EnviarTexto("Muestra de Huellas Necesarias para Guardar Template "+ Reclutador.getFeaturesNeeded());
+    //EnviarTexto("Muestra de Huellas Necesarias para Guardar Template "+ Reclutador.getFeaturesNeeded());
 }
 
 public void EnviarTexto(String string) {
@@ -681,56 +594,45 @@ public  void stop(){
         EnviarTexto("Cierre y vuela abrir el programa ");
 }
 
-    public DPFPTemplate getTemplate() {
-        return template;
-    }
+public DPFPTemplate getTemplate() {
+   return template;
+}
 
-    public void setTemplate(DPFPTemplate template) {
-        DPFPTemplate old = this.template;
-	this.template = template;
-	firePropertyChange(TEMPLATE_PROPERTY, old, template);
-    }
-    public void verificarHuella(String nom) 
+public void setTemplate(DPFPTemplate template) {
+    DPFPTemplate old = this.template;
+    this.template = template;
+    firePropertyChange(TEMPLATE_PROPERTY, old, template);
+}
+public void verificarHuella(String nom) 
+{
+    //TODO:Verificar 
+/*    try 
     {
-    try 
-    {
-    int Id =Integer.parseInt(nom);
-    Obj_Con.estableceConexion();
-    
-    nom=Obj_ret.Hallar_id("nombre","personal","idpers",nom);
-    
-    PreparedStatement verificarStmt = Obj_Con.conexion.prepareStatement("SELECT huehuella FROM somhue WHERE idpers=?");
-    verificarStmt.setInt(1,Id);
-    ResultSet rs = verificarStmt.executeQuery();
+        int Id =Integer.parseInt(nom);
+        Obj_Con.estableceConexion();
 
-    //Si se encuentra el nombre en la base de datos
-    if (rs.next()){
-    //Lee la plantilla de la base de datos
-    byte templateBuffer[] = rs.getBytes("huehuella");
-    //Crea una nueva plantilla a partir de la guardada en la base de datos
-    DPFPTemplate referenceTemplate = DPFPGlobal.getTemplateFactory().createTemplate(templateBuffer);
-    //Envia la plantilla creada al objeto contendor de Template del componente de huella digital
-    setTemplate(referenceTemplate);
+        nom=Obj_ret.Hallar_id("nombre","personal","idpers",nom);
 
-    // Compara las caracteriticas de la huella recientemente capturda con la
-    // plantilla guardada al usuario especifico en la base de datos
-    DPFPVerificationResult result = Verificador.verify(featuresverificacion, getTemplate());
+        PreparedStatement verificarStmt;
+        verificarStmt = cn.conexion.prepareStatement("SELECT huella FROM empleado WHERE idemp=?");
+        verificarStmt.setInt(1,Id);
+        ResultSet rs = verificarStmt.executeQuery();
+        if (rs.next()){
+        byte templateBuffer[] = rs.getBytes("huehuella");
+        DPFPTemplate referenceTemplate = DPFPGlobal.getTemplateFactory().createTemplate(templateBuffer);
+        setTemplate(referenceTemplate);
+        DPFPVerificationResult result = Verificador.verify(featuresverificacion, getTemplate());
 
-    
-    //compara las plantilas (actual vs bd)
-    if (result.isVerified())
-    {
-        
-        //JOptionPane.showMessageDialog(null, "Las huella capturada coinciden con la de "+nom,"Verificacion de Huella", JOptionPane.INFORMATION_MESSAGE);
-    }
-    else
-    {
-        JOptionPane.showMessageDialog(null, "La huella ingresada no se encuentra registrado", "Verificacion de Huella", JOptionPane.ERROR_MESSAGE);
-    }    
-    //Si no encuentra alguna huella correspondiente al nombre lo indica con un mensaje
-    } else {
-    JOptionPane.showMessageDialog(null, "No existe un registro de huella para "+nom, "Verificacion de Huella", JOptionPane.ERROR_MESSAGE);
-    }
+        if (result.isVerified()){
+            //JOptionPane.showMessageDialog(null, "Las huella capturada coinciden con la de "+nom,"Verificacion de Huella", JOptionPane.INFORMATION_MESSAGE);
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "La huella ingresada no se encuentra registrado", "Verificacion de Huella", JOptionPane.ERROR_MESSAGE);
+        }    
+        //Si no encuentra alguna huella correspondiente al nombre lo indica con un mensaje
+        } else {
+            JOptionPane.showMessageDialog(null, "No existe un registro de huella para "+nom, "Verificacion de Huella", JOptionPane.ERROR_MESSAGE);
+        }
     } catch (SQLException e) {
     //Si ocurre un error lo indica en la consola
     System.err.println("Error al verificar los datos de la huella."+e);
@@ -740,40 +642,8 @@ public  void stop(){
 
  
  
- 
+ */
  }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -788,13 +658,13 @@ public  void stop(){
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Identificacion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(WinIdentificacion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Identificacion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(WinIdentificacion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Identificacion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(WinIdentificacion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Identificacion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(WinIdentificacion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
@@ -802,7 +672,7 @@ public  void stop(){
         java.awt.EventQueue.invokeLater(new Runnable() {
 
             public void run() {
-                new Identificacion().setVisible(true);
+                new WinIdentificacion().setVisible(true);
             }
         });
     }
