@@ -301,7 +301,6 @@ public class WinTipoEmpleado extends javax.swing.JInternalFrame {
                 tipoemp = objtipoemp.getValues(Integer.parseInt(idArea));
                 txtName.setText(tipoemp.getName());
                 lblModified.setText(hp.getFormatDate(tipoemp.getModified()));
-                System.out.println(tipoemp.isEstado());
                 qs.loadState(cmbEstate,tipoemp.isEstado());
             }
             catch (Exception e) {

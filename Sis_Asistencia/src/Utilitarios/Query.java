@@ -279,6 +279,29 @@ public class Query extends ConexionBd{
         }
     }
     
+    /*
+     * Autocarga de los estados activo, inactivo
+     */
+    public void loadTypeextra(JComboBox cmbState, int tipo){
+        try{
+            dt = new Data();
+            MChoice = new DefaultComboBoxModel();
+            if(tipo == 0){
+                MChoice.addElement(dt.G_TIPOEXTRA[0]);
+                MChoice.addElement(dt.G_TIPOEXTRA[1]);
+            }
+            else{
+                MChoice.addElement(dt.G_TIPOEXTRA[1]);
+                MChoice.addElement(dt.G_TIPOEXTRA[0]);
+            }
+                
+            cmbState.setModel(MChoice);   
+        }
+        catch(Exception e){
+            System.out.println(_error+"loadTypeextra: "+e);
+        }
+    }
+    
     public int loadGlobal(int op, JComboBox cmbType, int value){
         int id = 0;
         try{
@@ -345,8 +368,7 @@ public class Query extends ConexionBd{
               MChoice.addElement(rs.getString(Campo));
             }     
             
-            cmbChoice.setModel(MChoice);   
-            closeConexion(); 
+            cmbChoice.setModel(MChoice);
         }
         catch(Exception e){
             System.out.println(_error+"loadChoice: "+e);
