@@ -45,13 +45,17 @@ public class EmpleadoDAO extends ConexionBd{
     public void getTableAll(JTable tblDatos){
         try{
             DefaultTableModel datos;
+            Object [] fila = new Object[2];
             qs= new Query();
             hp = new Helpers();
             if (filter.length == 0){
                 filter = new String[0][0];
             }
+            fila[0] ="< "+qs.getcount("empleado")+" >";
+            fila[1] = "total de registros";
             System.out.println("Campo: "+campos[3]);
             datos = qs.getAll(campos,_table,filter);
+            datos.addRow(fila);
             tblDatos.setModel(datos);
             hp.setWidthJtable(tblDatos,witdhcolum);
         }

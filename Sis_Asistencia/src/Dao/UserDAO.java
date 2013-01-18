@@ -12,7 +12,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 public class UserDAO extends ConexionBd{
-    
+
     ResultSet rs = null;
     Statement s = null;
     private Query qs;
@@ -25,7 +25,7 @@ public class UserDAO extends ConexionBd{
     private String _error;
     private String _table;
     private String abc1 = "abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQ123456789";
-    
+
     PreparedStatement  pt = null;
     /*
     * Carga de datos
@@ -47,14 +47,18 @@ public class UserDAO extends ConexionBd{
     
     public void getTableAll(JTable tblDatos){
         try{
+            Object [] fila = new Object[2];
             DefaultTableModel datos;
             qs= new Query();
             hp = new Helpers();
             if (filter.length <= 0){
                 filter = new String[0][0];
             }
+            fila[0] ="< "+qs.getcount("usuario")+" >";
+            fila[1] = "total de registros";
             String Table = _table;
             datos = qs.getAll(this.campos,Table,filter);
+            datos.addRow(fila);
             tblDatos.setModel(datos);
             hp.setWidthJtable(tblDatos,witdhcolum);
         }

@@ -591,6 +591,26 @@ public class Query extends ConexionBd{
         
         return datos;
         }
+        
+        public int getcount(String tabla)
+        {
+            int num=0;
+            try{
+                getConexion();
+                s = conexion.createStatement();
+                String qs = "select count(*) from " + tabla;
+
+                rs = s.executeQuery(qs);
+                rs.next();
+                num = rs.getInt(1);
+
+                closeConexion();
+                rs.close();
+            }
+            catch(Exception e){
+                System.out.println(_error+"userAuth: "+e);
+            }return num;
+        }
     }
         
 

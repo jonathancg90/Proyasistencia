@@ -130,7 +130,7 @@ public class WinRecuperacion extends javax.swing.JFrame {
             }
             catch(Exception e){
 
-                System.out.println(_error+"_enviarmsm:"+e);
+                System.out.println(_error + "_enviarmsm:" + e);
 
             }
         }
@@ -147,11 +147,11 @@ public class WinRecuperacion extends javax.swing.JFrame {
               System.out.println( e );
               System.out.println( "Debes estar conectado para que esto funcione bien." );
             }
-        }
-        i++;
-        if(i==3){
-            JOptionPane.showMessageDialog(null, "Te equivocastes 3 veces","Alerta",1);
-            limpiar();this.dispose();
+            i++;
+            if(i==3){
+                JOptionPane.showMessageDialog(null, "Te equivocastes 3 veces","Alerta",1);
+                limpiar();this.dispose();
+            }
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
