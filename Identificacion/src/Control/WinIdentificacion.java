@@ -59,7 +59,7 @@ public class WinIdentificacion extends javax.swing.JFrame implements Runnable{
     private String ampm;
     private Calendar calendario;
     private Thread h1;
-    private String _error = "Identificacion_Utilitarios_WinIdentificacion";
+    private String _error = "Iden_Utilitarios_WinIdentificacion_";
     
     //Inicializacion
     public WinIdentificacion() {
@@ -75,36 +75,45 @@ public class WinIdentificacion extends javax.swing.JFrame implements Runnable{
     }
     //Segundero(Real time)
     public void run(){
-        Thread ct = Thread.currentThread();
-        while(ct == h1) {   
-            calcula();
-            lbHora.setText(hora + ":" + minutos + ":" + segundos + " "+ampm);
-            try {
-                Thread.sleep(1000);
-            }
-            catch(InterruptedException e) {}
+        try{
+            Thread ct = Thread.currentThread();
+            while(ct == h1) {   
+                calcula();
+                lbHora.setText(hora + ":" + minutos + ":" + segundos + " "+ampm);
+                try {
+                    Thread.sleep(1000);
+                }
+                catch(InterruptedException e) {}
+            } 
+        } catch(Exception e) {
+            System.out.println(_error + "run");
         }
+           
     }
-    public void calcula () {        
-        Calendar calendario = new GregorianCalendar();
-        Date fechaHoraActual = new Date();
+    public void calcula () {
+        try {
+            Calendar calendario = new GregorianCalendar();
+            Date fechaHoraActual = new Date();
 
-        calendario.setTime(fechaHoraActual);
-        ampm = calendario.get(Calendar.AM_PM)==Calendar.AM?"AM":"PM";
-        if(ampm.equals("PM")){
-            int h = calendario.get(Calendar.HOUR_OF_DAY)-12;
-            hora = h>9?""+h:"0"+h;
-        }else{
-            hora = calendario.get(Calendar.HOUR_OF_DAY)>9?""+calendario.get(Calendar.HOUR_OF_DAY):"0"+calendario.get(Calendar.HOUR_OF_DAY);            
+            calendario.setTime(fechaHoraActual);
+            ampm = calendario.get(Calendar.AM_PM)==Calendar.AM?"AM":"PM";
+            if(ampm.equals("PM")){
+                int h = calendario.get(Calendar.HOUR_OF_DAY)-12;
+                hora = h>9?""+h:"0"+h;
+            }else{
+                hora = calendario.get(Calendar.HOUR_OF_DAY)>9?""+calendario.get(Calendar.HOUR_OF_DAY):"0"+calendario.get(Calendar.HOUR_OF_DAY);            
+            }
+            minutos = calendario.get(Calendar.MINUTE)>9?""+calendario.get(Calendar.MINUTE):"0"+calendario.get(Calendar.MINUTE);
+            segundos = calendario.get(Calendar.SECOND)>9?""+calendario.get(Calendar.SECOND):"0"+calendario.get(Calendar.SECOND); 
+        } catch(Exception e) {
+            System.out.println(_error + "run");
         }
-        minutos = calendario.get(Calendar.MINUTE)>9?""+calendario.get(Calendar.MINUTE):"0"+calendario.get(Calendar.MINUTE);
-        segundos = calendario.get(Calendar.SECOND)>9?""+calendario.get(Calendar.SECOND):"0"+calendario.get(Calendar.SECOND); 
     }
     
    public void  Llenar_Datos(String Id){
-       LblCodigo.setText(Id);
-       cn = new Conexion();
-       try{
+   LblCodigo.setText(Id);
+   cn = new Conexion();
+   try{
        cn.getConexion();
        
         ResultSet rs = null;
@@ -129,7 +138,7 @@ public class WinIdentificacion extends javax.swing.JFrame implements Runnable{
            JOptionPane.showMessageDialog(null, "No se pudo extraer los datos del trabajador","Verificacion de Huella", JOptionPane.INFORMATION_MESSAGE);
        }
    }
-  //Identificar huella  
+//Identificar huella  
  public void identificarHuella() throws IOException{
    try {
        cn.getConexion();
@@ -440,11 +449,11 @@ private void BtnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
     String StrCodigo=LblCodigo.getText();
     
     String mensaje="";
-    String Consulta="select fecha,hora from registro where fecha='"+StrFecha+"' and idpers='"+StrCodigo+"'";
+    String query="select fecha,hora from registro where fecha='"+StrFecha+"' and idpers='"+StrCodigo+"'";
     try{
         cn.getConexion();
         ResultSet rs = null;
-        rs = hp.Ejec_Consultas(Consulta);
+        rs = hp.Ejec_Consultas(query);
         int i=1;
         while(rs.next()) {
             mensaje=mensaje+"\n"+i+") "+rs.getString("hora");
@@ -453,12 +462,10 @@ private void BtnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
         cn.closeConexion();
         EnviarTexto(mensaje);
     }
-    catch(Exception e)
-    {
+    catch(Exception e){
         System.out.println("Error Boton consultar: "+e);
     }
 }//GEN-LAST:event_BtnConsultarActionPerformed
-
 
 private DPFPCapture Lector = DPFPGlobal.getCaptureFactory().createCapture();
 private DPFPEnrollment Reclutador = DPFPGlobal.getEnrollmentFactory().createEnrollment();
@@ -467,6 +474,8 @@ private DPFPTemplate template;
 public static String TEMPLATE_PROPERTY = "template";
 
 protected void Iniciar(){
+    try {
+        
    Lector.addDataListener(new DPFPDataAdapter() {
     @Override public void dataAcquired(final DPFPDataEvent e) {
     SwingUtilities.invokeLater(new Runnable() {	public void run() {
@@ -503,57 +512,60 @@ protected void Iniciar(){
     EnviarTexto("Error: "+e.getError());
     }});}
    });
+    }
+    catch(Exception e){
+        System.out.println(_error + "Iniciar");
+    }
 }
 
  public DPFPFeatureSet featuresinscripcion;
  public DPFPFeatureSet featuresverificacion;
 
- public  void ProcesarCaptura(DPFPSample sample)
- {
- // Procesar la muestra de la huella y crear un conjunto de características con el propósito de inscripción.
- featuresinscripcion = extraerCaracteristicas(sample, DPFPDataPurpose.DATA_PURPOSE_ENROLLMENT);
-
- // Procesar la muestra de la huella y crear un conjunto de características con el propósito de verificacion.
- featuresverificacion = extraerCaracteristicas(sample, DPFPDataPurpose.DATA_PURPOSE_VERIFICATION);
-
- // Comprobar la calidad de la muestra de la huella y lo añade a su reclutador si es bueno
- if (featuresinscripcion != null)
-     try{
-        System.out.println("Las Caracteristicas de la Huella han sido creada");
-        Reclutador.addFeatures(featuresinscripcion);// Agregar las caracteristicas de la huella a la plantilla a crear
-
-        // Dibuja la huella dactilar capturada.
-        Image image=CrearImagenHuella(sample);
-        DibujarHuella(image);
-
-        BtnRegistrar.setEnabled(true);
-        BtnConsultar.setEnabled(true);
+ public  void ProcesarCaptura(DPFPSample sample){
+ try {
+    // Procesar la muestra de la huella y crear un conjunto de características con el propósito de inscripción.
+    featuresinscripcion = extraerCaracteristicas(sample, DPFPDataPurpose.DATA_PURPOSE_ENROLLMENT);
+    // Procesar la muestra de la huella y crear un conjunto de características con el propósito de verificacion.
+    featuresverificacion = extraerCaracteristicas(sample, DPFPDataPurpose.DATA_PURPOSE_VERIFICATION);
+    // Comprobar la calidad de la muestra de la huella y lo añade a su reclutador si es bueno
+    if (featuresinscripcion != null)
         try{
-           identificarHuella();
-        }
-        catch(Exception e){
-        }
-     }catch (DPFPImageQualityException ex) {
-        System.err.println("Error: "+ex.getMessage());
-     }
-     finally {
-        EstadoHuellas();
-           switch(Reclutador.getTemplateStatus()){
-               case TEMPLATE_STATUS_READY:	// informe de éxito y detiene  la captura de huellas
-                   stop();
-                   setTemplate(Reclutador.getTemplate());
-                   break;
-
-               case TEMPLATE_STATUS_FAILED: // informe de fallas y reiniciar la captura de huellas
-                   Reclutador.clear();
-                   stop();
-                   EstadoHuellas();
-                   setTemplate(null);
-                   JOptionPane.showMessageDialog(WinIdentificacion.this, "La Plantilla de la Huella no pudo ser creada, Repita el Proceso", "Inscripcion de Huellas Dactilares", JOptionPane.ERROR_MESSAGE);
-                   start();
-                   break;
+           System.out.println("Las Caracteristicas de la Huella han sido creada");
+           Reclutador.addFeatures(featuresinscripcion);// Agregar las caracteristicas de la huella a la plantilla a crear
+           // Dibuja la huella dactilar capturada.
+           Image image=CrearImagenHuella(sample);
+           DibujarHuella(image);
+           BtnRegistrar.setEnabled(true);
+           BtnConsultar.setEnabled(true);
+           try{
+              identificarHuella();
            }
-     }
+           catch(Exception e){
+           }
+        }catch (DPFPImageQualityException ex) {
+           System.err.println("Error: "+ex.getMessage());
+        }
+        finally {
+           EstadoHuellas();
+              switch(Reclutador.getTemplateStatus()){
+                  case TEMPLATE_STATUS_READY:	// informe de éxito y detiene  la captura de huellas
+                      stop();
+                      setTemplate(Reclutador.getTemplate());
+                      break;
+
+                  case TEMPLATE_STATUS_FAILED: // informe de fallas y reiniciar la captura de huellas
+                      Reclutador.clear();
+                      stop();
+                      EstadoHuellas();
+                      setTemplate(null);
+                      JOptionPane.showMessageDialog(WinIdentificacion.this, "La Plantilla de la Huella no pudo ser creada, Repita el Proceso", "Inscripcion de Huellas Dactilares", JOptionPane.ERROR_MESSAGE);
+                      start();
+                      break;
+              }
+        }
+ } catch(Exception e){
+    System.out.println(_error + "ProcesarCaptura");
+ }
 }
  public  DPFPFeatureSet extraerCaracteristicas(DPFPSample sample, DPFPDataPurpose purpose){
      DPFPFeatureExtraction extractor = DPFPGlobal.getFeatureExtractionFactory().createFeatureExtraction();
@@ -567,11 +579,14 @@ protected void Iniciar(){
   public  Image CrearImagenHuella(DPFPSample sample) {
 	return DPFPGlobal.getSampleConversionFactory().createImage(sample);
 }
-
   public void DibujarHuella(Image image) {
-        lblImagenHuella.setIcon(new ImageIcon(
-        image.getScaledInstance(lblImagenHuella.getWidth(), lblImagenHuella.getHeight(), Image.SCALE_DEFAULT)));
-        repaint();
+  try { 
+      lblImagenHuella.setIcon(new ImageIcon(
+      image.getScaledInstance(lblImagenHuella.getWidth(), lblImagenHuella.getHeight(), Image.SCALE_DEFAULT)));
+      repaint();
+  } catch (Exception e){
+      System.out.println(_error + "DibujarHuella");
+  }
  }
 
 public  void EstadoHuellas()
@@ -599,9 +614,13 @@ public DPFPTemplate getTemplate() {
 }
 
 public void setTemplate(DPFPTemplate template) {
-    DPFPTemplate old = this.template;
-    this.template = template;
-    firePropertyChange(TEMPLATE_PROPERTY, old, template);
+    try {
+        DPFPTemplate old = this.template;
+        this.template = template;
+        firePropertyChange(TEMPLATE_PROPERTY, old, template);   
+    } catch(Exception e){
+        System.out.println(_error + "setTemplate");
+    }
 }
 public void verificarHuella(String nom) 
 {
@@ -670,7 +689,6 @@ public void verificarHuella(String nom)
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
-
             public void run() {
                 new WinIdentificacion().setVisible(true);
             }
