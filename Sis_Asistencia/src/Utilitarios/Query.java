@@ -24,6 +24,21 @@ public class Query extends ConexionBd{
         System.out.println("VALOR: " + this.identify);
     }
     
+    public void DeleteAll(String table) throws SQLException {
+        try {
+            getConexion();
+            Statement s = null;
+            s = conexion.createStatement();
+            pt  = conexion.prepareStatement("delete from "+table+" where idmod is not null");
+            rs.close();
+            pt.executeUpdate();
+            pt.close();
+            closeConexion();   
+        } catch(Exception e) {
+            System.out.println(_error+"DeleteAll: "+e);
+        }
+    }
+    
     public  PreparedStatement sqlRegister(String Table){
         pt = null;
         try{
