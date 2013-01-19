@@ -27,10 +27,11 @@ public class Query extends ConexionBd{
     public void DeleteAll(String table) throws SQLException {
         try {
             getConexion();
+            pt = null;
             Statement s = null;
             s = conexion.createStatement();
-            pt  = conexion.prepareStatement("delete from "+table+" where idmod is not null");
-            rs.close();
+            String id = getIdentify(table);
+            pt  = conexion.prepareStatement("delete from "+table+" where "+id+" is not null");
             pt.executeUpdate();
             pt.close();
             closeConexion();   

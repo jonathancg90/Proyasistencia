@@ -16,6 +16,7 @@ public class InsertData {
         InsertData insert = new InsertData();
         insert.deleteRegister();
         insert.insertModulos();
+        insert.inserRoles();
     }
     
     public void deleteRegister() throws SQLException {
