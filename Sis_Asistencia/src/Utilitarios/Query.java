@@ -24,6 +24,22 @@ public class Query extends ConexionBd{
         System.out.println("VALOR: " + this.identify);
     }
     
+    public void DeleteAll(String table) throws SQLException {
+        try {
+            getConexion();
+            pt = null;
+            Statement s = null;
+            s = conexion.createStatement();
+            String id = getIdentify(table);
+            pt  = conexion.prepareStatement("delete from "+table+" where "+id+" is not null");
+            pt.executeUpdate();
+            pt.close();
+            closeConexion();   
+        } catch(Exception e) {
+            System.out.println(_error+"DeleteAll: "+e);
+        }
+    }
+    
     public  PreparedStatement sqlRegister(String Table){
         pt = null;
         try{
@@ -434,6 +450,7 @@ public class Query extends ConexionBd{
             }
             MChoice = new DefaultComboBoxModel();
             s = conexion.createStatement();
+            value =  value.toUpperCase();
             query  = "select " +identify+ " from " +Tbl+ " where " +Campo+ " = '"+value+"'";
             rs = s.executeQuery(query);
             while(rs.next()) {
@@ -505,9 +522,11 @@ public class Query extends ConexionBd{
                     }
                 }
                 rs.close();
-            }
-            catch(Exception e){
-                System.out.println(_error+"getIdentify: "+e);
+                if ("NMID".equals(identify)) {
+                    identify = "\"NMID\"";
+                }
+            } catch (Exception e) {
+                System.out.println(_error+"getIdentify: " +e);
             }
                 
             return identify;

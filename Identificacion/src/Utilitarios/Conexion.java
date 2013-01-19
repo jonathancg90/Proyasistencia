@@ -28,11 +28,19 @@ public class Conexion {
            Class.forName("org.postgresql.Driver");
            conexion = DriverManager.getConnection(url,user,password);
            if (conexion !=null){
+<<<<<<< HEAD
                //System.out.println("Conexion establecida");
            }
         }
         catch (Exception e) {   
             //System.out.println("ConexionBd_getConexion: "+e);
+=======
+               System.out.println("Conexion establecida");
+           }
+        }
+        catch (Exception e) {   
+            System.out.println("ConexionBd_getConexion: "+e);
+>>>>>>> bb058feefad7da0acb8100a624712fa91312661e
         }
     }
     public void closeConexion(){
