@@ -41,9 +41,13 @@ public class WinExtra_descuento extends javax.swing.JInternalFrame {
         try {
             objextrades = new Extra_descuentoDAO();
             qs = new Query();
-            qs.loadChoice(cbotipo,"extra_descuento","tipo");
+            objextrades.findId(lblIdemp.getText(), tblextra);
+            lblIdemp.setVisible(false);
+            qs.loadTypeextra(cbotipo,0);
+            
         } catch (Exception e) {
             System.out.println(_error+"_CargaForm:"+e);
+            
         }
     }
     
@@ -68,7 +72,7 @@ public class WinExtra_descuento extends javax.swing.JInternalFrame {
         cbodate = new datechooser.beans.DateChooserCombo();
         txtMonto = new javax.swing.JTextField();
         cbotipo = new javax.swing.JComboBox();
-        lblidemp = new javax.swing.JLabel();
+        lblIdemp = new javax.swing.JLabel();
         pnlListado = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblextra = new javax.swing.JTable();
@@ -97,55 +101,56 @@ public class WinExtra_descuento extends javax.swing.JInternalFrame {
 
         cbotipo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        lblidemp.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        lblIdemp.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         javax.swing.GroupLayout PnlDatosLayout = new javax.swing.GroupLayout(PnlDatos);
         PnlDatos.setLayout(PnlDatosLayout);
         PnlDatosLayout.setHorizontalGroup(
             PnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PnlDatosLayout.createSequentialGroup()
-                .addGap(24, 24, 24)
+                .addGap(30, 30, 30)
                 .addGroup(PnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(PnlDatosLayout.createSequentialGroup()
                         .addGroup(PnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
                             .addComponent(jLabel1))
                         .addGap(34, 34, 34)
-                        .addGroup(PnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(cbodate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(PnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cbodate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(PnlDatosLayout.createSequentialGroup()
                                 .addComponent(lblid, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lblidemp, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(cbotipo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addGap(30, 30, 30)
+                                .addComponent(lblIdemp, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(cbotipo, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jLabel3)
                     .addGroup(PnlDatosLayout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addGap(18, 18, 18)
                         .addComponent(txtMonto, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
         PnlDatosLayout.setVerticalGroup(
             PnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PnlDatosLayout.createSequentialGroup()
-                .addGap(25, 25, 25)
+                .addContainerGap()
                 .addGroup(PnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PnlDatosLayout.createSequentialGroup()
+                        .addGap(2, 2, 2)
+                        .addComponent(lblid, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(39, 39, 39))
                     .addGroup(PnlDatosLayout.createSequentialGroup()
                         .addGroup(PnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(PnlDatosLayout.createSequentialGroup()
-                                .addGap(4, 4, 4)
+                                .addGap(6, 6, 6)
                                 .addComponent(jLabel1)
                                 .addGap(15, 15, 15))
-                            .addGroup(PnlDatosLayout.createSequentialGroup()
-                                .addComponent(lblidemp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(10, 10, 10)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PnlDatosLayout.createSequentialGroup()
+                                .addComponent(lblIdemp, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(8, 8, 8)))
                         .addGroup(PnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
                             .addComponent(cbotipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(1, 1, 1))
-                    .addGroup(PnlDatosLayout.createSequentialGroup()
-                        .addComponent(lblid, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
-                        .addGap(39, 39, 39)))
+                        .addGap(4, 4, 4)))
                 .addGroup(PnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(cbodate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
@@ -153,10 +158,10 @@ public class WinExtra_descuento extends javax.swing.JInternalFrame {
                 .addGroup(PnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(txtMonto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(5, 5, 5))
+                .addGap(45, 45, 45))
         );
 
-        getContentPane().add(PnlDatos, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 40, 290, 180));
+        getContentPane().add(PnlDatos, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 40, 290, 180));
 
         pnlListado.setBorder(javax.swing.BorderFactory.createTitledBorder("Listado"));
 
@@ -184,7 +189,7 @@ public class WinExtra_descuento extends javax.swing.JInternalFrame {
             pnlListadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlListadoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 274, Short.MAX_VALUE)
                 .addContainerGap())
         );
         pnlListadoLayout.setVerticalGroup(
@@ -195,7 +200,7 @@ public class WinExtra_descuento extends javax.swing.JInternalFrame {
                 .addContainerGap())
         );
 
-        getContentPane().add(pnlListado, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 37, -1, -1));
+        getContentPane().add(pnlListado, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 37, 310, -1));
 
         mfile.setText("Archivo");
 
@@ -270,12 +275,11 @@ public class WinExtra_descuento extends javax.swing.JInternalFrame {
                 //Asigando valores obtenidos
                 lblid.setText(idEmp);
                 extrades = objextrades.getValues(Integer.parseInt(idEmp));
-                lblidemp.setText(String.valueOf(extrades.getIdemp()));
+                lblIdemp.setText(String.valueOf(extrades.getIdemp()));
                 date2=format.parse(hp.getFormatDate(extrades.getDate()));
                 calendar2.setTime(date2);
                 cbodate.setSelectedDate(calendar2);
-                
-                qs.loadChoiceDefault(cbotipo,"extra_descuento","tipo",extrades.getTipo());
+                qs.loadTypeextra(cbotipo,extrades.getTipo());
 
             }
             catch (Exception e) {
@@ -288,20 +292,19 @@ public class WinExtra_descuento extends javax.swing.JInternalFrame {
 
     private void mitemRegistrarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemRegistrarMousePressed
         try{
-        val = new Validators();   
+        val = new Validators("extra_descuento");   
         
         hp=new Helpers();
-        Object[] datos = {cbotipo.getSelectedIndex(),txtMonto.getText()};
-        Object[] tipos = {2,4};
+        Object[] datos = {txtMonto.getText()};
+        Object[] tipos = {4};
         if(val.validar(datos, tipos)){
 
             try{
-                
                 String fecha = hp.getFormatDate(cbodate.getText());
                 int tipo = cbotipo.getSelectedIndex();
                 float monto = Float.valueOf(txtMonto.getText());
-                int id = Integer.parseInt(lblid.getText());
-                int i = objextrades.save(fecha,tipo,monto,id);
+                int idemp = Integer.parseInt(lblIdemp.getText());
+                int i = objextrades.save(fecha,tipo,monto,idemp);
                 if (i == 0) {
                     JOptionPane.showMessageDialog(null,"No se pudo grabar datos");
                 }
@@ -310,7 +313,7 @@ public class WinExtra_descuento extends javax.swing.JInternalFrame {
                     cleanBox();
                     JOptionPane.showMessageDialog(null,"Nueva salarioextra registrado");
                 }
-            }catch(Exception e){System.out.println(""+e);}
+            }catch(Exception e){}
         }
         else
             {
@@ -323,10 +326,10 @@ public class WinExtra_descuento extends javax.swing.JInternalFrame {
 
     private void mitemUpdateMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemUpdateMousePressed
         try{
-        val = new Validators();   
+        val = new Validators("extra_descuento");   
         
         hp=new Helpers();
-        Object[] datos = {cbotipo.getSelectedIndex(),txtMonto.getText(),lblid.getText()};
+        Object[] datos = {txtMonto.getText(),lblid.getText()};
         Object[] tipos = {2,4};
         if(val.validar(datos, tipos)){
 
@@ -335,7 +338,7 @@ public class WinExtra_descuento extends javax.swing.JInternalFrame {
                 String fecha = hp.getFormatDate(cbodate.getText());
                 int tipo = cbotipo.getSelectedIndex();
                 float monto = Float.valueOf(txtMonto.getText());
-                int id = Integer.parseInt(lblid.getText());
+                int id = Integer.parseInt(lblIdemp.getText());
                 int i = objextrades.update(fecha,tipo,monto,id);
                 if (i == 0) {
 
@@ -359,7 +362,7 @@ public class WinExtra_descuento extends javax.swing.JInternalFrame {
 
     private void jmitemDeleteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmitemDeleteMousePressed
        try{
-        val = new Validators(); 
+        val = new Validators("extra_descuento"); 
         Object[] datos = {lblid.getText()};
         Object[] tipos = {};
         if(val.validar(datos, tipos)){
@@ -373,7 +376,7 @@ public class WinExtra_descuento extends javax.swing.JInternalFrame {
                     JOptionPane.showMessageDialog(null,"No se pudo eliminar el horario");
                 }
                 else {
-                    //objextrades.findId(lblid.getText(), tblextra);
+                    objextrades.findId(lblIdemp.getText(), tblextra);
                     cleanBox();
                 }
             }
@@ -404,8 +407,8 @@ public class WinExtra_descuento extends javax.swing.JInternalFrame {
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JMenuItem jmitemDelete;
+    public javax.swing.JLabel lblIdemp;
     private javax.swing.JLabel lblid;
-    private javax.swing.JLabel lblidemp;
     private javax.swing.JMenu mclose;
     private javax.swing.JMenu medit;
     private javax.swing.JMenu mfile;

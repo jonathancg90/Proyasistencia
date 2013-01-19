@@ -411,7 +411,6 @@ public class WinEmpleado_horarios extends javax.swing.JInternalFrame {
     private void mitemdeleteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemdeleteMousePressed
        try{    
             val=new Validators("empleado_has_horarios");
-            hp = new Helpers();
             Object[] datos = {lblIdemp_horarios.getText()};
             Object[] tipos = {};
             if(val.validar(datos,tipos)){

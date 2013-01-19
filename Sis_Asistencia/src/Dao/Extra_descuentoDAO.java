@@ -30,7 +30,7 @@ public class Extra_descuentoDAO extends ConexionBd{
         filter = new String[0][0];
         campos = new String[2];
         campos[0]="id";
-        campos[1]="tipo";
+        campos[1]="monto";
         witdhcolum = new int[1];
         witdhcolum[0]=50;
     }
@@ -171,6 +171,21 @@ public class Extra_descuentoDAO extends ConexionBd{
             System.out.println(_error + "getValues: "+e);
             return objdes;
         }
+    }
+    public int findId(String id,JTable tblDatos) {
+        int i = 0;
+        try {
+            if(!"".equals(id)){
+                filter = new String[1][2];
+                filter[0][0] = "int_empleado_idemp";
+                filter[0][1] = id;
+            }
+            getTableAll(tblDatos);
+        }
+        catch(Exception e){
+            System.out.println(_error + "findId : "+e);
+        }
+        return i;
     }
 }
 

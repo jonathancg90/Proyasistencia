@@ -17,6 +17,7 @@ public class Data {
     public int DIMENTION[]= new int[9];
     public String G_TIPOH[]= new String[3];
     public String G_TIPOREG[]= new String[3];
+    public String G_TIPOEXTRA[] = new String[2];
     
     public Data()
     {
@@ -95,7 +96,8 @@ public class Data {
         G_TIPOH[1]="Trabajo";
         G_TIPOH[2]="Refrigerio";
         
-        
+        G_TIPOEXTRA[0]="Extra";
+        G_TIPOEXTRA[1]="Descuento";
         
 
     }

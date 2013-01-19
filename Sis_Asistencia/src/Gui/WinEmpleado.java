@@ -123,10 +123,10 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
         mhor = new javax.swing.JMenu();
         msue = new javax.swing.JMenu();
         mvac = new javax.swing.JMenu();
-        jMenu1 = new javax.swing.JMenu();
         jmfoto = new javax.swing.JMenu();
         mAbrirFoto = new javax.swing.JMenuItem();
         mclose = new javax.swing.JMenu();
+        mExtra = new javax.swing.JMenu();
 
         jMenuItem1.setText("jMenuItem1");
 
@@ -283,7 +283,7 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
                     .addComponent(chkactivo)
                     .addComponent(btnFiltro))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 203, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 205, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -374,14 +374,6 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
         });
         jMenuBar1.add(mvac);
 
-        jMenu1.setText("Calculos");
-        jMenu1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jMenu1MousePressed(evt);
-            }
-        });
-        jMenuBar1.add(jMenu1);
-
         jmfoto.setText("Foto");
 
         mAbrirFoto.setText("Abrir");
@@ -401,6 +393,14 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
             }
         });
         jMenuBar1.add(mclose);
+
+        mExtra.setText("Calculos");
+        mExtra.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                mExtraMousePressed(evt);
+            }
+        });
+        jMenuBar1.add(mExtra);
 
         setJMenuBar(jMenuBar1);
 
@@ -657,25 +657,6 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
         objempl.find(idarea, tblEmpleado);
     }//GEN-LAST:event_btnFiltroMouseClicked
 
-    private void jMenu1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu1MousePressed
-        if(!"".equals(this.lblidempleado.getText())){
-           dt= new Data();
-            String titulo=dt.G_TITULOS[21];
-            WinExtra_descuento objextra= new WinExtra_descuento();
-            objextra.setTitle(titulo);
-            objextra.setResizable(true);
-            //objextra.lblId.setText(lblidempleado.getText());
-
-            objextra.setMaximizable(true);
-            objextra.setIconifiable(true);
-            WinMdi.jdpContenedor.add(objextra);
-
-            objextra.setVisible(true);   
-        } else {
-            JOptionPane.showMessageDialog(null,"Debe de seleccionar una empleado para poder ingresar sus dias no laborables");
-        }
-    }//GEN-LAST:event_jMenu1MousePressed
-
     private void miteninfoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_miteninfoMousePressed
         try {
             String id = lblidempleado.getText();
@@ -753,6 +734,24 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
     }
     }//GEN-LAST:event_ItemExportarMousePressed
 
+    private void mExtraMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mExtraMousePressed
+    if(!"".equals(this.lblidempleado.getText())){
+           dt= new Data();
+            String titulo=dt.G_TITULOS[21];
+            WinExtra_descuento objextra= new WinExtra_descuento();
+            objextra.setTitle(titulo);
+            objextra.lblIdemp.setText(lblidempleado.getText());
+            objextra.setResizable(true);
+            objextra.setMaximizable(true);
+            objextra.setIconifiable(true);
+            WinMdi.jdpContenedor.add(objextra);
+
+            objextra.setVisible(true);   
+        } else {
+            JOptionPane.showMessageDialog(null,"Debe de seleccionar una empleado para poder ingresar sus dias no laborables");
+        }
+    }//GEN-LAST:event_mExtraMousePressed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem ItemExportar;
     private javax.swing.JButton btnFiltro;
@@ -776,7 +775,6 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
@@ -787,6 +785,7 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lblFoto;
     private javax.swing.JLabel lblidempleado;
     private javax.swing.JMenuItem mAbrirFoto;
+    private javax.swing.JMenu mExtra;
     private javax.swing.JMenu mclose;
     private javax.swing.JMenu medit;
     private javax.swing.JMenu mfile;
