@@ -18,6 +18,7 @@ public class Data {
     public String G_TIPOH[]= new String[3];
     public String G_TIPOREG[]= new String[3];
     public String G_TIPOEXTRA[] = new String[2];
+    public String G_MODULOS[] = new String[7];
     
     public Data()
     {
@@ -98,6 +99,14 @@ public class Data {
         
         G_TIPOEXTRA[0]="Extra";
         G_TIPOEXTRA[1]="Descuento";
+        
+        G_MODULOS[0] = "Asistencia";
+        G_MODULOS[1] = "Justificaciones";
+        G_MODULOS[2] = "Empleados";
+        G_MODULOS[3] = "Horarios";
+        G_MODULOS[4] = "Consulta";
+        G_MODULOS[5] = "Configuraciones";
+        G_MODULOS[6] = "Reportes";
         
 
     }

@@ -450,6 +450,7 @@ public class Query extends ConexionBd{
             }
             MChoice = new DefaultComboBoxModel();
             s = conexion.createStatement();
+            value =  value.toUpperCase();
             query  = "select " +identify+ " from " +Tbl+ " where " +Campo+ " = '"+value+"'";
             rs = s.executeQuery(query);
             while(rs.next()) {
@@ -521,9 +522,11 @@ public class Query extends ConexionBd{
                     }
                 }
                 rs.close();
-            }
-            catch(Exception e){
-                System.out.println(_error+"getIdentify: "+e);
+                if ("NMID".equals(identify)) {
+                    identify = "\"NMID\"";
+                }
+            } catch (Exception e) {
+                System.out.println(_error+"getIdentify: " +e);
             }
                 
             return identify;
