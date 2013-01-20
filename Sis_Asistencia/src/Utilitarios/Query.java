@@ -21,6 +21,7 @@ public class Query extends ConexionBd{
 
     public void setIdentify(String identify) {
         this.idcamp = identify;
+        this.identify = identify;
         System.out.println("VALOR: " + this.identify);
     }
     

@@ -6,6 +6,8 @@ import Utilitarios.Data;
 import Dao.ModulosDAO;
 import Dao.RolesDAO;
 import Dao.PermisoshasRolesDAO;
+import Dao.TipomonedaDAO;
+import Dao.CiudadDAO;
 import java.sql.SQLException;
 
 public class InsertData {
@@ -15,6 +17,8 @@ public class InsertData {
     private ModulosDAO mod;
     private RolesDAO rol;
     private PermisoshasRolesDAO per_mod;
+    private TipomonedaDAO mon;
+    private CiudadDAO ciu;
 
     
     public static void main(String[] args) throws SQLException {
@@ -23,14 +27,18 @@ public class InsertData {
         insert.insertModulos();
         insert.inserRoles();
         insert.insertPermiso_Roles();
+        insert.inserMoneda();
+        insert.inserCiudad();
     }
     
     public void deleteRegister() throws SQLException {
         qs = new Query();
         System.out.println("Eliminando registros ...");
+        qs.DeleteAll("permisos_has_roles");
         qs.DeleteAll("roles"); 
         qs.DeleteAll("modulos");
-        qs.DeleteAll("permisos_has_roles");
+        qs.DeleteAll("moneda");
+        qs.DeleteAll("ciudad");
     }
     
     public void insertModulos() {
@@ -61,5 +69,17 @@ public class InsertData {
         rol.save("Administrador");
         rol.save("Consultor");
     }
-    
+    public void inserMoneda() {
+        mon = new TipomonedaDAO();
+        System.out.println("Insert data Monedas ...");
+        mon.save("Nuevo Sol", "S/.", true);
+        mon.save("Dolar", "$", false);
+
+    }
+    public void inserCiudad() {
+        ciu = new CiudadDAO();
+        System.out.println("Insert data Ciudades ...");   
+        ciu.save("LIma");
+        ciu.save("Callao");
+    }
 }

@@ -75,7 +75,6 @@ public class CiudadDAO extends ConexionBd{
             pt = qs.sqlRegister(Table);
             
             pt.setString(1,objCiudad.getName());
-            System.out.println(pt);
             //Ejecucion y cierre
             i= pt.executeUpdate();
             pt.close();
