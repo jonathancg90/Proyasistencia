@@ -613,6 +613,38 @@ public class Query extends ConexionBd{
         
         return datos;
         }
+        
+        public Time[] getHora(String[] args, int max){
+            Time hora[] = new Time[0];
+            int k = 1;
+            if (max > 0){
+                try{
+                    getConexion();
+                    Statement s = null;
+                    s = conexion.createStatement();
+                    String query = "select hora from "+ args[0]+" where ";
+                    for(int i=1;i<args.length;i++){
+                         query = query + args[i]+" = "+args[i+1];
+                         if(args.length!=i+2){ 
+                            query = query + " and ";
+                         }
+                         i++;
+                    }
+                    System.out.println(query);
+                    rs = s.executeQuery(query);
+                    hora = new Time[max+1];
+                    while (rs.next()) {
+                        hora[k]= rs.getTime(1);
+                        k++;
+                    }
+                    rs.close();
+                    closeConexion();
+                } catch (Exception e) {
+                     System.out.println(_error+"getHora: "+e);
+                }
+            }
+            return hora;
+        }
     }
         
 

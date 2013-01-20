@@ -82,6 +82,38 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
         cboDia.setSelectedDate(rightNow);
     }
     
+    private boolean asistenciaValidator(Time hra){
+        boolean Validator= true;
+        hp=new Helpers();
+        val = new Validators();
+        String[] args = new String[5];
+        
+        args[0] = "registro";
+        args[1] = "idemp";
+        args[2] = lblidEmp.getText();
+        args[3] = "fecha";
+        args[4] = "'"+hp.getFormatDate(cboDia.getText())+"'";
+        
+        if (Validator) {
+            Validator = val.MaxRegistro(args, 4);
+            if(!Validator){
+               JOptionPane.showMessageDialog(null,"Numero maximo de registros completos");
+               return Validator;
+            }
+        }
+
+        if (Validator) {
+            int op = qs.loadGlobal(4, cboTiporeg, 0);
+            Validator = val.validarRegistro(args, op, hra);
+            if(!Validator){
+               JOptionPane.showMessageDialog(null,"Mal uso del registro");
+               return Validator;
+            }
+        }
+        return Validator;
+    
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -259,7 +291,7 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
                 .addContainerGap())
         );
 
-        jPanel3.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 370, 500));
+        jPanel3.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 370, 500));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Buscar"));
 
@@ -326,10 +358,10 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
                         .addComponent(cboempr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jCheckBox1))
                     .addComponent(btnbuscar))
-                .addContainerGap(42, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel3.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(18, 17, 850, -1));
+        jPanel3.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(18, 17, 850, 100));
 
         tblempleado.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -362,7 +394,7 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 439, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 429, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -509,8 +541,8 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
+                .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(22, 22, 22))
         );
@@ -562,7 +594,7 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
                         .addComponent(cboIni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnDateSearch)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(48, Short.MAX_VALUE))
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -585,32 +617,35 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton2)
-                .addGap(54, 54, 54))
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 410, Short.MAX_VALUE)
-                    .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(13, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
+                        .addComponent(jButton2)
+                        .addGap(54, 54, 54))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(jButton2)
-                .addContainerGap())
+                .addContainerGap(42, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Ver asistencias", jPanel7);
 
-        jPanel3.add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 170, 451, 500));
+        jPanel3.add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 130, 451, 490));
 
         mman.setText("Mantenimiento");
 
@@ -678,7 +713,7 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 698, Short.MAX_VALUE)
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 650, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -917,31 +952,27 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
         qs=new Query();
         hp=new Helpers();
         if(!"".equals(lblidEmp.getText())){
-            
+            SimpleDateFormat fhora = new SimpleDateFormat("HH:mm:ss");
+            Calendar ingreso = TimIngreso.getCalendar();
+            Time ing =  Time.valueOf(fhora.format(ingreso.getTime()));
              //Validacion propia del evento
-                
-                dt = new Data();
-                objRegistro= new RegistroDAO();
-                
-                SimpleDateFormat fhora = new SimpleDateFormat("HH:mm:ss");
-                
-                Calendar ingreso = TimIngreso.getCalendar();
-                
-                Time ing =  Time.valueOf(fhora.format(ingreso.getTime()));
-                String fecha=hp.getFormatDate(cboDia.getText());
-                int tiporeg=qs.loadGlobal(4, cboTiporeg, 0);
-                int i = objRegistro.save(tiporeg, ing, fecha, id,1);
-                int j = objRegistro.save(tiporeg, ing, fecha, id,0);
-                if (i == 0 && j == 0 ) {
-                    JOptionPane.showMessageDialog(null,"No se pudo grabar el detalle");
-                }
-                
-                else {
-                        objRegistro.findId(lblidEmp.getText(), tblAsistencia);
-                        cleanBox();
+                if(asistenciaValidator(ing)){
+                    dt = new Data();
+                    objRegistro= new RegistroDAO();
+                    
+                    String fecha=hp.getFormatDate(cboDia.getText());
+                    int tiporeg=qs.loadGlobal(4, cboTiporeg, 0);
+                    int i = objRegistro.save(tiporeg, ing, fecha, id,1);
+                    int j = objRegistro.save(tiporeg, ing, fecha, id,0);
+                    if (i == 0 && j == 0 ) {
+                        JOptionPane.showMessageDialog(null,"No se pudo grabar el detalle");
                     }
+                    else {
+                            objRegistro.findId(lblidEmp.getText(), tblAsistencia);
+                            cleanBox();
+                        }
+            }   
                 
-            
         } else {
             JOptionPane.showMessageDialog(null,"Seleccione un empleado para poder ingresar sus asistencia");
                 }
