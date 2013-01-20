@@ -21,9 +21,48 @@ public class Query extends ConexionBd{
 
     public void setIdentify(String identify) {
         this.idcamp = identify;
+        this.identify = identify;
         System.out.println("VALOR: " + this.identify);
     }
     
+    public void DeleteAll(String table) throws SQLException {
+        try {
+            getConexion();
+            pt = null;
+            Statement s = null;
+            s = conexion.createStatement();
+            String id = getIdentify(table);
+            pt  = conexion.prepareStatement("delete from "+table+" where "+id+" is not null");
+            pt.executeUpdate();
+            pt.close();
+            closeConexion();   
+        } catch(Exception e) {
+            System.out.println(_error+"DeleteAll: "+e);
+        }
+    }
+    public void RegisterAll(String table,String[] args) throws SQLException {
+        try {
+            getConexion();
+            pt = null;
+            Statement s = null;
+            s = conexion.createStatement();
+            String id = getIdentify(table);
+            String query= "insert into "+ table+ " values(";
+            for(int i=0;i<args.length;i++){
+                query = query + "'" + args[i] + "'";
+                if(i+1<args.length){
+                        query = query + ",";
+                }
+            }
+            query =  query + ")";
+            pt  = conexion.prepareStatement(query);
+            pt.executeUpdate();
+            pt.close();
+            closeConexion();   
+        } catch(Exception e) {
+            System.out.println(_error+"DeleteAll: "+e);
+        }
+    }
     public  PreparedStatement sqlRegister(String Table){
         pt = null;
         try{
@@ -49,11 +88,9 @@ public class Query extends ConexionBd{
                 }
             }
             query= "insert into "+Table+" ("+campos+") values("+values+")";
-            
             pt  = conexion.prepareStatement(query);
             rs.close();
             return pt;
-            
         }
         catch(Exception e){
             System.out.println(_error+"sqlRegister: "+e);
@@ -434,6 +471,7 @@ public class Query extends ConexionBd{
             }
             MChoice = new DefaultComboBoxModel();
             s = conexion.createStatement();
+            value =  value.toUpperCase();
             query  = "select " +identify+ " from " +Tbl+ " where " +Campo+ " = '"+value+"'";
             rs = s.executeQuery(query);
             while(rs.next()) {
@@ -505,9 +543,11 @@ public class Query extends ConexionBd{
                     }
                 }
                 rs.close();
-            }
-            catch(Exception e){
-                System.out.println(_error+"getIdentify: "+e);
+                if ("NMID".equals(identify)) {
+                    identify = "\"NMID\"";
+                }
+            } catch (Exception e) {
+                System.out.println(_error+"getIdentify: " +e);
             }
                 
             return identify;
@@ -614,6 +654,7 @@ public class Query extends ConexionBd{
         return datos;
         }
         
+
         public Time[] getHora(String[] args, int max){
             Time hora[] = new Time[0];
             int k = 1;
@@ -644,6 +685,27 @@ public class Query extends ConexionBd{
                 }
             }
             return hora;
+        }
+
+        public int getcount(String tabla)
+        {
+            int num=0;
+            try{
+                getConexion();
+                s = conexion.createStatement();
+                String qs = "select count(*) from " + tabla;
+
+                rs = s.executeQuery(qs);
+                rs.next();
+                num = rs.getInt(1);
+
+                closeConexion();
+                rs.close();
+            }
+            catch(Exception e){
+                System.out.println(_error+"userAuth: "+e);
+            }return num;
+
         }
     }
         

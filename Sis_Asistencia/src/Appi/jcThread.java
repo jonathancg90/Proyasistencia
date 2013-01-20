@@ -15,7 +15,7 @@ public class jcThread implements Runnable{
     /**
      * Constructor de clase
      */
-    public jcThread( JProgressBar jProgressBar  )
+    public jcThread( JProgressBar jProgressBar )
     {
         this.jProgressBar = jProgressBar;
         this.value = 100;

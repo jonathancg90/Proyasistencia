@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
+import Utilitarios.Data;
 
 
 
@@ -25,6 +26,7 @@ public class Validators {
     private Statement s = null;
     private String Table;
     private Query qs;
+    private Data dt;
 
     public void setTable(String Table) {
         this.Table = Table;
@@ -35,6 +37,32 @@ public class Validators {
 
     public Validators() {
     }
+    public boolean UserAcces(int Form, int User) {
+        boolean vali = true;
+        if(User == 0){
+            return true;
+        }
+        dt = new Data();
+        qs = new Query();
+        String[] args= new String[5];
+        
+        int mod = Integer.parseInt(qs.idChoice("modulos", "nombre", dt.G_MODULOS[Form]));
+        qs.setIdentify("idrol");
+        int rol = Integer.parseInt(qs.idChoice("usuario", "idusu", ""+User));
+        args[0] = "permisos_has_roles";
+        args[1] = "idrol";
+        args[2] = ""+rol;
+        args[3] = "modulos_idmod";
+        args[4] = ""+mod;
+        
+        
+        if(qs.getCountRegister(args) <= 0) {
+            vali = false;
+        }
+        
+        return vali;
+    }
+            
     
     /**
      * Gestor de validaciones de formulario

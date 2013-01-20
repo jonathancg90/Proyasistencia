@@ -6,12 +6,15 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.*;
 import Utilitarios.Data;
+import Utilitarios.Query;
 
 
 public class WinLogin extends javax.swing.JFrame {
     UserDAO  us;
     int i=0;
     private Data dt ;
+    private Query qs;
+    
     void limpiar(){
         txtusername.setText("");
         txtpassword.setText("");
@@ -150,11 +153,15 @@ public class WinLogin extends javax.swing.JFrame {
 
     private void btningresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btningresarActionPerformed
         us = new UserDAO ();
+        qs = new Query();
+        
         String user=txtusername.getText().toUpperCase();
         String pas = us.encriptar(txtpassword.getText());
         us= new UserDAO();
         if(us.userAuth(user, pas)==true){
             WinMdi objmdi=new WinMdi();
+            int iduser = Integer.parseInt(qs.idChoice("usuario", "username", user));;
+            objmdi.setUser(iduser);
             objmdi.show();
             objmdi.setLocation(250, 250);
             this.dispose();
@@ -172,11 +179,13 @@ public class WinLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_btningresarActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-            WinMdi objmdi=new WinMdi();
-            objmdi.show();
-            objmdi.setLocation(250, 250);
-            this.dispose();
-            limpiar();
+        int iduser = 0;
+        WinMdi objmdi=new WinMdi();
+        objmdi.setUser(iduser);
+        objmdi.show();
+        objmdi.setLocation(250, 250);
+        this.dispose();
+        limpiar();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jLabel3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MousePressed
