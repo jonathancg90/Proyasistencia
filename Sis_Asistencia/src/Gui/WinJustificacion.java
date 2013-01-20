@@ -23,7 +23,7 @@ import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
 import javax.swing.JOptionPane;
 import Utilitarios.Data;
-import com.sun.xml.internal.bind.v2.model.core.ID;
+//import com.sun.xml.internal.bind.v2.model.core.ID;
 import java.io.File;
 import java.sql.Time;
 import javax.swing.JFileChooser;

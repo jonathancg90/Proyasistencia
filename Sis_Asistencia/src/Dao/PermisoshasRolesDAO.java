@@ -40,16 +40,13 @@ public class PermisoshasRolesDAO extends ConexionBd{
     public void getTableAll(JTable tblDatos){
         try{
             DefaultTableModel datos;
-            Object [] fila = new Object[1];
             qs= new Query();
             hp = new Helpers();
             if (filter.length <= 0){
                 filter = new String[0][0];
             }
-            fila[0] = "total = < " + qs.getcount("permisos_has_roles") + " >";
             String Table = this._table;
             datos = qs.getAll(this.campos,Table,filter);
-            datos.addRow(fila);
             tblDatos.setModel(datos);
             hp.setWidthJtable(tblDatos,witdhcolum);
         }

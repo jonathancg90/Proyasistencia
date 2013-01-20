@@ -170,12 +170,13 @@ public class WinLogin extends javax.swing.JFrame {
         else {
             JOptionPane.showMessageDialog(null,"Haz ingresado incorrectamente");
             limpiar();
+            i++;
+            if(i==3){
+                JOptionPane.showMessageDialog(null, "Te equivocastes 3 veces","Alerta",1);
+                limpiar();this.dispose();
         }
-        i++;
-        if(i==3){
-            JOptionPane.showMessageDialog(null, "Te equivocastes 3 veces","Alerta",1);
-            limpiar();this.dispose();
         }
+        
     }//GEN-LAST:event_btningresarActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
