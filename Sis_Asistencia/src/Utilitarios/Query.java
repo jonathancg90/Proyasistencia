@@ -21,7 +21,24 @@ public class Query extends ConexionBd{
 
     public void setIdentify(String identify) {
         this.idcamp = identify;
+        this.identify = identify;
         System.out.println("VALOR: " + this.identify);
+    }
+    
+    public void DeleteAll(String table) throws SQLException {
+        try {
+            getConexion();
+            pt = null;
+            Statement s = null;
+            s = conexion.createStatement();
+            String id = getIdentify(table);
+            pt  = conexion.prepareStatement("delete from "+table+" where "+id+" is not null");
+            pt.executeUpdate();
+            pt.close();
+            closeConexion();   
+        } catch(Exception e) {
+            System.out.println(_error+"DeleteAll: "+e);
+        }
     }
     
     public  PreparedStatement sqlRegister(String Table){
@@ -434,6 +451,7 @@ public class Query extends ConexionBd{
             }
             MChoice = new DefaultComboBoxModel();
             s = conexion.createStatement();
+            value =  value.toUpperCase();
             query  = "select " +identify+ " from " +Tbl+ " where " +Campo+ " = '"+value+"'";
             rs = s.executeQuery(query);
             while(rs.next()) {
@@ -505,9 +523,11 @@ public class Query extends ConexionBd{
                     }
                 }
                 rs.close();
-            }
-            catch(Exception e){
-                System.out.println(_error+"getIdentify: "+e);
+                if ("NMID".equals(identify)) {
+                    identify = "\"NMID\"";
+                }
+            } catch (Exception e) {
+                System.out.println(_error+"getIdentify: " +e);
             }
                 
             return identify;
@@ -612,6 +632,26 @@ public class Query extends ConexionBd{
         }
         
         return datos;
+        }
+        
+        public int getcount(String tabla)
+        {
+            int num=0;
+            try{
+                getConexion();
+                s = conexion.createStatement();
+                String qs = "select count(*) from " + tabla;
+
+                rs = s.executeQuery(qs);
+                rs.next();
+                num = rs.getInt(1);
+
+                closeConexion();
+                rs.close();
+            }
+            catch(Exception e){
+                System.out.println(_error+"userAuth: "+e);
+            }return num;
         }
     }
         
