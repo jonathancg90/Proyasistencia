@@ -29,13 +29,15 @@ public class InsertData {
     public static void main(String[] args) throws SQLException, 
             IOException, BiffException, WriteException {
         InsertData insert = new InsertData();
-        insert.deleteRegister();
+        /*insert.deleteRegister();
         insert.insertModulos();
         insert.inserRoles();
         insert.insertPermiso_Roles();
         insert.inserMoneda();
         insert.inserCiudad();
         insert.insertArea();
+        insert.insertCargos();*/
+        insert.insertEmpresa();
     }
 
     public void deleteRegister() throws SQLException {
@@ -104,14 +106,41 @@ public class InsertData {
         System.out.println("Insert data Areas ...");
         String data[][];
         data = xls.ExcelUp("area");
-        System.out.println(data.length + " - "+data[0].length);
-        for(int c=0;c<data.length;c++){
-            String [] reg = new String[data[c].length];
-                for(int r=0;r<data[c].length;r++){
-                    reg[r]=data[c][r];
+        for(int r=1;r<data.length;r++){
+            String [] reg = new String[data[r].length];
+                for(int c=0;c<data[r].length;c++){
+                    reg[c]=data[r][c];
                 }
             qs.RegisterAll("area", reg);
         }
     }
-    
+    public void insertCargos() throws IOException, BiffException, WriteException, SQLException{
+        xls = new JExcel();
+        qs = new Query();
+        System.out.println("Insert data Cargos ...");
+        String data[][];
+        data = xls.ExcelUp("cargos");
+        for(int r=1;r<data.length;r++){
+            String [] reg = new String[data[r].length];
+                for(int c=0;c<data[r].length;c++){
+                    reg[c]=data[r][c];
+                }
+            qs.RegisterAll("cargo", reg);
+        }
+    }
+    public void insertEmpresa() throws IOException, BiffException, WriteException, SQLException{
+        xls = new JExcel();
+        qs = new Query();
+        System.out.println("Insert data empresa ...");
+        String data[][];
+        data = xls.ExcelUp("empresa");
+        for(int r=1;r<data.length;r++){
+            String [] reg = new String[data[r].length];
+                for(int c=0;c<data[r].length;c++){
+                    reg[c]=data[r][c];
+                }
+            qs.RegisterAll("cargo", reg);
+        }
+    }
+
 }
