@@ -40,7 +40,29 @@ public class Query extends ConexionBd{
             System.out.println(_error+"DeleteAll: "+e);
         }
     }
-    
+    public void RegisterAll(String table,String[] args) throws SQLException {
+        try {
+            getConexion();
+            pt = null;
+            Statement s = null;
+            s = conexion.createStatement();
+            String id = getIdentify(table);
+            String query= "insert into "+ table+ " values(";
+            for(int i=0;i<args.length;i++){
+                query = query + "'" + args[i] + "'";
+                if(i+1<args.length){
+                        query = query + ",";
+                }
+            }
+            query =  query + ")";
+            pt  = conexion.prepareStatement(query);
+            pt.executeUpdate();
+            pt.close();
+            closeConexion();   
+        } catch(Exception e) {
+            System.out.println(_error+"DeleteAll: "+e);
+        }
+    }
     public  PreparedStatement sqlRegister(String Table){
         pt = null;
         try{
@@ -66,11 +88,9 @@ public class Query extends ConexionBd{
                 }
             }
             query= "insert into "+Table+" ("+campos+") values("+values+")";
-            
             pt  = conexion.prepareStatement(query);
             rs.close();
             return pt;
-            
         }
         catch(Exception e){
             System.out.println(_error+"sqlRegister: "+e);

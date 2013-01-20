@@ -3,17 +3,22 @@ package Utilitarios;
 
 import Utilitarios.Query;
 import Utilitarios.Data;
+import Appi.JExcel;
 import Dao.ModulosDAO;
 import Dao.RolesDAO;
 import Dao.PermisoshasRolesDAO;
 import Dao.TipomonedaDAO;
 import Dao.CiudadDAO;
+import java.io.IOException;
 import java.sql.SQLException;
+import jxl.read.biff.BiffException;
+import jxl.write.WriteException;
 
 public class InsertData {
     
     private Query qs;
     private Data dt;
+    private JExcel xls;
     private ModulosDAO mod;
     private RolesDAO rol;
     private PermisoshasRolesDAO per_mod;
@@ -21,7 +26,8 @@ public class InsertData {
     private CiudadDAO ciu;
 
     
-    public static void main(String[] args) throws SQLException {
+    public static void main(String[] args) throws SQLException, 
+            IOException, BiffException, WriteException {
         InsertData insert = new InsertData();
         insert.deleteRegister();
         insert.insertModulos();
@@ -29,14 +35,17 @@ public class InsertData {
         insert.insertPermiso_Roles();
         insert.inserMoneda();
         insert.inserCiudad();
+        insert.insertArea();
     }
 
     public void deleteRegister() throws SQLException {
         qs = new Query();
-        System.out.println("Eliminando registros ...");
+        System.out.println("Eliminando registross ...");
+        qs.DeleteAll("empleado");
         qs.DeleteAll("sucursal");
         qs.DeleteAll("empresa");
-        qs.DeleteAll("empleado");
+        qs.DeleteAll("cargo");
+        qs.DeleteAll("area");
         qs.DeleteAll("permisos_has_roles");
         qs.DeleteAll("roles");
         qs.DeleteAll("modulos");
@@ -73,6 +82,7 @@ public class InsertData {
         rol.save("Administrador");
         rol.save("Consultor");
     }
+    
     public void inserMoneda() {
         mon = new TipomonedaDAO();
         System.out.println("Insert data Monedas ...");
@@ -80,11 +90,28 @@ public class InsertData {
         mon.save("Dolar", "$", false);
 
     }
+    
     public void inserCiudad() {
         ciu = new CiudadDAO();
         System.out.println("Insert data Ciudades ...");   
         ciu.save("LIma");
         ciu.save("Callao");
+    }
+    
+    public void insertArea() throws IOException, BiffException, WriteException, SQLException{
+        xls = new JExcel();
+        qs = new Query();
+        System.out.println("Insert data Areas ...");
+        String data[][];
+        data = xls.ExcelUp("area");
+        System.out.println(data.length + " - "+data[0].length);
+        for(int c=0;c<data.length;c++){
+            String [] reg = new String[data[c].length];
+                for(int r=0;r<data[c].length;r++){
+                    reg[r]=data[c][r];
+                }
+            qs.RegisterAll("area", reg);
+        }
     }
     
 }

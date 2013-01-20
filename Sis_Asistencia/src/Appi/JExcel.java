@@ -24,7 +24,7 @@ public class JExcel {
     
      public static void main(String[] args) throws IOException, WriteException, BiffException {
          JExcel xls = new JExcel();
-         xls.ExcelUp();
+         xls.ExcelUp("area");
          //xls.CreateXls("empleado.xls");
          //xls.ExcelTest();
     }
@@ -146,23 +146,24 @@ public class JExcel {
 
     return false;
     }
-    public void ExcelUp() throws IOException, BiffException {
+    public String[][] ExcelUp(String fileName) throws IOException, BiffException {
         //String dir = System.getProperty( "user.home" ); Directorio raiz de la pc
         try {
             File miDir = new File (".");
-            Workbook workbook = Workbook.getWorkbook(new File(miDir + "/data"+File.separatorChar+"area.xls"));
+            Workbook workbook = Workbook.getWorkbook(new File(miDir + "/data"+File.separatorChar+fileName+".xls"));
             Sheet sheet = workbook.getSheet(0);
-            data = new String[sheet.getColumns()][sheet.getRows()];
-            for(int c=0;c<sheet.getColumns();c++){
-                for(int r=0;r<sheet.getRows();r++){
+            data = new String[sheet.getRows()][sheet.getColumns()];
+            for(int r=1;r<sheet.getRows();r++){
+                for(int c=0;c<sheet.getColumns();c++){
                     Cell temp = sheet.getCell(c,r); 
-                    data[c][r] = temp.getContents(); 
+                    data[r][c] = temp.getContents();
                 }
             }
             workbook.close();
         } catch(Exception e){
             System.out.println(_error + "ExcelUp: "+ e);
         }
+        return data;
     }
     
 }
