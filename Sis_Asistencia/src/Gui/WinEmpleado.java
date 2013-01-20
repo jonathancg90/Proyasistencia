@@ -110,6 +110,8 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
         cboAreaFilter = new javax.swing.JComboBox();
         chkactivo = new javax.swing.JCheckBox();
         btnFiltro = new javax.swing.JButton();
+        lblcant = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         mfile = new javax.swing.JMenu();
         mitemregister = new javax.swing.JMenuItem();
@@ -254,6 +256,10 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
             }
         });
 
+        lblcant.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        jLabel13.setText("Total: ");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -272,7 +278,12 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
                         .addComponent(chkactivo)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnFiltro)
-                        .addGap(26, 26, 26))))
+                        .addGap(26, 26, 26))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel13)
+                        .addGap(17, 17, 17)
+                        .addComponent(lblcant, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -283,8 +294,11 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
                     .addComponent(chkactivo)
                     .addComponent(btnFiltro))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 205, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel13)
+                    .addComponent(lblcant, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         mfile.setText("Archivo");
@@ -767,6 +781,7 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -783,6 +798,7 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
     private javax.swing.JMenu jmfoto;
     private javax.swing.JMenu jmhuella;
     private javax.swing.JLabel lblFoto;
+    private javax.swing.JLabel lblcant;
     private javax.swing.JLabel lblidempleado;
     private javax.swing.JMenuItem mAbrirFoto;
     private javax.swing.JMenu mExtra;

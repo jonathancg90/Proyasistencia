@@ -10,7 +10,7 @@ import java.sql.PreparedStatement;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import org.postgresql.util.PSQLException;
-
+import javax.swing.JLabel;
 
 public class AreaDAO extends ConexionBd{
 
@@ -39,7 +39,7 @@ public class AreaDAO extends ConexionBd{
         witdhcolum[0]=50;
     }
 
-    public void getTableAll(JTable tblDatos){
+    public void getTableAll(JTable tblDatos , JLabel lblcant){
         try{
             DefaultTableModel datos;
             qs= new Query();
@@ -51,6 +51,8 @@ public class AreaDAO extends ConexionBd{
             datos = qs.getAll(this.campos,Table,filter);
             tblDatos.setModel(datos);
             hp.setWidthJtable(tblDatos,witdhcolum);
+            int num = tblDatos.getRowCount();
+            lblcant.setText(String .valueOf(num));
         }
         catch(Exception e){
             System.out.println(_error + "getTableAll: "+e);
@@ -176,7 +178,7 @@ public class AreaDAO extends ConexionBd{
      * int_ = Busqueda de entero
      * equ_ = busca exactamente la plabra
      */
-    public int find(String name,JTable tblDatos) {
+    public int find(String name,JTable tblDatos, JLabel lblcant) {
         int i = 0;
         try {
             if(!"".equals(name)){
@@ -184,7 +186,7 @@ public class AreaDAO extends ConexionBd{
                 filter[0][0] = "nombre";
                 filter[0][1] = name.toUpperCase(); 
             }
-            getTableAll(tblDatos);
+            getTableAll(tblDatos,lblcant);
         }
         catch(Exception e){
             System.out.println(_error + "find : "+e);

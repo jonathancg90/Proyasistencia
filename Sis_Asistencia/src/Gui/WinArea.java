@@ -41,8 +41,10 @@ public class WinArea extends javax.swing.JInternalFrame {
         try {
             objarea = new AreaDAO();
             qs = new Query();
-            objarea.getTableAll(tblArea);
+            objarea.getTableAll(tblArea, lblcant);
+            
             qs.loadState(cmbEstate, false);
+            
         } catch (Exception e) {
             System.out.println(_error + "_cargaForm:" + e);
         }
@@ -74,6 +76,8 @@ public class WinArea extends javax.swing.JInternalFrame {
         btnFind = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblArea = new javax.swing.JTable();
+        lblcant = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         mfile = new javax.swing.JMenu();
         mitemregister = new javax.swing.JMenuItem();
@@ -233,6 +237,12 @@ public class WinArea extends javax.swing.JInternalFrame {
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 260, -1));
 
+        lblcant.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        getContentPane().add(lblcant, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 290, 60, 20));
+
+        jLabel5.setText("Total: ");
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 290, -1, -1));
+
         mfile.setText("Archivo");
 
         mitemregister.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.CTRL_MASK));
@@ -342,7 +352,7 @@ public class WinArea extends javax.swing.JInternalFrame {
     private void btnFindActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFindActionPerformed
         String name = txtFilter.getText();
         objarea = new AreaDAO();
-        objarea.find(name, tblArea);
+        objarea.find(name, tblArea,lblcant);
     }//GEN-LAST:event_btnFindActionPerformed
 
     private void mcloseMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mcloseMousePressed
@@ -367,7 +377,7 @@ public class WinArea extends javax.swing.JInternalFrame {
                 }
                 else if (i>0){
                     JOptionPane.showMessageDialog(null,"Area eliminada");
-                    objarea.getTableAll(tblArea);
+                    objarea.getTableAll(tblArea,lblcant);
                     cleanBox();
                 }
                 else {
@@ -400,7 +410,7 @@ public class WinArea extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "No se pudo actualizar datos");
         }
         else {
-            objarea.getTableAll(tblArea);
+            objarea.getTableAll(tblArea,lblcant);
             cleanBox();
             JOptionPane.showMessageDialog(null, "Area actualizada");
         }
@@ -427,7 +437,7 @@ public class WinArea extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(null,"No se pudo grabar datos");
             }
             else {
-                objarea.getTableAll(tblArea);
+                objarea.getTableAll(tblArea,lblcant);
                 cleanBox();
                 JOptionPane.showMessageDialog(null,"Nueva area registrada");      
             }
@@ -521,6 +531,7 @@ public class WinArea extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
@@ -528,6 +539,7 @@ public class WinArea extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblId;
     private javax.swing.JLabel lblModified;
+    private javax.swing.JLabel lblcant;
     private javax.swing.JMenu maña;
     private javax.swing.JMenu mclose;
     private javax.swing.JMenu medit;

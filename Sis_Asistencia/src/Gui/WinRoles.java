@@ -59,6 +59,8 @@ public class WinRoles extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         lblId = new javax.swing.JLabel();
+        lblcant = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         mfile = new javax.swing.JMenu();
         mitemregister = new javax.swing.JMenuItem();
@@ -173,6 +175,12 @@ public class WinRoles extends javax.swing.JInternalFrame {
         );
 
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 20, 300, 220));
+
+        lblcant.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        getContentPane().add(lblcant, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 250, 70, 20));
+
+        jLabel5.setText("Total: ");
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 250, 50, -1));
 
         mfile.setText("Archivo");
 
@@ -462,6 +470,7 @@ public class WinRoles extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnFind;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
@@ -469,6 +478,7 @@ public class WinRoles extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblId;
+    private javax.swing.JLabel lblcant;
     private javax.swing.JMenu mclose;
     private javax.swing.JMenu medit;
     private javax.swing.JMenu mfile;

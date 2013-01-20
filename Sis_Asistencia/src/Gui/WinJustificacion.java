@@ -113,6 +113,8 @@ public class WinJustificacion extends javax.swing.JInternalFrame {
         Lblcargo = new javax.swing.JLabel();
         Lblarea = new javax.swing.JLabel();
         Cmb_Empleado = new javax.swing.JComboBox();
+        lblcant = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         mfile = new javax.swing.JMenu();
         mitemregister = new javax.swing.JMenuItem();
@@ -255,7 +257,7 @@ public class WinJustificacion extends javax.swing.JInternalFrame {
 
         jTabbedPane1.addTab("Ver", jPanel2);
 
-        getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 138, 520, 390));
+        getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 138, 520, 320));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Datos"));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -293,6 +295,12 @@ public class WinJustificacion extends javax.swing.JInternalFrame {
         jPanel1.add(Cmb_Empleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 30, 280, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 12, 507, 130));
+
+        lblcant.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        getContentPane().add(lblcant, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 480, 60, 20));
+
+        jLabel16.setText("Total: ");
+        getContentPane().add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 480, -1, -1));
 
         mfile.setText("Archivo");
 
@@ -490,6 +498,7 @@ public class WinJustificacion extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -507,6 +516,7 @@ public class WinJustificacion extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JLabel lblcant;
     private javax.swing.JMenu mclose;
     private javax.swing.JMenu medit;
     private javax.swing.JMenu mfile;

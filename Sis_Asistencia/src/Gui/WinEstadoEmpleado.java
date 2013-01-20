@@ -48,6 +48,8 @@ public class WinEstadoEmpleado extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         lblId = new javax.swing.JLabel();
+        lblcant = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         mitemRegistrar = new javax.swing.JMenuItem();
@@ -141,6 +143,12 @@ public class WinEstadoEmpleado extends javax.swing.JInternalFrame {
         );
 
         getContentPane().add(PnlDatos, new org.netbeans.lib.awtextra.AbsoluteConstraints(177, 22, 290, 202));
+
+        lblcant.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        getContentPane().add(lblcant, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 230, 60, 20));
+
+        jLabel5.setText("Total: ");
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, -1, -1));
 
         jMenu1.setText("Archivo");
 
@@ -312,6 +320,7 @@ public class WinEstadoEmpleado extends javax.swing.JInternalFrame {
     private javax.swing.JPanel PnlDatos;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
@@ -320,6 +329,7 @@ public class WinEstadoEmpleado extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JMenuItem jmitemDelete;
     private javax.swing.JLabel lblId;
+    private javax.swing.JLabel lblcant;
     private javax.swing.JMenuItem mitemRegistrar;
     private javax.swing.JMenuItem mitemUpdate;
     private javax.swing.JPanel pnlListado;
