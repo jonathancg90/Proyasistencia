@@ -45,6 +45,7 @@ public class WinExtra_descuento extends javax.swing.JInternalFrame {
             lblIdemp.setVisible(false);
             qs.loadTypeextra(cbotipo,0);
             
+            
         } catch (Exception e) {
             System.out.println(_error+"_CargaForm:"+e);
             
@@ -330,7 +331,7 @@ public class WinExtra_descuento extends javax.swing.JInternalFrame {
         
         hp=new Helpers();
         Object[] datos = {txtMonto.getText(),lblid.getText()};
-        Object[] tipos = {2,4};
+        Object[] tipos = {4,1};
         if(val.validar(datos, tipos)){
 
             try{
@@ -338,8 +339,8 @@ public class WinExtra_descuento extends javax.swing.JInternalFrame {
                 String fecha = hp.getFormatDate(cbodate.getText());
                 int tipo = cbotipo.getSelectedIndex();
                 float monto = Float.valueOf(txtMonto.getText());
-                int id = Integer.parseInt(lblIdemp.getText());
-                int i = objextrades.update(fecha,tipo,monto,id);
+                int idemp = Integer.parseInt(lblIdemp.getText());
+                int i = objextrades.update(fecha,tipo,monto,idemp);
                 if (i == 0) {
 
                     JOptionPane.showMessageDialog(null, "No se pudo actualizar datos");
