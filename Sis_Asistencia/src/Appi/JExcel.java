@@ -8,6 +8,7 @@ import java.util.Calendar;
 import java.util.Date; 
 import javax.swing.JTable;
 import jxl.*; 
+import jxl.read.biff.BiffException;
 import jxl.write.*; 
 import jxl.write.Number;
 
@@ -18,11 +19,13 @@ public class JExcel {
     private WritableFont Arialfont, Timesfont;
     private WritableCellFormat Arialcellfont, Timescellfont,
             IntegerFormat,FloatFormat,fivedpsFormat,dateFormat;
+    private String _error = "Appi_JExcel_";
     
-     public static void main(String[] args) throws IOException, WriteException {
+     public static void main(String[] args) throws IOException, WriteException, BiffException {
          JExcel xls = new JExcel();
-         xls.CreateXls("empleado.xls");
-         xls.ExcelTest();
+         xls.ExcelUp();
+         //xls.CreateXls("empleado.xls");
+         //xls.ExcelTest();
     }
     public JExcel() throws WriteException{
        //Tipo de letra
@@ -135,11 +138,40 @@ public class JExcel {
         w.write();
         w.close();
         out.close();
-    return true;
+        return true;
     }
     catch(IOException ex){ex.printStackTrace();}
     catch(WriteException ex){ex.printStackTrace();}
 
     return false;
     }
+    public void ExcelUp() throws IOException, BiffException {
+        //String dir = System.getProperty( "user.home" ); Directorio raiz de la pc
+        try {
+            File miDir = new File (".");
+            Workbook workbook = Workbook.getWorkbook(new File(miDir + "/data"+File.separatorChar+"area.xls"));
+            Sheet sheet = workbook.getSheet(0);
+            
+            for(int c=0;c<sheet.getColumns();c++){
+                for(int r=0;r<sheet.getRows();r++){
+                    
+                }
+            }
+            
+
+            Cell a1 = sheet.getCell(0,0); 
+            Cell b2 = sheet.getCell(1,1); 
+
+            String stringa1 = a1.getContents(); 
+            String stringb2 = b2.getContents(); 
+
+
+            System.out.println(stringa1+" - "+stringb2+" - ");   
+            
+            workbook.close();
+        } catch(Exception e){
+            System.out.println(_error + "ExcelUp: "+ e);
+        }
+    }
+    
 }

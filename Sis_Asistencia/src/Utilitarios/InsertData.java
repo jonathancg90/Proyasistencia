@@ -87,7 +87,4 @@ public class InsertData {
         ciu.save("Callao");
     }
     
-    public void ExcelUp() {
-        
-    }
 }
