@@ -30,15 +30,19 @@ public class InsertData {
         insert.inserMoneda();
         insert.inserCiudad();
     }
-    
+
     public void deleteRegister() throws SQLException {
         qs = new Query();
         System.out.println("Eliminando registros ...");
+        qs.DeleteAll("sucursal");
+        qs.DeleteAll("empresa");
+        qs.DeleteAll("empleado");
         qs.DeleteAll("permisos_has_roles");
-        qs.DeleteAll("roles"); 
+        qs.DeleteAll("roles");
         qs.DeleteAll("modulos");
         qs.DeleteAll("moneda");
         qs.DeleteAll("ciudad");
+        qs.DeleteAll("usuario");
     }
     
     public void insertModulos() {
@@ -81,5 +85,9 @@ public class InsertData {
         System.out.println("Insert data Ciudades ...");   
         ciu.save("LIma");
         ciu.save("Callao");
+    }
+    
+    public void ExcelUp() {
+        
     }
 }
