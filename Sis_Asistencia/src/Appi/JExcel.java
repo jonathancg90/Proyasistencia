@@ -20,6 +20,7 @@ public class JExcel {
     private WritableCellFormat Arialcellfont, Timescellfont,
             IntegerFormat,FloatFormat,fivedpsFormat,dateFormat;
     private String _error = "Appi_JExcel_";
+    private String data[][];
     
      public static void main(String[] args) throws IOException, WriteException, BiffException {
          JExcel xls = new JExcel();
@@ -151,23 +152,13 @@ public class JExcel {
             File miDir = new File (".");
             Workbook workbook = Workbook.getWorkbook(new File(miDir + "/data"+File.separatorChar+"area.xls"));
             Sheet sheet = workbook.getSheet(0);
-            
+            data = new String[sheet.getColumns()][sheet.getRows()];
             for(int c=0;c<sheet.getColumns();c++){
                 for(int r=0;r<sheet.getRows();r++){
-                    
+                    Cell temp = sheet.getCell(c,r); 
+                    data[c][r] = temp.getContents(); 
                 }
             }
-            
-
-            Cell a1 = sheet.getCell(0,0); 
-            Cell b2 = sheet.getCell(1,1); 
-
-            String stringa1 = a1.getContents(); 
-            String stringb2 = b2.getContents(); 
-
-
-            System.out.println(stringa1+" - "+stringb2+" - ");   
-            
             workbook.close();
         } catch(Exception e){
             System.out.println(_error + "ExcelUp: "+ e);
