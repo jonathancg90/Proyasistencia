@@ -228,4 +228,26 @@ public class Validators {
         boolean Value = false;
         return Value;
     }
+     
+    public boolean validarRegistro(String [] args, int op, Time hra){
+        boolean Value = false;
+        qs = new Query();
+        int max = qs.getCountRegister(args);
+        Time hora [] =qs.getHora(args, max);
+        if (hora.length == 0 || horaMayor(hra, hora[max])) {
+            if (max == 0 && op == 1) {
+                    Value = true;
+            }
+            else if (max == 1 && op == 2 ) {
+                    Value = true;
+            }
+            else if (max == 2 && op == 1 ) {
+                    Value = true;
+            }
+            else if (max == 3 && op == 2 ) {
+                    Value = true;
+            }
+        }    
+        return Value;
+    }
 }

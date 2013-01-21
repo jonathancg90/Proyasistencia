@@ -8,6 +8,7 @@ import java.util.Calendar;
 import java.util.Date; 
 import javax.swing.JTable;
 import jxl.*; 
+import jxl.read.biff.BiffException;
 import jxl.write.*; 
 import jxl.write.Number;
 
@@ -18,11 +19,14 @@ public class JExcel {
     private WritableFont Arialfont, Timesfont;
     private WritableCellFormat Arialcellfont, Timescellfont,
             IntegerFormat,FloatFormat,fivedpsFormat,dateFormat;
+    private String _error = "Appi_JExcel_";
+    private String data[][];
     
-     public static void main(String[] args) throws IOException, WriteException {
+     public static void main(String[] args) throws IOException, WriteException, BiffException {
          JExcel xls = new JExcel();
-         xls.CreateXls("empleado.xls");
-         xls.ExcelTest();
+         xls.ExcelUp("area");
+         //xls.CreateXls("empleado.xls");
+         //xls.ExcelTest();
     }
     public JExcel() throws WriteException{
        //Tipo de letra
@@ -135,11 +139,31 @@ public class JExcel {
         w.write();
         w.close();
         out.close();
-    return true;
+        return true;
     }
     catch(IOException ex){ex.printStackTrace();}
     catch(WriteException ex){ex.printStackTrace();}
 
     return false;
     }
+    public String[][] ExcelUp(String fileName) throws IOException, BiffException {
+        //String dir = System.getProperty( "user.home" ); Directorio raiz de la pc
+        try {
+            File miDir = new File (".");
+            Workbook workbook = Workbook.getWorkbook(new File(miDir + "/data"+File.separatorChar+fileName+".xls"));
+            Sheet sheet = workbook.getSheet(0);
+            data = new String[sheet.getRows()][sheet.getColumns()];
+            for(int r=1;r<sheet.getRows();r++){
+                for(int c=0;c<sheet.getColumns();c++){
+                    Cell temp = sheet.getCell(c,r); 
+                    data[r][c] = temp.getContents();
+                }
+            }
+            workbook.close();
+        } catch(Exception e){
+            System.out.println(_error + "ExcelUp: "+ e);
+        }
+        return data;
+    }
+    
 }

@@ -40,7 +40,29 @@ public class Query extends ConexionBd{
             System.out.println(_error+"DeleteAll: "+e);
         }
     }
-    
+    public void RegisterAll(String table,String[] args) throws SQLException {
+        try {
+            getConexion();
+            pt = null;
+            Statement s = null;
+            s = conexion.createStatement();
+            String id = getIdentify(table);
+            String query= "insert into "+ table+ " values(";
+            for(int i=0;i<args.length;i++){
+                query = query + "'" + args[i] + "'";
+                if(i+1<args.length){
+                        query = query + ",";
+                }
+            }
+            query =  query + ")";
+            pt  = conexion.prepareStatement(query);
+            pt.executeUpdate();
+            pt.close();
+            closeConexion();   
+        } catch(Exception e) {
+            System.out.println(_error+"DeleteAll: "+e);
+        }
+    }
     public  PreparedStatement sqlRegister(String Table){
         pt = null;
         try{
@@ -66,11 +88,9 @@ public class Query extends ConexionBd{
                 }
             }
             query= "insert into "+Table+" ("+campos+") values("+values+")";
-            
             pt  = conexion.prepareStatement(query);
             rs.close();
             return pt;
-            
         }
         catch(Exception e){
             System.out.println(_error+"sqlRegister: "+e);
@@ -634,6 +654,39 @@ public class Query extends ConexionBd{
         return datos;
         }
         
+
+        public Time[] getHora(String[] args, int max){
+            Time hora[] = new Time[0];
+            int k = 1;
+            if (max > 0){
+                try{
+                    getConexion();
+                    Statement s = null;
+                    s = conexion.createStatement();
+                    String query = "select hora from "+ args[0]+" where ";
+                    for(int i=1;i<args.length;i++){
+                         query = query + args[i]+" = "+args[i+1];
+                         if(args.length!=i+2){ 
+                            query = query + " and ";
+                         }
+                         i++;
+                    }
+                    System.out.println(query);
+                    rs = s.executeQuery(query);
+                    hora = new Time[max+1];
+                    while (rs.next()) {
+                        hora[k]= rs.getTime(1);
+                        k++;
+                    }
+                    rs.close();
+                    closeConexion();
+                } catch (Exception e) {
+                     System.out.println(_error+"getHora: "+e);
+                }
+            }
+            return hora;
+        }
+
         public int getcount(String tabla)
         {
             int num=0;
@@ -652,6 +705,7 @@ public class Query extends ConexionBd{
             catch(Exception e){
                 System.out.println(_error+"userAuth: "+e);
             }return num;
+
         }
     }
         

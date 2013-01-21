@@ -9,6 +9,8 @@ public class WinMdi extends javax.swing.JFrame {
     Validators val;
     Data data;
     private int user;
+    private String msj_A = "No cuenta con permisos para cceder a este modulo";
+    private String msj_V = "Cierre la ventana abierta para abrir otra";
     
     public void setUser(int user) {
         this.user = user;
@@ -260,10 +262,10 @@ public class WinMdi extends javax.swing.JFrame {
             if(val.EntryForms()){
                  objArea.setVisible(true);
             } else {
-                JOptionPane.showMessageDialog(null,"Cierre la ventana abierta para abrir otra");
+                JOptionPane.showMessageDialog(null,msj_V);
             }   
        } else {
-           JOptionPane.showMessageDialog(null,"No cuenta con permisos para cceder a este modulo");
+           JOptionPane.showMessageDialog(null,msj_A);
        }
        
        
@@ -275,16 +277,20 @@ public class WinMdi extends javax.swing.JFrame {
         data= new Data();
         String titulo=data.G_TITULOS[22];
         val = new Validators();
-        objAsis.setTitle(titulo);
-        objAsis.setResizable(true);
-        objAsis.setMaximizable(true);
-        objAsis.setIconifiable(true);
-        
-        jdpContenedor.add(objAsis);
-       if(val.EntryForms()){
-            objAsis.setVisible(true);
-       } else {
-           JOptionPane.showMessageDialog(null,"Cierre la ventana abierta para abrir otra");
+        if (val.UserAcces(0,this.user)){
+            objAsis.setTitle(titulo);
+            objAsis.setResizable(true);
+            objAsis.setMaximizable(true);
+            objAsis.setIconifiable(true);
+
+            jdpContenedor.add(objAsis);
+           if(val.EntryForms()){
+                objAsis.setVisible(true);
+           } else {
+               JOptionPane.showMessageDialog(null,msj_V);
+           }
+        } else {
+           JOptionPane.showMessageDialog(null,msj_A);
        }
         
     }//GEN-LAST:event_masiMousePressed
@@ -295,17 +301,21 @@ public class WinMdi extends javax.swing.JFrame {
         data= new Data();
         String titulo=data.G_TITULOS[23];
         val = new Validators();
-        objJus.setTitle(titulo);
-        objJus.setResizable(true);
-        objJus.setMaximizable(true);
-        objJus.setIconifiable(true);
-        
-        jdpContenedor.add(objJus);
-       if(val.EntryForms()){
-            objJus.setVisible(true);
-       } else {
-           JOptionPane.showMessageDialog(null,"Cierre la ventana abierta para abrir otra");
-       }
+        if (val.UserAcces(1,this.user)){
+            objJus.setTitle(titulo);
+            objJus.setResizable(true);
+            objJus.setMaximizable(true);
+            objJus.setIconifiable(true);
+
+            jdpContenedor.add(objJus);
+           if(val.EntryForms()){
+                objJus.setVisible(true);
+           } else {
+               JOptionPane.showMessageDialog(null,msj_V);
+           }
+        } else {
+               JOptionPane.showMessageDialog(null,msj_A);
+        }
         
     }//GEN-LAST:event_mjusMousePressed
 
@@ -314,16 +324,20 @@ public class WinMdi extends javax.swing.JFrame {
         data= new Data();
         String titulo=data.G_TITULOS[16];
         val = new Validators();
-        objHor.setTitle(titulo);
-        objHor.setResizable(true);
-        objHor.setMaximizable(true);
-        objHor.setIconifiable(true);
-        jdpContenedor.add(objHor);
-       if(val.EntryForms()){
-            objHor.setVisible(true);
-       } else {
-           JOptionPane.showMessageDialog(null,"Cierre la ventana abierta para abrir otra");
-       }
+        if (val.UserAcces(3,this.user)){
+            objHor.setTitle(titulo);
+            objHor.setResizable(true);
+            objHor.setMaximizable(true);
+            objHor.setIconifiable(true);
+            jdpContenedor.add(objHor);
+           if(val.EntryForms()){
+                objHor.setVisible(true);
+           } else {
+               JOptionPane.showMessageDialog(null,msj_V);
+           }
+         } else {
+               JOptionPane.showMessageDialog(null,msj_A);
+         }
 
     }//GEN-LAST:event_mhorMousePressed
 
@@ -332,17 +346,20 @@ public class WinMdi extends javax.swing.JFrame {
         data= new Data();
         String titulo=data.G_TITULOS[15];
         val = new Validators();
-        objCon.setTitle(titulo);
-        objCon.setResizable(true);
-        objCon.setMaximizable(true);
-        objCon.setIconifiable(true);
-        jdpContenedor.add(objCon);
-        if(val.EntryForms()){
-            objCon.setVisible(true);
-        } else {
-           JOptionPane.showMessageDialog(null,"Cierre la ventana abierta para abrir otra");
-       }
-        
+        if (val.UserAcces(4,this.user)){
+            objCon.setTitle(titulo);
+            objCon.setResizable(true);
+            objCon.setMaximizable(true);
+            objCon.setIconifiable(true);
+            jdpContenedor.add(objCon);
+            if(val.EntryForms()){
+                objCon.setVisible(true);
+            } else {
+               JOptionPane.showMessageDialog(null,msj_V);
+           }
+         } else {
+               JOptionPane.showMessageDialog(null,msj_A);
+         }
     }//GEN-LAST:event_mvisMousePressed
 
     private void mrepMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mrepMousePressed
@@ -358,7 +375,7 @@ public class WinMdi extends javax.swing.JFrame {
         if(val.EntryForms()){
             objRep.setVisible(true);
        } else {
-           JOptionPane.showMessageDialog(null,"Cierre la ventana abierta para abrir otra");
+           JOptionPane.showMessageDialog(null,msj_V);
        }
           
     }//GEN-LAST:event_mrepMousePressed
@@ -378,10 +395,10 @@ public class WinMdi extends javax.swing.JFrame {
             if(val.EntryForms()){
                  objEmpresa.setVisible(true);
             } else {
-                JOptionPane.showMessageDialog(null,"Cierre la ventana abierta para abrir otra");
+                JOptionPane.showMessageDialog(null,msj_V);
             }
         } else {
-            JOptionPane.showMessageDialog(null,"No cuenta con permisos para acceder a esta modulo");
+            JOptionPane.showMessageDialog(null,msj_A);
         }
        
     }//GEN-LAST:event_JmitemempMousePressed
@@ -400,10 +417,10 @@ public class WinMdi extends javax.swing.JFrame {
             if(val.EntryForms()){
                 objsucursal.setVisible(true);
             } else {
-               JOptionPane.showMessageDialog(null,"Cierre la ventana abierta para abrir otra");
+               JOptionPane.showMessageDialog(null,msj_V);
             }
          } else {
-               JOptionPane.showMessageDialog(null,"No cuenta con permisos para acceder a este modulo");
+               JOptionPane.showMessageDialog(null,msj_A);
          }
         
     }//GEN-LAST:event_JmitemRolesMousePressed
@@ -422,7 +439,7 @@ public class WinMdi extends javax.swing.JFrame {
 
             objtipo.setVisible(true);
          } else {
-            JOptionPane.showMessageDialog(null,"No cuenta con permisos para acceder a este modulo");
+            JOptionPane.showMessageDialog(null,msj_A);
         } 
     }//GEN-LAST:event_JmitemTipoMousePressed
 
@@ -440,7 +457,7 @@ public class WinMdi extends javax.swing.JFrame {
         if(val.EntryForms()){
             objUsu.setVisible(true);
         } else {
-            JOptionPane.showMessageDialog(null,"Cierre la ventana abierta para abrir otra");
+            JOptionPane.showMessageDialog(null,msj_V);
         } 
     }//GEN-LAST:event_JmitemUsuMousePressed
 
@@ -450,17 +467,21 @@ public class WinMdi extends javax.swing.JFrame {
         data= new Data();
         String titulo=data.G_TITULOS[17];
         val = new Validators();
-        objEmp.setTitle(titulo);
-        objEmp.setResizable(true);
-        objEmp.setMaximizable(true);
-        objEmp.setIconifiable(true);
-        //obj_Asis.setClosable(true);
-        jdpContenedor.add(objEmp);
-        if(val.EntryForms()){
-            objEmp.setVisible(true);
-        } else {
-            JOptionPane.showMessageDialog(null,"Cierre la ventana abierta para abrir otra");
-        }
+        if (val.UserAcces(2,this.user)){
+            objEmp.setTitle(titulo);
+            objEmp.setResizable(true);
+            objEmp.setMaximizable(true);
+            objEmp.setIconifiable(true);
+            //obj_Asis.setClosable(true);
+            jdpContenedor.add(objEmp);
+            if(val.EntryForms()){
+                objEmp.setVisible(true);
+            } else {
+                JOptionPane.showMessageDialog(null,msj_V);
+            }
+         } else {
+                JOptionPane.showMessageDialog(null,msj_A);
+         }
     }//GEN-LAST:event_mempMousePressed
 
     private void JmitemCiudadMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JmitemCiudadMousePressed
@@ -478,10 +499,10 @@ public class WinMdi extends javax.swing.JFrame {
             if(val.EntryForms()){
                 objUsu.setVisible(true);
             } else {
-                JOptionPane.showMessageDialog(null,"Cierre la ventana abierta para abrir otra");
+                JOptionPane.showMessageDialog(null,msj_V);
             }
          } else {
-                JOptionPane.showMessageDialog(null,"No cuenta con permisos para acceder a este modulo");
+                JOptionPane.showMessageDialog(null,msj_A);
          }
     }//GEN-LAST:event_JmitemCiudadMousePressed
 
@@ -500,10 +521,10 @@ public class WinMdi extends javax.swing.JFrame {
             if(val.EntryForms()){
                 objmon.setVisible(true);
             } else {
-                JOptionPane.showMessageDialog(null,"Cierre la ventana abierta para abrir otra");
+                JOptionPane.showMessageDialog(null,msj_V);
             }
          } else {
-                JOptionPane.showMessageDialog(null,"No cuenta con permisos para acceder a este modulo");
+                JOptionPane.showMessageDialog(null,msj_A);
          }
     }//GEN-LAST:event_JmitemtpmonMousePressed
 
@@ -522,10 +543,10 @@ public class WinMdi extends javax.swing.JFrame {
             if(val.EntryForms()){
                 objmod.setVisible(true);
             } else {
-                JOptionPane.showMessageDialog(null,"Cierre la ventana abierta para abrir otra");
+                JOptionPane.showMessageDialog(null,msj_V);
             }
          } else {
-                JOptionPane.showMessageDialog(null,"No cuenta con permisos necesarios para acceder a este modulo");
+                JOptionPane.showMessageDialog(null,msj_A);
          }
     }//GEN-LAST:event_jmItemModulosMousePressed
 
@@ -545,10 +566,10 @@ public class WinMdi extends javax.swing.JFrame {
             if(val.EntryForms()){
                 objjus.setVisible(true);
             } else {
-                JOptionPane.showMessageDialog(null,"Cierre la ventana abierta para abrir otra");
+                JOptionPane.showMessageDialog(null,msj_V);
             }
         } else {
-                JOptionPane.showMessageDialog(null,"No cuenta con permisos para acceder a este modulo");
+                JOptionPane.showMessageDialog(null,msj_A);
         }
     }//GEN-LAST:event_JmitemJustificacionMousePressed
 
@@ -567,10 +588,10 @@ public class WinMdi extends javax.swing.JFrame {
             if(val.EntryForms()){
                 objest.setVisible(true);
             } else {
-                JOptionPane.showMessageDialog(null,"Cierre la ventana abierta para abrir otra");
+                JOptionPane.showMessageDialog(null,msj_V);
             }
          } else {
-                JOptionPane.showMessageDialog(null,"No cuenta con permisos para acceder a este modulo");
+                JOptionPane.showMessageDialog(null,msj_A);
          }
     }//GEN-LAST:event_jMenuItem1MousePressed
 
