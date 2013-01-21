@@ -13,10 +13,12 @@ import java.awt.Image;
 import java.io.File;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.Icon;
 import javax.swing.JFileChooser;
 import javax.swing.ImageIcon;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import jxl.write.WriteException;
+
 
 public  class WinEmpleado extends javax.swing.JInternalFrame {
     private EmpleadoDAO objempl;
@@ -294,7 +296,7 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
                     .addComponent(chkactivo)
                     .addComponent(btnFiltro))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel13)
@@ -463,6 +465,7 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
         int sucursal =  Integer.parseInt(qs.idChoice("sucursal","nombre",String.valueOf(cboSucursal.getSelectedItem())));
         int cargo =  Integer.parseInt(qs.idChoice("cargo","nombre",String.valueOf(cboCargo.getSelectedItem())));
         int estate =  Integer.parseInt(qs.idChoice("estadoemp","nombre",String.valueOf(cboEstado.getSelectedItem())));
+        Icon imagen= lblFoto.getIcon();
         
         objempl = new EmpleadoDAO();
         int i = objempl.saveEmpleado(0,nombre,apellido,dni, telefono,area, tipo, estate,cargo,empresa,sucursal);
@@ -552,6 +555,9 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
          qs.loadChoiceDefault(cboCargo,"cargo","nombre",modemp.getIdcar());
          qs.loadChoiceDefault(cboEmpresa,"empresa","nombre",modemp.getIdempr());
          qs.loadChoiceDefault(cboSucursal,"sucursal","nombre",modemp.getIdsuc());
+         String file = "/imagenes/defecto.jpg";
+         ImageIcon imagenFondo = new ImageIcon(getClass().getResource(file));
+         lblFoto.setIcon(imagenFondo);
          }
          catch (Exception e) {
             System.out.println(_error + "tblempleado:" + e);

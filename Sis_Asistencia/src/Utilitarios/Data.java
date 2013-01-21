@@ -75,8 +75,8 @@ public class Data {
         G_TITULOS[19]="Empleado: Salarios";
         G_TITULOS[20]="Empleado: Vacaciones";
         G_TITULOS[21]="Empleado: Extra-descuento";
-        G_TITULOS[22]="Justificaciones";
-        G_TITULOS[23]="Asistencia";
+        G_TITULOS[22]="Asistencia";
+        G_TITULOS[23]="Justificaciones";
         G_TITULOS[24]="Login";
         G_TITULOS[25]="Sistema de Asistencia";
         G_TITULOS[26]="Recuperar Contraseña";

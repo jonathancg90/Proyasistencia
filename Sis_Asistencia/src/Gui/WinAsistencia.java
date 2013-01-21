@@ -1019,19 +1019,18 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
                 if(JOptionPane.OK_OPTION == JOptionPane.showConfirmDialog(this,"El fichero existe,deseas reemplazarlo?","Reemplazar",JOptionPane.YES_NO_OPTION));{
                     Confirma=xls.ExportJtable(tblempleado, fichero, "Asistencia");
                 }
-            } 
-            else{
-                Confirma=xls.ExportJtable(tblempleado, fichero, "Asistencia");
             }
-                if(Confirma==true){
-                    JOptionPane.showMessageDialog(null, "El documento se grabo exitosamente","Confirmacion",JOptionPane.INFORMATION_MESSAGE);
+            else {
+                Confirma = xls.ExportJtable(tblempleado, fichero, "Asistencia");
+            }
+                if (Confirma == true) {
+                    JOptionPane.showMessageDialog(null, "El documento se grabo exitosamente","Confirmacion", JOptionPane.INFORMATION_MESSAGE);
                 }
-                else{
+                else {
                     JOptionPane.showMessageDialog(null, "No se pudo grabar el documento", "Confirmacion", JOptionPane.INFORMATION_MESSAGE);
                 }
         }
-    }
-    catch(Exception e)
+    } catch (Exception e)
     {
         JOptionPane.showMessageDialog(null, "Ha ocurrido un error durante la exportacion del documento","Error",JOptionPane.ERROR_MESSAGE);
         System.out.println(_error + "Exportar :"+e);
