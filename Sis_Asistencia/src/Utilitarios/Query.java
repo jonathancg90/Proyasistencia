@@ -49,18 +49,23 @@ public class Query extends ConexionBd{
             String id = getIdentify(table);
             String query= "insert into "+ table+ " values(";
             for(int i=0;i<args.length;i++){
-                query = query + "'" + args[i] + "'";
+                if("NULL".equals(args[i].toUpperCase())){
+                   query = query + "" + args[i].toLowerCase() + ""; 
+                } else {
+                   query = query + "'" + args[i].toUpperCase() + "'";   
+                }
                 if(i+1<args.length){
                         query = query + ",";
                 }
             }
             query =  query + ")";
+            System.out.println(query);
             pt  = conexion.prepareStatement(query);
             pt.executeUpdate();
             pt.close();
             closeConexion();   
         } catch(Exception e) {
-            System.out.println(_error+"DeleteAll: "+e);
+            System.out.println(_error+"RegisterAll: "+e);
         }
     }
     public  PreparedStatement sqlRegister(String Table){

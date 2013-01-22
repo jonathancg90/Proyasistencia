@@ -29,20 +29,30 @@ public class InsertData {
     public static void main(String[] args) throws SQLException, 
             IOException, BiffException, WriteException {
         InsertData insert = new InsertData();
-        /*insert.deleteRegister();
+        insert.deleteRegister();
         insert.insertModulos();
         insert.inserRoles();
         insert.insertPermiso_Roles();
         insert.inserMoneda();
         insert.inserCiudad();
         insert.insertArea();
-        insert.insertCargos();*/
+        insert.insertCargos();
         insert.insertEmpresa();
+        insert.insertSucursal();
+        insert.insertHorarios();
+        insert.insertDetailHorarios();
+        insert.insertTipoEmpleado();
+        insert.insertEstadoEmpleado();
+        insert.insertEmpleado();
     }
 
     public void deleteRegister() throws SQLException {
         qs = new Query();
         System.out.println("Eliminando registross ...");
+        qs.DeleteAll("estadoemp");
+        qs.DeleteAll("tipoempleado");
+        qs.DeleteAll("detailhorario");
+        qs.DeleteAll("horarios");
         qs.DeleteAll("empleado");
         qs.DeleteAll("sucursal");
         qs.DeleteAll("empresa");
@@ -85,21 +95,35 @@ public class InsertData {
         rol.save("Consultor");
     }
     
-    public void inserMoneda() {
-        mon = new TipomonedaDAO();
+    public void inserCiudad() throws WriteException, IOException, SQLException, BiffException {
+        xls = new JExcel();
+        qs = new Query();
+        System.out.println("Insert data Ciudades ...");
+        String data[][];
+        data = xls.ExcelUp("ciudades");
+        for(int r=1;r<data.length;r++){
+            String [] reg = new String[data[r].length];
+                for(int c=0;c<data[r].length;c++){
+                    reg[c]=data[r][c];
+                }
+            qs.RegisterAll("ciudad", reg);
+        }
+    }
+    public void inserMoneda() throws WriteException, IOException, BiffException, SQLException {
+        xls = new JExcel();
+        qs = new Query();
         System.out.println("Insert data Monedas ...");
-        mon.save("Nuevo Sol", "S/.", true);
-        mon.save("Dolar", "$", false);
+        String data[][];
+        data = xls.ExcelUp("monedas");
+        for(int r=1;r<data.length;r++){
+            String [] reg = new String[data[r].length];
+                for(int c=0;c<data[r].length;c++){
+                    reg[c]=data[r][c];
+                }
+            qs.RegisterAll("moneda", reg);
+        }
 
     }
-    
-    public void inserCiudad() {
-        ciu = new CiudadDAO();
-        System.out.println("Insert data Ciudades ...");   
-        ciu.save("LIma");
-        ciu.save("Callao");
-    }
-    
     public void insertArea() throws IOException, BiffException, WriteException, SQLException{
         xls = new JExcel();
         qs = new Query();
@@ -139,8 +163,95 @@ public class InsertData {
                 for(int c=0;c<data[r].length;c++){
                     reg[c]=data[r][c];
                 }
-            qs.RegisterAll("cargo", reg);
+            qs.RegisterAll("empresa", reg);
         }
     }
-
+    public void insertSucursal() throws IOException, BiffException, WriteException, SQLException{
+        xls = new JExcel();
+        qs = new Query();
+        System.out.println("Insert data Sucursal ...");
+        String data[][];
+        data = xls.ExcelUp("sucursal");
+        for(int r=1;r<data.length;r++){
+            String [] reg = new String[data[r].length];
+                for(int c=0;c<data[r].length;c++){
+                    reg[c]=data[r][c];
+                }
+            qs.RegisterAll("sucursal", reg);
+        }
+    }
+    public void insertHorarios() throws IOException, BiffException, WriteException, SQLException{
+        xls = new JExcel();
+        qs = new Query();
+        System.out.println("Insert data Horario ...");
+        String data[][];
+        data = xls.ExcelUp("horarios");
+        for(int r=1;r<data.length;r++){
+            String [] reg = new String[data[r].length];
+                for(int c=0;c<data[r].length;c++){
+                    reg[c]=data[r][c];
+                }
+            qs.RegisterAll("horarios", reg);
+        }
+    }
+   public void insertDetailHorarios() throws IOException, BiffException, WriteException, SQLException{
+        xls = new JExcel();
+        qs = new Query();
+        System.out.println("Insert data Detalle de Horario ...");
+        String data[][];
+        data = xls.ExcelUp("det_horario");
+        for(int r=1;r<data.length;r++){
+            String [] reg = new String[data[r].length];
+                for(int c=0;c<data[r].length;c++){
+                    reg[c]=data[r][c];
+                }
+            qs.RegisterAll("detailhorario", reg);
+        }
+    }  
+   
+   public void insertTipoEmpleado() throws IOException, BiffException, WriteException, SQLException{
+        xls = new JExcel();
+        qs = new Query();
+        System.out.println("Insert data Tipo de Empleados ...");
+        String data[][];
+        data = xls.ExcelUp("tipo_empleado");
+        for(int r=1;r<data.length;r++){
+            String [] reg = new String[data[r].length];
+                for(int c=0;c<data[r].length;c++){
+                    reg[c]=data[r][c];
+                }
+            qs.RegisterAll("tipoempleado", reg);
+        }
+    }   
+   
+       public void insertEstadoEmpleado() throws IOException, BiffException, WriteException, SQLException{
+        xls = new JExcel();
+        qs = new Query();
+        System.out.println("Insert data  Estado de Empleados ...");
+        String data[][];
+        data = xls.ExcelUp("estado_empleado");
+        for(int r=1;r<data.length;r++){
+            String [] reg = new String[data[r].length];
+                for(int c=0;c<data[r].length;c++){
+                    reg[c]=data[r][c];
+                }
+            qs.RegisterAll("estadoemp", reg);
+        }
+    }   
+       
+    public void insertEmpleado() throws IOException, BiffException, WriteException, SQLException{
+        xls = new JExcel();
+        qs = new Query();
+        System.out.println("Insert data  Empleados ...");
+        String data[][];
+        data = xls.ExcelUp("Empleados");
+        for(int r=1;r<data.length;r++){
+            String [] reg = new String[data[r].length];
+                for(int c=0;c<data[r].length;c++){
+                    reg[c]=data[r][c];
+                }
+            qs.RegisterAll("empleado", reg);
+        }
+    }    
+   
 }
