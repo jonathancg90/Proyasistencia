@@ -296,7 +296,7 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
                     .addComponent(chkactivo)
                     .addComponent(btnFiltro))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel13)
@@ -364,6 +364,11 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
         jMenuBar1.add(medit);
 
         jmhuella.setText("Huella digital");
+        jmhuella.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jmhuellaMousePressed(evt);
+            }
+        });
         jMenuBar1.add(jmhuella);
 
         mhor.setText("Horarios");
@@ -771,6 +776,24 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null,"Debe de seleccionar una empleado para poder ingresar sus dias no laborables");
         }
     }//GEN-LAST:event_mExtraMousePressed
+
+    private void jmhuellaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmhuellaMousePressed
+          if(!"".equals(this.lblidempleado.getText())){
+           dt= new Data();
+            String titulo=dt.G_TITULOS[21];
+            WinEmpleado_Huella objextra= new WinEmpleado_Huella();
+            objextra.setTitle(titulo);
+            objextra.lblcodigo.setText(lblidempleado.getText());
+            objextra.setResizable(true);
+            objextra.setMaximizable(true);
+            objextra.setIconifiable(true);
+            WinMdi.jdpContenedor.add(objextra);
+
+            objextra.setVisible(true);   
+        } else {
+            JOptionPane.showMessageDialog(null,"Debe de seleccionar una empleado para poder ingresar su huella digital");
+        }
+    }//GEN-LAST:event_jmhuellaMousePressed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem ItemExportar;

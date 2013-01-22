@@ -92,6 +92,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Huella digital"/>
           </Properties>
+          <Events>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jmhuellaMousePressed"/>
+          </Events>
         </Menu>
         <Menu class="javax.swing.JMenu" name="mhor">
           <Properties>
@@ -506,7 +509,7 @@
                       <Component id="btnFiltro" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jScrollPane1" pref="187" max="32767" attributes="0"/>
+                  <Component id="jScrollPane1" pref="189" max="32767" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jLabel13" min="-2" max="-2" attributes="0"/>
