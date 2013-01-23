@@ -198,7 +198,7 @@ public class RegistroDAO extends ConexionBd{
             hp = new Helpers();
             String Table = this._table;
             
-            datos = qs.getFechafilter(this.campos,Table,inicio,fin,id);
+            datos = qs.getFechafilter(this.campos,Table,inicio,fin,"idemp",id);
             tblDatos.setModel(datos);
             hp.setWidthJtable(tblDatos,witdhcolum);
         }
