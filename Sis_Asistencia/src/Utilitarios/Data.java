@@ -3,9 +3,6 @@ package Utilitarios;
 
 public class Data {
     //MDI
-
-    public String G_MAIN_WIDTH;                     //Tamaño de MDI
-    public String G_MAIN_HEIGHT;                    //Tamaño de MDI
     public String G_STATES[] = new String[2];       //Valores de los estados para formularios
     public String G_BOOLEAN[] = new String[2];      //Valores de los estados para la base de datos
     public String G_TYPEHOR[] = new String[4];      //Valores de los estados para la base de datos
@@ -22,9 +19,6 @@ public class Data {
     
     public Data()
     {
-        
-        G_MAIN_WIDTH = "";
-        G_MAIN_HEIGHT = "";
         
         G_TIPOREG[1]="Entrada";
         G_TIPOREG[2]="Salida";

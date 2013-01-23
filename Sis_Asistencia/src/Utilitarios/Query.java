@@ -59,7 +59,6 @@ public class Query extends ConexionBd{
                 }
             }
             query =  query + ")";
-            System.out.println(query);
             pt  = conexion.prepareStatement(query);
             pt.executeUpdate();
             pt.close();

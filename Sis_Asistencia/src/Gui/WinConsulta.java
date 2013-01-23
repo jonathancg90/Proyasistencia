@@ -43,7 +43,6 @@ public class WinConsulta extends javax.swing.JInternalFrame {
         dateChooserCombo1 = new datechooser.beans.DateChooserCombo();
         dateChooserCombo2 = new datechooser.beans.DateChooserCombo();
         jButton1 = new javax.swing.JButton();
-        TxtName = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -179,13 +178,15 @@ public class WinConsulta extends javax.swing.JInternalFrame {
                 .addGap(29, 29, 29)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 407, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6)
                     .addComponent(lblcant, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(21, 21, 21))
         );
+
+        getAccessibleContext().setAccessibleParent(TxtName);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -201,13 +202,13 @@ public class WinConsulta extends javax.swing.JInternalFrame {
 
     private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
          WinBuscarEmpleado objbus = new WinBuscarEmpleado();
-         objbus.Form = 1;
         //objbus.setTitle(titulo);
         objbus.setResizable(true);
         objbus.setMaximizable(true);
         objbus.setIconifiable(true);
         objbus.setClosable(true);
         WinMdi.jdpContenedor.add(objbus);
+        objbus.LblModulo.setText("1");
         objbus.setVisible(true);
     }//GEN-LAST:event_jLabel5MouseClicked
 
@@ -253,7 +254,7 @@ public class WinConsulta extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem ItemExportar;
     private javax.swing.JTable JtblConsulta;
-    public javax.swing.JTextField TxtName;
+    public static final javax.swing.JTextField TxtName = new javax.swing.JTextField();
     private datechooser.beans.DateChooserCombo dateChooserCombo1;
     private datechooser.beans.DateChooserCombo dateChooserCombo2;
     private javax.swing.JButton jButton1;

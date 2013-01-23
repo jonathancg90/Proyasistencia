@@ -49,11 +49,11 @@ public class InsertData {
     public void deleteRegister() throws SQLException {
         qs = new Query();
         System.out.println("Eliminando registross ...");
+        qs.DeleteAll("empleado");
         qs.DeleteAll("estadoemp");
         qs.DeleteAll("tipoempleado");
         qs.DeleteAll("detailhorario");
         qs.DeleteAll("horarios");
-        qs.DeleteAll("empleado");
         qs.DeleteAll("sucursal");
         qs.DeleteAll("empresa");
         qs.DeleteAll("cargo");
