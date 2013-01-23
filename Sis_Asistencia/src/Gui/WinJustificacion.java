@@ -472,12 +472,13 @@ public class WinJustificacion extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnDateSearchjButton5MouseClicked
 
     private void mitemregisterMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemregisterMousePressed
+        if(!"".equals(lblID.getText())){
         try{
         int id = Integer.parseInt(lblID.getText());
         val = new Validators();    
         qs=new Query();
         hp=new Helpers();
-        if(!"".equals(Lblarea.getText())){
+        
             
              //Validacion propia del evento
                 
@@ -507,13 +508,14 @@ public class WinJustificacion extends javax.swing.JInternalFrame {
                     }
                 
             
-        } else {
-            JOptionPane.showMessageDialog(null,"Seleccione un empleado para poder ingresar sus asistencia");
-                }
+        
         }
     catch(Exception e){
         System.out.println("Evento registrar: "+e);
     }  
+        } else {
+            JOptionPane.showMessageDialog(null,"Seleccione un empleado para poder ingresar su justificacion");
+                }
     }//GEN-LAST:event_mitemregisterMousePressed
 
     private void jLabel17MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel17MouseClicked

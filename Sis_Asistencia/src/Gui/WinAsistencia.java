@@ -816,12 +816,13 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_mitemdeleteMousePressed
 
     private void mitemupdateMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemupdateMousePressed
-       try{
+       if(!"".equals(lblidEmp.getText())){
+        try{
         int id = Integer.parseInt(lblidEmp.getText());
         val = new Validators();    
         qs=new Query();
         hp=new Helpers();
-        if(!"".equals(lblidEmp.getText())){
+        
             
              //Validacion propia del evento
                 
@@ -848,14 +849,14 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
                     }
                 
             
-        } else {
-            JOptionPane.showMessageDialog(null,"Seleccione un empleado para poder ingresar sus asistencia");
-                }
+        
         }
     catch(Exception e){
         System.out.println("Evento registrar: "+e);
     } 
-
+} else {
+            JOptionPane.showMessageDialog(null,"Seleccione un empleado para poder ingresar sus asistencia");
+                }
     }//GEN-LAST:event_mitemupdateMousePressed
 
                                        
@@ -944,12 +945,13 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_tblempleadoMouseClicked
 
     private void btnRegisterMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegisterMousePressed
+        if(!"".equals(lblidEmp.getText())){
         try{
         int id = Integer.parseInt(lblidEmp.getText());
         val = new Validators();
         
         hp=new Helpers();
-        if(!"".equals(lblidEmp.getText())){
+        
                 SimpleDateFormat fhora = new SimpleDateFormat("HH:mm:ss");
                 Calendar ingreso = TimIngreso.getCalendar();
                 Time ing =  Time.valueOf(fhora.format(ingreso.getTime()));
@@ -974,13 +976,14 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
                         }
                 }   
             
-        } else {
-            JOptionPane.showMessageDialog(null,"Seleccione un empleado para poder ingresar sus asistencia");
-                }
+        
         }
     catch(Exception e){
         System.out.println("Evento registrar: "+e);
     }
+        } else {
+            JOptionPane.showMessageDialog(null,"Seleccione un empleado para poder ingresar sus asistencia");
+                }
     }//GEN-LAST:event_btnRegisterMousePressed
 
     private void tblAsistenciaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblAsistenciaMouseClicked
