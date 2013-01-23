@@ -3,6 +3,7 @@ package Gui;
 import Dao.BusquedaEmpleadoDAO;
 import Utilitarios.Query;
 import javax.swing.table.DefaultTableModel;
+import Utilitarios.Data;
 
 
 public class WinBuscarEmpleado extends javax.swing.JInternalFrame {
@@ -10,10 +11,14 @@ public class WinBuscarEmpleado extends javax.swing.JInternalFrame {
     private Query qs;
     public int Form;
     public static String Nomape;
-
+    public Data dt;
+    
     public WinBuscarEmpleado() {
         initComponents();
+        dt = new Data();
+        this.setTitle(dt.G_TITULOS[27]);
         cargaForm();
+        
     }
     private void cargaForm(){
         qs = new Query();
@@ -246,12 +251,24 @@ public class WinBuscarEmpleado extends javax.swing.JInternalFrame {
         DefaultTableModel m = new DefaultTableModel();
         m = (DefaultTableModel) this.Tblbuscador.getModel();
         String idEmp = String.valueOf(m.getValueAt(fsel, 0));
-        Nomape = String.valueOf(m.getValueAt(fsel, 1));
+
+        String Nomape = String.valueOf(m.getValueAt(fsel, 1));
+        String ape = String.valueOf(m.getValueAt(fsel, 2));
+        String area = String.valueOf(m.getValueAt(fsel, 3));
+        String cargo = String.valueOf(m.getValueAt(fsel, 4));
+        System.out.println("Hola"+ Form + " - " + Nomape);
         switch(LblModulo.getText()){
             case "1":
                 Gui.WinConsulta.TxtName.setText(Nomape);
                 System.out.println("Hola: "+Nomape);
-                ;break;
+                break;
+            case "2": WinJustificacion jus = new WinJustificacion();
+                    jus.lblID.setText(idEmp);
+                    jus.lblNomape.setText(Nomape+" "+ape);
+                    jus.Lblarea.setText(area);
+                    jus.lblcargo.setText(cargo);
+                    break; 
+            
         }
     }//GEN-LAST:event_TblbuscadorMousePressed
 

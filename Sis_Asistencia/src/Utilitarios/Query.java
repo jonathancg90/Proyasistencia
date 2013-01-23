@@ -611,7 +611,7 @@ public class Query extends ConexionBd{
         }
         
         
-        public  DefaultTableModel getFechafilter(String[] args, String Table, String inicio,String fin, int idemp){
+        public  DefaultTableModel getFechafilter(String[] args, String Table, String inicio,String fin,String id_emp, int idemp){
         try{
             datos = new DefaultTableModel();
             getConexion();
@@ -626,10 +626,7 @@ public class Query extends ConexionBd{
             qs = qs +" from "+Table;
             qs = qs.replace(", "," ");
             qs = qs + " where ";
-            qs=qs+" (fecha >'"+inicio+"') and (fecha<'"+fin+"') and idemp="+idemp;
-            
-            System.out.println("cambiate de salon"+qs);
-            
+            qs=qs+" (fecha >'"+inicio+"') and (fecha<'"+fin+"') and "+id_emp+" = "+idemp;
             rs = s.executeQuery(qs);
             //Llenado Cabecera Jtable
             ResultSetMetaData meta = rs.getMetaData();

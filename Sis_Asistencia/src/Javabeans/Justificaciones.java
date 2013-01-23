@@ -7,7 +7,7 @@ public class Justificaciones {
     private int idjus;
     private int empleado_idemp;
     private int tipo_justificaciones_idtip_jus;
-    private int fecha;
+    private String fecha;
     private String motivo;
     private String recibo;
     private Time horas;
@@ -15,7 +15,7 @@ public class Justificaciones {
     public Justificaciones() {
     }
 
-    public Justificaciones(int idjus, int empleado_idemp, int tipo_justificaciones_idtip_jus, int fecha, String motivo, String recibo, Time horas) {
+    public Justificaciones(int idjus, int empleado_idemp, int tipo_justificaciones_idtip_jus, String fecha, String motivo, String recibo, Time horas) {
         this.idjus = idjus;
         this.empleado_idemp = empleado_idemp;
         this.tipo_justificaciones_idtip_jus = tipo_justificaciones_idtip_jus;
@@ -70,14 +70,14 @@ public class Justificaciones {
     /**
      * @return the fecha
      */
-    public int getFecha() {
+    public String getFecha() {
         return fecha;
     }
 
     /**
      * @param fecha the fecha to set
      */
-    public void setFecha(int fecha) {
+    public void setFecha(String fecha) {
         this.fecha = fecha;
     }
 
@@ -122,5 +122,6 @@ public class Justificaciones {
     public void setHoras(Time horas) {
         this.horas = horas;
     }
+
     
 }
