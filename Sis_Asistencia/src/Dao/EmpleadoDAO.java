@@ -9,6 +9,7 @@ import Utilitarios.Helpers;
 import Utilitarios.Query;
 import Utilitarios.Validators;
 import java.sql.*;
+import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -42,7 +43,7 @@ public class EmpleadoDAO extends ConexionBd{
         witdhcolum = new int[1];
         witdhcolum[0]=50;
     }
-    public void getTableAll(JTable tblDatos){
+    public void getTableAll(JTable tblDatos, JLabel lblcant){
         try{
             DefaultTableModel datos;
             qs= new Query();
@@ -54,6 +55,8 @@ public class EmpleadoDAO extends ConexionBd{
             datos = qs.getAll(campos,_table,filter);
             tblDatos.setModel(datos);
             hp.setWidthJtable(tblDatos,witdhcolum);
+            int num = tblDatos.getRowCount();
+            lblcant.setText(String .valueOf(num));
         }
         catch(Exception e){
             System.out.println(_error+"getTableAll: "+e);
@@ -218,7 +221,7 @@ public class EmpleadoDAO extends ConexionBd{
     /*
      * Filtros de busqueda
      */
-    public int find(String idareaactivo,JTable tblDatos) {
+    public int find(String idareaactivo,JTable tblDatos, JLabel lblcant) {
         int i = 0;
         try {
             if(!"".equals(idareaactivo)){
@@ -226,7 +229,7 @@ public class EmpleadoDAO extends ConexionBd{
                 filter[0][0] = "equ_idare";
                 filter[0][1] = idareaactivo; 
             }
-            getTableAll(tblDatos);
+            getTableAll(tblDatos, lblcant);
         }
         catch(Exception e){
         }
@@ -267,7 +270,7 @@ public class EmpleadoDAO extends ConexionBd{
         }
     }
     
-    public int findAsistencia(String tipo,String empresa,String sucursal,JTable tblDatos){
+    public int findAsistencia(String tipo,String empresa,String sucursal,JTable tblDatos, JLabel lblcant){
         
         int i=0;
         try {
@@ -280,7 +283,7 @@ public class EmpleadoDAO extends ConexionBd{
                 filter[2][0] = "equ_idsuc";
                 filter[2][1] = sucursal;
             }
-            getTableAll(tblDatos);
+            getTableAll(tblDatos, lblcant);
         }
         catch(Exception e){
         }

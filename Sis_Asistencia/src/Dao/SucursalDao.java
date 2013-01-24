@@ -12,6 +12,7 @@ import Javabeans.Usuario;
 import Utilitarios.Validators;
 import java.sql.Date;
 import java.sql.PreparedStatement;
+import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -42,7 +43,7 @@ public class SucursalDao extends ConexionBd{
         witdhcolum[0]=50;
     }
     
-     public void getTableAll(JTable tblDatos){
+     public void getTableAll(JTable tblDatos, JLabel lblcant){
         try{
             DefaultTableModel datos;
             qs = new Query();
@@ -54,6 +55,8 @@ public class SucursalDao extends ConexionBd{
             datos = qs.getAll(campos,Table,filter);
             tblDatos.setModel(datos);
             hp.setWidthJtable(tblDatos,witdhcolum);
+            int num = tblDatos.getRowCount();
+            lblcant.setText(String .valueOf(num));
         }
         catch(Exception e){
             System.out.println(_error + "getTableAll: "+e);
@@ -154,7 +157,7 @@ public class SucursalDao extends ConexionBd{
             return i;
         }
     }
-    public int findName(String name,String id, JTable tblDatos) {
+    public int findName(String name,String id, JTable tblDatos, JLabel lblcant) {
         int i = 0;
         try {
             if(!"".equals(name)){
@@ -164,14 +167,14 @@ public class SucursalDao extends ConexionBd{
                 filter[1][0] = "int_idempr";
                 filter[1][1] = id;
             }
-            getTableAll(tblDatos);
+            getTableAll(tblDatos, lblcant);
         }
         catch(Exception e){
             System.out.println(_error + "findName : "+e);
         }
         return i;
     }
-    public int findId(String id,JTable tblDatos) {
+    public int findId(String id,JTable tblDatos, JLabel lblcant) {
         int i = 0;
         try {
             if(!"".equals(id)){
@@ -179,7 +182,7 @@ public class SucursalDao extends ConexionBd{
                 filter[0][0] = "int_idempr";
                 filter[0][1] = id;
             }
-            getTableAll(tblDatos);
+            getTableAll(tblDatos, lblcant);
         }
         catch(Exception e){
             System.out.println(_error + "findId : "+e);

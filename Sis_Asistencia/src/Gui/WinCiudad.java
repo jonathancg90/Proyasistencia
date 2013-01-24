@@ -33,7 +33,7 @@ public class WinCiudad extends javax.swing.JInternalFrame {
         try {
             objciudad = new CiudadDAO();
             qs = new Query();
-            objciudad.getTableAll(tblciudad);
+            objciudad.getTableAll(tblciudad, lblcant);
         } catch (Exception e) {
             System.out.println(_error+"_CargaForm:" + e);
         }
@@ -274,7 +274,7 @@ public class WinCiudad extends javax.swing.JInternalFrame {
     private void btnFindActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFindActionPerformed
         String name = txtFilter.getText();
         objciudad = new CiudadDAO();
-        objciudad.find(name, tblciudad);
+        objciudad.find(name, tblciudad, lblcant);
     }//GEN-LAST:event_btnFindActionPerformed
 
     private void tblciudadMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblciudadMouseClicked
@@ -314,7 +314,7 @@ public class WinCiudad extends javax.swing.JInternalFrame {
                 JOptionPane.showInputDialog(null,"No se pudo grabar datos");
             }
             else {
-                objciudad.getTableAll(tblciudad);
+                objciudad.getTableAll(tblciudad, lblcant);
                 cleanBox();
                 JOptionPane.showMessageDialog(null,"Nueva ciudad registrada");
             }
@@ -343,7 +343,7 @@ public class WinCiudad extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(null, "No se pudo actualizar datos");
             }
             else {
-                objciudad.getTableAll(tblciudad);
+                objciudad.getTableAll(tblciudad, lblcant);
                 cleanBox();
                 JOptionPane.showMessageDialog(null, "ciudad actualizadas");
             }
@@ -374,7 +374,7 @@ public class WinCiudad extends javax.swing.JInternalFrame {
                     JOptionPane.showMessageDialog(null,"No se pudo eliminar la ciudad");
                 }
                 else {
-                    objciudad.getTableAll(tblciudad);
+                    objciudad.getTableAll(tblciudad, lblcant);
                     cleanBox();
                     JOptionPane.showMessageDialog(null,"Ciudad eliminada");
                 }

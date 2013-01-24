@@ -40,7 +40,7 @@ public class WinEmpresa extends javax.swing.JInternalFrame {
         try{
             qs = new Query();
             objempresa = new EmpresaDAO();
-            objempresa.getTableAll(tblempresa);
+            objempresa.getTableAll(tblempresa, lblcant);
             qs.loadState(cmbEstate,false);
             qs.loadChoice(cboMon,"moneda","nombre");
           
@@ -368,7 +368,7 @@ public class WinEmpresa extends javax.swing.JInternalFrame {
     private void btnFindActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFindActionPerformed
         String name = txtFilter.getText();
         objempresa = new EmpresaDAO();
-        objempresa.find(name, tblempresa);
+        objempresa.find(name, tblempresa, lblcant);
     }//GEN-LAST:event_btnFindActionPerformed
 
     private void mañoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mañoMousePressed
@@ -414,7 +414,7 @@ public class WinEmpresa extends javax.swing.JInternalFrame {
                               JOptionPane.showMessageDialog(null,"No se pudo eliminar la Empresa");
                         } 
                         else {
-                              objempresa.getTableAll(tblempresa);
+                              objempresa.getTableAll(tblempresa, lblcant);
                               cleanBox();
                         }
                     }
@@ -449,7 +449,7 @@ public class WinEmpresa extends javax.swing.JInternalFrame {
                     JOptionPane.showMessageDialog(null,"No se pudo actualizar datos");
                 }
                 else {
-                    objempresa.getTableAll(tblempresa);
+                    objempresa.getTableAll(tblempresa, lblcant);
                     cleanBox();
                     JOptionPane.showMessageDialog(null,"Nueva empresa registrada");
                 }
@@ -483,7 +483,7 @@ public class WinEmpresa extends javax.swing.JInternalFrame {
                     JOptionPane.showMessageDialog(null,"No se pudo grabar datos");
                 }
                 else {
-                    objempresa.getTableAll(tblempresa);
+                    objempresa.getTableAll(tblempresa, lblcant);
                     cleanBox();
                     JOptionPane.showMessageDialog(null,"Nueva empresa registrada");
                 }

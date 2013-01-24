@@ -9,6 +9,7 @@ import Utilitarios.Query;
 import Utilitarios.Validators;
 import java.sql.Date;
 import java.sql.PreparedStatement;
+import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -39,7 +40,7 @@ public class HorariosDAO extends ConexionBd{
         witdhcolum[0]=50;
     }
       //==========================================================================        
-    public void getTableAll(JTable tblDatos){
+    public void getTableAll(JTable tblDatos, JLabel lblcant){
         try{
             DefaultTableModel datos;
             qs= new Query();
@@ -51,6 +52,8 @@ public class HorariosDAO extends ConexionBd{
             datos = qs.getAll(this.campos,Table,filter);
             tblDatos.setModel(datos);
             hp.setWidthJtable(tblDatos,witdhcolum);
+            int num = tblDatos.getRowCount();
+            lblcant.setText(String .valueOf(num));
         }
         catch(Exception e){
             System.out.println(_error + "getTableAll: "+e);
@@ -157,7 +160,7 @@ public class HorariosDAO extends ConexionBd{
    /*
      * Filtros de busqueda
      */
-    public int find(String state,JTable tblDatos) {
+    public int find(String state,JTable tblDatos, JLabel lblcant) {
         int i = 0;
         try {
             if(!"".equals(state)){
@@ -165,7 +168,7 @@ public class HorariosDAO extends ConexionBd{
                 filter[0][0] = "equ_estado";
                 filter[0][1] = state; 
             }
-            getTableAll(tblDatos);
+            getTableAll(tblDatos, lblcant);
         }
         catch(Exception e){
             System.out.println(_error + "find : "+e);

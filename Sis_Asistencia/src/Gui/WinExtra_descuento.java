@@ -41,7 +41,7 @@ public class WinExtra_descuento extends javax.swing.JInternalFrame {
         try {
             objextrades = new Extra_descuentoDAO();
             qs = new Query();
-            objextrades.findId(lblIdemp.getText(), tblextra);
+            objextrades.findId(lblIdemp.getText(), tblextra, lblcant);
             lblIdemp.setVisible(false);
             qs.loadTypeextra(cbotipo,0);
             
@@ -318,7 +318,7 @@ public class WinExtra_descuento extends javax.swing.JInternalFrame {
                     JOptionPane.showMessageDialog(null,"No se pudo grabar datos");
                 }
                 else {
-                    objextrades.getTableAll(tblextra);
+                    objextrades.getTableAll(tblextra, lblcant);
                     cleanBox();
                     JOptionPane.showMessageDialog(null,"Nueva salarioextra registrado");
                 }
@@ -385,7 +385,7 @@ public class WinExtra_descuento extends javax.swing.JInternalFrame {
                     JOptionPane.showMessageDialog(null,"No se pudo eliminar el horario");
                 }
                 else {
-                    objextrades.findId(lblIdemp.getText(), tblextra);
+                    objextrades.findId(lblIdemp.getText(), tblextra, lblcant);
                     cleanBox();
                 }
             }

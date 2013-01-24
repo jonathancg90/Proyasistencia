@@ -13,6 +13,7 @@ import java.sql.PreparedStatement;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import Gui.WinNolaborables;
+import javax.swing.JLabel;
 
 public class NolaborablesDAO extends ConexionBd{
     
@@ -41,7 +42,7 @@ public class NolaborablesDAO extends ConexionBd{
         
      }
     
-    public void getTableAll(JTable tblDatos){
+    public void getTableAll(JTable tblDatos, JLabel lblcant){
         
         try{
             
@@ -55,6 +56,8 @@ public class NolaborablesDAO extends ConexionBd{
             datos = qs.getAll(this.campos,Table,filter);
             tblDatos.setModel(datos);
             hp.setWidthJtable(tblDatos,witdhcolum);
+            int num = tblDatos.getRowCount();
+            lblcant.setText(String .valueOf(num));
         }
         catch(Exception e){
             System.out.println(_error + "getTableAll: "+e);
@@ -182,7 +185,7 @@ public class NolaborablesDAO extends ConexionBd{
         
     }
     
-    public int findId(String id,JTable tblDatos) {
+    public int findId(String id,JTable tblDatos, JLabel lblcant) {
         int i = 0;
         try {
             if(!"".equals(id)){
@@ -190,7 +193,7 @@ public class NolaborablesDAO extends ConexionBd{
                 filter[0][0] = "int_idempr";
                 filter[0][1] = id;
             }
-            getTableAll(tblDatos);
+            getTableAll(tblDatos, lblcant);
         }
         catch(Exception e){
             System.out.println(_error + "findId : "+e);

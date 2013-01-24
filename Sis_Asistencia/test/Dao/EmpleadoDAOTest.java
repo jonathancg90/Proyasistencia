@@ -5,6 +5,7 @@
 package Dao;
 
 import Javabeans.Empleado;
+import javax.swing.JLabel;
 import javax.swing.JTable;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -45,8 +46,9 @@ public class EmpleadoDAOTest {
     public void testGetTableAll() {
         System.out.println("getTableAll");
         JTable tblDatos = null;
+        JLabel lblcant = null;
         EmpleadoDAO instance = new EmpleadoDAO();
-        instance.getTableAll(tblDatos);
+        instance.getTableAll(tblDatos, lblcant);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
@@ -139,9 +141,10 @@ public class EmpleadoDAOTest {
         System.out.println("find");
         String idareaactivo = "";
         JTable tblDatos = null;
+        JLabel lblcant = null;
         EmpleadoDAO instance = new EmpleadoDAO();
         int expResult = 0;
-        int result = instance.find(idareaactivo, tblDatos);
+        int result = instance.find(idareaactivo, tblDatos, lblcant);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");

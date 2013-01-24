@@ -48,7 +48,7 @@ public class WinEmpleado_Vacaciones extends javax.swing.JInternalFrame {
         try {
             objVacaciones = new VacacionesDAO();
             qs = new Query();
-            objVacaciones.findId(lblIdemp.getText(), tblVacaciones);
+            objVacaciones.findId(lblIdemp.getText(), tblVacaciones, lblcant);
             lblIdemp.setVisible(false);
         } catch (Exception e) {
             System.out.println(_error + "_cargaForm:" + e);
@@ -373,7 +373,7 @@ public class WinEmpleado_Vacaciones extends javax.swing.JInternalFrame {
                     JOptionPane.showMessageDialog(null,"No se pudo grabar datos");
                 }
                 else {
-                    objVacaciones.findId(lblIdemp.getText(), tblVacaciones);
+                    objVacaciones.findId(lblIdemp.getText(), tblVacaciones, lblcant);
                     cleanBox();
                     JOptionPane.showMessageDialog(null,"Nueva vacacion registrado");
                 }
@@ -409,7 +409,7 @@ public class WinEmpleado_Vacaciones extends javax.swing.JInternalFrame {
                     JOptionPane.showMessageDialog(null, "No se pudo actualizar datos");
                 }
                 else {
-                    objVacaciones.findId(lblIdemp.getText(), tblVacaciones);
+                    objVacaciones.findId(lblIdemp.getText(), tblVacaciones, lblcant);
                     cleanBox();
                     JOptionPane.showMessageDialog(null, "Vacacion actualizado");
                 }
@@ -440,7 +440,7 @@ public class WinEmpleado_Vacaciones extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(null,"No se pudo eliminar la vacacion");
             }
             else {
-                objVacaciones.findId(lblIdemp.getText(), tblVacaciones);
+                objVacaciones.findId(lblIdemp.getText(), tblVacaciones, lblcant);
                 cleanBox();
             }
         }

@@ -4,6 +4,7 @@
  */
 package Dao;
 
+import javax.swing.JLabel;
 import javax.swing.JTable;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -44,8 +45,9 @@ public class PermisoshasRolesDAOTest {
     public void testGetTableAll() {
         System.out.println("getTableAll");
         JTable tblDatos = null;
+        JLabel lblcant = null;
         PermisoshasRolesDAO instance = new PermisoshasRolesDAO();
-        instance.getTableAll(tblDatos);
+        instance.getTableAll(tblDatos, lblcant);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }

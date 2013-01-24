@@ -11,6 +11,7 @@ import Utilitarios.Query;
 import Utilitarios.Validators;
 import java.sql.Date;
 import java.sql.PreparedStatement;
+import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -46,7 +47,7 @@ public class EstadoEmpleadoDAO extends ConexionBd{
     }
     
     //==========================================================================        
-    public void getTableAll(JTable tblDatos){
+    public void getTableAll(JTable tblDatos, JLabel lblcant){
         try{
             DefaultTableModel datos;
             qs= new Query();
@@ -58,6 +59,8 @@ public class EstadoEmpleadoDAO extends ConexionBd{
             datos = qs.getAll(this.campos,Table,filter);
             tblDatos.setModel(datos);
             hp.setWidthJtable(tblDatos,witdhcolum);
+            int num = tblDatos.getRowCount();
+            lblcant.setText(String .valueOf(num));
         }
         catch(Exception e){
             System.out.println(_error + "getTableAll: "+e);

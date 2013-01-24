@@ -9,6 +9,7 @@ import Javabeans.Tipoempleado;
 import Javabeans.Usuario;
 import java.sql.Date;
 import java.sql.PreparedStatement;
+import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -42,7 +43,7 @@ public class TipoEmpleadoDAO extends ConexionBd{
      * Middleware mostrar nombres de los tipos de empleados
      */
     
-    public void getTableAll(JTable tblDatos){
+    public void getTableAll(JTable tblDatos, JLabel lblcant){
         try{
             DefaultTableModel datos;
             qs= new Query();
@@ -54,6 +55,8 @@ public class TipoEmpleadoDAO extends ConexionBd{
             datos = qs.getAll(campos,Table,filter);
             tblDatos.setModel(datos);
             hp.setWidthJtable(tblDatos,witdhcolum);
+            int num = tblDatos.getRowCount();
+            lblcant.setText(String .valueOf(num));
         }
         catch(Exception e){
             System.out.println(_error + "getTableAll: "+e);
@@ -151,7 +154,7 @@ public class TipoEmpleadoDAO extends ConexionBd{
         }
     }
     
-    public int find(String name,JTable tblDatos) {
+    public int find(String name,JTable tblDatos, JLabel lblcant) {
         int i = 0;
         try {
             if(!"".equals(name)){
@@ -159,7 +162,7 @@ public class TipoEmpleadoDAO extends ConexionBd{
                 filter[0][0] = "nombre";
                 filter[0][1] = name.toUpperCase(); 
             }
-            getTableAll(tblDatos);
+            getTableAll(tblDatos, lblcant);
         }
         catch(Exception e){
             System.out.println(_error + "find : "+e);

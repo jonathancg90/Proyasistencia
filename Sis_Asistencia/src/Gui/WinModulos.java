@@ -34,7 +34,7 @@ public class WinModulos extends javax.swing.JInternalFrame {
         try {
             objmod = new ModulosDAO();
             qs = new Query();
-            objmod.getTableAll(tblmod);
+            objmod.getTableAll(tblmod, lblcant);
             qs.loadState(cmbState,false);
         } catch (Exception e) {
             System.out.println(_error+"_CargaForm:"+e);
@@ -322,7 +322,7 @@ public class WinModulos extends javax.swing.JInternalFrame {
     private void btnFindActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFindActionPerformed
         String name = txtFilter.getText();
         objmod = new ModulosDAO();
-        objmod.find(name, tblmod);
+        objmod.find(name, tblmod, lblcant);
     }//GEN-LAST:event_btnFindActionPerformed
 
     private void tblmodMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblmodMouseClicked
@@ -366,7 +366,7 @@ public class WinModulos extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(null,"No se pudo grabar datos");
             }
             else {
-                objmod.getTableAll(tblmod);
+                objmod.getTableAll(tblmod, lblcant);
                 cleanBox();
                 JOptionPane.showMessageDialog(null,"Nuevo modulo registrado");
             }
@@ -396,7 +396,7 @@ public class WinModulos extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(null, "No se pudo actualizar datos");
             }
             else {
-                objmod.getTableAll(tblmod);
+                objmod.getTableAll(tblmod, lblcant);
                 cleanBox();
                 JOptionPane.showMessageDialog(null, "modulos actualizados");
             }
@@ -427,7 +427,7 @@ public class WinModulos extends javax.swing.JInternalFrame {
                     JOptionPane.showMessageDialog(null,"No se pudo eliminar el modulo");
                 }
                 else {
-                    objmod.getTableAll(tblmod);
+                    objmod.getTableAll(tblmod, lblcant);
                     cleanBox();
                     JOptionPane.showMessageDialog(null,"modulo eliminado");
                 }

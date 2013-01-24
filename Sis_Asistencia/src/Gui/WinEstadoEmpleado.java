@@ -5,6 +5,7 @@ import Javabeans.EstadoEmp;
 import Utilitarios.Data;
 import Utilitarios.Query;
 import Utilitarios.Validators;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -27,7 +28,7 @@ public class WinEstadoEmpleado extends javax.swing.JInternalFrame {
         try {
             objest = new EstadoEmpleadoDAO();
             qs = new Query();
-            objest.getTableAll(tblest);
+            objest.getTableAll(tblest, lblcant);
         } catch (Exception e) {
             System.out.println(_error+"_CargaForm:"+e);
         }
@@ -222,7 +223,7 @@ public class WinEstadoEmpleado extends javax.swing.JInternalFrame {
                 JOptionPane.showInputDialog(null,"No se pudo grabar datos");
             }
             else {
-                objest.getTableAll(tblest);
+                objest.getTableAll(tblest, lblcant);
                 cleanBox();
                 JOptionPane.showMessageDialog(null,"Nuevo estado registrado");      
             }
@@ -255,7 +256,7 @@ public class WinEstadoEmpleado extends javax.swing.JInternalFrame {
                     JOptionPane.showMessageDialog(null,"No se pudo actualizar el estado");
                 }
                 else {
-                    objest.getTableAll(tblest);
+                    objest.getTableAll(tblest, lblcant);
                     cleanBox();
                     JOptionPane.showMessageDialog(null,"Estado actualizado");      
                 }       
@@ -288,7 +289,7 @@ public class WinEstadoEmpleado extends javax.swing.JInternalFrame {
                         JOptionPane.showInputDialog(null,"No se pudo eliminar el estado");
                     }
                     else {
-                        objest.getTableAll(tblest);
+                        objest.getTableAll(tblest, lblcant);
                         cleanBox();
                         JOptionPane.showMessageDialog(null,"Estado eliminado");      
                     }

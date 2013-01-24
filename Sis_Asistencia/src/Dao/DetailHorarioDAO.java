@@ -11,6 +11,7 @@ import java.sql.Timestamp;
 import java.sql.PreparedStatement;
 import java.sql.Time;
 import java.util.Calendar;
+import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -45,7 +46,7 @@ public class DetailHorarioDAO extends ConexionBd{
     }
     
     //==========================================================================        
-    public void getTableAll(JTable tblDatos){
+    public void getTableAll(JTable tblDatos, JLabel lblcant){
         try{
             DefaultTableModel datos;
             qs= new Query();
@@ -57,6 +58,8 @@ public class DetailHorarioDAO extends ConexionBd{
             datos = qs.getAll(this.campos,Table,filter);
             tblDatos.setModel(datos);
             hp.setWidthJtable(tblDatos,witdhcolum);
+            int num = tblDatos.getRowCount();
+            lblcant.setText(String .valueOf(num));
         }
         catch(Exception e){
             System.out.println(_error + "getTableAll: "+e);
@@ -125,7 +128,7 @@ public class DetailHorarioDAO extends ConexionBd{
      * int_ = Busqueda de entero
      * equ_ = busca exactamente la plabra
      */
-    public int find(String horario,JTable tblDatos) {
+    public int find(String horario,JTable tblDatos, JLabel lblcant) {
         int i = 0;
         try {
             if(!"".equals(horario)){
@@ -133,7 +136,7 @@ public class DetailHorarioDAO extends ConexionBd{
                 filter[0][0] = "int_horarios_idhor";
                 filter[0][1] = horario; 
             }
-            getTableAll(tblDatos);
+            getTableAll(tblDatos, lblcant);
         }
         catch(Exception e){
             System.out.println(_error + "find : "+e);

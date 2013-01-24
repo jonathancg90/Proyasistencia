@@ -29,7 +29,7 @@ public class WinTipomoneda extends javax.swing.JInternalFrame {
         try {
             objmoneda = new TipomonedaDAO();
             qs = new Query();
-            objmoneda.getTableAll(tblmoneda);
+            objmoneda.getTableAll(tblmoneda, lblcant);
         } catch (Exception e) {
             System.out.println(_error+"_CargaForm:"+e);
         }
@@ -278,7 +278,7 @@ public class WinTipomoneda extends javax.swing.JInternalFrame {
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
-                .addGap(37, 37, 37)
+                .addGap(39, 39, 39)
                 .addComponent(jLabel7)
                 .addGap(17, 17, 17)
                 .addComponent(lblcant, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -291,10 +291,11 @@ public class WinTipomoneda extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel7)
-                    .addComponent(lblcant, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(lblcant, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         pack();
@@ -303,7 +304,7 @@ public class WinTipomoneda extends javax.swing.JInternalFrame {
     private void btnFindActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFindActionPerformed
         String name = txtFilter.getText();
         objmoneda = new TipomonedaDAO();
-        objmoneda.find(name, tblmoneda);
+        objmoneda.find(name, tblmoneda, lblcant);
     }//GEN-LAST:event_btnFindActionPerformed
 
     private void tblmonedaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblmonedaMouseClicked
@@ -348,7 +349,7 @@ public class WinTipomoneda extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(null,"No se pudo grabar datos");
             }
             else {
-                objmoneda.getTableAll(tblmoneda);
+                objmoneda.getTableAll(tblmoneda, lblcant);
                 cleanBox();
                 JOptionPane.showMessageDialog(null,"Nueva moneda registrada");
             }
@@ -378,7 +379,7 @@ public class WinTipomoneda extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(null, "No se pudo actualizar datos");
             }
             else {
-                objmoneda.getTableAll(tblmoneda);
+                objmoneda.getTableAll(tblmoneda, lblcant);
                 cleanBox();
                 JOptionPane.showMessageDialog(null, "moneda actualizadas");
             }
@@ -409,7 +410,7 @@ public class WinTipomoneda extends javax.swing.JInternalFrame {
                     JOptionPane.showMessageDialog(null,"No se pudo eliminar la moneda");
                 }
                 else {
-                    objmoneda.getTableAll(tblmoneda);
+                    objmoneda.getTableAll(tblmoneda, lblcant);
                     cleanBox();
                     JOptionPane.showMessageDialog(null,"moneda eliminada");
                 }

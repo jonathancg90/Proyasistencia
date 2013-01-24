@@ -46,7 +46,7 @@ public class WinNolaborables extends javax.swing.JInternalFrame {
         try {
             objNolaborables = new NolaborablesDAO();
             qs = new Query();
-            objNolaborables.findId(lblIdempr.getText(), tblNolaborable);
+            objNolaborables.findId(lblIdempr.getText(), tblNolaborable, lblcant);
             lblIdempr.setVisible(false);
         } catch (Exception e) {
             System.out.println(_error+"_CargaForm:"+e);
@@ -281,30 +281,32 @@ public class WinNolaborables extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 12, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
             .addGroup(layout.createSequentialGroup()
-                .addGap(35, 35, 35)
-                .addComponent(jLabel6)
-                .addGap(17, 17, 17)
-                .addComponent(lblcant, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addComponent(jLabel6)
+                        .addGap(17, 17, 17)
+                        .addComponent(lblcant, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(32, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6)
-                    .addComponent(lblcant, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(lblcant, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -365,7 +367,7 @@ public class WinNolaborables extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(null,"No se pudo grabar datos");
             }
             else {
-                objNolaborables.findId(lblIdempr.getText(), tblNolaborable);
+                objNolaborables.findId(lblIdempr.getText(), tblNolaborable, lblcant);
                 cleanBox();
                 JOptionPane.showMessageDialog(null,"Nueva dia no laborable registrado");
             }
@@ -397,7 +399,7 @@ public class WinNolaborables extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "No se pudo actualizar datos");
         }
         else {
-            objNolaborables.findId(lblIdempr.getText(), tblNolaborable);
+            objNolaborables.findId(lblIdempr.getText(), tblNolaborable, lblcant);
             cleanBox();
             JOptionPane.showMessageDialog(null, "dia no laborable actualizado");
         }
@@ -424,7 +426,7 @@ public class WinNolaborables extends javax.swing.JInternalFrame {
                     JOptionPane.showMessageDialog(null,"No se pudo eliminar el dia no laborable");
                 }
                 else {
-                    objNolaborables.findId(lblIdempr.getText(), tblNolaborable);
+                    objNolaborables.findId(lblIdempr.getText(), tblNolaborable, lblcant);
                     cleanBox();
                 }
             }

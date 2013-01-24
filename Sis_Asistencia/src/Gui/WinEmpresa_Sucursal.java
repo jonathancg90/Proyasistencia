@@ -23,7 +23,7 @@ public class WinEmpresa_Sucursal extends javax.swing.JInternalFrame {
         try {
             objsucursal = new SucursalDao();
             qs = new Query();
-            objsucursal.findId(lblIdemp.getText(), tblSucursal);
+            objsucursal.findId(lblIdemp.getText(), tblSucursal, lblcant);
             qs.loadChoice(cmbCiudad,"ciudad","nombre");
             lblIdemp.setVisible(false);
         } catch (Exception e) {
@@ -328,7 +328,7 @@ public class WinEmpresa_Sucursal extends javax.swing.JInternalFrame {
         String name = txtFilter.getText();
         String id = lblIdemp.getText();
         objsucursal = new SucursalDao();
-        objsucursal.findName(name, id, tblSucursal);
+        objsucursal.findName(name, id, tblSucursal, lblcant);
     }//GEN-LAST:event_btnFindActionPerformed
 
     private void tblSucursalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblSucursalMouseClicked
@@ -373,7 +373,7 @@ public class WinEmpresa_Sucursal extends javax.swing.JInternalFrame {
                 JOptionPane.showInputDialog(null,"No se pudo grabar datos");
             }
             else {
-                objsucursal.findId(lblIdemp.getText(), tblSucursal);
+                objsucursal.findId(lblIdemp.getText(), tblSucursal, lblcant);
                 cleanBox();
                 JOptionPane.showMessageDialog(null,"Nueva area registrada");
             }
@@ -405,7 +405,7 @@ public class WinEmpresa_Sucursal extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(null, "No se pudo actualizar datos");
             }
             else {
-                objsucursal.findId(lblIdemp.getText(), tblSucursal);
+                objsucursal.findId(lblIdemp.getText(), tblSucursal, lblcant);
                 cleanBox();
                 JOptionPane.showMessageDialog(null, "Sucursal actualizada");
             }
@@ -437,7 +437,7 @@ public class WinEmpresa_Sucursal extends javax.swing.JInternalFrame {
                     JOptionPane.showMessageDialog(null,"No se pudo eliminar la sucursal");
                 }
                 else {
-                    objsucursal.findId(lblIdemp.getText(), tblSucursal);
+                    objsucursal.findId(lblIdemp.getText(), tblSucursal, lblcant);
                     cleanBox();
                     JOptionPane.showMessageDialog(null,"Sucursal eliminada");
                 }

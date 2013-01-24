@@ -28,7 +28,7 @@ public class WinTipoJustificacion extends javax.swing.JInternalFrame {
         try {
             objjus = new TipoJustificacionDAO();
             qs = new Query();
-            objjus.getTableAll(tbljus);
+            objjus.getTableAll(tbljus, lblcant);
         } catch (Exception e) {
             System.out.println(_error+"_CargaForm:"+e);
         }
@@ -261,7 +261,7 @@ public class WinTipoJustificacion extends javax.swing.JInternalFrame {
     private void btnFindActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFindActionPerformed
         String name = txtFilter.getText();
         objjus = new TipoJustificacionDAO();
-        objjus.find(name, tbljus);
+        objjus.find(name, tbljus, lblcant);
     }//GEN-LAST:event_btnFindActionPerformed
 
     private void tbljusMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbljusMouseClicked
@@ -303,7 +303,7 @@ public class WinTipoJustificacion extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(null,"No se pudo grabar datos");
             }
             else {
-                objjus.getTableAll(tbljus);
+                objjus.getTableAll(tbljus, lblcant);
                 cleanBox();
                 JOptionPane.showMessageDialog(null,"Nueva justificacion registrado");
             }
@@ -332,7 +332,7 @@ public class WinTipoJustificacion extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(null, "No se pudo actualizar datos");
             }
             else {
-                objjus.getTableAll(tbljus);
+                objjus.getTableAll(tbljus, lblcant);
                 cleanBox();
                 JOptionPane.showMessageDialog(null, "justificaciones actualizadas");
             }
@@ -363,7 +363,7 @@ public class WinTipoJustificacion extends javax.swing.JInternalFrame {
                     JOptionPane.showMessageDialog(null,"No se pudo eliminar el tipo de justificacion");
                 }
                 else {
-                    objjus.getTableAll(tbljus);
+                    objjus.getTableAll(tbljus, lblcant);
                     cleanBox();
                     JOptionPane.showMessageDialog(null,"justificacion eliminado");
                 }

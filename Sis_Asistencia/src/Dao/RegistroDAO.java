@@ -12,6 +12,7 @@ import java.sql.PreparedStatement;
 import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -43,7 +44,7 @@ public class RegistroDAO extends ConexionBd{
         witdhcolum[0]=50;
     }
     
-    public void getTableAll(JTable tblDatos){
+    public void getTableAll(JTable tblDatos, JLabel lblcant){
         try{
             DefaultTableModel datos;
             qs= new Query();
@@ -55,6 +56,8 @@ public class RegistroDAO extends ConexionBd{
             datos = qs.getAll(this.campos,Table,filter);
             tblDatos.setModel(datos);
             hp.setWidthJtable(tblDatos,witdhcolum);
+            int num = tblDatos.getRowCount();
+            lblcant.setText(String .valueOf(num));
         }
         catch(Exception e){
             System.out.println(_error + "getTableAll: "+e);
@@ -175,7 +178,7 @@ public class RegistroDAO extends ConexionBd{
         }
     }
     
-    public int findId(String id,JTable tblDatos) {
+    public int findId(String id, JTable tblDatos, JLabel lblcant) {
         int i = 0;
         try {
             if(!"".equals(id)){
@@ -183,7 +186,7 @@ public class RegistroDAO extends ConexionBd{
                 filter[0][0] = "int_idemp";
                 filter[0][1] = id;
             }
-            getTableAll(tblDatos);
+            getTableAll(tblDatos, lblcant);
         }
         catch(Exception e){
             System.out.println(_error + "findId : "+e);

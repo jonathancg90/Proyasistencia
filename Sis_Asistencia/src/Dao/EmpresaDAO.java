@@ -9,6 +9,7 @@ import Javabeans.Usuario;
 import Utilitarios.Validators;
 import java.sql.Date;
 import java.sql.PreparedStatement;
+import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -37,7 +38,7 @@ public class EmpresaDAO extends ConexionBd{
         witdhcolum[0]=50;
     }
     
-    public void getTableAll(JTable tblDatos){
+    public void getTableAll(JTable tblDatos, JLabel lblcant){
         try{
             DefaultTableModel datos;
             qs= new Query();
@@ -49,6 +50,8 @@ public class EmpresaDAO extends ConexionBd{
             datos = qs.getAll(campos,Table, filter);
             tblDatos.setModel(datos);
             hp.setWidthJtable(tblDatos,witdhcolum);
+            int num = tblDatos.getRowCount();
+            lblcant.setText(String .valueOf(num));
         }
         catch(Exception e){
             System.out.println("Dao_EmpresaDao: "+e);
@@ -155,7 +158,7 @@ public class EmpresaDAO extends ConexionBd{
         }
     }
     
-    public int find(String name,JTable tblDatos) {
+    public int find(String name,JTable tblDatos, JLabel lblcant) {
         int i = 0;
         try {
             if(!"".equals(name)){
@@ -163,7 +166,7 @@ public class EmpresaDAO extends ConexionBd{
                 filter[0][0] = "nombre";
                 filter[0][1] = name.toUpperCase(); 
             }
-            getTableAll(tblDatos);
+            getTableAll(tblDatos, lblcant);
         }
         catch(Exception e){
             System.out.println("Dao_EmpresaDAO_find : "+e);

@@ -20,7 +20,7 @@ public class WinRoles_Permisos extends javax.swing.JInternalFrame {
         objPerol = new PermisoshasRolesDAO();
         lblidrol.setVisible(false);
         qs.loadChoice(CboModulo,"modulos","nombre");
-        objPerol.getTableAll(Jtablepermi);
+        objPerol.getTableAll(Jtablepermi, lblcant);
     }
             
 
@@ -197,7 +197,7 @@ public class WinRoles_Permisos extends javax.swing.JInternalFrame {
        int idrol = Integer.parseInt(lblidrol.getText());
        int idmod = Integer.parseInt(qs.idChoice("modulos","nombre",String.valueOf(CboModulo.getSelectedItem())));
        objPerol.save(idrol,idmod);
-       objPerol.getTableAll(Jtablepermi);
+       objPerol.getTableAll(Jtablepermi, lblcant);
        }catch(Exception e){}
     }//GEN-LAST:event_sitemagregarMousePressed
 
@@ -216,7 +216,7 @@ public class WinRoles_Permisos extends javax.swing.JInternalFrame {
                 int idrol = Integer.parseInt(lblidrol.getText());
                 //idmod = qs.idChoice("modulos","nombre",String.valueOf(CboModulo.getSelectedItem()));
                 objPerol.delete(idrol,idmod);
-                objPerol.getTableAll(Jtablepermi);
+                objPerol.getTableAll(Jtablepermi, lblcant);
             }
             catch(Exception e){
                 System.out.println("Error producido en seleccion de modulo" + e);

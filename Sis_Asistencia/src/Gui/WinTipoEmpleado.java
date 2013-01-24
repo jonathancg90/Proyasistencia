@@ -30,7 +30,7 @@ public class WinTipoEmpleado extends javax.swing.JInternalFrame {
         try {
             objtipoemp = new TipoEmpleadoDAO();
             qs = new Query();
-            objtipoemp.getTableAll(tblTipoemp);
+            objtipoemp.getTableAll(tblTipoemp, lblcant);
             qs.loadState(cmbEstate,false);
         } catch (Exception e) {
             System.out.println(_error+"_CargaForm:"+e);
@@ -296,7 +296,7 @@ public class WinTipoEmpleado extends javax.swing.JInternalFrame {
     private void btnFindActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFindActionPerformed
         String name = txtFilter.getText();
         objtipoemp = new TipoEmpleadoDAO();
-        objtipoemp.find(name, tblTipoemp);
+        objtipoemp.find(name, tblTipoemp, lblcant);
     }//GEN-LAST:event_btnFindActionPerformed
 
     private void tblTipoempMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblTipoempMouseClicked
@@ -346,7 +346,7 @@ public class WinTipoEmpleado extends javax.swing.JInternalFrame {
                 JOptionPane.showInputDialog(null,"No se pudo grabar datos");
             }
             else {
-                objtipoemp.getTableAll(tblTipoemp);
+                objtipoemp.getTableAll(tblTipoemp, lblcant);
                 cleanBox();
                 JOptionPane.showMessageDialog(null,"Nuevo tipo empleado registrado");
             }
@@ -377,7 +377,7 @@ public class WinTipoEmpleado extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(null, "No se pudo actualizar datos");
             }
             else {
-                objtipoemp.getTableAll(tblTipoemp);
+                objtipoemp.getTableAll(tblTipoemp, lblcant);
                 cleanBox();
                 JOptionPane.showMessageDialog(null, "tipo de empleado actualizado");
             }
@@ -408,7 +408,7 @@ public class WinTipoEmpleado extends javax.swing.JInternalFrame {
                     JOptionPane.showMessageDialog(null,"No se pudo eliminar el tipo de empleado");
                 }
                 else {
-                    objtipoemp.getTableAll(tblTipoemp);
+                    objtipoemp.getTableAll(tblTipoemp, lblcant);
                     cleanBox();
                 }
             }

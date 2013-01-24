@@ -32,7 +32,7 @@ public class WinRoles extends javax.swing.JInternalFrame {
         try {
             objroles = new RolesDAO();
             qs = new Query();
-            objroles.getTableAll(tblroles);
+            objroles.getTableAll(tblroles, lblcant);
         } catch (Exception e) {
             System.out.println(_error+"CargaForm:"+e);
         }
@@ -286,7 +286,7 @@ public class WinRoles extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(null,"No se pudo grabar datos");
             }
             else {
-                objroles.getTableAll(tblroles);
+                objroles.getTableAll(tblroles, lblcant);
                 cleanBox();
                 JOptionPane.showMessageDialog(null,"Nueva rol registrado");
             }
@@ -315,7 +315,7 @@ public class WinRoles extends javax.swing.JInternalFrame {
                    JOptionPane.showMessageDialog(null, "No se pudo actualizar datos");
                }
                else {
-                   objroles.getTableAll(tblroles);
+                   objroles.getTableAll(tblroles, lblcant);
                    cleanBox();
                    JOptionPane.showMessageDialog(null, "roles actualizados");
                }   
@@ -349,7 +349,7 @@ public class WinRoles extends javax.swing.JInternalFrame {
                         JOptionPane.showMessageDialog(null,"No se pudo eliminar el rol");
                     }
                     else {
-                        objroles.getTableAll(tblroles);
+                        objroles.getTableAll(tblroles, lblcant);
                         cleanBox();
                         JOptionPane.showMessageDialog(null,"Rol eliminado");
                     }
@@ -399,7 +399,7 @@ public class WinRoles extends javax.swing.JInternalFrame {
     private void btnFindActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFindActionPerformed
         String name = txtFilter.getText();
         objroles = new RolesDAO();
-        objroles.find(name, tblroles);
+        objroles.find(name, tblroles, lblcant);
     }//GEN-LAST:event_btnFindActionPerformed
 
     private void mitemclearMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemclearMousePressed

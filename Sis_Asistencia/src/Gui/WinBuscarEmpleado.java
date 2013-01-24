@@ -41,7 +41,7 @@ public class WinBuscarEmpleado extends javax.swing.JInternalFrame {
         String idarea = qs.idChoice("area", "nombre", String.valueOf(Cboarea.getSelectedItem()));
         String idcargo = qs.idChoice("cargo", "nombre", String.valueOf(CboCargo.getSelectedItem()));
         String estado = qs.idChoice("estadoemp", "nombre", String.valueOf(CboEstado.getSelectedItem()));
-        Bus.find(apellidos,idarea,idcargo,idemp,idsuc,estado,Tblbuscador);
+        Bus.find(apellidos,idarea,idcargo,idemp,idsuc,estado,Tblbuscador, lblcant);
     }
           
     @SuppressWarnings("unchecked")

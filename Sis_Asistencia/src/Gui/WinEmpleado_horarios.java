@@ -43,7 +43,7 @@ public class WinEmpleado_horarios extends javax.swing.JInternalFrame {
         try {
             objEmphorarios = new Empleado_has_horariosDAO();
             qs = new Query();
-            objEmphorarios.findId(lblIdemp.getText(), tblEmpleado_has_horarios);
+            objEmphorarios.findId(lblIdemp.getText(), tblEmpleado_has_horarios, lblcant);
             lblIdemp.setVisible(false);
             qs.loadChoice(cbo_Horario,"horarios","nombre");
         } catch (Exception e) {
@@ -368,7 +368,7 @@ public class WinEmpleado_horarios extends javax.swing.JInternalFrame {
                     JOptionPane.showMessageDialog(null,"No se pudo grabar datos");
                 }
                 else {
-                    objEmphorarios.findId(lblIdemp.getText(), tblEmpleado_has_horarios);
+                    objEmphorarios.findId(lblIdemp.getText(), tblEmpleado_has_horarios, lblcant);
                     cleanBox();
                     JOptionPane.showMessageDialog(null,"Nueva Horario registrado");
                 }
@@ -407,7 +407,7 @@ public class WinEmpleado_horarios extends javax.swing.JInternalFrame {
                     JOptionPane.showMessageDialog(null, "No se pudo actualizar datos");
                 }
                 else {
-                    objEmphorarios.findId(lblIdemp.getText(), tblEmpleado_has_horarios);
+                    objEmphorarios.findId(lblIdemp.getText(), tblEmpleado_has_horarios, lblcant);
                     cleanBox();
                     JOptionPane.showMessageDialog(null, "Horario actualizado");
                 }
@@ -440,7 +440,7 @@ public class WinEmpleado_horarios extends javax.swing.JInternalFrame {
                     JOptionPane.showMessageDialog(null,"No se pudo eliminar el horario");
                 }
                 else {
-                    objEmphorarios.findId(lblIdemp.getText(), tblEmpleado_has_horarios);
+                    objEmphorarios.findId(lblIdemp.getText(), tblEmpleado_has_horarios, lblcant);
                     cleanBox();
                 }
             }

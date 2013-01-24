@@ -39,7 +39,7 @@ public class WinArea_Cargos extends javax.swing.JInternalFrame {
             objCar = new CargosDAO();
             qs = new Query();
             
-            objCar.find(lblidArea.getText(),TblCargos);
+            objCar.find(lblidArea.getText(),TblCargos, lblcant);
         } catch (Exception e) {
             System.out.println(_error + "_Cargos: " + e);
         }
@@ -276,12 +276,12 @@ public class WinArea_Cargos extends javax.swing.JInternalFrame {
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(3, 3, 3))
                     .addComponent(lblArea, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblcant, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30))
@@ -313,7 +313,7 @@ public class WinArea_Cargos extends javax.swing.JInternalFrame {
                 JOptionPane.showInputDialog(null,"No se pudo grabar datos");
             }
             else {
-                objCar.find(lblidArea.getText(),TblCargos);
+                objCar.find(lblidArea.getText(),TblCargos, lblcant);
                 cleanBox();
                 JOptionPane.showMessageDialog(null,"Nuevo cargo registrado");      
             } 
@@ -352,7 +352,7 @@ public class WinArea_Cargos extends javax.swing.JInternalFrame {
                            JOptionPane.showMessageDialog(null,"No se pudo eliminar el cargo");
                        }
                        else {
-                           objCar.find(lblidArea.getText(),TblCargos);
+                           objCar.find(lblidArea.getText(),TblCargos, lblcant);
                            cleanBox();
                        } 
                     }                       
@@ -389,7 +389,7 @@ public class WinArea_Cargos extends javax.swing.JInternalFrame {
                                JOptionPane.showMessageDialog(null,"No se pudo actualizar el cargo");
                            }
                            else {
-                               objCar.find(lblidArea.getText(),TblCargos);
+                               objCar.find(lblidArea.getText(),TblCargos, lblcant);
                                cleanBox();
                            } 
                         }                       

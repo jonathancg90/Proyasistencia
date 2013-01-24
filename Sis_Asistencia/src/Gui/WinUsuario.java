@@ -37,7 +37,7 @@ public class WinUsuario extends javax.swing.JInternalFrame {
         try {
             objUser = new UserDAO();
             qs = new Query();
-            objUser.getTableAll(TblUsu);
+            objUser.getTableAll(TblUsu, lblcant);
             qs.loadState(cboEstado, false); 
             qs.loadState(cboFilter, false);
             qs.loadChoice(cboEmp, "empleado", "nombres");
@@ -312,7 +312,7 @@ public class WinUsuario extends javax.swing.JInternalFrame {
         dt = new Data();
         String  state = dt.G_BOOLEAN[cboFilter.getSelectedIndex()].substring(0, 1);
         objUser = new UserDAO();
-        objUser.find(state, TblUsu);
+        objUser.find(state, TblUsu, lblcant);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void mitemregisterMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemregisterMousePressed
@@ -336,7 +336,7 @@ public class WinUsuario extends javax.swing.JInternalFrame {
                 if (i == 0) {
                     JOptionPane.showMessageDialog(null, "No se pudo grabar datos");
             } else {
-                objUser.getTableAll(TblUsu);
+                objUser.getTableAll(TblUsu, lblcant);
                 cleanBox();
                 JOptionPane.showMessageDialog(null, "Nuevo usuario registrado");
             }
@@ -373,7 +373,7 @@ public class WinUsuario extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(null,"No se pudo grabar datos");
             }
             else {
-                objUser.getTableAll(TblUsu);
+                objUser.getTableAll(TblUsu, lblcant);
                 cleanBox();
                 JOptionPane.showMessageDialog(null,"usuario actualizado");
             }
@@ -406,7 +406,7 @@ public class WinUsuario extends javax.swing.JInternalFrame {
                     JOptionPane.showMessageDialog(null,"No se pudo eliminar el usuario");
                 }
                 else {
-                    objUser.getTableAll(TblUsu);
+                    objUser.getTableAll(TblUsu, lblcant);
                     cleanBox();
                     JOptionPane.showMessageDialog(null,"usuario eliminado");
                 }

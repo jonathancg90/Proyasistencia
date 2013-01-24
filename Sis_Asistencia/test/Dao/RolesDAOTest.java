@@ -5,6 +5,7 @@
 package Dao;
 
 import Javabeans.Roles;
+import javax.swing.JLabel;
 import javax.swing.JTable;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -45,8 +46,9 @@ public class RolesDAOTest {
     public void testGetTableAll() {
         System.out.println("getTableAll");
         JTable tblDatos = null;
+        JLabel lblcant = null;
         RolesDAO instance = new RolesDAO();
-        instance.getTableAll(tblDatos);
+        instance.getTableAll(tblDatos, lblcant);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
@@ -105,9 +107,10 @@ public class RolesDAOTest {
         System.out.println("find");
         String name = "";
         JTable tblDatos = null;
+        JLabel lblcant = null;
         RolesDAO instance = new RolesDAO();
         int expResult = 0;
-        int result = instance.find(name, tblDatos);
+        int result = instance.find(name, tblDatos, lblcant);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");

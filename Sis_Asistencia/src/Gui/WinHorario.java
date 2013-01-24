@@ -39,7 +39,7 @@ public class WinHorario extends javax.swing.JInternalFrame {
         try {
             objhora = new HorariosDAO();
             qs = new Query();
-            objhora.getTableAll(tblhora);
+            objhora.getTableAll(tblhora, lblcant);
             qs.loadState(cbofindestado,false);
             qs.loadState(cboestado,false);
             qs.loadGlobal(1,cbofindtipo,1);
@@ -55,7 +55,7 @@ public class WinHorario extends javax.swing.JInternalFrame {
     private void cargaDetalle(){
         objdetail = new DetailHorarioDAO();
         String horario = lblId.getText();
-        objdetail.find(horario,JtblDetail);
+        objdetail.find(horario,JtblDetail, lblcant1);
        //objdetail.getTableAll(JtblDetail);
     }
     
@@ -159,6 +159,8 @@ public class WinHorario extends javax.swing.JInternalFrame {
         cbotipoReg = new javax.swing.JComboBox();
         TimSalida = new com.lavantech.gui.comp.TimePanel();
         TimIngreso = new com.lavantech.gui.comp.TimePanel();
+        lblcant1 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
         lblcant = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -321,24 +323,22 @@ public class WinHorario extends javax.swing.JInternalFrame {
         TimIngreso.setDisplayAnalog(false);
         TimIngreso.setSecDisplayed(false);
 
+        lblcant1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        jLabel13.setText("Total: ");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(40, 40, 40)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(BtnAgree)
-                        .addGap(37, 37, 37)
-                        .addComponent(BtnRemove)))
-                .addContainerGap(22, Short.MAX_VALUE))
-            .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(BtnAgree)
+                        .addGap(37, 37, 37)
+                        .addComponent(BtnRemove)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
@@ -362,6 +362,15 @@ public class WinHorario extends javax.swing.JInternalFrame {
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(cbotipoReg, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE))))))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(40, 40, 40)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel13)
+                        .addGap(17, 17, 17)
+                        .addComponent(lblcant1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -389,11 +398,15 @@ public class WinHorario extends javax.swing.JInternalFrame {
                         .addComponent(TimSalida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel13)
+                    .addComponent(lblcant1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BtnAgree)
                     .addComponent(BtnRemove))
-                .addGap(50, 50, 50))
+                .addContainerGap())
         );
 
         jTabbedPane1.addTab("Detalle del horario", jPanel2);
@@ -509,7 +522,7 @@ public class WinHorario extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel7)
                     .addComponent(lblcant, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
 
         pack();
@@ -535,7 +548,7 @@ public class WinHorario extends javax.swing.JInternalFrame {
                     }
                     else {
                         JOptionPane.showMessageDialog(null,"Horario eliminado");
-                        objhora.getTableAll(tblhora);
+                        objhora.getTableAll(tblhora, lblcant);
                         cleanBox();
                 }
             }
@@ -575,7 +588,7 @@ public class WinHorario extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(null,"No se pudo grabar datos");
             }
             else {
-                objhora.getTableAll(tblhora);
+                objhora.getTableAll(tblhora, lblcant);
                 cleanBox();
                 JOptionPane.showMessageDialog(null,"Nueva area registrada");      
             }
@@ -634,7 +647,7 @@ public class WinHorario extends javax.swing.JInternalFrame {
                     JOptionPane.showMessageDialog(null, "No se pudo actualizar datos");
                 }
                 else {
-                    objhora.getTableAll(tblhora);
+                    objhora.getTableAll(tblhora, lblcant);
                     cleanBox();
                     JOptionPane.showMessageDialog(null, "Horario actualizado");
                 } 
@@ -653,7 +666,7 @@ public class WinHorario extends javax.swing.JInternalFrame {
         dt = new Data();
         String  state = dt.G_BOOLEAN[cbofindestado.getSelectedIndex()].substring(0,1);
         objhora = new HorariosDAO();
-        objhora.find(state, tblhora);
+        objhora.find(state, tblhora, lblcant);
     }//GEN-LAST:event_btnfindMouseClicked
 
     private void BtnAgreeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAgreeActionPerformed
@@ -783,6 +796,7 @@ public class WinHorario extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -802,6 +816,7 @@ public class WinHorario extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lblId;
     private javax.swing.JLabel lblModified;
     private javax.swing.JLabel lblcant;
+    private javax.swing.JLabel lblcant1;
     private javax.swing.JMenu mclose;
     private javax.swing.JMenu medit;
     private javax.swing.JMenu mfile;

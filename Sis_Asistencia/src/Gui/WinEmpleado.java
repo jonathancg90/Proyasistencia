@@ -44,7 +44,7 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
         try {
             objempl = new EmpleadoDAO();
             qs = new Query();
-            objempl.getTableAll(tblEmpleado);
+            objempl.getTableAll(tblEmpleado, lblcant);
             qs.loadChoice(cboEstado,"estadoemp","nombre");
             qs.loadChoice(cboAreaFilter,"area","nombre");
             qs.loadChoice(cboEmpresa,"empresa","nombre");
@@ -478,7 +478,7 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null,"No se pudo grabar datos");
         }
         else {
-            objempl.getTableAll(tblEmpleado);
+            objempl.getTableAll(tblEmpleado, lblcant);
             cleanBox();
             JOptionPane.showMessageDialog(null,"Nuevo usuario registrado");
         }
@@ -520,7 +520,7 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(null,"No se pudo grabar datos");
             }
             else {
-                objempl.getTableAll(tblEmpleado);
+                objempl.getTableAll(tblEmpleado, lblcant);
                 cleanBox();
                 JOptionPane.showMessageDialog(null,"Nuevo usuario actualizado");
             }   
@@ -588,7 +588,7 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
                 //TODO: IMPLEMENTAR CAMBIO DE ESTADO (INACTIVO)
             }
             else {
-                objempl.getTableAll(tblEmpleado);
+                objempl.getTableAll(tblEmpleado, lblcant);
                 cleanBox();
                 JOptionPane.showMessageDialog(null,"Empleado eliminada");
             }
@@ -679,7 +679,7 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
         
         String  idarea = String.valueOf(cboAreaFilter.getSelectedIndex()+1);
         objempl = new EmpleadoDAO();
-        objempl.find(idarea, tblEmpleado);
+        objempl.find(idarea, tblEmpleado, lblcant);
     }//GEN-LAST:event_btnFiltroMouseClicked
 
     private void miteninfoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_miteninfoMousePressed

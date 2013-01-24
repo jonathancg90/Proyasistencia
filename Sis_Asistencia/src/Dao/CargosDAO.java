@@ -9,6 +9,7 @@ import Javabeans.Cargo;
 import Javabeans.Usuario;
 import java.sql.Date;
 import java.sql.PreparedStatement;
+import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -39,7 +40,7 @@ public class CargosDAO extends ConexionBd{
         witdhcolum[0]=50;
     }
     
-    public void getTableAll(JTable tblDatos){
+    public void getTableAll(JTable tblDatos, JLabel lblcant){
         try{
             DefaultTableModel datos;
             qs= new Query();
@@ -50,6 +51,8 @@ public class CargosDAO extends ConexionBd{
             datos = qs.getAll(campos,this._table,filter);
             tblDatos.setModel(datos);
             hp.setWidthJtable(tblDatos,witdhcolum);
+            int num = tblDatos.getRowCount();
+            lblcant.setText(String .valueOf(num));
         }
         catch(Exception e){
             System.out.println(_error+"getTableAll: "+e);
@@ -59,7 +62,7 @@ public class CargosDAO extends ConexionBd{
     /*
      * Filtros de busquedas
      */
-     public int find(String idare,JTable tblDatos) {
+     public int find(String idare, JTable tblDatos, JLabel lblcant) {
         int i = 0;
         try {
             if(!"".equals(idare)){
@@ -67,7 +70,7 @@ public class CargosDAO extends ConexionBd{
                 filter[0][0] = "int_idare";
                 filter[0][1] = idare;
             }
-            getTableAll(tblDatos);
+            getTableAll(tblDatos, lblcant);
         }
         catch(Exception e){
             System.out.println("Dao_AreaDAO_find : "+e);

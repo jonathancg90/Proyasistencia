@@ -50,7 +50,7 @@ public class WinEmpleado_Salarios extends javax.swing.JInternalFrame {
         try {
             objSalarios = new SalariosDAO();
             qs = new Query();
-            objSalarios.findId(lblIdemp.getText(), tblSalarios);
+            objSalarios.findId(lblIdemp.getText(), tblSalarios, lblcant);
             lblIdemp.setVisible(false);
         } catch (Exception e) {
             System.out.println(_error +"_CargaForm:"+ e);
@@ -160,14 +160,14 @@ public class WinEmpleado_Salarios extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6)
                     .addComponent(lblcant, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(30, 30, 30))
+                .addContainerGap())
         );
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 400, 360));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 400, 340));
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Ingreso de salarios"));
 
@@ -342,7 +342,7 @@ public class WinEmpleado_Salarios extends javax.swing.JInternalFrame {
                         JOptionPane.showMessageDialog(null,"No se pudo grabar datos");
                     }
                     else {
-                        objSalarios.findId(lblIdemp.getText(), tblSalarios);
+                        objSalarios.findId(lblIdemp.getText(), tblSalarios, lblcant);
                         cleanBox();
                         JOptionPane.showMessageDialog(null,"Nueva salario registrado");
                     }
@@ -387,7 +387,7 @@ public class WinEmpleado_Salarios extends javax.swing.JInternalFrame {
                         JOptionPane.showMessageDialog(null, "No se pudo actualizar datos");
                     }
                 else {
-                    objSalarios.findId(lblIdemp.getText(), tblSalarios);
+                    objSalarios.findId(lblIdemp.getText(), tblSalarios, lblcant);
                     cleanBox();
                     JOptionPane.showMessageDialog(null, "Salario actualizado");
                 }
@@ -423,7 +423,7 @@ public class WinEmpleado_Salarios extends javax.swing.JInternalFrame {
                     JOptionPane.showMessageDialog(null,"No se pudo eliminar el salario");
                 }
                 else {
-                    objSalarios.findId(lblIdemp.getText(), tblSalarios);
+                    objSalarios.findId(lblIdemp.getText(), tblSalarios, lblcant);
                     cleanBox();
                 } 
              }

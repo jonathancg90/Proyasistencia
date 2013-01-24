@@ -5,6 +5,7 @@
 package Dao;
 
 import Javabeans.Horarios;
+import javax.swing.JLabel;
 import javax.swing.JTable;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -45,8 +46,9 @@ public class HorariosDAOTest {
     public void testGetTableAll() {
         System.out.println("getTableAll");
         JTable tblDatos = null;
+        JLabel lblcant = null;
         HorariosDAO instance = new HorariosDAO();
-        instance.getTableAll(tblDatos);
+        instance.getTableAll(tblDatos, lblcant);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
@@ -109,9 +111,10 @@ public class HorariosDAOTest {
         System.out.println("find");
         String state = "";
         JTable tblDatos = null;
+        JLabel lblcant = null;
         HorariosDAO instance = new HorariosDAO();
         int expResult = 0;
-        int result = instance.find(state, tblDatos);
+        int result = instance.find(state, tblDatos, lblcant);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
