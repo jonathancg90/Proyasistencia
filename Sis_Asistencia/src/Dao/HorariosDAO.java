@@ -157,13 +157,15 @@ public class HorariosDAO extends ConexionBd{
    /*
      * Filtros de busqueda
      */
-    public int find(String state,JTable tblDatos) {
+    public int find(String state,String type, JTable tblDatos) {
         int i = 0;
         try {
             if(!"".equals(state)){
-                filter = new String[1][2];
-                filter[0][0] = "equ_estado";
-                filter[0][1] = state; 
+                filter = new String[2][2];
+                filter[0][0] = "equ_state";
+                filter[0][1] = state;
+                filter[1][0] = "int_typehor";
+                filter[1][1] = type; 
             }
             getTableAll(tblDatos);
         }

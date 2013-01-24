@@ -32,7 +32,7 @@ public class EmpleadoDAO extends ConexionBd{
      */
      public EmpleadoDAO(){
         _table = "Empleado";
-        _error = "Dao_EmpleadoDao_";
+        _error = "Dao_EmpleadoDao";
         filter = new String[0][0];
         campos = new String[4];
         campos[0]="idemp";
@@ -42,6 +42,7 @@ public class EmpleadoDAO extends ConexionBd{
         witdhcolum = new int[1];
         witdhcolum[0]=50;
     }
+
     public void getTableAll(JTable tblDatos){
         try{
             DefaultTableModel datos;
@@ -50,7 +51,6 @@ public class EmpleadoDAO extends ConexionBd{
             if (filter.length == 0){
                 filter = new String[0][0];
             }
-            System.out.println("Campo: "+campos[3]);
             datos = qs.getAll(campos,_table,filter);
             tblDatos.setModel(datos);
             hp.setWidthJtable(tblDatos,witdhcolum);
@@ -73,7 +73,8 @@ public class EmpleadoDAO extends ConexionBd{
             qs = new Query();
             String now = hp.getDateNow();
             //Grabar datos del empleado
-            objEmpl = new Empleado( idemp,  nombres, apellidos, dni,  telefono, now, 1,now, now, idare, idtip, idest,  idcar,  idempr,idsuc);
+            objEmpl = new Empleado( idemp,  nombres, apellidos, dni,  telefono,
+                    now, 1,now, now, idare, idtip, idest,  idcar,  idempr,idsuc);
             pt = qs.sqlRegister(_table);
            
             pt.setString(1,objEmpl.getNombres());
@@ -136,7 +137,9 @@ public class EmpleadoDAO extends ConexionBd{
     /*
      * Actualizacion de Empleado
      */
-    public int updateEmpleado(int idemp,String nombres, String apellidos, String dni, String telefono, int idare, int idtip, int idest, int idcar, int idempr,int idsuc){
+    public int updateEmpleado(int idemp,String nombres, String apellidos,
+            String dni, String telefono, int idare, int idtip, int idest,
+            int idcar, int idempr,int idsuc){
        int i=0;
         try{
             Date date = new Date(0000-00-00);
@@ -215,23 +218,6 @@ public class EmpleadoDAO extends ConexionBd{
             return i;
         }
     }
-    /*
-     * Filtros de busqueda
-     */
-    public int find(String idareaactivo,JTable tblDatos) {
-        int i = 0;
-        try {
-            if(!"".equals(idareaactivo)){
-                filter = new String[1][2];
-                filter[0][0] = "equ_idare";
-                filter[0][1] = idareaactivo; 
-            }
-            getTableAll(tblDatos);
-        }
-        catch(Exception e){
-        }
-        return i;
-    }
     
     /*
      * Cargar valores de busqueda al modelo 
@@ -266,9 +252,49 @@ public class EmpleadoDAO extends ConexionBd{
             return objEmpl;
         }
     }
-    
+    /*
+     * Filtros de busqueda
+     */
+    public int findAll(String idare,String idest, String apellido, JTable tblDatos) {
+        int i = 0;
+        try {
+            if(!"".equals(apellido)){
+                filter = new String[3][3];
+                filter[0][0] = "equ_idare";
+                filter[0][1] = idare;
+                filter[1][0] = "int_idest";
+                filter[1][1] = idest; 
+                filter[2][0] = "apellidos";
+                filter[2][1] = apellido.toUpperCase(); 
+            }
+            else {
+                findState(idare, idest, tblDatos);
+            }
+            getTableAll(tblDatos);
+        }
+        catch(Exception e){
+            System.out.println(_error + "findAll: "+e);
+        }
+        return i;
+    }
+    public int findState(String idare,String idest, JTable tblDatos) {
+        int i = 0;
+        try {
+            if(!"".equals(idare)){
+                filter = new String[2][2];
+                filter[0][0] = "equ_idare";
+                filter[0][1] = idare; 
+                filter[1][0] = "int_idest";
+                filter[1][1] = idest; 
+            }
+            getTableAll(tblDatos);
+        }
+        catch(Exception e){
+            System.out.println(_error + "findState: "+e);
+        }
+        return i;
+    }
     public int findAsistencia(String tipo,String empresa,String sucursal,JTable tblDatos){
-        
         int i=0;
         try {
             if(!"".equals(tipo) && !"".equals(empresa)&& !"".equals(sucursal)){
@@ -283,11 +309,12 @@ public class EmpleadoDAO extends ConexionBd{
             getTableAll(tblDatos);
         }
         catch(Exception e){
+            System.out.println(_error + "findAsistencia: "+e);
         }
         
         
         
         return i;
     }
-    
+  
 }
