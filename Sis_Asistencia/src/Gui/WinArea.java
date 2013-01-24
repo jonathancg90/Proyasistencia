@@ -41,7 +41,8 @@ public class WinArea extends javax.swing.JInternalFrame {
         try {
             objarea = new AreaDAO();
             qs = new Query();
-            objarea.getTableAll(tblArea, lblcant);
+            String state = String.valueOf(!Chkinactivo.isSelected());
+            objarea.findState(state,tblArea, lblcant);
             
             qs.loadState(cmbEstate, false);
             
@@ -76,8 +77,9 @@ public class WinArea extends javax.swing.JInternalFrame {
         btnFind = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblArea = new javax.swing.JTable();
-        lblcant = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        lblcant = new javax.swing.JLabel();
+        Chkinactivo = new javax.swing.JCheckBox();
         jMenuBar1 = new javax.swing.JMenuBar();
         mfile = new javax.swing.JMenu();
         mitemregister = new javax.swing.JMenuItem();
@@ -156,7 +158,7 @@ public class WinArea extends javax.swing.JInternalFrame {
                 .add(pnlOpcionesLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
                     .add(lblModified, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 32, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .add(jLabel3))
-                .addContainerGap(65, Short.MAX_VALUE))
+                .addContainerGap(107, Short.MAX_VALUE))
         );
 
         org.jdesktop.layout.GroupLayout pnlMantenimientoLayout = new org.jdesktop.layout.GroupLayout(pnlMantenimiento);
@@ -207,6 +209,12 @@ public class WinArea extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(tblArea);
 
+        jLabel5.setText("Total: ");
+
+        lblcant.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        Chkinactivo.setText("Inactivos");
+
         org.jdesktop.layout.GroupLayout jPanel1Layout = new org.jdesktop.layout.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -218,30 +226,40 @@ public class WinArea extends javax.swing.JInternalFrame {
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(btnFind)
                 .add(0, 7, Short.MAX_VALUE))
-            .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+            .add(jPanel1Layout.createSequentialGroup()
+                .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .add(0, 0, Short.MAX_VALUE)
+                        .add(Chkinactivo)
+                        .add(18, 18, 18)
+                        .add(jLabel5)
+                        .add(17, 17, 17)
+                        .add(lblcant, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 60, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
                 .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(jLabel6)
                     .add(txtFilter, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .add(btnFind))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
-                .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 8, Short.MAX_VALUE)
+                .add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 184, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                        .add(jLabel5)
+                        .add(Chkinactivo))
+                    .add(lblcant, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 260, -1));
-
-        lblcant.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        getContentPane().add(lblcant, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 290, 60, 20));
-
-        jLabel5.setText("Total: ");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 290, -1, -1));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 260, 300));
 
         mfile.setText("Archivo");
 
@@ -352,7 +370,8 @@ public class WinArea extends javax.swing.JInternalFrame {
     private void btnFindActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFindActionPerformed
         String name = txtFilter.getText();
         objarea = new AreaDAO();
-        objarea.find(name, tblArea,lblcant);
+        String state = String.valueOf(!Chkinactivo.isSelected());
+        objarea.findName(name,state, tblArea,lblcant);
     }//GEN-LAST:event_btnFindActionPerformed
 
     private void mcloseMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mcloseMousePressed
@@ -377,7 +396,8 @@ public class WinArea extends javax.swing.JInternalFrame {
                 }
                 else if (i>0){
                     JOptionPane.showMessageDialog(null,"Area eliminada");
-                    objarea.getTableAll(tblArea,lblcant);
+                    String state = String.valueOf(!Chkinactivo.isSelected());
+                    objarea.findState(state,tblArea, lblcant);
                     cleanBox();
                 }
                 else {
@@ -410,7 +430,8 @@ public class WinArea extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "No se pudo actualizar datos");
         }
         else {
-            objarea.getTableAll(tblArea,lblcant);
+            String state = String.valueOf(!Chkinactivo.isSelected());
+            objarea.findState(state,tblArea, lblcant);
             cleanBox();
             JOptionPane.showMessageDialog(null, "Area actualizada");
         }
@@ -437,7 +458,8 @@ public class WinArea extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(null,"No se pudo grabar datos");
             }
             else {
-                objarea.getTableAll(tblArea,lblcant);
+                String state = String.valueOf(!Chkinactivo.isSelected());
+                objarea.findState(state,tblArea, lblcant);
                 cleanBox();
                 JOptionPane.showMessageDialog(null,"Nueva area registrada");      
             }
@@ -525,6 +547,7 @@ public class WinArea extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jMenuItem1MousePressed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JCheckBox Chkinactivo;
     private javax.swing.JButton btnFind;
     private javax.swing.JComboBox cmbEstate;
     private javax.swing.JLabel jLabel1;

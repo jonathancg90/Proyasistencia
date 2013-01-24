@@ -281,7 +281,7 @@ public class WinArea_Cargos extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblcant, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30))
@@ -302,25 +302,25 @@ public class WinArea_Cargos extends javax.swing.JInternalFrame {
     private void mitemregisterMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemregisterMousePressed
      try{
         val = new Validators("cargo");    
-     Object[] datos = {txtname.getText()};
-     Object[] tipos = {2};
-     if(val.validar(datos,tipos)){   
-        String name = txtname.getText();
-            int idArea = Integer.parseInt(lblidArea.getText());
-            objCar = new CargosDAO();
-            int i = objCar.save(idArea,name);
-            if (i == 0) {
-                JOptionPane.showInputDialog(null,"No se pudo grabar datos");
-            }
-            else {
-                objCar.find(lblidArea.getText(),TblCargos);
-                cleanBox();
-                JOptionPane.showMessageDialog(null,"Nuevo cargo registrado");      
-            } 
-      }                                          
-      else {
-            JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
-      }
+        Object[] datos = {txtname.getText()};
+        Object[] tipos = {2};
+        if(val.validar(datos,tipos)){   
+           String name = txtname.getText();
+               int idArea = Integer.parseInt(lblidArea.getText());
+               objCar = new CargosDAO();
+               int i = objCar.save(idArea,name);
+               if (i == 0) {
+                   JOptionPane.showInputDialog(null,"No se pudo grabar datos");
+               }
+               else {
+                   objCar.find(lblidArea.getText(),TblCargos);
+                   cleanBox();
+                   JOptionPane.showMessageDialog(null,"Nuevo cargo registrado");      
+               } 
+         }                                          
+         else {
+               JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
+         }
         }catch(Exception e){
             System.out.println(_error + "_Register: " + e);
         }

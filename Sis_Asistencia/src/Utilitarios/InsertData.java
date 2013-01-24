@@ -24,6 +24,7 @@ public class InsertData {
     private PermisoshasRolesDAO per_mod;
     private TipomonedaDAO mon;
     private CiudadDAO ciu;
+    private String[] args =  new String[1];
 
     
     public static void main(String[] args) throws SQLException, 
@@ -31,10 +32,10 @@ public class InsertData {
         InsertData insert = new InsertData();
         insert.deleteRegister();
         insert.insertModulos();
-        insert.inserRoles();
+        insert.insertRoles();
         insert.insertPermiso_Roles();
-        insert.inserMoneda();
-        insert.inserCiudad();
+        insert.insertMoneda();
+        insert.insertCiudad();
         insert.insertArea();
         insert.insertCargos();
         insert.insertEmpresa();
@@ -44,16 +45,21 @@ public class InsertData {
         insert.insertTipoEmpleado();
         insert.insertEstadoEmpleado();
         insert.insertEmpleado();
+        insert.insertHorarioEmpleado();
     }
 
     public void deleteRegister() throws SQLException {
         qs = new Query();
         System.out.println("Eliminando registross ...");
+        qs.DeleteAll("usuario");
+        qs.DeleteAll("registro_backlog");
+        qs.DeleteAll("registro");
+        qs.DeleteAll("empleado_has_horarios");
         qs.DeleteAll("empleado");
-        qs.DeleteAll("estadoemp");
         qs.DeleteAll("tipoempleado");
         qs.DeleteAll("detailhorario");
         qs.DeleteAll("horarios");
+        qs.DeleteAll("estadoemp");
         qs.DeleteAll("sucursal");
         qs.DeleteAll("empresa");
         qs.DeleteAll("cargo");
@@ -87,7 +93,7 @@ public class InsertData {
         }
     }
     
-    public void inserRoles() {
+    public void insertRoles() {
         rol = new RolesDAO();
         System.out.println("Insert data Roles ...");
         rol.save("Super administrador");
@@ -95,7 +101,7 @@ public class InsertData {
         rol.save("Consultor");
     }
     
-    public void inserCiudad() throws WriteException, IOException, SQLException, BiffException {
+    public void insertCiudad() throws WriteException, IOException, SQLException, BiffException {
         xls = new JExcel();
         qs = new Query();
         System.out.println("Insert data Ciudades ...");
@@ -108,8 +114,11 @@ public class InsertData {
                 }
             qs.RegisterAll("ciudad", reg);
         }
+        args[0] = "ciudad";
+        String name = "ciudad_idciu_seq";
+        qs.AlterSecuence(name, qs.getCountRegister(args)+1);
     }
-    public void inserMoneda() throws WriteException, IOException, BiffException, SQLException {
+    public void insertMoneda() throws WriteException, IOException, BiffException, SQLException {
         xls = new JExcel();
         qs = new Query();
         System.out.println("Insert data Monedas ...");
@@ -122,7 +131,9 @@ public class InsertData {
                 }
             qs.RegisterAll("moneda", reg);
         }
-
+        args[0] = "moneda";
+        String name = "moneda_idmon_seq";
+        qs.AlterSecuence(name, qs.getCountRegister(args)+1);
     }
     public void insertArea() throws IOException, BiffException, WriteException, SQLException{
         xls = new JExcel();
@@ -137,6 +148,9 @@ public class InsertData {
                 }
             qs.RegisterAll("area", reg);
         }
+        args[0] = "area";
+        String name = "area_idare_seq";
+        qs.AlterSecuence(name, qs.getCountRegister(args)+1);
     }
     public void insertCargos() throws IOException, BiffException, WriteException, SQLException{
         xls = new JExcel();
@@ -151,6 +165,9 @@ public class InsertData {
                 }
             qs.RegisterAll("cargo", reg);
         }
+        args[0] = "cargo";
+        String name = "cargo_idcar_seq";
+        qs.AlterSecuence(name, qs.getCountRegister(args)+1);
     }
     public void insertEmpresa() throws IOException, BiffException, WriteException, SQLException{
         xls = new JExcel();
@@ -165,6 +182,9 @@ public class InsertData {
                 }
             qs.RegisterAll("empresa", reg);
         }
+        args[0] = "empresa";
+        String name = "empresa_idempr_seq";
+        qs.AlterSecuence(name, qs.getCountRegister(args)+1);
     }
     public void insertSucursal() throws IOException, BiffException, WriteException, SQLException{
         xls = new JExcel();
@@ -179,6 +199,9 @@ public class InsertData {
                 }
             qs.RegisterAll("sucursal", reg);
         }
+        args[0] = "empresa";
+        String name = "sucursal_idsuc_seq";
+        qs.AlterSecuence(name, qs.getCountRegister(args)+1);
     }
     public void insertHorarios() throws IOException, BiffException, WriteException, SQLException{
         xls = new JExcel();
@@ -193,6 +216,9 @@ public class InsertData {
                 }
             qs.RegisterAll("horarios", reg);
         }
+        args[0] = "horarios";
+        String name = "horarios_idhor_seq";
+        qs.AlterSecuence(name, qs.getCountRegister(args)+1);
     }
    public void insertDetailHorarios() throws IOException, BiffException, WriteException, SQLException{
         xls = new JExcel();
@@ -207,6 +233,9 @@ public class InsertData {
                 }
             qs.RegisterAll("detailhorario", reg);
         }
+        args[0] = "detailhorario";
+        String name = "detailhorario_iddet_hor_seq";
+        qs.AlterSecuence(name, qs.getCountRegister(args)+1);
     }  
    
    public void insertTipoEmpleado() throws IOException, BiffException, WriteException, SQLException{
@@ -222,9 +251,12 @@ public class InsertData {
                 }
             qs.RegisterAll("tipoempleado", reg);
         }
+        args[0] = "tipoempleado";
+        String name = "tipoempleado_idtip_seq";
+        qs.AlterSecuence(name, qs.getCountRegister(args)+1);
     }   
    
-       public void insertEstadoEmpleado() throws IOException, BiffException, WriteException, SQLException{
+    public void insertEstadoEmpleado() throws IOException, BiffException, WriteException, SQLException{
         xls = new JExcel();
         qs = new Query();
         System.out.println("Insert data  Estado de Empleados ...");
@@ -237,6 +269,9 @@ public class InsertData {
                 }
             qs.RegisterAll("estadoemp", reg);
         }
+        args[0] = "estadoemp";
+        String name = "estadoemp_idest_seq";
+        qs.AlterSecuence(name, qs.getCountRegister(args)+1);
     }   
        
     public void insertEmpleado() throws IOException, BiffException, WriteException, SQLException{
@@ -252,6 +287,26 @@ public class InsertData {
                 }
             qs.RegisterAll("empleado", reg);
         }
+        args[0] = "empleado";
+        String name = "empleado_idemp_seq";
+        qs.AlterSecuence(name, qs.getCountRegister(args)+1);
     }    
+    public void insertHorarioEmpleado() throws IOException, BiffException, WriteException, SQLException{
+        xls = new JExcel();
+        qs = new Query();
+        System.out.println("Insert data  Horarios de empleados ...");
+        String data[][];
+        data = xls.ExcelUp("horario_personal");
+        for(int r=1;r<data.length;r++){
+            String [] reg = new String[data[r].length];
+                for(int c=0;c<data[r].length;c++){
+                    reg[c]=data[r][c];
+                }
+            qs.RegisterAll("empleado_has_horarios", reg);
+        }
+        args[0] = "empleado_has_horarios";
+        String name = "empleado_has_horarios_NMID_seq";
+        qs.AlterSecuence(name, qs.getCountRegister(args)+1);
+    } 
    
 }

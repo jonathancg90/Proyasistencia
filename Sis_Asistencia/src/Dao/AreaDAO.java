@@ -178,13 +178,33 @@ public class AreaDAO extends ConexionBd{
      * int_ = Busqueda de entero
      * equ_ = busca exactamente la plabra
      */
-    public int find(String name,JTable tblDatos, JLabel lblcant) {
+    public int findName(String name, String state,JTable tblDatos, JLabel lblcant) {
         int i = 0;
         try {
-            if(!"".equals(name)){
-                filter = new String[1][2];
+            System.out.println(name);
+            if(!"".equals(name) && !"".equals(state)){
+                filter = new String[2][2];
                 filter[0][0] = "nombre";
-                filter[0][1] = name.toUpperCase(); 
+                filter[0][1] = name.toUpperCase();
+                filter[1][0] = "int_estado";
+                filter[1][1] = state; 
+            } else {
+                findState(state,tblDatos,lblcant);
+            }
+            getTableAll(tblDatos,lblcant);
+        }
+        catch(Exception e){
+            System.out.println(_error + "find : "+e);
+        }
+        return i;
+    }
+    public int findState(String state,JTable tblDatos, JLabel lblcant) {
+        int i = 0;
+        try {
+            if(!"".equals(state)){
+                filter = new String[1][2];
+                filter[0][0] = "int_estado";
+                filter[0][1] = state; 
             }
             getTableAll(tblDatos,lblcant);
         }
@@ -194,7 +214,6 @@ public class AreaDAO extends ConexionBd{
         return i;
     }
     
-
     /*
      * Cargar valores de busqueda al modelo 
      */
