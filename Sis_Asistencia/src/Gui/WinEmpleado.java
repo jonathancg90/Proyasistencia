@@ -140,8 +140,8 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
         mvac = new javax.swing.JMenu();
         jmfoto = new javax.swing.JMenu();
         mAbrirFoto = new javax.swing.JMenuItem();
-        mclose = new javax.swing.JMenu();
         mExtra = new javax.swing.JMenu();
+        mclose = new javax.swing.JMenu();
 
         jMenuItem1.setText("jMenuItem1");
 
@@ -324,16 +324,18 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
                     .addComponent(jLabel15)
                     .addComponent(CmbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 177, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel13)
                     .addComponent(lblcant, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
+        mfile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilitarios/Img/Archivo.png"))); // NOI18N
         mfile.setText("Archivo");
 
         mitemregister.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.CTRL_MASK));
+        mitemregister.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilitarios/Img/registrar.png"))); // NOI18N
         mitemregister.setText("Registrar");
         mitemregister.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -343,6 +345,7 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
         mfile.add(mitemregister);
 
         mitemupdate.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));
+        mitemupdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilitarios/Img/actualizar.png"))); // NOI18N
         mitemupdate.setText("Actualizar");
         mitemupdate.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -352,6 +355,7 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
         mfile.add(mitemupdate);
 
         mitemdelete.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_X, java.awt.event.InputEvent.CTRL_MASK));
+        mitemdelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilitarios/Img/eliminar.png"))); // NOI18N
         mitemdelete.setText("Eliminar");
         mitemdelete.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -362,9 +366,11 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
 
         jMenuBar1.add(mfile);
 
+        medit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilitarios/Img/Editar.png"))); // NOI18N
         medit.setText("Edit");
 
         mitemclear.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.CTRL_MASK));
+        mitemclear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilitarios/Img/limpiar.png"))); // NOI18N
         mitemclear.setText("Limpiar");
         mitemclear.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -381,6 +387,7 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
         });
         medit.add(miteninfo);
 
+        ItemExportar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilitarios/Img/exportar.png"))); // NOI18N
         ItemExportar.setText("Exportar");
         ItemExportar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -399,6 +406,7 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
         });
         jMenuBar1.add(jmhuella);
 
+        mhor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilitarios/Img/ver_asistencia.png"))); // NOI18N
         mhor.setText("Horarios");
         mhor.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -407,6 +415,7 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
         });
         jMenuBar1.add(mhor);
 
+        msue.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilitarios/Img/Salario.png"))); // NOI18N
         msue.setText("Salarios");
         msue.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -415,6 +424,7 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
         });
         jMenuBar1.add(msue);
 
+        mvac.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilitarios/Img/Vacaciones.png"))); // NOI18N
         mvac.setText("Vacaciones");
         mvac.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -423,6 +433,7 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
         });
         jMenuBar1.add(mvac);
 
+        jmfoto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilitarios/Img/Foto.png"))); // NOI18N
         jmfoto.setText("Foto");
 
         mAbrirFoto.setText("Abrir");
@@ -435,14 +446,7 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
 
         jMenuBar1.add(jmfoto);
 
-        mclose.setText("Cerrar");
-        mclose.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                mcloseMousePressed(evt);
-            }
-        });
-        jMenuBar1.add(mclose);
-
+        mExtra.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilitarios/Img/Calculos.png"))); // NOI18N
         mExtra.setText("Calculos");
         mExtra.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -450,6 +454,15 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
             }
         });
         jMenuBar1.add(mExtra);
+
+        mclose.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilitarios/Img/Cerrar.png"))); // NOI18N
+        mclose.setText("Cerrar");
+        mclose.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                mcloseMousePressed(evt);
+            }
+        });
+        jMenuBar1.add(mclose);
 
         setJMenuBar(jMenuBar1);
 

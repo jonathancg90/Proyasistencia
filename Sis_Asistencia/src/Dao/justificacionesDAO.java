@@ -58,7 +58,7 @@ public class justificacionesDAO extends ConexionBd{
     
     }
     
-   public int save(int idemp,int idtip_reg, String fecha,String motivo,String recibo,Time horas){
+   public int save(int idemp,int idtip_reg, String fecha,String motivo,String recibo,Time horas,Time inicio, Time fin){
        int i=0;
         try{
             Date date = new Date(0000-00-00);
@@ -66,15 +66,17 @@ public class justificacionesDAO extends ConexionBd{
             getConexion();
             qs = new Query();
             String Table = this._table;
-            objjusti = new Justificaciones(0,idemp,idtip_reg,fecha,motivo,recibo,horas);
+            objjusti = new Justificaciones(0,idemp,idtip_reg,fecha,motivo,recibo,horas,inicio,fin);
             //Iniciando consulta y asignando valores
             
             pt.setInt(1,objjusti.getEmpleado_idemp());
             pt.setInt(2,objjusti.getTipo_justificaciones_idtip_jus());
-            pt.setDate(3,date.valueOf(objjusti.getFecha()));
-            pt.setString(4,objjusti.getMotivo());
-            pt.setString(5,objjusti.getRecibo());
-            pt.setTime(6,objjusti.getHoras());;
+            pt.setString(3,objjusti.getMotivo());
+            pt.setString(4,objjusti.getRecibo());
+            pt.setTime(5,objjusti.getHoras());
+            pt.setDate(6,date.valueOf(objjusti.getFecha()));
+            pt.setTime(7,objjusti.getInicio());
+            pt.setTime(8,objjusti.getFin());
             //Ejecucion y cierre
             i= pt.executeUpdate();
             pt.close();

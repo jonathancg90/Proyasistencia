@@ -69,13 +69,7 @@ public class Helpers{
         return date;
     }
      
-    /*
-     * Encriptador
-     */
-    
-    
-    /*
-     * Desencriptador
-     */
-            
+//Suma horas
+//Ingreso dos horas me devuelve la diferencua entre las horas
+//Ingreso empleado, dia me devuelve su horario de ese dia (entradas salidas)            
 }

@@ -496,7 +496,7 @@ public class WinJustificacion extends javax.swing.JInternalFrame {
                 Time hrs = Time.valueOf(String.valueOf(ing.compareTo(sal)));
                 String fecha=hp.getFormatDate(cboDia.getText());
                 int tipojus =  Integer.parseInt(qs.idChoice("justificaciones","nombre",String.valueOf(cboTipojus.getSelectedItem())));
-                int i = objjusti.save(id,tipojus,fecha,motivo,recivo,hrs);
+                int i = objjusti.save(id,tipojus,fecha,motivo,recivo,hrs,ing,sal);
                 
                 if (i == 0 ) {
                     JOptionPane.showMessageDialog(null,"No se pudo grabar el detalle");

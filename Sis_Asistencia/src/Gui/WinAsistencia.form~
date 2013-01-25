@@ -6,7 +6,10 @@
       <SubComponents>
         <Menu class="javax.swing.JMenu" name="mman">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Mantenimiento"/>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/Utilitarios/Img/Archivo.png"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Archivo"/>
           </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="mitemupdate">
@@ -29,13 +32,19 @@
         </Menu>
         <Menu class="javax.swing.JMenu" name="medit">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Edit"/>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/Utilitarios/Img/Editar.png"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Editar"/>
           </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="mitemclear">
               <Properties>
                 <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
                   <KeyStroke key="Ctrl+E"/>
+                </Property>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/Utilitarios/Img/limpiar.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Limpiar"/>
               </Properties>
@@ -45,6 +54,9 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="ItemExportar">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/Utilitarios/Img/exportar.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Exportar"/>
               </Properties>
               <Events>
@@ -53,13 +65,11 @@
             </MenuItem>
           </SubComponents>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="mver">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Ver asistencias"/>
-          </Properties>
-        </Menu>
         <Menu class="javax.swing.JMenu" name="mclose">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/Utilitarios/Img/Cerrar.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Cerrar"/>
           </Properties>
           <Events>
@@ -99,10 +109,10 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
 <<<<<<< HEAD
-              <Component id="jPanel3" pref="643" max="32767" attributes="0"/>
+              <Component id="jPanel3" pref="646" max="32767" attributes="0"/>
 =======
-              <Component id="jPanel3" pref="638" max="32767" attributes="0"/>
->>>>>>> 8a315f4089b440f645289fbe93053f5db3c0c97d
+              <Component id="jPanel3" max="32767" attributes="0"/>
+>>>>>>> f057e68aa1a51760c1c923745f36f6eba4306462
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -517,13 +527,13 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jScrollPane2" pref="397" max="32767" attributes="0"/>
+                          <Component id="jScrollPane2" pref="376" max="32767" attributes="0"/>
                           <EmptySpace min="-2" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jLabel12" min="-2" max="-2" attributes="0"/>
                               <Component id="lblcant" min="-2" pref="20" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="18" max="32767" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -564,7 +574,6 @@
                 </Component>
               </SubComponents>
             </Container>
-<<<<<<< HEAD
             <Container class="javax.swing.JPanel" name="jPanel7">
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
@@ -748,8 +757,6 @@
                 </Component>
               </SubComponents>
             </Container>
-=======
->>>>>>> 8a315f4089b440f645289fbe93053f5db3c0c97d
             <Container class="javax.swing.JPanel" name="jPanel2">
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
@@ -800,7 +807,11 @@
                               <Component id="jLabel18" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="lblcant3" alignment="0" min="-2" pref="20" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="34" max="32767" attributes="0"/>
+<<<<<<< HEAD
+                          <EmptySpace max="32767" attributes="0"/>
+=======
+                          <EmptySpace pref="36" max="32767" attributes="0"/>
+>>>>>>> f057e68aa1a51760c1c923745f36f6eba4306462
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -994,7 +1005,7 @@
                 </Component>
               </SubComponents>
             </Container>
-            <Container class="javax.swing.JPanel" name="jPanel7">
+            <Container class="javax.swing.JPanel" name="jPanel9">
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
                   <JTabbedPaneConstraints tabName="Ver asistencias">
@@ -1002,59 +1013,15 @@
                   </JTabbedPaneConstraints>
                 </Constraint>
               </Constraints>
-
-              <Layout>
-                <DimensionLayout dim="0">
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
-                          <Component id="jPanel10" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="13" max="32767" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace max="32767" attributes="0"/>
-                          <Component id="jScrollPane3" min="-2" pref="410" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
-                          <Component id="jLabel14" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="17" pref="17" max="-2" attributes="0"/>
-                          <Component id="lblcant1" min="-2" pref="60" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
-                          <Component id="jButton2" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
-                </DimensionLayout>
-                <DimensionLayout dim="1">
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jPanel10" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="jScrollPane3" min="-2" pref="241" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="jButton2" min="-2" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jLabel14" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lblcant1" alignment="0" min="-2" pref="20" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                      </Group>
-                  </Group>
-                </DimensionLayout>
-              </Layout>
               <SubComponents>
-                <Container class="javax.swing.JScrollPane" name="jScrollPane3">
+                <Container class="javax.swing.JScrollPane" name="jScrollPane6">
                   <AuxValues>
                     <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
                   </AuxValues>
 
                   <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                   <SubComponents>
-                    <Component class="javax.swing.JTable" name="tblFiltroFecha">
+                    <Component class="javax.swing.JTable" name="tblFiltroFecha1">
                       <Properties>
                         <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                           <Table columnCount="0" rowCount="4"/>
@@ -1063,12 +1030,12 @@
                     </Component>
                   </SubComponents>
                 </Container>
-                <Component class="javax.swing.JButton" name="jButton2">
+                <Component class="javax.swing.JButton" name="jButton3">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Exportar"/>
                   </Properties>
                 </Component>
-                <Container class="javax.swing.JPanel" name="jPanel10">
+                <Container class="javax.swing.JPanel" name="jPanel12">
                   <Properties>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
@@ -1076,6 +1043,8 @@
                       </Border>
                     </Property>
                   </Properties>
+<<<<<<< HEAD
+=======
 
                   <Layout>
                     <DimensionLayout dim="0">
@@ -1112,32 +1081,33 @@
                                   <Component id="cboFin" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace min="0" pref="8" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="2" max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
                               <Component id="btnDateSearch" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="21" max="32767" attributes="0"/>
+                              <EmptySpace pref="15" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
                   </Layout>
+>>>>>>> f057e68aa1a51760c1c923745f36f6eba4306462
                   <SubComponents>
-                    <Component class="datechooser.beans.DateChooserCombo" name="cboIni">
+                    <Component class="datechooser.beans.DateChooserCombo" name="cboIni1">
                     </Component>
-                    <Component class="datechooser.beans.DateChooserCombo" name="cboFin">
+                    <Component class="datechooser.beans.DateChooserCombo" name="cboFin1">
                     </Component>
-                    <Component class="javax.swing.JLabel" name="jLabel9">
+                    <Component class="javax.swing.JLabel" name="jLabel20">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Fecha inicial"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JLabel" name="jLabel10">
+                    <Component class="javax.swing.JLabel" name="jLabel21">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Fecha final "/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JButton" name="btnDateSearch">
+                    <Component class="javax.swing.JButton" name="btnDateSearch1">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Buscar"/>
                       </Properties>
@@ -1147,7 +1117,7 @@
                     </Component>
                   </SubComponents>
                 </Container>
-                <Component class="javax.swing.JLabel" name="lblcant2">
+                <Component class="javax.swing.JLabel" name="lblcant5">
                   <Properties>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
@@ -1156,17 +1126,17 @@
                     </Property>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JLabel" name="jLabel17">
+                <Component class="javax.swing.JLabel" name="jLabel22">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Total: "/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JLabel" name="jLabel14">
+                <Component class="javax.swing.JLabel" name="jLabel23">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Total: "/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JLabel" name="lblcant1">
+                <Component class="javax.swing.JLabel" name="lblcant6">
                   <Properties>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">

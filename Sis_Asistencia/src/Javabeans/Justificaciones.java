@@ -11,11 +11,13 @@ public class Justificaciones {
     private String motivo;
     private String recibo;
     private Time horas;
+    private Time inicio;
+    private Time fin;
 
     public Justificaciones() {
     }
 
-    public Justificaciones(int idjus, int empleado_idemp, int tipo_justificaciones_idtip_jus, String fecha, String motivo, String recibo, Time horas) {
+    public Justificaciones(int idjus, int empleado_idemp, int tipo_justificaciones_idtip_jus, String fecha, String motivo, String recibo, Time horas, Time inicio, Time fin) {
         this.idjus = idjus;
         this.empleado_idemp = empleado_idemp;
         this.tipo_justificaciones_idtip_jus = tipo_justificaciones_idtip_jus;
@@ -23,6 +25,8 @@ public class Justificaciones {
         this.motivo = motivo;
         this.recibo = recibo;
         this.horas = horas;
+        this.inicio = inicio;
+        this.fin = fin;
     }
 
     /**
@@ -123,5 +127,33 @@ public class Justificaciones {
         this.horas = horas;
     }
 
-    
+    /**
+     * @return the inicio
+     */
+    public Time getInicio() {
+        return inicio;
+    }
+
+    /**
+     * @param inicio the inicio to set
+     */
+    public void setInicio(Time inicio) {
+        this.inicio = inicio;
+    }
+
+    /**
+     * @return the fin
+     */
+    public Time getFin() {
+        return fin;
+    }
+
+    /**
+     * @param fin the fin to set
+     */
+    public void setFin(Time fin) {
+        this.fin = fin;
+    }
+
+     
 }
