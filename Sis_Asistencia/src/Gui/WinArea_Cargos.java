@@ -301,7 +301,7 @@ public class WinArea_Cargos extends javax.swing.JInternalFrame {
 
     private void mitemregisterMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemregisterMousePressed
      try{
-        val = new Validators("cargo");    
+        val = new Validators("cargo");
      Object[] datos = {txtname.getText()};
      Object[] tipos = {2};
      if(val.validar(datos,tipos)){   

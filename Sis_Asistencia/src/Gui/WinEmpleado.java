@@ -46,6 +46,7 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
             qs = new Query();
             objempl.getTableAll(tblEmpleado, lblcant);
             qs.loadChoice(cboEstado,"estadoemp","nombre");
+            qs.loadChoice(CmbEstado,"estadoemp","nombre");
             qs.loadChoice(cboAreaFilter,"area","nombre");
             qs.loadChoice(cboEmpresa,"empresa","nombre");
             qs.setIdentify("idempr");
@@ -56,6 +57,13 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
             qs.loadChoiceDefault(cboCargo,"cargo","nombre",
             Integer.parseInt(qs.idChoice("area","nombre",String.valueOf(cboArea.getSelectedItem()))));
             qs.loadChoice(cboTipo,"tipoempleado","nombre");
+            
+            String  idarea = qs.idChoice("area","nombre",String.valueOf(cboAreaFilter.getSelectedItem()));
+            String  idest = qs.idChoice("estadoemp","nombre",String.valueOf(CmbEstado.getSelectedItem()));
+            String apellido = TxtApellido.getText();
+            objempl = new EmpleadoDAO();
+
+            objempl.findAll(idarea,idest,apellido,tblEmpleado, lblcant);
 
         } catch (Exception e) {
             System.out.println(_error+"_CaragForm:" + e);
@@ -110,10 +118,13 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
         tblEmpleado = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
         cboAreaFilter = new javax.swing.JComboBox();
-        chkactivo = new javax.swing.JCheckBox();
         btnFiltro = new javax.swing.JButton();
         lblcant = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        TxtApellido = new javax.swing.JTextField();
+        jLabel15 = new javax.swing.JLabel();
+        CmbEstado = new javax.swing.JComboBox();
         jMenuBar1 = new javax.swing.JMenuBar();
         mfile = new javax.swing.JMenu();
         mitemregister = new javax.swing.JMenuItem();
@@ -249,18 +260,25 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
 
         jLabel3.setText("Area");
 
-        chkactivo.setText("Activos");
-
         btnFiltro.setText("Ok");
         btnFiltro.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnFiltroMouseClicked(evt);
             }
         });
+        btnFiltro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFiltroActionPerformed(evt);
+            }
+        });
 
         lblcant.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jLabel13.setText("Total: ");
+
+        jLabel14.setText("Apellidos");
+
+        jLabel15.setText("Estado");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -270,15 +288,22 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 627, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1)
                         .addContainerGap())
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(8, 8, 8)
+                        .addComponent(jLabel14)
+                        .addGap(28, 28, 28)
+                        .addComponent(TxtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel3)
-                        .addGap(29, 29, 29)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cboAreaFilter, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel15)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(CmbEstado, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(chkactivo)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnFiltro)
                         .addGap(26, 26, 26))
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -293,10 +318,13 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(cboAreaFilter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(chkactivo)
-                    .addComponent(btnFiltro))
+                    .addComponent(btnFiltro)
+                    .addComponent(jLabel14)
+                    .addComponent(TxtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel15)
+                    .addComponent(CmbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel13)
@@ -432,10 +460,8 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 174, Short.MAX_VALUE))
-                    .addComponent(pnlMantenimiento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(pnlMantenimiento, javax.swing.GroupLayout.DEFAULT_SIZE, 850, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -495,7 +521,7 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
         val = new Validators("empleado");    
         Object[] datos = {txtnombres.getText(),txtapellidos.getText(),
                           txtdni.getText(),txttelefono.getText(),lblidempleado.getText()};
-        Object[] tipos = {2,3,4,5};
+        Object[] tipos = {2,3,4,5,0};
         if(val.validar(datos,tipos)){ 
             Data dt = new Data();
             qs = new Query();
@@ -529,7 +555,7 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
         }
     }catch(Exception e){
-        System.out.println(_error + "_Update:" + e);
+        System.out.println(_error + "Update:" + e);
     }
     }//GEN-LAST:event_mitemupdateMousePressed
 
@@ -676,10 +702,12 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_cboAreaActionPerformed
 
     private void btnFiltroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFiltroMouseClicked
-        
-        String  idarea = String.valueOf(cboAreaFilter.getSelectedIndex()+1);
+
+        String  idarea = qs.idChoice("area","nombre",String.valueOf(cboAreaFilter.getSelectedItem()));
+        String  idest = qs.idChoice("estadoemp","nombre",String.valueOf(CmbEstado.getSelectedItem()));
+        String apellido = TxtApellido.getText();
         objempl = new EmpleadoDAO();
-        objempl.find(idarea, tblEmpleado, lblcant);
+        objempl.findAll(idarea,idest,apellido,tblEmpleado, lblcant);
     }//GEN-LAST:event_btnFiltroMouseClicked
 
     private void miteninfoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_miteninfoMousePressed
@@ -795,8 +823,14 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jmhuellaMousePressed
 
+    private void btnFiltroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFiltroActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnFiltroActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox CmbEstado;
     private javax.swing.JMenuItem ItemExportar;
+    private javax.swing.JTextField TxtApellido;
     private javax.swing.JButton btnFiltro;
     private javax.swing.JComboBox cboArea;
     private javax.swing.JComboBox cboAreaFilter;
@@ -805,12 +839,13 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox cboEstado;
     private javax.swing.JComboBox cboSucursal;
     private javax.swing.JComboBox cboTipo;
-    private javax.swing.JCheckBox chkactivo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

@@ -75,8 +75,8 @@ public class QueryTest {
         System.out.println("sqlSearch");
         Query instance = new Query();
         String expResult = "";
-        String result = instance.sqlSearch();
-        assertEquals(expResult, result);
+        //String result = instance.sqlSearch();
+        //assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }

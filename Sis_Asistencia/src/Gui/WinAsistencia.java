@@ -180,6 +180,20 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
         tblAsistencia = new javax.swing.JTable();
         jLabel18 = new javax.swing.JLabel();
         lblcant3 = new javax.swing.JLabel();
+        jPanel9 = new javax.swing.JPanel();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        tblFiltroFecha1 = new javax.swing.JTable();
+        jButton3 = new javax.swing.JButton();
+        jPanel12 = new javax.swing.JPanel();
+        cboIni1 = new datechooser.beans.DateChooserCombo();
+        cboFin1 = new datechooser.beans.DateChooserCombo();
+        jLabel20 = new javax.swing.JLabel();
+        jLabel21 = new javax.swing.JLabel();
+        btnDateSearch1 = new javax.swing.JButton();
+        lblcant5 = new javax.swing.JLabel();
+        jLabel22 = new javax.swing.JLabel();
+        jLabel23 = new javax.swing.JLabel();
+        lblcant6 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         mman = new javax.swing.JMenu();
         mitemupdate = new javax.swing.JMenuItem();
@@ -427,12 +441,12 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 397, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 376, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel12)
                     .addComponent(lblcant, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Lista de empleados", jPanel4);
@@ -686,12 +700,64 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel18)
                     .addComponent(lblcant3, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(34, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Registrar Asistencia", jPanel2);
 
-        jPanel3.add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 130, 451, 490));
+        tblFiltroFecha1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane6.setViewportView(tblFiltroFecha1);
+
+        jPanel9.add(jScrollPane6);
+
+        jButton3.setText("Exportar");
+        jPanel9.add(jButton3);
+
+        jPanel12.setBorder(javax.swing.BorderFactory.createTitledBorder("Rango de busqueda"));
+        jPanel12.add(cboIni1);
+        jPanel12.add(cboFin1);
+
+        jLabel20.setText("Fecha inicial");
+        jPanel12.add(jLabel20);
+
+        jLabel21.setText("Fecha final ");
+        jPanel12.add(jLabel21);
+
+        btnDateSearch1.setText("Buscar");
+        btnDateSearch1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton5MouseClicked(evt);
+            }
+        });
+        jPanel12.add(btnDateSearch1);
+
+        jPanel9.add(jPanel12);
+
+        lblcant5.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel9.add(lblcant5);
+
+        jLabel22.setText("Total: ");
+        jPanel9.add(jLabel22);
+
+        jLabel23.setText("Total: ");
+        jPanel9.add(jLabel23);
+
+        lblcant6.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel9.add(lblcant6);
+
+        jTabbedPane1.addTab("Ver asistencias", jPanel9);
+
+        jPanel3.add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 140, 451, 490));
 
         mman.setText("Mantenimiento");
 
@@ -759,7 +825,7 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 643, Short.MAX_VALUE)
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 646, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -831,12 +897,13 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_mitemdeleteMousePressed
 
     private void mitemupdateMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemupdateMousePressed
-       try{
+       if(!"".equals(lblidEmp.getText())){
+        try{
         int id = Integer.parseInt(lblidEmp.getText());
         val = new Validators();    
         qs=new Query();
         hp=new Helpers();
-        if(!"".equals(lblidEmp.getText())){
+        
             
              //Validacion propia del evento
                 
@@ -863,14 +930,14 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
                     }
                 
             
-        } else {
-            JOptionPane.showMessageDialog(null,"Seleccione un empleado para poder ingresar sus asistencia");
-                }
+        
         }
     catch(Exception e){
         System.out.println("Evento registrar: "+e);
     } 
-
+} else {
+            JOptionPane.showMessageDialog(null,"Seleccione un empleado para poder ingresar sus asistencia");
+                }
     }//GEN-LAST:event_mitemupdateMousePressed
 
                                        
@@ -914,21 +981,95 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_ItemExportarMousePressed
 
     private void jButton5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MouseClicked
+        if(!"".equals(lblidEmp.getText())){
+            hp=new Helpers();
+            String inicio=hp.getFormatDate(cboIni.getText());
+            String fin=hp.getFormatDate(cboFin.getText());
+            int id = Integer.parseInt(lblidEmp.getText() );
+            objRegistro= new RegistroDAO();
+            val=new Validators();
+            if(val.validarFechas(inicio, fin)){
+                objRegistro.getTableFilter(tblFiltroFecha, inicio, fin,id);
 
-        hp=new Helpers();
-        String inicio=hp.getFormatDate(cboIni.getText());
-        String fin=hp.getFormatDate(cboFin.getText());
-        int id = Integer.parseInt(lblidEmp.getText() );
-        objRegistro= new RegistroDAO();
-        val=new Validators();
-        if(val.validarFechas(inicio, fin)){
-            objRegistro.getTableFilter(tblFiltroFecha, inicio, fin,id);
-
-        }
-        else{
-            JOptionPane.showMessageDialog(null,"Conflicto de fechas");
+            }
+            else{
+                JOptionPane.showMessageDialog(null,"Conflicto de fechas");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null,"Seleccione un empleado para poder ingresar sus asistencia");
         }
     }//GEN-LAST:event_jButton5MouseClicked
+
+    private void tblAsistenciaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblAsistenciaMouseClicked
+        hp=new Helpers();
+        date = new Date();
+        calendar= new GregorianCalendar();
+        calendar2 = new GregorianCalendar();
+        int fsel;
+        fsel=this.tblAsistencia.getSelectedRow();
+        if (fsel == -1) {
+            //No se ha seleccionado registo en Jtable
+        } else {
+            try {
+                registro = new Registro();
+                DefaultTableModel m = new DefaultTableModel();
+                m = (DefaultTableModel) this.tblAsistencia.getModel();
+                String idAsistencia = String.valueOf(m.getValueAt(fsel, 0));
+                lblReg.setText(idAsistencia);
+                registro=objRegistro.getValues(Integer.parseInt(idAsistencia));
+                date=format.parse(hp.getFormatDate(registro.getFecha()));
+                calendar.setTime(date);
+                cboDia.setSelectedDate(calendar);
+                lblMod.setText(hp.getFormatDate(registro.getModified()));
+                date2 = new Date(registro.getHora().getTime());
+                calendar2.setTime(date2);
+                TimIngreso.setCalendar(calendar2);
+            } catch (Exception e){
+                System.out.println("GUI_Asistencia"+e);
+            }
+        }
+    }//GEN-LAST:event_tblAsistenciaMouseClicked
+
+    private void btnRegisterMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegisterMousePressed
+        if(!"".equals(lblidEmp.getText())){
+            try{
+                int id = Integer.parseInt(lblidEmp.getText());
+                val = new Validators();
+
+                hp=new Helpers();
+
+                SimpleDateFormat fhora = new SimpleDateFormat("HH:mm:ss");
+                Calendar ingreso = TimIngreso.getCalendar();
+                Time ing =  Time.valueOf(fhora.format(ingreso.getTime()));
+
+                //Validacion propia del evento
+                if(asistenciaValidator(ing)){
+                    dt = new Data();
+                    objRegistro= new RegistroDAO();
+
+                    String fecha=hp.getFormatDate(cboDia.getText());
+                    int tiporeg=qs.loadGlobal(4, cboTiporeg, 0);
+                    int i = objRegistro.save(tiporeg, ing, fecha, id,1);
+                    int j = objRegistro.save(tiporeg, ing ,fecha,id ,0);
+                    if (i == 0 && j == 0) {
+                        JOptionPane.showMessageDialog(null,"No se pudo grabar el detalle");
+                    }
+
+                    else {
+                        objRegistro.findId(lblidEmp.getText(), tblAsistencia, lblcant3);
+                        cleanBox();
+                        JOptionPane.showMessageDialog(null,"Nueva asistencia registrado");
+                    }
+                }
+
+            }
+            catch(Exception e){
+                System.out.println("Evento registrar: "+e);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null,"Seleccione un empleado para poder ingresar sus asistencia");
+        }
+    }//GEN-LAST:event_btnRegisterMousePressed
 
     private void tblempleadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblempleadoMouseClicked
 
@@ -955,91 +1096,25 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_tblempleadoMouseClicked
 
-    private void btnRegisterMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegisterMousePressed
-        try{
-        int id = Integer.parseInt(lblidEmp.getText());
-        val = new Validators();
-        
-        hp=new Helpers();
-        if(!"".equals(lblidEmp.getText())){
-                SimpleDateFormat fhora = new SimpleDateFormat("HH:mm:ss");
-                Calendar ingreso = TimIngreso.getCalendar();
-                Time ing =  Time.valueOf(fhora.format(ingreso.getTime()));
-                
-             //Validacion propia del evento
-                if(asistenciaValidator(ing)){
-                    dt = new Data();
-                    objRegistro= new RegistroDAO();
-
-                    String fecha=hp.getFormatDate(cboDia.getText());
-                    int tiporeg=qs.loadGlobal(4, cboTiporeg, 0);
-                    int i = objRegistro.save(tiporeg, ing, fecha, id,1);
-                    int j = objRegistro.save(tiporeg, ing ,fecha,id ,0);
-                    if (i == 0 && j == 0) {
-                        JOptionPane.showMessageDialog(null,"No se pudo grabar el detalle");
-                    }
-
-                    else {
-                            objRegistro.findId(lblidEmp.getText(), tblAsistencia, lblcant3);
-                            cleanBox();
-                            JOptionPane.showMessageDialog(null,"Nueva asistencia registrado");
-                        }
-                }   
-            
-        } else {
-            JOptionPane.showMessageDialog(null,"Seleccione un empleado para poder ingresar sus asistencia");
-                }
-        }
-    catch(Exception e){
-        System.out.println("Evento registrar: "+e);
-    }
-    }//GEN-LAST:event_btnRegisterMousePressed
-
-    private void tblAsistenciaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblAsistenciaMouseClicked
-       hp=new Helpers();
-       date = new Date();
-        calendar= new GregorianCalendar();
-        calendar2 = new GregorianCalendar();
-        int fsel;
-        fsel=this.tblAsistencia.getSelectedRow();
-        if (fsel == -1) {
-            //No se ha seleccionado registo en Jtable
-        } else {
-            try {
-                    registro = new Registro();
-                    DefaultTableModel m = new DefaultTableModel();
-                    m = (DefaultTableModel) this.tblAsistencia.getModel();
-                    String idAsistencia = String.valueOf(m.getValueAt(fsel, 0));
-                    lblReg.setText(idAsistencia);
-                    registro=objRegistro.getValues(Integer.parseInt(idAsistencia));
-                    date=format.parse(hp.getFormatDate(registro.getFecha()));
-                    calendar.setTime(date);
-                    cboDia.setSelectedDate(calendar);
-                    lblMod.setText(hp.getFormatDate(registro.getModified()));
-                    date2 = new Date(registro.getHora().getTime());
-                    calendar2.setTime(date2);
-                    TimIngreso.setCalendar(calendar2);
-            } catch (Exception e){
-                System.out.println("GUI_Asistencia"+e);
-            }
-        }
-    }//GEN-LAST:event_tblAsistenciaMouseClicked
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem ItemExportar;
     private com.lavantech.gui.comp.TimePanel TimIngreso;
     private javax.swing.JButton btnDateSearch;
+    private javax.swing.JButton btnDateSearch1;
     private javax.swing.JButton btnRegister;
     private javax.swing.JButton btnbuscar;
     private datechooser.beans.DateChooserCombo cboDia;
     private datechooser.beans.DateChooserCombo cboFin;
+    private datechooser.beans.DateChooserCombo cboFin1;
     private datechooser.beans.DateChooserCombo cboIni;
+    private datechooser.beans.DateChooserCombo cboIni1;
     private javax.swing.JComboBox cboTiporeg;
     private javax.swing.JComboBox cboempr;
     private javax.swing.JComboBox cbosuc;
     private javax.swing.JComboBox cbotipo;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -1053,6 +1128,10 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -1064,16 +1143,19 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
+    private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
+    private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel lblApe;
     private javax.swing.JLabel lblDNI;
@@ -1086,6 +1168,8 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lblcant2;
     private javax.swing.JLabel lblcant3;
     private javax.swing.JLabel lblcant4;
+    private javax.swing.JLabel lblcant5;
+    private javax.swing.JLabel lblcant6;
     private javax.swing.JLabel lblidEmp;
     private javax.swing.JMenu mclose;
     private javax.swing.JMenu medit;
@@ -1096,6 +1180,7 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
     private javax.swing.JMenu mver;
     private javax.swing.JTable tblAsistencia;
     private javax.swing.JTable tblFiltroFecha;
+    private javax.swing.JTable tblFiltroFecha1;
     private javax.swing.JTable tblHorario;
     private javax.swing.JTable tblempleado;
     // End of variables declaration//GEN-END:variables

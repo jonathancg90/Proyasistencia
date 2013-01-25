@@ -110,11 +110,12 @@ public class HorariosDAOTest {
     public void testFind() {
         System.out.println("find");
         String state = "";
+        String tipo = "";
         JTable tblDatos = null;
         JLabel lblcant = null;
         HorariosDAO instance = new HorariosDAO();
         int expResult = 0;
-        int result = instance.find(state, tblDatos, lblcant);
+        int result = instance.find(state, tipo, tblDatos, lblcant);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");

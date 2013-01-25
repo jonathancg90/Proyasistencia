@@ -59,7 +59,6 @@ public class Query extends ConexionBd{
                 }
             }
             query =  query + ")";
-            System.out.println(query);
             pt  = conexion.prepareStatement(query);
             pt.executeUpdate();
             pt.close();
@@ -102,14 +101,20 @@ public class Query extends ConexionBd{
             return pt;
         }
     }
-    /*
-     * Arma busqueda
-     */
-    public String sqlSearch(){
-        
-        String query="";
-    
-        return query;
+    public void AlterSecuence(String name, int start) throws SQLException{
+        try {
+            getConexion();
+            pt = null;
+            Statement s = null;
+            s = conexion.createStatement();
+            String query ="ALTER SEQUENCE "+name+" RESTART WITH "+start;
+            pt  = conexion.prepareStatement(query);
+            pt.executeUpdate();
+            pt.close();
+            closeConexion();
+         } catch(Exception e) {
+             System.out.println(_error+"AlterSecuence: "+e);
+         }
     }
      /*
      * Arma actualizacion
@@ -563,7 +568,6 @@ public class Query extends ConexionBd{
         public  int getCountRegister(String[] args){
             int cant=0;
             try{  
-                System.out.println("1:"+args.length);
                 getConexion();
                 Statement s = null;
                 s = conexion.createStatement();
@@ -612,7 +616,7 @@ public class Query extends ConexionBd{
         }
         
         
-        public  DefaultTableModel getFechafilter(String[] args, String Table, String inicio,String fin, int idemp){
+        public  DefaultTableModel getFechafilter(String[] args, String Table, String inicio,String fin,String id_emp, int idemp){
         try{
             datos = new DefaultTableModel();
             getConexion();
@@ -627,10 +631,7 @@ public class Query extends ConexionBd{
             qs = qs +" from "+Table;
             qs = qs.replace(", "," ");
             qs = qs + " where ";
-            qs=qs+" (fecha >'"+inicio+"') and (fecha<'"+fin+"') and idemp="+idemp;
-            
-            System.out.println("cambiate de salon"+qs);
-            
+            qs=qs+" (fecha >'"+inicio+"') and (fecha<'"+fin+"') and "+id_emp+" = "+idemp;
             rs = s.executeQuery(qs);
             //Llenado Cabecera Jtable
             ResultSetMetaData meta = rs.getMetaData();

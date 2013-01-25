@@ -3,16 +3,22 @@ package Gui;
 import Dao.BusquedaEmpleadoDAO;
 import Utilitarios.Query;
 import javax.swing.table.DefaultTableModel;
+import Utilitarios.Data;
 
 
 public class WinBuscarEmpleado extends javax.swing.JInternalFrame {
     private BusquedaEmpleadoDAO Bus;
     private Query qs;
     public int Form;
-
+    public static String Nomape;
+    public Data dt;
+    
     public WinBuscarEmpleado() {
         initComponents();
+        dt = new Data();
+        this.setTitle(dt.G_TITULOS[27]);
         cargaForm();
+        
     }
     private void cargaForm(){
         qs = new Query();
@@ -62,6 +68,7 @@ public class WinBuscarEmpleado extends javax.swing.JInternalFrame {
         Cboarea = new javax.swing.JComboBox();
         jLabel6 = new javax.swing.JLabel();
         CboEstado = new javax.swing.JComboBox();
+        LblModulo = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         Tblbuscador = new javax.swing.JTable();
         lblcant = new javax.swing.JLabel();
@@ -106,21 +113,23 @@ public class WinBuscarEmpleado extends javax.swing.JInternalFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton1)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addComponent(jLabel1)
-                            .addGap(18, 18, 18)
-                            .addComponent(Txtapellidos))
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel2)
-                                .addComponent(jLabel5))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(CboEmpresa, 0, 209, Short.MAX_VALUE)
-                                .addComponent(Cboarea, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(LblModulo)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(18, 18, 18)
+                        .addComponent(Txtapellidos))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel5))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(CboEmpresa, 0, 209, Short.MAX_VALUE)
+                            .addComponent(Cboarea, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
@@ -155,7 +164,9 @@ public class WinBuscarEmpleado extends javax.swing.JInternalFrame {
                     .addComponent(jLabel5)
                     .addComponent(Cboarea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(LblModulo)))
         );
 
         Tblbuscador.setModel(new javax.swing.table.DefaultTableModel(
@@ -240,13 +251,23 @@ public class WinBuscarEmpleado extends javax.swing.JInternalFrame {
         DefaultTableModel m = new DefaultTableModel();
         m = (DefaultTableModel) this.Tblbuscador.getModel();
         String idEmp = String.valueOf(m.getValueAt(fsel, 0));
+
         String Nomape = String.valueOf(m.getValueAt(fsel, 1));
+        String ape = String.valueOf(m.getValueAt(fsel, 2));
+        String area = String.valueOf(m.getValueAt(fsel, 3));
+        String cargo = String.valueOf(m.getValueAt(fsel, 4));
         System.out.println("Hola"+ Form + " - " + Nomape);
-        switch(Form){
-            case 1:
-                WinConsulta con = new WinConsulta();
-                con.TxtName.setText(Nomape);
-                ;break;
+        switch(LblModulo.getText()){
+            case "1":
+                Gui.WinConsulta.TxtName.setText(Nomape);
+                System.out.println("Hola: "+Nomape);
+                break;
+            case "2": WinJustificacion jus = new WinJustificacion();
+                    jus.lblID.setText(idEmp);
+                    jus.lblNomape.setText(Nomape+" "+ape);
+                    jus.Lblarea.setText(area);
+                    jus.lblcargo.setText(cargo);
+                    break; 
             
         }
     }//GEN-LAST:event_TblbuscadorMousePressed
@@ -257,6 +278,7 @@ public class WinBuscarEmpleado extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox CboEstado;
     private javax.swing.JComboBox CboSucursal;
     private javax.swing.JComboBox Cboarea;
+    public javax.swing.JLabel LblModulo;
     private javax.swing.JTable Tblbuscador;
     private javax.swing.JTextField Txtapellidos;
     private javax.swing.JButton jButton1;
