@@ -61,6 +61,7 @@ public class WinMdi extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        masi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilitarios/Img/asistencia.png"))); // NOI18N
         masi.setText("Asistencia");
         masi.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -69,6 +70,7 @@ public class WinMdi extends javax.swing.JFrame {
         });
         jMenuBar1.add(masi);
 
+        mjus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilitarios/Img/Justificaciones.png"))); // NOI18N
         mjus.setText("Justificaciones");
         mjus.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -77,6 +79,7 @@ public class WinMdi extends javax.swing.JFrame {
         });
         jMenuBar1.add(mjus);
 
+        memp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilitarios/Img/empleado.png"))); // NOI18N
         memp.setText("Empleados");
         memp.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -85,6 +88,7 @@ public class WinMdi extends javax.swing.JFrame {
         });
         jMenuBar1.add(memp);
 
+        mhor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilitarios/Img/Horario.png"))); // NOI18N
         mhor.setText("Horarios");
         mhor.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -93,6 +97,7 @@ public class WinMdi extends javax.swing.JFrame {
         });
         jMenuBar1.add(mhor);
 
+        mvis.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilitarios/Img/consulta.png"))); // NOI18N
         mvis.setText("Consulta");
         mvis.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -101,6 +106,7 @@ public class WinMdi extends javax.swing.JFrame {
         });
         jMenuBar1.add(mvis);
 
+        mdis.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilitarios/Img/configuraciones.png"))); // NOI18N
         mdis.setText("Configuraciones");
         mdis.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -108,8 +114,10 @@ public class WinMdi extends javax.swing.JFrame {
             }
         });
 
+        SubmenuCrit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilitarios/Img/tag2.png"))); // NOI18N
         SubmenuCrit.setText("Criterios");
 
+        JmitemArea.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilitarios/Img/tag.png"))); // NOI18N
         JmitemArea.setText("Area");
         JmitemArea.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -118,6 +126,7 @@ public class WinMdi extends javax.swing.JFrame {
         });
         SubmenuCrit.add(JmitemArea);
 
+        Jmitememp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilitarios/Img/tag.png"))); // NOI18N
         Jmitememp.setText("Empresa");
         Jmitememp.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -126,6 +135,7 @@ public class WinMdi extends javax.swing.JFrame {
         });
         SubmenuCrit.add(Jmitememp);
 
+        JmitemTipo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilitarios/Img/tag.png"))); // NOI18N
         JmitemTipo.setText("Tipo empleado(contrato)");
         JmitemTipo.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -134,6 +144,7 @@ public class WinMdi extends javax.swing.JFrame {
         });
         SubmenuCrit.add(JmitemTipo);
 
+        Jmitemtpmon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilitarios/Img/tag.png"))); // NOI18N
         Jmitemtpmon.setText("Monedas");
         Jmitemtpmon.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -142,6 +153,7 @@ public class WinMdi extends javax.swing.JFrame {
         });
         SubmenuCrit.add(Jmitemtpmon);
 
+        JmitemRoles.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilitarios/Img/tag.png"))); // NOI18N
         JmitemRoles.setText("Roles");
         JmitemRoles.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -150,6 +162,7 @@ public class WinMdi extends javax.swing.JFrame {
         });
         SubmenuCrit.add(JmitemRoles);
 
+        JmitemCiudad.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilitarios/Img/tag.png"))); // NOI18N
         JmitemCiudad.setText("Ciudad");
         JmitemCiudad.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -158,6 +171,7 @@ public class WinMdi extends javax.swing.JFrame {
         });
         SubmenuCrit.add(JmitemCiudad);
 
+        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilitarios/Img/tag.png"))); // NOI18N
         jMenuItem1.setText("Estado. Empleado");
         jMenuItem1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -166,6 +180,7 @@ public class WinMdi extends javax.swing.JFrame {
         });
         SubmenuCrit.add(jMenuItem1);
 
+        jmItemModulos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilitarios/Img/tag.png"))); // NOI18N
         jmItemModulos.setText("Modulos");
         jmItemModulos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -174,6 +189,7 @@ public class WinMdi extends javax.swing.JFrame {
         });
         SubmenuCrit.add(jmItemModulos);
 
+        JmitemJustificacion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilitarios/Img/tag.png"))); // NOI18N
         JmitemJustificacion.setText("Tipo justificacion");
         JmitemJustificacion.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -184,6 +200,7 @@ public class WinMdi extends javax.swing.JFrame {
 
         mdis.add(SubmenuCrit);
 
+        JmitemUsu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilitarios/Img/tag.png"))); // NOI18N
         JmitemUsu.setText("Usuarios");
         JmitemUsu.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -192,17 +209,21 @@ public class WinMdi extends javax.swing.JFrame {
         });
         mdis.add(JmitemUsu);
 
+        JmitemDis.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilitarios/Img/tag.png"))); // NOI18N
         JmitemDis.setText("Diseño");
         mdis.add(JmitemDis);
 
+        JmiBackup.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilitarios/Img/tag.png"))); // NOI18N
         JmiBackup.setText("Backup");
         mdis.add(JmiBackup);
 
+        Jmitemhelp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilitarios/Img/tag.png"))); // NOI18N
         Jmitemhelp.setText("Help");
         mdis.add(Jmitemhelp);
 
         jMenuBar1.add(mdis);
 
+        mrep.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilitarios/Img/reportes.png"))); // NOI18N
         mrep.setText("Reportes");
         mrep.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -211,6 +232,7 @@ public class WinMdi extends javax.swing.JFrame {
         });
         jMenuBar1.add(mrep);
 
+        mclose.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilitarios/Img/salir2.png"))); // NOI18N
         mclose.setText("Salir");
         mclose.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -225,7 +247,7 @@ public class WinMdi extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jdpContenedor, javax.swing.GroupLayout.DEFAULT_SIZE, 664, Short.MAX_VALUE)
+            .addComponent(jdpContenedor, javax.swing.GroupLayout.DEFAULT_SIZE, 791, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

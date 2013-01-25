@@ -185,7 +185,6 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
         medit = new javax.swing.JMenu();
         mitemclear = new javax.swing.JMenuItem();
         ItemExportar = new javax.swing.JMenuItem();
-        mver = new javax.swing.JMenu();
         mclose = new javax.swing.JMenu();
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Asistencias"));
@@ -561,7 +560,7 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel18)
                     .addComponent(lblcant3, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(34, Short.MAX_VALUE))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Registrar Asistencia", jPanel2);
@@ -623,11 +622,11 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(cboFin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel10))
-                .addGap(0, 8, Short.MAX_VALUE))
+                .addGap(0, 2, Short.MAX_VALUE))
             .addGroup(jPanel10Layout.createSequentialGroup()
                 .addGap(24, 24, 24)
                 .addComponent(btnDateSearch)
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         lblcant2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -678,7 +677,8 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
 
         jPanel3.add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 140, 451, 490));
 
-        mman.setText("Mantenimiento");
+        mman.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilitarios/Img/Archivo.png"))); // NOI18N
+        mman.setText("Archivo");
 
         mitemupdate.setText("Actualizar");
         mitemupdate.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -698,9 +698,11 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
 
         jMenuBar1.add(mman);
 
-        medit.setText("Edit");
+        medit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilitarios/Img/Editar.png"))); // NOI18N
+        medit.setText("Editar");
 
         mitemclear.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.CTRL_MASK));
+        mitemclear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilitarios/Img/limpiar.png"))); // NOI18N
         mitemclear.setText("Limpiar");
         mitemclear.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -709,6 +711,7 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
         });
         medit.add(mitemclear);
 
+        ItemExportar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilitarios/Img/exportar.png"))); // NOI18N
         ItemExportar.setText("Exportar");
         ItemExportar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -719,9 +722,7 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
 
         jMenuBar1.add(medit);
 
-        mver.setText("Ver asistencias");
-        jMenuBar1.add(mver);
-
+        mclose.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilitarios/Img/Cerrar.png"))); // NOI18N
         mclose.setText("Cerrar");
         mclose.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -744,7 +745,7 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 638, Short.MAX_VALUE)
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -1082,7 +1083,6 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
     private javax.swing.JMenuItem mitemdelete;
     private javax.swing.JMenuItem mitemupdate;
     private javax.swing.JMenu mman;
-    private javax.swing.JMenu mver;
     private javax.swing.JTable tblAsistencia;
     private javax.swing.JTable tblFiltroFecha;
     private javax.swing.JTable tblHorario;
