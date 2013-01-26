@@ -31,6 +31,7 @@ public class InsertData {
             IOException, BiffException, WriteException {
         InsertData insert = new InsertData();
         insert.deleteRegister();
+        insert.insertTipoJustificaciones();
         insert.insertModulos();
         insert.insertRoles();
         insert.insertPermiso_Roles();
@@ -45,16 +46,23 @@ public class InsertData {
         insert.insertTipoEmpleado();
         insert.insertEstadoEmpleado();
         insert.insertEmpleado();
+        insert.insertRegistro();
+        insert.insertJustificaciones();
         insert.insertHorarioEmpleado();
     }
 
     public void deleteRegister() throws SQLException {
         qs = new Query();
-        System.out.println("Eliminando registross ...");
+        System.out.println("Eliminando registros ...");
+    
+        qs.DeleteAll("registro");
+        qs.DeleteAll("registro_backlog");
         qs.DeleteAll("usuario");
         qs.DeleteAll("registro_backlog");
         qs.DeleteAll("registro");
         qs.DeleteAll("empleado_has_horarios");
+        qs.DeleteAll("justificaciones");
+        qs.DeleteAll("tipo_justificaciones");
         qs.DeleteAll("empleado");
         qs.DeleteAll("tipoempleado");
         qs.DeleteAll("detailhorario");
@@ -305,8 +313,62 @@ public class InsertData {
             qs.RegisterAll("empleado_has_horarios", reg);
         }
         args[0] = "empleado_has_horarios";
-        String name = "empleado_has_horarios_NMID_seq";
+        String name = "\"empleado_has_horarios_NMID_seq\"";
         qs.AlterSecuence(name, qs.getCountRegister(args)+1);
     } 
-   
+    public void insertRegistro() throws IOException, BiffException, WriteException, SQLException{
+        xls = new JExcel();
+        qs = new Query();
+        System.out.println("Insert data  Registro / Backlog ...");
+        String data[][];
+        data = xls.ExcelUp("registro");
+        for(int r=1;r<data.length;r++){
+            String [] reg = new String[data[r].length];
+                for(int c=0;c<data[r].length;c++){
+                    reg[c]=data[r][c];
+                }
+            qs.RegisterAll("registro", reg);
+            qs.RegisterAll("registro_backlog", reg);
+        }
+        args[0] = "registro";
+        String name = "registro_idreg_seq";
+        qs.AlterSecuence(name, qs.getCountRegister(args)+1);
+        args[0] = "registro_backlog";
+        name = "registro_backlog_idreg_seq";
+        qs.AlterSecuence(name, qs.getCountRegister(args)+1);
+    }
+    public void insertTipoJustificaciones() throws IOException, BiffException, WriteException, SQLException{
+        xls = new JExcel();
+        qs = new Query();
+        System.out.println("Insert data Tipo de Justificaciones ...");
+        String data[][];
+        data = xls.ExcelUp("tipo_justificaciones");
+        for(int r=1;r<data.length;r++){
+            String [] reg = new String[data[r].length];
+                for(int c=0;c<data[r].length;c++){
+                    reg[c]=data[r][c];
+                }
+            qs.RegisterAll("tipo_justificaciones", reg);
+        }
+        args[0] = "tipo_justificaciones";
+        String name = "tipo_justificaciones_idtip_jus_seq";
+        qs.AlterSecuence(name, qs.getCountRegister(args)+1);
+    } 
+    public void insertJustificaciones() throws IOException, BiffException, WriteException, SQLException{
+        xls = new JExcel();
+        qs = new Query();
+        System.out.println("Insert data  Justificaciones de empleados ...");
+        String data[][];
+        data = xls.ExcelUp("justificaciones");
+        for(int r=1;r<data.length;r++){
+            String [] reg = new String[data[r].length];
+                for(int c=0;c<data[r].length;c++){
+                    reg[c]=data[r][c];
+                }
+            qs.RegisterAll("justificaciones", reg);
+        }
+        args[0] = "justificaciones";
+        String name = "justificaciones_idjus_seq";
+        qs.AlterSecuence(name, qs.getCountRegister(args)+1);
+    } 
 }

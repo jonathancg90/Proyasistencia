@@ -64,10 +64,7 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
             qs=new Query();
             qs.loadChoice(cbotipo,"tipoempleado","nombre");
             qs.loadChoice(cboempr,"empresa","nombre");
-            qs.setIdentify("idempr");
-            qs.loadChoiceDefault(cbosuc,"sucursal","nombre",
-                Integer.parseInt(qs.idChoice("empresa","nombre",String.valueOf(cboempr.getSelectedItem())))
-                );
+            qs.loadChoice(CboEstado,"estadoemp","nombre");
             qs.loadGlobal(4, cboTiporeg, 1);
         }
         catch(Exception e){
@@ -138,11 +135,13 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
         btnbuscar = new javax.swing.JButton();
         jLabel13 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
         cboempr = new javax.swing.JComboBox();
-        cbosuc = new javax.swing.JComboBox();
         cbotipo = new javax.swing.JComboBox();
-        jCheckBox1 = new javax.swing.JCheckBox();
+        jLabel24 = new javax.swing.JLabel();
+        jLabel25 = new javax.swing.JLabel();
+        Txtnombre = new javax.swing.JTextField();
+        TxtApellido = new javax.swing.JTextField();
+        CboEstado = new javax.swing.JComboBox();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -180,20 +179,6 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
         tblAsistencia = new javax.swing.JTable();
         jLabel18 = new javax.swing.JLabel();
         lblcant3 = new javax.swing.JLabel();
-        jPanel9 = new javax.swing.JPanel();
-        jScrollPane6 = new javax.swing.JScrollPane();
-        tblFiltroFecha1 = new javax.swing.JTable();
-        jButton3 = new javax.swing.JButton();
-        jPanel12 = new javax.swing.JPanel();
-        cboIni1 = new datechooser.beans.DateChooserCombo();
-        cboFin1 = new datechooser.beans.DateChooserCombo();
-        jLabel20 = new javax.swing.JLabel();
-        jLabel21 = new javax.swing.JLabel();
-        btnDateSearch1 = new javax.swing.JButton();
-        lblcant5 = new javax.swing.JLabel();
-        jLabel22 = new javax.swing.JLabel();
-        jLabel23 = new javax.swing.JLabel();
-        lblcant6 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         mman = new javax.swing.JMenu();
         mitemupdate = new javax.swing.JMenuItem();
@@ -262,8 +247,8 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel19)
                     .addComponent(lblcant4, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -278,38 +263,46 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(lblFoto, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3))
-                        .addGap(19, 19, 19)
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(lblDNI, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE)
-                            .addComponent(lblApe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
+                            .addComponent(jLabel3)
                             .addComponent(jLabel11))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblNombre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblidEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lblFoto, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 0, Short.MAX_VALUE)))))
-                .addGap(82, 82, 82))
+                            .addComponent(lblidEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblDNI, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 11, Short.MAX_VALUE))
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel5Layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(19, 19, 19)
+                        .addComponent(lblApe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel5Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(18, 18, 18)
+                        .addComponent(lblNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblFoto, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblFoto, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel11)
+                            .addComponent(lblidEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(lblDNI, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel11)
-                    .addComponent(lblidEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -318,12 +311,8 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel2))
                     .addComponent(lblApe, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(6, 6, 6)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
-                    .addComponent(lblDNI, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -331,10 +320,16 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Buscar"));
 
+        btnbuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilitarios/Img/consulta.png"))); // NOI18N
         btnbuscar.setText("Buscar");
         btnbuscar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnbuscarMouseClicked(evt);
+            }
+        });
+        btnbuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnbuscarActionPerformed(evt);
             }
         });
 
@@ -342,15 +337,15 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
 
         jLabel15.setText("Empresa");
 
-        jLabel16.setText("Sucursal");
-
         cboempr.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cboemprActionPerformed(evt);
             }
         });
 
-        jCheckBox1.setText("Todo");
+        jLabel24.setText("Nombres");
+
+        jLabel25.setText("Apellidos");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -358,42 +353,50 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel15)
-                    .addComponent(jLabel13))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel15)
+                        .addGap(18, 18, 18)
+                        .addComponent(cboempr, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel24)
+                        .addGap(18, 18, 18)
+                        .addComponent(Txtnombre)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(cbotipo, 0, 220, Short.MAX_VALUE)
-                    .addComponent(cboempr, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel25)
+                        .addGap(18, 18, 18)
+                        .addComponent(TxtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel13)
+                        .addGap(46, 46, 46)
+                        .addComponent(cbotipo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jCheckBox1)
-                        .addGap(115, 115, 115)
-                        .addComponent(btnbuscar))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel16)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cbosuc, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(29, 264, Short.MAX_VALUE))
+                    .addComponent(btnbuscar)
+                    .addComponent(CboEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel16)
-                        .addComponent(cbosuc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel13)
-                        .addComponent(cbotipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(4, 4, 4)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel24)
+                    .addComponent(jLabel25)
+                    .addComponent(Txtnombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(TxtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnbuscar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel15)
-                        .addComponent(cboempr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jCheckBox1))
-                    .addComponent(btnbuscar))
+                        .addComponent(cboempr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel13)
+                        .addComponent(cbotipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(CboEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -427,25 +430,25 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addComponent(jLabel12)
+                        .addGap(17, 17, 17)
+                        .addComponent(lblcant, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(54, 54, 54))
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(34, 34, 34)
-                .addComponent(jLabel12)
-                .addGap(17, 17, 17)
-                .addComponent(lblcant, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 376, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 389, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel12)
                     .addComponent(lblcant, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Lista de empleados", jPanel4);
@@ -471,6 +474,7 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
 
         jLabel10.setText("Fecha final ");
 
+        btnDateSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilitarios/Img/consulta.png"))); // NOI18N
         btnDateSearch.setText("Buscar");
         btnDateSearch.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -495,7 +499,7 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
                         .addComponent(cboIni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnDateSearch)
-                .addContainerGap(48, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -507,7 +511,7 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(cboFin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel10))
-                .addGap(0, 8, Short.MAX_VALUE))
+                .addGap(0, 15, Short.MAX_VALUE))
             .addGroup(jPanel10Layout.createSequentialGroup()
                 .addGap(24, 24, 24)
                 .addComponent(btnDateSearch)
@@ -526,14 +530,6 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel7Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(15, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
                 .addGap(29, 29, 29)
                 .addComponent(jLabel14)
@@ -542,15 +538,21 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton2)
                 .addGap(54, 54, 54))
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(24, 24, 24)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jButton2)
                     .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -568,6 +570,12 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
 
         jLabel5.setText("Dia");
 
+        cboDia.addSelectionChangedListener(new datechooser.events.SelectionChangedListener() {
+            public void onSelectionChange(datechooser.events.SelectionChangedEvent evt) {
+                cboDiaOnSelectionChange(evt);
+            }
+        });
+
         jLabel6.setText("Hora");
 
         TimIngreso.setDisplayAnalog(false);
@@ -579,6 +587,7 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
 
         lblMod.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
+        btnRegister.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilitarios/Img/registrar.png"))); // NOI18N
         btnRegister.setText("Registrar");
         btnRegister.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -592,17 +601,8 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel11Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel11Layout.createSequentialGroup()
-                        .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel4))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cboDia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblReg, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(69, 69, 69))
-                    .addGroup(jPanel11Layout.createSequentialGroup()
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel11Layout.createSequentialGroup()
                         .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel7)
                             .addComponent(jLabel8)
@@ -612,20 +612,32 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
                             .addComponent(TimIngreso, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel11Layout.createSequentialGroup()
                                 .addGap(12, 12, 12)
-                                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblMod, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(cboTiporeg, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(cboTiporeg, 0, 128, Short.MAX_VALUE)
+                                    .addComponent(lblMod, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnRegister)))
-                        .addGap(0, 19, Short.MAX_VALUE))))
+                        .addGap(19, 19, 19))
+                    .addGroup(jPanel11Layout.createSequentialGroup()
+                        .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel4))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cboDia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblReg, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(111, 111, 111))))
         );
         jPanel11Layout.setVerticalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(jPanel11Layout.createSequentialGroup()
-                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblReg, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel11Layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addGap(18, 18, 18))
+                    .addGroup(jPanel11Layout.createSequentialGroup()
+                        .addComponent(lblReg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel5)
                     .addComponent(cboDia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -633,15 +645,20 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(TimIngreso, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cboTiporeg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblMod, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8)))
-            .addComponent(btnRegister)
+                    .addGroup(jPanel11Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cboTiporeg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel8)
+                            .addComponent(lblMod, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel11Layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addComponent(btnRegister)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         tblAsistencia.setModel(new javax.swing.table.DefaultTableModel(
@@ -672,95 +689,40 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(jPanel11, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(22, 22, 22)
-                                .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addContainerGap()
                                 .addComponent(jLabel18)
                                 .addGap(17, 17, 17)
-                                .addComponent(lblcant3, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 19, Short.MAX_VALUE)))
+                                .addComponent(lblcant3, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 299, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel18)
                     .addComponent(lblcant3, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         jTabbedPane1.addTab("Registrar Asistencia", jPanel2);
-
-        tblFiltroFecha1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {},
-                {},
-                {},
-                {}
-            },
-            new String [] {
-
-            }
-        ));
-        jScrollPane6.setViewportView(tblFiltroFecha1);
-
-        jPanel9.add(jScrollPane6);
-
-        jButton3.setText("Exportar");
-        jPanel9.add(jButton3);
-
-        jPanel12.setBorder(javax.swing.BorderFactory.createTitledBorder("Rango de busqueda"));
-        jPanel12.add(cboIni1);
-        jPanel12.add(cboFin1);
-
-        jLabel20.setText("Fecha inicial");
-        jPanel12.add(jLabel20);
-
-        jLabel21.setText("Fecha final ");
-        jPanel12.add(jLabel21);
-
-        btnDateSearch1.setText("Buscar");
-        btnDateSearch1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton5MouseClicked(evt);
-            }
-        });
-        jPanel12.add(btnDateSearch1);
-
-        jPanel9.add(jPanel12);
-
-        lblcant5.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel9.add(lblcant5);
-
-        jLabel22.setText("Total: ");
-        jPanel9.add(jLabel22);
-
-        jLabel23.setText("Total: ");
-        jPanel9.add(jLabel23);
-
-        lblcant6.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel9.add(lblcant6);
-
-        jTabbedPane1.addTab("Ver asistencias", jPanel9);
 
         jPanel3.add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 140, 451, 490));
 
         mman.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilitarios/Img/Archivo.png"))); // NOI18N
         mman.setText("Archivo");
 
+        mitemupdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilitarios/Img/actualizar.png"))); // NOI18N
         mitemupdate.setText("Actualizar");
         mitemupdate.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -769,6 +731,7 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
         });
         mman.add(mitemupdate);
 
+        mitemdelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilitarios/Img/eliminar.png"))); // NOI18N
         mitemdelete.setText("Eliminar");
         mitemdelete.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -826,7 +789,7 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 643, Short.MAX_VALUE)
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 665, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -839,35 +802,26 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_mcloseMousePressed
 
     private void btnbuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnbuscarMouseClicked
-       if (jCheckBox1.isSelected()) {
-           objEmpleado = new EmpleadoDAO();
-           objEmpleado.getTableAll(tblempleado, lblcant);
-       } else {
-           String tipo = String.valueOf(cbotipo.getSelectedIndex() + 1);
-           String empresa = String.valueOf(cboempr.getSelectedIndex() + 1);
-           String sucursal = String.valueOf(cbosuc.getSelectedIndex() + 1);
-           objEmpleado = new EmpleadoDAO();
-           objEmpleado.findAsistencia(tipo, empresa, sucursal, tblempleado, lblcant);
-        }
+
+       String tipo = qs.idChoice("tipoempleado","nombre",String.valueOf(cbotipo.getSelectedItem()));
+       String empresa = qs.idChoice("empresa","nombre",String.valueOf(cboempr.getSelectedItem()));
+       String Nombres = this.Txtnombre.getText().toUpperCase();
+       String Apellidos = this.TxtApellido.getText().toUpperCase();
+       String estado =  qs.idChoice("estadoemp","nombre",String.valueOf(CboEstado.getSelectedItem()));
+       objEmpleado = new EmpleadoDAO();
+       objEmpleado.findAsistencia(tipo, empresa, Nombres,Apellidos,estado, tblempleado, lblcant);
+
     }//GEN-LAST:event_btnbuscarMouseClicked
 
     private void cboemprActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboemprActionPerformed
-        qs = new Query();
-        qs.setIdentify("idempr");
-        qs.loadChoiceDefault(cbosuc,"sucursal","nombre",
-                Integer.parseInt(qs.idChoice("empresa","nombre",String.valueOf(cboempr.getSelectedItem())))
-                );
+
     }//GEN-LAST:event_cboemprActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
 
-        
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void mitemregisterMousePressed(java.awt.event.MouseEvent evt) {                                           
-         
-        
-        
     }                                           
 
     private void btnDateSearchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDateSearchMouseClicked
@@ -990,8 +944,9 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
             objRegistro= new RegistroDAO();
             val=new Validators();
             if(val.validarFechas(inicio, fin)){
-                objRegistro.getTableFilter(tblFiltroFecha, inicio, fin,id);
-
+                //objRegistro.getTableFilter(tblFiltroFecha, inicio, fin,id);
+                objRegistro=new RegistroDAO();
+                objRegistro.findRegFecha(lblidEmp.getText(), inicio, fin, tblAsistencia, lblcant1);
             }
             else{
                 JOptionPane.showMessageDialog(null,"Conflicto de fechas");
@@ -1093,30 +1048,36 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
             objEmpHor.findId(idempleado, tblHorario, lblcant4);
 
             objRegistro=new RegistroDAO();
-            objRegistro.findId(lblidEmp.getText(), tblAsistencia, lblcant3);
+            String fecha = cboDia.getText();
+            objRegistro.findRegFecha(lblidEmp.getText(), fecha, fecha, tblAsistencia, lblcant3);
         }
     }//GEN-LAST:event_tblempleadoMouseClicked
 
+    private void btnbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbuscarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnbuscarActionPerformed
+
+    private void cboDiaOnSelectionChange(datechooser.events.SelectionChangedEvent evt) {//GEN-FIRST:event_cboDiaOnSelectionChange
+
+    }//GEN-LAST:event_cboDiaOnSelectionChange
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox CboEstado;
     private javax.swing.JMenuItem ItemExportar;
     private com.lavantech.gui.comp.TimePanel TimIngreso;
+    private javax.swing.JTextField TxtApellido;
+    private javax.swing.JTextField Txtnombre;
     private javax.swing.JButton btnDateSearch;
-    private javax.swing.JButton btnDateSearch1;
     private javax.swing.JButton btnRegister;
     private javax.swing.JButton btnbuscar;
     private datechooser.beans.DateChooserCombo cboDia;
     private datechooser.beans.DateChooserCombo cboFin;
-    private datechooser.beans.DateChooserCombo cboFin1;
     private datechooser.beans.DateChooserCombo cboIni;
-    private datechooser.beans.DateChooserCombo cboIni1;
     private javax.swing.JComboBox cboTiporeg;
     private javax.swing.JComboBox cboempr;
-    private javax.swing.JComboBox cbosuc;
     private javax.swing.JComboBox cbotipo;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1124,15 +1085,12 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel22;
-    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -1144,19 +1102,16 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
-    private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
-    private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel lblApe;
     private javax.swing.JLabel lblDNI;
@@ -1169,8 +1124,6 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lblcant2;
     private javax.swing.JLabel lblcant3;
     private javax.swing.JLabel lblcant4;
-    private javax.swing.JLabel lblcant5;
-    private javax.swing.JLabel lblcant6;
     private javax.swing.JLabel lblidEmp;
     private javax.swing.JMenu mclose;
     private javax.swing.JMenu medit;
@@ -1180,7 +1133,6 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
     private javax.swing.JMenu mman;
     private javax.swing.JTable tblAsistencia;
     private javax.swing.JTable tblFiltroFecha;
-    private javax.swing.JTable tblFiltroFecha1;
     private javax.swing.JTable tblHorario;
     private javax.swing.JTable tblempleado;
     // End of variables declaration//GEN-END:variables

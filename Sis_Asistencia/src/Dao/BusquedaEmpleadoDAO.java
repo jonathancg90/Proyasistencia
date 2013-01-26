@@ -63,7 +63,7 @@ public class BusquedaEmpleadoDAO {
         try {
             i = 0;
             if(!"".equals(apellidos)){
-                filter = new String[6][2];
+                filter = new String[1][2];
                 filter[i][0] = "apellidos";
                 filter[i][1] = apellidos.toUpperCase();
                 i++;

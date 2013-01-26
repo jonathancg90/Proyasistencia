@@ -41,11 +41,21 @@ public class WinBuscarEmpleado extends javax.swing.JInternalFrame {
     private void buscar(){
         Bus = new BusquedaEmpleadoDAO();
         qs = new Query();
-        String apellidos = Txtapellidos.getText();
+        String[] campos = new String[4];
+        
+        String apellidos = Txtapellidos.getText().toUpperCase();
         String idemp = qs.idChoice("empresa", "nombre", String.valueOf(CboEmpresa.getSelectedItem()));
-        String idsuc = qs.idChoice("sucursal", "nombre", String.valueOf(CboSucursal.getSelectedItem()));
+        campos[0] = "nombre";
+        campos[1] = String.valueOf(CboSucursal.getSelectedItem());
+        campos[2] = "idempr";
+        campos[3] = idemp;
+        String idsuc = qs.getIdMltiSentences("sucursal","idsuc", campos);
         String idarea = qs.idChoice("area", "nombre", String.valueOf(Cboarea.getSelectedItem()));
-        String idcargo = qs.idChoice("cargo", "nombre", String.valueOf(CboCargo.getSelectedItem()));
+        campos[0] = "nombre";
+        campos[1] = String.valueOf(CboCargo.getSelectedItem());
+        campos[2] = "idare";
+        campos[3] = idarea;
+        String idcargo = qs.getIdMltiSentences("cargo","idcar", campos);
         String estado = qs.idChoice("estadoemp", "nombre", String.valueOf(CboEstado.getSelectedItem()));
         Bus.find(apellidos,idarea,idcargo,idemp,idsuc,estado,Tblbuscador, lblcant);
     }

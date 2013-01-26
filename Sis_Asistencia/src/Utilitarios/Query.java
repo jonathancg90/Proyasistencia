@@ -22,7 +22,6 @@ public class Query extends ConexionBd{
     public void setIdentify(String identify) {
         this.idcamp = identify;
         this.identify = identify;
-        System.out.println("VALOR: " + this.identify);
     }
     
     public void DeleteAll(String table) throws SQLException {
@@ -241,6 +240,11 @@ public class Query extends ConexionBd{
                     case "int":qs = qs + " " + camp + "=" + Filter[i][1] + " ";
                          break;
                     case "equ":qs = qs + " " + camp + "='" + Filter[i][1] + "' ";
+                         break;
+                    case "bet":
+                        String[] between;
+                        between = camp.split("_");
+                        qs = qs + between[0] + " between '" + between[1] + "' and '" + Filter[i][1] + "' ";
                          break;
                     default:qs = qs + " " + Filter[i][0] + " like '%" + Filter[i][1] + "%' ";
                          break;
@@ -500,6 +504,34 @@ public class Query extends ConexionBd{
         }
         return campo;
     }
+    public String getIdMltiSentences(String Table,String id, String[] campos){
+        String campo="";
+        try{
+            getConexion();
+            if("".equals(id)){
+                id = getIdentify(Table);
+            }
+
+            String query  = "select " +id+ " from " +Table+ " where ";
+            for(int i=0;i<campos.length;i++){
+                query = query + campos[i] + "='" + campos[i+1]+"' ";
+                i++;
+                if(i < campos.length - 1) {
+                    query = query + "and ";
+                }
+            }
+            s = conexion.createStatement();
+            rs = s.executeQuery(query);
+            while(rs.next()) {
+                campo = String.valueOf(rs.getInt(id));
+            }
+            closeConexion(); 
+        } catch(Exception e){
+            System.out.println(_error + "getIdMltiSentences: "+e);
+        }
+        return campo;
+    }
+    
     /*
      * Obtener valores de la tabla 
      */
@@ -631,7 +663,7 @@ public class Query extends ConexionBd{
             qs = qs +" from "+Table;
             qs = qs.replace(", "," ");
             qs = qs + " where ";
-            qs=qs+" (fecha >'"+inicio+"') and (fecha<'"+fin+"') and "+id_emp+" = "+idemp;
+            qs=qs+" (fecha >='"+inicio+"') and (fecha=<'"+fin+"') and "+id_emp+" = "+idemp;
             rs = s.executeQuery(qs);
             //Llenado Cabecera Jtable
             ResultSetMetaData meta = rs.getMetaData();

@@ -313,17 +313,41 @@ public class EmpleadoDAO extends ConexionBd{
         }
         return i;
     }
-    public int findAsistencia(String tipo,String empresa,String sucursal,JTable tblDatos, JLabel lblcant){
+    public int findAsistencia(String tipo,String empresa,String Nombres,
+            String Apellidos,String estado, JTable tblDatos, JLabel lblcant){
         int i=0;
         try {
-            if(!"".equals(tipo) && !"".equals(empresa)&& !"".equals(sucursal)){
+            if(!"".equals(Nombres) && "".equals(Apellidos)){
+                filter = new String[2][2];
+                filter[0][0] = "nombres";
+                filter[0][1] = Nombres;
+                filter[1][0] = "equ_idest";
+                filter[1][1] = estado;
+            }
+            else if(!"".equals(Apellidos) && "".equals(Nombres)){
+                filter = new String[2][2];
+                filter[0][0] = "apellidos";
+                filter[0][1] = Apellidos;
+                filter[1][0] = "equ_idest";
+                filter[1][1] = estado;
+            }
+            else if(!"".equals(Nombres) && !"".equals(Apellidos)){
+                filter = new String[3][2];
+                filter[0][0] = "nombres";
+                filter[0][1] = Nombres;
+                filter[1][0] = "apellidos";
+                filter[1][1] = Apellidos;
+                filter[2][0] = "equ_idest";
+                filter[2][1] = estado;
+            }
+            else if("".equals(Nombres) && "".equals(Apellidos)){
                 filter = new String[3][2];
                 filter[0][0] = "equ_idtip";
                 filter[0][1] =  tipo;
                 filter[1][0] = "equ_idempr";
                 filter[1][1] = empresa;
-                filter[2][0] = "equ_idsuc";
-                filter[2][1] = sucursal;
+                filter[2][0] = "equ_idest";
+                filter[2][1] = estado;
             }
             getTableAll(tblDatos, lblcant);
         }

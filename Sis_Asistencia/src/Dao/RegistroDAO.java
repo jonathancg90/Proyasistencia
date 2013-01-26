@@ -193,6 +193,23 @@ public class RegistroDAO extends ConexionBd{
         }
         return i;
     }
+    public int findRegFecha(String id,String inicio, String fin, JTable tblDatos, JLabel lblcant) {
+        int i = 0;
+        try {
+            if(!"".equals(id)){
+                filter = new String[1][2];
+                filter[0][0] = "int_idemp";
+                filter[0][1] = id;
+                filter[0][0] = "bet_fecha_"+inicio;
+                filter[0][1] = fin;
+            }
+            getTableAll(tblDatos, lblcant);
+        }
+        catch(Exception e){
+            System.out.println(_error + "findId : "+e);
+        }
+        return i;
+    }
     
     public void getTableFilter(JTable tblDatos,String inicio,String fin, int id){
         try{

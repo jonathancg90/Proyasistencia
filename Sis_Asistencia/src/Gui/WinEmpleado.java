@@ -69,6 +69,13 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
             System.out.println(_error+"_CaragForm:" + e);
         }
     }  
+     public void buscar(){
+        String  idarea = qs.idChoice("area","nombre",String.valueOf(cboAreaFilter.getSelectedItem()));
+        String  idest = qs.idChoice("estadoemp","nombre",String.valueOf(CmbEstado.getSelectedItem()));
+        String apellido = TxtApellido.getText();
+        objempl = new EmpleadoDAO();
+        objempl.findAll(idarea,idest,apellido,tblEmpleado, lblcant);
+     }
     public void cleanBox(){
         txtapellidos.setText("");
         txtdni.setText("");
@@ -260,7 +267,7 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
 
         jLabel3.setText("Area");
 
-        btnFiltro.setText("Ok");
+        btnFiltro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilitarios/Img/consulta.png"))); // NOI18N
         btnFiltro.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnFiltroMouseClicked(evt);
@@ -302,7 +309,7 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jLabel15)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(CmbEstado, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(CmbEstado, 0, 140, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnFiltro)
                         .addGap(26, 26, 26))
@@ -324,7 +331,7 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
                     .addComponent(jLabel15)
                     .addComponent(CmbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 177, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel13)
@@ -503,11 +510,21 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
         String dni=txtdni.getText();
         String apellido=txtapellidos.getText();
         String telefono=txttelefono.getText();
-        int empresa =  Integer.parseInt(qs.idChoice("empresa","nombre",String.valueOf(cboEmpresa.getSelectedItem())));
-        int area =  Integer.parseInt(qs.idChoice("area","nombre",String.valueOf(cboArea.getSelectedItem())));
+        String[] campos = new String[4];
+        
         int tipo =  Integer.parseInt(qs.idChoice("tipoempleado","nombre",String.valueOf(cboTipo.getSelectedItem())));
-        int sucursal =  Integer.parseInt(qs.idChoice("sucursal","nombre",String.valueOf(cboSucursal.getSelectedItem())));
-        int cargo =  Integer.parseInt(qs.idChoice("cargo","nombre",String.valueOf(cboCargo.getSelectedItem())));
+        int empresa =  Integer.parseInt(qs.idChoice("empresa","nombre",String.valueOf(cboEmpresa.getSelectedItem())));
+        campos[0] = "nombre";
+        campos[1] = String.valueOf(cboSucursal.getSelectedItem());
+        campos[2] = "idempr";
+        campos[3] = ""+empresa;
+        int sucursal =  Integer.parseInt(qs.getIdMltiSentences("sucursal","idsuc", campos));
+        int area =  Integer.parseInt(qs.idChoice("area","nombre",String.valueOf(cboArea.getSelectedItem())));
+        campos[0] = "nombre";
+        campos[1] = String.valueOf(String.valueOf(cboCargo.getSelectedItem()));
+        campos[2] = "idare";
+        campos[3] = ""+area;
+        int cargo =  Integer.parseInt(qs.getIdMltiSentences("cargo","idcar", campos));
         int estate =  Integer.parseInt(qs.idChoice("estadoemp","nombre",String.valueOf(cboEstado.getSelectedItem())));
         Icon imagen= lblFoto.getIcon();
         
@@ -517,7 +534,7 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null,"No se pudo grabar datos");
         }
         else {
-            objempl.getTableAll(tblEmpleado, lblcant);
+            buscar();
             cleanBox();
             JOptionPane.showMessageDialog(null,"Nuevo usuario registrado");
         }
@@ -544,12 +561,21 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
             String dni=txtdni.getText();
             String apellido=txtapellidos.getText();
             String telefono=txttelefono.getText();
+            String[] campos = new String[4];
             
-            int empresa =  Integer.parseInt(qs.idChoice("empresa","nombre",String.valueOf(cboEmpresa.getSelectedItem())));
-            int area =  Integer.parseInt(qs.idChoice("area","nombre",String.valueOf(cboArea.getSelectedItem())));
             int tipo =  Integer.parseInt(qs.idChoice("tipoempleado","nombre",String.valueOf(cboTipo.getSelectedItem())));
-            int sucursal =  Integer.parseInt(qs.idChoice("sucursal","nombre",String.valueOf(cboSucursal.getSelectedItem())));
-            int cargo =  Integer.parseInt(qs.idChoice("cargo","nombre",String.valueOf(cboCargo.getSelectedItem())));
+            int empresa =  Integer.parseInt(qs.idChoice("empresa","nombre",String.valueOf(cboEmpresa.getSelectedItem())));
+            campos[0] = "nombre";
+            campos[1] = String.valueOf(cboSucursal.getSelectedItem());
+            campos[2] = "idempr";
+            campos[3] = ""+empresa;
+            int sucursal =  Integer.parseInt(qs.getIdMltiSentences("sucursal","idsuc", campos));
+            int area =  Integer.parseInt(qs.idChoice("area","nombre",String.valueOf(cboArea.getSelectedItem())));
+            campos[0] = "nombre";
+            campos[1] = String.valueOf(String.valueOf(cboCargo.getSelectedItem()));
+            campos[2] = "idare";
+            campos[3] = ""+area;
+            int cargo =  Integer.parseInt(qs.getIdMltiSentences("cargo","idcar", campos));
             int estate =  Integer.parseInt(qs.idChoice("estadoemp","nombre",String.valueOf(cboEstado.getSelectedItem())));
 
             objempl = new EmpleadoDAO();
@@ -559,7 +585,7 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(null,"No se pudo grabar datos");
             }
             else {
-                objempl.getTableAll(tblEmpleado, lblcant);
+                buscar();
                 cleanBox();
                 JOptionPane.showMessageDialog(null,"Nuevo usuario actualizado");
             }   
@@ -627,7 +653,7 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
                 //TODO: IMPLEMENTAR CAMBIO DE ESTADO (INACTIVO)
             }
             else {
-                objempl.getTableAll(tblEmpleado, lblcant);
+                buscar();
                 cleanBox();
                 JOptionPane.showMessageDialog(null,"Empleado eliminada");
             }
@@ -715,12 +741,7 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_cboAreaActionPerformed
 
     private void btnFiltroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFiltroMouseClicked
-
-        String  idarea = qs.idChoice("area","nombre",String.valueOf(cboAreaFilter.getSelectedItem()));
-        String  idest = qs.idChoice("estadoemp","nombre",String.valueOf(CmbEstado.getSelectedItem()));
-        String apellido = TxtApellido.getText();
-        objempl = new EmpleadoDAO();
-        objempl.findAll(idarea,idest,apellido,tblEmpleado, lblcant);
+        buscar();
     }//GEN-LAST:event_btnFiltroMouseClicked
 
     private void miteninfoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_miteninfoMousePressed
