@@ -92,6 +92,7 @@ public class Query extends ConexionBd{
             }
             query= "insert into "+Table+" ("+campos+") values("+values+")";
             pt  = conexion.prepareStatement(query);
+            System.out.println(query);
             rs.close();
             return pt;
         }

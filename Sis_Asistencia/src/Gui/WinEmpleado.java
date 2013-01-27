@@ -18,6 +18,7 @@ import javax.swing.JFileChooser;
 import javax.swing.ImageIcon;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import jxl.write.WriteException;
+import Appi.ImagePreviewPanel;
 
 
 public  class WinEmpleado extends javax.swing.JInternalFrame {
@@ -88,6 +89,10 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
         cboEstado.setSelectedIndex(0);
         cboSucursal.setSelectedIndex(0);
         cboTipo.setSelectedIndex(0);
+        lblFoto.setIcon(null);
+        tblEmpleado.setModel(new DefaultTableModel());
+        lblidempleado.setText("");
+                
         
     }
     @SuppressWarnings("unchecked")
@@ -331,7 +336,7 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
                     .addComponent(jLabel15)
                     .addComponent(CmbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel13)
@@ -443,7 +448,7 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
         jmfoto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilitarios/Img/Foto.png"))); // NOI18N
         jmfoto.setText("Foto");
 
-        mAbrirFoto.setText("Abrir");
+        mAbrirFoto.setText("Subir foto");
         mAbrirFoto.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 mAbrirFotoMousePressed(evt);
@@ -526,7 +531,7 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
         campos[3] = ""+area;
         int cargo =  Integer.parseInt(qs.getIdMltiSentences("cargo","idcar", campos));
         int estate =  Integer.parseInt(qs.idChoice("estadoemp","nombre",String.valueOf(cboEstado.getSelectedItem())));
-        Icon imagen= lblFoto.getIcon();
+        lblFoto.setIcon(null);
         
         objempl = new EmpleadoDAO();
         int i = objempl.saveEmpleado(0,nombre,apellido,dni, telefono,area, tipo, estate,cargo,empresa,sucursal);
@@ -625,9 +630,29 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
          qs.loadChoiceDefault(cboCargo,"cargo","nombre",modemp.getIdcar());
          qs.loadChoiceDefault(cboEmpresa,"empresa","nombre",modemp.getIdempr());
          qs.loadChoiceDefault(cboSucursal,"sucursal","nombre",modemp.getIdsuc());
-         String file = "/imagenes/defecto.jpg";
-         ImageIcon imagenFondo = new ImageIcon(getClass().getResource(file));
-         lblFoto.setIcon(imagenFondo);
+        
+             
+             File archivo = new  File("src/imagenes/"+idEmp+".jpg");
+             if(archivo.exists()){
+                 String archivoimg = "src/imagenes/"+idEmp+".jpg";
+                 ImageIcon imagenfoto = new ImageIcon(archivoimg);
+                 
+                 Image iamgendimen = imagenfoto.getImage();
+                  Image newimg = iamgendimen.getScaledInstance(140,170,java.awt.Image.SCALE_SMOOTH);
+                  ImageIcon newIcon = new ImageIcon(newimg);
+                  lblFoto.setIcon(newIcon);
+             }else{
+                 System.out.println("no eres file");
+           
+            ImageIcon imagenFondo = new ImageIcon(getClass().getResource("/imagenes/defecto.jpg"));
+           Image iamgendimen = imagenFondo.getImage();
+                  Image newimg = iamgendimen.getScaledInstance(140,170,java.awt.Image.SCALE_SMOOTH);
+                  ImageIcon newIcon = new ImageIcon(newimg);
+            lblFoto.setIcon(newIcon);
+             }
+                
+        
+         
          }
          catch (Exception e) {
             System.out.println(_error + "tblempleado:" + e);
@@ -759,23 +784,38 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
     private void mAbrirFotoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mAbrirFotoMousePressed
         if(!"".equals(this.lblidempleado.getText())){
             fileChooser= new JFileChooser();
-            fl= new FileNameExtensionFilter("jpg & png", "jpg", "png");
+            
+            ImagePreviewPanel preview = new ImagePreviewPanel();
+            
+            fileChooser.setAccessory(preview);
+            fileChooser.addPropertyChangeListener(preview);
+            fl= new FileNameExtensionFilter("imagenes", "jpg", "png","jpeg");
             fileChooser.setAcceptAllFileFilterUsed(false);
             fileChooser.setFileFilter(fl);
-            int imagenElegida= fileChooser.showOpenDialog(this);
+            int imagenElegida= fileChooser.showDialog(this,"Subir foto");
             if(imagenElegida == JFileChooser.APPROVE_OPTION) 
                 {
-                    String file= fileChooser.getSelectedFile().getAbsolutePath();
-                    //Modificando la imagen
-                    ImageIcon icon = new ImageIcon(file);
-                    // se extrae la imagen del icono
-                    Image img = icon.getImage();
-                    //Se modifica su tamaño
-                    Image newimg = img.getScaledInstance(140,170,java.awt.Image.SCALE_SMOOTH);
-                    // se genera el Image icon con la nueva imagen
-                    ImageIcon newIcon = new ImageIcon(newimg);
-                    lblFoto.setIcon(newIcon); // se coloca el nuevo icono modificado
-                    lblFoto.setSize(140,170); // se cambia el tamaño de la etiqueta
+                    File img =  fileChooser.getSelectedFile().getAbsoluteFile();
+
+                    File dir = new File ("src/imagenes/");
+                    if(!dir.exists()){
+                       dir.mkdir();
+                    }
+
+                    File foto = new File (this.lblidempleado.getText()+".jpg");
+
+                    img.renameTo(foto);
+
+                    boolean semovio = foto.renameTo(new File (dir,foto.getName()));
+                    String file ="src/imagenes/"+lblidempleado.getText()+".jpg";
+                    ImageIcon foto2 = new ImageIcon(file);
+                    Image iamgendimen = foto2.getImage();
+                  Image newimg = iamgendimen.getScaledInstance(140,170,java.awt.Image.SCALE_SMOOTH);
+                  ImageIcon newIcon = new ImageIcon(newimg);
+                    lblFoto.setIcon(newIcon);
+                    if (!semovio){
+                    System.out.println("error");
+                    }
                 }
         } else {
             JOptionPane.showMessageDialog(null,"Debe de seleccionar una empleado para poder ingresar sus dias no laborables");

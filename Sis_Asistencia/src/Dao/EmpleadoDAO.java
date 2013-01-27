@@ -94,6 +94,7 @@ public class EmpleadoDAO extends ConexionBd{
             pt.setInt(12, objEmpl.getIdcar());
             pt.setInt(13, objEmpl.getIdempr());
             pt.setInt(14, objEmpl.getIdsuc());
+            
             //Ejecucion y cierre
             i= pt.executeUpdate();
             pt.close();
