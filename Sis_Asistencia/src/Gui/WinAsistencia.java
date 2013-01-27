@@ -76,7 +76,6 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
         Calendar rightNow = Calendar.getInstance();
         lblReg.setText("");
         lblMod.setText("");
-        cboDia.setSelectedDate(rightNow);
     }
     
     private boolean asistenciaValidator(Time hra){
@@ -175,6 +174,7 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
         jLabel8 = new javax.swing.JLabel();
         lblMod = new javax.swing.JLabel();
         btnRegister = new javax.swing.JButton();
+        BtnVer = new javax.swing.JButton();
         jScrollPane5 = new javax.swing.JScrollPane();
         tblAsistencia = new javax.swing.JTable();
         jLabel18 = new javax.swing.JLabel();
@@ -594,6 +594,18 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
                 btnRegisterMousePressed(evt);
             }
         });
+        btnRegister.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegisterActionPerformed(evt);
+            }
+        });
+
+        BtnVer.setText("Ver");
+        BtnVer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnVerActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
         jPanel11.setLayout(jPanel11Layout);
@@ -601,8 +613,8 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel11Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel11Layout.createSequentialGroup()
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel11Layout.createSequentialGroup()
                         .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel7)
                             .addComponent(jLabel8)
@@ -617,30 +629,34 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
                                     .addComponent(lblMod, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnRegister)))
-                        .addGap(19, 19, 19))
+                        .addContainerGap(32, Short.MAX_VALUE))
                     .addGroup(jPanel11Layout.createSequentialGroup()
                         .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel5)
                             .addComponent(jLabel4))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cboDia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblReg, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(111, 111, 111))))
+                            .addComponent(lblReg, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel11Layout.createSequentialGroup()
+                                .addComponent(cboDia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(BtnVer)))
+                        .addGap(66, 66, 66))))
         );
         jPanel11Layout.setVerticalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(jPanel11Layout.createSequentialGroup()
-                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel11Layout.createSequentialGroup()
                         .addComponent(jLabel4)
-                        .addGap(18, 18, 18))
+                        .addGap(28, 28, 28)
+                        .addComponent(jLabel5))
                     .addGroup(jPanel11Layout.createSequentialGroup()
                         .addComponent(lblReg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel5)
-                    .addComponent(cboDia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cboDia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(BtnVer))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(TimIngreso, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -789,7 +805,7 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 665, Short.MAX_VALUE)
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 673, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -835,6 +851,7 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
     private void mitemdeleteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemdeleteMousePressed
 
         int i;
+        objRegistro = new RegistroDAO();
         i= JOptionPane.showConfirmDialog(null,"¿Esta seguro de eliminar este registro?","Aviso",JOptionPane.OK_CANCEL_OPTION,JOptionPane.WARNING_MESSAGE);
         if(i==0){
             int id = Integer.valueOf(lblReg.getText());
@@ -858,8 +875,6 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
         val = new Validators();    
         qs=new Query();
         hp=new Helpers();
-        
-            
              //Validacion propia del evento
                 
                 dt = new Data();
@@ -946,7 +961,7 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
             if(val.validarFechas(inicio, fin)){
                 //objRegistro.getTableFilter(tblFiltroFecha, inicio, fin,id);
                 objRegistro=new RegistroDAO();
-                objRegistro.findRegFecha(lblidEmp.getText(), inicio, fin, tblAsistencia, lblcant1);
+                objRegistro.findRegFecha(lblidEmp.getText(), inicio, fin, tblFiltroFecha, lblcant1);
             }
             else{
                 JOptionPane.showMessageDialog(null,"Conflicto de fechas");
@@ -961,6 +976,7 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
         date = new Date();
         calendar= new GregorianCalendar();
         calendar2 = new GregorianCalendar();
+        objRegistro= new RegistroDAO();
         int fsel;
         fsel=this.tblAsistencia.getSelectedRow();
         if (fsel == -1) {
@@ -997,13 +1013,14 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
                 SimpleDateFormat fhora = new SimpleDateFormat("HH:mm:ss");
                 Calendar ingreso = TimIngreso.getCalendar();
                 Time ing =  Time.valueOf(fhora.format(ingreso.getTime()));
+                String fecha;
 
                 //Validacion propia del evento
                 if(asistenciaValidator(ing)){
                     dt = new Data();
                     objRegistro= new RegistroDAO();
 
-                    String fecha=hp.getFormatDate(cboDia.getText());
+                    fecha=hp.getFormatDate(cboDia.getText());
                     int tiporeg=qs.loadGlobal(4, cboTiporeg, 0);
                     int i = objRegistro.save(tiporeg, ing, fecha, id,1);
                     int j = objRegistro.save(tiporeg, ing ,fecha,id ,0);
@@ -1012,7 +1029,9 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
                     }
 
                     else {
-                        objRegistro.findId(lblidEmp.getText(), tblAsistencia, lblcant3);
+                        objRegistro= new RegistroDAO();
+                        fecha = cboDia.getText();
+                        objRegistro.findRegFecha(lblidEmp.getText(), fecha, fecha, tblAsistencia, lblcant3);
                         cleanBox();
                         JOptionPane.showMessageDialog(null,"Nueva asistencia registrado");
                     }
@@ -1061,8 +1080,25 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_cboDiaOnSelectionChange
 
+    private void BtnVerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnVerActionPerformed
+        if(lblidEmp.getText()!="") {
+            objRegistro= new RegistroDAO();
+            String fecha = cboDia.getText();
+            objRegistro.findRegFecha(lblidEmp.getText(), fecha, fecha, tblAsistencia, lblcant3);
+            //objRegistro.findId(lblidEmp.getText(), tblAsistencia, lblcant3);
+        } else {
+            JOptionPane.showMessageDialog(null,"Seleccione un empleado para poder consultar");
+        }
+
+    }//GEN-LAST:event_BtnVerActionPerformed
+
+    private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnRegisterActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BtnVer;
     private javax.swing.JComboBox CboEstado;
     private javax.swing.JMenuItem ItemExportar;
     private com.lavantech.gui.comp.TimePanel TimIngreso;
