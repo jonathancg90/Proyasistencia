@@ -46,19 +46,19 @@ public class WinJustificacion extends javax.swing.JInternalFrame {
     
     public WinJustificacion() {
         initComponents();
-        format=new SimpleDateFormat("dd-MM-yyyy");
-        cboDia.setDateFormat(format);
-        cboIni.setDateFormat(format);
-        cboFin.setDateFormat(format);
-        
         cargaForm();
     }
 
     public final void cargaForm(){
-    
         try{
+            format=new SimpleDateFormat("dd-MM-yyyy");
+            cboDia.setDateFormat(format);
+            cboIni.setDateFormat(format);
+            cboFin.setDateFormat(format);
+            
             qs=new Query();
             qs.loadChoice(cboTipojus,"tipo_justificaciones","nombre");
+            Lblidemp.setVisible(false);
            
         }
         catch(Exception e){
@@ -104,6 +104,8 @@ public class WinJustificacion extends javax.swing.JInternalFrame {
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         btnDateSearch = new javax.swing.JButton();
+        jLabel16 = new javax.swing.JLabel();
+        lblcant = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
@@ -111,12 +113,8 @@ public class WinJustificacion extends javax.swing.JInternalFrame {
         jLabel4 = new javax.swing.JLabel();
         lblcargo = new javax.swing.JLabel();
         Lblarea = new javax.swing.JLabel();
-        lblID = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
-        lblNomape = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
-        lblcant = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         mfile = new javax.swing.JMenu();
         mitemregister = new javax.swing.JMenuItem();
@@ -130,14 +128,14 @@ public class WinJustificacion extends javax.swing.JInternalFrame {
 
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel5.add(cboTipojus, new org.netbeans.lib.awtextra.AbsoluteConstraints(122, 12, 230, -1));
+        jPanel5.add(cboTipojus, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 10, 230, -1));
 
         jLabel2.setText("Tipo ");
         jPanel5.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 12, -1, -1));
 
         jLabel7.setText("Fecha");
         jPanel5.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 55, -1, -1));
-        jPanel5.add(TxtNum, new org.netbeans.lib.awtextra.AbsoluteConstraints(132, 85, 130, -1));
+        jPanel5.add(TxtNum, new org.netbeans.lib.awtextra.AbsoluteConstraints(132, 85, 230, -1));
 
         jLabel13.setText("Recibo");
         jPanel5.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 85, -1, -1));
@@ -152,17 +150,17 @@ public class WinJustificacion extends javax.swing.JInternalFrame {
         jPanel5.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(176, 249, 10, -1));
 
         jLabel12.setText("Ingreso");
-        jPanel5.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, -1, -1));
+        jPanel5.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 240, -1, -1));
 
         jLabel11.setText("Salida");
-        jPanel5.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 260, -1, -1));
+        jPanel5.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 250, -1, -1));
 
         Txtaobservacion.setColumns(20);
         Txtaobservacion.setRows(5);
         jScrollPane3.setViewportView(Txtaobservacion);
 
-        jPanel5.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(133, 113, -1, -1));
-        jPanel5.add(cboDia, new org.netbeans.lib.awtextra.AbsoluteConstraints(122, 45, -1, -1));
+        jPanel5.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(133, 113, 470, -1));
+        jPanel5.add(cboDia, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 50, 230, -1));
 
         TimIngreso.setDisplayAnalog(false);
         TimIngreso.setSecDisplayed(false);
@@ -190,6 +188,7 @@ public class WinJustificacion extends javax.swing.JInternalFrame {
 
         jLabel15.setText("Fecha final ");
 
+        btnDateSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilitarios/Img/consulta.png"))); // NOI18N
         btnDateSearch.setText("Buscar");
         btnDateSearch.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -212,9 +211,9 @@ public class WinJustificacion extends javax.swing.JInternalFrame {
                         .addComponent(jLabel14)
                         .addGap(18, 18, 18)
                         .addComponent(cboIni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(38, 38, 38)
                 .addComponent(btnDateSearch)
-                .addContainerGap(270, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -226,19 +225,29 @@ public class WinJustificacion extends javax.swing.JInternalFrame {
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(cboFin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel15))
-                .addGap(0, 8, Short.MAX_VALUE))
-            .addGroup(jPanel10Layout.createSequentialGroup()
-                .addGap(24, 24, 24)
+                .addGap(0, 6, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnDateSearch)
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addGap(20, 20, 20))
         );
+
+        jLabel16.setText("Total: ");
+
+        lblcant.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel10, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 512, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 632, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel16)
+                .addGap(17, 17, 17)
+                .addComponent(lblcant, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -246,19 +255,23 @@ public class WinJustificacion extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel16)
+                    .addComponent(lblcant, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(38, 38, 38))
         );
 
         jTabbedPane1.addTab("Ver", jPanel2);
 
-        getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 140, 640, 330));
+        getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, 640, 370));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Datos"));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setText("Trabajador");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, -1, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, -1, -1));
 
         jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -273,48 +286,46 @@ public class WinJustificacion extends javax.swing.JInternalFrame {
             .addGap(0, 97, Short.MAX_VALUE)
         );
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 20, -1, -1));
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 30, -1, -1));
 
         jLabel3.setText("Area");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, -1, -1));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, -1, -1));
 
         jLabel4.setText("Cargo");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 70, -1, -1));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 100, -1, -1));
 
         lblcargo.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel1.add(lblcargo, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 70, 110, 20));
+        jPanel1.add(lblcargo, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 100, 110, 30));
 
         Lblarea.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel1.add(Lblarea, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 70, 110, 20));
+        jPanel1.add(Lblarea, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 100, 110, 30));
 
         lblID.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel1.add(lblID, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 20, 40, 20));
+        jPanel1.add(lblID, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 20, 60, 30));
 
         jLabel18.setText("ID");
-        jPanel1.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, -1));
+        jPanel1.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, -1, -1));
 
         lblNomape.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel1.add(lblNomape, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 40, 260, 20));
+        jPanel1.add(lblNomape, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 60, 310, 30));
 
+        jLabel17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilitarios/Img/empleado.png"))); // NOI18N
         jLabel17.setText("Buscar");
         jLabel17.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel17MouseClicked(evt);
             }
         });
-        jPanel1.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 100, -1, -1));
+        jPanel1.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 60, -1, -1));
+        jPanel1.add(Lblidemp, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 20, -1, -1));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 12, 507, 130));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 630, 140));
 
-        lblcant.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        getContentPane().add(lblcant, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 500, 60, 20));
-
-        jLabel16.setText("Total: ");
-        getContentPane().add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 500, -1, -1));
-
+        mfile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilitarios/Img/Archivo.png"))); // NOI18N
         mfile.setText("Archivo");
 
         mitemregister.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.CTRL_MASK));
+        mitemregister.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilitarios/Img/registrar.png"))); // NOI18N
         mitemregister.setText("Registrar");
         mitemregister.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -324,6 +335,7 @@ public class WinJustificacion extends javax.swing.JInternalFrame {
         mfile.add(mitemregister);
 
         mitemdelete.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_X, java.awt.event.InputEvent.CTRL_MASK));
+        mitemdelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilitarios/Img/eliminar.png"))); // NOI18N
         mitemdelete.setText("Eliminar");
         mitemdelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -334,9 +346,11 @@ public class WinJustificacion extends javax.swing.JInternalFrame {
 
         jMenuBar1.add(mfile);
 
+        medit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilitarios/Img/Editar.png"))); // NOI18N
         medit.setText("Edit");
 
         mitemclear.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.CTRL_MASK));
+        mitemclear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilitarios/Img/limpiar.png"))); // NOI18N
         mitemclear.setText("Limpiar");
         mitemclear.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -345,6 +359,7 @@ public class WinJustificacion extends javax.swing.JInternalFrame {
         });
         medit.add(mitemclear);
 
+        ItemExportar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilitarios/Img/exportar.png"))); // NOI18N
         ItemExportar.setText("Exportar");
         ItemExportar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -355,6 +370,7 @@ public class WinJustificacion extends javax.swing.JInternalFrame {
 
         jMenuBar1.add(medit);
 
+        mclose.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilitarios/Img/Cerrar.png"))); // NOI18N
         mclose.setText("Cerrar");
         mclose.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -474,41 +490,34 @@ public class WinJustificacion extends javax.swing.JInternalFrame {
     private void mitemregisterMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemregisterMousePressed
         if(!"".equals(lblID.getText())){
         try{
-        int id = Integer.parseInt(lblID.getText());
-        val = new Validators();    
-        qs=new Query();
-        hp=new Helpers();
-        
-            
+            int id = Integer.parseInt(lblID.getText());
+            val = new Validators();    
+            qs=new Query();
+            hp=new Helpers();
              //Validacion propia del evento
-                
-                dt = new Data();
-                objjusti= new justificacionesDAO();
-                
-                SimpleDateFormat fhora = new SimpleDateFormat("HH:mm:ss");
-                
-                Calendar ingreso = TimIngreso.getCalendar();
-                Calendar salida = TimIngreso1.getCalendar();
-                String motivo = Txtaobservacion.getText();
-                String recivo = TxtNum.getText();
-                Time ing =  Time.valueOf(fhora.format(ingreso.getTime()));
-                Time sal =  Time.valueOf(fhora.format(salida.getTime()));
-                Time hrs = Time.valueOf(String.valueOf(ing.compareTo(sal)));
-                String fecha=hp.getFormatDate(cboDia.getText());
-                int tipojus =  Integer.parseInt(qs.idChoice("justificaciones","nombre",String.valueOf(cboTipojus.getSelectedItem())));
-                int i = objjusti.save(id,tipojus,fecha,motivo,recivo,hrs,ing,sal);
-                
-                if (i == 0 ) {
-                    JOptionPane.showMessageDialog(null,"No se pudo grabar el detalle");
-                }
-                
-                else {
-                        JOptionPane.showMessageDialog(null,"justificacion grabada");
-                        cleanBox();
-                    }
-                
+            dt = new Data();
+            objjusti= new justificacionesDAO();
             
-        
+            SimpleDateFormat fhora = new SimpleDateFormat("HH:mm:ss");  
+            Calendar ingreso = TimIngreso.getCalendar();
+            Calendar salida = TimIngreso1.getCalendar();
+            String motivo = Txtaobservacion.getText();
+            String recivo = TxtNum.getText();
+            Time ing =  Time.valueOf(fhora.format(ingreso.getTime()));
+            Time sal =  Time.valueOf(fhora.format(salida.getTime()));
+            //el metodo getTime te devuelve en mili segundos para saberlo en mins debes hacer
+            System.out.println();
+            Time hrs = Time.valueOf(String.valueOf(ing.compareTo(sal)));
+            String fecha=hp.getFormatDate(cboDia.getText());
+            int tipojus =  Integer.parseInt(qs.idChoice("justificaciones","nombre",String.valueOf(cboTipojus.getSelectedItem())));
+            int i = objjusti.save(id,tipojus,fecha,motivo,recivo,hrs,ing,sal);
+            if (i == 0 ) {
+                JOptionPane.showMessageDialog(null,"No se pudo grabar el detalle");
+            }
+            else {
+                  JOptionPane.showMessageDialog(null,"justificacion grabada");
+                  cleanBox();
+                 }
         }
     catch(Exception e){
         System.out.println("Evento registrar: "+e);
@@ -520,13 +529,13 @@ public class WinJustificacion extends javax.swing.JInternalFrame {
 
     private void jLabel17MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel17MouseClicked
         WinBuscarEmpleado objbus = new WinBuscarEmpleado();
-        objbus.Form = 2;
         //objbus.setTitle(titulo);
         objbus.setResizable(true);
         objbus.setMaximizable(true);
         objbus.setIconifiable(true);
         objbus.setClosable(true);
         WinMdi.jdpContenedor.add(objbus);
+        objbus.LblModulo.setText("2");
         objbus.setVisible(true);
     }//GEN-LAST:event_jLabel17MouseClicked
 
@@ -537,6 +546,7 @@ public class WinJustificacion extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem ItemExportar;
     public javax.swing.JLabel Lblarea;
+    public static final javax.swing.JLabel Lblidemp = new javax.swing.JLabel();
     private javax.swing.JTable TblJusti;
     private com.lavantech.gui.comp.TimePanel TimIngreso;
     private com.lavantech.gui.comp.TimePanel TimIngreso1;
@@ -572,8 +582,8 @@ public class WinJustificacion extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
-    public javax.swing.JLabel lblID;
-    public javax.swing.JLabel lblNomape;
+    public static final javax.swing.JLabel lblID = new javax.swing.JLabel();
+    public static final javax.swing.JLabel lblNomape = new javax.swing.JLabel();
     private javax.swing.JLabel lblcant;
     public javax.swing.JLabel lblcargo;
     private javax.swing.JMenu mclose;
