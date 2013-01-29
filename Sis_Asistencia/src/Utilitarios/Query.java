@@ -223,6 +223,10 @@ public class Query extends ConexionBd{
             if(temp.length>=1){
                 kargs[i] = temp[0];
             }
+            temp = kargs[i].split("%");
+            if(temp.length>=1){
+                kargs[i] = temp[0];
+            }
             qs = qs + kargs[i];
             qs = qs + ",";
         }
@@ -263,6 +267,7 @@ public class Query extends ConexionBd{
     public  DefaultTableModel getAll(String[] args, String Table, String[][] Filter){
         try{
             ResultSet rs_all = null;
+            hp = new Helpers();
             datos = new DefaultTableModel();
             getConexion();
             String id;
@@ -287,14 +292,21 @@ public class Query extends ConexionBd{
             rs_all = s.executeQuery(qs);
             while(rs_all.next()){
                 for(int i=0; i<nCols; ++i){   
-                        temp = args[i].split("/");
-                        if(temp.length>1){
-                            tbl = temp[1];
-                            this.identify = "str_"+temp[2];
-                            fila[i] =  idChoice(tbl,colum[i], String.valueOf(rs_all.getObject(i+1)));
-                        }else {
-                            fila[i] = rs_all.getObject(i+1);
-                        }
+                    fila[i] = rs_all.getObject(i+1);
+                    temp = args[i].split("/");
+                    if(temp.length>1){
+                        tbl = temp[1];
+                        this.identify = "str_"+temp[2];
+                        fila[i] =  idChoice(tbl,colum[i], String.valueOf(rs_all.getObject(i+1)));
+                    }
+                    temp = args[i].split("%");
+                    if(temp.length>1){
+                        String[] camp;
+                        tbl = temp[1];
+                        System.out.println(tbl);
+                        camp =  hp.getConstantData(tbl);
+                        fila[i] = camp[rs_all.getInt(i+1)];
+                    }
                 }
                 datos.addRow(fila);
             }

@@ -4,9 +4,12 @@ package Utilitarios;
 import java.io.*;
 import java.util.Calendar;
 import javax.swing.JTable;
+import Utilitarios.Data;
 
 
 public class Helpers{
+    
+    private Data dt;
     
     /*
      * Metodo optener contenido de un archivo de texto
@@ -67,6 +70,17 @@ public class Helpers{
         String [] arrayfecha = fecha.split("-");
         date = arrayfecha[2]+"-"+arrayfecha[1]+"-"+arrayfecha[0];
         return date;
+    }
+    
+    public String[] getConstantData(String op){
+        dt = new Data();
+        String[] camp;
+        switch(op){
+            case "G_TIPOREG": camp = dt.G_TIPOREG;break;
+            default: camp = new String[0];
+        }
+        
+        return camp;
     }
      
 //Suma horas

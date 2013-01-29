@@ -37,7 +37,7 @@ public class RegistroDAO extends ConexionBd{
         filter = new String[0][0];
         campos = new String[4];
         campos[0]="idreg";
-        campos[1]="idtip_reg";
+        campos[1]="idtip_reg%G_TIPOREG";
         campos[2]="fecha";
         campos[3]="hora";
         witdhcolum = new int[1];
