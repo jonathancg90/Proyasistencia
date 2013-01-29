@@ -245,7 +245,7 @@ public class Query extends ConexionBd{
                     case "bet":
                         String[] between;
                         between = camp.split("_");
-                        qs = qs + between[0] + " between '" + between[1] + "' and '" + Filter[i][1] + "' ";
+                        qs = qs +" "+ between[0] + " between '" + between[1] + "' and '" + Filter[i][1] + "' ";
                          break;
                     default:qs = qs + " " + Filter[i][0] + " like '%" + Filter[i][1] + "%' ";
                          break;

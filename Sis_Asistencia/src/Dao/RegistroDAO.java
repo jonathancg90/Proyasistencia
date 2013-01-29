@@ -197,11 +197,11 @@ public class RegistroDAO extends ConexionBd{
         int i = 0;
         try {
             if(!"".equals(id)){
-                filter = new String[1][2];
+                filter = new String[2][2];
                 filter[0][0] = "int_idemp";
                 filter[0][1] = id;
-                filter[0][0] = "bet_fecha_"+inicio;
-                filter[0][1] = fin;
+                filter[1][0] = "bet_fecha_"+inicio;
+                filter[1][1] = fin;
             }
             getTableAll(tblDatos, lblcant);
         }

@@ -861,7 +861,8 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(null,"No se pudo eliminar el registro de asistencia");
             }
             else {
-                objRegistro.findId(lblidEmp.getText(), tblAsistencia, lblcant3);
+                String fecha=hp.getFormatDate(cboDia.getText());
+                objRegistro.findRegFecha(lblidEmp.getText(), fecha, fecha, tblAsistencia, lblcant3);
                 cleanBox();
             }
         }
@@ -894,7 +895,7 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
                 }
                 
                 else {
-                        objRegistro.findId(lblidEmp.getText(), tblAsistencia, lblcant3);
+                    objRegistro.findRegFecha(lblidEmp.getText(), fecha, fecha, tblAsistencia, lblcant3);
                         cleanBox();
                         JOptionPane.showMessageDialog(null,"Asistencia actualizada");
                     }
