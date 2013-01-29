@@ -303,7 +303,6 @@ public class Query extends ConexionBd{
                     if(temp.length>1){
                         String[] camp;
                         tbl = temp[1];
-                        System.out.println(tbl);
                         camp =  hp.getConstantData(tbl);
                         fila[i] = camp[rs_all.getInt(i+1)];
                     }
@@ -500,6 +499,7 @@ public class Query extends ConexionBd{
             s = conexion.createStatement();
             value =  value.toUpperCase();
             query  = "select " +identify+ " from " +Tbl+ " where " +Campo+ " = '"+value+"'";
+            System.out.println("2"+query);
             rs = s.executeQuery(query);
             while(rs.next()) {
                 switch(type){
@@ -722,7 +722,6 @@ public class Query extends ConexionBd{
                          }
                          i++;
                     }
-                    System.out.println(query);
                     rs = s.executeQuery(query);
                     hora = new Time[max+1];
                     while (rs.next()) {

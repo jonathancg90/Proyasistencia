@@ -14,6 +14,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import Gui.WinEmpleado_Vacaciones;
 import java.sql.Time;
+import javax.swing.JLabel;
 
 public class justificacionesDAO extends ConexionBd{
     private Query qs;
@@ -33,27 +34,33 @@ public class justificacionesDAO extends ConexionBd{
         _table = "justificaciones";
         _error = "Dao_justificacionesDAO_";
         filter = new String[0][0];
-        campos = new String[4];
+        campos = new String[6];
         campos[0]="idjus";
-        campos[1]="tipo_justificaciones_idtip_jus";
+        campos[1]="idtip_jus/tipo_justificaciones/nombre";
         campos[2]="fecha";
-        campos[3]="hora";
+        campos[3]="inicio";
+        campos[4]="fin";
+        campos[5]="horas";
         witdhcolum = new int[1];
         witdhcolum[0]=50;
     }
-    public void getTableFilter(JTable tblDatos,String inicio,String fin, int id){
+    public void getTableAll(JTable tblDatos, JLabel lblcant){
         try{
             DefaultTableModel datos;
             qs= new Query();
             hp = new Helpers();
+            if (filter.length <= 0){
+                filter = new String[0][0];
+            }
             String Table = this._table;
-            
-            datos = qs.getFechafilter(this.campos,Table,inicio,fin,"empleado_idemp",id);
+            datos = qs.getAll(this.campos,Table,filter);
             tblDatos.setModel(datos);
             hp.setWidthJtable(tblDatos,witdhcolum);
+            int num = tblDatos.getRowCount();
+            lblcant.setText(String .valueOf(num));
         }
         catch(Exception e){
-            System.out.println(_error + "getTableFechaFilter: "+e);
+            System.out.println(_error + "getTableAll: "+e);
         }
     
     }
@@ -67,7 +74,7 @@ public class justificacionesDAO extends ConexionBd{
             qs = new Query();
             String Table = this._table;
             objjusti = new Justificaciones(0,idemp,idtip_reg,fecha,motivo,recibo,horas,inicio,fin);
-            //Iniciando consulta y asignando valores
+            pt = qs.sqlRegister(Table);
             
             pt.setInt(1,objjusti.getEmpleado_idemp());
             pt.setInt(2,objjusti.getTipo_justificaciones_idtip_jus());
@@ -112,5 +119,22 @@ public class justificacionesDAO extends ConexionBd{
             return i;
         }
         
+    }
+   public int findJusti(String id,String inicio, String fin, JTable tblDatos, JLabel lblcant) {
+        int i = 0;
+        try {
+            if(!"".equals(id)){
+                filter = new String[2][2];
+                filter[0][0] = "int_empleado_idemp";
+                filter[0][1] = id;
+                filter[1][0] = "bet_fecha_"+inicio;
+                filter[1][1] = fin;
+            }
+            getTableAll(tblDatos, lblcant);
+        }
+        catch(Exception e){
+            System.out.println(_error + "findId : "+e);
+        }
+        return i;
     }
 }

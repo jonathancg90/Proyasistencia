@@ -23,8 +23,11 @@ import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
 import javax.swing.JOptionPane;
 import Utilitarios.Data;
+import Appi.TimeOPeration;
 import java.io.File;
 import java.sql.Time;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -42,6 +45,7 @@ public class WinJustificacion extends javax.swing.JInternalFrame {
     private Calendar calendar;
     private GregorianCalendar calendar2;
     private JExcel xls;
+    private TimeOPeration tm;
     private String _error = "Gui_WinJustificacion_";
     
     public WinJustificacion() {
@@ -93,8 +97,8 @@ public class WinJustificacion extends javax.swing.JInternalFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         Txtaobservacion = new javax.swing.JTextArea();
         cboDia = new datechooser.beans.DateChooserCombo();
+        TimSalida = new com.lavantech.gui.comp.TimePanel();
         TimIngreso = new com.lavantech.gui.comp.TimePanel();
-        TimIngreso1 = new com.lavantech.gui.comp.TimePanel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         TblJusti = new javax.swing.JTable();
@@ -162,13 +166,13 @@ public class WinJustificacion extends javax.swing.JInternalFrame {
         jPanel5.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(133, 113, 470, -1));
         jPanel5.add(cboDia, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 50, 230, -1));
 
+        TimSalida.setDisplayAnalog(false);
+        TimSalida.setSecDisplayed(false);
+        jPanel5.add(TimSalida, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 220, -1, 70));
+
         TimIngreso.setDisplayAnalog(false);
         TimIngreso.setSecDisplayed(false);
-        jPanel5.add(TimIngreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 220, -1, 70));
-
-        TimIngreso1.setDisplayAnalog(false);
-        TimIngreso1.setSecDisplayed(false);
-        jPanel5.add(TimIngreso1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 210, -1, 70));
+        jPanel5.add(TimIngreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 210, -1, 70));
 
         jTabbedPane1.addTab("Registro", jPanel5);
 
@@ -475,8 +479,7 @@ public class WinJustificacion extends javax.swing.JInternalFrame {
             objjusti= new justificacionesDAO();
             val=new Validators();
             if(val.validarFechas(inicio, fin)){
-               objjusti.getTableFilter(TblJusti, inicio, fin, Integer.parseInt(lblID.getText()));
-
+               objjusti.findJusti(lblID.getText() ,inicio, fin,TblJusti, lblcant);
             }
             else{
                 JOptionPane.showMessageDialog(null,"Conflicto de fechas");
@@ -491,32 +494,33 @@ public class WinJustificacion extends javax.swing.JInternalFrame {
         if(!"".equals(lblID.getText())){
         try{
             int id = Integer.parseInt(lblID.getText());
-            val = new Validators();    
-            qs=new Query();
-            hp=new Helpers();
-             //Validacion propia del evento
+            val = new Validators();
             dt = new Data();
-            objjusti= new justificacionesDAO();
+            tm = new TimeOPeration();
+            qs = new Query();
+            hp = new Helpers();
             
-            SimpleDateFormat fhora = new SimpleDateFormat("HH:mm:ss");  
+            //Validacion propia del evento
+            objjusti = new justificacionesDAO();
+            
+            SimpleDateFormat fhora = new SimpleDateFormat("HH:mm:ss");
             Calendar ingreso = TimIngreso.getCalendar();
-            Calendar salida = TimIngreso1.getCalendar();
+            Calendar salida = TimSalida.getCalendar();
             String motivo = Txtaobservacion.getText();
             String recivo = TxtNum.getText();
+            
             Time ing =  Time.valueOf(fhora.format(ingreso.getTime()));
             Time sal =  Time.valueOf(fhora.format(salida.getTime()));
-            //el metodo getTime te devuelve en mili segundos para saberlo en mins debes hacer
-            System.out.println();
-            Time hrs = Time.valueOf(String.valueOf(ing.compareTo(sal)));
+            //System.out.println("Resta de horas: "+sal + " - " +ing+" : "+tm.restarTime(ing,sal));
+            Time hrs = tm.restarTime(ing,sal);
             String fecha=hp.getFormatDate(cboDia.getText());
-            int tipojus =  Integer.parseInt(qs.idChoice("justificaciones","nombre",String.valueOf(cboTipojus.getSelectedItem())));
+            int tipojus =  Integer.parseInt(qs.idChoice("tipo_justificaciones","nombre",String.valueOf(cboTipojus.getSelectedItem())));
             int i = objjusti.save(id,tipojus,fecha,motivo,recivo,hrs,ing,sal);
             if (i == 0 ) {
                 JOptionPane.showMessageDialog(null,"No se pudo grabar el detalle");
             }
             else {
                   JOptionPane.showMessageDialog(null,"justificacion grabada");
-                  cleanBox();
                  }
         }
     catch(Exception e){
@@ -549,7 +553,7 @@ public class WinJustificacion extends javax.swing.JInternalFrame {
     public static final javax.swing.JLabel Lblidemp = new javax.swing.JLabel();
     private javax.swing.JTable TblJusti;
     private com.lavantech.gui.comp.TimePanel TimIngreso;
-    private com.lavantech.gui.comp.TimePanel TimIngreso1;
+    private com.lavantech.gui.comp.TimePanel TimSalida;
     private javax.swing.JTextField TxtNum;
     private javax.swing.JTextArea Txtaobservacion;
     private javax.swing.JButton btnDateSearch;

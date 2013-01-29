@@ -22,12 +22,6 @@ public class JExcel {
     private String _error = "Appi_JExcel_";
     private String data[][];
     
-     public static void main(String[] args) throws IOException, WriteException, BiffException {
-         JExcel xls = new JExcel();
-         xls.ExcelUp("area");
-         //xls.CreateXls("empleado.xls");
-         //xls.ExcelTest();
-    }
     public JExcel() throws WriteException{
        //Tipo de letra
             //Arial
