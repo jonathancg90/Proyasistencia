@@ -92,7 +92,6 @@ public class Query extends ConexionBd{
             }
             query= "insert into "+Table+" ("+campos+") values("+values+")";
             pt  = conexion.prepareStatement(query);
-            System.out.println(query);
             rs.close();
             return pt;
         }
@@ -499,7 +498,6 @@ public class Query extends ConexionBd{
             s = conexion.createStatement();
             value =  value.toUpperCase();
             query  = "select " +identify+ " from " +Tbl+ " where " +Campo+ " = '"+value+"'";
-            System.out.println("2"+query);
             rs = s.executeQuery(query);
             while(rs.next()) {
                 switch(type){
