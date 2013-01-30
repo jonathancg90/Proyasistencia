@@ -4,6 +4,9 @@ import Dao.BusquedaEmpleadoDAO;
 import Utilitarios.Query;
 import javax.swing.table.DefaultTableModel;
 import Utilitarios.Data;
+import java.awt.Image;
+import java.io.File;
+import javax.swing.ImageIcon;
 
 
 public class WinBuscarEmpleado extends javax.swing.JInternalFrame {
@@ -300,6 +303,27 @@ public class WinBuscarEmpleado extends javax.swing.JInternalFrame {
             case "2": 
                 Gui.WinJustificacion.lblNomape.setText(nombre + " "+ apellido);
                 Gui.WinJustificacion.lblID.setText(id);
+                Gui.WinJustificacion.Lblarea.setText(area);
+                Gui.WinJustificacion.lblcargo.setText(cargo);
+                File archivo = new  File("src/imagenes/"+idEmp+".jpg");
+                if(archivo.exists()){
+                    String archivoimg = "src/imagenes/"+idEmp+".jpg";
+                    ImageIcon imagenfoto = new ImageIcon(archivoimg);
+
+                    Image iamgendimen = imagenfoto.getImage();
+                     Image newimg = iamgendimen.getScaledInstance(100,100,java.awt.Image.SCALE_SMOOTH);
+                     ImageIcon newIcon = new ImageIcon(newimg);
+                     Gui.WinJustificacion.lblFoto.setIcon(newIcon);
+                }else{
+                    System.out.println("no eres file");
+
+                    ImageIcon imagenFondo = new ImageIcon(getClass().getResource("/imagenes/defecto.jpg"));
+                    Image iamgendimen = imagenFondo.getImage();
+                          Image newimg = iamgendimen.getScaledInstance(100,100,java.awt.Image.SCALE_SMOOTH);
+                          ImageIcon newIcon = new ImageIcon(newimg);
+                    Gui.WinJustificacion.lblFoto.setIcon(newIcon);
+                }
+                
                 this.dispose();
                 break;
             

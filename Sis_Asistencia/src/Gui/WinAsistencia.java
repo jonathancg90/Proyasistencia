@@ -23,8 +23,10 @@ import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
 import javax.swing.JOptionPane;
 import Utilitarios.Data;
+import java.awt.Image;
 import java.io.File;
 import java.sql.Time;
+import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -254,7 +256,7 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
                     .addComponent(lblcant4, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
-        lblFoto.setBorder(javax.swing.BorderFactory.createTitledBorder("Foto"));
+        lblFoto.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -311,7 +313,7 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel2))
                     .addComponent(lblApe, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
                 .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -805,7 +807,7 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 677, Short.MAX_VALUE)
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 681, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -1070,6 +1072,25 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
             objRegistro=new RegistroDAO();
             String fecha = cboDia.getText();
             objRegistro.findRegFecha(lblidEmp.getText(), fecha, fecha, tblAsistencia, lblcant3);
+            
+            File archivo = new  File("src/imagenes/"+idempleado+".jpg");
+             if(archivo.exists()){
+                 String archivoimg = "src/imagenes/"+idempleado+".jpg";
+                 ImageIcon imagenfoto = new ImageIcon(archivoimg);
+                 
+                 Image iamgendimen = imagenfoto.getImage();
+                  Image newimg = iamgendimen.getScaledInstance(142,121,java.awt.Image.SCALE_SMOOTH);
+                  ImageIcon newIcon = new ImageIcon(newimg);
+                  lblFoto.setIcon(newIcon);
+             }else{
+                 System.out.println("no eres file");
+           
+            ImageIcon imagenFondo = new ImageIcon(getClass().getResource("/imagenes/defecto.jpg"));
+           Image iamgendimen = imagenFondo.getImage();
+                  Image newimg = iamgendimen.getScaledInstance(142,121,java.awt.Image.SCALE_SMOOTH);
+                  ImageIcon newIcon = new ImageIcon(newimg);
+            lblFoto.setIcon(newIcon);
+             }
         }
     }//GEN-LAST:event_tblempleadoMouseClicked
 

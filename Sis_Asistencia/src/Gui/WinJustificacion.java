@@ -112,11 +112,8 @@ public class WinJustificacion extends javax.swing.JInternalFrame {
         lblcant = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        lblcargo = new javax.swing.JLabel();
-        Lblarea = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -277,21 +274,6 @@ public class WinJustificacion extends javax.swing.JInternalFrame {
         jLabel1.setText("Trabajador");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, -1, -1));
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 90, Short.MAX_VALUE)
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 97, Short.MAX_VALUE)
-        );
-
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 30, -1, -1));
-
         jLabel3.setText("Area");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, -1, -1));
 
@@ -322,6 +304,9 @@ public class WinJustificacion extends javax.swing.JInternalFrame {
         });
         jPanel1.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 60, -1, -1));
         jPanel1.add(Lblidemp, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 20, -1, -1));
+
+        lblFoto.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel1.add(lblFoto, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 20, 100, 100));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 630, 140));
 
@@ -549,7 +534,7 @@ public class WinJustificacion extends javax.swing.JInternalFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem ItemExportar;
-    public javax.swing.JLabel Lblarea;
+    public static final javax.swing.JLabel Lblarea = new javax.swing.JLabel();
     public static final javax.swing.JLabel Lblidemp = new javax.swing.JLabel();
     private javax.swing.JTable TblJusti;
     private com.lavantech.gui.comp.TimePanel TimIngreso;
@@ -581,15 +566,15 @@ public class WinJustificacion extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
+    public static final javax.swing.JLabel lblFoto = new javax.swing.JLabel();
     public static final javax.swing.JLabel lblID = new javax.swing.JLabel();
     public static final javax.swing.JLabel lblNomape = new javax.swing.JLabel();
     private javax.swing.JLabel lblcant;
-    public javax.swing.JLabel lblcargo;
+    public static final javax.swing.JLabel lblcargo = new javax.swing.JLabel();
     private javax.swing.JMenu mclose;
     private javax.swing.JMenu medit;
     private javax.swing.JMenu mfile;
