@@ -6,16 +6,17 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import javax.swing.*;
-import java.util.HashMap;
-import java.util.Map;
 import java.sql.*;
-import net.sf.jasperreports.engine.*;
+import java.util.Map;
+import java.util.HashMap;
+import javax.swing.JOptionPane;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.util.JRLoader;
-import net.sf.jasperreports.view.*;
-import net.sf.jasperreports.view.save.JRPdfSaveContributor.*;
-import net.sf.jasperreports.view.JRViewer.*;
-import net.sf.jasperreports.view.save.JRMultipleSheetsXlsSaveContributor.*;
-
+import net.sf.jasperreports.view.JasperViewer;
 public class Ireport {
     
     private Connection conn = null;
@@ -51,23 +52,31 @@ public class Ireport {
             ex.printStackTrace();
         }
     }
-    public void SelectReport(int op) throws JRException{
+    public void SelectReport(int op){
         switch(op){
             case 1:ReportEjemplo();break;
         }
         
     }
     
-    public void ReportEjemplo() throws JRException{
+    public void ReportEjemplo(){
        try {
+            /*String arch ="/home/platano/ejemplo.jasper";
+            JasperReport Jas_Rep= JasperCompileManager.compileReport(arch);
+            JasperPrint Jas_Prin= JasperFillManager.fillReport(Jas_Rep, null,conn);
+            JasperViewer.viewReport(Jas_Prin);
+           */
+           
+            getConexionIreport();
             File miDir = new File (".");
-            String archivo = miDir + "/" + _ubicacion + File.separatorChar + "Ejemplo.jasper";
+            String archivo = miDir + "/" + _ubicacion + File.separatorChar + "Ejemplo.jrxml";
             System.out.println(archivo);
             if(archivo == null){
                 System.out.println("No se encuentra el archivo.");
             }
+            String archivo2 = "reportes\\ejemplo.jrxml";
             try{
-                masterReport= (JasperReport) JRLoader.loadObject(new File(archivo));
+                masterReport= (JasperReport) JRLoader.loadObject("reportes\\ejemplo.jrxml");
             } catch (JRException e) {
                 System.out.println("Error cargando el reporte maestro: " + e.getMessage());
             }
@@ -77,9 +86,9 @@ public class Ireport {
             JasperViewer jviewer= new JasperViewer(jasperPrint,false);
             jviewer.setTitle("Ejemplo de reporte");
             jviewer.setVisible(true);
-            }catch (Exception j){
+        }catch (Exception j){
                 System.out.println("Mensaje de Error:"+j.getMessage());
-            }
+        }
 
         }
 }

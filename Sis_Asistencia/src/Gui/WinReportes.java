@@ -9,7 +9,6 @@ import java.util.GregorianCalendar;
 import Utilitarios.Ireport;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import net.sf.jasperreports.engine.JRException;
 
 public class WinReportes extends javax.swing.JInternalFrame {
 
