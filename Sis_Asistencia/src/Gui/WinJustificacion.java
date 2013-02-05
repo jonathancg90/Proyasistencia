@@ -78,6 +78,10 @@ public class WinJustificacion extends javax.swing.JInternalFrame {
         lblcargo.setText("");
         cboDia.setSelectedDate(rightNow);
     }
+    public void cleanForm() {
+        TxtNum.setText("");
+        Txtaobservacion.setText("");
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -497,10 +501,11 @@ public class WinJustificacion extends javax.swing.JInternalFrame {
             Time ing =  Time.valueOf(fhora.format(ingreso.getTime()));
             Time sal =  Time.valueOf(fhora.format(salida.getTime()));
             //System.out.println("Resta de horas: "+sal + " - " +ing+" : "+tm.restarTime(ing,sal));
-            Time hrs = tm.restarTime(ing,sal);
+            Time hrs = tm.restarTime(sal,ing);
             String fecha=hp.getFormatDate(cboDia.getText());
             int tipojus =  Integer.parseInt(qs.idChoice("tipo_justificaciones","nombre",String.valueOf(cboTipojus.getSelectedItem())));
             int i = objjusti.save(id,tipojus,fecha,motivo,recivo,hrs,ing,sal);
+            cleanForm();
             if (i == 0 ) {
                 JOptionPane.showMessageDialog(null,"No se pudo grabar el detalle");
             }
