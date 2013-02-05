@@ -228,8 +228,4 @@ public class RegistroDAO extends ConexionBd{
     
     }
     
-    
-    
-    
-    
 }

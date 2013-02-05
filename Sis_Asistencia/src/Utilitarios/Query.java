@@ -755,6 +755,38 @@ public class Query extends ConexionBd{
             }return num;
 
         }
+        public void create_report(String[] args) {
+            try {
+                getConexion();
+                pt = null;
+                String qs = "create table report(";
+                for(int i=0;i<args.length;i++){
+                    qs = qs + args[i] + " varchar(150)";
+                    if(args.length!=i+1){ 
+                        qs = qs + ",";
+                    }
+                }
+                qs = qs + ")";
+                pt  = conexion.prepareStatement(qs);
+                pt.executeUpdate();
+                pt.close();
+                closeConexion();
+            } catch(Exception e) {
+                destroid_report();
+            }
+        }
+        public void destroid_report(){
+            try {
+                getConexion();
+                pt = null;
+                pt  = conexion.prepareStatement("drop table report");
+                pt.executeUpdate();
+                pt.close();
+                closeConexion();
+            } catch(Exception e) {
+                System.out.println(_error+"destroid_report: "+e);
+            }
+        }
     }
         
 

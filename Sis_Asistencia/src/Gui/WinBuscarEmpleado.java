@@ -293,7 +293,6 @@ public class WinBuscarEmpleado extends javax.swing.JInternalFrame {
         String apellido = String.valueOf(m.getValueAt(fsel, 2));
         String area = String.valueOf(m.getValueAt(fsel, 3));
         String cargo = String.valueOf(m.getValueAt(fsel, 4));
-        System.out.println("Hola"+ Form + " - " + Nomape);
         switch(LblModulo.getText()){
             case "1":
                 Gui.WinConsulta.TxtName.setText(nombre + " "+ apellido);
@@ -315,8 +314,6 @@ public class WinBuscarEmpleado extends javax.swing.JInternalFrame {
                      ImageIcon newIcon = new ImageIcon(newimg);
                      Gui.WinJustificacion.lblFoto.setIcon(newIcon);
                 }else{
-                    System.out.println("no eres file");
-
                     ImageIcon imagenFondo = new ImageIcon(getClass().getResource("/imagenes/defecto.jpg"));
                     Image iamgendimen = imagenFondo.getImage();
                           Image newimg = iamgendimen.getScaledInstance(100,100,java.awt.Image.SCALE_SMOOTH);
