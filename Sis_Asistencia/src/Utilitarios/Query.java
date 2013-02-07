@@ -209,6 +209,8 @@ public class Query extends ConexionBd{
         String type;
         String camp;
         String[] temp;
+        String[] order;
+        String by_order="";
         String[] kargs =  new String[args.length];
         
         for(int i=0;i<args.length;i++){
@@ -229,6 +231,12 @@ public class Query extends ConexionBd{
             qs = qs + kargs[i];
             qs = qs + ",";
         }
+        order = Table.split("/");
+        if(order.length>1){
+            Table = order[0];
+            by_order = "order by " + order[1] + " asc";
+        }
+        
         qs = qs +" from "+Table;
         qs = qs.replace(", "," ");
         
@@ -257,6 +265,7 @@ public class Query extends ConexionBd{
                     qs = qs + "and";
                 }
             }
+            qs = qs + by_order;
         }
         return qs;
     }
@@ -773,9 +782,10 @@ public class Query extends ConexionBd{
                 closeConexion();
             } catch(Exception e) {
                 destroid_report();
+                create_report(args);
             }
         }
-        public void destroid_report(){
+        public void destroid_report() {
             try {
                 getConexion();
                 pt = null;
@@ -786,6 +796,37 @@ public class Query extends ConexionBd{
             } catch(Exception e) {
                 System.out.println(_error+"destroid_report: "+e);
             }
+        }
+        public String Execute(String query) {
+            String result = "";
+            try{
+                getConexion();
+                s = conexion.createStatement();
+
+                rs = s.executeQuery(query);
+                rs.next();
+                result = rs.getString(1);
+
+                closeConexion();
+                rs.close();
+            }
+            catch(Exception e){
+                System.out.println(_error+"userAuth: "+e);
+            }
+            return result;
+
+        }
+        //Obtener dia a partir de la fecha
+        public String getDayOfTheWeek(String Fecha) {
+            String StrDia="";
+            try {
+                String query="select dia_semana('"+Fecha+"');";
+                StrDia = Execute(query);
+            }
+            catch(Exception e) {
+                System.out.println("Problemas en Obtener_Dia_Fecha: "+e);
+            }
+        return StrDia;
         }
     }
         

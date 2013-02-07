@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JLabel;
 import javax.swing.JTable;
@@ -59,11 +60,12 @@ public class ConsultaDAO {
     }
     public void findAsistencia(String args[], JTable tblDatos, JLabel lblcant) {
         qs= new Query();
+        hp= new Helpers();
         Statement s = null;
         con = new ConexionBd();
         try {
             //Campos de la tabla report
-            String campos[];
+            String lista[];
             campos = set_camp_registro();
             //Campos para la consulta
             qs.create_report(campos);
@@ -77,26 +79,50 @@ public class ConsultaDAO {
             filter[0][1] = args[0];
             filter[1][0] = "bet_fecha_"+args[1];
             filter[1][1] = args[2];
-            String Consulta = qs.getQueryList(camp,"registro",filter);
-            System.out.println(Consulta);
-            con.getConexion();
-            conexion = con.getConetion();
-            s = conexion.createStatement();
-            rs = s.executeQuery(Consulta);
-            ResultSetMetaData meta = rs.getMetaData();
-            int nCols = meta.getColumnCount();
-            while(rs.next()){
-                for(int i=1; i<=nCols; ++i){    
-                    System.out.println(rs.getString(i));
-                }
-                
-            }
+            String Consulta = qs.getQueryList(camp,"registro/fecha",filter);
+            helper_asistencia(Consulta, camp);
             qs.destroid_report();
         }
         catch(Exception e){
             System.out.println(_error + "findAsistencia : "+e);
         }
     }
+    private void helper_asistencia(String Consulta, String camp[]) throws SQLException{
+        Object[] fila;
+        String[] temp;
+        String tbl;
+        System.out.println(Consulta);
+        con.getConexion();
+        conexion = con.getConetion();
+        s = conexion.createStatement();
+        rs = s.executeQuery(Consulta);
+        ResultSetMetaData meta = rs.getMetaData();
+        int nCols = meta.getColumnCount();
+        fila = new Object[nCols];
+        int count=0;
+            //Recorro los dias del mes
+            //Obtendo un dia y hago la consulta a la bd
+            //cantidad de registros si es 2(entrada - salida) si es 4 (incluye refrigerios)
+            //armo el arreglo deacuerdo a la cantidad
+            //registro
+            
+         while(rs.next()){
+            count++;
+            for(int i=0; i<nCols; ++i){
+                fila[i] = rs.getObject(i+1);
+                temp = camp[i].split("%");
+                if(temp.length>1){
+                    String[] campo;
+                    tbl = temp[1];
+                    campo =  hp.getConstantData(tbl);
+                    fila[i] = campo[rs.getInt(i+1)];
+                }
+                System.out.println(fila[i]);
+            }
+        }
+    }
+            
+    
     
     public void register_report(String[] args) {
         pt = null;

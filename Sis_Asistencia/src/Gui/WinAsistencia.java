@@ -49,6 +49,8 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
     private GregorianCalendar calendar2;
     private JExcel xls;
     private String _error =  "Gui_WinAsistencia_";
+    private String TIPOREG[]= new String[3];
+    private String signal[]= new String[3];
     
     public WinAsistencia() {
         initComponents();
@@ -56,6 +58,10 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
         cboDia.setDateFormat(format);
         cboIni.setDateFormat(format);
         cboFin.setDateFormat(format);
+        TIPOREG[1]="d.ingreso >= ";
+        TIPOREG[2]="d.salida <=";
+        signal[1]=" >= ";
+        signal[2]=" <=";
         
         cargaForm();
     }
@@ -1005,6 +1011,28 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_tblAsistenciaMouseClicked
 
+    private int get_tipo(int cant, String [] args) {
+        int count = 0;
+        args[2] = "1";
+        count = Integer.parseInt(val.getHora("","",args));
+        args[2] = "2";
+        count = count + Integer.parseInt(val.getHora("","",args));
+        if(count == 2) {
+            if(cant == 0 || cant == 3) {
+                return 1;
+            }
+            if(cant == 1 || cant == 2) {
+                return 2;
+            }
+            //Tiene trabajo y refrigerio
+        } else if (count == 1) {
+            return 1;//Solo tiene trabajo
+        } 
+        //Si arroja 0 no tiene horario
+        return count;
+        
+        
+    }
     private void btnRegisterMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegisterMousePressed
         if(!"".equals(lblidEmp.getText())){
             try{
@@ -1017,29 +1045,46 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
                 Calendar ingreso = TimIngreso.getCalendar();
                 Time ing =  Time.valueOf(fhora.format(ingreso.getTime()));
                 String fecha;
-
                 //Validacion propia del evento
                 if(asistenciaValidator(ing)){
-                    dt = new Data();
-                    objRegistro= new RegistroDAO();
-
+                    Time ing_reg = ing;
                     fecha=hp.getFormatDate(cboDia.getText());
                     int tiporeg=qs.loadGlobal(4, cboTiporeg, 0);
-                    int i = objRegistro.save(tiporeg, ing, fecha, id,1);
-                    int j = objRegistro.save(tiporeg, ing ,fecha,id ,0);
-                    if (i == 0 && j == 0) {
-                        JOptionPane.showMessageDialog(null,"No se pudo grabar el detalle");
-                    }
-
-                    else {
+                    int cantidad = Integer.parseInt(lblcant3.getText());
+                    String[] args = new String[4];
+                    String dia = qs.getDayOfTheWeek(fecha);
+                    args[0] = ""+id;
+                    args[1] = dia;
+                    args[3] = ""+fecha;
+                    tiporeg = get_tipo(cantidad, args);
+                    if (tiporeg > 0) {
+                        args[2] = ""+tiporeg;
+                        //0 = No corresponde
+                        String extra = "and " + TIPOREG[tiporeg] + signal[tiporeg] + " '" + ing_reg + "'";
+                        int count = Integer.valueOf(val.getHora("",extra,args));
+                        System.out.print("count : "+count);
+                        if (count == 0) {
+                            ing_reg = Time.valueOf(val.getHora(TIPOREG[tiporeg],"",args));
+                        }
+                        dt = new Data();
                         objRegistro= new RegistroDAO();
-                        fecha = cboDia.getText();
-                        objRegistro.findRegFecha(lblidEmp.getText(), fecha, fecha, tblAsistencia, lblcant3);
-                        cleanBox();
-                        JOptionPane.showMessageDialog(null,"Nueva asistencia registrado");
+
+                        int i = objRegistro.save(tiporeg, ing_reg, fecha, id,1);
+                        int j = objRegistro.save(tiporeg, ing ,fecha,id ,0);
+                        if (i == 0 && j == 0) {
+                            JOptionPane.showMessageDialog(null,"No se pudo grabar el detalle");
+                        }
+                        else {
+                            objRegistro= new RegistroDAO();
+                            fecha = cboDia.getText();
+                            objRegistro.findRegFecha(lblidEmp.getText(), fecha, fecha, tblAsistencia, lblcant3);
+                            cleanBox();
+                            JOptionPane.showMessageDialog(null,"Nueva asistencia registrado");
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(null,"Actualize el horario del empleado");
                     }
                 }
-
             }
             catch(Exception e){
                 System.out.println("Evento registrar: "+e);

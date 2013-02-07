@@ -5,6 +5,8 @@ import java.io.*;
 import java.util.Calendar;
 import javax.swing.JTable;
 import Utilitarios.Data;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 
 public class Helpers{
@@ -36,7 +38,6 @@ public class Helpers{
         String date;
         
         Calendar c = Calendar.getInstance();
-        
         int mesact = c.get(Calendar.MONTH);
         if(mesact == 0){
             mesact = mesact +1;
