@@ -46,7 +46,6 @@ public class Empleado_has_horariosDAO extends ConexionBd {
     
     public void getTableAll(JTable tblDatos, JLabel lblcant){
         try{
-            
             DefaultTableModel datos;
             qs= new Query();
             hp = new Helpers();
@@ -63,8 +62,6 @@ public class Empleado_has_horariosDAO extends ConexionBd {
         catch(Exception e){
             System.out.println(_error + "getTableAll: "+e);
         }
-    
-    
     }
     /*
      * Registro de Salarios
@@ -73,28 +70,18 @@ public class Empleado_has_horariosDAO extends ConexionBd {
        int i=0;
         try{
             Date date = new Date(0000-00-00);
-            //Date date2 = new Date(00-00-0000);
-            
-            //SimpleDateFormat formato = new SimpleDateFormat("dd")
-            
             //Preparando
             getConexion();
             hp = new Helpers();
             qs = new Query();
-            
-            
             objEmp_horarios = new Empleado_has_horarios(0,idemp,idhor,f_inicio,f_final);
-            //Iniciando consulta y asignando 
-
+            //Iniciando consulta y asignando
             pt = qs.sqlRegister(_table);
             pt.setInt(1,objEmp_horarios.getIdemp());
             pt.setInt(2,objEmp_horarios.getIdhor());
             pt.setDate(3,date.valueOf(objEmp_horarios.getInicio()));
             pt.setDate(4,date.valueOf(objEmp_horarios.getFin()));
-            
-            
             //Ejecucion y cierre
-            
             i= pt.executeUpdate();
             pt.close();
             closeConexion();
@@ -117,8 +104,6 @@ public class Empleado_has_horariosDAO extends ConexionBd {
             
             qs= new Query();
             String Table = this._table;
-            
-            
             objEmp_horarios = new Empleado_has_horarios(NMID,idemp,idhor,f_inicio,f_final);
             //Iniciando consulta y asignando valores
             pt = qs.sqlUpdate(Table);
@@ -127,7 +112,6 @@ public class Empleado_has_horariosDAO extends ConexionBd {
             pt.setDate(3,date.valueOf(objEmp_horarios.getInicio()));
             pt.setDate(4,date.valueOf(objEmp_horarios.getFin()));
             pt.setInt(5,objEmp_horarios.getNMID());
-            
             //Ejecucion y cierre
             i= pt.executeUpdate();
             pt.close();

@@ -149,10 +149,11 @@ public class Query extends ConexionBd{
                 }
             }
             if(id.equals("NMID")){
-            id="\"NMID\"";
+                id="\"NMID\"";
             }
             query = query + " where "+id+"= ?";
             query = query.replace(", "," ");
+            System.out.println(query);
             pt  = conexion.prepareStatement(query);
             rs.close();
             return pt;
