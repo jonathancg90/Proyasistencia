@@ -22,10 +22,9 @@ public class WinConsulta extends javax.swing.JInternalFrame {
     private String _error = "Gui_WinConsulta_";
     private ConsultaDAO consul;
 
-    
     public WinConsulta() {
         initComponents();
-        format=new SimpleDateFormat("dd-MM-yyyy");
+        format = new SimpleDateFormat("dd-MM-yyyy");
         ChFechaIni.setDateFormat(format);
         ChFechaFin.setDateFormat(format);
         Lblidemp.setVisible(false);
@@ -210,7 +209,7 @@ public class WinConsulta extends javax.swing.JInternalFrame {
 
     private void mcloseMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mcloseMousePressed
         this.setVisible(false);
-        Utilitarios.Config.OPENWINDOWS =0;
+        Utilitarios.Config.OPENWINDOWS = 0;
     }//GEN-LAST:event_mcloseMousePressed
 
     private void mcloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mcloseActionPerformed
@@ -231,26 +230,26 @@ public class WinConsulta extends javax.swing.JInternalFrame {
 
     private void ItemExportarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ItemExportarMousePressed
   try {
-        JFileChooser Obj=new JFileChooser();
+        JFileChooser Obj = new JFileChooser();
         xls = new JExcel();
-        FileNameExtensionFilter filter = new FileNameExtensionFilter("Excel xls", "xls","xlsx");
+        FileNameExtensionFilter filter;
+        filter = new FileNameExtensionFilter("Excel xls", "xls", "xlsx");
         Obj.setFileFilter(filter);
         Obj.setDialogTitle("Guardar reporte");
-        int seleccion=Obj.showSaveDialog(JtblConsulta);
+        int seleccion = Obj.showSaveDialog(JtblConsulta);
         //Guardar
-        if(seleccion == JFileChooser.APPROVE_OPTION){
+        if (seleccion == JFileChooser.APPROVE_OPTION) {
             File fichero = Obj.getSelectedFile();
             String filePath = fichero.getPath();
-            if(!filePath.toLowerCase().endsWith(".xls")){
+            if (!filePath.toLowerCase().endsWith(".xls")) {
                 fichero = new File(filePath + ".xls");
             }
             boolean Confirma;
-            if((fichero).exists()) {
+            if ((fichero).exists()) {
                 if(JOptionPane.OK_OPTION == JOptionPane.showConfirmDialog(this,"El fichero existe,deseas reemplazarlo?","Reemplazar",JOptionPane.YES_NO_OPTION));{
                     Confirma=xls.ExportJtable(JtblConsulta, fichero, "Cargos");
                 }
-            } 
-            else{
+            } else {
                 Confirma=xls.ExportJtable(JtblConsulta, fichero, "Cargos");
             }
                 if(Confirma==true){
@@ -260,17 +259,14 @@ public class WinConsulta extends javax.swing.JInternalFrame {
                     JOptionPane.showMessageDialog(null, "No se pudo grabar el documento", "Confirmacion", JOptionPane.INFORMATION_MESSAGE);
                 }
         }
-    }
-    catch(Exception e)
-    {
+    } catch(Exception e) {
         JOptionPane.showMessageDialog(null, "Ha ocurrido un error durante la exportacion del documento","Error",JOptionPane.ERROR_MESSAGE);
         System.out.println(_error + "Exportar :"+e);
     }
     }//GEN-LAST:event_ItemExportarMousePressed
 
     private void BtnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnConsultarActionPerformed
-    consul =  new ConsultaDAO();
-        
+    consul =  new ConsultaDAO();     
     int op  =  CboReport.getSelectedIndex();
     switch(op) {
         case 0:
