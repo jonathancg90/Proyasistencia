@@ -315,24 +315,25 @@ public class WinUsuario extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void TblUsuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TblUsuMouseClicked
-    try {       int fsel;
-                fsel = this.TblUsu.getSelectedRow();
-                objUser = new UserDAO();
-                DefaultTableModel m = new DefaultTableModel();
-                m = (DefaultTableModel) this.TblUsu.getModel();
-                String idUsu = String.valueOf(m.getValueAt(fsel, 0));
-                modusu = objUser.getValues(Integer.parseInt(idUsu));
-                lblUsu.setText(idUsu);   
-                txtUsername.setText(modusu.getUsername());
-                txtPassword.setText(modusu.getPassword());
-                txtRePassword.setText(modusu.getPassword());
-                qs.loadChoiceDefault(cboRol, "roles", "nombre", modusu.getRol());
-                qs.loadChoiceDefault(cboEmp, "empleado", "nombres", modusu.getIdemp());
-                Txtcorreo.setText(modusu.getCorreo());
-                qs.loadState(cboEstado, modusu.isEstado());
+    try {       
+        int fsel;
+        fsel = this.TblUsu.getSelectedRow();
+        objUser = new UserDAO();
+        DefaultTableModel m = new DefaultTableModel();
+        m = (DefaultTableModel) this.TblUsu.getModel();
+        String idUsu = String.valueOf(m.getValueAt(fsel, 0));
+        modusu = objUser.getValues(Integer.parseInt(idUsu));
+        lblUsu.setText(idUsu);   
+        txtUsername.setText(modusu.getUsername());
+        txtPassword.setText(modusu.getPassword());
+        txtRePassword.setText(modusu.getPassword());
+        qs.loadChoiceDefault(cboRol, "roles", "nombre", modusu.getRol());
+        qs.loadChoiceDefault(cboEmp, "empleado", "nombres", modusu.getIdemp());
+        Txtcorreo.setText(modusu.getCorreo());
+        qs.loadState(cboEstado, modusu.isEstado());
        } catch (Exception e) {
                 System.out.println(_error+"_tblusu:"+e);
-            }
+       }
     }//GEN-LAST:event_TblUsuMouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -348,28 +349,30 @@ public class WinUsuario extends javax.swing.JInternalFrame {
             val = new Validators("usuario");    
             Object[] datos = {txtUsername.getText(), txtPassword.getPassword(), Txtcorreo.getText()};
             Object[] tipos = {3, 4, 9};
-            if (val.validar(datos, tipos)){     
+            if (val.validar(datos, tipos)) {     
                 dt = new Data();
                 String username = txtUsername.getText();
                 String password = objUser.encriptar(String.valueOf(txtPassword.getPassword()).toLowerCase());
                 String nomemp = String.valueOf(cboEmp.getSelectedItem());
                 qs = new Query();
                 int idemp = Integer.parseInt(qs.idChoice("empleado", "nombres", nomemp));
-                boolean estate = Boolean.valueOf(dt.G_BOOLEAN[cboEstado.getSelectedIndex()]);
+                int idState = dt.getEstado(String.valueOf(cboEstado.getSelectedItem()));
+                boolean estate = Boolean.valueOf(dt.G_BOOLEAN[idState]);
                 int rol = Integer.parseInt(qs.idChoice("roles", "nombre", String.valueOf(cboRol.getSelectedItem())));
                 String correo = Txtcorreo.getText();
                 objUser = new UserDAO();
                 int i = objUser.saveUsuario(username, password, idemp, estate, rol, correo);
                 if (i == 0) {
                     JOptionPane.showMessageDialog(null, "No se pudo grabar datos");
+                } else {
+                    objUser.getTableAll(TblUsu, lblcant);
+                    cleanBox();
+                    JOptionPane.showMessageDialog(null, "Nuevo usuario registrado");
+                }
             } else {
-                objUser.getTableAll(TblUsu, lblcant);
-                cleanBox();
-                JOptionPane.showMessageDialog(null, "Nuevo usuario registrado");
-            }
-        } else {
-            JOptionPane.showMessageDialog(null, "Campos requeridos incompletos");
-        } } catch(Exception e){
+                JOptionPane.showMessageDialog(null, "Campos requeridos incompletos");
+            } 
+        } catch(Exception e) {
             System.out.println(_error+"_Register:"+e);
         }
     }//GEN-LAST:event_mitemregisterMousePressed
@@ -389,8 +392,8 @@ public class WinUsuario extends javax.swing.JInternalFrame {
 
             qs = new Query();
             int idemp = Integer.parseInt(qs.idChoice("empleado","nombres", nomemp));
-
-            boolean estate = Boolean.valueOf(dt.G_BOOLEAN[cboEstado.getSelectedIndex()]);
+            int idState = dt.getEstado(String.valueOf(cboEstado.getSelectedItem()));
+            boolean estate = Boolean.valueOf(dt.G_BOOLEAN[idState]);
             int rol = Integer.parseInt(qs.idChoice("roles","nombre",String.valueOf(cboRol.getSelectedItem())));
             String correo = Txtcorreo.getText();
             objUser = new UserDAO();

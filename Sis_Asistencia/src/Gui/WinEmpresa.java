@@ -31,11 +31,9 @@ public class WinEmpresa extends javax.swing.JInternalFrame {
         initComponents();
         cargaForm();
     }
-
-    /*
-     * Construccion de formualrio
+    /**
+     * Construccion de formualrio.
      */
-    
     public void cargaForm(){
         try{
             qs = new Query();
@@ -447,7 +445,8 @@ public class WinEmpresa extends javax.swing.JInternalFrame {
                 int id = Integer.valueOf(lblId.getText());
                 String name = txtName.getText();
                 String ruc = txtruc.getText();
-                boolean estate = Boolean.valueOf(dt.G_BOOLEAN[cmbEstate.getSelectedIndex()]);
+                int idState = dt.getEstado(String.valueOf(cmbEstate.getSelectedItem()));
+                boolean estate = Boolean.valueOf(dt.G_BOOLEAN[idState]);
                 //int estate = cmbEstate.getSelectedIndex();
                 int trab = Integer.parseInt(txtCantTrab.getText());
                 int mon = Integer.parseInt(qs.idChoice("moneda","nombre",String.valueOf(cboMon.getSelectedItem())));
@@ -481,7 +480,8 @@ public class WinEmpresa extends javax.swing.JInternalFrame {
                 dt = new Data();
                 String name = txtName.getText();
                 String ruc = txtruc.getText();
-                boolean estate = Boolean.valueOf(dt.G_BOOLEAN[cmbEstate.getSelectedIndex()]);
+                int idState = dt.getEstado(String.valueOf(cmbEstate.getSelectedItem()));
+                boolean estate = Boolean.valueOf(dt.G_BOOLEAN[idState]);
                 //int estate = Integer.parseInt(txtCantTrab.getText());
                 int trab = 0;
                 int mon = Integer.parseInt(qs.idChoice("moneda","nombre",String.valueOf(cboMon.getSelectedItem())));

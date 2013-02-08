@@ -133,10 +133,11 @@ public class WinTipoEmpleado extends javax.swing.JInternalFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(txtFilter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnFind))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnFind)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel6)
+                        .addComponent(txtFilter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -297,7 +298,7 @@ public class WinTipoEmpleado extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(pnlMantenimiento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         pack();
@@ -315,8 +316,7 @@ public class WinTipoEmpleado extends javax.swing.JInternalFrame {
         fsel = this.tblTipoemp.getSelectedRow();
         if (fsel == -1) {
             //No se ha seleccionado registo en Jtable
-        }
-        else {
+        } else {
             try {
                 tipoemp = new Tipoempleado();
                 DefaultTableModel m = new DefaultTableModel();
@@ -328,8 +328,7 @@ public class WinTipoEmpleado extends javax.swing.JInternalFrame {
                 txtName.setText(tipoemp.getName());
                 lblModified.setText(hp.getFormatDate(tipoemp.getModified()));
                 qs.loadState(cmbEstate,tipoemp.isEstado());
-            }
-            catch (Exception e) {
+            } catch (Exception e) {
                 System.out.println(_error+"_tblTipoemp:"+e);
             }
 
@@ -341,49 +340,46 @@ public class WinTipoEmpleado extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_cmbEstateActionPerformed
 
     private void mitemregisterMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemregisterMousePressed
-        try{
+        try {
         val = new Validators("tipoempleado");    
         Object[] datos = {txtName.getText()};
         Object[] tipos = {2};
-        if(val.validar(datos,tipos))
-        { 
+        if(val.validar(datos,tipos)) { 
             dt = new Data();
             String name = txtName.getText();
-            boolean estate = Boolean.valueOf(dt.G_BOOLEAN[cmbEstate.getSelectedIndex()]);
+            int idState = dt.getEstado(String.valueOf(cmbEstate.getSelectedItem()));
+            boolean estate = Boolean.valueOf(dt.G_BOOLEAN[idState]);
             objtipoemp = new TipoEmpleadoDAO();
             int i = objtipoemp.save(name, estate);
             if (i == 0) {
                 JOptionPane.showInputDialog(null,"No se pudo grabar datos");
-            }
-            else {
+            } else {
                 objtipoemp.getTableAll(tblTipoemp, lblcant);
                 cleanBox();
                 JOptionPane.showMessageDialog(null,"Nuevo tipo empleado registrado");
             }
-         }                                          
-        else {
+         } else {
             JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
-             }
-        }catch(Exception e){
+        }
+        } catch(Exception e) {
             System.out.println(_error+"_Register:"+e);
         }
     }//GEN-LAST:event_mitemregisterMousePressed
 
     private void mitemupdateMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemupdateMousePressed
-        try{
+        try {
         val = new Validators("tipoempleado");    
         Object[] datos = {txtName.getText(),lblId.getText()};
         Object[] tipos = {2};
-        if(val.validar(datos,tipos))
-        {
+        if(val.validar(datos,tipos)) {
             dt = new Data();
             int id = Integer.valueOf(lblId.getText());
             String name = txtName.getText();
-            boolean estate = Boolean.valueOf(dt.G_BOOLEAN[cmbEstate.getSelectedIndex()]);
+            int idState = dt.getEstado(String.valueOf(cmbEstate.getSelectedItem()));
+            boolean estate = Boolean.valueOf(dt.G_BOOLEAN[idState]);
             objtipoemp = new TipoEmpleadoDAO();
             int i = objtipoemp.update(id,name,estate);
             if (i == 0) {
-
                 JOptionPane.showMessageDialog(null, "No se pudo actualizar datos");
             }
             else {
@@ -391,8 +387,7 @@ public class WinTipoEmpleado extends javax.swing.JInternalFrame {
                 cleanBox();
                 JOptionPane.showMessageDialog(null, "tipo de empleado actualizado");
             }
-         }                                          
-    else {
+         } else {
             JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
          }
         }catch(Exception e){
@@ -405,8 +400,7 @@ public class WinTipoEmpleado extends javax.swing.JInternalFrame {
         val = new Validators("tipoempleado");    
         Object[] datos = {lblId.getText()};
         Object[] tipos = {};
-        if(val.validar(datos,tipos))
-        {
+        if(val.validar(datos,tipos)) {
             int i;
             i= JOptionPane.showConfirmDialog(null,"¿Esta seguro de eliminar este registro?","Aviso",JOptionPane.OK_CANCEL_OPTION,JOptionPane.WARNING_MESSAGE);
             if(i==0){
@@ -422,8 +416,7 @@ public class WinTipoEmpleado extends javax.swing.JInternalFrame {
                     cleanBox();
                 }
             }
-        }
-        else {
+        } else {
             JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
         }
         }catch(Exception e){

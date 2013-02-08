@@ -334,8 +334,8 @@ public class WinModulos extends javax.swing.JInternalFrame {
         fsel= this.tblmod.getSelectedRow();
         if(fsel==-1){
         }
-        else{
-            try{
+        else {
+            try {
                 modulo = new Modulos();
                 DefaultTableModel m = new DefaultTableModel();
                 m = (DefaultTableModel) this.tblmod.getModel();
@@ -346,8 +346,7 @@ public class WinModulos extends javax.swing.JInternalFrame {
                 lblModified.setText(hp.getFormatDate(modulo.getModified()));
                 qs.loadState(cmbState,modulo.isState());
 
-            }
-            catch(Exception e){
+            } catch(Exception e){
                 System.out.println(_error+"_tblmod:"+e);
             }
 
@@ -355,26 +354,25 @@ public class WinModulos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_tblmodMouseClicked
 
     private void mitemregisterMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemregisterMousePressed
-        try{
+        try {
         val = new Validators("modulos");    
         Object[] datos = {txtName.getText()};
         Object[] tipos = {2};
         if(val.validar(datos,tipos)){    
             dt = new Data();
             String name = txtName.getText();
-            boolean estate = Boolean.valueOf(dt.G_BOOLEAN[cmbState.getSelectedIndex()]);
+            int idState = dt.getEstado(String.valueOf(cmbState.getSelectedItem()));
+            boolean estate = Boolean.valueOf(dt.G_BOOLEAN[idState]);
             objmod = new ModulosDAO();
             int i = objmod.save(name,estate);
             if (i == 0) {
                 JOptionPane.showMessageDialog(null,"No se pudo grabar datos");
-            }
-            else {
+            } else {
                 objmod.getTableAll(tblmod, lblcant);
                 cleanBox();
                 JOptionPane.showMessageDialog(null,"Nuevo modulo registrado");
             }
-        }                                          
-        else {
+        } else {
             JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
         }
         }catch(Exception e){
@@ -387,24 +385,22 @@ public class WinModulos extends javax.swing.JInternalFrame {
         val = new Validators("modulos");    
         Object[] datos = {txtName.getText(),lblId.getText()};
         Object[] tipos = {2};
-        if(val.validar(datos,tipos)){    
+        if(val.validar(datos,tipos)) {    
             dt = new Data();
             int id = Integer.valueOf(lblId.getText());
             String name = txtName.getText();
-            boolean estate = Boolean.valueOf(dt.G_BOOLEAN[cmbState.getSelectedIndex()]);
+            int idState = dt.getEstado(String.valueOf(cmbState.getSelectedItem()));
+            boolean estate = Boolean.valueOf(dt.G_BOOLEAN[idState]);
             objmod = new ModulosDAO();
-            int i = objmod.update(id,name,estate);
+            int i = objmod.update(id, name, estate);
             if (i == 0) {
-
                 JOptionPane.showMessageDialog(null, "No se pudo actualizar datos");
-            }
-            else {
+            } else {
                 objmod.getTableAll(tblmod, lblcant);
                 cleanBox();
                 JOptionPane.showMessageDialog(null, "modulos actualizados");
             }
-        }                                          
-        else {
+        } else {
             JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
         }
         }catch(Exception e){
@@ -423,23 +419,20 @@ public class WinModulos extends javax.swing.JInternalFrame {
 
             if(i==0) {    
                 int id = Integer.valueOf(lblId.getText());
-
                 objmod = new ModulosDAO();
                 i = objmod.delete(id);
                 if(i==0) {
                     JOptionPane.showMessageDialog(null,"No se pudo eliminar el modulo");
-                }
-                else {
+                } else {
                     objmod.getTableAll(tblmod, lblcant);
                     cleanBox();
                     JOptionPane.showMessageDialog(null,"modulo eliminado");
                 }
             }
-        }                                          
-        else {
+        } else {
             JOptionPane.showMessageDialog(null,"Campos requeridos incompletos");
         }
-        }catch(Exception e){
+        } catch(Exception e) {
             System.out.println(_error+"_Delete:"+e);
         }
     }//GEN-LAST:event_mitemdeleteMousePressed
