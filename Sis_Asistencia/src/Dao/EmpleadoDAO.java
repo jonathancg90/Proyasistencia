@@ -58,7 +58,7 @@ public class EmpleadoDAO extends ConexionBd{
             int num = tblDatos.getRowCount();
             lblcant.setText(String .valueOf(num));
         }
-        catch(Exception e){
+        catch(Exception e) {
             System.out.println(_error+"getTableAll: "+e);
         }
     
@@ -68,7 +68,7 @@ public class EmpleadoDAO extends ConexionBd{
      */
     public int saveEmpleado(int idemp,String nombres, String apellidos, String dni, String telefono, int idare, int idtip, int idest, int idcar, int idempr,int idsuc){
        int i=0;
-        try{
+        try {
             Date date = new Date(0000-00-00);
             //Preparando
             getConexion();

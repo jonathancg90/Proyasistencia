@@ -15,14 +15,13 @@ public class WinRoles_Permisos extends javax.swing.JInternalFrame {
         initComponents();
         cargaForm();
     }
-    public void cargaForm(){
+    public void cargaForm() {
         qs = new Query();
         objPerol = new PermisoshasRolesDAO();
         lblidrol.setVisible(false);
         qs.loadChoice(CboModulo,"modulos","nombre");
         objPerol.getTableAll(Jtablepermi, lblcant);
     }
-            
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents

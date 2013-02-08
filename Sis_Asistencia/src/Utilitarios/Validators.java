@@ -267,7 +267,7 @@ public class Validators {
                        " and idemp=" + args[0] + " \n" +
                        " and d.dia = " + args[1] + "\n" +
                        " and idtip_reg = " + args[2] + "\n" +
-                       " and '" + args[3] + "'>=e.inicio and '" + args[3] + "'<=e.fin" +
+                       " and '" + args[3] + "'>=e.inicio and '" + args[3] + "'<=e.fin " + "\n" +
                        extra;
         //and d.ingreso < '9:00'
         System.out.println(query);

@@ -49,8 +49,8 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
     private GregorianCalendar calendar2;
     private JExcel xls;
     private String _error =  "Gui_WinAsistencia_";
-    private String TIPOREG[]= new String[3];
-    private String signal[]= new String[3];
+    private String TIPOREG[][]= new String[3][4];
+    private String signal[][]= new String[3][4];
     
     public WinAsistencia() {
         initComponents();
@@ -58,10 +58,20 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
         cboDia.setDateFormat(format);
         cboIni.setDateFormat(format);
         cboFin.setDateFormat(format);
-        TIPOREG[1]="d.ingreso >= ";
-        TIPOREG[2]="d.salida <=";
-        signal[1]=" >= ";
-        signal[2]=" <=";
+        //Trabajo - entrada/salida *Cantidad de registros
+        TIPOREG[1][0]="d.ingreso ";
+        TIPOREG[1][1]="d.salida ";
+        TIPOREG[1][3]="d.salida ";
+        //Refrigerio
+        TIPOREG[2][1]="d.ingreso ";
+        TIPOREG[2][2]="d.salida ";
+        
+        
+        signal[1][0]=" >= ";
+        signal[1][1]=" <= ";
+        signal[1][3]=" <= ";
+        signal[2][1]=" <= ";
+        signal[2][2]=" <= ";
         
         cargaForm();
     }
@@ -1019,10 +1029,10 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
         count = count + Integer.parseInt(val.getHora("","",args));
         if(count == 2) {
             if(cant == 0 || cant == 3) {
-                return 1;
+                return 1;//Trabajo
             }
             if(cant == 1 || cant == 2) {
-                return 2;
+                return 2;//Refrigerio
             }
             //Tiene trabajo y refrigerio
         } else if (count == 1) {
@@ -1049,32 +1059,29 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
                 if(asistenciaValidator(ing)){
                     Time ing_reg = ing;
                     fecha=hp.getFormatDate(cboDia.getText());
-                    int tiporeg=qs.loadGlobal(4, cboTiporeg, 0);
+                    int tipohor = qs.loadGlobal(4, cboTiporeg, 0); // Saber q tipo de registro es(refrigferio o trabajo)*si retorna 0 su horario esta desactualizado
                     int cantidad = Integer.parseInt(lblcant3.getText());
                     String[] args = new String[4];
                     String dia = qs.getDayOfTheWeek(fecha);
                     args[0] = ""+id;
                     args[1] = dia;
                     args[3] = ""+fecha;
-                    tiporeg = get_tipo(cantidad, args);
+                    int tiporeg = get_tipo(cantidad, args);
                     if (tiporeg > 0) {
                         args[2] = ""+tiporeg;
-                        //0 = No corresponde
-                        String extra = "and " + TIPOREG[tiporeg] + signal[tiporeg] + " '" + ing_reg + "'";
+                        String extra = "and " + TIPOREG[tiporeg][cantidad] + signal[tiporeg][cantidad] + " '" + ing_reg + "'";
                         int count = Integer.valueOf(val.getHora("",extra,args));
-                        System.out.print("count : "+count);
-                        if (count == 0) {
-                            ing_reg = Time.valueOf(val.getHora(TIPOREG[tiporeg],"",args));
+                        if (count > 0) {
+                            ing_reg = Time.valueOf(val.getHora(TIPOREG[tiporeg][cantidad],"",args));
                         }
                         dt = new Data();
-                        objRegistro= new RegistroDAO();
+                        objRegistro = new RegistroDAO();
 
-                        int i = objRegistro.save(tiporeg, ing_reg, fecha, id,1);
-                        int j = objRegistro.save(tiporeg, ing ,fecha,id ,0);
+                        int i = objRegistro.save(tipohor, ing_reg, fecha, id,1);
+                        int j = objRegistro.save(tipohor, ing ,fecha,id ,0);
                         if (i == 0 && j == 0) {
                             JOptionPane.showMessageDialog(null,"No se pudo grabar el detalle");
-                        }
-                        else {
+                        } else {
                             objRegistro= new RegistroDAO();
                             fecha = cboDia.getText();
                             objRegistro.findRegFecha(lblidEmp.getText(), fecha, fecha, tblAsistencia, lblcant3);
