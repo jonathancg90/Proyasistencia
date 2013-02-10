@@ -53,28 +53,20 @@ public class Ireport {
             ex.printStackTrace();
         }
     }
-    public void SelectReport(int op, JPanel pan){
+    public void SelectReport(int op){
         switch(op){
-            case 1:ReportEjemplo(pan);break;
+            case 1:ReportEjemplo();break;
         }
         
     }
     
-    public void ReportEjemplo(JPanel pan){
+    public void ReportEjemplo(){
        try {
             /*String arch ="/home/platano/ejemplo.jasper";
             JasperReport Jas_Rep= JasperCompileManager.compileReport(arch);
             JasperPrint Jas_Prin= JasperFillManager.fillReport(Jas_Rep, null,conn);
             JasperViewer.viewReport(Jas_Prin);
            */
-           
-           getConexionIreport();
-           JasperReport reporte = (JasperReport) JRLoader.loadObject("src/reportes/perro.jasper");
-           JasperPrint jasperPrint = JasperFillManager.fillReport(reporte, null, conn);
-           JasperViewer view = new JasperViewer(jasperPrint);
-           Container container = view.getContentPane(); 
-           pan.add(container); 
-           
            
            
            /*
