@@ -105,6 +105,9 @@
     </Container>
     <Component class="javax.swing.JButton" name="jButton1">
       <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/Utilitarios/Img/actualizar.png"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Recuperar contrase&#xf1;a"/>
       </Properties>
       <Events>

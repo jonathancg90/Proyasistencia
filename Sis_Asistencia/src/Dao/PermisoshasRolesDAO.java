@@ -33,11 +33,9 @@ public class PermisoshasRolesDAO extends ConexionBd{
         _error = "Dao_Permisos_has_RolesDAO_";
         filter = new String[0][0];
         campos = new String[1];
-        campos[0]="modulos_idmod";
+        campos[0]="idmod/modulos/nombre";
         witdhcolum = new int[0];
-    }
-    
-    //==========================================================================        
+    } 
     public void getTableAll(JTable tblDatos, JLabel lblcant){
         try{
             DefaultTableModel datos;

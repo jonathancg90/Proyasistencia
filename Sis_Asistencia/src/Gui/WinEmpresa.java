@@ -31,11 +31,9 @@ public class WinEmpresa extends javax.swing.JInternalFrame {
         initComponents();
         cargaForm();
     }
-
-    /*
-     * Construccion de formualrio
+    /**
+     * Construccion de formualrio.
      */
-    
     public void cargaForm(){
         try{
             qs = new Query();
@@ -59,8 +57,7 @@ public class WinEmpresa extends javax.swing.JInternalFrame {
         txtCantTrab.setText("");
         
     }
-    
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -259,9 +256,11 @@ public class WinEmpresa extends javax.swing.JInternalFrame {
         jLabel7.setText("Total: ");
         getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 320, -1, -1));
 
+        mfile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilitarios/Img/Archivo.png"))); // NOI18N
         mfile.setText("Archivo");
 
         mitemregister.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.CTRL_MASK));
+        mitemregister.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilitarios/Img/registrar.png"))); // NOI18N
         mitemregister.setText("Registrar");
         mitemregister.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -271,6 +270,7 @@ public class WinEmpresa extends javax.swing.JInternalFrame {
         mfile.add(mitemregister);
 
         mitemupdate.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));
+        mitemupdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilitarios/Img/actualizar.png"))); // NOI18N
         mitemupdate.setText("Actualizar");
         mitemupdate.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -280,6 +280,7 @@ public class WinEmpresa extends javax.swing.JInternalFrame {
         mfile.add(mitemupdate);
 
         mitemdelete.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_X, java.awt.event.InputEvent.CTRL_MASK));
+        mitemdelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilitarios/Img/eliminar.png"))); // NOI18N
         mitemdelete.setText("Eliminar");
         mitemdelete.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -290,12 +291,15 @@ public class WinEmpresa extends javax.swing.JInternalFrame {
 
         jMenuBar1.add(mfile);
 
+        medit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilitarios/Img/Editar.png"))); // NOI18N
         medit.setText("Edit");
 
         mitemclear.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.CTRL_MASK));
+        mitemclear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilitarios/Img/limpiar.png"))); // NOI18N
         mitemclear.setText("Limpiar");
         medit.add(mitemclear);
 
+        ItemExportar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilitarios/Img/exportar.png"))); // NOI18N
         ItemExportar.setText("Exportar");
         ItemExportar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -306,6 +310,7 @@ public class WinEmpresa extends javax.swing.JInternalFrame {
 
         jMenuBar1.add(medit);
 
+        maño.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilitarios/Img/sucursales.png"))); // NOI18N
         maño.setText("Sucursales");
         maño.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -314,6 +319,7 @@ public class WinEmpresa extends javax.swing.JInternalFrame {
         });
         jMenuBar1.add(maño);
 
+        nolaborables.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilitarios/Img/no_laborables.png"))); // NOI18N
         nolaborables.setText("Dias no laborables");
         nolaborables.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -322,6 +328,7 @@ public class WinEmpresa extends javax.swing.JInternalFrame {
         });
         jMenuBar1.add(nolaborables);
 
+        mclose.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilitarios/Img/Cerrar.png"))); // NOI18N
         mclose.setText("Cerrar");
         mclose.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -438,7 +445,8 @@ public class WinEmpresa extends javax.swing.JInternalFrame {
                 int id = Integer.valueOf(lblId.getText());
                 String name = txtName.getText();
                 String ruc = txtruc.getText();
-                boolean estate = Boolean.valueOf(dt.G_BOOLEAN[cmbEstate.getSelectedIndex()]);
+                int idState = dt.getEstado(String.valueOf(cmbEstate.getSelectedItem()));
+                boolean estate = Boolean.valueOf(dt.G_BOOLEAN[idState]);
                 //int estate = cmbEstate.getSelectedIndex();
                 int trab = Integer.parseInt(txtCantTrab.getText());
                 int mon = Integer.parseInt(qs.idChoice("moneda","nombre",String.valueOf(cboMon.getSelectedItem())));
@@ -472,7 +480,8 @@ public class WinEmpresa extends javax.swing.JInternalFrame {
                 dt = new Data();
                 String name = txtName.getText();
                 String ruc = txtruc.getText();
-                boolean estate = Boolean.valueOf(dt.G_BOOLEAN[cmbEstate.getSelectedIndex()]);
+                int idState = dt.getEstado(String.valueOf(cmbEstate.getSelectedItem()));
+                boolean estate = Boolean.valueOf(dt.G_BOOLEAN[idState]);
                 //int estate = Integer.parseInt(txtCantTrab.getText());
                 int trab = 0;
                 int mon = Integer.parseInt(qs.idChoice("moneda","nombre",String.valueOf(cboMon.getSelectedItem())));

@@ -57,7 +57,6 @@ public class AreaDAO extends ConexionBd{
         catch(Exception e){
             System.out.println(_error + "getTableAll: "+e);
         }
-    
     }
     /*
      * Registro de areas
@@ -181,7 +180,6 @@ public class AreaDAO extends ConexionBd{
     public int findName(String name, String state,JTable tblDatos, JLabel lblcant) {
         int i = 0;
         try {
-            System.out.println(name);
             if(!"".equals(name) && !"".equals(state)){
                 filter = new String[2][2];
                 filter[0][0] = "nombre";

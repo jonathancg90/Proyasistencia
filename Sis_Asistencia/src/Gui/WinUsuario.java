@@ -107,13 +107,11 @@ public class WinUsuario extends javax.swing.JInternalFrame {
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Datos:"));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setText("Id usuario:");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 31, -1, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
 
         lblUsu.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel1.add(lblUsu, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 31, 92, 17));
@@ -128,28 +126,26 @@ public class WinUsuario extends javax.swing.JInternalFrame {
         jPanel1.add(txtUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 105, 140, -1));
 
         jLabel4.setText("Password:");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(18, 185, -1, -1));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, -1, -1));
 
         jLabel6.setText("Estado:");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, -1, -1));
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, -1, -1));
 
-        jPanel1.add(cboEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 240, 174, -1));
+        jPanel1.add(cboEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 270, 174, -1));
 
-        jPanel1.add(cboRol, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 270, 174, -1));
+        jPanel1.add(cboRol, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 310, 174, -1));
 
         jLabel7.setText("Rol:");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, -1, -1));
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 320, -1, -1));
 
         jLabel8.setText("Re - Password:");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(18, 220, -1, -1));
-        jPanel1.add(txtRePassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 210, 224, -1));
-        jPanel1.add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 177, 224, -1));
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 240, -1, -1));
+        jPanel1.add(txtRePassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 230, 224, -1));
+        jPanel1.add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 190, 224, -1));
 
         jLabel9.setText("E - mail");
         jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(18, 144, -1, -1));
         jPanel1.add(Txtcorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 144, 224, -1));
-
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 12, 380, 340));
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Listado", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, null, new java.awt.Color(1, 1, 1)));
 
@@ -173,12 +169,16 @@ public class WinUsuario extends javax.swing.JInternalFrame {
 
         jLabel2.setText("Estado");
 
-        jButton1.setText("ok");
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilitarios/Img/consulta.png"))); // NOI18N
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
+
+        lblcant.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        jLabel10.setText("Total: ");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -188,13 +188,21 @@ public class WinUsuario extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cboFilter, 0, 119, Short.MAX_VALUE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton1))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addContainerGap())
+                        .addGap(12, 12, 12)
+                        .addComponent(jLabel10)
+                        .addGap(17, 17, 17)
+                        .addComponent(lblcant, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cboFilter, 0, 119, Short.MAX_VALUE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButton1))
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                        .addContainerGap())))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -205,18 +213,14 @@ public class WinUsuario extends javax.swing.JInternalFrame {
                     .addComponent(cboFilter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel10)
+                    .addComponent(lblcant, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 10, -1, 340));
-
-        lblcant.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        getContentPane().add(lblcant, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 360, 60, 20));
-
-        jLabel10.setText("Total: ");
-        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 360, -1, -1));
-
+        mfile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilitarios/Img/Archivo.png"))); // NOI18N
         mfile.setText("Archivo");
 
         mitemregister.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.CTRL_MASK));
@@ -253,6 +257,7 @@ public class WinUsuario extends javax.swing.JInternalFrame {
 
         jMenuBar1.add(mfile);
 
+        medit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilitarios/Img/Editar.png"))); // NOI18N
         medit.setText("Edit");
 
         mitemclear.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.CTRL_MASK));
@@ -274,6 +279,7 @@ public class WinUsuario extends javax.swing.JInternalFrame {
 
         jMenuBar1.add(medit);
 
+        mclose.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilitarios/Img/Cerrar.png"))); // NOI18N
         mclose.setText("Cerrar");
         mclose.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -284,28 +290,50 @@ public class WinUsuario extends javax.swing.JInternalFrame {
 
         setJMenuBar(jMenuBar1);
 
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(8, 8, 8)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 392, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(12, 12, 12)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(28, 28, 28))
+        );
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void TblUsuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TblUsuMouseClicked
-    try {       int fsel;
-                fsel = this.TblUsu.getSelectedRow();
-                objUser = new UserDAO();
-                DefaultTableModel m = new DefaultTableModel();
-                m = (DefaultTableModel) this.TblUsu.getModel();
-                String idUsu = String.valueOf(m.getValueAt(fsel, 0));
-                modusu = objUser.getValues(Integer.parseInt(idUsu));
-                lblUsu.setText(idUsu);   
-                txtUsername.setText(modusu.getUsername());
-                txtPassword.setText(modusu.getPassword());
-                txtRePassword.setText(modusu.getPassword());
-                qs.loadChoiceDefault(cboRol, "roles", "nombre", modusu.getRol());
-                qs.loadChoiceDefault(cboEmp, "empleado", "nombres", modusu.getIdemp());
-                Txtcorreo.setText(modusu.getCorreo());
-                qs.loadState(cboEstado, modusu.isEstado());
+    try {       
+        int fsel;
+        fsel = this.TblUsu.getSelectedRow();
+        objUser = new UserDAO();
+        DefaultTableModel m = new DefaultTableModel();
+        m = (DefaultTableModel) this.TblUsu.getModel();
+        String idUsu = String.valueOf(m.getValueAt(fsel, 0));
+        modusu = objUser.getValues(Integer.parseInt(idUsu));
+        lblUsu.setText(idUsu);   
+        txtUsername.setText(modusu.getUsername());
+        txtPassword.setText(modusu.getPassword());
+        txtRePassword.setText(modusu.getPassword());
+        qs.loadChoiceDefault(cboRol, "roles", "nombre", modusu.getRol());
+        qs.loadChoiceDefault(cboEmp, "empleado", "nombres", modusu.getIdemp());
+        Txtcorreo.setText(modusu.getCorreo());
+        qs.loadState(cboEstado, modusu.isEstado());
        } catch (Exception e) {
                 System.out.println(_error+"_tblusu:"+e);
-            }
+       }
     }//GEN-LAST:event_TblUsuMouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -321,28 +349,30 @@ public class WinUsuario extends javax.swing.JInternalFrame {
             val = new Validators("usuario");    
             Object[] datos = {txtUsername.getText(), txtPassword.getPassword(), Txtcorreo.getText()};
             Object[] tipos = {3, 4, 9};
-            if (val.validar(datos, tipos)){     
+            if (val.validar(datos, tipos)) {     
                 dt = new Data();
                 String username = txtUsername.getText();
                 String password = objUser.encriptar(String.valueOf(txtPassword.getPassword()).toLowerCase());
                 String nomemp = String.valueOf(cboEmp.getSelectedItem());
                 qs = new Query();
                 int idemp = Integer.parseInt(qs.idChoice("empleado", "nombres", nomemp));
-                boolean estate = Boolean.valueOf(dt.G_BOOLEAN[cboEstado.getSelectedIndex()]);
+                int idState = dt.getEstado(String.valueOf(cboEstado.getSelectedItem()));
+                boolean estate = Boolean.valueOf(dt.G_BOOLEAN[idState]);
                 int rol = Integer.parseInt(qs.idChoice("roles", "nombre", String.valueOf(cboRol.getSelectedItem())));
                 String correo = Txtcorreo.getText();
                 objUser = new UserDAO();
                 int i = objUser.saveUsuario(username, password, idemp, estate, rol, correo);
                 if (i == 0) {
                     JOptionPane.showMessageDialog(null, "No se pudo grabar datos");
+                } else {
+                    objUser.getTableAll(TblUsu, lblcant);
+                    cleanBox();
+                    JOptionPane.showMessageDialog(null, "Nuevo usuario registrado");
+                }
             } else {
-                objUser.getTableAll(TblUsu, lblcant);
-                cleanBox();
-                JOptionPane.showMessageDialog(null, "Nuevo usuario registrado");
-            }
-        } else {
-            JOptionPane.showMessageDialog(null, "Campos requeridos incompletos");
-        } } catch(Exception e){
+                JOptionPane.showMessageDialog(null, "Campos requeridos incompletos");
+            } 
+        } catch(Exception e) {
             System.out.println(_error+"_Register:"+e);
         }
     }//GEN-LAST:event_mitemregisterMousePressed
@@ -362,8 +392,8 @@ public class WinUsuario extends javax.swing.JInternalFrame {
 
             qs = new Query();
             int idemp = Integer.parseInt(qs.idChoice("empleado","nombres", nomemp));
-
-            boolean estate = Boolean.valueOf(dt.G_BOOLEAN[cboEstado.getSelectedIndex()]);
+            int idState = dt.getEstado(String.valueOf(cboEstado.getSelectedItem()));
+            boolean estate = Boolean.valueOf(dt.G_BOOLEAN[idState]);
             int rol = Integer.parseInt(qs.idChoice("roles","nombre",String.valueOf(cboRol.getSelectedItem())));
             String correo = Txtcorreo.getText();
             objUser = new UserDAO();

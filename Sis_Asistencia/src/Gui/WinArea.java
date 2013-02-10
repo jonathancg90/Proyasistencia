@@ -427,21 +427,21 @@ public class WinArea extends javax.swing.JInternalFrame {
     private void mitemupdateMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemupdateMousePressed
     try {
     val = new Validators("area");
-    Object[] datos = {txtName.getText(),lblId.getText()};
-    Object[] tipos={1,0};
-    if(val.validar(datos,tipos)){
+    Object[] datos = {txtName.getText(), lblId.getText()};
+    Object[] tipos = {2, 0};
+    if (val.validar(datos, tipos)) {
         dt = new Data();
         int id = Integer.valueOf(lblId.getText());
         String name = txtName.getText();
-        boolean estate = Boolean.valueOf(dt.G_BOOLEAN[cmbEstate.getSelectedIndex()]);
+        int idState = dt.getEstado(String.valueOf(cmbEstate.getSelectedItem()));
+        boolean estate = Boolean.valueOf(dt.G_BOOLEAN[idState]);
         objarea = new AreaDAO();
-        int i = objarea.update(id,name,estate);
+        int i = objarea.update(id, name, estate);
         if (i == 0) {
             JOptionPane.showMessageDialog(null, "No se pudo actualizar datos");
-        }
-        else {
+        } else {
             String state = String.valueOf(!Chkinactivo.isSelected());
-            objarea.findState(state,tblArea, lblcant);
+            objarea.findState(state, tblArea, lblcant);
             cleanBox();
             JOptionPane.showMessageDialog(null, "Area actualizada");
         }
@@ -461,7 +461,8 @@ public class WinArea extends javax.swing.JInternalFrame {
         if(val.validar(datos,tipos)){
             dt = new Data();
             String name = txtName.getText();
-            boolean estate = Boolean.valueOf(dt.G_BOOLEAN[cmbEstate.getSelectedIndex()]);
+            int idState = dt.getEstado(String.valueOf(cmbEstate.getSelectedItem()));
+            boolean estate = Boolean.valueOf(dt.G_BOOLEAN[idState]);
             objarea = new AreaDAO();
             int i = objarea.save(name, estate);
             if (i == 0) {

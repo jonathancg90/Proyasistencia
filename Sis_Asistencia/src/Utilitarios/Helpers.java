@@ -5,38 +5,40 @@ import java.io.*;
 import java.util.Calendar;
 import javax.swing.JTable;
 import Utilitarios.Data;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
+/**
+* Clase para facilitar procesos externos del sistema
+* @author Jonathan Carrasco
+* @version Worktec 1.0
+*/
+public class Helpers {
 
-public class Helpers{
-    
     private Data dt;
-    
-    /*
-     * Metodo optener contenido de un archivo de texto
+    /**
+     * Metodo para leer el contenido de un txt.
+     * @return Texto del file
      */
     public String readFiles(File lectura) throws IOException{
         
     BufferedReader entrada = new BufferedReader(new FileReader(lectura));
     String renglon;
     String Str_Texto="";
-        while ((renglon = entrada.readLine()) != null)
-        {
-            for (int i = 0; i < renglon.length(); i++)
-            {
+        while ((renglon = entrada.readLine()) != null) {
+            for (int i = 0; i < renglon.length(); i++) {
                Str_Texto += String.valueOf(renglon.charAt(i)); 
             }
         }
     return Str_Texto;
     }
-    
-    /*
-     * Obtener la fecha actual
+    /**
+     * Obtener la fecha actual.
      */
     public String getDateNow(){
         String date;
         
         Calendar c = Calendar.getInstance();
-        
         int mesact = c.get(Calendar.MONTH);
         if(mesact == 0){
             mesact = mesact +1;
@@ -49,21 +51,19 @@ public class Helpers{
                 
         return date;
     }
-     /*
-     * Tamaño de columnas de los Jtable
+     /**
+     * Modificar el tamaño de columnas de los Jtable.
      */
-    public void setWidthJtable(JTable tblDatos, int[] args){
+    public void setWidthJtable(JTable tblDatos, int[] args) {
         for(int i=0;i<args.length;i++){
             tblDatos.getColumnModel().getColumn(i).setPreferredWidth(args[i]);
             tblDatos.getColumnModel().getColumn(i).setMinWidth(args[i]);
             tblDatos.getColumnModel().getColumn(i).setMaxWidth(args[i]);    
         }
     }
-     /*
-     * Formateo de fecha
+     /**
+     * Formatear fecha ().
      */
-    
-    
     public String getFormatDate(String fecha)
     {
         String date;
@@ -71,7 +71,9 @@ public class Helpers{
         date = arrayfecha[2]+"-"+arrayfecha[1]+"-"+arrayfecha[0];
         return date;
     }
-    
+    /**
+     * Obtener valores de una constante.
+     */
     public String[] getConstantData(String op){
         dt = new Data();
         String[] camp;
@@ -81,9 +83,7 @@ public class Helpers{
         }
         
         return camp;
-    }
-     
-//Suma horas
+    } 
 //Ingreso dos horas me devuelve la diferencua entre las horas
 //Ingreso empleado, dia me devuelve su horario de ese dia (entradas salidas)            
 }

@@ -2,10 +2,10 @@
 package Gui;
 
 import Appi.JExcel;
+import Dao.ConsultaDAO;
 import java.io.File;
 import java.text.DateFormat;
 import java.util.Calendar;
-
 import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
@@ -20,13 +20,13 @@ public class WinConsulta extends javax.swing.JInternalFrame {
     private Calendar calendar,calendar2;
     private JExcel xls;
     private String _error = "Gui_WinConsulta_";
+    private ConsultaDAO consul;
 
-    
     public WinConsulta() {
         initComponents();
-        format=new SimpleDateFormat("dd-MM-yyyy");
-        dateChooserCombo2.setDateFormat(format);
-        dateChooserCombo1.setDateFormat(format);
+        format = new SimpleDateFormat("dd-MM-yyyy");
+        ChFechaIni.setDateFormat(format);
+        ChFechaFin.setDateFormat(format);
         Lblidemp.setVisible(false);
     }
 
@@ -37,13 +37,13 @@ public class WinConsulta extends javax.swing.JInternalFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox();
+        CboReport = new javax.swing.JComboBox();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        dateChooserCombo1 = new datechooser.beans.DateChooserCombo();
-        dateChooserCombo2 = new datechooser.beans.DateChooserCombo();
-        jButton1 = new javax.swing.JButton();
+        ChFechaFin = new datechooser.beans.DateChooserCombo();
+        ChFechaIni = new datechooser.beans.DateChooserCombo();
+        BtnConsultar = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         Lblidemp = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
@@ -63,8 +63,8 @@ public class WinConsulta extends javax.swing.JInternalFrame {
         jLabel1.setText("Elija un reporte");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(18, 31, -1, -1));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Asistencia del personal", "Log de asistencia", "Justificaciones", "Totales" }));
-        jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(135, 31, 325, -1));
+        CboReport.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Asistencia del personal", "Log de asistencia", "Justificaciones", "Totales" }));
+        jPanel1.add(CboReport, new org.netbeans.lib.awtextra.AbsoluteConstraints(135, 31, 325, -1));
 
         jLabel2.setText("Fecha de termino");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 120, -1, -1));
@@ -74,12 +74,17 @@ public class WinConsulta extends javax.swing.JInternalFrame {
 
         jLabel4.setText("Fecha de inicio");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, -1, -1));
-        jPanel1.add(dateChooserCombo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 120, -1, -1));
-        jPanel1.add(dateChooserCombo2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 120, -1, -1));
+        jPanel1.add(ChFechaFin, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 120, -1, -1));
+        jPanel1.add(ChFechaIni, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 120, -1, -1));
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilitarios/Img/consulta.png"))); // NOI18N
-        jButton1.setText("Consultar");
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 30, -1, 40));
+        BtnConsultar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilitarios/Img/consulta.png"))); // NOI18N
+        BtnConsultar.setText("Consultar");
+        BtnConsultar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnConsultarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(BtnConsultar, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 30, -1, 40));
 
         TxtName.setEditable(false);
         jPanel1.add(TxtName, new org.netbeans.lib.awtextra.AbsoluteConstraints(131, 73, 320, -1));
@@ -190,7 +195,7 @@ public class WinConsulta extends javax.swing.JInternalFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6)
                     .addComponent(lblcant, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -204,7 +209,7 @@ public class WinConsulta extends javax.swing.JInternalFrame {
 
     private void mcloseMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mcloseMousePressed
         this.setVisible(false);
-        Utilitarios.Config.OPENWINDOWS =0;
+        Utilitarios.Config.OPENWINDOWS = 0;
     }//GEN-LAST:event_mcloseMousePressed
 
     private void mcloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mcloseActionPerformed
@@ -225,26 +230,26 @@ public class WinConsulta extends javax.swing.JInternalFrame {
 
     private void ItemExportarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ItemExportarMousePressed
   try {
-        JFileChooser Obj=new JFileChooser();
+        JFileChooser Obj = new JFileChooser();
         xls = new JExcel();
-        FileNameExtensionFilter filter = new FileNameExtensionFilter("Excel xls", "xls","xlsx");
+        FileNameExtensionFilter filter;
+        filter = new FileNameExtensionFilter("Excel xls", "xls", "xlsx");
         Obj.setFileFilter(filter);
         Obj.setDialogTitle("Guardar reporte");
-        int seleccion=Obj.showSaveDialog(JtblConsulta);
+        int seleccion = Obj.showSaveDialog(JtblConsulta);
         //Guardar
-        if(seleccion == JFileChooser.APPROVE_OPTION){
+        if (seleccion == JFileChooser.APPROVE_OPTION) {
             File fichero = Obj.getSelectedFile();
             String filePath = fichero.getPath();
-            if(!filePath.toLowerCase().endsWith(".xls")){
+            if (!filePath.toLowerCase().endsWith(".xls")) {
                 fichero = new File(filePath + ".xls");
             }
             boolean Confirma;
-            if((fichero).exists()) {
+            if ((fichero).exists()) {
                 if(JOptionPane.OK_OPTION == JOptionPane.showConfirmDialog(this,"El fichero existe,deseas reemplazarlo?","Reemplazar",JOptionPane.YES_NO_OPTION));{
                     Confirma=xls.ExportJtable(JtblConsulta, fichero, "Cargos");
                 }
-            } 
-            else{
+            } else {
                 Confirma=xls.ExportJtable(JtblConsulta, fichero, "Cargos");
             }
                 if(Confirma==true){
@@ -254,23 +259,41 @@ public class WinConsulta extends javax.swing.JInternalFrame {
                     JOptionPane.showMessageDialog(null, "No se pudo grabar el documento", "Confirmacion", JOptionPane.INFORMATION_MESSAGE);
                 }
         }
-    }
-    catch(Exception e)
-    {
+    } catch(Exception e) {
         JOptionPane.showMessageDialog(null, "Ha ocurrido un error durante la exportacion del documento","Error",JOptionPane.ERROR_MESSAGE);
         System.out.println(_error + "Exportar :"+e);
     }
     }//GEN-LAST:event_ItemExportarMousePressed
 
+    private void BtnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnConsultarActionPerformed
+    consul =  new ConsultaDAO();     
+    int op  =  CboReport.getSelectedIndex();
+    switch(op) {
+        case 0:
+            String args[] = new String[4];
+            args[0] = Lblidemp.getText();
+            args[1] = ChFechaIni.getText();
+            args[2] = ChFechaFin.getText();
+            consul.findAsistencia(args, JtblConsulta, lblcant);
+            ;break;
+        case 1:
+            
+            ;break;
+        case 2:
+            
+            ;break;
+     }
+    }//GEN-LAST:event_BtnConsultarActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BtnConsultar;
+    private javax.swing.JComboBox CboReport;
+    private datechooser.beans.DateChooserCombo ChFechaFin;
+    private datechooser.beans.DateChooserCombo ChFechaIni;
     private javax.swing.JMenuItem ItemExportar;
     private javax.swing.JTable JtblConsulta;
     public static javax.swing.JLabel Lblidemp;
     public static final javax.swing.JTextField TxtName = new javax.swing.JTextField();
-    private datechooser.beans.DateChooserCombo dateChooserCombo1;
-    private datechooser.beans.DateChooserCombo dateChooserCombo2;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

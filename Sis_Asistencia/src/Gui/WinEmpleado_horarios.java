@@ -139,7 +139,7 @@ public class WinEmpleado_horarios extends javax.swing.JInternalFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 249, Short.MAX_VALUE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 243, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -215,9 +215,11 @@ public class WinEmpleado_horarios extends javax.swing.JInternalFrame {
 
         jLabel5.setText("Total: ");
 
+        mfile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilitarios/Img/Archivo.png"))); // NOI18N
         mfile.setText("Archivo");
 
         mitemregister.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.CTRL_MASK));
+        mitemregister.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilitarios/Img/registrar.png"))); // NOI18N
         mitemregister.setText("Registrar");
         mitemregister.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -227,6 +229,7 @@ public class WinEmpleado_horarios extends javax.swing.JInternalFrame {
         mfile.add(mitemregister);
 
         mitemupdate.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));
+        mitemupdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilitarios/Img/actualizar.png"))); // NOI18N
         mitemupdate.setText("Actualizar");
         mitemupdate.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -236,6 +239,7 @@ public class WinEmpleado_horarios extends javax.swing.JInternalFrame {
         mfile.add(mitemupdate);
 
         mitemdelete.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_X, java.awt.event.InputEvent.CTRL_MASK));
+        mitemdelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilitarios/Img/eliminar.png"))); // NOI18N
         mitemdelete.setText("Eliminar");
         mitemdelete.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -246,9 +250,11 @@ public class WinEmpleado_horarios extends javax.swing.JInternalFrame {
 
         jMenuBar1.add(mfile);
 
+        medit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilitarios/Img/Editar.png"))); // NOI18N
         medit.setText("Edit");
 
         mitemclear.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.CTRL_MASK));
+        mitemclear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilitarios/Img/limpiar.png"))); // NOI18N
         mitemclear.setText("Limpiar");
         mitemclear.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -259,6 +265,7 @@ public class WinEmpleado_horarios extends javax.swing.JInternalFrame {
 
         jMenuBar1.add(medit);
 
+        mclose.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilitarios/Img/Cerrar.png"))); // NOI18N
         mclose.setText("Cerrar");
         mclose.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -297,7 +304,7 @@ public class WinEmpleado_horarios extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5)
                     .addComponent(lblcant, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -346,24 +353,20 @@ public class WinEmpleado_horarios extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_tblEmpleado_has_horariosMouseClicked
 
     private void mitemregisterMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemregisterMousePressed
-
-        try{
-
+    try{
         val = new Validators("empleado_has_horarios");   
         
-       hp=new Helpers();
+        hp=new Helpers();
         String F_inicio=hp.getFormatDate(cboF_inicio.getText());
         String F_final=hp.getFormatDate(cboF_final.getText());
         if(val.validarFechasTablas(tblEmpleado_has_horarios, F_inicio, F_final)&&
            val.validarFechas(F_inicio, F_final)){
-     
-
             try{
                 int horario =  Integer.parseInt(qs.idChoice("horarios","nombre",String.valueOf(cbo_Horario.getSelectedItem())));
                 
                 int idemp=Integer.valueOf(lblIdemp.getText());
 
-                int i = objEmphorarios.save(cboF_inicio.getText(),cboF_final.getText(),horario,idemp);
+                int i = objEmphorarios.save(F_inicio,F_final,horario,idemp);
                 if (i == 0) {
                     JOptionPane.showMessageDialog(null,"No se pudo grabar datos");
                 }
@@ -373,13 +376,9 @@ public class WinEmpleado_horarios extends javax.swing.JInternalFrame {
                     JOptionPane.showMessageDialog(null,"Nueva Horario registrado");
                 }
             }catch(Exception e){System.out.println(""+e);}
-        }
-        else
-            {
+        } else {
                 JOptionPane.showMessageDialog(null,"Conflicto en fechas");
             }
-
-
         }
         catch(Exception e){
             System.out.println(_error+"_Register:" + e);
@@ -395,15 +394,12 @@ public class WinEmpleado_horarios extends javax.swing.JInternalFrame {
             String F_inicio=hp.getFormatDate(cboF_inicio.getText());
             String F_final=hp.getFormatDate(cboF_final.getText());
             if(val.validarFechas(F_inicio, F_final)){
-
-
                 int idhorarios=Integer.parseInt(lblIdemp_horarios.getText());
                 int horario =  Integer.parseInt(qs.idChoice("horarios","nombre",String.valueOf(cbo_Horario.getSelectedItem())));
                 int idemp=Integer.parseInt(lblIdemp.getText());
 
-                int i = objEmphorarios.update(idhorarios,cboF_inicio.getText(),cboF_final.getText(),horario,idemp);
+                int i = objEmphorarios.update(idhorarios,F_inicio,F_final,horario,idemp);
                 if (i == 0) {
-
                     JOptionPane.showMessageDialog(null, "No se pudo actualizar datos");
                 }
                 else {
@@ -411,10 +407,8 @@ public class WinEmpleado_horarios extends javax.swing.JInternalFrame {
                     cleanBox();
                     JOptionPane.showMessageDialog(null, "Horario actualizado");
                 }
-            
             }
-            else
-            {
+            else {
                 JOptionPane.showMessageDialog(null,"Conflicto en fechas");
             }
         }catch(Exception e){

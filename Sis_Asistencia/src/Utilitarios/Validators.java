@@ -131,14 +131,17 @@ public class Validators {
     qs = new Query();
     for (int i = 0; i <= datos.length - 1; i++) {
         if (datos[i].toString().isEmpty()) {
+            System.out.println("vacio");
            return false;
         } 
         else {
             if(tipos.length != 0){
                 String a =tipos[i].toString();  
                 if(!"0".equals(a)){
+                    System.out.println("entro");
                     int pres = qs.gettamColumn(this.Table,Integer.parseInt(tipos[i].toString()));
                     if(datos[i].toString().length() > pres){
+                        System.out.println("tipo: " + pres);
                         return false;
                     }
                 }
@@ -167,8 +170,6 @@ public class Validators {
                date.valueOf(fin).before(date.valueOf(String.valueOf(tablemodel.getValueAt(i,2)))))
                
                ){
-                
-                
                 return false;
             }
         }
@@ -249,5 +250,29 @@ public class Validators {
             }
         }    
         return Value;
+    }
+    public String getHora(String campo,String extra, String [] args){
+        qs = new Query();
+        String result = ""; 
+        if("".equals(campo)) {
+            campo =  "count(*)";
+        }
+        //d.ingreso,d.salida
+        // idtip_reg = trabajo, refrigerio
+        //Tipo de reg = trabajo refrigerio
+        String query = "   select " + campo + "\n" +
+                       " from empleado_has_horarios e, detailhorario d\n" +
+                       " where \n" +
+                       " d.horarios_idhor = e.idhor\n" +
+                       " and idemp=" + args[0] + " \n" +
+                       " and d.dia = " + args[1] + "\n" +
+                       " and idtip_reg = " + args[2] + "\n" +
+                       " and '" + args[3] + "'>=e.inicio and '" + args[3] + "'<=e.fin " + "\n" +
+                       extra;
+        //and d.ingreso < '9:00'
+        System.out.println(query);
+        result = qs.Execute(query);
+        
+        return result;
     }
 }

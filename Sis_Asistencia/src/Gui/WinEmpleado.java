@@ -587,12 +587,11 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
             objempl.UpdateEmpresa(id*-1);
             int i = objempl.updateEmpleado(id,nombre,apellido,dni, telefono,area, tipo, estate,cargo,empresa,sucursal);
             if (i == 0) {
-                JOptionPane.showMessageDialog(null,"No se pudo grabar datos");
+                JOptionPane.showMessageDialog(null,"No se pudo actualizar los datos");
             }
             else {
                 buscar();
-                cleanBox();
-                JOptionPane.showMessageDialog(null,"Nuevo usuario actualizado");
+                JOptionPane.showMessageDialog(null,"usuario actualizado");
             }   
             }                                          
         else {
