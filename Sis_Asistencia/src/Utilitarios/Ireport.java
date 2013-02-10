@@ -1,6 +1,7 @@
 
 package Utilitarios;
 
+import java.awt.Container;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -52,14 +53,14 @@ public class Ireport {
             ex.printStackTrace();
         }
     }
-    public void SelectReport(int op){
+    public void SelectReport(int op, JPanel pan){
         switch(op){
-            case 1:ReportEjemplo();break;
+            case 1:ReportEjemplo(pan);break;
         }
         
     }
     
-    public void ReportEjemplo(){
+    public void ReportEjemplo(JPanel pan){
        try {
             /*String arch ="/home/platano/ejemplo.jasper";
             JasperReport Jas_Rep= JasperCompileManager.compileReport(arch);
@@ -67,6 +68,16 @@ public class Ireport {
             JasperViewer.viewReport(Jas_Prin);
            */
            
+           getConexionIreport();
+           JasperReport reporte = (JasperReport) JRLoader.loadObject("src/reportes/perro.jasper");
+           JasperPrint jasperPrint = JasperFillManager.fillReport(reporte, null, conn);
+           JasperViewer view = new JasperViewer(jasperPrint);
+           Container container = view.getContentPane(); 
+           pan.add(container); 
+           
+           
+           
+           /*
             getConexionIreport();
             File miDir = new File (".");
             String archivo = miDir + "/" + _ubicacion + File.separatorChar + "Ejemplo.jrxml";
@@ -76,7 +87,7 @@ public class Ireport {
             }
             String archivo2 = "reportes\\ejemplo.jrxml";
             try{
-                masterReport= (JasperReport) JRLoader.loadObject("reportes\\ejemplo.jrxml");
+                masterReport= (JasperReport) JRLoader.loadObject("src/reportes/report1.jasper");
             } catch (JRException e) {
                 System.out.println("Error cargando el reporte maestro: " + e.getMessage());
             }
@@ -86,6 +97,11 @@ public class Ireport {
             JasperViewer jviewer= new JasperViewer(jasperPrint,false);
             jviewer.setTitle("Ejemplo de reporte");
             jviewer.setVisible(true);
+            
+            
+            
+            */
+            
         }catch (Exception j){
                 System.out.println("Mensaje de Error:"+j.getMessage());
         }
