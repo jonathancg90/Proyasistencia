@@ -28,6 +28,13 @@ public class Ireport {
     private JasperPrint jasperPrint;
     private JasperViewer jviewer;
     
+    public static void main(String[] args) {
+        Ireport rep =  new Ireport();
+        rep.getConexionIreport();
+        rep.ReportEjemplo();
+    }
+    private String idEmp;
+
     public void setargs(String[] args) {
         this.args = args;
     }
@@ -41,7 +48,7 @@ public class Ireport {
             String user = "postgres";
             String password = "sp1r4ls4c";
             String bd = "asistencia"; 
-            String url = "Jdbc:postgresql://"+IP+":5432/"+bd;
+            String url = "Jdbc:postgresql://"+IP+"/"+bd;
 
             Class.forName("org.postgresql.Driver"); 
             conn = DriverManager.getConnection(url,user,password);
@@ -56,39 +63,42 @@ public class Ireport {
         switch(op){
             case 1:ReportEjemplo();break;
         }
-        
     }
     
     public void ReportEjemplo(){
-       try {
-            /*String arch ="/home/platano/ejemplo.jasper";
-            JasperReport Jas_Rep= JasperCompileManager.compileReport(arch);
-            JasperPrint Jas_Prin= JasperFillManager.fillReport(Jas_Rep, null,conn);
-            JasperViewer.viewReport(Jas_Prin);
-           */
-           
-            getConexionIreport();
-            File miDir = new File (".");
-            String archivo = miDir + "/" + _ubicacion + File.separatorChar + "Ejemplo.jrxml";
-            System.out.println(archivo);
-            if(archivo == null){
-                System.out.println("No se encuentra el archivo.");
-            }
-            String archivo2 = "reportes\\ejemplo.jrxml";
-            try{
-                masterReport= (JasperReport) JRLoader.loadObject("reportes\\ejemplo.jrxml");
-            } catch (JRException e) {
-                System.out.println("Error cargando el reporte maestro: " + e.getMessage());
-            }
-            Map parametro= new HashMap();
-            parametro.put("nombre",args[0]);
-            JasperPrint jasperPrint = JasperFillManager.fillReport(masterReport,parametro,conn);
-            JasperViewer jviewer= new JasperViewer(jasperPrint,false);
-            jviewer.setTitle("Ejemplo de reporte");
-            jviewer.setVisible(true);
-        }catch (Exception j){
-                System.out.println("Mensaje de Error:"+j.getMessage());
+    try{
+        //Ruta en donde se encuentra el reporte
+        File archivo = new  File("reportes/example.jasper");
+        //String archivo = "home\\platano\\virtualenv\\worktec\\desarrollo\\Proyasistencia\\Sis_Asistencia\\reportes\\ejemplo.jasper";
+        //String archivo = "reportes\\ejemplo.jasper";
+        System.out.println("Cargando desde: " + archivo);
+        if(archivo == null){
+            System.out.println("No se encuentra el archivo.");
+            System.exit(2);
         }
+        JasperReport masterReport= null;
+        try{
+            masterReport= (JasperReport) JRLoader.loadObject(archivo);
+        } catch (JRException e) {
+            System.out.println("Error cargando el reporte maestro: " + e.getMessage());
+            System.exit(3);
+        }
+        //int codigo=Integer.parseInt(id);
 
-        }
+        Map parametro= new HashMap();
+        //parametro.put("idpers","");
+        //parametro.put("Fecha_Inicial","");
+        //parametro.put("Fecha_Final","");
+        //parametro.put("Horario","");
+
+    //Reporte diseñado y compilado con iReport
+        JasperPrint jasperPrint= JasperFillManager.fillReport(masterReport,parametro,conn);
+    //Se lanza el Viewerde Jasper, no termina aplicación al salir
+        JasperViewer jviewer= new JasperViewer(jasperPrint,false);
+        jviewer.setTitle("Reporte de asistencia");
+        jviewer.setVisible(true);
+    } catch (Exception j) {
+        System.out.println("Mensaje de Error:"+j);
+    }
+  }
 }
