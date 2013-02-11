@@ -6,6 +6,7 @@ import Utilitarios.Helpers;
 import Utilitarios.Query;
 import Utilitarios.ConexionBd;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
@@ -38,6 +39,7 @@ public class ConsultaDAO {
         campos = new String[0];
         witdhcolum = new int[1];
         witdhcolum[0]=50;
+        _table = "report";
     }
     public void getTableAll(JTable tblDatos , JLabel lblcant){
         try{
@@ -60,7 +62,6 @@ public class ConsultaDAO {
     }
     public void findAsistencia(String args[], JTable tblDatos, JLabel lblcant) {
         qs= new Query();
-        hp= new Helpers();
         Statement s = null;
         con = new ConexionBd();
         try {
@@ -77,36 +78,56 @@ public class ConsultaDAO {
             filter = new String[2][2];
             filter[0][0] = "int_idemp";
             filter[0][1] = args[0];
-            filter[1][0] = "bet_fecha_"+args[1];
+            filter[1][0] = "bet_fecha_" + args[1];
             filter[1][1] = args[2];
-            String Consulta = qs.getQueryList(camp,"registro/fecha",filter);
-            helper_asistencia(Consulta, camp);
+     
+            helper_asistencia(filter, camp, args[1], args[2]);
+            filter = new String[0][0];
+            getTableAll(tblDatos,lblcant);
             qs.destroid_report();
         }
         catch(Exception e){
             System.out.println(_error + "findAsistencia : "+e);
         }
     }
-    private void helper_asistencia(String Consulta, String camp[]) throws SQLException{
+    //Ejecucion de la consulta
+    private void helper_asistencia(String filter[][], String camp[],
+            String fechInicio, String fechFinal) throws SQLException{
+        qs= new Query();
+        hp= new Helpers();
+        //Declaracion
+        Date date = new Date(0000-00-00);
+        String Consulta = "";
         Object[] fila;
         String[] temp;
         String tbl;
-        System.out.println(Consulta);
         con.getConexion();
         conexion = con.getConetion();
         s = conexion.createStatement();
+        //Titulos
+        Consulta = qs.getQueryList(camp, "registro/fecha", filter);
         rs = s.executeQuery(Consulta);
         ResultSetMetaData meta = rs.getMetaData();
         int nCols = meta.getColumnCount();
         fila = new Object[nCols];
-        int count=0;
-            //Recorro los dias del mes
-            //Obtendo un dia y hago la consulta a la bd
-            //cantidad de registros si es 2(entrada - salida) si es 4 (incluye refrigerios)
-            //armo el arreglo deacuerdo a la cantidad
-            //registro
-            
-         while(rs.next()){
+        int count = 0;
+        int ind = 0;
+        //Logica
+        fechFinal = qs.getDay(fechFinal, "+");
+        String fechActual = fechInicio;
+        do {
+            ind = 0;
+            //Ejecucion de consulta
+            filter[1][0] = "bet_fecha_" + fechActual;
+            filter[1][1] = fechActual;
+            Consulta = qs.getQueryList(camp, "registro/fecha", filter);
+            System.out.println(Consulta);
+            rs = s.executeQuery(Consulta);
+            boolean countReg = false;
+            //Registro del reporte
+            String[] campReg = new String[nCols*2];
+            while(rs.next()){
+            countReg = true;
             count++;
             for(int i=0; i<nCols; ++i){
                 fila[i] = rs.getObject(i+1);
@@ -116,21 +137,38 @@ public class ConsultaDAO {
                     tbl = temp[1];
                     campo =  hp.getConstantData(tbl);
                     fila[i] = campo[rs.getInt(i+1)];
+                    }
+                    System.out.println("Indice: "+ind+"limite: "+campReg.length);
+                    //Temporal
+                    if(ind < 6){
+                        campReg[ind]=String.valueOf(fila[i]);
+                        System.out.println(campReg[i]);
+                    }
+                    ind++;
                 }
-                System.out.println(fila[i]);
             }
-        }
+            //No existen registros del dia
+            if(countReg == false) { 
+                System.out.println("No hay registro: "+fechActual);
+                //Domingo
+                //Verificar si el dia es parte de su horario
+                    //Verificar si es por sus vacaciones
+                    //Verificar si es dia no laborable
+                    //Verificar si tiene justificacion de falta
+               
+            }
+            register_report(campReg);
+        fechActual = qs.getDay(fechActual, "+");
+        } while(!fechActual.equals(fechFinal));
     }
-            
-    
-    
+        
     public void register_report(String[] args) {
         pt = null;
         try {
             String query = "insert into report values(";
             for(int i=0;i<args.length;i++){
-                query = query + args[i];
-                if(args.length!=i+1){ 
+                query = query + "'" + args[i] + "'";
+                if(args.length!=i+1) { 
                     query = query + ",";
                 }
             }

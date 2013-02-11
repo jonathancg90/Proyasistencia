@@ -244,20 +244,20 @@ public class WinConsulta extends javax.swing.JInternalFrame {
             if (!filePath.toLowerCase().endsWith(".xls")) {
                 fichero = new File(filePath + ".xls");
             }
-            boolean Confirma;
+            boolean confirma;
             if ((fichero).exists()) {
                 if(JOptionPane.OK_OPTION == JOptionPane.showConfirmDialog(this,"El fichero existe,deseas reemplazarlo?","Reemplazar",JOptionPane.YES_NO_OPTION));{
-                    Confirma=xls.ExportJtable(JtblConsulta, fichero, "Cargos");
+                    confirma=xls.ExportJtable(JtblConsulta, fichero, "Cargos");
                 }
             } else {
-                Confirma=xls.ExportJtable(JtblConsulta, fichero, "Cargos");
+                confirma=xls.ExportJtable(JtblConsulta, fichero, "Cargos");
             }
-                if(Confirma==true){
-                    JOptionPane.showMessageDialog(null, "El documento se grabo exitosamente","Confirmacion",JOptionPane.INFORMATION_MESSAGE);
-                }
-                else{
-                    JOptionPane.showMessageDialog(null, "No se pudo grabar el documento", "Confirmacion", JOptionPane.INFORMATION_MESSAGE);
-                }
+            if(confirma==true){
+                JOptionPane.showMessageDialog(null, "El documento se grabo exitosamente","Confirmacion",JOptionPane.INFORMATION_MESSAGE);
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "No se pudo grabar el documento", "Confirmacion", JOptionPane.INFORMATION_MESSAGE);
+            }
         }
     } catch(Exception e) {
         JOptionPane.showMessageDialog(null, "Ha ocurrido un error durante la exportacion del documento","Error",JOptionPane.ERROR_MESSAGE);

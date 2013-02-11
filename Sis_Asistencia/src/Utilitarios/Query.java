@@ -744,7 +744,7 @@ public class Query extends ConexionBd{
             }
             return hora;
         }
-
+        //Obtener cantidad de registro de una tabla
         public int getcount(String tabla)
         {
             int num=0;
@@ -765,6 +765,7 @@ public class Query extends ConexionBd{
             }return num;
 
         }
+        //Creacion de tabla temporal de reportes
         public void create_report(String[] args) {
             try {
                 getConexion();
@@ -786,6 +787,7 @@ public class Query extends ConexionBd{
                 create_report(args);
             }
         }
+        //Eliminar tabla temporal de reportes
         public void destroid_report() {
             try {
                 getConexion();
@@ -798,6 +800,7 @@ public class Query extends ConexionBd{
                 System.out.println(_error+"destroid_report: "+e);
             }
         }
+        //Ejecutar consultas
         public String Execute(String query) {
             String result = "";
             try{
@@ -822,6 +825,18 @@ public class Query extends ConexionBd{
             String StrDia="";
             try {
                 String query="select dia_semana('"+Fecha+"');";
+                StrDia = Execute(query);
+            }
+            catch(Exception e) {
+                System.out.println("Problemas en Obtener_Dia_Fecha: "+e);
+            }
+        return StrDia;
+        }
+        //Obtener el dia siguiente o previo
+        public String getDay(String Fecha,String Op) {
+            String StrDia="";
+            try {
+                String query="select Date '"+Fecha+"' "+Op+" Integer '1'";
                 StrDia = Execute(query);
             }
             catch(Exception e) {
