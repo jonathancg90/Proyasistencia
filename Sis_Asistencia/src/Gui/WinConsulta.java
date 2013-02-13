@@ -268,16 +268,21 @@ public class WinConsulta extends javax.swing.JInternalFrame {
     private void BtnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnConsultarActionPerformed
     consul =  new ConsultaDAO();     
     int op  =  CboReport.getSelectedIndex();
+    String args[] = new String[4];
     switch(op) {
         case 0:
-            String args[] = new String[4];
+            consul.setTable("registro");
             args[0] = Lblidemp.getText();
             args[1] = ChFechaIni.getText();
             args[2] = ChFechaFin.getText();
             consul.findAsistencia(args, JtblConsulta, lblcant);
             ;break;
         case 1:
-            
+            consul.setTable("registro_backlog");
+            args[0] = Lblidemp.getText();
+            args[1] = ChFechaIni.getText();
+            args[2] = ChFechaFin.getText();
+            consul.findAsistencia(args, JtblConsulta, lblcant);
             ;break;
         case 2:
             

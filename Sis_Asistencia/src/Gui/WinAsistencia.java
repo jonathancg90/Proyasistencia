@@ -888,7 +888,7 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_mitemdeleteMousePressed
 
     private void mitemupdateMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemupdateMousePressed
-       if(!"".equals(lblidEmp.getText())){
+       /*if(!"".equals(lblidEmp.getText())){
         try{
         int id = Integer.parseInt(lblidEmp.getText());
         val = new Validators();    
@@ -920,13 +920,12 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
                 
             
         
-        }
-    catch(Exception e){
-        System.out.println("Evento registrar: "+e);
-    } 
-} else {
+        } catch(Exception e){
+            System.out.println("Evento registrar: "+e);
+        } 
+    } else {
             JOptionPane.showMessageDialog(null,"Seleccione un empleado para poder ingresar sus asistencia");
-                }
+    }*/
     }//GEN-LAST:event_mitemupdateMousePressed
 
                                        

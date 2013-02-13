@@ -40,6 +40,8 @@ public class ConsultaDAO {
     private ConexionBd con;
     private Connection conexion;
     private TimeOPeration tm;
+    private String DateEmp[];
+    private String _Table;
 
     public ConsultaDAO(){
         _error = "Dao_ConsultaDAO_";
@@ -47,13 +49,17 @@ public class ConsultaDAO {
         campos = new String[0];
         witdhcolum = new int[6];
         witdhcolum[0]=180;
-        witdhcolum[1]=75;
+        witdhcolum[1]=80;
         witdhcolum[2]=75;
         witdhcolum[3]=75;
         witdhcolum[4]=75;
         witdhcolum[5]=60;
         _table = "report";
     }
+    public void setTable(String table) {
+        this._Table = table;
+    }
+    
     public void getTableAll(JTable tblDatos , JLabel lblcant){
         try{
             DefaultTableModel datos;
@@ -74,7 +80,7 @@ public class ConsultaDAO {
         }
     }
     public void findAsistencia(String args[], JTable tblDatos, JLabel lblcant) {
-        qs= new Query();
+        qs = new Query();
         Statement s = null;
         con = new ConexionBd();
         try {
@@ -87,6 +93,10 @@ public class ConsultaDAO {
             camp[0] = "fecha";
             //camp[1] = "idtip_reg%G_TIPOREG";
             camp[1] = "hora";
+            DateEmp = qs.getRecords("empleado",Integer.parseInt(args[0]));
+            System.out.println("Datos_: " +DateEmp[1]);
+            System.out.println();
+            System.out.println();
             //Filtros
             filter = new String[2][2];
             filter[0][0] = "int_idemp";
@@ -116,17 +126,17 @@ public class ConsultaDAO {
         Object[] fila;
         String[] temp;
         String tbl;
+        int count = 0;
+        int ind = 0;
         con.getConexion();
         conexion = con.getConetion();
         s = conexion.createStatement();
         //Titulos
-        Consulta = qs.getQueryList(camp, "registro/fecha", filter);
+        Consulta = qs.getQueryList(camp, this._Table + "/fecha", filter);
         rs = s.executeQuery(Consulta);
         ResultSetMetaData meta = rs.getMetaData();
         int nCols = meta.getColumnCount();
         fila = new Object[nCols];
-        int count = 0;
-        int ind = 0;
         //Logica
         fechFinal = qs.getDay(fechFinal, "+");
         String fechActual = fechInicio;
@@ -134,8 +144,7 @@ public class ConsultaDAO {
         do {
             ind = 0;
             //Ejecucion de consulta
-            filter[1][0] = "bet_fecha_" + fechActual;
-            filter[1][1] = fechActual;
+            filter[1][0] = "bet_fecha_" + fechActual;filter[1][1] = fechActual;
             Consulta = qs.getQueryList(camp, "registro/fecha", filter);
             System.out.println(Consulta);
             rs = s.executeQuery(Consulta);
@@ -149,13 +158,6 @@ public class ConsultaDAO {
                 count++;
                 for(int i=0; i<nCols; ++i){
                     fila[i] = rs.getObject(i+1);
-                    temp = camp[i].split("%");
-                    if(temp.length>1){
-                        String[] campo;
-                        tbl = temp[1];
-                        campo =  hp.getConstantData(tbl);
-                        fila[i] = campo[rs.getInt(i+1)];
-                    }
                     //Temporal
                     if(ind >= 2 && i == 1 ){
                         campReg[ind]=String.valueOf(fila[i]);
@@ -173,9 +175,7 @@ public class ConsultaDAO {
             //Suma
             if(countReg == true) {
                 if(ind == 3){
-                    campReg[4] = campReg[2];
-                    campReg[2] = "";
-                    campReg[3] = "";
+                    campReg[4] = campReg[2];campReg[2] = "";campReg[3] = "";
                     campReg[5] = calculoHoras(campReg, 2);
                 } else if(ind == 5){
                     campReg[5] = calculoHoras(campReg, 4);
@@ -190,13 +190,40 @@ public class ConsultaDAO {
                     campReg[1]=String.valueOf("");
                 }
                 else {
-                    campReg[1]=String.valueOf("Falto");
-                }
-                //Verificar si el dia es parte de su horario
-                    //Verificar si es por sus vacaciones
-                    //Verificar si es dia no laborable
-                    //Verificar si tiene justificacion de falta
-               
+                    int cVal=0;
+                    String[] args =  new String[5];
+                    args[0]="nolaborables";
+                    args[1]="idempr";
+                    args[2]=DateEmp[14];
+                    args[3]="fecha";
+                    args[4]=fechActual;
+                    cVal = qs.getCountRegister(args);
+                    if(cVal > 0) {
+                        campReg[1]=String.valueOf("Dia no laborable");
+                    } 
+                    if(cVal == 0){
+                        cVal = qs.getcount(" vacaciones where idemp='" + DateEmp[1] +"' and '"+fechActual+"'>=f_ini and '"+fechActual+"'<=f_final");
+                        if(cVal > 0) {
+                            campReg[1]=String.valueOf("Vacaciones");
+                        } 
+                    }
+                    if(cVal == 0){
+                        args =  new String[7];
+                        args[0]="justificaciones";
+                        args[1]="empleado_idemp";
+                        args[2]=DateEmp[1];
+                        args[3]="fecha";
+                        args[4]=fechActual;
+                        args[5]="idtip_jus";
+                        args[6]="2";
+                        cVal = qs.getCountRegister(args);
+                        if(cVal > 0) {
+                            campReg[1]=String.valueOf("Justificado");
+                        }
+                    }
+                    if(cVal == 0)
+                        campReg[1]=String.valueOf("Falto");
+                    }
             }
             register_report(campReg);
         fechActual = qs.getDay(fechActual, "+");

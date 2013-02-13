@@ -567,6 +567,7 @@ public class Query extends ConexionBd{
             identify="\"NMID\"";
             }
             query= "select * from "+Table+" where "+ identify +" = "+Id+"";
+            System.out.println("query: "+query);
             s = conexion.createStatement();
             rs = s.executeQuery(query);
             ResultSetMetaData meta = rs.getMetaData();
@@ -632,14 +633,14 @@ public class Query extends ConexionBd{
                     else if(args.length>=3){
                         query = "select count(*) from "+args[0]+" where ";
                         for(int i=1;i<args.length;i++){
-                            query = query + args[i]+" = "+args[i+1];
+                            query = query + args[i]+" = '"+args[i+1]+"'";
                             if(args.length!=i+2){ 
                                 query = query + " and ";
                             }
                             i++;
                         }
-                        
                     }
+                    System.out.println("Consulta count: "+query);
                     rs = s.executeQuery(query);
                     rs.next();
                     cant = rs.getInt(1);
@@ -752,7 +753,7 @@ public class Query extends ConexionBd{
                 getConexion();
                 s = conexion.createStatement();
                 String qs = "select count(*) from " + tabla;
-
+                System.out.println("Contando: "+qs);
                 rs = s.executeQuery(qs);
                 rs.next();
                 num = rs.getInt(1);
@@ -761,7 +762,7 @@ public class Query extends ConexionBd{
                 rs.close();
             }
             catch(Exception e){
-                System.out.println(_error+"userAuth: "+e);
+                System.out.println(_error+"getcount: "+e);
             }return num;
 
         }
@@ -815,7 +816,7 @@ public class Query extends ConexionBd{
                 rs.close();
             }
             catch(Exception e){
-                System.out.println(_error+"userAuth: "+e);
+                System.out.println(_error+"Execute: "+e);
             }
             return result;
 
