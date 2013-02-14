@@ -106,7 +106,7 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
         args[1] = "idemp";
         args[2] = lblidEmp.getText();
         args[3] = "fecha";
-        args[4] = "'"+hp.getFormatDate(cboDia.getText())+"'";
+        args[4] = ""+hp.getFormatDate(cboDia.getText());
         
         if (Validator) {
             Validator = val.MaxRegistro(args, 4);
