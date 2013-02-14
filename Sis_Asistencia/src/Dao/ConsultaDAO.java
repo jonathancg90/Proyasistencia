@@ -94,9 +94,6 @@ public class ConsultaDAO {
             //camp[1] = "idtip_reg%G_TIPOREG";
             camp[1] = "hora";
             DateEmp = qs.getRecords("empleado",Integer.parseInt(args[0]));
-            System.out.println("Datos_: " +DateEmp[1]);
-            System.out.println();
-            System.out.println();
             //Filtros
             filter = new String[2][2];
             filter[0][0] = "int_idemp";
@@ -145,7 +142,7 @@ public class ConsultaDAO {
             ind = 0;
             //Ejecucion de consulta
             filter[1][0] = "bet_fecha_" + fechActual;filter[1][1] = fechActual;
-            Consulta = qs.getQueryList(camp, "registro/fecha", filter);
+            Consulta = qs.getQueryList(camp, this._Table + "/fecha", filter);
             System.out.println(Consulta);
             rs = s.executeQuery(Consulta);
             boolean countReg = false;
@@ -257,9 +254,7 @@ public class ConsultaDAO {
                         Time.valueOf(sdf.format(date_ini)));
                 Time hrs_refrigerio = tm.restarTime(Time.valueOf(sdf.format(date_fin)),
                         Time.valueOf(sdf.format(date_ref_fin)));
-                System.out.println("Trabajo: "+hrs_trabajo+"Refrigerio: "+hrs_refrigerio);
                 Time hrs = tm.sumarTime(hrs_trabajo, hrs_refrigerio);
-                System.out.println("suma: "+hrs);
                 suma = String.valueOf(hrs);
             } 
         } catch(Exception e) {

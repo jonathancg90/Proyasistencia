@@ -867,23 +867,23 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_mitemclearMousePressed
 
     private void mitemdeleteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemdeleteMousePressed
+    int i;
+    objRegistro = new RegistroDAO();
+    i= JOptionPane.showConfirmDialog(null,"¿Esta seguro de eliminar este registro?","Aviso",JOptionPane.OK_CANCEL_OPTION,JOptionPane.WARNING_MESSAGE);
+    if(i==0){
+        int id = Integer.valueOf(lblReg.getText());
 
-        int i;
-        objRegistro = new RegistroDAO();
-        i= JOptionPane.showConfirmDialog(null,"¿Esta seguro de eliminar este registro?","Aviso",JOptionPane.OK_CANCEL_OPTION,JOptionPane.WARNING_MESSAGE);
-        if(i==0){
-            int id = Integer.valueOf(lblReg.getText());
-
-            i = objRegistro.delete(id);
-            if(i==0) {
-                JOptionPane.showMessageDialog(null,"No se pudo eliminar el registro de asistencia");
-            }
-            else {
-                String fecha=hp.getFormatDate(cboDia.getText());
-                objRegistro.findRegFecha(lblidEmp.getText(), fecha, fecha, tblAsistencia, lblcant3);
-                cleanBox();
-            }
+        i = objRegistro.delete(id,0);
+        i = objRegistro.delete(id,1);
+        if(i==0) {
+            JOptionPane.showMessageDialog(null,"No se pudo eliminar el registro de asistencia");
         }
+         else {
+            String fecha=hp.getFormatDate(cboDia.getText());
+            objRegistro.findRegFecha(lblidEmp.getText(), fecha, fecha, tblAsistencia, lblcant3);
+            cleanBox();
+        }
+     }
 
     }//GEN-LAST:event_mitemdeleteMousePressed
 

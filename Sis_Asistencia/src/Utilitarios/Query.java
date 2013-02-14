@@ -567,7 +567,6 @@ public class Query extends ConexionBd{
             identify="\"NMID\"";
             }
             query= "select * from "+Table+" where "+ identify +" = "+Id+"";
-            System.out.println("query: "+query);
             s = conexion.createStatement();
             rs = s.executeQuery(query);
             ResultSetMetaData meta = rs.getMetaData();
@@ -640,7 +639,6 @@ public class Query extends ConexionBd{
                             i++;
                         }
                     }
-                    System.out.println("Consulta count: "+query);
                     rs = s.executeQuery(query);
                     rs.next();
                     cant = rs.getInt(1);
@@ -658,6 +656,9 @@ public class Query extends ConexionBd{
             int i=0;
         return i;
         }
+        /*
+         * Validar si es integer or String
+         */
         public int gettamColumn(String table,int pos) throws SQLException{
             getConexion();
             Statement s = null;
@@ -668,8 +669,9 @@ public class Query extends ConexionBd{
             return pres;
             
         }
-        
-        
+        /*
+         * Filtro de fehcas (rango)
+         */
         public  DefaultTableModel getFechafilter(String[] args, String Table, String inicio,String fin,String id_emp, int idemp){
         try{
             datos = new DefaultTableModel();
@@ -705,7 +707,6 @@ public class Query extends ConexionBd{
            //Cerrando conexion
            rs.close();
            closeConexion(); 
-           
         }
         catch(Exception e){
             System.out.println(_error+"getFechaFilter: "+e);
@@ -753,7 +754,6 @@ public class Query extends ConexionBd{
                 getConexion();
                 s = conexion.createStatement();
                 String qs = "select count(*) from " + tabla;
-                System.out.println("Contando: "+qs);
                 rs = s.executeQuery(qs);
                 rs.next();
                 num = rs.getInt(1);
@@ -829,7 +829,7 @@ public class Query extends ConexionBd{
                 StrDia = Execute(query);
             }
             catch(Exception e) {
-                System.out.println("Problemas en Obtener_Dia_Fecha: "+e);
+                System.out.println(_error + "getDayOfTheWeek: "+e);
             }
         return StrDia;
         }
@@ -841,7 +841,7 @@ public class Query extends ConexionBd{
                 StrDia = Execute(query);
             }
             catch(Exception e) {
-                System.out.println("Problemas en Obtener_Dia_Fecha: "+e);
+                System.out.println(_error + "getDay: "+e);
             }
         return StrDia;
         }
