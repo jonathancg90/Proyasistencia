@@ -17,7 +17,9 @@ import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.util.JRLoader;
 import net.sf.jasperreports.view.JasperViewer;
-public class Ireport {
+import Utilitarios.ConexionBd;
+
+public class Ireport  extends  ConexionBd{
     
     private Connection conn = null;
     private Helpers hp;
@@ -28,17 +30,12 @@ public class Ireport {
     private JasperPrint jasperPrint;
     private JasperViewer jviewer;
     
-    public static void main(String[] args) {
-        Ireport rep =  new Ireport();
-        rep.getConexionIreport();
-        rep.ReportEjemplo();
-    }
     private String idEmp;
 
-    public void setargs(String[] args) {
+    public void setargs(String[] args){
         this.args = args;
     }
-    
+/*    
     public void getConexionIreport() {
         try{
             //Obtener numero IP del servidor
@@ -59,19 +56,21 @@ public class Ireport {
             ex.printStackTrace();
         }
     }
+ */
     public void SelectReport(int op){
-        switch(op){
-            case 1:ReportAsistencia();break;
-            case 2:ReportAsistencia_Log();break;
+        
+        switch(op) {
+            case 1:ReportAsistencia(); break;
+            case 2:ReportAsistencia_Log(); break;
+            default:break;
         }
     }
     
     public void ReportAsistencia(){
     try{
-        //Ruta en donde se encuentra el reporte
+        getConexion();
+        conn = getConetion();
         File archivo = new  File("reportes/example.jasper");
-        //String archivo = "home\\platano\\virtualenv\\worktec\\desarrollo\\Proyasistencia\\Sis_Asistencia\\reportes\\ejemplo.jasper";
-        //String archivo = "reportes\\ejemplo.jasper";
         System.out.println("Cargando desde: " + archivo);
         if(archivo == null){
             System.out.println("No se encuentra el archivo.");
@@ -92,12 +91,11 @@ public class Ireport {
         //parametro.put("Fecha_Final","");
         //parametro.put("Horario","");
 
-    //Reporte diseñado y compilado con iReport
         JasperPrint jasperPrint= JasperFillManager.fillReport(masterReport,parametro,conn);
-    //Se lanza el Viewerde Jasper, no termina aplicación al salir
         JasperViewer jviewer= new JasperViewer(jasperPrint,false);
-        jviewer.setTitle("Reporte de asistencia");
+        jviewer.setTitle("Asistencia Personal");
         jviewer.setVisible(true);
+        closeConexion();
     } catch (Exception j) {
         System.out.println("Mensaje de Error:"+j);
     }
