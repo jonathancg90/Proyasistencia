@@ -61,11 +61,12 @@ public class Ireport {
     }
     public void SelectReport(int op){
         switch(op){
-            case 1:ReportEjemplo();break;
+            case 1:ReportAsistencia();break;
+            case 2:ReportAsistencia_Log();break;
         }
     }
     
-    public void ReportEjemplo(){
+    public void ReportAsistencia(){
     try{
         //Ruta en donde se encuentra el reporte
         File archivo = new  File("reportes/example.jasper");
@@ -101,4 +102,7 @@ public class Ireport {
         System.out.println("Mensaje de Error:"+j);
     }
   }
+    private void ReportAsistencia_Log() {
+        
+    }
 }
