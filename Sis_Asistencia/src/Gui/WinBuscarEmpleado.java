@@ -327,6 +327,11 @@ public class WinBuscarEmpleado extends javax.swing.JInternalFrame {
                 
                 this.dispose();
                 break;
+            case "3":
+                Gui.WinReportes.TxtEmpleado.setText(nombre + " "+ apellido);
+                Gui.WinReportes.Lblidemp.setText(id);
+                this.dispose();
+                ;break;
             
         }
     }//GEN-LAST:event_TblbuscadorMousePressed
