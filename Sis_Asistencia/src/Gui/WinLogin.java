@@ -178,7 +178,6 @@ public class WinLogin extends javax.swing.JFrame {
                 limpiar();this.dispose();
         }
         }
-        
     }//GEN-LAST:event_btningresarActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -186,7 +185,7 @@ public class WinLogin extends javax.swing.JFrame {
         WinMdi objmdi=new WinMdi();
         objmdi.setUser(iduser);
         objmdi.show();
-        objmdi.setLocation(250, 250);
+        objmdi.setLocationRelativeTo(null);
         this.dispose();
         limpiar();
     }//GEN-LAST:event_jButton1ActionPerformed

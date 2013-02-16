@@ -6,9 +6,11 @@ import java.util.Calendar;
 import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
-import Utilitarios.Ireport;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultComboBoxModel;
+import Utilitarios.Ireport;
+import Utilitarios.Data;
 
 public class WinReportes extends javax.swing.JInternalFrame {
 
@@ -16,15 +18,25 @@ public class WinReportes extends javax.swing.JInternalFrame {
     private Date date,date2;
     private Calendar calendar,calendar2;
     private Ireport rep;
+    private DefaultComboBoxModel MChoice;
+    private Data dt;
     
     public WinReportes() {
         initComponents();
         format=new SimpleDateFormat("dd-MM-yyyy");
         CmbF_De.setDateFormat(format);
         CmbF_Hasta.setDateFormat(format);
-        
+        cargaChoice();
+        Lblidemp.setVisible(false);
     }
-
+    public void cargaChoice(){
+        dt = new Data();
+        MChoice = new DefaultComboBoxModel();
+        for(int i= 0;i<dt.G_REPORTES.length;i++) {
+            MChoice.addElement(dt.G_REPORTES[i]);
+        }
+        CmbTipo.setModel(MChoice);
+    }
    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -36,9 +48,10 @@ public class WinReportes extends javax.swing.JInternalFrame {
         CmbF_De = new datechooser.beans.DateChooserCombo();
         jLabel4 = new javax.swing.JLabel();
         CmbF_Hasta = new datechooser.beans.DateChooserCombo();
-        jTextField1 = new javax.swing.JTextField();
+        TxtEmpleado = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        Lblidemp = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         CmbTipo = new javax.swing.JComboBox();
@@ -53,10 +66,15 @@ public class WinReportes extends javax.swing.JInternalFrame {
 
         jLabel4.setText("Hasta");
 
-        jTextField1.setEditable(false);
+        TxtEmpleado.setEditable(false);
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilitarios/Img/consulta.png"))); // NOI18N
         jLabel5.setText("Buscar");
+        jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel5MousePressed(evt);
+            }
+        });
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilitarios/Img/Ingresar.png"))); // NOI18N
         jButton1.setText("Ver report");
@@ -83,7 +101,7 @@ public class WinReportes extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(Panel_datosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(Panel_datosLayout.createSequentialGroup()
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(TxtEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel5))
                     .addGroup(Panel_datosLayout.createSequentialGroup()
@@ -93,17 +111,22 @@ public class WinReportes extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton1)))
                 .addGap(26, 26, 26))
+            .addGroup(Panel_datosLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(Lblidemp)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         Panel_datosLayout.setVerticalGroup(
             Panel_datosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Panel_datosLayout.createSequentialGroup()
-                .addContainerGap(30, Short.MAX_VALUE)
+                .addComponent(Lblidemp)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
                 .addGroup(Panel_datosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jButton1)
                     .addGroup(Panel_datosLayout.createSequentialGroup()
                         .addGroup(Panel_datosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(TxtEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel5))
                         .addGap(6, 6, 6)
                         .addGroup(Panel_datosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -171,7 +194,7 @@ public class WinReportes extends javax.swing.JInternalFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(22, Short.MAX_VALUE)
+                .addContainerGap(43, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Panel_datos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -191,23 +214,45 @@ public class WinReportes extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_mcloseMousePressed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+     int op = CmbTipo.getSelectedIndex();
+     rep = new Ireport();
      String args[] = new String[1];
      try {
-        rep = new Ireport();
-        rep.setargs(args);
-        rep.getConexionIreport();
-        args[0] =  "Saravia se lo come";
-        rep.SelectReport(1);
+         switch(op) {
+         case 0:
+                rep.setargs(args);
+                //rep.getConexionIreport();
+                args[0] =  "Saravia se lo come";
+                rep.SelectReport(1);
+             ;break;
+         case 2:
+             rep.SelectReport(2);
+             ;break;
+        }
      } catch (Exception ex) {
          System.out.println(ex);
      }
+
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jLabel5MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MousePressed
+    WinBuscarEmpleado objbus = new WinBuscarEmpleado();
+    objbus.setResizable(true);
+    objbus.setMaximizable(true);
+    objbus.setIconifiable(true);
+    objbus.setClosable(true);
+    WinMdi.jdpContenedor.add(objbus);
+    objbus.LblModulo.setText("3");
+    objbus.setVisible(true);
+    }//GEN-LAST:event_jLabel5MousePressed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private datechooser.beans.DateChooserCombo CmbF_De;
     private datechooser.beans.DateChooserCombo CmbF_Hasta;
     private javax.swing.JComboBox CmbTipo;
+    public static javax.swing.JLabel Lblidemp;
     private javax.swing.JPanel Panel_datos;
+    public static javax.swing.JTextField TxtEmpleado;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -216,7 +261,6 @@ public class WinReportes extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JMenu mclose;
     // End of variables declaration//GEN-END:variables
 }
