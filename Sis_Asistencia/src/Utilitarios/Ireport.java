@@ -77,11 +77,10 @@ public class Ireport  extends  ConexionBd{
             System.exit(2);
         }
         JasperReport masterReport= null;
-        try{
+        try {
             masterReport= (JasperReport) JRLoader.loadObject(archivo);
         } catch (JRException e) {
             System.out.println("Error cargando el reporte maestro: " + e.getMessage());
-            System.exit(3);
         }
         //int codigo=Integer.parseInt(id);
 

@@ -1,0 +1,18 @@
+-- Table: report
+
+-- DROP TABLE report;
+
+CREATE TABLE report
+(
+  fecha character varying(150)[],
+  ingreso character varying(150)[],
+  refrigerio_ing character varying(150)[],
+  refrigerio_sal character varying(150)[],
+  salida character varying(150)[],
+  horas character varying(150)[]
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE report
+  OWNER TO postgres;
