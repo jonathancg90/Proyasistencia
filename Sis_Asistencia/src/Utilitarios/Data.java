@@ -13,13 +13,14 @@ public class Data {
     public static String G_EXCLUDE[] = new String[1];       //Datos excluidos para la actualizacion de registros
     public String G_AREA[] = new String[3];
     public String G_DIAS[] = new String[8];
-    public String G_TITULOS[]= new String[28];
+    public String G_TITULOS[]= new String[29];
     public String TYPEDATE[]= new String[2];
     public int DIMENTION[]= new int[9];
     public String G_TIPOH[]= new String[3];
     public String G_TIPOREG[]= new String[3];
     public String G_TIPOEXTRA[] = new String[2];
     public String G_MODULOS[] = new String[7];
+    public String G_DISEÑOS[] = new String[13];
     /**
     * Inicializacion de datos.
     */
@@ -43,6 +44,7 @@ public class Data {
         setTitulos();
         setModulos();
         setDias();
+        setdiseño();
 
     }
     /**
@@ -158,5 +160,24 @@ public class Data {
         G_TITULOS[25] = "Sistema de Asistencia";
         G_TITULOS[26] = "Recuperar Contraseña";
         G_TITULOS[27] = "Buscar Empleado";
+        G_TITULOS[28] = "Diseño";
+    }
+    /**
+    * Tipo de diseños del sistema.
+    */
+    private void setdiseño(){
+        G_DISEÑOS[0] = "Default";
+        G_DISEÑOS[1] = "Texture";
+        G_DISEÑOS[2] = "Acryl";
+        G_DISEÑOS[3] = "McWin";
+        G_DISEÑOS[4] = "Noire";
+        G_DISEÑOS[5] = "Aero";
+        G_DISEÑOS[6] = "Aluminium";
+        G_DISEÑOS[7] = "Bernstein";
+        G_DISEÑOS[8] = "Fast";
+        G_DISEÑOS[9] = "Graphite";
+        G_DISEÑOS[10] = "Luna";
+        G_DISEÑOS[11] = "Mint";
+        G_DISEÑOS[12] = "Smart";
     }
 }

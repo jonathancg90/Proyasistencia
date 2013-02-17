@@ -374,6 +374,34 @@ public class Query extends ConexionBd{
         }
     }
     
+    /*
+     * Autocarga de los estados activo, inactivo
+     */
+    public void loaddiseño(JComboBox cmbState){
+        try{
+            dt = new Data();
+            MChoice = new DefaultComboBoxModel();
+            MChoice.addElement(dt.G_DISEÑOS[0]);
+            MChoice.addElement(dt.G_DISEÑOS[1]);
+            MChoice.addElement(dt.G_DISEÑOS[2]);
+            MChoice.addElement(dt.G_DISEÑOS[3]);
+            MChoice.addElement(dt.G_DISEÑOS[4]);
+            MChoice.addElement(dt.G_DISEÑOS[5]);
+            MChoice.addElement(dt.G_DISEÑOS[6]);
+            MChoice.addElement(dt.G_DISEÑOS[7]);
+            MChoice.addElement(dt.G_DISEÑOS[8]);
+            MChoice.addElement(dt.G_DISEÑOS[9]);
+            MChoice.addElement(dt.G_DISEÑOS[10]);
+            MChoice.addElement(dt.G_DISEÑOS[11]);
+            MChoice.addElement(dt.G_DISEÑOS[12]);
+            cmbState.setModel(MChoice);   
+            System.out.println("OLAAA"+dt.G_DISEÑOS[0]);
+        }
+        catch(Exception e){
+            System.out.println(_error+"loaddiseño: "+e);
+        }
+    }
+    
     public int loadGlobal(int op, JComboBox cmbType, int value){
         int id = 0;
         try{
