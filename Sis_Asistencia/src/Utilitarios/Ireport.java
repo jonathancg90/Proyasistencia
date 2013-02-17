@@ -1,6 +1,7 @@
 
 package Utilitarios;
 
+import java.awt.Container;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -17,7 +18,9 @@ import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.util.JRLoader;
 import net.sf.jasperreports.view.JasperViewer;
-public class Ireport {
+import Utilitarios.ConexionBd;
+
+public class Ireport  extends  ConexionBd{
     
     private Connection conn = null;
     private Helpers hp;
@@ -28,10 +31,12 @@ public class Ireport {
     private JasperPrint jasperPrint;
     private JasperViewer jviewer;
     
-    public void setargs(String[] args) {
+    private String idEmp;
+
+    public void setargs(String[] args){
         this.args = args;
     }
-    
+/*    
     public void getConexionIreport() {
         try{
             //Obtener numero IP del servidor
@@ -41,7 +46,7 @@ public class Ireport {
             String user = "postgres";
             String password = "sp1r4ls4c";
             String bd = "asistencia"; 
-            String url = "Jdbc:postgresql://"+IP+":5432/"+bd;
+            String url = "Jdbc:postgresql://"+IP+"/"+bd;
 
             Class.forName("org.postgresql.Driver"); 
             conn = DriverManager.getConnection(url,user,password);
@@ -52,43 +57,85 @@ public class Ireport {
             ex.printStackTrace();
         }
     }
+ */
     public void SelectReport(int op){
-        switch(op){
-            case 1:ReportEjemplo();break;
-        }
         
-    }
-    
-    public void ReportEjemplo(){
-       try {
-            /*String arch ="/home/platano/ejemplo.jasper";
-            JasperReport Jas_Rep= JasperCompileManager.compileReport(arch);
-            JasperPrint Jas_Prin= JasperFillManager.fillReport(Jas_Rep, null,conn);
-            JasperViewer.viewReport(Jas_Prin);
-           */
-           
-            getConexionIreport();
-            File miDir = new File (".");
-            String archivo = miDir + "/" + _ubicacion + File.separatorChar + "Ejemplo.jrxml";
-            System.out.println(archivo);
-            if(archivo == null){
-                System.out.println("No se encuentra el archivo.");
-            }
-            String archivo2 = "reportes\\ejemplo.jrxml";
-            try{
-                masterReport= (JasperReport) JRLoader.loadObject("reportes\\ejemplo.jrxml");
-            } catch (JRException e) {
-                System.out.println("Error cargando el reporte maestro: " + e.getMessage());
-            }
-            Map parametro= new HashMap();
-            parametro.put("nombre",args[0]);
-            JasperPrint jasperPrint = JasperFillManager.fillReport(masterReport,parametro,conn);
-            JasperViewer jviewer= new JasperViewer(jasperPrint,false);
-            jviewer.setTitle("Ejemplo de reporte");
-            jviewer.setVisible(true);
-        }catch (Exception j){
-                System.out.println("Mensaje de Error:"+j.getMessage());
+        switch(op) {
+            case 1:ReportAsistencia(); break;
+            case 2:ReportAsistencia_Log(); break;
+            default:break;
         }
+    }
+
+    public void ReportAsistencia(){
+    try{
+        getConexion();
+        conn = getConetion();
+        File archivo = new  File("reportes/example.jasper");
+        System.out.println("Cargando desde: " + archivo);
+        if(archivo == null){
+            System.out.println("No se encuentra el archivo.");
+            System.exit(2);
 
         }
+        JasperReport masterReport= null;
+        try{
+            masterReport= (JasperReport) JRLoader.loadObject(archivo);
+        } catch (JRException e) {
+            System.out.println("Error cargando el reporte maestro: " + e.getMessage());
+            System.exit(3);
+        }
+        //int codigo=Integer.parseInt(id);
+
+        Map parametro= new HashMap();
+        //parametro.put("idpers","");
+        //parametro.put("Fecha_Inicial","");
+        //parametro.put("Fecha_Final","");
+        //parametro.put("Horario","");
+
+        JasperPrint jasperPrint= JasperFillManager.fillReport(masterReport,parametro,conn);
+        JasperViewer jviewer= new JasperViewer(jasperPrint,false);
+        jviewer.setTitle("Asistencia Personal");
+        jviewer.setVisible(true);
+        closeConexion();
+    } catch (Exception j) {
+        System.out.println("Mensaje de Error:"+j);
+    }
+  }
+    private void ReportAsistencia_Log() {
+        try{
+        Date date = new Date(0000-00-00);    
+        getConexion();
+        conn = getConetion();
+        File archivo = new  File("reportes/justificaciones.jasper");
+        System.out.println("Cargando desde: " + archivo);
+        if(archivo == null){
+            System.out.println("No se encuentra el archivo.");
+            System.exit(2);
+
+        }
+        JasperReport masterReport= null;
+        try{
+            masterReport= (JasperReport) JRLoader.loadObject(archivo);
+        } catch (JRException e) {
+            System.out.println("Error cargando el reporte maestro: " + e.getMessage());
+            System.exit(3);
+        }
+        //int codigo=Integer.parseInt(id);
+
+        Map parametro= new HashMap();
+        parametro.put("fin", date.valueOf("2013-02-22"));
+        parametro.put("id", 4);
+        parametro.put("inicio", date.valueOf("2013-02-14"));
+        
+        
+        JasperPrint jasperPrint= JasperFillManager.fillReport(masterReport,parametro,conn);
+        JasperViewer jviewer= new JasperViewer(jasperPrint,false);
+        jviewer.setTitle("Asistencia Personal");
+        jviewer.setVisible(true);
+        closeConexion();
+    } catch (Exception j) {
+        System.out.println("Mensaje de Error:"+j);
+    }
+    }
 }

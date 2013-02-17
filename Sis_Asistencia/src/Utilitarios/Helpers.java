@@ -84,6 +84,14 @@ public class Helpers {
         
         return camp;
     } 
+    
+    public String formatFecha(String fecha) {
+        String fechFormato = "";
+        String[] temp;
+        temp = fecha.split("-");
+        fechFormato = temp[2] + "-" + temp[1] + "-" + temp[0];
+        return fechFormato;
+    }
 //Ingreso dos horas me devuelve la diferencua entre las horas
 //Ingreso empleado, dia me devuelve su horario de ese dia (entradas salidas)            
 }

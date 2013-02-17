@@ -106,7 +106,7 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
         args[1] = "idemp";
         args[2] = lblidEmp.getText();
         args[3] = "fecha";
-        args[4] = "'"+hp.getFormatDate(cboDia.getText())+"'";
+        args[4] = ""+hp.getFormatDate(cboDia.getText());
         
         if (Validator) {
             Validator = val.MaxRegistro(args, 4);
@@ -867,28 +867,28 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_mitemclearMousePressed
 
     private void mitemdeleteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemdeleteMousePressed
+    int i;
+    objRegistro = new RegistroDAO();
+    i= JOptionPane.showConfirmDialog(null,"¿Esta seguro de eliminar este registro?","Aviso",JOptionPane.OK_CANCEL_OPTION,JOptionPane.WARNING_MESSAGE);
+    if(i==0){
+        int id = Integer.valueOf(lblReg.getText());
 
-        int i;
-        objRegistro = new RegistroDAO();
-        i= JOptionPane.showConfirmDialog(null,"¿Esta seguro de eliminar este registro?","Aviso",JOptionPane.OK_CANCEL_OPTION,JOptionPane.WARNING_MESSAGE);
-        if(i==0){
-            int id = Integer.valueOf(lblReg.getText());
-
-            i = objRegistro.delete(id);
-            if(i==0) {
-                JOptionPane.showMessageDialog(null,"No se pudo eliminar el registro de asistencia");
-            }
-            else {
-                String fecha=hp.getFormatDate(cboDia.getText());
-                objRegistro.findRegFecha(lblidEmp.getText(), fecha, fecha, tblAsistencia, lblcant3);
-                cleanBox();
-            }
+        i = objRegistro.delete(id,0);
+        i = objRegistro.delete(id,1);
+        if(i==0) {
+            JOptionPane.showMessageDialog(null,"No se pudo eliminar el registro de asistencia");
         }
+         else {
+            String fecha=hp.getFormatDate(cboDia.getText());
+            objRegistro.findRegFecha(lblidEmp.getText(), fecha, fecha, tblAsistencia, lblcant3);
+            cleanBox();
+        }
+     }
 
     }//GEN-LAST:event_mitemdeleteMousePressed
 
     private void mitemupdateMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemupdateMousePressed
-       if(!"".equals(lblidEmp.getText())){
+       /*if(!"".equals(lblidEmp.getText())){
         try{
         int id = Integer.parseInt(lblidEmp.getText());
         val = new Validators();    
@@ -920,13 +920,12 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
                 
             
         
-        }
-    catch(Exception e){
-        System.out.println("Evento registrar: "+e);
-    } 
-} else {
+        } catch(Exception e){
+            System.out.println("Evento registrar: "+e);
+        } 
+    } else {
             JOptionPane.showMessageDialog(null,"Seleccione un empleado para poder ingresar sus asistencia");
-                }
+    }*/
     }//GEN-LAST:event_mitemupdateMousePressed
 
                                        

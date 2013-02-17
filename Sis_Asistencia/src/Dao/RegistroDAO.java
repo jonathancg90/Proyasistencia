@@ -26,6 +26,7 @@ public class RegistroDAO extends ConexionBd{
     private String campos[];
     private int witdhcolum[];
     private String _table;
+    private String _table_log = "registro_backlog";
     private String _error;
     
     PreparedStatement  pt = null;
@@ -79,7 +80,8 @@ public class RegistroDAO extends ConexionBd{
             //Iniciando consulta y asignando valores
             if (op>0){
                 pt = qs.sqlRegister(Table);
-            } else {  pt = qs.sqlRegister("registro_backlog");
+            } else {  
+                pt = qs.sqlRegister(this._table_log);
             }
             pt.setInt(1,objRegistro.getIdemp());
             pt.setInt(2,objRegistro.getIdtip_reg());
@@ -129,7 +131,7 @@ public class RegistroDAO extends ConexionBd{
     }
     }
     
-    public int delete(int id){
+    public int delete(int id, int op){
        int i=0;
         try{
             //Preparando
@@ -140,7 +142,11 @@ public class RegistroDAO extends ConexionBd{
             String Table = this._table;
             
             objRegistro.setIdreg(id);
-            pt = qs.sqlDelete(Table);
+            if (op>0){
+                pt = qs.sqlDelete(Table);
+            } else {  
+                pt = qs.sqlDelete(this._table_log);
+            }
             pt.setInt(1,objRegistro.getIdreg());
             i= pt.executeUpdate();
             pt.close();

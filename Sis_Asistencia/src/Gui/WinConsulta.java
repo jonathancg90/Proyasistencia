@@ -244,20 +244,20 @@ public class WinConsulta extends javax.swing.JInternalFrame {
             if (!filePath.toLowerCase().endsWith(".xls")) {
                 fichero = new File(filePath + ".xls");
             }
-            boolean Confirma;
+            boolean confirma;
             if ((fichero).exists()) {
                 if(JOptionPane.OK_OPTION == JOptionPane.showConfirmDialog(this,"El fichero existe,deseas reemplazarlo?","Reemplazar",JOptionPane.YES_NO_OPTION));{
-                    Confirma=xls.ExportJtable(JtblConsulta, fichero, "Cargos");
+                    confirma=xls.ExportJtable(JtblConsulta, fichero, "Cargos");
                 }
             } else {
-                Confirma=xls.ExportJtable(JtblConsulta, fichero, "Cargos");
+                confirma=xls.ExportJtable(JtblConsulta, fichero, "Cargos");
             }
-                if(Confirma==true){
-                    JOptionPane.showMessageDialog(null, "El documento se grabo exitosamente","Confirmacion",JOptionPane.INFORMATION_MESSAGE);
-                }
-                else{
-                    JOptionPane.showMessageDialog(null, "No se pudo grabar el documento", "Confirmacion", JOptionPane.INFORMATION_MESSAGE);
-                }
+            if(confirma==true){
+                JOptionPane.showMessageDialog(null, "El documento se grabo exitosamente","Confirmacion",JOptionPane.INFORMATION_MESSAGE);
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "No se pudo grabar el documento", "Confirmacion", JOptionPane.INFORMATION_MESSAGE);
+            }
         }
     } catch(Exception e) {
         JOptionPane.showMessageDialog(null, "Ha ocurrido un error durante la exportacion del documento","Error",JOptionPane.ERROR_MESSAGE);
@@ -268,16 +268,21 @@ public class WinConsulta extends javax.swing.JInternalFrame {
     private void BtnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnConsultarActionPerformed
     consul =  new ConsultaDAO();     
     int op  =  CboReport.getSelectedIndex();
+    String args[] = new String[4];
     switch(op) {
         case 0:
-            String args[] = new String[4];
+            consul.setTable("registro");
             args[0] = Lblidemp.getText();
             args[1] = ChFechaIni.getText();
             args[2] = ChFechaFin.getText();
             consul.findAsistencia(args, JtblConsulta, lblcant);
             ;break;
         case 1:
-            
+            consul.setTable("registro_backlog");
+            args[0] = Lblidemp.getText();
+            args[1] = ChFechaIni.getText();
+            args[2] = ChFechaFin.getText();
+            consul.findAsistencia(args, JtblConsulta, lblcant);
             ;break;
         case 2:
             

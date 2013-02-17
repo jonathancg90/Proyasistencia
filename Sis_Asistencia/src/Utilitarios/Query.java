@@ -660,13 +660,12 @@ public class Query extends ConexionBd{
                     else if(args.length>=3){
                         query = "select count(*) from "+args[0]+" where ";
                         for(int i=1;i<args.length;i++){
-                            query = query + args[i]+" = "+args[i+1];
+                            query = query + args[i]+" = '"+args[i+1]+"'";
                             if(args.length!=i+2){ 
                                 query = query + " and ";
                             }
                             i++;
                         }
-                        
                     }
                     rs = s.executeQuery(query);
                     rs.next();
@@ -685,6 +684,9 @@ public class Query extends ConexionBd{
             int i=0;
         return i;
         }
+        /*
+         * Validar si es integer or String
+         */
         public int gettamColumn(String table,int pos) throws SQLException{
             getConexion();
             Statement s = null;
@@ -695,8 +697,9 @@ public class Query extends ConexionBd{
             return pres;
             
         }
-        
-        
+        /*
+         * Filtro de fehcas (rango)
+         */
         public  DefaultTableModel getFechafilter(String[] args, String Table, String inicio,String fin,String id_emp, int idemp){
         try{
             datos = new DefaultTableModel();
@@ -732,7 +735,6 @@ public class Query extends ConexionBd{
            //Cerrando conexion
            rs.close();
            closeConexion(); 
-           
         }
         catch(Exception e){
             System.out.println(_error+"getFechaFilter: "+e);
@@ -772,7 +774,7 @@ public class Query extends ConexionBd{
             }
             return hora;
         }
-
+        //Obtener cantidad de registro de una tabla
         public int getcount(String tabla)
         {
             int num=0;
@@ -780,7 +782,6 @@ public class Query extends ConexionBd{
                 getConexion();
                 s = conexion.createStatement();
                 String qs = "select count(*) from " + tabla;
-
                 rs = s.executeQuery(qs);
                 rs.next();
                 num = rs.getInt(1);
@@ -789,10 +790,11 @@ public class Query extends ConexionBd{
                 rs.close();
             }
             catch(Exception e){
-                System.out.println(_error+"userAuth: "+e);
+                System.out.println(_error+"getcount: "+e);
             }return num;
 
         }
+        //Creacion de tabla temporal de reportes
         public void create_report(String[] args) {
             try {
                 getConexion();
@@ -814,6 +816,7 @@ public class Query extends ConexionBd{
                 create_report(args);
             }
         }
+        //Eliminar tabla temporal de reportes
         public void destroid_report() {
             try {
                 getConexion();
@@ -826,6 +829,7 @@ public class Query extends ConexionBd{
                 System.out.println(_error+"destroid_report: "+e);
             }
         }
+        //Ejecutar consultas
         public String Execute(String query) {
             String result = "";
             try{
@@ -840,7 +844,7 @@ public class Query extends ConexionBd{
                 rs.close();
             }
             catch(Exception e){
-                System.out.println(_error+"userAuth: "+e);
+                System.out.println(_error+"Execute: "+e);
             }
             return result;
 
@@ -853,7 +857,19 @@ public class Query extends ConexionBd{
                 StrDia = Execute(query);
             }
             catch(Exception e) {
-                System.out.println("Problemas en Obtener_Dia_Fecha: "+e);
+                System.out.println(_error + "getDayOfTheWeek: "+e);
+            }
+        return StrDia;
+        }
+        //Obtener el dia siguiente o previo
+        public String getDay(String Fecha,String Op) {
+            String StrDia="";
+            try {
+                String query="select Date '"+Fecha+"' "+Op+" Integer '1'";
+                StrDia = Execute(query);
+            }
+            catch(Exception e) {
+                System.out.println(_error + "getDay: "+e);
             }
         return StrDia;
         }

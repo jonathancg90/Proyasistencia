@@ -90,6 +90,7 @@ public class WinBuscarEmpleado extends javax.swing.JInternalFrame {
         Tblbuscador = new javax.swing.JTable();
         lblcant = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
+        jSpinner1 = new javax.swing.JSpinner();
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Criterios de busqueda"));
 
@@ -244,6 +245,8 @@ public class WinBuscarEmpleado extends javax.swing.JInternalFrame {
                 .addComponent(jLabel7)
                 .addGap(17, 17, 17)
                 .addComponent(lblcant, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(137, 137, 137)
+                .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -252,12 +255,13 @@ public class WinBuscarEmpleado extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 358, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 354, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel7)
-                    .addComponent(lblcant, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(24, 24, 24))
+                    .addComponent(lblcant, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(16, 16, 16))
         );
 
         pack();
@@ -323,6 +327,11 @@ public class WinBuscarEmpleado extends javax.swing.JInternalFrame {
                 
                 this.dispose();
                 break;
+            case "3":
+                Gui.WinReportes.TxtEmpleado.setText(nombre + " "+ apellido);
+                Gui.WinReportes.Lblidemp.setText(id);
+                this.dispose();
+                ;break;
             
         }
     }//GEN-LAST:event_TblbuscadorMousePressed
@@ -348,6 +357,7 @@ public class WinBuscarEmpleado extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSpinner jSpinner1;
     private javax.swing.JLabel lblcant;
     // End of variables declaration//GEN-END:variables
 }

@@ -1,0 +1,145 @@
+annotation.processing.enabled=true
+annotation.processing.enabled.in.editor=false
+annotation.processing.processors.list=
+annotation.processing.run.all.processors=true
+annotation.processing.source.output=${build.generated.sources.dir}/ap-source-output
+application.title=Sis_Asistencia
+application.vendor=platano
+build.classes.dir=${build.dir}/classes
+build.classes.excludes=**/*.java,**/*.form
+# This directory is removed when the project is cleaned:
+build.dir=build
+build.generated.dir=${build.dir}/generated
+build.generated.sources.dir=${build.dir}/generated-sources
+# Only compile against the classpath explicitly listed here:
+build.sysclasspath=ignore
+build.test.classes.dir=${build.dir}/test/classes
+build.test.results.dir=${build.dir}/test/results
+# Uncomment to specify the preferred debugger connection transport:
+#debug.transport=dt_socket
+debug.classpath=\
+    ${run.classpath}
+debug.test.classpath=\
+    ${run.test.classpath}
+# This directory is removed when the project is cleaned:
+dist.dir=dist
+dist.jar=${dist.dir}/Sis_Asistencia.jar
+dist.javadoc.dir=${dist.dir}/javadoc
+endorsed.classpath=
+excludes=
+file.reference.commons-beanutils-1.8.2.jar=lib/Appi/Jasperreports/commons-beanutils-1.8.2.jar
+file.reference.commons-collections-3.2.1.jar=lib/Appi/Jasperreports/commons-collections-3.2.1.jar
+file.reference.commons-digester-2.1.jar=lib/Appi/Jasperreports/commons-digester-2.1.jar
+file.reference.commons-javaflow-20060411.jar=lib/Appi/Jasperreports/commons-javaflow-20060411.jar
+file.reference.commons-logging-1.1.jar=lib/Appi/Jasperreports/commons-logging-1.1.jar
+file.reference.DateChooser.jar-1=lib/Swing/DateChooser.jar
+file.reference.datetimepicker3.3.jar=lib/Swing/datetimepicker3.3.jar
+file.reference.dpfpenrollment.jar=lib/Appi/Digital Persona/dpfpenrollment.jar
+file.reference.dpfpverification.jar=lib/Appi/Digital Persona/dpfpverification.jar
+file.reference.dpotapi.jar=lib/Appi/Digital Persona/dpotapi.jar
+file.reference.dpotjni.jar=lib/Appi/Digital Persona/dpotjni.jar
+file.reference.groovy-all-1.7.5.jar=lib/Appi/Jasperreports/groovy-all-1.7.5.jar
+file.reference.iText-2.1.7.jar=lib/Appi/Jasperreports/iText-2.1.7.jar
+file.reference.jasperreports-5.0.0.jar=lib/Appi/Jasperreports/jasperreports-5.0.0.jar
+file.reference.jasperreports-applet-5.0.0.jar=lib/Appi/Jasperreports/jasperreports-applet-5.0.0.jar
+file.reference.jasperreports-fonts-5.0.0.jar=lib/Appi/Jasperreports/jasperreports-fonts-5.0.0.jar
+file.reference.jasperreports-javaflow-5.0.0.jar=lib/Appi/Jasperreports/jasperreports-javaflow-5.0.0.jar
+file.reference.javax.mail-1.3.3.01.jar=lib/Appi/javax.mail-1.3.3.01.jar
+file.reference.jcommon-1.0.15.jar=lib/Appi/Jasperreports/jcommon-1.0.15.jar
+file.reference.jfreechart-1.0.12.jar=lib/Appi/Jasperreports/jfreechart-1.0.12.jar
+file.reference.JTattooDemo.jar=lib/Swing/JTattooDemo.jar
+file.reference.jxl.jar=lib/Appi/jxl.jar
+file.reference.png-encoder-1.5.jar=lib/Appi/Jasperreports/png-encoder-1.5.jar
+file.reference.poi-3.7-20101029.jar=lib/Appi/Jasperreports/poi-3.7-20101029.jar
+file.reference.postgresql-9.1-901.jdbc4.jar=lib/Appi/Jasperreports/4.0.1/postgresql-9.1-901.jdbc4.jar
+file.reference.postgresql-9.1-901.jdbc4.jar-1=lib/Bd/postgresql-9.1-901.jdbc4.jar
+file.reference.spring.jar=lib/Appi/Jasperreports/spring.jar
+includes=**
+jar.archive.disabled=${jnlp.enabled}
+jar.compress=false
+jar.index=${jnlp.enabled}
+javac.classpath=\
+    ${libs.swing-layout.classpath}:\
+    ${libs.absolutelayout.classpath}:\
+    ${file.reference.DateChooser.jar-1}:\
+    ${file.reference.JTattooDemo.jar}:\
+    ${file.reference.datetimepicker3.3.jar}:\
+    ${file.reference.jxl.jar}:\
+    ${file.reference.javax.mail-1.3.3.01.jar}:\
+    ${libs.Digital Persona.classpath}:\
+    ${file.reference.commons-beanutils-1.8.2.jar}:\
+    ${file.reference.commons-collections-3.2.1.jar}:\
+    ${file.reference.commons-digester-2.1.jar}:\
+    ${file.reference.commons-javaflow-20060411.jar}:\
+    ${file.reference.commons-logging-1.1.jar}:\
+    ${file.reference.groovy-all-1.7.5.jar}:\
+    ${file.reference.iText-2.1.7.jar}:\
+    ${file.reference.jasperreports-5.0.0.jar}:\
+    ${file.reference.jasperreports-applet-5.0.0.jar}:\
+    ${file.reference.jasperreports-fonts-5.0.0.jar}:\
+    ${file.reference.jasperreports-javaflow-5.0.0.jar}:\
+    ${file.reference.jcommon-1.0.15.jar}:\
+    ${file.reference.jfreechart-1.0.12.jar}:\
+    ${file.reference.png-encoder-1.5.jar}:\
+    ${file.reference.poi-3.7-20101029.jar}:\
+    ${file.reference.spring.jar}:\
+<<<<<<< HEAD
+    ${file.reference.postgresql-9.1-901.jdbc4.jar}:\
+    ${file.reference.postgresql-9.1-901.jdbc4.jar-1}
+=======
+    ${file.reference.dpfpenrollment.jar}:\
+    ${file.reference.dpfpverification.jar}:\
+    ${file.reference.dpotapi.jar}:\
+    ${file.reference.dpotjni.jar}
+>>>>>>> a2a2863857795e5c3ede038137c3783aacd6b563
+# Space-separated list of extra javac options
+javac.compilerargs=
+javac.deprecation=false
+javac.processorpath=\
+    ${javac.classpath}
+javac.source=1.7
+javac.target=1.7
+javac.test.classpath=\
+    ${javac.classpath}:\
+    ${build.classes.dir}:\
+    ${libs.junit_4.classpath}
+javac.test.processorpath=\
+    ${javac.test.classpath}
+javadoc.additionalparam=
+javadoc.author=false
+javadoc.encoding=${source.encoding}
+javadoc.noindex=false
+javadoc.nonavbar=false
+javadoc.notree=false
+javadoc.private=false
+javadoc.splitindex=true
+javadoc.use=true
+javadoc.version=false
+javadoc.windowtitle=
+jnlp.codebase.type=no.codebase
+jnlp.descriptor=application
+jnlp.enabled=false
+jnlp.mixed.code=default
+jnlp.offline-allowed=false
+jnlp.signed=false
+jnlp.signing=
+jnlp.signing.alias=
+jnlp.signing.keystore=
+main.class=Gui.WinLogin
+manifest.file=manifest.mf
+meta.inf.dir=${src.dir}/META-INF
+mkdist.disabled=false
+platform.active=default_platform
+run.classpath=\
+    ${javac.classpath}:\
+    ${build.classes.dir}
+# Space-separated list of JVM arguments used when running the project.
+# You may also define separate properties like run-sys-prop.name=value instead of -Dname=value.
+# To set system properties for unit tests define test-sys-prop.name=value:
+run.jvmargs=
+run.test.classpath=\
+    ${javac.test.classpath}:\
+    ${build.test.classes.dir}
+source.encoding=UTF-8
+src.dir=src
+test.src.dir=test
