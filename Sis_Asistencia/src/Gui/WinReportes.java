@@ -225,8 +225,8 @@ public class WinReportes extends javax.swing.JInternalFrame {
                 args[0] =  "Saravia se lo come";
                 rep.SelectReport(1);
              ;break;
-         case 1:
-             
+         case 2:
+             rep.SelectReport(2);
              ;break;
         }
      } catch (Exception ex) {

@@ -293,6 +293,5 @@ public class ConsultaDAO {
         campos[5] = "horas";
         return campos;
     }
-    
-    /**/
+   
 }

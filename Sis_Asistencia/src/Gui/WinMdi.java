@@ -1,4 +1,3 @@
-
 package Gui;
 
 import Utilitarios.Validators;
@@ -53,7 +52,7 @@ public class WinMdi extends javax.swing.JFrame {
         jmItemModulos = new javax.swing.JMenuItem();
         JmitemJustificacion = new javax.swing.JMenuItem();
         JmitemUsu = new javax.swing.JMenuItem();
-        JmitemDis = new javax.swing.JMenuItem();
+        Submenudiseño = new javax.swing.JMenuItem();
         JmiBackup = new javax.swing.JMenuItem();
         Jmitemhelp = new javax.swing.JMenuItem();
         mrep = new javax.swing.JMenu();
@@ -209,9 +208,14 @@ public class WinMdi extends javax.swing.JFrame {
         });
         mdis.add(JmitemUsu);
 
-        JmitemDis.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilitarios/Img/tag.png"))); // NOI18N
-        JmitemDis.setText("Diseño");
-        mdis.add(JmitemDis);
+        Submenudiseño.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilitarios/Img/tag.png"))); // NOI18N
+        Submenudiseño.setText("Diseño");
+        Submenudiseño.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                SubmenudiseñoMousePressed(evt);
+            }
+        });
+        mdis.add(Submenudiseño);
 
         JmiBackup.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilitarios/Img/tag.png"))); // NOI18N
         JmiBackup.setText("Backup");
@@ -247,11 +251,11 @@ public class WinMdi extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jdpContenedor, javax.swing.GroupLayout.DEFAULT_SIZE, 791, Short.MAX_VALUE)
+            .addComponent(jdpContenedor, javax.swing.GroupLayout.DEFAULT_SIZE, 884, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jdpContenedor, javax.swing.GroupLayout.DEFAULT_SIZE, 357, Short.MAX_VALUE)
+            .addComponent(jdpContenedor, javax.swing.GroupLayout.DEFAULT_SIZE, 365, Short.MAX_VALUE)
         );
 
         pack();
@@ -621,6 +625,25 @@ public class WinMdi extends javax.swing.JFrame {
 
     }//GEN-LAST:event_mdisMousePressed
 
+    private void SubmenudiseñoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SubmenudiseñoMousePressed
+        WinDisenho objDis= new WinDisenho();
+        data= new Data();
+        String titulo=data.G_TITULOS[28];
+        val = new Validators();
+        objDis.setTitle(titulo);
+        objDis.setResizable(true);
+        objDis.setLocation(500, 150);
+        this.setVisible(false);
+        Utilitarios.Config.OPENWINDOWS = 0;
+        //obj_Asis.setClosable(true);
+       
+        if(val.EntryForms()){
+            objDis.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(null,msj_V);
+        } 
+    }//GEN-LAST:event_SubmenudiseñoMousePressed
+
 
 
     public static void main(String args[]) {
@@ -659,7 +682,6 @@ public class WinMdi extends javax.swing.JFrame {
     private javax.swing.JMenuItem JmiBackup;
     private javax.swing.JMenuItem JmitemArea;
     private javax.swing.JMenuItem JmitemCiudad;
-    private javax.swing.JMenuItem JmitemDis;
     private javax.swing.JMenuItem JmitemJustificacion;
     private javax.swing.JMenuItem JmitemRoles;
     private javax.swing.JMenuItem JmitemTipo;
@@ -668,6 +690,7 @@ public class WinMdi extends javax.swing.JFrame {
     private javax.swing.JMenuItem Jmitemhelp;
     private javax.swing.JMenuItem Jmitemtpmon;
     private javax.swing.JMenu SubmenuCrit;
+    private javax.swing.JMenuItem Submenudiseño;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     public static javax.swing.JDesktopPane jdpContenedor;
