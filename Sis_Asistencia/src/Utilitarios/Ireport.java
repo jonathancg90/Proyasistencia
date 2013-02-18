@@ -107,7 +107,7 @@ public class Ireport  extends  ConexionBd{
         Date date = new Date(0000-00-00);    
         getConexion();
         conn = getConetion();
-        File archivo = new  File("reportes/justificaciones.jasper");
+        File archivo = new  File("src/reportes/justificaciones.jasper");
         System.out.println("Cargando desde: " + archivo);
         if(archivo == null){
             System.out.println("No se encuentra el archivo.");
