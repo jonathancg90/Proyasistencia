@@ -79,7 +79,7 @@ public class ConsultaDAO {
             System.out.println(_error + "getTableAll: "+e);
         }
     }
-    public void findAsistencia(String args[], JTable tblDatos, JLabel lblcant) {
+    public void findAsistencia(String args[]) {
         qs = new Query();
         Statement s = null;
         con = new ConexionBd();
@@ -100,15 +100,19 @@ public class ConsultaDAO {
             filter[0][1] = args[0];
             filter[1][0] = "bet_fecha_" + args[1];
             filter[1][1] = args[2];
-     
+            System.out.println("var1: " + args[1] + "" + args[2]);
             helper_asistencia(filter, camp, args[1], args[2]);
             filter = new String[0][0];
-            getTableAll(tblDatos,lblcant);
-            qs.destroid_report();
         }
         catch(Exception e){
             System.out.println(_error + "findAsistencia : "+e);
         }
+    }
+    public void destroid_report() {
+        qs.destroid_report();
+    }
+    public void gettabel(JTable tblDatos, JLabel lblcant) {
+        getTableAll(tblDatos,lblcant);
     }
     //Ejecucion de la consulta
     private void helper_asistencia(String filter[][], String camp[],
@@ -116,7 +120,6 @@ public class ConsultaDAO {
         qs= new Query();
         hp= new Helpers();
         dt = new Data();
-        
         //Declaracion
         SimpleDateFormat fhora = new SimpleDateFormat("HH:mm:ss");
         String Consulta = "";
@@ -129,7 +132,10 @@ public class ConsultaDAO {
         conexion = con.getConetion();
         s = conexion.createStatement();
         //Titulos
+        System.out.println("1");
+        System.out.println("table: " + this._Table + "filter: "+filter[0][0]+" - "+filter[0][1]);
         Consulta = qs.getQueryList(camp, this._Table + "/fecha", filter);
+        System.out.println("consulta: "+Consulta);
         rs = s.executeQuery(Consulta);
         ResultSetMetaData meta = rs.getMetaData();
         int nCols = meta.getColumnCount();
@@ -199,7 +205,7 @@ public class ConsultaDAO {
                         campReg[1]=String.valueOf("Dia no laborable");
                     } 
                     if(cVal == 0){
-                        cVal = qs.getcount(" vacaciones where idemp='" + DateEmp[1] +"' and '"+fechActual+"'>=f_ini and '"+fechActual+"'<=f_final");
+                        cVal = qs.getcount("vacaciones where idemp='" + DateEmp[1] +"' and '"+fechActual+"'>=f_ini and '"+fechActual+"'<=f_final");
                         if(cVal > 0) {
                             campReg[1]=String.valueOf("Vacaciones");
                         } 

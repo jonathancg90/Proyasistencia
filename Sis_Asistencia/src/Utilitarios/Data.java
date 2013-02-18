@@ -20,11 +20,8 @@ public class Data {
     public String G_TIPOREG[]= new String[3];
     public String G_TIPOEXTRA[] = new String[2];
     public String G_MODULOS[] = new String[7];
-<<<<<<< HEAD
     public String G_DISEÑOS[] = new String[13];
-=======
     public String G_REPORTES[] = new String[3];
->>>>>>> aaec8f7eb2a58c16bb2020e12f6a34c5f452cb09
     /**
     * Inicializacion de datos.
     */
@@ -48,11 +45,8 @@ public class Data {
         setTitulos();
         setModulos();
         setDias();
-<<<<<<< HEAD
         setdiseño();
-=======
         setReportes();
->>>>>>> aaec8f7eb2a58c16bb2020e12f6a34c5f452cb09
 
     }
     /**
