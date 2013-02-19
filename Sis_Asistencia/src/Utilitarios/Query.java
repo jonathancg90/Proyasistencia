@@ -1,6 +1,9 @@
-
 package Utilitarios;
-
+/**
+* Clase para formar sentecias query
+* @author Gustavo Pajuelo
+* @version Worktec 1.0
+*/
 import Utilitarios.Data;
 
 import java.sql.*;
