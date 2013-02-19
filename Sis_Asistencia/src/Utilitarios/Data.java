@@ -45,9 +45,7 @@ public class Data {
         setTitulos();
         setModulos();
         setDias();
-
         setdiseño();
-
         setReportes();
 
 

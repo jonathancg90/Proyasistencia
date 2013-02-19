@@ -813,6 +813,7 @@ public class Query extends ConexionBd{
                 pt  = conexion.prepareStatement(qs);
                 pt.executeUpdate();
                 pt.close();
+                System.out.append("sE CREO");
                 closeConexion();
             } catch(Exception e) {
                 destroid_report();

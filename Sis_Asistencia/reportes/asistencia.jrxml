@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="asistencia" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="0629ab5b-e5b3-4a5b-830a-5b73ebe8d19d">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[select * from report]]>
+	</queryString>
+	<field name="fecha" class="java.lang.String"/>
+	<field name="ingreso" class="java.lang.String"/>
+	<field name="refrigerio_ing" class="java.lang.String"/>
+	<field name="refrigerio_sal" class="java.lang.String"/>
+	<field name="salida" class="java.lang.String"/>
+	<field name="horas" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="b855a4c9-7fd7-4940-9bf3-18590bb4c52b" x="217" y="34" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[Saravia se la come]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="65" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="24" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="2aa7c377-40d4-48c6-b6d9-51385e158e0e" x="0" y="4" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[fecha]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="dae732ae-4467-421d-a10b-747660cc9eac" x="100" y="4" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[ingreso]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="143309ef-12d6-4a73-ad54-948d9369092e" x="200" y="4" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[refrigerio_ing]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="aa6ed723-7c0d-4e77-b475-995004a07ca7" x="300" y="4" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[refrigerio_sal]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="7af232ca-c4ea-49c9-b7af-bb0f0202ab73" x="500" y="4" width="55" height="20"/>
+				<textElement/>
+				<text><![CDATA[horas]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="9c6494b3-0c1d-4604-8404-1375ba1f6d6e" x="400" y="4" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[salida]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="30" splitType="Stretch">
+			<textField>
+				<reportElement uuid="387523c4-0f89-4a70-beeb-8047707e6f51" x="0" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{fecha}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="82cc3ea2-183c-46cb-856c-1442726a202d" x="100" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{ingreso}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="903f9466-d230-4db6-9173-9cd6650445c2" x="200" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{refrigerio_ing}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="8dd287d8-5b67-4794-8d3d-c552ad12510b" x="300" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{refrigerio_sal}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="c63c7127-1be5-4bfb-b80b-3a79c0d56f0f" x="500" y="0" width="55" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{horas}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="68824a5d-46e6-44a4-9c7c-2298b3411692" x="400" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{salida}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

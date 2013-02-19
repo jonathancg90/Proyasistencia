@@ -19,6 +19,7 @@ import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.util.JRLoader;
 import net.sf.jasperreports.view.JasperViewer;
 import Utilitarios.ConexionBd;
+import Dao.ConsultaDAO;
 
 public class Ireport  extends  ConexionBd{
     
@@ -30,34 +31,12 @@ public class Ireport  extends  ConexionBd{
     private Map parametro;
     private JasperPrint jasperPrint;
     private JasperViewer jviewer;
-    
+    private ConsultaDAO consul;
     private String idEmp;
 
     public void setargs(String[] args){
         this.args = args;
     }
-/*    
-    public void getConexionIreport() {
-        try{
-            //Obtener numero IP del servidor
-            hp = new Helpers();
-            File algun_archivo = new File("Host.txt");
-            String IP=hp.readFiles(algun_archivo);
-            String user = "postgres";
-            String password = "sp1r4ls4c";
-            String bd = "asistencia"; 
-            String url = "Jdbc:postgresql://"+IP+"/"+bd;
-
-            Class.forName("org.postgresql.Driver"); 
-            conn = DriverManager.getConnection(url,user,password);
-            if (conn != null){
-               System.out.println("Conexion establecida");
-            }
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-    }
- */
     public void SelectReport(int op){
         
         switch(op) {
@@ -69,21 +48,23 @@ public class Ireport  extends  ConexionBd{
 
     public void ReportAsistencia(){
     try{
+        ConsultaDAO consul = new ConsultaDAO();
         getConexion();
         conn = getConetion();
-        File archivo = new  File("reportes/example.jasper");
+        File archivo = new  File("reportes/asistencia.jasper");
+        consul.setTable("registro");
+        consul.findAsistencia(this.args);
+        //crear reporte
         System.out.println("Cargando desde: " + archivo);
         if(archivo == null){
             System.out.println("No se encuentra el archivo.");
             System.exit(2);
-
         }
         JasperReport masterReport= null;
-        try{
+        try {
             masterReport= (JasperReport) JRLoader.loadObject(archivo);
         } catch (JRException e) {
             System.out.println("Error cargando el reporte maestro: " + e.getMessage());
-            System.exit(3);
         }
         //int codigo=Integer.parseInt(id);
 
@@ -92,11 +73,11 @@ public class Ireport  extends  ConexionBd{
         //parametro.put("Fecha_Inicial","");
         //parametro.put("Fecha_Final","");
         //parametro.put("Horario","");
-
         JasperPrint jasperPrint= JasperFillManager.fillReport(masterReport,parametro,conn);
         JasperViewer jviewer= new JasperViewer(jasperPrint,false);
         jviewer.setTitle("Asistencia Personal");
         jviewer.setVisible(true);
+        consul.destroid_report();
         closeConexion();
     } catch (Exception j) {
         System.out.println("Mensaje de Error:"+j);

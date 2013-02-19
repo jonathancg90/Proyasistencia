@@ -10,7 +10,9 @@ import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
 import javax.swing.JFileChooser;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class WinConsulta extends javax.swing.JInternalFrame {
@@ -275,17 +277,18 @@ public class WinConsulta extends javax.swing.JInternalFrame {
             args[0] = Lblidemp.getText();
             args[1] = ChFechaIni.getText();
             args[2] = ChFechaFin.getText();
-            consul.findAsistencia(args, JtblConsulta, lblcant);
+            consul.findAsistencia(args);
+            consul.gettabel(JtblConsulta, lblcant);
+            consul.destroid_report();
             ;break;
         case 1:
             consul.setTable("registro_backlog");
             args[0] = Lblidemp.getText();
             args[1] = ChFechaIni.getText();
             args[2] = ChFechaFin.getText();
-            consul.findAsistencia(args, JtblConsulta, lblcant);
+            consul.findAsistencia(args);
             ;break;
         case 2:
-            
             ;break;
      }
     }//GEN-LAST:event_BtnConsultarActionPerformed
