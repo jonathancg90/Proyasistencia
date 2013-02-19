@@ -2,7 +2,7 @@
 package Gui;
 import java.text.DateFormat;
 import java.util.Calendar;
-
+import Utilitarios.Helpers;
 import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
@@ -20,6 +20,7 @@ public class WinReportes extends javax.swing.JInternalFrame {
     private Ireport rep;
     private DefaultComboBoxModel MChoice;
     private Data dt;
+    private Helpers hp;
     
     public WinReportes() {
         initComponents();
@@ -194,7 +195,7 @@ public class WinReportes extends javax.swing.JInternalFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(43, Short.MAX_VALUE)
+                .addContainerGap(45, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Panel_datos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -215,6 +216,7 @@ public class WinReportes extends javax.swing.JInternalFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
      int op = CmbTipo.getSelectedIndex();
+     hp = new Helpers();
      rep = new Ireport();
      String args[] = new String[3];
      try {
@@ -223,14 +225,18 @@ public class WinReportes extends javax.swing.JInternalFrame {
                 
                 //rep.getConexionIreport();
                 args[0] =  Lblidemp.getText();
-                args[1] =  CmbF_De.getText();
-                args[2] =  CmbF_Hasta.getText();
+                args[1] =  hp.formatFecha(CmbF_De.getText());
+                args[2] =  hp.formatFecha(CmbF_Hasta.getText());
                 rep.setargs(args);
                 rep.SelectReport(1);
              ;break;
          case 2:
-             rep.SelectReport(2);
-             ;break;
+                args[0] =  Lblidemp.getText();
+                args[1] =  hp.formatFecha(CmbF_De.getText());
+                args[2] =  hp.formatFecha(CmbF_Hasta.getText());
+                rep.setargs(args);
+                rep.SelectReport(2);
+                ;break;
         }
      } catch (Exception ex) {
          System.out.println(ex);
