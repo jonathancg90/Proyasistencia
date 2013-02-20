@@ -126,20 +126,10 @@ public class Ireport  extends  ConexionBd{
                 System.out.println("No se encuentra el archivo.");
                 System.exit(2);
 
-            }
-            JasperReport masterReport= null;
-            try{
-                masterReport= (JasperReport) JRLoader.loadObject(archivo);
-            } catch (JRException e) {
-                System.out.println("Error cargando el reporte maestro: " + e.getMessage());
-                System.exit(3);
-            }
-            //int codigo=Integer.parseInt(id);
-
             Map parametro= new HashMap();
-            parametro.put("fin", date.valueOf("2013-02-22"));
-            parametro.put("id", 4);
-            parametro.put("inicio", date.valueOf("2013-02-14"));
+            parametro.put("fin", date.valueOf(args[2]));
+            parametro.put("id", Integer.parseInt(args[0]));
+            parametro.put("inicio", date.valueOf(args[1]));
 
 
             JasperPrint jasperPrint= JasperFillManager.fillReport(masterReport,parametro,conn);
@@ -147,8 +137,9 @@ public class Ireport  extends  ConexionBd{
             jviewer.setTitle("Asistencia Personal");
             jviewer.setVisible(true);
             closeConexion();
+            } 
         } catch (Exception j) {
-            System.out.println("Mensaje de Error:"+j);
-        }
+        System.out.println("Mensaje de Error:"+j);
     }
+}
 }

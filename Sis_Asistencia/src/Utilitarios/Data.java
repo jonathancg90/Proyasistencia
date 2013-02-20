@@ -48,6 +48,7 @@ public class Data {
         setdiseño();
         setReportes();
 
+
     }
     /**
     * Opciones de reportes disponibles.
