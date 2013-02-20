@@ -216,20 +216,25 @@ public class WinReportes extends javax.swing.JInternalFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
      int op = CmbTipo.getSelectedIndex();
      rep = new Ireport();
-     String args[] = new String[3];
+     String args[];
+     args = new String[3];
+     args[0] =  Lblidemp.getText();
+     args[1] =  CmbF_De.getText();
+     args[2] =  CmbF_Hasta.getText();
      try {
          switch(op) {
          case 0:
-                
-                //rep.getConexionIreport();
-                args[0] =  Lblidemp.getText();
-                args[1] =  CmbF_De.getText();
-                args[2] =  CmbF_Hasta.getText();
-                rep.setargs(args);
-                rep.SelectReport(1);
+             //Reporte de asistencia
+             rep.setargs(args);
+             rep.SelectReport(1);
+             ;break;
+         case 1:
+             //Reporte de asistencia log
+             rep.SelectReport(2);
              ;break;
          case 2:
-             rep.SelectReport(2);
+             rep.setargs(args);
+             rep.SelectReport(3);
              ;break;
         }
      } catch (Exception ex) {

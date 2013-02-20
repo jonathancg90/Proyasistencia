@@ -76,10 +76,10 @@ and e.idempr = p.idempr]]>
 		<band height="43" splitType="Stretch">
 			<staticText>
 				<reportElement uuid="b855a4c9-7fd7-4940-9bf3-18590bb4c52b" x="185" y="0" width="165" height="20"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
+				<textElement>
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[Reporte Asistencia]]></text>
+				<text><![CDATA[Reporte Asistencia Interno]]></text>
 			</staticText>
 			<textField>
 				<reportElement uuid="f67b0b81-f9a5-4ac4-92d0-f7fa98fce59c" x="148" y="20" width="242" height="20"/>

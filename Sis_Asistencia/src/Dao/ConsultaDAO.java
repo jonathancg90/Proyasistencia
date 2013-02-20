@@ -186,7 +186,7 @@ public class ConsultaDAO {
             }
             //No existen registros del dia
             if(countReg == false) { 
-                campReg = new String[2];
+                campReg = new String[6];
                 campReg[0]=String.valueOf(fechActual + " (" + dt.G_DIAS[dia] + ")");
                 //Domingo
                 if(dia == 7) {
@@ -227,6 +227,9 @@ public class ConsultaDAO {
                     if(cVal == 0)
                         campReg[1]=String.valueOf("Falto");
                     }
+               for(int i=2;i<campReg.length;i++){
+                   campReg[i]=String.valueOf("");
+               }
             }
             register_report(campReg);
         fechActual = qs.getDay(fechActual, "+");

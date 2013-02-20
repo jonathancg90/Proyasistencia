@@ -42,10 +42,13 @@ public class Ireport  extends  ConexionBd{
         switch(op) {
             case 1:ReportAsistencia(); break;
             case 2:ReportAsistencia_Log(); break;
+            case 3:Justificaciones(); break;
             default:break;
         }
     }
-
+    /*
+     * Reporte de asistencia.
+     */
     public void ReportAsistencia(){
     try{
         ConsultaDAO consul = new ConsultaDAO();
@@ -58,7 +61,6 @@ public class Ireport  extends  ConexionBd{
         System.out.println("Cargando desde: " + archivo);
         if(archivo == null){
             System.out.println("No se encuentra el archivo.");
-            System.exit(2);
         }
         JasperReport masterReport= null;
         try {
@@ -66,13 +68,10 @@ public class Ireport  extends  ConexionBd{
         } catch (JRException e) {
             System.out.println("Error cargando el reporte maestro: " + e.getMessage());
         }
-        //int codigo=Integer.parseInt(id);
-
+        System.out.println("Enviado: "+this.args[0]);
         Map parametro= new HashMap();
-        //parametro.put("idpers","");
-        //parametro.put("Fecha_Inicial","");
-        //parametro.put("Fecha_Final","");
-        //parametro.put("Horario","");
+        parametro.put("idemp",Integer.parseInt(this.args[0]));
+        
         JasperPrint jasperPrint= JasperFillManager.fillReport(masterReport,parametro,conn);
         JasperViewer jviewer= new JasperViewer(jasperPrint,false);
         jviewer.setTitle("Asistencia Personal");
@@ -83,40 +82,73 @@ public class Ireport  extends  ConexionBd{
         System.out.println("Mensaje de Error:"+j);
     }
   }
-    private void ReportAsistencia_Log() {
-        try{
-        Date date = new Date(0000-00-00);    
-        getConexion();
-        conn = getConetion();
-        File archivo = new  File("src/reportes/justificaciones.jasper");
-        System.out.println("Cargando desde: " + archivo);
-        if(archivo == null){
-            System.out.println("No se encuentra el archivo.");
-            System.exit(2);
+  /*
+  * Reporte de asistencia Log.
+  */
+  private void ReportAsistencia_Log() {
+        try{   
+            getConexion();
+            conn = getConetion();
+            File archivo = new  File("src/reportes/asistencia_log.jasper");
+            System.out.println("Cargando desde: " + archivo);
+            if(archivo == null){
+                System.out.println("No se encuentra el archivo.");
+                System.exit(2);
+            }
+            JasperReport masterReport= null;
+            try{
+                masterReport= (JasperReport) JRLoader.loadObject(archivo);
+            } catch (JRException e) {
+                System.out.println("Error cargando el reporte maestro: " + e.getMessage());
+                System.exit(3);
+            }
+            Map parametro= new HashMap();
+            parametro.put("idemp",Integer.parseInt(this.args[0]));
 
-        }
-        JasperReport masterReport= null;
-        try{
-            masterReport= (JasperReport) JRLoader.loadObject(archivo);
-        } catch (JRException e) {
-            System.out.println("Error cargando el reporte maestro: " + e.getMessage());
-            System.exit(3);
-        }
-        //int codigo=Integer.parseInt(id);
 
-        Map parametro= new HashMap();
-        parametro.put("fin", date.valueOf("2013-02-22"));
-        parametro.put("id", 4);
-        parametro.put("inicio", date.valueOf("2013-02-14"));
-        
-        
-        JasperPrint jasperPrint= JasperFillManager.fillReport(masterReport,parametro,conn);
-        JasperViewer jviewer= new JasperViewer(jasperPrint,false);
-        jviewer.setTitle("Asistencia Personal");
-        jviewer.setVisible(true);
-        closeConexion();
-    } catch (Exception j) {
-        System.out.println("Mensaje de Error:"+j);
+            JasperPrint jasperPrint= JasperFillManager.fillReport(masterReport,parametro,conn);
+            JasperViewer jviewer= new JasperViewer(jasperPrint,false);
+            jviewer.setTitle("Asistencia Personal");
+            jviewer.setVisible(true);
+            closeConexion();
+        } catch (Exception j) {
+            System.out.println("Mensaje de Error:"+j);
+        }
     }
+    private void Justificaciones() {
+        try{
+            Date date = new Date(0000-00-00);    
+            getConexion();
+            conn = getConetion();
+            File archivo = new  File("src/reportes/justificaciones.jasper");
+            System.out.println("Cargando desde: " + archivo);
+            if(archivo == null){
+                System.out.println("No se encuentra el archivo.");
+                System.exit(2);
+
+            }
+            JasperReport masterReport= null;
+            try{
+                masterReport= (JasperReport) JRLoader.loadObject(archivo);
+            } catch (JRException e) {
+                System.out.println("Error cargando el reporte maestro: " + e.getMessage());
+                System.exit(3);
+            }
+            //int codigo=Integer.parseInt(id);
+
+            Map parametro= new HashMap();
+            parametro.put("fin", date.valueOf("2013-02-22"));
+            parametro.put("id", 4);
+            parametro.put("inicio", date.valueOf("2013-02-14"));
+
+
+            JasperPrint jasperPrint= JasperFillManager.fillReport(masterReport,parametro,conn);
+            JasperViewer jviewer= new JasperViewer(jasperPrint,false);
+            jviewer.setTitle("Asistencia Personal");
+            jviewer.setVisible(true);
+            closeConexion();
+        } catch (Exception j) {
+            System.out.println("Mensaje de Error:"+j);
+        }
     }
 }
