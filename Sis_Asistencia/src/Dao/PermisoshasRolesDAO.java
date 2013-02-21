@@ -99,7 +99,7 @@ public class PermisoshasRolesDAO extends ConexionBd{
             
             objPerol.setIdrol(rol);
             objPerol.setModulos_idmod(modulo);
-            String sqlDelete = "delete from  "+Table+" where  idrol=? and modulos_idmod=?";
+            String sqlDelete = "delete from  "+Table+" where  idrol=? and idmod=?";
             pt  = conexion.prepareStatement(sqlDelete);
             pt.setInt(1,objPerol.getIdrol());
             pt.setInt(2,objPerol.getModulos_idmod());

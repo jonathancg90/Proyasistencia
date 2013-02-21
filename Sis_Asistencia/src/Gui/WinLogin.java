@@ -35,7 +35,6 @@ public class WinLogin extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         txtusername = new javax.swing.JTextField();
         txtpassword = new javax.swing.JPasswordField();
@@ -46,13 +45,6 @@ public class WinLogin extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jButton1.setText("Entrar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Login "));
 
@@ -125,9 +117,7 @@ public class WinLogin extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addComponent(jButton1)
-                .addGap(18, 18, 18)
+                .addGap(98, 98, 98)
                 .addComponent(jLabel4)
                 .addGap(39, 39, 39)
                 .addComponent(jLabel3)
@@ -145,8 +135,7 @@ public class WinLogin extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jLabel3)
-                    .addComponent(jButton1))
+                    .addComponent(jLabel3))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -165,7 +154,7 @@ public class WinLogin extends javax.swing.JFrame {
             int iduser = Integer.parseInt(qs.idChoice("usuario", "username", user));;
             objmdi.setUser(iduser);
             objmdi.show();
-            objmdi.setLocation(250, 250);
+            objmdi.setLocationRelativeTo(null);
             this.dispose();
             limpiar();
         }
@@ -179,16 +168,6 @@ public class WinLogin extends javax.swing.JFrame {
         }
         }
     }//GEN-LAST:event_btningresarActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        int iduser = 0;
-        WinMdi objmdi=new WinMdi();
-        objmdi.setUser(iduser);
-        objmdi.show();
-        objmdi.setLocationRelativeTo(null);
-        this.dispose();
-        limpiar();
-    }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jLabel3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MousePressed
         int i;
@@ -218,7 +197,6 @@ public class WinLogin extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btningresar;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

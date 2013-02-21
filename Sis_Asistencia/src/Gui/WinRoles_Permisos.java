@@ -215,11 +215,10 @@ public class WinRoles_Permisos extends javax.swing.JInternalFrame {
             try {
                 DefaultTableModel m = new DefaultTableModel();
                 m = (DefaultTableModel) this.Jtablepermi.getModel();
-                int idmod = Integer.parseInt((String.valueOf(m.getValueAt(fsel, 0))));
+                String modulo = (String.valueOf(m.getValueAt(fsel, 0)));
                 int idrol = Integer.parseInt(lblidrol.getText());
-                //idmod = qs.idChoice("modulos","nombre",String.valueOf(CboModulo.getSelectedItem()));
-                objPerol.delete(idrol,idmod);
-                objPerol.getTableAll(Jtablepermi, lblcant);
+                int id_mod = Integer.parseInt(qs.idChoice("modulos","nombre",modulo));
+                objPerol.delete(idrol,id_mod);
             }
             catch(Exception e){
                 System.out.println("Error producido en seleccion de modulo" + e);

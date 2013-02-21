@@ -15,7 +15,7 @@ public class Horarios {
 
     public Horarios(int idhora, String nombre, int tipo, boolean estado, String created, String modified) {
         this.idhora = idhora;
-        this.nombre = nombre;
+        this.nombre = nombre.toUpperCase();
         this.tipo = tipo;
         this.estado = estado;
         this.created = created;
@@ -47,7 +47,7 @@ public class Horarios {
      * @param nombre the nombre to set
      */
     public void setNombre(String nombre) {
-        this.nombre = nombre;
+        this.nombre = nombre.toUpperCase();
     }
 
     /**

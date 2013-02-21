@@ -382,14 +382,13 @@ public class WinUsuario extends javax.swing.JInternalFrame {
         //objUser = new UserDAO ();
         val = new Validators("usuario");    
         Object[] datos = {txtUsername.getText(),txtPassword.getPassword(),Txtcorreo.getText(),lblUsu.getText()};
-        Object[] tipos = {3,4,9};
+        Object[] tipos = {3,4,9,0};
         if(val.validar(datos,tipos)){     
             dt = new Data();
             int id = Integer.parseInt(lblUsu.getText());
             String username = txtUsername.getText();
             //String password=objUser.encriptar(String.valueOf(txtPassword.getPassword()).toLowerCase());
             String nomemp = String.valueOf(cboEmp.getSelectedItem());
-
             qs = new Query();
             int idemp = Integer.parseInt(qs.idChoice("empleado","nombres", nomemp));
             int idState = dt.getEstado(String.valueOf(cboEstado.getSelectedItem()));
