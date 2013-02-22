@@ -52,7 +52,7 @@ public class Validators {
         args[0] = "permisos_has_roles";
         args[1] = "idrol";
         args[2] = ""+rol;
-        args[3] = "modulos_idmod";
+        args[3] = "idmod";
         args[4] = ""+mod;
         
         

@@ -21,7 +21,7 @@ public class Data {
     public String G_TIPOEXTRA[] = new String[2];
     public String G_MODULOS[] = new String[7];
     public String G_DISEÑOS[] = new String[13];
-    public String G_REPORTES[] = new String[3];
+    public String G_REPORTES[] = new String[5];
     /**
     * Inicializacion de datos.
     */
@@ -57,6 +57,8 @@ public class Data {
         G_REPORTES[0]="Asistencia Personal";
         G_REPORTES[1]="Asistencia Personal(Interna)";
         G_REPORTES[2]="Justificaciones";
+        G_REPORTES[3]="Resumen";
+        G_REPORTES[4]="Justificaciones (Estadistico)";
     }
     /**
     * Tipos de registro(tabla: detalle horario).

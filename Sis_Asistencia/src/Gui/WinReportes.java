@@ -231,16 +231,28 @@ public class WinReportes extends javax.swing.JInternalFrame {
              rep.SelectReport(1);
              ;break;
          case 1:
-             //Reporte de asistencia log
+             //Log de asistencia
+             rep.setargs(args);
              rep.SelectReport(2);
              ;break;
          case 2:
-                args[0] =  Lblidemp.getText();
-                args[1] =  hp.formatFecha(CmbF_De.getText());
-                args[2] =  hp.formatFecha(CmbF_Hasta.getText());
-                rep.setargs(args);
-                rep.SelectReport(2);
-                ;break;
+             //Justifiaciones
+             rep.setargs(args);
+             rep.SelectReport(2);
+             ;break;
+         case 3:
+             //Resumen
+             rep.setargs(args);
+             rep.SelectReport(2);
+             ;break;
+         case 4:
+              //Justificaciones estadistico  
+              args[0] =  Lblidemp.getText();
+              args[1] =  hp.formatFecha(CmbF_De.getText());
+              args[2] =  hp.formatFecha(CmbF_Hasta.getText());
+              rep.setargs(args);
+              rep.SelectReport(2);
+              ;break;
         }
      } catch (Exception ex) {
          System.out.println(ex);

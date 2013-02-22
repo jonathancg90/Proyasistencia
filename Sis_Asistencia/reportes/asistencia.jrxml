@@ -129,7 +129,7 @@ and e.idempr = p.idempr]]>
 		</band>
 	</pageHeader>
 	<detail>
-		<band height="75" splitType="Stretch">
+		<band height="63" splitType="Stretch">
 			<componentElement>
 				<reportElement uuid="43d9cd6f-b663-42d4-bd07-199a6d0e4a5d" key="table 1" style="table 1" x="0" y="0" width="555" height="50"/>
 				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
@@ -165,7 +165,7 @@ and e.idempr = p.idempr]]>
 							</staticText>
 						</jr:columnHeader>
 						<jr:detailCell style="table 1_TD" height="20" rowSpan="1">
-							<textField>
+							<textField isBlankWhenNull="true">
 								<reportElement uuid="31742f40-aefd-4391-8323-c6547ff415f0" x="0" y="0" width="88" height="20"/>
 								<textElement/>
 								<textFieldExpression><![CDATA[$F{ingreso}]]></textFieldExpression>
@@ -183,7 +183,7 @@ and e.idempr = p.idempr]]>
 							</staticText>
 						</jr:columnHeader>
 						<jr:detailCell style="table 1_TD" height="20" rowSpan="1">
-							<textField>
+							<textField isBlankWhenNull="true">
 								<reportElement uuid="5bd17eac-df06-40fc-aeb1-2c75a65015e5" x="0" y="0" width="90" height="20"/>
 								<textElement/>
 								<textFieldExpression><![CDATA[$F{refrigerio_ing}]]></textFieldExpression>
@@ -201,7 +201,7 @@ and e.idempr = p.idempr]]>
 							</staticText>
 						</jr:columnHeader>
 						<jr:detailCell style="table 1_TD" height="20" rowSpan="1">
-							<textField>
+							<textField isBlankWhenNull="true">
 								<reportElement uuid="dc68db2b-e072-41db-9070-c46c793a2a16" x="0" y="0" width="90" height="20"/>
 								<textElement/>
 								<textFieldExpression><![CDATA[$F{refrigerio_sal}]]></textFieldExpression>
@@ -219,7 +219,7 @@ and e.idempr = p.idempr]]>
 							</staticText>
 						</jr:columnHeader>
 						<jr:detailCell style="table 1_TD" height="20" rowSpan="1">
-							<textField>
+							<textField isBlankWhenNull="true">
 								<reportElement uuid="dc70e08e-2eba-4762-a71a-c3c7ea792581" x="0" y="0" width="73" height="20"/>
 								<textElement/>
 								<textFieldExpression><![CDATA[$F{salida}]]></textFieldExpression>
@@ -237,7 +237,7 @@ and e.idempr = p.idempr]]>
 							</staticText>
 						</jr:columnHeader>
 						<jr:detailCell style="table 1_TD" height="20" rowSpan="1">
-							<textField>
+							<textField isBlankWhenNull="true">
 								<reportElement uuid="b9e80ccf-7894-4ec5-9f7d-2aa55e01b95a" x="0" y="0" width="73" height="20"/>
 								<textElement/>
 								<textFieldExpression><![CDATA[$F{horas}]]></textFieldExpression>

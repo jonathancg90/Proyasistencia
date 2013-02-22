@@ -7,6 +7,8 @@ import java.util.logging.Logger;
 import javax.swing.*;
 import Utilitarios.Data;
 import Utilitarios.Query;
+import java.awt.Toolkit;
+import java.awt.event.KeyEvent;
 
 
 public class WinLogin extends javax.swing.JFrame {
@@ -29,6 +31,31 @@ public class WinLogin extends javax.swing.JFrame {
         String titulo=dt.G_TITULOS[24];
         this.setTitle(titulo);
     }
+    public void Login() {
+        us = new UserDAO ();
+        qs = new Query();
+        
+        String user=txtusername.getText().toUpperCase();
+        String pas = us.encriptar(txtpassword.getText());
+        us= new UserDAO();
+        if(us.userAuth(user, pas)==true){
+            WinMdi objmdi=new WinMdi();
+            int iduser = Integer.parseInt(qs.idChoice("usuario", "username", user));;
+            objmdi.setUser(iduser);
+            objmdi.show();
+            objmdi.setLocationRelativeTo(null);
+            this.dispose();
+            limpiar();
+        } else {
+            JOptionPane.showMessageDialog(null,"Haz ingresado incorrectamente");
+            limpiar();
+            i++;
+            if(i==3){
+                JOptionPane.showMessageDialog(null, "Te equivocastes 3 veces","Alerta",1);
+                limpiar();this.dispose();
+            }
+        }
+    }
 
     
     @SuppressWarnings("unchecked")
@@ -47,6 +74,12 @@ public class WinLogin extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Login "));
+
+        txtpassword.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtpasswordKeyPressed(evt);
+            }
+        });
 
         jLabel1.setText("Username:");
 
@@ -73,7 +106,7 @@ public class WinLogin extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(txtusername)
                     .addComponent(txtpassword, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
                 .addComponent(btningresar)
                 .addGap(21, 21, 21))
         );
@@ -117,15 +150,17 @@ public class WinLogin extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(98, 98, 98)
-                .addComponent(jLabel4)
-                .addGap(39, 39, 39)
-                .addComponent(jLabel3)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel3)
+                        .addGap(30, 30, 30))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -143,30 +178,7 @@ public class WinLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btningresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btningresarActionPerformed
-        us = new UserDAO ();
-        qs = new Query();
-        
-        String user=txtusername.getText().toUpperCase();
-        String pas = us.encriptar(txtpassword.getText());
-        us= new UserDAO();
-        if(us.userAuth(user, pas)==true){
-            WinMdi objmdi=new WinMdi();
-            int iduser = Integer.parseInt(qs.idChoice("usuario", "username", user));;
-            objmdi.setUser(iduser);
-            objmdi.show();
-            objmdi.setLocationRelativeTo(null);
-            this.dispose();
-            limpiar();
-        }
-        else {
-            JOptionPane.showMessageDialog(null,"Haz ingresado incorrectamente");
-            limpiar();
-            i++;
-            if(i==3){
-                JOptionPane.showMessageDialog(null, "Te equivocastes 3 veces","Alerta",1);
-                limpiar();this.dispose();
-        }
-        }
+        Login();
     }//GEN-LAST:event_btningresarActionPerformed
 
     private void jLabel3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MousePressed
@@ -184,6 +196,12 @@ public class WinLogin extends javax.swing.JFrame {
         objrec.setTitle(titulo);
         objrec.show();
     }//GEN-LAST:event_jLabel4MousePressed
+
+    private void txtpasswordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtpasswordKeyPressed
+    if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+        Login();
+    }
+    }//GEN-LAST:event_txtpasswordKeyPressed
     
     
     public static void main(String args[]) {

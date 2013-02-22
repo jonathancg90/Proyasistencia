@@ -5,6 +5,7 @@ import Utilitarios.Query;
 import javax.swing.table.DefaultTableModel;
 import Utilitarios.Data;
 import java.awt.Image;
+import java.awt.event.KeyEvent;
 import java.io.File;
 import javax.swing.ImageIcon;
 
@@ -127,6 +128,12 @@ public class WinBuscarEmpleado extends javax.swing.JInternalFrame {
         jLabel6.setText("Estado");
 
         jLabel8.setText("Nombres");
+
+        TxtNombres.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                TxtNombresKeyPressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -255,7 +262,7 @@ public class WinBuscarEmpleado extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 354, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 352, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel7)
@@ -335,6 +342,12 @@ public class WinBuscarEmpleado extends javax.swing.JInternalFrame {
             
         }
     }//GEN-LAST:event_TblbuscadorMousePressed
+
+    private void TxtNombresKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtNombresKeyPressed
+     if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+        buscar();
+    }
+    }//GEN-LAST:event_TxtNombresKeyPressed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox CboCargo;

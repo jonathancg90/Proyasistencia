@@ -47,6 +47,7 @@ public class RegistroDAO extends ConexionBd{
     
     public void getTableAll(JTable tblDatos, JLabel lblcant){
         try{
+            System.out.println("entro");
             DefaultTableModel datos;
             qs= new Query();
             hp = new Helpers();
@@ -63,7 +64,6 @@ public class RegistroDAO extends ConexionBd{
         catch(Exception e){
             System.out.println(_error + "getTableAll: "+e);
         }
-    
     }
     
     public int save(int idtip_reg, Time hora, String fecha, int idemp,int op){
@@ -103,7 +103,6 @@ public class RegistroDAO extends ConexionBd{
     
     public int update(int idreg, int idtip_reg, Time hora, String fecha, int idemp){
     int i = 0;
-    
     try {
         Date date = new Date(0000-00-00);
         //Preparando
@@ -159,14 +158,9 @@ public class RegistroDAO extends ConexionBd{
         }
         
     }
-    
-    
     public Registro getValues(int id){
        objRegistro =  new Registro();
-       
         try{
-            
-            
             qs= new Query();
             //Preparando
             String campos[] = new String[8];
@@ -202,6 +196,7 @@ public class RegistroDAO extends ConexionBd{
     public int findRegFecha(String id,String inicio, String fin, JTable tblDatos, JLabel lblcant) {
         int i = 0;
         try {
+            System.out.println("id:"+id);
             if(!"".equals(id)){
                 filter = new String[2][2];
                 filter[0][0] = "int_idemp";
