@@ -64,6 +64,7 @@ public class WinJustificacion extends javax.swing.JInternalFrame {
             qs=new Query();
             qs.loadChoice(cboTipojus,"tipo_justificaciones","nombre");
             Lblidemp.setVisible(false);
+            jLabel5.setVisible(false);
         }
         catch(Exception e) {
             System.out.println("Gui_Asistencia"+ e);
@@ -84,12 +85,9 @@ public class WinJustificacion extends javax.swing.JInternalFrame {
     }
     public void cargarLog() {
         try {
-            System.out.println("1");
             reg = new RegistroDAO();
             hp =  new Helpers();
-            System.out.println("2");
             String fecha=hp.getFormatDate(cboDia.getText());
-            System.out.println("3");
             if (!"".equals(lblID.getText())) {
                reg.findRegFecha(lblID.getText(),fecha, fecha, JtblLog, jLabel5);  
             } else {
