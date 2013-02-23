@@ -84,9 +84,17 @@ public class WinJustificacion extends javax.swing.JInternalFrame {
     }
     public void cargarLog() {
         try {
+            System.out.println("1");
             reg = new RegistroDAO();
+            hp =  new Helpers();
+            System.out.println("2");
             String fecha=hp.getFormatDate(cboDia.getText());
-            reg.findRegFecha(lblID.getText(),fecha, fecha, JtblLog, jLabel5);   
+            System.out.println("3");
+            if (!"".equals(lblID.getText())) {
+               reg.findRegFecha(lblID.getText(),fecha, fecha, JtblLog, jLabel5);  
+            } else {
+                JOptionPane.showMessageDialog(null,"Seleccione un empleado para consultar");
+            }   
         } catch(Exception e) {
             System.out.println(_error + "cargaLog: " + e);
         }
@@ -103,8 +111,6 @@ public class WinJustificacion extends javax.swing.JInternalFrame {
         TxtNum = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -162,12 +168,6 @@ public class WinJustificacion extends javax.swing.JInternalFrame {
         jLabel10.setText("Motivo");
         jPanel5.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, -1, -1));
 
-        jLabel9.setText(":");
-        jPanel5.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(268, 244, 10, -1));
-
-        jLabel8.setText(":");
-        jPanel5.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(176, 249, 10, -1));
-
         jLabel12.setText("Ingreso");
         jPanel5.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 290, -1, -1));
 
@@ -178,7 +178,7 @@ public class WinJustificacion extends javax.swing.JInternalFrame {
         Txtaobservacion.setRows(5);
         jScrollPane3.setViewportView(Txtaobservacion);
 
-        jPanel5.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 170, 530, -1));
+        jPanel5.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 170, 590, -1));
         jPanel5.add(cboDia, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 60, 230, -1));
 
         TimSalida.setDisplayAnalog(false);
@@ -210,7 +210,7 @@ public class WinJustificacion extends javax.swing.JInternalFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 214, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 254, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -221,7 +221,7 @@ public class WinJustificacion extends javax.swing.JInternalFrame {
                 .addContainerGap())
         );
 
-        jPanel5.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 10, 250, 140));
+        jPanel5.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 10, 290, 140));
 
         BtnVer.setText("Ver");
         BtnVer.addActionListener(new java.awt.event.ActionListener() {
@@ -229,9 +229,7 @@ public class WinJustificacion extends javax.swing.JInternalFrame {
                 BtnVerActionPerformed(evt);
             }
         });
-        jPanel5.add(BtnVer, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 60, -1, -1));
-
-        jLabel5.setText("jLabel5");
+        jPanel5.add(BtnVer, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 60, -1, -1));
         jPanel5.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 140, -1, -1));
 
         jTabbedPane1.addTab("Registro", jPanel5);
@@ -307,7 +305,7 @@ public class WinJustificacion extends javax.swing.JInternalFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 648, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 678, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jLabel16)
@@ -321,7 +319,7 @@ public class WinJustificacion extends javax.swing.JInternalFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -332,7 +330,7 @@ public class WinJustificacion extends javax.swing.JInternalFrame {
 
         jTabbedPane1.addTab("Ver", jPanel2);
 
-        getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, 680, 400));
+        getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, 710, 400));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Datos"));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -344,13 +342,13 @@ public class WinJustificacion extends javax.swing.JInternalFrame {
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, -1, -1));
 
         jLabel4.setText("Cargo");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 100, -1, -1));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 100, -1, -1));
 
         lblcargo.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel1.add(lblcargo, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 100, 110, 30));
+        jPanel1.add(lblcargo, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 100, 140, 30));
 
         Lblarea.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel1.add(Lblarea, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 100, 110, 30));
+        jPanel1.add(Lblarea, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 100, 140, 30));
 
         lblID.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel1.add(lblID, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 20, 60, 30));
@@ -359,7 +357,7 @@ public class WinJustificacion extends javax.swing.JInternalFrame {
         jPanel1.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, -1, -1));
 
         lblNomape.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel1.add(lblNomape, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 60, 310, 30));
+        jPanel1.add(lblNomape, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 60, 340, 30));
 
         jLabel17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilitarios/Img/empleado.png"))); // NOI18N
         jLabel17.setText("Buscar");
@@ -368,13 +366,13 @@ public class WinJustificacion extends javax.swing.JInternalFrame {
                 jLabel17MouseClicked(evt);
             }
         });
-        jPanel1.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 60, -1, -1));
+        jPanel1.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 60, -1, -1));
         jPanel1.add(Lblidemp, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 20, -1, -1));
 
         lblFoto.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel1.add(lblFoto, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 20, 100, 100));
+        jPanel1.add(lblFoto, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 20, 110, 100));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 660, 140));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 700, 140));
 
         mfile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilitarios/Img/Archivo.png"))); // NOI18N
         mfile.setText("Archivo");
@@ -634,8 +632,6 @@ public class WinJustificacion extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
