@@ -7,13 +7,7 @@ import java.util.GregorianCalendar;
 import java.util.List;
 
 public class TimeOPeration {
-    
-    public static void main(String[] args){
-         TimeOPeration tm = new TimeOPeration();
-         //tm.sumarTime(hora1, hora2);
-         //xls.CreateXls("empleado.xls");
-         //xls.ExcelTest();
-    }
+
 
     public Time sumarTime(java.sql.Time hora1, java.sql.Time hora2) {
         return operacionTime(hora1, hora2, "+");

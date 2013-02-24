@@ -132,10 +132,10 @@ public class ConsultaDAO {
         conexion = con.getConetion();
         s = conexion.createStatement();
         //Titulos
-        System.out.println("1");
-        System.out.println("table: " + this._Table + "filter: "+filter[0][0]+" - "+filter[0][1]);
+        //System.out.println("1");
+        //System.out.println("table: " + this._Table + "filter: "+filter[0][0]+" - "+filter[0][1]);
         Consulta = qs.getQueryList(camp, this._Table + "/fecha", filter);
-        System.out.println("consulta: "+Consulta);
+        //System.out.println("consulta: "+Consulta);
         rs = s.executeQuery(Consulta);
         ResultSetMetaData meta = rs.getMetaData();
         int nCols = meta.getColumnCount();
@@ -149,7 +149,7 @@ public class ConsultaDAO {
             //Ejecucion de consulta
             filter[1][0] = "bet_fecha_" + fechActual;filter[1][1] = fechActual;
             Consulta = qs.getQueryList(camp, this._Table + "/fecha", filter);
-            System.out.println(Consulta);
+            //System.out.println(Consulta);
             rs = s.executeQuery(Consulta);
             boolean countReg = false;
             //Registro del reporte
@@ -258,13 +258,17 @@ public class ConsultaDAO {
                 Date date_ini = sdf.parse(inicio);
                 Date date_fin = sdf.parse(termino);
                 Date date_ref_ini = sdf.parse(ref_inicio);
+                Date ref = sdf.parse("12:00:00");
                 Date date_ref_fin = sdf.parse(ref_termino);
                 Time hrs_trabajo = tm.restarTime(Time.valueOf(sdf.format(date_ref_ini)),
                         Time.valueOf(sdf.format(date_ini)));
                 Time hrs_refrigerio = tm.restarTime(Time.valueOf(sdf.format(date_fin)),
                         Time.valueOf(sdf.format(date_ref_fin)));
+                System.out.println("trabajo: "+hrs_trabajo+"refrigerio:"+hrs_refrigerio);
                 Time hrs = tm.sumarTime(hrs_trabajo, hrs_refrigerio);
+                hrs = tm.restarTime(hrs, Time.valueOf(sdf.format(ref)));
                 suma = String.valueOf(hrs);
+                System.out.println("Suma: "+suma);
             } 
         } catch(Exception e) {
             System.out.println(_error + "calculoHoras: "+e);
