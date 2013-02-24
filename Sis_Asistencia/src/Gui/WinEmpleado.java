@@ -19,6 +19,7 @@ import javax.swing.ImageIcon;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import jxl.write.WriteException;
 import Appi.ImagePreviewPanel;
+import java.awt.event.KeyEvent;
 
 
 public  class WinEmpleado extends javax.swing.JInternalFrame {
@@ -290,6 +291,12 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
 
         jLabel14.setText("Apellidos");
 
+        TxtApellido.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                TxtApellidoKeyPressed(evt);
+            }
+        });
+
         jLabel15.setText("Estado");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -336,7 +343,7 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
                     .addComponent(jLabel15)
                     .addComponent(CmbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel13)
@@ -899,6 +906,12 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
     private void btnFiltroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFiltroActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnFiltroActionPerformed
+
+    private void TxtApellidoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtApellidoKeyPressed
+       if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+        buscar();
+       }
+    }//GEN-LAST:event_TxtApellidoKeyPressed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox CmbEstado;
