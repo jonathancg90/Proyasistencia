@@ -135,8 +135,8 @@ public class Data {
     private void setDias() {
         G_DIAS[1] = "Lunes";
         G_DIAS[2] = "Martes";
-        G_DIAS[3] = "MIercoles";
-        G_DIAS[4] = "JUeves";
+        G_DIAS[3] = "Miercoles";
+        G_DIAS[4] = "Jueves";
         G_DIAS[5] = "Viernes";
         G_DIAS[6] = "Sabado";
         G_DIAS[7] = "Domingo";

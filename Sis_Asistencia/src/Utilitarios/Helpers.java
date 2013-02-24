@@ -87,6 +87,8 @@ public class Helpers {
         String[] camp;
         switch(op){
             case "G_TIPOREG": camp = dt.G_TIPOREG;break;
+            case "G_TIPOH": camp = dt.G_TIPOH;break;
+            case "G_DIAS": camp = dt.G_DIAS;break;
             default: camp = new String[0];
         }
         

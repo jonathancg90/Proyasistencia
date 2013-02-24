@@ -37,8 +37,8 @@ public class DetailHorarioDAO extends ConexionBd{
         filter = new String[0][0];
         campos = new String[5];
         campos[0]="iddet_hor";
-        campos[1]="dia";
-        campos[2]="idtip_reg";
+        campos[1]="dia%G_DIAS";
+        campos[2]="idtip_reg%G_TIPOH";
         campos[3]="ingreso";
         campos[4]="salida";
         witdhcolum = new int[1];
