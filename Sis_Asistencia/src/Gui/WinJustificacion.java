@@ -114,13 +114,17 @@ public class WinJustificacion extends javax.swing.JInternalFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         Txtaobservacion = new javax.swing.JTextArea();
         cboDia = new datechooser.beans.DateChooserCombo();
-        TimSalida = new com.lavantech.gui.comp.TimePanel();
-        TimIngreso = new com.lavantech.gui.comp.TimePanel();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         JtblLog = new javax.swing.JTable();
         BtnVer = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
+        SpIhour = new javax.swing.JSpinner();
+        SpImin = new javax.swing.JSpinner();
+        cboItiempo = new javax.swing.JComboBox();
+        SpShour = new javax.swing.JSpinner();
+        SpSmin = new javax.swing.JSpinner();
+        cboStiempo = new javax.swing.JComboBox();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         TblJusti = new javax.swing.JTable();
@@ -179,14 +183,6 @@ public class WinJustificacion extends javax.swing.JInternalFrame {
         jPanel5.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 170, 590, -1));
         jPanel5.add(cboDia, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 60, 230, -1));
 
-        TimSalida.setDisplayAnalog(false);
-        TimSalida.setSecDisplayed(false);
-        jPanel5.add(TimSalida, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 270, -1, 70));
-
-        TimIngreso.setDisplayAnalog(false);
-        TimIngreso.setSecDisplayed(false);
-        jPanel5.add(TimIngreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 260, -1, 70));
-
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Log de asistencia"));
 
         JtblLog.setModel(new javax.swing.table.DefaultTableModel(
@@ -214,14 +210,14 @@ public class WinJustificacion extends javax.swing.JInternalFrame {
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(14, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
         jPanel5.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 10, 290, 140));
 
-        BtnVer.setText("Ver");
+        BtnVer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilitarios/Img/consulta.png"))); // NOI18N
         BtnVer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnVerActionPerformed(evt);
@@ -229,6 +225,24 @@ public class WinJustificacion extends javax.swing.JInternalFrame {
         });
         jPanel5.add(BtnVer, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 60, -1, -1));
         jPanel5.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 140, -1, -1));
+
+        SpIhour.setModel(new javax.swing.SpinnerNumberModel(1, 1, 12, 1));
+        jPanel5.add(SpIhour, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 290, -1, -1));
+
+        SpImin.setModel(new javax.swing.SpinnerNumberModel(0, 0, 59, 1));
+        jPanel5.add(SpImin, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 290, -1, -1));
+
+        cboItiempo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "AM", "PM" }));
+        jPanel5.add(cboItiempo, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 290, -1, -1));
+
+        SpShour.setModel(new javax.swing.SpinnerNumberModel(1, 1, 12, 1));
+        jPanel5.add(SpShour, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 290, -1, -1));
+
+        SpSmin.setModel(new javax.swing.SpinnerNumberModel(0, 0, 59, 1));
+        jPanel5.add(SpSmin, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 290, -1, -1));
+
+        cboStiempo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "AM", "PM" }));
+        jPanel5.add(cboStiempo, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 290, -1, -1));
 
         jTabbedPane1.addTab("Registro", jPanel5);
 
@@ -287,7 +301,7 @@ public class WinJustificacion extends javax.swing.JInternalFrame {
                     .addComponent(jLabel15))
                 .addGap(0, 8, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
-                .addContainerGap(20, Short.MAX_VALUE)
+                .addContainerGap(22, Short.MAX_VALUE)
                 .addComponent(btnDateSearch)
                 .addGap(20, 20, 20))
         );
@@ -551,8 +565,8 @@ public class WinJustificacion extends javax.swing.JInternalFrame {
             objjusti = new justificacionesDAO();
             
             SimpleDateFormat fhora = new SimpleDateFormat("HH:mm:ss");
-            Calendar ingreso = TimIngreso.getCalendar();
-            Calendar salida = TimSalida.getCalendar();
+            Calendar ingreso = hp.getCalendar(SpIhour,SpImin,cboItiempo);
+            Calendar salida = hp.getCalendar(SpShour,SpSmin,cboStiempo);
             String motivo = Txtaobservacion.getText();
             String recivo = TxtNum.getText();
 
@@ -605,15 +619,19 @@ public class WinJustificacion extends javax.swing.JInternalFrame {
     private javax.swing.JTable JtblLog;
     public static final javax.swing.JLabel Lblarea = new javax.swing.JLabel();
     public static final javax.swing.JLabel Lblidemp = new javax.swing.JLabel();
+    private javax.swing.JSpinner SpIhour;
+    private javax.swing.JSpinner SpImin;
+    private javax.swing.JSpinner SpShour;
+    private javax.swing.JSpinner SpSmin;
     private javax.swing.JTable TblJusti;
-    private com.lavantech.gui.comp.TimePanel TimIngreso;
-    private com.lavantech.gui.comp.TimePanel TimSalida;
     private javax.swing.JTextField TxtNum;
     private javax.swing.JTextArea Txtaobservacion;
     private javax.swing.JButton btnDateSearch;
     private datechooser.beans.DateChooserCombo cboDia;
     private datechooser.beans.DateChooserCombo cboFin;
     private datechooser.beans.DateChooserCombo cboIni;
+    private javax.swing.JComboBox cboItiempo;
+    private javax.swing.JComboBox cboStiempo;
     private javax.swing.JComboBox cboTipojus;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;

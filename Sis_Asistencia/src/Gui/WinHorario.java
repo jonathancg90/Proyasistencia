@@ -14,6 +14,7 @@ import Utilitarios.Query;
 import Utilitarios.Validators;
 import Utilitarios.Helpers;
 import java.io.File;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import javax.swing.JFileChooser;
@@ -72,9 +73,10 @@ public class WinHorario extends javax.swing.JInternalFrame {
         txtnombre.setText("");
         lblModified.setText("");
     }
-    private boolean HoraValidator_Delete(){
+    private boolean HoraValidator_Delete() throws ParseException{
         boolean Validator= true;
         val = new Validators();
+        hp = new Helpers();
         String[] args = new String[3];
         String[] kargs = new String[5];
         String[] Wargs = new String[7];
@@ -113,10 +115,10 @@ public class WinHorario extends javax.swing.JInternalFrame {
                return Validator;
             }
         }
-        if(Validator){
+        if(Validator) {
             SimpleDateFormat fhora = new SimpleDateFormat("HH:mm:ss");
-            Calendar ingreso = TimIngreso.getCalendar();
-            Calendar salida = TimSalida.getCalendar();
+            Calendar ingreso = hp.getCalendar(SpIhour,SpImin,cboItiempo);
+            Calendar salida = hp.getCalendar(SpShour,SpSmin,cboStiempo);
             Time ing =  Time.valueOf(fhora.format(ingreso.getTime()));
             Time sal =  Time.valueOf(fhora.format(salida.getTime()));
             Validator = val.horaMayor(sal, ing);
@@ -165,10 +167,14 @@ public class WinHorario extends javax.swing.JInternalFrame {
         cboDia = new javax.swing.JComboBox();
         jLabel11 = new javax.swing.JLabel();
         cbotipoReg = new javax.swing.JComboBox();
-        TimSalida = new com.lavantech.gui.comp.TimePanel();
-        TimIngreso = new com.lavantech.gui.comp.TimePanel();
         lblcant1 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
+        SpIhour = new javax.swing.JSpinner();
+        SpImin = new javax.swing.JSpinner();
+        SpShour = new javax.swing.JSpinner();
+        SpSmin = new javax.swing.JSpinner();
+        cboItiempo = new javax.swing.JComboBox();
+        cboStiempo = new javax.swing.JComboBox();
         jMenuBar1 = new javax.swing.JMenuBar();
         mfile = new javax.swing.JMenu();
         mitemregister = new javax.swing.JMenuItem();
@@ -247,7 +253,7 @@ public class WinHorario extends javax.swing.JInternalFrame {
                     .addComponent(jLabel1)
                     .addComponent(btnfind))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 389, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 391, Short.MAX_VALUE)
                 .addGap(17, 17, 17)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -300,6 +306,7 @@ public class WinHorario extends javax.swing.JInternalFrame {
         ));
         jScrollPane2.setViewportView(JtblDetail);
 
+        BtnAgree.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilitarios/Img/registrar.png"))); // NOI18N
         BtnAgree.setText("Registrar");
         BtnAgree.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -307,6 +314,7 @@ public class WinHorario extends javax.swing.JInternalFrame {
             }
         });
 
+        BtnRemove.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilitarios/Img/eliminar.png"))); // NOI18N
         BtnRemove.setText("Eliminar");
         BtnRemove.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -322,15 +330,21 @@ public class WinHorario extends javax.swing.JInternalFrame {
 
         jLabel11.setText("Tipo");
 
-        TimSalida.setDisplayAnalog(false);
-        TimSalida.setSecDisplayed(false);
-
-        TimIngreso.setDisplayAnalog(false);
-        TimIngreso.setSecDisplayed(false);
-
         lblcant1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jLabel13.setText("Total: ");
+
+        SpIhour.setModel(new javax.swing.SpinnerNumberModel(1, 1, 12, 1));
+
+        SpImin.setModel(new javax.swing.SpinnerNumberModel(0, 0, 59, 1));
+
+        SpShour.setModel(new javax.swing.SpinnerNumberModel(1, 1, 12, 1));
+
+        SpSmin.setModel(new javax.swing.SpinnerNumberModel(0, 0, 59, 1));
+
+        cboItiempo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "AM", "PM" }));
+
+        cboStiempo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "AM", "PM" }));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -339,42 +353,47 @@ public class WinHorario extends javax.swing.JInternalFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel11)
+                    .addComponent(jLabel8)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(BtnAgree)
-                        .addGap(37, 37, 37)
-                        .addComponent(BtnRemove)
+                        .addGap(2, 2, 2)
+                        .addComponent(jLabel9))
+                    .addComponent(jLabel10))
+                .addGap(66, 66, 66)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(cbotipoReg, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(2, 2, 2)
-                                .addComponent(jLabel9))
-                            .addComponent(jLabel10))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(TimSalida, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(TimIngreso, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap())
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel11)
-                            .addComponent(jLabel8))
-                        .addGap(90, 90, 90)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(SpIhour, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(SpImin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cboItiempo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(cboDia, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(cboDia, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(cbotipoReg, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))))))
+                                .addComponent(SpShour, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(SpSmin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cboStiempo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(40, 40, 40)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel13)
                         .addGap(17, 17, 17)
-                        .addComponent(lblcant1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(12, 12, 12)
+                                .addComponent(BtnAgree)
+                                .addGap(37, 37, 37)
+                                .addComponent(BtnRemove))
+                            .addComponent(lblcant1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(22, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -388,20 +407,20 @@ public class WinHorario extends javax.swing.JInternalFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel11)
                     .addComponent(cbotipoReg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(1, 1, 1)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(TimIngreso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(33, 33, 33)
-                        .addComponent(jLabel9)))
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(33, 33, 33)
-                        .addComponent(jLabel10))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(TimSalida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
+                .addGap(29, 29, 29)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(SpIhour, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(SpImin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cboItiempo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(32, 32, 32)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel10)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(SpShour, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(SpSmin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cboStiempo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(34, 34, 34)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -653,7 +672,8 @@ public class WinHorario extends javax.swing.JInternalFrame {
     private void BtnAgreeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAgreeActionPerformed
     try{
         int id = Integer.parseInt(lblId.getText());
-        val = new Validators("horarios");    
+        val = new Validators("horarios");
+        hp = new Helpers();
         Object[] datos = {lblId.getText()};
         Object[] tipos={};
         if(val.validar(datos,tipos)){ //Validacion generica
@@ -664,8 +684,8 @@ public class WinHorario extends javax.swing.JInternalFrame {
                 SimpleDateFormat fhora = new SimpleDateFormat("HH:mm:ss");
                 int dia  = qs.loadGlobal(2,cboDia,0);
                 int tipo = qs.loadGlobal(3,cbotipoReg,0);
-                Calendar ingreso = TimIngreso.getCalendar();
-                Calendar salida = TimSalida.getCalendar();
+                Calendar ingreso = hp.getCalendar(SpIhour,SpImin,cboItiempo);
+                Calendar salida = hp.getCalendar(SpShour,SpSmin,cboStiempo);
                 Time ing =  Time.valueOf(fhora.format(ingreso.getTime()));
                 Time sal =  Time.valueOf(fhora.format(salida.getTime()));
 
@@ -764,10 +784,14 @@ public class WinHorario extends javax.swing.JInternalFrame {
     private javax.swing.JCheckBox Chkinactivo;
     private javax.swing.JMenuItem ItemExportar;
     private javax.swing.JTable JtblDetail;
-    private com.lavantech.gui.comp.TimePanel TimIngreso;
-    private com.lavantech.gui.comp.TimePanel TimSalida;
+    private javax.swing.JSpinner SpIhour;
+    private javax.swing.JSpinner SpImin;
+    private javax.swing.JSpinner SpShour;
+    private javax.swing.JSpinner SpSmin;
     private javax.swing.JButton btnfind;
     private javax.swing.JComboBox cboDia;
+    private javax.swing.JComboBox cboItiempo;
+    private javax.swing.JComboBox cboStiempo;
     private javax.swing.JComboBox cboestado;
     private javax.swing.JComboBox cbofindtipo;
     private javax.swing.JComboBox cbotipo;

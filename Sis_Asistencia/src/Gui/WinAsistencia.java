@@ -1068,7 +1068,6 @@ public class WinAsistencia extends javax.swing.JInternalFrame {
                 SimpleDateFormat fhora = new SimpleDateFormat("HH:mm:ss");
                 Calendar ingreso = hp.getCalendar(Sphour,Spmin,Cbotiempo);
                 Time ing =  Time.valueOf(fhora.format(ingreso.getTime()));
-                System.out.println("Conversion: "+ing);
                 String fecha;
                 //Validacion propia del evento
                 if(asistenciaValidator(ing)){
