@@ -5,8 +5,16 @@ import java.io.*;
 import java.util.Calendar;
 import javax.swing.JTable;
 import Utilitarios.Data;
+import java.sql.SQLException;
+import java.sql.Time;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import javax.swing.JComboBox;
+import javax.swing.JSpinner;
+import jxl.read.biff.BiffException;
+import jxl.write.WriteException;
 
 /**
 * Clase para facilitar procesos externos del sistema
@@ -91,6 +99,32 @@ public class Helpers {
         temp = fecha.split("-");
         fechFormato = temp[2] + "-" + temp[1] + "-" + temp[0];
         return fechFormato;
+    }
+    /*
+     * Conversion de spiner a calendar
+    */
+    public Calendar getCalendar(JSpinner hora, JSpinner min, JComboBox tiempo) throws ParseException {
+        Calendar cal = Calendar.getInstance();
+        
+        int i_hora = Integer.parseInt(hora.getValue().toString());
+        int i_min = Integer.parseInt(min.getValue().toString());
+        String S_tiempo = tiempo.getSelectedItem().toString();
+        
+        cal.set(Calendar.AM_PM,Calendar.AM);
+        
+        System.out.println("hora: "+i_hora);
+        System.out.println("min: "+i_min);
+        System.out.println("tiempo: "+S_tiempo);
+        if("PM".equals(S_tiempo)) {
+            i_hora = i_hora + 12;
+            if (i_hora == 12) {
+                i_hora = 24;
+            }
+        }
+       
+        cal.set(1, 1, 1, i_hora, i_min, 0);
+        
+        return cal;
     }
 //Ingreso dos horas me devuelve la diferencua entre las horas
 //Ingreso empleado, dia me devuelve su horario de ese dia (entradas salidas)            

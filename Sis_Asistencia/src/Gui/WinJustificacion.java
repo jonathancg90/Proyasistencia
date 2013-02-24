@@ -555,7 +555,7 @@ public class WinJustificacion extends javax.swing.JInternalFrame {
             Calendar salida = TimSalida.getCalendar();
             String motivo = Txtaobservacion.getText();
             String recivo = TxtNum.getText();
-            
+
             Time ing =  Time.valueOf(fhora.format(ingreso.getTime()));
             Time sal =  Time.valueOf(fhora.format(salida.getTime()));
             //System.out.println("Resta de horas: "+sal + " - " +ing+" : "+tm.restarTime(ing,sal));
