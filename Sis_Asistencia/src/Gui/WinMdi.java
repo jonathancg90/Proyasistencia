@@ -3,6 +3,7 @@ package Gui;
 import Utilitarios.Validators;
 import Utilitarios.Data;
 import javax.swing.*;
+import Utilitarios.ImagenFondo;
 
 public class WinMdi extends javax.swing.JFrame {
     Validators val;
@@ -25,7 +26,7 @@ public class WinMdi extends javax.swing.JFrame {
         data= new Data();
         String titulo=data.G_TITULOS[25];
         this.setTitle(titulo);
-
+        jdpContenedor.setBorder(new ImagenFondo());
     }
     
     
