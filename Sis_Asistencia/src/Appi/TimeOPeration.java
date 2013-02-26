@@ -99,5 +99,57 @@ public class TimeOPeration {
 
         return auxReturn;
     }
+    
+    public String SumaHoras(String ini, String fin) {
+        String suma = "00:00";
+        try {
+            String[] tiempo_i,tiempo_f;
+            
+            double Horas=0;
+            double DblSumHora=0;
+            
+            tiempo_i = ini.split(":");
+            tiempo_f = fin.split(":");
+
+            double  h_ini =Double.valueOf(tiempo_i[0]+"."+tiempo_i[1]);
+            double  h_fin =Double.valueOf(tiempo_f[0]+"."+tiempo_f[1]);
+            
+            //System.out.println("h_ini: "+h_ini+" h_fin: "+h_fin);
+
+            double HoraS = (int) h_ini;
+            double HoraE = (int) h_fin;
+
+            //System.out.println("HoraS: "+HoraS+" HoraE: "+HoraE);
+            
+            double MinS= redondear((h_ini-HoraS), 2)*100;
+            double MinE= redondear(h_fin-HoraE,2)*100;
+            
+            //System.out.println("MinS: "+MinS+" MinE: "+MinE);
+
+            HoraS=(HoraS*60)+MinS;
+            HoraE=(HoraE*60)+MinE;
+
+            //System.out.println("HoraS: "+HoraS+" HoraE: "+HoraE);
+            
+            Horas=redondear(HoraS+HoraE,2);
+
+            DblSumHora=DblSumHora+Horas;
+
+            //System.out.println("DblSumHora: "+DblSumHora);
+            
+            //Transformando a horas
+            DblSumHora=(int) (DblSumHora/60)+((DblSumHora%60)/100);
+            DblSumHora=redondear(DblSumHora, 2);
+            suma=String.valueOf(DblSumHora);
+            suma=suma.replace(".",":");
+        } catch(Exception e) {
+            System.out.println("Error en la suma de horas : "+ini+" + "+fin+" - "+e );
+        }
+        
+        return suma;
+    }
+    public double redondear( double numero, int decimales )  {
+        return Math.round(numero*Math.pow(10,decimales))/Math.pow(10,decimales);
+    }
 
 }

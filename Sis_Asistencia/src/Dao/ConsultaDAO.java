@@ -109,7 +109,7 @@ public class ConsultaDAO {
         }
     }
     public void destroid_report() {
-        qs.destroid_report();
+        //qs.destroid_report();
     }
     public void gettabel(JTable tblDatos, JLabel lblcant) {
         getTableAll(tblDatos,lblcant);
@@ -144,6 +144,7 @@ public class ConsultaDAO {
         fechFinal = qs.getDay(fechFinal, "+");
         String fechActual = fechInicio;
         int dia = 0;
+        String Total="00:00";
         do {
             ind = 0;
             //Ejecucion de consulta
@@ -183,6 +184,7 @@ public class ConsultaDAO {
                 } else if(ind == 5){
                     campReg[5] = calculoHoras(campReg, 4);
                 }
+                Total = tm.SumaHoras(String.valueOf(Total), String.valueOf(campReg[5]));
             }
             //No existen registros del dia
             if(countReg == false) { 
@@ -234,6 +236,14 @@ public class ConsultaDAO {
             register_report(campReg);
         fechActual = qs.getDay(fechActual, "+");
         } while(!fechActual.equals(fechFinal));
+         String[] campReg = new String[6];
+         campReg[0] = "";
+         campReg[1] = "";
+         campReg[2] = "";
+         campReg[3] = "";
+         campReg[4] = "Total";
+         campReg[5] = Total;
+        register_report(campReg);
     }
         
     public String calculoHoras(String[] args, int op){
@@ -258,16 +268,18 @@ public class ConsultaDAO {
                 Date date_ini = sdf.parse(inicio);
                 Date date_fin = sdf.parse(termino);
                 Date date_ref_ini = sdf.parse(ref_inicio);
-                Date ref = sdf.parse("12:00:00");
+                //Date ref = sdf.parse("12:00:00");
                 Date date_ref_fin = sdf.parse(ref_termino);
                 Time hrs_trabajo = tm.restarTime(Time.valueOf(sdf.format(date_ref_ini)),
                         Time.valueOf(sdf.format(date_ini)));
                 Time hrs_refrigerio = tm.restarTime(Time.valueOf(sdf.format(date_fin)),
                         Time.valueOf(sdf.format(date_ref_fin)));
-                System.out.println("trabajo: "+hrs_trabajo+"refrigerio:"+hrs_refrigerio);
-                Time hrs = tm.sumarTime(hrs_trabajo, hrs_refrigerio);
-                hrs = tm.restarTime(hrs, Time.valueOf(sdf.format(ref)));
-                suma = String.valueOf(hrs);
+                System.out.println("trabajo: "+hrs_trabajo+" refrigerio: "+hrs_refrigerio);
+                //Time hrs = tm.sumarTime(hrs_trabajo, hrs_refrigerio);
+                //hrs = tm.restarTime(hrs, Time.valueOf(sdf.format(ref)));
+                //suma = String.valueOf(hrs);
+                suma = tm.SumaHoras(String.valueOf(hrs_trabajo), String.valueOf(hrs_refrigerio));
+                
                 System.out.println("Suma: "+suma);
             } 
         } catch(Exception e) {
