@@ -221,8 +221,8 @@ public class WinReportes extends javax.swing.JInternalFrame {
      String args[];
      args = new String[3];
      args[0] =  Lblidemp.getText();
-     args[1] =  CmbF_De.getText();
-     args[2] =  CmbF_Hasta.getText();
+     args[1] =  hp.formatFecha(CmbF_De.getText());
+     args[2] =  hp.formatFecha(CmbF_Hasta.getText());
      try {
          switch(op) {
          case 0:
@@ -247,12 +247,10 @@ public class WinReportes extends javax.swing.JInternalFrame {
              ;break;
          case 4:
               //Justificaciones estadistico  
-              args[0] =  Lblidemp.getText();
-              args[1] =  hp.formatFecha(CmbF_De.getText());
-              args[2] =  hp.formatFecha(CmbF_Hasta.getText());
+              
               rep.setargs(args);
-              rep.SelectReport(2);
-              ;break;
+              rep.SelectReport(5);
+              break;
         }
      } catch (Exception ex) {
          System.out.println(ex);

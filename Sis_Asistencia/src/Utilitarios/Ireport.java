@@ -125,24 +125,28 @@ public class Ireport  extends  ConexionBd{
             Date date = new Date(0000-00-00);    
             getConexion();
             conn = getConetion();
-            File archivo = new  File("src/reportes/justificaciones.jasper");
+            File archivo = new  File("reportes/justificaciones.jasper");
+            //crear reporte
             System.out.println("Cargando desde: " + archivo);
             if(archivo == null){
                 System.out.println("No se encuentra el archivo.");
-                System.exit(2);
-
+            }
+            JasperReport masterReport= null;
+            try {
+                masterReport= (JasperReport) JRLoader.loadObject(archivo);
+            } catch (JRException e) {
+                System.out.println("Error cargando el reporte maestro: " + e.getMessage());
+            }
+            System.out.println("Enviado: "+this.args[0]);
             Map parametro= new HashMap();
-            parametro.put("fin", date.valueOf(args[2]));
-            parametro.put("id", Integer.parseInt(args[0]));
-            parametro.put("inicio", date.valueOf(args[1]));
-
-
+            parametro.put("id",Integer.parseInt(this.args[0]));
+            parametro.put("inicio", date.valueOf(this.args[1]));
+            parametro.put("fin", date.valueOf(this.args[2]));
             JasperPrint jasperPrint= JasperFillManager.fillReport(masterReport,parametro,conn);
             JasperViewer jviewer= new JasperViewer(jasperPrint,false);
-            jviewer.setTitle("Asistencia Personal");
+            jviewer.setTitle("JUstificaciones");
             jviewer.setVisible(true);
             closeConexion();
-            } 
         } catch (Exception j) {
         System.out.println("Mensaje de Error:"+j);
     }
