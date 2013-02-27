@@ -19,7 +19,7 @@ public class ImagenFondo implements Border {
     public ImagenFondo(){    
         try {       
             //se obtiene la imagen            
-            URL url = new URL(getClass().getResource("/Utilitarios/Img/Wallpaper.jpg").toString());
+            URL url = new URL(getClass().getResource("/Utilitarios/Img/fondo.gif").toString());
             fondo = ImageIO.read(url);    
             
         } catch (IOException ex) {
