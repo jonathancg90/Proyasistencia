@@ -331,6 +331,8 @@ public class WinTipomoneda extends javax.swing.JInternalFrame {
                 txtName.setText(moneda.getNombre());
                 txtsimbolo.setText(moneda.getSimbol());
                 lblmodified.setText(hp.getFormatDate(moneda.getModified()));
+                System.out.println("estado: "+moneda.isPor_defecto());
+                chkdefault.setSelected(moneda.isPor_defecto());
 
             }
             catch(Exception e){
@@ -372,7 +374,7 @@ public class WinTipomoneda extends javax.swing.JInternalFrame {
         try{
         val = new Validators("moneda");    
         Object[] datos = {txtName.getText(),txtsimbolo.getText(),lblId.getText()};
-        Object[] tipos = {2,3};
+        Object[] tipos = {2,3,0};
         if(val.validar(datos,tipos)){      
             int id = Integer.valueOf(lblId.getText());
             String name = txtName.getText();

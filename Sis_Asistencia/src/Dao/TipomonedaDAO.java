@@ -113,9 +113,8 @@ public class TipomonedaDAO extends ConexionBd{
             pt.setString(1,objmoneda.getNombre());
             pt.setString(2,objmoneda.getSimbol());
             pt.setBoolean(3,objmoneda.isPor_defecto());
-            pt.setDate(4,date.valueOf(objmoneda.getCreated()));
-            pt.setDate(5,date.valueOf(objmoneda.getModified()));
-            pt.setInt(6,objmoneda.getIdtipmon());
+            pt.setDate(4,date.valueOf(objmoneda.getModified()));
+            pt.setInt(5,objmoneda.getIdtipmon());
             //Ejecucion y cierre
             i= pt.executeUpdate();
             pt.close();
@@ -181,9 +180,13 @@ public class TipomonedaDAO extends ConexionBd{
             //Preparando
             String campos[] = new String[1];
             campos = qs.getRecords(_table,idtipmon);
+            boolean state = false;
+            if("t".equals(campos[4])){
+                state =  true;
+            }
             objmoneda.setNombre(campos[2]);
             objmoneda.setSimbol(campos[3]);
-            objmoneda.setPor_defecto(Boolean.parseBoolean(campos[4]));
+            objmoneda.setPor_defecto(state);
             objmoneda.setModified(campos[5]);
             
             return objmoneda;

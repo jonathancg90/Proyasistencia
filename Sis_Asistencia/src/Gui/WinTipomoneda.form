@@ -184,7 +184,7 @@
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="jScrollPane1" min="-2" pref="213" max="-2" attributes="0"/>
-                  <EmptySpace pref="15" max="32767" attributes="0"/>
+                  <EmptySpace pref="19" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
                       <Component id="lblcant" min="-2" pref="20" max="-2" attributes="0"/>
