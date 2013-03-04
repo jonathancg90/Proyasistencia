@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="justificaciones" language="groovy" pageWidth="612" pageHeight="792" columnWidth="572" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="40"/>
+	<property name="ireport.y" value="110"/>
 	<parameter name="id" class="java.lang.Integer">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
@@ -14,13 +14,18 @@
 	</parameter>
 	<queryString>
 		<![CDATA[SELECT
-     justificaciones."idtip_jus" AS tipojus
+     justificaciones."idtip_jus" AS tipojus,
+     tipo_justificaciones."idtip_jus" AS tipo_justificaciones_idtip_jus,
+     tipo_justificaciones."nombre" AS tipo_justificaciones_nombre
 FROM
-     "public"."justificaciones" justificaciones
-where
-      justificaciones."empleado_idemp" = $P{id} and justificaciones."fecha" between $P{inicio} and $P{fin}]]>
+     "public"."tipo_justificaciones" tipo_justificaciones FULL OUTER JOIN "public"."justificaciones" justificaciones ON tipo_justificaciones."idtip_jus" = justificaciones."idtip_jus"
+WHERE
+     justificaciones."empleado_idemp" = $P{id}
+     and justificaciones."fecha" BETWEEN $P{inicio} and $P{fin}]]>
 	</queryString>
 	<field name="tipojus" class="java.lang.Integer"/>
+	<field name="tipo_justificaciones_idtip_jus" class="java.lang.Integer"/>
+	<field name="tipo_justificaciones_nombre" class="java.lang.String"/>
 	<group name="tipojus">
 		<groupExpression><![CDATA[$F{tipojus}]]></groupExpression>
 	</group>
@@ -28,27 +33,36 @@ where
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="29" splitType="Stretch"/>
+		<band splitType="Stretch"/>
 	</title>
 	<pageHeader>
 		<band splitType="Stretch"/>
 	</pageHeader>
 	<columnHeader>
-		<band height="20" splitType="Stretch"/>
+		<band splitType="Stretch"/>
 	</columnHeader>
 	<detail>
-		<band height="347" splitType="Stretch">
+		<band splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="453" splitType="Stretch">
 			<bar3DChart>
 				<chart>
-					<reportElement x="29" y="32" width="437" height="265"/>
+					<reportElement x="22" y="108" width="517" height="287" backcolor="#3BB938"/>
 					<chartTitle/>
 					<chartSubtitle/>
 					<chartLegend/>
 				</chart>
 				<categoryDataset>
 					<categorySeries>
-						<seriesExpression><![CDATA["Tipo de Justificaciones"]]></seriesExpression>
-						<categoryExpression><![CDATA[$F{tipojus}]]></categoryExpression>
+						<seriesExpression><![CDATA["Justificaciones"]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{tipo_justificaciones_nombre}]]></categoryExpression>
 						<valueExpression><![CDATA[$V{tipojus_COUNT}]]></valueExpression>
 					</categorySeries>
 				</categoryDataset>
@@ -58,14 +72,5 @@ where
 				</bar3DPlot>
 			</bar3DChart>
 		</band>
-	</detail>
-	<columnFooter>
-		<band height="18" splitType="Stretch"/>
-	</columnFooter>
-	<pageFooter>
-		<band height="11" splitType="Stretch"/>
-	</pageFooter>
-	<summary>
-		<band height="42" splitType="Stretch"/>
 	</summary>
 </jasperReport>
