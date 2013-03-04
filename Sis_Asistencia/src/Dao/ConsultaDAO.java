@@ -35,7 +35,9 @@ public class ConsultaDAO {
     private String _table;
     private String _error;
     private ResultSet rs = null;
+    private ResultSet rs_extra = null;
     private Statement s = null;
+    private Statement s_extra = null;
     private PreparedStatement  pt = null;
     private ConexionBd con;
     private Connection conexion;
@@ -100,7 +102,6 @@ public class ConsultaDAO {
             filter[0][1] = args[0];
             filter[1][0] = "bet_fecha_" + args[1];
             filter[1][1] = args[2];
-            System.out.println("var1: " + args[1] + "" + args[2]);
             helper_asistencia(filter, camp, args[1], args[2]);
             filter = new String[0][0];
         }
@@ -109,7 +110,7 @@ public class ConsultaDAO {
         }
     }
     public void destroid_report() {
-        //qs.destroid_report();
+        qs.destroid_report();
     }
     public void gettabel(JTable tblDatos, JLabel lblcant) {
         getTableAll(tblDatos,lblcant);
@@ -318,5 +319,62 @@ public class ConsultaDAO {
         campos[5] = "horas";
         return campos;
     }
-   
+    public String[] set_camp_justificaciones(){
+        String campos[] = new String[5];
+        campos[0] = "recibo";
+        campos[1] = "descripcion";
+        campos[2] = "hora_ini";
+        campos[3] = "hora_final";
+        campos[4] = "salida";
+        return campos;
+    }
+   public void create_report_justificaciones(String args[]){
+       qs= new Query();
+       con = new ConexionBd();
+       try {
+            Statement s = null;
+            Statement s_extra = null;
+            campos = set_camp_justificaciones();
+            qs.create_report(campos);
+            con.getConexion();
+            conexion = con.getConetion();
+            s = conexion.createStatement();
+            s_extra = conexion.createStatement();
+            String[] campReg = new String[5];
+            String Consulta;
+            String ConsultaTipo = "select * from tipo_justificaciones";
+            //System.out.println(Consulta);
+            
+            rs = s.executeQuery(ConsultaTipo);
+            int i;
+            while(rs.next()){
+                i = 0;
+                Consulta = "select * from justificaciones "
+                        + "where idtip_jus = " +rs.getInt(1)
+                        + " and empleado_idemp="+args[0];
+                rs_extra = s_extra.executeQuery(Consulta);
+                while(rs_extra.next()){
+                    if(i==0){
+                        campReg[0] = rs.getString(2);
+                        campReg[1] = "";
+                        campReg[2] = "";
+                        campReg[3] = "";
+                        campReg[4] = "";
+                        register_report(campReg);i++;
+                    }
+                    campReg[0] = rs_extra.getString(7)+"("+rs_extra.getString(5)+")";
+                    campReg[1] = rs_extra.getString(4);
+                    campReg[2] = rs_extra.getString(8);
+                    campReg[3] = rs_extra.getString(9);
+                    campReg[4] = rs_extra.getString(6);
+                    register_report(campReg);
+                }
+            }
+            con.closeConexion();
+       } catch(Exception e){
+           System.out.println(_error + "create_report_justificaciones : "+e);
+       }
+
+       
+   }
 }

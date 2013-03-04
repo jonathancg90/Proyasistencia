@@ -238,7 +238,7 @@ public class WinReportes extends javax.swing.JInternalFrame {
          case 2:
              //Justifiaciones
              rep.setargs(args);
-             rep.SelectReport(2);
+             rep.SelectReport(3);
              ;break;
          case 3:
              //Resumen
