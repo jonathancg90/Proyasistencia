@@ -178,7 +178,7 @@ public class Ireport  extends  ConexionBd{
             parametro.put("fin", date.valueOf(this.args[2]));
             JasperPrint jasperPrint= JasperFillManager.fillReport(masterReport,parametro,conn);
             JasperViewer jviewer= new JasperViewer(jasperPrint,false);
-            jviewer.setTitle("JUstificaciones");
+            jviewer.setTitle("Justificaciones");
             jviewer.setVisible(true);
             closeConexion();
         } catch (Exception j) {
