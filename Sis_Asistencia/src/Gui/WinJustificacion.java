@@ -210,7 +210,7 @@ public class WinJustificacion extends javax.swing.JInternalFrame {
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(14, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -417,11 +417,6 @@ public class WinJustificacion extends javax.swing.JInternalFrame {
         mitemclear.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.CTRL_MASK));
         mitemclear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilitarios/Img/limpiar.png"))); // NOI18N
         mitemclear.setText("Limpiar");
-        mitemclear.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                mitemclearMouseClicked(evt);
-            }
-        });
         medit.add(mitemclear);
 
         ItemExportar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilitarios/Img/exportar.png"))); // NOI18N
@@ -460,6 +455,9 @@ public class WinJustificacion extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_mcloseActionPerformed
 
     private void mitemdeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mitemdeleteActionPerformed
+        hp = new Helpers();        
+        String inicio=hp.getFormatDate(cboIni.getText());
+        String fin=hp.getFormatDate(cboFin.getText());
         int fsel;
         fsel = this.TblJusti.getSelectedRow();
         objjusti= new justificacionesDAO();
@@ -480,7 +478,7 @@ public class WinJustificacion extends javax.swing.JInternalFrame {
                 }
                 else {
                     JOptionPane.showMessageDialog(null,"Justificacion eliminada");
-                    cleanBox();
+                    objjusti.findJusti(lblID.getText() ,inicio, fin,TblJusti, lblcant);
                 }
             }
         }
@@ -575,15 +573,19 @@ public class WinJustificacion extends javax.swing.JInternalFrame {
             //System.out.println("Resta de horas: "+sal + " - " +ing+" : "+tm.restarTime(ing,sal));
             Time hrs = tm.restarTime(sal,ing);
             String fecha=hp.getFormatDate(cboDia.getText());
-            int tipojus =  Integer.parseInt(qs.idChoice("tipo_justificaciones","nombre",String.valueOf(cboTipojus.getSelectedItem())));
-            int i = objjusti.save(id,tipojus,fecha,motivo,recivo,hrs,ing,sal);
-            cleanForm();
-            if (i == 0 ) {
-                JOptionPane.showMessageDialog(null,"No se pudo grabar el detalle");
+            if (val.horaMayor(sal, ing)) {
+                int tipojus =  Integer.parseInt(qs.idChoice("tipo_justificaciones","nombre",String.valueOf(cboTipojus.getSelectedItem())));
+                int i = objjusti.save(id,tipojus,fecha,motivo,recivo,hrs,ing,sal);
+                cleanForm();
+                if (i == 0 ) {
+                    JOptionPane.showMessageDialog(null,"No se pudo grabar el detalle");
+                }
+                else {
+                      JOptionPane.showMessageDialog(null,"justificacion grabada");
+                     }
+            } else {
+                JOptionPane.showMessageDialog(null,"conflicto de horas");
             }
-            else {
-                  JOptionPane.showMessageDialog(null,"justificacion grabada");
-                 }
         }
     catch(Exception e){
         System.out.println("Evento registrar: "+e);
@@ -604,10 +606,6 @@ public class WinJustificacion extends javax.swing.JInternalFrame {
         objbus.LblModulo.setText("2");
         objbus.setVisible(true);
     }//GEN-LAST:event_jLabel17MouseClicked
-
-    private void mitemclearMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemclearMouseClicked
-        cleanBox();
-    }//GEN-LAST:event_mitemclearMouseClicked
 
     private void BtnVerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnVerActionPerformed
      cargarLog();

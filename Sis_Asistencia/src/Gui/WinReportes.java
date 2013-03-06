@@ -11,6 +11,8 @@ import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import Utilitarios.Ireport;
 import Utilitarios.Data;
+import Utilitarios.Validators;
+import javax.swing.JOptionPane;
 
 public class WinReportes extends javax.swing.JInternalFrame {
 
@@ -21,6 +23,7 @@ public class WinReportes extends javax.swing.JInternalFrame {
     private DefaultComboBoxModel MChoice;
     private Data dt;
     private Helpers hp;
+    private Validators val;
     
     public WinReportes() {
         initComponents();
@@ -216,6 +219,7 @@ public class WinReportes extends javax.swing.JInternalFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
      int op = CmbTipo.getSelectedIndex();
+     val = new Validators();
      hp = new Helpers();
      rep = new Ireport();
      String args[];
@@ -223,39 +227,46 @@ public class WinReportes extends javax.swing.JInternalFrame {
      args[0] =  Lblidemp.getText();
      args[1] =  hp.formatFecha(CmbF_De.getText());
      args[2] =  hp.formatFecha(CmbF_Hasta.getText());
-     try {
-         switch(op) {
-         case 0:
-             //Reporte de asistencia
-             rep.setargs(args);
-             rep.SelectReport(1);
-             ;break;
-         case 1:
-             //Log de asistencia
-             rep.setargs(args);
-             rep.SelectReport(2);
-             ;break;
-         case 2:
-             //Justifiaciones
-             rep.setargs(args);
-             rep.SelectReport(3);
-             ;break;
-         case 3:
-             //Resumen
-             rep.setargs(args);
-             rep.SelectReport(2);
-             ;break;
-         case 4:
-              //Justificaciones estadistico  
-              
-              rep.setargs(args);
-              rep.SelectReport(5);
-              break;
-        }
-     } catch (Exception ex) {
-         System.out.println(ex);
-     }
+     if (args[0]!=""){
+        if (val.validarFechas(args[1], args[2]) ) {
+           try {
+               switch(op) {
+               case 0:
+                   //Reporte de asistencia
+                   rep.setargs(args);
+                   rep.SelectReport(1);
+                   ;break;
+               case 1:
+                   //Log de asistencia
+                   rep.setargs(args);
+                   rep.SelectReport(2);
+                   ;break;
+               case 2:
+                   //Justifiaciones
+                   rep.setargs(args);
+                   rep.SelectReport(3);
+                   ;break;
+               case 3:
+                   //Resumen
+                   rep.setargs(args);
+                   rep.SelectReport(2);
+                   ;break;
+               case 4:
+                    //Justificaciones estadistico  
 
+                    rep.setargs(args);
+                    rep.SelectReport(5);
+                    break;
+              }
+           } catch (Exception ex) {
+               System.out.println(ex);
+           } 
+        } else {
+           JOptionPane.showMessageDialog(null,"Conflicto en fechas");
+        }
+     } else {
+           JOptionPane.showMessageDialog(null,"No ha seleccionado ningún empleado");
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jLabel5MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MousePressed
