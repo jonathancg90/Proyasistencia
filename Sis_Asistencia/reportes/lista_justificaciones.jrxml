@@ -148,7 +148,7 @@ and e.idempr = p.idempr]]>
 						<jr:detailCell style="table 1_TD" height="20" rowSpan="1">
 							<textField>
 								<reportElement uuid="0c10da16-85c4-46bc-afe5-1488d5fe6ddd" x="0" y="0" width="137" height="20"/>
-								<textElement/>
+								<textElement textAlignment="Left" verticalAlignment="Middle"/>
 								<textFieldExpression><![CDATA[$F{recibo}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
@@ -166,7 +166,7 @@ and e.idempr = p.idempr]]>
 						<jr:detailCell style="table 1_TD" height="20" rowSpan="1">
 							<textField>
 								<reportElement uuid="88cbb150-3aaa-4b69-8417-6cbc56d533c9" x="0" y="0" width="192" height="20"/>
-								<textElement/>
+								<textElement textAlignment="Left" verticalAlignment="Middle"/>
 								<textFieldExpression><![CDATA[$F{descripcion}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
@@ -184,7 +184,7 @@ and e.idempr = p.idempr]]>
 						<jr:detailCell style="table 1_TD" height="20" rowSpan="1">
 							<textField>
 								<reportElement uuid="d8d3cf96-5870-4d64-b423-ead728313bb3" x="0" y="0" width="79" height="20"/>
-								<textElement/>
+								<textElement textAlignment="Left" verticalAlignment="Middle"/>
 								<textFieldExpression><![CDATA[$F{hora_ini}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
@@ -202,7 +202,7 @@ and e.idempr = p.idempr]]>
 						<jr:detailCell style="table 1_TD" height="20" rowSpan="1">
 							<textField>
 								<reportElement uuid="fc54e08d-1d30-47a0-aae8-b91089b6e686" x="0" y="0" width="79" height="20"/>
-								<textElement/>
+								<textElement textAlignment="Left" verticalAlignment="Middle"/>
 								<textFieldExpression><![CDATA[$F{hora_final}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
@@ -220,7 +220,7 @@ and e.idempr = p.idempr]]>
 						<jr:detailCell style="table 1_TD" height="20" rowSpan="1">
 							<textField>
 								<reportElement uuid="9f76c48d-5193-44b2-83dd-f26173cc1851" x="0" y="0" width="74" height="20"/>
-								<textElement/>
+								<textElement textAlignment="Left" verticalAlignment="Middle"/>
 								<textFieldExpression><![CDATA[$F{salida}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>

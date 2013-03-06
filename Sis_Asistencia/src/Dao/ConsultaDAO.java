@@ -275,13 +275,10 @@ public class ConsultaDAO {
                         Time.valueOf(sdf.format(date_ini)));
                 Time hrs_refrigerio = tm.restarTime(Time.valueOf(sdf.format(date_fin)),
                         Time.valueOf(sdf.format(date_ref_fin)));
-                System.out.println("trabajo: "+hrs_trabajo+" refrigerio: "+hrs_refrigerio);
                 //Time hrs = tm.sumarTime(hrs_trabajo, hrs_refrigerio);
                 //hrs = tm.restarTime(hrs, Time.valueOf(sdf.format(ref)));
                 //suma = String.valueOf(hrs);
                 suma = tm.SumaHoras(String.valueOf(hrs_trabajo), String.valueOf(hrs_refrigerio));
-                
-                System.out.println("Suma: "+suma);
             } 
         } catch(Exception e) {
             System.out.println(_error + "calculoHoras: "+e);
@@ -331,6 +328,7 @@ public class ConsultaDAO {
    public void create_report_justificaciones(String args[]){
        qs= new Query();
        con = new ConexionBd();
+       tm = new TimeOPeration();
        try {
             Statement s = null;
             Statement s_extra = null;
@@ -348,10 +346,12 @@ public class ConsultaDAO {
             rs = s.executeQuery(ConsultaTipo);
             int i;
             while(rs.next()){
+                String suma="00:00";
                 i = 0;
                 Consulta = "select * from justificaciones "
                         + "where idtip_jus = " +rs.getInt(1)
-                        + " and empleado_idemp="+args[0];
+                        + " and empleado_idemp="+args[0]
+                        + " and fecha between '"+args[1]+"' and '"+args[2]+"'";
                 rs_extra = s_extra.executeQuery(Consulta);
                 while(rs_extra.next()){
                     if(i==0){
@@ -362,11 +362,21 @@ public class ConsultaDAO {
                         campReg[4] = "";
                         register_report(campReg);i++;
                     }
-                    campReg[0] = rs_extra.getString(7)+"("+rs_extra.getString(5)+")";
+                    campReg[0] = rs_extra.getString(7)+" ("+rs_extra.getString(5)+")";
                     campReg[1] = rs_extra.getString(4);
                     campReg[2] = rs_extra.getString(8);
                     campReg[3] = rs_extra.getString(9);
                     campReg[4] = rs_extra.getString(6);
+                    register_report(campReg);
+                    System.out.println(suma+" + "+rs_extra.getString(6));
+                    suma = tm.SumaHoras(suma, rs_extra.getString(6));
+                }
+                if(i>0){
+                    campReg[0] = "";
+                    campReg[1] = "";
+                    campReg[2] = "";
+                    campReg[3] = "Total";
+                    campReg[4] = suma;
                     register_report(campReg);
                 }
             }

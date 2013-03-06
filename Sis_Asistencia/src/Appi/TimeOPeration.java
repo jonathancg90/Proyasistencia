@@ -107,13 +107,13 @@ public class TimeOPeration {
             
             double Horas=0;
             double DblSumHora=0;
-            
+            System.out.println("ini: "+ini+" fin:"+fin);
             tiempo_i = ini.split(":");
             tiempo_f = fin.split(":");
 
             double  h_ini =Double.valueOf(tiempo_i[0]+"."+tiempo_i[1]);
             double  h_fin =Double.valueOf(tiempo_f[0]+"."+tiempo_f[1]);
-            
+            System.out.println("1: "+h_ini+" 2:"+h_fin);
             //System.out.println("h_ini: "+h_ini+" h_fin: "+h_fin);
 
             double HoraS = (int) h_ini;
@@ -138,6 +138,7 @@ public class TimeOPeration {
             //System.out.println("DblSumHora: "+DblSumHora);
             
             //Transformando a horas
+            
             DblSumHora=(int) (DblSumHora/60)+((DblSumHora%60)/100);
             DblSumHora=redondear(DblSumHora, 2);
             suma=String.valueOf(DblSumHora);
