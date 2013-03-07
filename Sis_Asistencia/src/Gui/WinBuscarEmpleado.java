@@ -317,13 +317,13 @@ public class WinBuscarEmpleado extends javax.swing.JInternalFrame {
                     ImageIcon imagenfoto = new ImageIcon(archivoimg);
 
                     Image iamgendimen = imagenfoto.getImage();
-                     Image newimg = iamgendimen.getScaledInstance(100,100,java.awt.Image.SCALE_SMOOTH);
+                     Image newimg = iamgendimen.getScaledInstance(110,100,java.awt.Image.SCALE_SMOOTH);
                      ImageIcon newIcon = new ImageIcon(newimg);
                      Gui.WinJustificacion.lblFoto.setIcon(newIcon);
                 }else{
                     ImageIcon imagenFondo = new ImageIcon(getClass().getResource("/imagenes/defecto.jpg"));
                     Image iamgendimen = imagenFondo.getImage();
-                          Image newimg = iamgendimen.getScaledInstance(100,100,java.awt.Image.SCALE_SMOOTH);
+                          Image newimg = iamgendimen.getScaledInstance(110,100,java.awt.Image.SCALE_SMOOTH);
                           ImageIcon newIcon = new ImageIcon(newimg);
                     Gui.WinJustificacion.lblFoto.setIcon(newIcon);
                 }
