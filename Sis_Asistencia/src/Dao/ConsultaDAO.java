@@ -191,8 +191,9 @@ public class ConsultaDAO {
             if(countReg == false) { 
                 campReg = new String[6];
                 campReg[0]=String.valueOf(fechActual + " (" + dt.G_DIAS[dia] + ")");
-                //Domingo
-                if(dia == 7) {
+                //Dia no labora deacuerdo a su horario
+                if(getDiasTrabajo(DateEmp[1], fechActual, dia) == false) {
+                    
                     campReg[1]=String.valueOf("");
                 }
                 else {
@@ -248,7 +249,7 @@ public class ConsultaDAO {
     }
         
     public String calculoHoras(String[] args, int op){
-                String suma="";
+        String suma="";
         try {
             tm = new TimeOPeration();
             DateFormat sdf = new SimpleDateFormat("HH:mm:ss");
@@ -384,7 +385,30 @@ public class ConsultaDAO {
        } catch(Exception e){
            System.out.println(_error + "create_report_justificaciones : "+e);
        }
-
+    }
+       public boolean getDiasTrabajo(String emp, String fecha, int dia) throws SQLException{
+           boolean val = false;
+           con = new ConexionBd();
+           con.getConexion();
+           s = conexion.createStatement();
+           conexion = con.getConetion();
+            String Consulta = "select dia "
+                    + "from empleado_has_horarios  c, detailhorario d "
+                    + "where idemp= "+emp+" "
+                    + "and '"+fecha+"' >= inicio  "
+                    + "and '"+fecha+"' <= fin "
+                    + "and c.idhor = d.horarios_idhor";
+            System.out.println("False: "+Consulta);
+            rs = s.executeQuery(Consulta);
+            while(rs.next()){
+                //Si trabaja ese dia = true
+                if(rs.getInt(1) == dia) {
+                    System.out.println("True: "+Consulta);
+                    return true;
+                }
+            }
+        
+        return val;
+       }
        
    }
-}

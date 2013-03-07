@@ -136,10 +136,10 @@ and e.idempr = p.idempr]]>
 					<datasetRun subDataset="Table Dataset 1" uuid="4d0986ea-d8b3-49ec-9981-2ff3be7ca598">
 						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 					</datasetRun>
-					<jr:column width="137" uuid="7039916a-32fd-4f25-9912-5f8f09cf2034">
+					<jr:column width="175" uuid="7039916a-32fd-4f25-9912-5f8f09cf2034">
 						<jr:columnHeader style="table 1_CH" height="30" rowSpan="1">
 							<staticText>
-								<reportElement uuid="eccaef69-e200-4d37-8766-e1e4c553efc2" x="0" y="0" width="137" height="30"/>
+								<reportElement uuid="eccaef69-e200-4d37-8766-e1e4c553efc2" x="0" y="0" width="175" height="30"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font isBold="true"/>
 								</textElement>
@@ -148,7 +148,7 @@ and e.idempr = p.idempr]]>
 						</jr:columnHeader>
 						<jr:detailCell style="table 1_TD" height="20" rowSpan="1">
 							<textField>
-								<reportElement uuid="0d583251-4a77-4fbd-a329-a19a42459313" x="0" y="0" width="137" height="20"/>
+								<reportElement uuid="0d583251-4a77-4fbd-a329-a19a42459313" x="0" y="0" width="175" height="20"/>
 								<textElement/>
 								<textFieldExpression><![CDATA[$F{fecha}]]></textFieldExpression>
 							</textField>
@@ -179,7 +179,7 @@ and e.idempr = p.idempr]]>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font isBold="true"/>
 								</textElement>
-								<text><![CDATA[refrigerio_ing]]></text>
+								<text><![CDATA[refrigerio ing]]></text>
 							</staticText>
 						</jr:columnHeader>
 						<jr:detailCell style="table 1_TD" height="20" rowSpan="1">
@@ -197,7 +197,7 @@ and e.idempr = p.idempr]]>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font isBold="true"/>
 								</textElement>
-								<text><![CDATA[refrigerio_sal]]></text>
+								<text><![CDATA[refrigerio sal]]></text>
 							</staticText>
 						</jr:columnHeader>
 						<jr:detailCell style="table 1_TD" height="20" rowSpan="1">
@@ -208,10 +208,10 @@ and e.idempr = p.idempr]]>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="74" uuid="838d689c-9800-40c7-a4e6-28ed20ae0e0a">
+					<jr:column width="92" uuid="838d689c-9800-40c7-a4e6-28ed20ae0e0a">
 						<jr:columnHeader style="table 1_CH" height="30" rowSpan="1">
 							<staticText>
-								<reportElement uuid="d3596ae5-6809-4c0f-9c0d-c06d823efa57" x="0" y="0" width="73" height="30"/>
+								<reportElement uuid="d3596ae5-6809-4c0f-9c0d-c06d823efa57" x="0" y="0" width="92" height="30"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font isBold="true"/>
 								</textElement>
@@ -220,27 +220,9 @@ and e.idempr = p.idempr]]>
 						</jr:columnHeader>
 						<jr:detailCell style="table 1_TD" height="20" rowSpan="1">
 							<textField isBlankWhenNull="true">
-								<reportElement uuid="dc70e08e-2eba-4762-a71a-c3c7ea792581" x="0" y="0" width="73" height="20"/>
+								<reportElement uuid="dc70e08e-2eba-4762-a71a-c3c7ea792581" x="0" y="0" width="92" height="20"/>
 								<textElement/>
 								<textFieldExpression><![CDATA[$F{salida}]]></textFieldExpression>
-							</textField>
-						</jr:detailCell>
-					</jr:column>
-					<jr:column width="75" uuid="58ccb2dc-efd2-412b-9fbd-c862303f3026">
-						<jr:columnHeader style="table 1_CH" height="30" rowSpan="1">
-							<staticText>
-								<reportElement uuid="ed5c4545-7f7f-4435-a14f-d3c5fed5532b" x="0" y="0" width="73" height="30"/>
-								<textElement textAlignment="Center" verticalAlignment="Middle">
-									<font isBold="true"/>
-								</textElement>
-								<text><![CDATA[horas]]></text>
-							</staticText>
-						</jr:columnHeader>
-						<jr:detailCell style="table 1_TD" height="20" rowSpan="1">
-							<textField isBlankWhenNull="true">
-								<reportElement uuid="b9e80ccf-7894-4ec5-9f7d-2aa55e01b95a" x="0" y="0" width="73" height="20"/>
-								<textElement/>
-								<textFieldExpression><![CDATA[$F{horas}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
