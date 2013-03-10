@@ -20,7 +20,6 @@ public class WinRoles_Permisos extends javax.swing.JInternalFrame {
         objPerol = new PermisoshasRolesDAO();
         lblidrol.setVisible(false);
         qs.loadChoice(CboModulo,"modulos","nombre");
-        objPerol.getTableAll(Jtablepermi, lblcant);
     }
 
     @SuppressWarnings("unchecked")
@@ -43,6 +42,24 @@ public class WinRoles_Permisos extends javax.swing.JInternalFrame {
         sitemagregar = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
+
+        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameActivated(evt);
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+            }
+        });
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Lista de permisos"));
 
@@ -184,7 +201,7 @@ public class WinRoles_Permisos extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
 
         pack();
@@ -200,7 +217,7 @@ public class WinRoles_Permisos extends javax.swing.JInternalFrame {
        int idrol = Integer.parseInt(lblidrol.getText());
        int idmod = Integer.parseInt(qs.idChoice("modulos","nombre",String.valueOf(CboModulo.getSelectedItem())));
        objPerol.save(idrol,idmod);
-       objPerol.getTableAll(Jtablepermi, lblcant);
+       objPerol.find(lblidrol.getText(), Jtablepermi, lblcant);
        }catch(Exception e){}
     }//GEN-LAST:event_sitemagregarMousePressed
 
@@ -219,6 +236,7 @@ public class WinRoles_Permisos extends javax.swing.JInternalFrame {
                 int idrol = Integer.parseInt(lblidrol.getText());
                 int id_mod = Integer.parseInt(qs.idChoice("modulos","nombre",modulo));
                 objPerol.delete(idrol,id_mod);
+                objPerol.find(lblidrol.getText(), Jtablepermi, lblcant);
             }
             catch(Exception e){
                 System.out.println("Error producido en seleccion de modulo" + e);
@@ -226,6 +244,11 @@ public class WinRoles_Permisos extends javax.swing.JInternalFrame {
                 
         }
     }//GEN-LAST:event_jMenuItem2MousePressed
+
+    private void formInternalFrameActivated(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameActivated
+       objPerol = new PermisoshasRolesDAO();
+       objPerol.find(lblidrol.getText(), Jtablepermi, lblcant);
+    }//GEN-LAST:event_formInternalFrameActivated
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox CboModulo;

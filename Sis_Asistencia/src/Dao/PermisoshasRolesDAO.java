@@ -54,7 +54,20 @@ public class PermisoshasRolesDAO extends ConexionBd{
         catch(Exception e){
             System.out.println(_error + "getTableAll: "+e);
         }
-    
+    }
+    public int find(String rol,JTable tblDatos, JLabel lblcant) {
+        int i = 0;
+        try {
+            System.out.println("rol: "+rol);
+                filter = new String[1][2];
+                filter[0][0] = "int_idrol";
+                filter[0][1] = rol; 
+                getTableAll(tblDatos, lblcant);
+        }
+        catch(Exception e){
+            System.out.println(_error + "find : "+e);
+        }
+        return i;
     }
     /*
      * Registro de areas
