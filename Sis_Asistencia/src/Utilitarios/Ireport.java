@@ -45,6 +45,7 @@ public class Ireport  extends  ConexionBd{
             case 3:ReportJustificaciones(); break;
             case 4:ReportAsistencia_Log(); break;
             case 5:Justificaciones(); break;
+            case 6:ReportVacaciones(); break;
             default:break;
         }
     }
@@ -70,7 +71,6 @@ public class Ireport  extends  ConexionBd{
         } catch (JRException e) {
             System.out.println("Error cargando el reporte maestro: " + e.getMessage());
         }
-        System.out.println("Enviado: "+this.args[0]);
         Map parametro= new HashMap();
         parametro.put("idemp",Integer.parseInt(this.args[0]));
         
@@ -171,7 +171,6 @@ public class Ireport  extends  ConexionBd{
             } catch (JRException e) {
                 System.out.println("Error cargando el reporte maestro: " + e.getMessage());
             }
-            System.out.println("Enviado: "+this.args[0]);
             Map parametro= new HashMap();
             parametro.put("id",Integer.parseInt(this.args[0]));
             parametro.put("inicio", date.valueOf(this.args[1]));
@@ -185,4 +184,38 @@ public class Ireport  extends  ConexionBd{
         System.out.println("Mensaje de Error:"+j);
     }
 }
+ public void ReportVacaciones(){
+    try{
+        ConsultaDAO consul = new ConsultaDAO();
+        getConexion();
+        conn = getConetion();
+        File archivo = new  File("reportes/vacaciones.jasper");
+        consul.setTable("registro");
+        consul.findAsistencia(this.args);
+        //crear reporte
+        System.out.println("Cargando desde: " + archivo);
+        if(archivo == null){
+            System.out.println("No se encuentra el archivo.");
+        }
+        JasperReport masterReport= null;
+        try {
+            masterReport= (JasperReport) JRLoader.loadObject(archivo);
+        } catch (JRException e) {
+            System.out.println("Error cargando el reporte maestro: " + e.getMessage());
+        }
+        Map parametro= new HashMap();
+        parametro.put("idemp",Integer.parseInt(this.args[0]));
+        parametro.put("dias",this.args[1]);
+        parametro.put("periodo",this.args[2]);
+        
+        JasperPrint jasperPrint= JasperFillManager.fillReport(masterReport,parametro,conn);
+        JasperViewer jviewer= new JasperViewer(jasperPrint,false);
+        jviewer.setTitle("Permiso de vacaciones");
+        jviewer.setVisible(true);
+        consul.destroid_report();
+        closeConexion();
+    } catch (Exception j) {
+        System.out.println("Mensaje de Error:"+j);
+    }
+  }
 }

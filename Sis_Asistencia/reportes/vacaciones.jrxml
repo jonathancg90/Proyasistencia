@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="vacaciones" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="47435575-5377-4d06-91a1-4f35615cce12">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="idemp" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[0]]></defaultValueExpression>
+	</parameter>
+	<parameter name="dias" class="java.lang.String"/>
+	<parameter name="periodo" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select e.nombres,apellidos,dni, c.nombre as cargo, p.nombre as empresa
+from empleado e, cargo c, empresa p
+where e.idcar = c.idcar
+and e.idempr = p.idempr
+and e.idemp = $P{idemp}]]>
+	</queryString>
+	<field name="nombres" class="java.lang.String"/>
+	<field name="apellidos" class="java.lang.String"/>
+	<field name="dni" class="java.lang.String"/>
+	<field name="cargo" class="java.lang.String"/>
+	<field name="empresa" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="108" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="50056073-2307-4145-85f6-27a79528c7b1" x="19" y="79" width="100" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cargo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="741a277d-97e4-4a73-b1ee-1d6e1f697680" x="19" y="59" width="100" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nombre]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="df838b07-9775-4a32-96f5-517846b4ecc8" x="175" y="0" width="205" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Permiso de vacaciones]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="85989fef-0170-4e3d-b895-27712fff255b" x="119" y="59" width="314" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{nombres}+" "+$F{apellidos}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="fc5939e4-1f17-4cdd-983b-a9a6fae0d30b" x="119" y="79" width="171" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{cargo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="95931970-c5e0-414c-b31e-574d4bac9730" x="0" y="20" width="143" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{empresa}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="118" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="9946811d-d9c5-44fa-8de3-fdf9c985fe93" x="55" y="21" width="100" height="20"/>
+				<textElement>
+					<font isBold="false" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Dias]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="46a43c29-6119-4959-b5e6-257e10f939af" x="290" y="21" width="100" height="20"/>
+				<textElement textAlignment="Center">
+					<font isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Periodo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="f01f3e6a-63dd-48a8-b1d7-5052d0710575" x="55" y="82" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[Solicitado por :]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="9f64ad94-7238-41fc-81cf-ede1860d47a0" x="155" y="102" width="278" height="1"/>
+			</line>
+			<textField>
+				<reportElement uuid="be1ae4d5-bbf3-4bb6-98d2-6927fce70fb3" x="232" y="41" width="201" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$P{periodo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="7d48aee0-826c-4efa-b9d7-98323e89b1c5" x="55" y="41" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$P{dias}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch">
+			<line>
+				<reportElement uuid="412607d1-d8a8-4727-bbe9-9b7342ab5c95" x="19" y="36" width="213" height="1"/>
+			</line>
+			<staticText>
+				<reportElement uuid="4428f818-8490-4686-bfa0-f479d12ce0b7" x="79" y="36" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[Administrador]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+</jasperReport>

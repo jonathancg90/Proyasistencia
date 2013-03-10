@@ -877,6 +877,18 @@ public class Query extends ConexionBd{
             }
         return StrDia;
         }
+        //Obtener el dias entre dos fechas
+        public String getDayToRange(String FechaI,String FechaF) {
+            String StrDia="";
+            try {
+                String query="select to_date('"+FechaI+"','dd-mm-yyyy') - to_date('"+FechaF+"','dd-mm-yyyy')";
+                StrDia = Execute(query);
+            }
+            catch(Exception e) {
+                System.out.println(_error + "getDayToRange: "+e);
+            }
+        return StrDia;
+        }
     }
         
 

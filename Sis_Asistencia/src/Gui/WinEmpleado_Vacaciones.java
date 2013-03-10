@@ -10,6 +10,7 @@ import Utilitarios.Query;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import Utilitarios.Helpers;
+import Utilitarios.Ireport;
 import Utilitarios.Validators;
 
 import java.text.DateFormat;
@@ -21,6 +22,7 @@ import java.util.GregorianCalendar;
 
 public class WinEmpleado_Vacaciones extends javax.swing.JInternalFrame {
 
+    private Ireport rep;
     private VacacionesDAO objVacaciones;
     private Vacaciones Vacaciones;
     private Query qs;
@@ -39,8 +41,6 @@ public class WinEmpleado_Vacaciones extends javax.swing.JInternalFrame {
         format=new SimpleDateFormat("dd-MM-yyyy");
         cboF_inicio.setDateFormat(format);
         cboF_final.setDateFormat(format);
-        
-        
     }
     
     
@@ -87,6 +87,7 @@ public class WinEmpleado_Vacaciones extends javax.swing.JInternalFrame {
         mitemregister = new javax.swing.JMenuItem();
         mitemupdate = new javax.swing.JMenuItem();
         mitemdelete = new javax.swing.JMenuItem();
+        jMenu1 = new javax.swing.JMenu();
         medit = new javax.swing.JMenu();
         mitemclear = new javax.swing.JMenuItem();
         mclose = new javax.swing.JMenu();
@@ -258,6 +259,15 @@ public class WinEmpleado_Vacaciones extends javax.swing.JInternalFrame {
 
         jMenuBar1.add(mfile);
 
+        jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilitarios/Img/permisos.png"))); // NOI18N
+        jMenu1.setText("Permiso");
+        jMenu1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jMenu1MousePressed(evt);
+            }
+        });
+        jMenuBar1.add(jMenu1);
+
         medit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilitarios/Img/Editar.png"))); // NOI18N
         medit.setText("Edit");
 
@@ -316,7 +326,7 @@ public class WinEmpleado_Vacaciones extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6)
                     .addComponent(lblcant, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
 
         pack();
@@ -470,6 +480,27 @@ public class WinEmpleado_Vacaciones extends javax.swing.JInternalFrame {
         cleanBox();
     }//GEN-LAST:event_mitemclearMousePressed
 
+    private void jMenu1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu1MousePressed
+        rep = new Ireport();
+        qs = new Query();
+        hp = new Helpers();
+        String idvac = lblIdvacaciones.getText();
+        
+        Vacaciones = new Vacaciones();
+        Vacaciones = objVacaciones.getValues(Integer.parseInt(idvac));
+                
+        String dias,
+               periodo;
+        periodo = "del "+hp.formatFecha(Vacaciones.getF_ini())+" al "+hp.formatFecha(Vacaciones.getF_final());
+        String args[];
+        args = new String[3];
+        args[0] =  lblIdemp.getText();
+        args[1] =  qs.getDayToRange(hp.formatFecha(Vacaciones.getF_final()),hp.formatFecha(Vacaciones.getF_ini()));;
+        args[2] =  periodo;
+        rep.setargs(args);
+        rep.SelectReport(6);
+    }//GEN-LAST:event_jMenu1MousePressed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private datechooser.beans.DateChooserCombo cboF_final;
     private datechooser.beans.DateChooserCombo cboF_inicio;
@@ -478,6 +509,7 @@ public class WinEmpleado_Vacaciones extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
