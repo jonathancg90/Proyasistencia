@@ -65,7 +65,7 @@ public class WinConsulta extends javax.swing.JInternalFrame {
         jLabel1.setText("Elija un reporte");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(18, 31, -1, -1));
 
-        CboReport.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Asistencia del personal", "Log de asistencia", "Justificaciones", "Totales" }));
+        CboReport.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Asistencia del personal", "Log de asistencia", "Justificaciones", "Resumen" }));
         jPanel1.add(CboReport, new org.netbeans.lib.awtextra.AbsoluteConstraints(135, 31, 325, -1));
 
         jLabel2.setText("Fecha de termino");
@@ -197,7 +197,7 @@ public class WinConsulta extends javax.swing.JInternalFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6)
                     .addComponent(lblcant, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -287,6 +287,7 @@ public class WinConsulta extends javax.swing.JInternalFrame {
             args[1] = ChFechaIni.getText();
             args[2] = ChFechaFin.getText();
             consul.findAsistencia(args);
+            consul.destroid_report();
             ;break;
         case 2:
             ;break;

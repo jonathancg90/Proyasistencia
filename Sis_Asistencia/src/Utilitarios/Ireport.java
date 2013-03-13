@@ -46,6 +46,7 @@ public class Ireport  extends  ConexionBd{
             case 4:ReportAsistencia_Log(); break;
             case 5:Justificaciones(); break;
             case 6:ReportVacaciones(); break;
+            case 7:ReportResumen(); break;
             default:break;
         }
     }
@@ -211,6 +212,38 @@ public class Ireport  extends  ConexionBd{
         JasperPrint jasperPrint= JasperFillManager.fillReport(masterReport,parametro,conn);
         JasperViewer jviewer= new JasperViewer(jasperPrint,false);
         jviewer.setTitle("Permiso de vacaciones");
+        jviewer.setVisible(true);
+        consul.destroid_report();
+        closeConexion();
+    } catch (Exception j) {
+        System.out.println("Mensaje de Error:"+j);
+    }
+  }
+  public void ReportResumen(){
+    try{
+        ConsultaDAO consul = new ConsultaDAO();
+        getConexion();
+        conn = getConetion();
+        File archivo = new  File("reportes/resumen.jasper");
+        consul.setTable("registro");
+        consul.findAsistencia(this.args);
+        //crear reporte
+        System.out.println("Cargando desde: " + archivo);
+        if(archivo == null){
+            System.out.println("No se encuentra el archivo.");
+        }
+        JasperReport masterReport= null;
+        try {
+            masterReport= (JasperReport) JRLoader.loadObject(archivo);
+        } catch (JRException e) {
+            System.out.println("Error cargando el reporte maestro: " + e.getMessage());
+        }
+        Map parametro= new HashMap();
+        parametro.put("idemp",Integer.parseInt(this.args[0]));
+        
+        JasperPrint jasperPrint= JasperFillManager.fillReport(masterReport,parametro,conn);
+        JasperViewer jviewer= new JasperViewer(jasperPrint,false);
+        jviewer.setTitle("Resumen de empleado");
         jviewer.setVisible(true);
         consul.destroid_report();
         closeConexion();

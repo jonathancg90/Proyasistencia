@@ -102,7 +102,9 @@ public class ConsultaDAO {
             filter[0][1] = args[0];
             filter[1][0] = "bet_fecha_" + args[1];
             filter[1][1] = args[2];
+            System.out.println("1");
             helper_asistencia(filter, camp, args[1], args[2]);
+            System.out.println("2");
             filter = new String[0][0];
         }
         catch(Exception e){
@@ -115,7 +117,9 @@ public class ConsultaDAO {
     public void gettabel(JTable tblDatos, JLabel lblcant) {
         getTableAll(tblDatos,lblcant);
     }
-    //Ejecucion de la consulta
+    /*
+     * Reporte de asistencia
+     */
     private void helper_asistencia(String filter[][], String camp[],
             String fechInicio, String fechFinal) throws SQLException, ParseException{
         qs= new Query();
@@ -158,6 +162,7 @@ public class ConsultaDAO {
             String[] campReg;
             campReg = new String[6];
             dia = Integer.parseInt(qs.getDayOfTheWeek(fechActual));
+            System.out.println("a");
             while(rs.next()){
                 countReg = true;
                 count++;
@@ -177,6 +182,7 @@ public class ConsultaDAO {
                     }
                 }
             }
+            
             //Suma
             if(countReg == true) {
                 if(ind == 3){
@@ -254,6 +260,8 @@ public class ConsultaDAO {
             tm = new TimeOPeration();
             DateFormat sdf = new SimpleDateFormat("HH:mm:ss");
             if (op == 2) {
+                System.out.println("a");
+                System.out.println("a1: "+args[1]+" "+args[4]);
                 String inicio = args[1];
                 String termino = args[4];
                 Date date_ini = sdf.parse(inicio);
@@ -263,6 +271,8 @@ public class ConsultaDAO {
                 suma = String.valueOf(hrs);
             }
             if(op == 4) {
+                System.out.println("j");
+                System.out.println("a1: "+args[1]+" "+args[4]+" "+args[2]+" "+args[3]);
                 String inicio = args[1];
                 String termino = args[4];
                 String ref_inicio = args[2];
@@ -286,7 +296,9 @@ public class ConsultaDAO {
         }
         return suma;
     }
-    
+    /*
+     * Registro en report
+     */
     public void register_report(String[] args) {
         pt = null;
         try {
@@ -306,7 +318,9 @@ public class ConsultaDAO {
             System.out.println(_error + "register_findAsistencia : "+e);
         }
     }
-    
+    /*
+     * Asignacion decampos
+     */
     public String[] set_camp_registro(){
         String campos[] = new String[6];
         campos[0] = "fecha";
@@ -326,6 +340,24 @@ public class ConsultaDAO {
         campos[4] = "salida";
         return campos;
     }
+    public String[] set_camp_resumen(){
+        String campos[] = new String[11];
+        campos[0] = "idemp";
+        campos[1] = "horas_trabajadas";
+        campos[2] = "c_extra";
+        campos[3] = "h_extra";
+        campos[4] = "c_tardanza";
+        campos[5] = "h_tardanza";
+        campos[6] = "c_falta";
+        campos[7] = "j_falta";
+        campos[8] = "total";
+        campos[9] = "descuento";
+        campos[10] = "adicional";
+        return campos;
+    }
+    /*
+     * Reporte de justificaciones
+     */
    public void create_report_justificaciones(String args[]){
        qs= new Query();
        con = new ConexionBd();
@@ -386,7 +418,7 @@ public class ConsultaDAO {
            System.out.println(_error + "create_report_justificaciones : "+e);
        }
     }
-       public boolean getDiasTrabajo(String emp, String fecha, int dia) throws SQLException{
+    public boolean getDiasTrabajo(String emp, String fecha, int dia) throws SQLException{
            boolean val = false;
            con = new ConexionBd();
            con.getConexion();
@@ -398,17 +430,30 @@ public class ConsultaDAO {
                     + "and '"+fecha+"' >= inicio  "
                     + "and '"+fecha+"' <= fin "
                     + "and c.idhor = d.horarios_idhor";
-            System.out.println("False: "+Consulta);
             rs = s.executeQuery(Consulta);
             while(rs.next()){
                 //Si trabaja ese dia = true
                 if(rs.getInt(1) == dia) {
-                    System.out.println("True: "+Consulta);
                     return true;
                 }
             }
         
         return val;
        }
-       
+   /*
+   * Reporte de justificaciones
+   */
+   public void create_report_resumen(String args[]){
+       qs= new Query();
+       con = new ConexionBd();
+       try {
+            con.getConexion();
+            conexion = con.getConetion();
+            campos = set_camp_justificaciones();
+            qs.create_report(campos);
+            con.closeConexion();   
+       } catch(Exception e) {
+           System.out.println(_error + "create_report_resumen : "+e);
+       }
+   }
    }
