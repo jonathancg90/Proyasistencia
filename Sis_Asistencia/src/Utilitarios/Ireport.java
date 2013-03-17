@@ -62,9 +62,8 @@ public class Ireport  extends  ConexionBd{
         consul.setTable("registro");
         consul.findAsistencia(this.args);
         //crear reporte
-        System.out.println("Cargando desde: " + archivo);
         if(archivo == null){
-            System.out.println("No se encuentra el archivo.");
+            JOptionPane.showMessageDialog(null,"Reporte desactualizado, consulte con su soporte");
         }
         JasperReport masterReport= null;
         try {
@@ -97,9 +96,8 @@ public class Ireport  extends  ConexionBd{
         consul.setTable("registro_backlog");
         consul.findAsistencia(this.args);
         //crear reporte
-        System.out.println("Cargando desde: " + archivo);
         if(archivo == null){
-            System.out.println("No se encuentra el archivo.");
+            JOptionPane.showMessageDialog(null,"Reporte desactualizado, consulte con su soporte");
         }
         JasperReport masterReport= null;
         try {
@@ -107,7 +105,6 @@ public class Ireport  extends  ConexionBd{
         } catch (JRException e) {
             System.out.println("Error cargando el reporte maestro: " + e.getMessage());
         }
-        System.out.println("Enviado: "+this.args[0]);
         Map parametro= new HashMap();
         parametro.put("idemp",Integer.parseInt(this.args[0]));
         
@@ -132,9 +129,8 @@ public class Ireport  extends  ConexionBd{
         File archivo = new  File("reportes/lista_justificaciones.jasper");
         consul.create_report_justificaciones(this.args);
         //crear reporte
-        System.out.println("Cargando desde: " + archivo);
         if(archivo == null){
-            System.out.println("No se encuentra el archivo.");
+            JOptionPane.showMessageDialog(null,"Reporte desactualizado, consulte con su soporte");
         }
         JasperReport masterReport= null;
         try {
@@ -149,7 +145,7 @@ public class Ireport  extends  ConexionBd{
         JasperViewer jviewer= new JasperViewer(jasperPrint,false);
         jviewer.setTitle("Justificaciones Personal");
         jviewer.setVisible(true);
-        //consul.destroid_report();
+        consul.destroid_report();
         closeConexion();
     } catch (Exception j) {
         System.out.println("Mensaje de Error:"+j);
@@ -162,9 +158,8 @@ public class Ireport  extends  ConexionBd{
             conn = getConetion();
             File archivo = new  File("reportes/justificaciones.jasper");
             //crear reporte
-            System.out.println("Cargando desde: " + archivo);
             if(archivo == null){
-                System.out.println("No se encuentra el archivo.");
+                JOptionPane.showMessageDialog(null,"Reporte desactualizado, consulte con su soporte");
             }
             JasperReport masterReport= null;
             try {
@@ -180,9 +175,10 @@ public class Ireport  extends  ConexionBd{
             JasperViewer jviewer= new JasperViewer(jasperPrint,false);
             jviewer.setTitle("Justificaciones");
             jviewer.setVisible(true);
+            consul.destroid_report();
             closeConexion();
         } catch (Exception j) {
-        System.out.println("Mensaje de Error:"+j);
+            System.out.println("Mensaje de Error:"+j);
     }
 }
  public void ReportVacaciones(){
@@ -194,9 +190,8 @@ public class Ireport  extends  ConexionBd{
         consul.setTable("registro");
         consul.findAsistencia(this.args);
         //crear reporte
-        System.out.println("Cargando desde: " + archivo);
         if(archivo == null){
-            System.out.println("No se encuentra el archivo.");
+            JOptionPane.showMessageDialog(null,"Reporte desactualizado, consulte con su soporte");
         }
         JasperReport masterReport= null;
         try {
@@ -230,7 +225,7 @@ public class Ireport  extends  ConexionBd{
         //crear reporte
         System.out.println("Cargando desde: " + archivo);
         if(archivo == null){
-            System.out.println("No se encuentra el archivo.");
+            JOptionPane.showMessageDialog(null,"Reporte desactualizado, consulte con su soporte");
         }
         JasperReport masterReport= null;
         try {
