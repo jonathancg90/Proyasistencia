@@ -47,7 +47,6 @@ public class RegistroDAO extends ConexionBd{
     
     public void getTableAll(JTable tblDatos, JLabel lblcant){
         try{
-            System.out.println("entro");
             DefaultTableModel datos;
             qs= new Query();
             hp = new Helpers();
@@ -65,7 +64,25 @@ public class RegistroDAO extends ConexionBd{
             System.out.println(_error + "getTableAll: "+e);
         }
     }
-    
+    public void getTableAllBacklog(JTable tblDatos, JLabel lblcant){
+        try{
+            DefaultTableModel datos;
+            qs= new Query();
+            hp = new Helpers();
+            if (filter.length <= 0){
+                filter = new String[0][0];
+            }
+            String Table = this._table_log;
+            datos = qs.getAll(this.campos,Table,filter);
+            tblDatos.setModel(datos);
+            hp.setWidthJtable(tblDatos,witdhcolum);
+            int num = tblDatos.getRowCount();
+            lblcant.setText(String .valueOf(num));
+        }
+        catch(Exception e){
+            System.out.println(_error + "getTableAll: "+e);
+        }
+    }
     public int save(int idtip_reg, Time hora, String fecha, int idemp,int op){
        int i=0;
         try{
@@ -196,7 +213,6 @@ public class RegistroDAO extends ConexionBd{
     public int findRegFecha(String id,String inicio, String fin, JTable tblDatos, JLabel lblcant) {
         int i = 0;
         try {
-            System.out.println("id:"+id);
             if(!"".equals(id)){
                 filter = new String[2][2];
                 filter[0][0] = "int_idemp";
@@ -205,6 +221,24 @@ public class RegistroDAO extends ConexionBd{
                 filter[1][1] = fin;
             }
             getTableAll(tblDatos, lblcant);
+        }
+        catch(Exception e){
+            System.out.println(_error + "findId : "+e);
+        }
+        return i;
+    }
+    
+    public int findRegFechaBacklog(String id,String inicio, String fin, JTable tblDatos, JLabel lblcant) {
+        int i = 0;
+        try {
+            if(!"".equals(id)){
+                filter = new String[2][2];
+                filter[0][0] = "int_idemp";
+                filter[0][1] = id;
+                filter[1][0] = "bet_fecha_"+inicio;
+                filter[1][1] = fin;
+            }
+            getTableAllBacklog(tblDatos, lblcant);
         }
         catch(Exception e){
             System.out.println(_error + "findId : "+e);
