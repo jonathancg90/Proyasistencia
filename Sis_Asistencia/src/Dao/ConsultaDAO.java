@@ -44,6 +44,7 @@ public class ConsultaDAO {
     private TimeOPeration tm;
     private String DateEmp[];
     private String _Table;
+    private String R_Justifica[];
 
     public ConsultaDAO(){
         _error = "Dao_ConsultaDAO_";
@@ -333,11 +334,12 @@ public class ConsultaDAO {
     }
     public String[] set_camp_justificaciones(){
         String campos[] = new String[5];
-        campos[0] = "recibo";
-        campos[1] = "descripcion";
-        campos[2] = "hora_ini";
-        campos[3] = "hora_final";
-        campos[4] = "salida";
+        campos[0] = "tipo";
+        campos[1] = "recibo";
+        campos[2] = "descripcion";
+        campos[3] = "hora_ini";
+        campos[4] = "hora_final";
+        campos[5] = "salida";
         return campos;
     }
     public String[] set_camp_resumen(){
@@ -355,9 +357,9 @@ public class ConsultaDAO {
         campos[10] = "adicional";
         return campos;
     }
-    /*
-     * Reporte de justificaciones
-     */
+/*
+* Reporte de justificaciones
+*/
    public void create_report_justificaciones(String args[]){
        qs= new Query();
        con = new ConexionBd();
@@ -371,7 +373,7 @@ public class ConsultaDAO {
             conexion = con.getConetion();
             s = conexion.createStatement();
             s_extra = conexion.createStatement();
-            String[] campReg = new String[5];
+            String[] campReg = new String[6];
             String Consulta;
             String ConsultaTipo = "select * from tipo_justificaciones";
             //System.out.println(Consulta);
@@ -388,28 +390,30 @@ public class ConsultaDAO {
                 rs_extra = s_extra.executeQuery(Consulta);
                 while(rs_extra.next()){
                     if(i==0){
-                        campReg[0] = rs.getString(2);
-                        campReg[1] = "";
+                        campReg[0] = rs.getString(1);
+                        campReg[1] = rs.getString(2);
                         campReg[2] = "";
                         campReg[3] = "";
                         campReg[4] = "";
+                        campReg[5] = "";
                         register_report(campReg);i++;
                     }
-                    campReg[0] = rs_extra.getString(7)+" ("+rs_extra.getString(5)+")";
-                    campReg[1] = rs_extra.getString(4);
-                    campReg[2] = rs_extra.getString(8);
-                    campReg[3] = rs_extra.getString(9);
-                    campReg[4] = rs_extra.getString(6);
+                    campReg[0] = rs.getString(1);
+                    campReg[1] = rs_extra.getString(7)+" ("+rs_extra.getString(5)+")";
+                    campReg[2] = rs_extra.getString(4);
+                    campReg[3] = rs_extra.getString(8);
+                    campReg[4] = rs_extra.getString(9);
+                    campReg[5] = rs_extra.getString(6);
                     register_report(campReg);
-                    System.out.println(suma+" + "+rs_extra.getString(6));
                     suma = tm.SumaHoras(suma, rs_extra.getString(6));
                 }
                 if(i>0){
-                    campReg[0] = "";
+                    campReg[0] = rs.getString(1);
                     campReg[1] = "";
                     campReg[2] = "";
-                    campReg[3] = "Total";
-                    campReg[4] = suma;
+                    campReg[3] = "";
+                    campReg[4] = "Total";
+                    campReg[5] = suma;
                     register_report(campReg);
                 }
             }
@@ -449,8 +453,51 @@ public class ConsultaDAO {
        try {
             con.getConexion();
             conexion = con.getConetion();
-            campos = set_camp_justificaciones();
+            //Horas trabajadas (report registro)
+                setTable("registro");
+                findAsistencia(args);
+                String hTrabajada = qs.Execute("select horas from report where salida='Total'");
+                destroid_report();
+                //Consulta el total
+            //JUstifiaciones
+                create_report_justificaciones(args);
+                String hExtras = "00:00";
+                String cExtras = qs.Execute("select count(*) from report where tipo='falta'");
+                if(!"0".equals(cExtras)){
+                    hExtras = qs.Execute("select horas from report where tipo='falta' and hora_final='Total'");
+                }
+                String hTardanza = "00:00";
+                String cTardanza = qs.Execute("select count(*) from report where tipo='falta'");;
+                if(!"0".equals(cTardanza)){
+                    hTardanza = qs.Execute("select horas from report where tipo='falta' and hora_final='Total'");
+                }
+                String cFaltas = qs.Execute("select count(*) from report where tipo='falta'");;
+                String Total = "00:00";
+                destroid_report();
+                //Obtener total de extras(count)
+                //Obtener total horasde extras
+                //Obtener total de tardanza(count)
+                //Obtener total horas tardanza
+                //Obtener la cantidad  de faltas
+            //Calculo de hora total (horas trabajdas - tardanza)
+            
+            
+            //Registro del reporte
+            campos = set_camp_resumen();
             qs.create_report(campos);
+            String[] campReg = new String[11];
+            campReg[0] = args[0];
+            campReg[1] = hTrabajada;
+            campReg[2] = cExtras;
+            campReg[3] = hExtras;
+            campReg[4] = cTardanza;
+            campReg[5] = hTardanza;
+            campReg[6] = "0";
+            campReg[7] = cFaltas;
+            campReg[8] = Total;
+            campReg[9] = "";
+            campReg[10] = "";
+            register_report(campReg);
             con.closeConexion();   
        } catch(Exception e) {
            System.out.println(_error + "create_report_resumen : "+e);

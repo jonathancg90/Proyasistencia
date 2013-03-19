@@ -221,7 +221,7 @@ public class Ireport  extends  ConexionBd{
         conn = getConetion();
         File archivo = new  File("reportes/resumen.jasper");
         consul.setTable("registro");
-        consul.findAsistencia(this.args);
+        consul.create_report_resumen(this.args);
         //crear reporte
         System.out.println("Cargando desde: " + archivo);
         if(archivo == null){
