@@ -240,7 +240,7 @@ public class Ireport  extends  ConexionBd{
         JasperViewer jviewer= new JasperViewer(jasperPrint,false);
         jviewer.setTitle("Resumen de empleado");
         jviewer.setVisible(true);
-        consul.destroid_report();
+        //consul.destroid_report();
         closeConexion();
     } catch (Exception j) {
         System.out.println("Mensaje de Error:"+j);

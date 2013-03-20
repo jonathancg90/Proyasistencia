@@ -58,12 +58,25 @@
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
 	<queryString>
-		<![CDATA[select e.nombres,apellidos,dni, c.nombre as cargo, p.nombre as empresa
-from empleado e, cargo c, empresa p
-where e.idemp = $P{idemp}
+		<![CDATA[select r.horas_trabajadas, r.c_extra, r.h_extra, r.h_extra, r.c_tardanza,
+ r h_tardanza, r.c_falta, r.j_falta, r.total, r.descuento, r.adicional,
+ e.nombres,apellidos,dni, c.nombre as cargo, p.nombre as empresa
+from empleado e, cargo c, empresa p, report r
+where e.idemp = 2
 and e.idcar = c.idcar
-and e.idempr = p.idempr]]>
+and e.idempr = p.idempr
+and r.idemp = e.idemp]]>
 	</queryString>
+	<field name="horas_trabajadas" class="java.lang.String"/>
+	<field name="c_extra" class="java.lang.String"/>
+	<field name="h_extra" class="java.lang.String"/>
+	<field name="c_tardanza" class="java.lang.String"/>
+	<field name="h_tardanza" class="java.lang.Object"/>
+	<field name="c_falta" class="java.lang.String"/>
+	<field name="j_falta" class="java.lang.String"/>
+	<field name="total" class="java.lang.String"/>
+	<field name="descuento" class="java.lang.String"/>
+	<field name="adicional" class="java.lang.String"/>
 	<field name="nombres" class="java.lang.String"/>
 	<field name="apellidos" class="java.lang.String"/>
 	<field name="dni" class="java.lang.String"/>
@@ -134,7 +147,7 @@ and e.idempr = p.idempr]]>
 				<reportElement uuid="97e5b16c-091d-462d-828e-912e9b3c0bda" x="318" y="141" width="62" height="20"/>
 			</rectangle>
 			<rectangle>
-				<reportElement uuid="97e5b16c-091d-462d-828e-912e9b3c0bda" x="380" y="141" width="62" height="20"/>
+				<reportElement uuid="97e5b16c-091d-462d-828e-912e9b3c0bda" x="380" y="141" width="86" height="20"/>
 			</rectangle>
 			<rectangle>
 				<reportElement uuid="97e5b16c-091d-462d-828e-912e9b3c0bda" x="18" y="221" width="62" height="20"/>
@@ -143,7 +156,7 @@ and e.idempr = p.idempr]]>
 				<reportElement uuid="97e5b16c-091d-462d-828e-912e9b3c0bda" x="18" y="245" width="62" height="20"/>
 			</rectangle>
 			<rectangle>
-				<reportElement uuid="97e5b16c-091d-462d-828e-912e9b3c0bda" x="86" y="221" width="62" height="20"/>
+				<reportElement uuid="97e5b16c-091d-462d-828e-912e9b3c0bda" x="86" y="221" width="99" height="20"/>
 			</rectangle>
 			<rectangle>
 				<reportElement uuid="97e5b16c-091d-462d-828e-912e9b3c0bda" x="18" y="6" width="130" height="20"/>
@@ -235,13 +248,13 @@ and e.idempr = p.idempr]]>
 				<reportElement uuid="97e5b16c-091d-462d-828e-912e9b3c0bda" x="148" y="141" width="62" height="20"/>
 			</rectangle>
 			<rectangle>
-				<reportElement uuid="97e5b16c-091d-462d-828e-912e9b3c0bda" x="380" y="61" width="62" height="20"/>
+				<reportElement uuid="97e5b16c-091d-462d-828e-912e9b3c0bda" x="380" y="61" width="86" height="20"/>
 			</rectangle>
 			<rectangle>
-				<reportElement uuid="97e5b16c-091d-462d-828e-912e9b3c0bda" x="380" y="101" width="62" height="20"/>
+				<reportElement uuid="97e5b16c-091d-462d-828e-912e9b3c0bda" x="380" y="101" width="86" height="20"/>
 			</rectangle>
 			<rectangle>
-				<reportElement uuid="97e5b16c-091d-462d-828e-912e9b3c0bda" x="380" y="175" width="62" height="20"/>
+				<reportElement uuid="97e5b16c-091d-462d-828e-912e9b3c0bda" x="380" y="175" width="86" height="20"/>
 			</rectangle>
 			<rectangle>
 				<reportElement uuid="97e5b16c-091d-462d-828e-912e9b3c0bda" x="148" y="6" width="62" height="20"/>
@@ -257,13 +270,63 @@ and e.idempr = p.idempr]]>
 				<text><![CDATA[Adicional]]></text>
 			</staticText>
 			<rectangle>
-				<reportElement uuid="97e5b16c-091d-462d-828e-912e9b3c0bda" x="86" y="245" width="62" height="20"/>
+				<reportElement uuid="97e5b16c-091d-462d-828e-912e9b3c0bda" x="86" y="245" width="99" height="20"/>
 			</rectangle>
 			<staticText>
 				<reportElement uuid="b924b4e6-6bd1-48c7-8969-92abb753f80c" x="321" y="143" width="62" height="20"/>
 				<textElement/>
 				<text><![CDATA[Justificadas :]]></text>
 			</staticText>
+			<textField>
+				<reportElement uuid="6f805cb0-2813-470a-bada-ef6d0af3e0bb" x="148" y="6" width="62" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{horas_trabajadas}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="45a9047c-cb81-45d7-9ee3-5104aea30602" x="150" y="61" width="60" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{c_extra}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="d379e4f7-1fa9-4f8b-ae64-d5bfc777ccc4" x="380" y="61" width="86" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{h_extra}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="e593f52b-d298-49e9-a128-fce885f0aca1" x="150" y="101" width="60" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{c_tardanza}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="bb153607-a508-46c7-bd0a-4ab1a9ff3b21" x="380" y="101" width="86" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[""+$F{h_tardanza}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="cf229b0a-eef2-4f97-9893-3cdf6fe58716" x="150" y="143" width="60" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{c_falta}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="a5f52c65-3b73-4fac-9ff6-a0c12792d699" x="380" y="143" width="86" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{j_falta}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="ae017a45-166d-4f26-921e-f4b2135226a7" x="380" y="175" width="86" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{total}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="5795ddcd-5ddd-4413-88e3-313fe9d86830" x="86" y="221" width="99" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{descuento}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="45ba4248-0a38-4307-9d9d-4695d6559c3f" x="86" y="245" width="99" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{adicional}]]></textFieldExpression>
+			</textField>
 		</band>
 	</detail>
 	<summary>
