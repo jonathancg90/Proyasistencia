@@ -100,13 +100,11 @@ public class TimeOPeration {
         return auxReturn;
     }
     
-    public String SumaHoras(String ini, String fin) {
-        String suma = "00:00";
+    public double[] PrepararHoras(String ini, String fin) {
+        double horas[] = new double[2];
         try {
             String[] tiempo_i,tiempo_f;
             
-            double Horas=0;
-            double DblSumHora=0;
             System.out.println("ini: "+ini+" fin:"+fin);
             tiempo_i = ini.split(":");
             tiempo_f = fin.split(":");
@@ -128,26 +126,68 @@ public class TimeOPeration {
 
             HoraS=(HoraS*60)+MinS;
             HoraE=(HoraE*60)+MinE;
+            horas[0]=HoraS;
+            horas[1]=HoraE;
+            } catch(Exception e) {
+                System.out.println("Error en la preparacion de horas : "+ini+" + "+fin+" - "+e );
+            }
+        return horas;
+     }
+      public String SumaHoras(String ini, String fin) {
+          String suma = "00:00";
+          try {
+            double horas[] = new double[2];
+            horas = PrepararHoras(ini, fin);
+            double Horas=0;
+            double DblSumHora=0;
+            double HoraS = horas[0];
+            double HoraE = horas[1];
+              //System.out.println("HoraS: "+HoraS+" HoraE: "+HoraE);
 
-            //System.out.println("HoraS: "+HoraS+" HoraE: "+HoraE);
-            
-            Horas=redondear(HoraS+HoraE,2);
+              Horas=redondear(HoraS+HoraE,2);
 
-            DblSumHora=DblSumHora+Horas;
+              DblSumHora=DblSumHora+Horas;
 
-            //System.out.println("DblSumHora: "+DblSumHora);
-            
-            //Transformando a horas
-            
-            DblSumHora=(int) (DblSumHora/60)+((DblSumHora%60)/100);
-            DblSumHora=redondear(DblSumHora, 2);
-            suma=String.valueOf(DblSumHora);
-            suma=suma.replace(".",":");
-        } catch(Exception e) {
-            System.out.println("Error en la suma de horas : "+ini+" + "+fin+" - "+e );
-        }
-        
+              //System.out.println("DblSumHora: "+DblSumHora);
+
+              //Transformando a horas
+
+              DblSumHora=(int) (DblSumHora/60)+((DblSumHora%60)/100);
+              DblSumHora=redondear(DblSumHora, 2);
+              suma=String.valueOf(DblSumHora);
+              suma=suma.replace(".",":");
+          } catch(Exception e){
+              System.out.println("Error en la suma de horas : "+ini+" + "+fin+" - "+e );
+          }
         return suma;
+    }
+    public String RestaHoras(String ini, String fin) {
+          String resta = "00:00";
+          try {
+            double horas[] = new double[2];
+            horas = PrepararHoras(ini, fin);
+            double Horas=0;
+            double DblRestHora=0;
+            double HoraS = horas[0];
+            double HoraE = horas[1];
+              //System.out.println("HoraS: "+HoraS+" HoraE: "+HoraE);
+
+              Horas=redondear(HoraS-HoraE,2);
+
+              DblRestHora=DblRestHora+Horas;
+
+              //System.out.println("DblSumHora: "+DblSumHora);
+
+              //Transformando a horas
+
+              DblRestHora=(int) (DblRestHora/60)+((DblRestHora%60)/100);
+              DblRestHora=redondear(DblRestHora, 2);
+              resta=String.valueOf(DblRestHora);
+              resta=resta.replace(".",":");
+          } catch(Exception e){
+              System.out.println("Error en la resta de horas : "+ini+" + "+fin+" - "+e );
+          }
+        return resta;
     }
     public double redondear( double numero, int decimales )  {
         return Math.round(numero*Math.pow(10,decimales))/Math.pow(10,decimales);

@@ -13,6 +13,7 @@ import java.sql.PreparedStatement;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import Gui.WinEmpleado_Vacaciones;
+import java.sql.SQLException;
 import java.sql.Time;
 import javax.swing.JLabel;
 
@@ -87,6 +88,8 @@ public class justificacionesDAO extends ConexionBd{
             //Ejecucion y cierre
             i= pt.executeUpdate();
             pt.close();
+            String id = qs.Execute("select idjus from justificaciones order by idjus desc limit 1");
+            i = update(id);
             closeConexion();
             return i;
         }
@@ -95,6 +98,20 @@ public class justificacionesDAO extends ConexionBd{
             return i;
         }
     }
+   public int update(String id) throws SQLException{
+       getConexion();
+       pt = null;
+       String query = "update justificaciones set "
+               + "horas = fin - inicio "
+               + "where idjus = "+id;
+       System.out.println(query);
+       pt  = conexion.prepareStatement(query);
+       int i= pt.executeUpdate();
+       pt.close();
+       closeConexion();
+       return i;
+
+   }
    
    public int delete(int id){
        int i=0;

@@ -153,7 +153,14 @@ public class ConsultaDAO {
             ind = 0;
             //Ejecucion de consulta
             filter[1][0] = "bet_fecha_" + fechActual;filter[1][1] = fechActual;
-            Consulta = qs.getQueryList(camp, this._Table + "/fecha", filter);
+            //Consulta a justifiaciones si tiene una justificaciond e horas extras o tardanza en ese dia
+            int tar = Integer.parseInt(qs.Execute("select count(*) from justificaciones where fecha = '"+fechActual+"' and idtip_jus = 1  and empleado_idemp="+filter[0][1]));
+            int ext = Integer.parseInt(qs.Execute("select count(*) from justificaciones where fecha = '"+fechActual+"' and idtip_jus = 4  and empleado_idemp="+filter[0][1]));
+            if((tar+ext)==0){
+                Consulta = qs.getQueryList(camp, this._Table + "/fecha", filter);
+            } else {
+                Consulta = qs.getQueryList(camp, "registro_backlog" + "/fecha", filter);
+            }
             //System.out.println(Consulta);
             rs = s.executeQuery(Consulta);
             boolean countReg = false;
@@ -393,22 +400,26 @@ public class ConsultaDAO {
                         register_report(campReg);i++;
                     }
                     campReg[0] = rs.getString(1);
-                    campReg[1] = rs_extra.getString(7)+" ("+rs_extra.getString(5)+")";
+                    campReg[1] = rs_extra.getString(7);
                     campReg[2] = rs_extra.getString(4);
-                    campReg[3] = rs_extra.getString(8);
-                    campReg[4] = rs_extra.getString(9);
-                    campReg[5] = rs_extra.getString(6);
+                    if (!"2".equals(rs.getString(1))){
+                        campReg[3] = rs_extra.getString(8);
+                        campReg[4] = rs_extra.getString(9);
+                        campReg[5] = rs_extra.getString(6);
+                    }
                     register_report(campReg);
                     suma = tm.SumaHoras(suma, rs_extra.getString(6));
                 }
                 if(i>0){
-                    campReg[0] = rs.getString(1);
-                    campReg[1] = "";
-                    campReg[2] = "";
-                    campReg[3] = "";
-                    campReg[4] = "Total";
-                    campReg[5] = suma;
-                    register_report(campReg);
+                    if (!"2".equals(rs.getString(1))){
+                        campReg[0] = rs.getString(1);
+                        campReg[1] = "";
+                        campReg[2] = "";
+                        campReg[3] = "";
+                        campReg[4] = "Total";
+                        campReg[5] = suma;
+                        register_report(campReg);
+                    }
                 }
             }
             con.closeConexion();
@@ -451,7 +462,6 @@ public class ConsultaDAO {
                 setTable("registro");
                 findAsistencia(args);
                 String hTrabajada = qs.Execute("select horas from report where salida='Total'");
-                System.out.println("1a: "+hTrabajada);
                 destroid_report();
                 //Consulta el total
             //JUstifiaciones
@@ -459,20 +469,17 @@ public class ConsultaDAO {
                 String hExtras = "00:00";
                 String tipo = qs.Execute("select idtip_jus from tipo_justificaciones where nombre = 'PERMISO HORAS EXTRAS'");
                 String cExtras = qs.Execute("select count(*) from report where tipo='"+tipo+"'");
-                System.out.println("2a: "+cExtras);
                 if(!"0".equals(cExtras)){
                     hExtras = qs.Execute("select salida from report where tipo='"+tipo+"' and hora_final='Total'");
                 }
                 tipo = qs.Execute("select idtip_jus from tipo_justificaciones where nombre = 'TARDANZA JUSTIFICADA'");
                 String hTardanza = "00:00";
                 String cTardanza = qs.Execute("select count(*) from report where tipo='"+tipo+"'");
-                System.out.println("3a: "+cTardanza);
                 if(!"0".equals(cTardanza)){
                     hTardanza = qs.Execute("select salida from report where tipo='"+tipo+"' and hora_final='Total'");
                 }
                 tipo = qs.Execute("select idtip_jus from tipo_justificaciones where nombre = 'FALTA JUSTIFICADA'");
                 String cFaltas = qs.Execute("select count(*) from report where tipo='"+tipo+"'");
-                System.out.println("4a: "+cFaltas);
                 String Total = "00:00";
                 destroid_report();
             campos = set_camp_resumen();

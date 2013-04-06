@@ -97,6 +97,24 @@ public class WinJustificacion extends javax.swing.JInternalFrame {
             System.out.println(_error + "cargaLog: " + e);
         }
     }
+    public void buscar_justificaciones(){
+                if(!"".equals(lblID.getText())){
+            hp=new Helpers();
+            String inicio=hp.getFormatDate(cboIni.getText());
+            String fin=hp.getFormatDate(cboFin.getText());
+            //int id = Integer.parseInt(lblidEmp.getText() );
+            objjusti= new justificacionesDAO();
+            val=new Validators();
+            if(val.validarFechas(inicio, fin)){
+               objjusti.findJusti(lblID.getText() ,inicio, fin,TblJusti, lblcant);
+            }
+            else{
+                JOptionPane.showMessageDialog(null,"Conflicto de fechas");
+            }
+       } else {
+            JOptionPane.showMessageDialog(null,"Seleccione un empleado para poder ingresar sus asistencia");
+                }   
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -134,6 +152,8 @@ public class WinJustificacion extends javax.swing.JInternalFrame {
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         btnDateSearch = new javax.swing.JButton();
+        lblrecal = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         jLabel16 = new javax.swing.JLabel();
         lblcant = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
@@ -254,13 +274,23 @@ public class WinJustificacion extends javax.swing.JInternalFrame {
 
             }
         ));
+        TblJusti.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TblJustiMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(TblJusti);
 
         jPanel10.setBorder(javax.swing.BorderFactory.createTitledBorder("Rango de busqueda"));
+        jPanel10.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel10.add(cboIni, new org.netbeans.lib.awtextra.AbsoluteConstraints(129, 19, -1, -1));
+        jPanel10.add(cboFin, new org.netbeans.lib.awtextra.AbsoluteConstraints(129, 58, -1, -1));
 
         jLabel14.setText("Fecha inicial");
+        jPanel10.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 29, -1, -1));
 
         jLabel15.setText("Fecha final ");
+        jPanel10.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 68, -1, -1));
 
         btnDateSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilitarios/Img/consulta.png"))); // NOI18N
         btnDateSearch.setText("Buscar");
@@ -269,42 +299,23 @@ public class WinJustificacion extends javax.swing.JInternalFrame {
                 btnDateSearchjButton5MouseClicked(evt);
             }
         });
+        btnDateSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDateSearchActionPerformed(evt);
+            }
+        });
+        jPanel10.add(btnDateSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(322, 42, -1, -1));
 
-        javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
-        jPanel10.setLayout(jPanel10Layout);
-        jPanel10Layout.setHorizontalGroup(
-            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel10Layout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(jPanel10Layout.createSequentialGroup()
-                        .addComponent(jLabel15)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(cboFin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel10Layout.createSequentialGroup()
-                        .addComponent(jLabel14)
-                        .addGap(18, 18, 18)
-                        .addComponent(cboIni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(38, 38, 38)
-                .addComponent(btnDateSearch)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel10Layout.setVerticalGroup(
-            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel10Layout.createSequentialGroup()
-                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(cboIni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel14))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(cboFin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel15))
-                .addGap(0, 8, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
-                .addContainerGap(22, Short.MAX_VALUE)
-                .addComponent(btnDateSearch)
-                .addGap(20, 20, 20))
-        );
+        lblrecal.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel10.add(lblrecal, new org.netbeans.lib.awtextra.AbsoluteConstraints(514, 31, 53, 20));
+
+        jButton1.setText("Recalcular");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel10.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(499, 57, -1, -1));
 
         jLabel16.setText("Total: ");
 
@@ -330,8 +341,8 @@ public class WinJustificacion extends javax.swing.JInternalFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -530,22 +541,7 @@ public class WinJustificacion extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_ItemExportarMousePressed
 
     private void btnDateSearchjButton5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDateSearchjButton5MouseClicked
-         if(!"".equals(lblID.getText())){
-            hp=new Helpers();
-            String inicio=hp.getFormatDate(cboIni.getText());
-            String fin=hp.getFormatDate(cboFin.getText());
-            //int id = Integer.parseInt(lblidEmp.getText() );
-            objjusti= new justificacionesDAO();
-            val=new Validators();
-            if(val.validarFechas(inicio, fin)){
-               objjusti.findJusti(lblID.getText() ,inicio, fin,TblJusti, lblcant);
-            }
-            else{
-                JOptionPane.showMessageDialog(null,"Conflicto de fechas");
-            }
-       } else {
-            JOptionPane.showMessageDialog(null,"Seleccione un empleado para poder ingresar sus asistencia");
-                }       
+        buscar_justificaciones();
 
     }//GEN-LAST:event_btnDateSearchjButton5MouseClicked
 
@@ -611,6 +607,47 @@ public class WinJustificacion extends javax.swing.JInternalFrame {
      cargarLog();
     }//GEN-LAST:event_BtnVerActionPerformed
 
+    private void TblJustiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TblJustiMouseClicked
+        int fsel;
+        fsel= this.TblJusti.getSelectedRow();
+        if(fsel==-1){
+
+        }
+        else{
+            try{
+                DefaultTableModel m = new DefaultTableModel();
+                m = (DefaultTableModel) this.TblJusti.getModel();
+                String idjus = String.valueOf(m.getValueAt(fsel, 0));
+                this.lblrecal.setText(idjus);
+            }
+            catch(Exception e){
+                System.out.println(_error+"_Tblciudad:"+e);
+            }
+
+        }
+    }//GEN-LAST:event_TblJustiMouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
+        try {
+            String id =  lblrecal.getText();
+            int i = objjusti.update(id);
+                if(i==0) {
+                    JOptionPane.showMessageDialog(null,"No se pudo  recalcular las horas");
+                } else {
+                    JOptionPane.showMessageDialog(null,"Justificacion recalculada");
+                    buscar_justificaciones();
+                }
+                
+        } catch(Exception e){
+            
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void btnDateSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDateSearchActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnDateSearchActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnVer;
     private javax.swing.JMenuItem ItemExportar;
@@ -631,6 +668,7 @@ public class WinJustificacion extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox cboItiempo;
     private javax.swing.JComboBox cboStiempo;
     private javax.swing.JComboBox cboTipojus;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -661,6 +699,7 @@ public class WinJustificacion extends javax.swing.JInternalFrame {
     public static final javax.swing.JLabel lblNomape = new javax.swing.JLabel();
     private javax.swing.JLabel lblcant;
     public static final javax.swing.JLabel lblcargo = new javax.swing.JLabel();
+    private javax.swing.JLabel lblrecal;
     private javax.swing.JMenu mclose;
     private javax.swing.JMenu medit;
     private javax.swing.JMenu mfile;
