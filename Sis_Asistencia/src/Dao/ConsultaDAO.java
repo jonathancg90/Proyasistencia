@@ -132,12 +132,12 @@ public class ConsultaDAO {
         String tbl;
         int count = 0;
         int ind = 0;
+        boolean tardanza=false;
+        boolean extra=false;
         con.getConexion();
         conexion = con.getConetion();
         s = conexion.createStatement();
         //Titulos
-        //System.out.println("1");
-        //System.out.println("table: " + this._Table + "filter: "+filter[0][0]+" - "+filter[0][1]);
         Consulta = qs.getQueryList(camp, this._Table + "/fecha", filter);
         //System.out.println("consulta: "+Consulta);
         rs = s.executeQuery(Consulta);
@@ -149,7 +149,10 @@ public class ConsultaDAO {
         String fechActual = fechInicio;
         int dia = 0;
         String Total="00:00";
+        String tmp_table = "";
         do {
+            tardanza =  false;
+            extra = false;
             ind = 0;
             //Ejecucion de consulta
             filter[1][0] = "bet_fecha_" + fechActual;filter[1][1] = fechActual;
@@ -158,8 +161,16 @@ public class ConsultaDAO {
             int ext = Integer.parseInt(qs.Execute("select count(*) from justificaciones where fecha = '"+fechActual+"' and idtip_jus = 4  and empleado_idemp="+filter[0][1]));
             if((tar+ext)==0){
                 Consulta = qs.getQueryList(camp, this._Table + "/fecha", filter);
+                tmp_table = "";
             } else {
-                Consulta = qs.getQueryList(camp, "registro_backlog" + "/fecha", filter);
+                tmp_table = "registro_backlog";
+                Consulta = qs.getQueryList(camp, tmp_table + "/fecha", filter);
+                if(tar>0){
+                    tardanza = true;
+                }
+                if(ext>0){
+                    extra = true;
+                }
             }
             //System.out.println(Consulta);
             rs = s.executeQuery(Consulta);
@@ -187,6 +198,10 @@ public class ConsultaDAO {
                     }
                 }
             }
+            //Validacion tardanza justificada
+            if(tardanza){
+                campReg[1] = qs.Execute("select inicio from justificaciones where fecha = '"+fechActual+"' and idtip_jus = 1  and empleado_idemp="+filter[0][1]);
+            }
             
             //Suma
             if(countReg == true) {
@@ -204,8 +219,17 @@ public class ConsultaDAO {
                 campReg[0]=String.valueOf(fechActual + " (" + dt.G_DIAS[dia] + ")");
                 //Dia no labora deacuerdo a su horario
                 if(getDiasTrabajo(DateEmp[1], fechActual, dia) == false) {
-                    
-                    campReg[1]=String.valueOf("");
+                    campReg[1] = "";
+                    if(extra){
+                        System.out.println();
+                        campReg[1] = qs.Execute("select inicio from justificaciones where fecha = '"+fechActual+"' and idtip_jus = 4  and empleado_idemp="+filter[0][1]);
+                        campReg[2] = "";
+                        campReg[3] = "";
+                        campReg[4] = qs.Execute("select fin from justificaciones where fecha = '"+fechActual+"' and idtip_jus = 4  and empleado_idemp="+filter[0][1]);
+                        campReg[5] = qs.Execute("select horas from justificaciones where fecha = '"+fechActual+"' and idtip_jus = 4  and empleado_idemp="+filter[0][1]);
+                        //campReg[1]=String.valueOf("HORA: "+campReg[4]);
+                        Total = tm.SumaHoras(String.valueOf(Total), String.valueOf(campReg[5]));
+                    }
                 }
                 else {
                     int cVal=0;
@@ -242,8 +266,10 @@ public class ConsultaDAO {
                     if(cVal == 0)
                         campReg[1]=String.valueOf("Falto");
                     }
-               for(int i=2;i<campReg.length;i++){
-                   campReg[i]=String.valueOf("");
+               if(!extra){
+                   for(int i=2;i<campReg.length;i++){
+                        campReg[i]=String.valueOf("");
+                    }
                }
             }
             register_report(campReg);
@@ -505,4 +531,73 @@ public class ConsultaDAO {
            System.out.println(_error + "create_report_resumen : "+e);
        }
    }
+   public String[][]  report_injustificaciones(String idemp, String Fini, String Ffin){
+       qs = new Query();
+       con = new ConexionBd();
+       String result[][];
+       result = new String[0][0];
+       try {
+            con.getConexion();
+            conexion = con.getConetion();
+            s = conexion.createStatement();
+            s_extra = conexion.createStatement();
+            String args[];
+            args = new String[3];
+            args[0] =  idemp;
+            args[1] =  Fini;
+            args[2] =  Ffin;
+
+            ConsultaDAO consul = new ConsultaDAO();
+            consul.setTable("registro_backlog");
+            consul.findAsistencia(args);
+            
+            String query = "select * from report"; 
+            rs = s.executeQuery(query);
+            String fecha="",
+                   hini="",
+                   hfin="",
+                   sum="",
+                   ingreso="",
+                   salida="";
+            
+            while(rs.next()){
+                
+                fecha = rs.getString(1).substring(0, 10);
+                hini = rs.getString(2);
+                hfin = rs.getString(5);
+                
+                String Consulta = "select ingreso, salida "
+                    + "from empleado_has_horarios  c, detailhorario d "
+                    + "where idemp= "+idemp+" "
+                    + "and '"+fecha+"' >= inicio  "
+                    + "and '"+fecha+"' <= fin "
+                    + "and c.idhor = d.horarios_idhor "
+                    + "and tip_reg = 1";
+                    rs_extra= s_extra.executeQuery(Consulta);
+                    ingreso = "";salida = "";
+                    while(rs_extra.next()){
+                        ingreso = rs.getString(1);
+                        salida = rs.getString(2);
+                    }
+                    if(!"".equals(ingreso) && salida != "" ){
+                        //hini - ingreso
+                        //hfin - salida
+                   //comparo entrada backlog no puede ser mayor a su horario de entrada (tardanza)
+                        //verifico q no tenga justificacion de ese dia de tipo tardanza
+                   //comparo salida backlog no puede ser mayor a su horario de salida (extra)
+                        //verifico q no tenga justificacion de ese dia de tipo hora extra
+                    } else {
+                        //No trabaja ese dia
+                    }
+            }
+            //registro en un arreglo [justi][fecha];[justi][entrada horario];[justi][entrada backlog](resta)
+            consul.destroid_report();
+            con.closeConexion();
+       } catch(Exception e ){
+           System.out.println(_error + "report_injustificaciones : "+e);
+       }
+       return result;
+       
+   }
+   
    }

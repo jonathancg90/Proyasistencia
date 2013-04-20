@@ -13,7 +13,7 @@ import Javabeans.Registro;
 import javax.swing.table.DefaultTableModel;
 
 import Utilitarios.Query;
-
+import Dao.RegistroDAO;
 import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -554,6 +554,7 @@ public class WinJustificacion extends javax.swing.JInternalFrame {
             tm = new TimeOPeration();
             qs = new Query();
             hp = new Helpers();
+            int dia;
             
             //Validacion propia del evento
             objjusti = new justificacionesDAO();
@@ -578,6 +579,18 @@ public class WinJustificacion extends javax.swing.JInternalFrame {
                 }
                 else {
                       JOptionPane.showMessageDialog(null,"justificacion grabada");
+                      Dao.ConsultaDAO djus =  new Dao.ConsultaDAO();
+                      dia = Integer.parseInt(qs.getDayOfTheWeek(fecha));
+                      System.out.println("grabando: "+tipojus+" value :"+djus.getDiasTrabajo(lblID.getText(), fecha, dia));
+                      if(djus.getDiasTrabajo(lblID.getText(), fecha, dia) == false && tipojus == 4) {
+                            RegistroDAO objRegistro;
+                            objRegistro = new RegistroDAO();
+                            System.out.println("grabando");
+                            objRegistro.save(1, ing, fecha, id,1);
+                            objRegistro.save(2, sal, fecha, id,1);
+                            objRegistro.save(1, ing ,fecha,id ,0);
+                            objRegistro.save(2, sal ,fecha,id ,0);
+                        }
                      }
             } else {
                 JOptionPane.showMessageDialog(null,"conflicto de horas");

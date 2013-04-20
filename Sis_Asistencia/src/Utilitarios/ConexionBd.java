@@ -32,7 +32,7 @@ public class ConexionBd {
            File archivo = new File("Host.txt");
            String user = "postgres";
            String password = "sp1r4ls4c";
-           String bd = "asistencia"; 
+           String bd = "asistenciabk"; 
            String host = hp.readFiles(archivo);
            String url = "Jdbc:postgresql://"+host+"/"+bd;
            Class.forName("org.postgresql.Driver");
