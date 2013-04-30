@@ -200,7 +200,7 @@ public class ConsultaDAO {
             }
             //Validacion tardanza justificada
             if(tardanza){
-                campReg[1] = qs.Execute("select inicio from justificaciones where fecha = '"+fechActual+"' and idtip_jus = 1  and empleado_idemp="+filter[0][1]);
+                campReg[1] = qs.Execute("select fin from justificaciones where fecha = '"+fechActual+"' and idtip_jus = 1  and empleado_idemp="+filter[0][1]);
             }
             
             //Suma
@@ -241,7 +241,7 @@ public class ConsultaDAO {
                     args[4]=fechActual;
                     cVal = qs.getCountRegister(args);
                     if(cVal > 0) {
-                        campReg[1]=String.valueOf("Dia no laborable");
+                        campReg[1]=String.valueOf("Feriado");
                     } 
                     if(cVal == 0){
                         cVal = qs.getcount("vacaciones where idemp='" + DateEmp[1] +"' and '"+fechActual+"'>=f_ini and '"+fechActual+"'<=f_final");
