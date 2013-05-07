@@ -91,19 +91,19 @@ and e.idempr = p.idempr]]>
 	<pageHeader>
 		<band height="54" splitType="Stretch">
 			<textField>
-				<reportElement uuid="966bcbff-da75-4743-92c8-421eaffc4471" x="118" y="20" width="132" height="20"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<reportElement uuid="966bcbff-da75-4743-92c8-421eaffc4471" x="42" y="20" width="132" height="20"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{dni}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement uuid="1125282a-cc2a-4a31-9297-f2a57648392a" x="0" y="0" width="118" height="20"/>
+				<reportElement uuid="1125282a-cc2a-4a31-9297-f2a57648392a" x="0" y="0" width="130" height="20"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[Nombres y apellidos]]></text>
+				<text><![CDATA[Nombres y apellidos : ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="5e16ba07-2a71-4bfa-97ab-c5c54404a084" x="0" y="20" width="118" height="20"/>
+				<reportElement uuid="5e16ba07-2a71-4bfa-97ab-c5c54404a084" x="0" y="20" width="42" height="20"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
@@ -118,12 +118,12 @@ and e.idempr = p.idempr]]>
 			</staticText>
 			<textField>
 				<reportElement uuid="d4f1d46c-a872-4a5b-b386-b4355b310789" x="350" y="20" width="100" height="20"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{cargo}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement uuid="b90cc98e-697f-4e66-b430-c6c7190edb2f" x="118" y="0" width="332" height="20"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<reportElement uuid="b90cc98e-697f-4e66-b430-c6c7190edb2f" x="130" y="0" width="332" height="20"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{nombres}+$F{apellidos}]]></textFieldExpression>
 			</textField>
 		</band>

@@ -163,7 +163,12 @@ public class ConsultaDAO {
                 Consulta = qs.getQueryList(camp, this._Table + "/fecha", filter);
                 tmp_table = "";
             } else {
-                tmp_table = "registro_backlog";
+                if(ext>0){
+                    tmp_table = "registro_backlog";
+                } else {
+                    tmp_table = "registro";
+                }
+
                 Consulta = qs.getQueryList(camp, tmp_table + "/fecha", filter);
                 if(tar>0){
                     tardanza = true;
