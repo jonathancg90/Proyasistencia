@@ -207,6 +207,10 @@ public class ConsultaDAO {
             if(tardanza){
                 campReg[1] = qs.Execute("select fin from justificaciones where fecha = '"+fechActual+"' and idtip_jus = 1  and empleado_idemp="+filter[0][1]);
             }
+            //Validacion horas extras (entrada normal)
+            if(extra){
+                campReg[1] = qs.Execute("select hora from registro where idemp="+filter[0][1]+"and fecha='"+fechActual+"' and idtip_reg = 1 order by hora asc limit 1");
+            }
             
             //Suma
             if(countReg == true) {
@@ -226,7 +230,6 @@ public class ConsultaDAO {
                 if(getDiasTrabajo(DateEmp[1], fechActual, dia) == false) {
                     campReg[1] = "";
                     if(extra){
-                        System.out.println();
                         campReg[1] = qs.Execute("select inicio from justificaciones where fecha = '"+fechActual+"' and idtip_jus = 4  and empleado_idemp="+filter[0][1]);
                         campReg[2] = "";
                         campReg[3] = "";
@@ -334,7 +337,6 @@ public class ConsultaDAO {
     public void register_report(String[] args) {
         pt = null;
         try {
-            System.out.println("insertar");
             String query = "insert into report values(";
             for(int i=0;i<args.length;i++){
                 query = query + "'" + args[i] + "'";
@@ -408,7 +410,6 @@ public class ConsultaDAO {
             String[] campReg = new String[6];
             String Consulta;
             String ConsultaTipo = "select * from tipo_justificaciones";
-            //System.out.println(Consulta);
             
             rs = s.executeQuery(ConsultaTipo);
             int i;

@@ -344,7 +344,6 @@ public class WinCiudad extends javax.swing.JInternalFrame {
             int id = Integer.valueOf(lblId.getText());
             String name = txtName.getText();
             objciudad = new CiudadDAO();
-            System.out.println("ID: "+id);
             int i = objciudad.update(id,name);
             if (i == 0) {
 

@@ -230,7 +230,6 @@ public class UserDAO extends ConexionBd{
             objUsu.setModified(campos[6]);
             objUsu.setEstado(objVal.StringToBoolean(campos[7]));
             objUsu.setRol(Integer.parseInt(campos[8]));
-            System.out.println(campos[8]);
             objUsu.setCorreo(campos[9]);
             
             return objUsu;

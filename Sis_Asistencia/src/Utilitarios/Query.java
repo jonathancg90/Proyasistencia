@@ -156,7 +156,6 @@ public class Query extends ConexionBd{
             }
             query = query + " where "+id+"= ?";
             query = query.replace(", "," ");
-            System.out.println(query);
             pt  = conexion.prepareStatement(query);
             rs.close();
             return pt;
@@ -288,7 +287,6 @@ public class Query extends ConexionBd{
             String tbl;
             s = conexion.createStatement();
             String qs = getQueryList(args,Table, Filter);
-            System.out.println("Consulta : " + qs);
             rs_all = s.executeQuery(qs);
             //Llenado Cabecera Jtable
             ResultSetMetaData meta = rs_all.getMetaData();
@@ -398,7 +396,6 @@ public class Query extends ConexionBd{
             MChoice.addElement(dt.G_DISEÑOS[11]);
             MChoice.addElement(dt.G_DISEÑOS[12]);
             cmbState.setModel(MChoice);   
-            System.out.println("OLAAA"+dt.G_DISEÑOS[0]);
         }
         catch(Exception e){
             System.out.println(_error+"loaddiseño: "+e);

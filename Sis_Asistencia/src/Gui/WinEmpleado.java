@@ -620,7 +620,6 @@ public  class WinEmpleado extends javax.swing.JInternalFrame {
          DefaultTableModel m = new DefaultTableModel();
          m = (DefaultTableModel) this.tblEmpleado.getModel();
          String idEmp = String.valueOf(m.getValueAt(fsel, 0));
-         System.out.println(idEmp);
                 //crear objeto modusu
                 
          modemp = objempl.getValues(Integer.parseInt(idEmp));

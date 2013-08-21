@@ -114,9 +114,6 @@ public class Helpers {
         
         cal.set(Calendar.AM_PM,Calendar.AM);
         
-        System.out.println("hora: "+i_hora);
-        System.out.println("min: "+i_min);
-        System.out.println("tiempo: "+S_tiempo);
         if("PM".equals(S_tiempo)) {
             i_hora = i_hora + 12;
             if (i_hora == 12) {

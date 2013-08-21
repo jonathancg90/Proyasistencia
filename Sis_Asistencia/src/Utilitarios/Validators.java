@@ -131,17 +131,14 @@ public class Validators {
     qs = new Query();
     for (int i = 0; i <= datos.length - 1; i++) {
         if (datos[i].toString().isEmpty()) {
-            System.out.println("vacio");
            return false;
         } 
         else {
             if(tipos.length != 0){
                 String a =tipos[i].toString();  
                 if(!"0".equals(a)){
-                    System.out.println("entro");
                     int pres = qs.gettamColumn(this.Table,Integer.parseInt(tipos[i].toString()));
                     if(datos[i].toString().length() > pres){
-                        System.out.println("tipo: " + pres);
                         return false;
                     }
                 }

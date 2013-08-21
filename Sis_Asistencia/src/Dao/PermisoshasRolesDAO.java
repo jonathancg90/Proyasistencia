@@ -58,7 +58,6 @@ public class PermisoshasRolesDAO extends ConexionBd{
     public int find(String rol,JTable tblDatos, JLabel lblcant) {
         int i = 0;
         try {
-            System.out.println("rol: "+rol);
                 filter = new String[1][2];
                 filter[0][0] = "int_idrol";
                 filter[0][1] = rol; 

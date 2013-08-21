@@ -183,7 +183,6 @@ public class TipoEmpleadoDAO extends ConexionBd{
             String campos[] = new String[6];
             campos = qs.getRecords("tipoempleado",idusu);
             objtipoemp.setName(campos[2]);
-            System.out.println("Estado: "+objVal.StringToBoolean(campos[3]));
             objtipoemp.setEstado(objVal.StringToBoolean(campos[3]));
             objtipoemp.setCreated(campos[4]);
             objtipoemp.setModified(campos[5]);

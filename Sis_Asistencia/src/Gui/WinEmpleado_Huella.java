@@ -446,14 +446,11 @@ public void guardarHuella(){
 
     ByteArrayInputStream datosHuella = new ByteArrayInputStream(template.serialize());
     Integer tamañoHuella=template.serialize().length;
-    System.out.println("llego1");
     try{
         cn = new ConexionBd();
         cn.getConexion();
-        System.out.println("llego2");
         String query = "update empleado set huella=? where idemp = ?";
         PreparedStatement guardarStmt = cn.conexion.prepareStatement(query);
-        System.out.println("llego3");
         guardarStmt.setInt(2,Id);
         guardarStmt.setBinaryStream(1, datosHuella,tamañoHuella);
 

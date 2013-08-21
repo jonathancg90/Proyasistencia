@@ -58,7 +58,7 @@
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
 	<queryString>
-		<![CDATA[select e.nombres,apellidos,dni, c.nombre as cargo, p.nombre as empresa, p.ruc
+		<![CDATA[select e.nombres,apellidos,dni, c.nombre as cargo, p.nombre as empresa
 from empleado e, cargo c, empresa p
 where e.idemp = $P{idemp}
 and e.idcar = c.idcar
@@ -69,12 +69,11 @@ and e.idempr = p.idempr]]>
 	<field name="dni" class="java.lang.String"/>
 	<field name="cargo" class="java.lang.String"/>
 	<field name="empresa" class="java.lang.String"/>
-	<field name="ruc" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="40" splitType="Stretch">
+		<band height="43" splitType="Stretch">
 			<staticText>
 				<reportElement uuid="b855a4c9-7fd7-4940-9bf3-18590bb4c52b" x="185" y="0" width="165" height="20"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -83,9 +82,9 @@ and e.idempr = p.idempr]]>
 				<text><![CDATA[Reporte Asistencia]]></text>
 			</staticText>
 			<textField>
-				<reportElement uuid="f67b0b81-f9a5-4ac4-92d0-f7fa98fce59c" x="130" y="20" width="302" height="20"/>
+				<reportElement uuid="f67b0b81-f9a5-4ac4-92d0-f7fa98fce59c" x="148" y="20" width="242" height="20"/>
 				<textElement textAlignment="Center"/>
-				<textFieldExpression><![CDATA[$F{empresa}+' ( '+$F{ruc}+' )']]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{empresa}]]></textFieldExpression>
 			</textField>
 		</band>
 	</title>
@@ -132,7 +131,7 @@ and e.idempr = p.idempr]]>
 	<detail>
 		<band height="63" splitType="Stretch">
 			<componentElement>
-				<reportElement uuid="43d9cd6f-b663-42d4-bd07-199a6d0e4a5d" key="table 1" style="table 1" x="0" y="0" width="555" height="45"/>
+				<reportElement uuid="43d9cd6f-b663-42d4-bd07-199a6d0e4a5d" key="table 1" style="table 1" x="0" y="0" width="555" height="50"/>
 				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
 					<datasetRun subDataset="Table Dataset 1" uuid="4d0986ea-d8b3-49ec-9981-2ff3be7ca598">
 						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
@@ -147,9 +146,9 @@ and e.idempr = p.idempr]]>
 								<text><![CDATA[fecha]]></text>
 							</staticText>
 						</jr:columnHeader>
-						<jr:detailCell style="table 1_TD" height="16" rowSpan="1">
+						<jr:detailCell style="table 1_TD" height="20" rowSpan="1">
 							<textField>
-								<reportElement uuid="0d583251-4a77-4fbd-a329-a19a42459313" x="0" y="0" width="175" height="15"/>
+								<reportElement uuid="0d583251-4a77-4fbd-a329-a19a42459313" x="0" y="0" width="175" height="20"/>
 								<textElement/>
 								<textFieldExpression><![CDATA[$F{fecha}]]></textFieldExpression>
 							</textField>
@@ -165,9 +164,9 @@ and e.idempr = p.idempr]]>
 								<text><![CDATA[ingreso]]></text>
 							</staticText>
 						</jr:columnHeader>
-						<jr:detailCell style="table 1_TD" height="16" rowSpan="1">
+						<jr:detailCell style="table 1_TD" height="20" rowSpan="1">
 							<textField isBlankWhenNull="true">
-								<reportElement uuid="31742f40-aefd-4391-8323-c6547ff415f0" x="0" y="0" width="88" height="15"/>
+								<reportElement uuid="31742f40-aefd-4391-8323-c6547ff415f0" x="0" y="0" width="88" height="20"/>
 								<textElement/>
 								<textFieldExpression><![CDATA[$F{ingreso}]]></textFieldExpression>
 							</textField>
@@ -183,9 +182,9 @@ and e.idempr = p.idempr]]>
 								<text><![CDATA[refrigerio ing]]></text>
 							</staticText>
 						</jr:columnHeader>
-						<jr:detailCell style="table 1_TD" height="16" rowSpan="1">
+						<jr:detailCell style="table 1_TD" height="20" rowSpan="1">
 							<textField isBlankWhenNull="true">
-								<reportElement uuid="5bd17eac-df06-40fc-aeb1-2c75a65015e5" x="0" y="0" width="90" height="15"/>
+								<reportElement uuid="5bd17eac-df06-40fc-aeb1-2c75a65015e5" x="0" y="0" width="90" height="20"/>
 								<textElement/>
 								<textFieldExpression><![CDATA[$F{refrigerio_ing}]]></textFieldExpression>
 							</textField>
@@ -201,9 +200,9 @@ and e.idempr = p.idempr]]>
 								<text><![CDATA[refrigerio sal]]></text>
 							</staticText>
 						</jr:columnHeader>
-						<jr:detailCell style="table 1_TD" height="16" rowSpan="1">
+						<jr:detailCell style="table 1_TD" height="20" rowSpan="1">
 							<textField isBlankWhenNull="true">
-								<reportElement uuid="dc68db2b-e072-41db-9070-c46c793a2a16" x="0" y="0" width="90" height="15"/>
+								<reportElement uuid="dc68db2b-e072-41db-9070-c46c793a2a16" x="0" y="0" width="90" height="20"/>
 								<textElement/>
 								<textFieldExpression><![CDATA[$F{refrigerio_sal}]]></textFieldExpression>
 							</textField>
@@ -219,9 +218,9 @@ and e.idempr = p.idempr]]>
 								<text><![CDATA[salida]]></text>
 							</staticText>
 						</jr:columnHeader>
-						<jr:detailCell style="table 1_TD" height="16" rowSpan="1">
+						<jr:detailCell style="table 1_TD" height="20" rowSpan="1">
 							<textField isBlankWhenNull="true">
-								<reportElement uuid="dc70e08e-2eba-4762-a71a-c3c7ea792581" x="0" y="0" width="92" height="15"/>
+								<reportElement uuid="dc70e08e-2eba-4762-a71a-c3c7ea792581" x="0" y="0" width="92" height="20"/>
 								<textElement/>
 								<textFieldExpression><![CDATA[$F{salida}]]></textFieldExpression>
 							</textField>

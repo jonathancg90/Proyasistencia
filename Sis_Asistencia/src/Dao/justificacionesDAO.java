@@ -104,7 +104,6 @@ public class justificacionesDAO extends ConexionBd{
        String query = "update justificaciones set "
                + "horas = fin - inicio "
                + "where idjus = "+id;
-       System.out.println(query);
        pt  = conexion.prepareStatement(query);
        int i= pt.executeUpdate();
        pt.close();
