@@ -582,7 +582,7 @@ public class ConsultaDAO {
                     + "and '"+fecha+"' >= inicio  "
                     + "and '"+fecha+"' <= fin "
                     + "and c.idhor = d.horarios_idhor "
-                    + "and tip_reg = 1";
+                    + "and idtip_reg = 1";
                     rs_extra= s_extra.executeQuery(Consulta);
                     ingreso = "";salida = "";
                     while(rs_extra.next()){

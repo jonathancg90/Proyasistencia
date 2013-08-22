@@ -80,6 +80,16 @@ public class Helpers {
         return date;
     }
     /**
+     * Convertir hora y minuto a decimal.
+     */
+    public double getConvertTime(String hora)
+    {
+        double convert;
+        String [] arrayfecha = hora.split(":");
+        convert = Double.parseDouble(arrayfecha[0]+"."+arrayfecha[1]);
+        return convert;
+    }
+    /**
      * Obtener valores de una constante.
      */
     public String[] getConstantData(String op){

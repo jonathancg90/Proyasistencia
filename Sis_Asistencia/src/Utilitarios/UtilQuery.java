@@ -81,4 +81,57 @@ public class UtilQuery {
         }
         return result;
     }
+    
+    //Hora que llego en un determinado dia
+    public String arrival_day(String emp, String fecha){
+        String llegada = "";
+        qs = new Query();
+        String query = "select hora from registro "
+                + "where idemp="+emp+" "
+                + "and idtip_reg=1 "
+                + "and fecha='"+fecha+"' "
+                + "order by hora asc";
+        llegada = qs.Execute(query);
+        return llegada;
+    }
+
+    
+    //Hora de ingreso o salida segun su horario de un determinado dia
+    public String arrival_schedule(String emp, String fecha, String opcion, int dia){
+        String llegada = "";
+        qs = new Query();
+        String query = "select "+opcion+" " +
+                        "from empleado_has_horarios  c, detailhorario d " +
+                        "where idemp= "+emp+" " +
+                        "and '"+fecha+"' >= inicio " +
+                        "and '"+fecha+"' <= fin " +
+                        "and c.idhor = d.horarios_idhor " +
+                        "and d.idtip_reg = 1" +
+                        "and d.dia="+dia;
+        llegada = qs.Execute(query);
+        return llegada;
+    }
+    //Crear tabla de injustificaciones
+    public void createTableInjustificaciones(){
+        qs = new Query();
+        String query = "create table injustificaciones( "
+                + "tipo varchar(30),"
+                + "fecha varchar(30),"
+                + "horas varchar(30)"
+                + ");";
+        
+        qs.ExecuteUpdating(query);
+    }
+    //elimina tabla de injustificaciones    
+    public void dropTableInjustificaciones(){
+        qs = new Query();
+        String query = "drop table injustificaciones";
+        qs.ExecuteUpdating(query);
+    }
+    //inserta injustificacion en la tabla de injustificaciones
+    public void insert_injustificacion(String tipo, String fecha, String horas){
+        qs = new Query();
+        String query = "insert into injustificaciones values('"+tipo+"','"+fecha+"','"+horas+"')";
+        qs.ExecuteUpdating(query);
+    }
 }

@@ -63,7 +63,32 @@ public class justificacionesDAO extends ConexionBd{
         catch(Exception e){
             System.out.println(_error + "getTableAll: "+e);
         }
-    
+    }
+    public void getTableInjustificaciones(JTable tblDatos, JLabel lblcant){
+        try{
+            campos = new String[3];
+            campos[0]="tipo";
+            campos[1]="fecha";
+            campos[2]="horas";
+            
+            witdhcolum = new int[1];
+            witdhcolum[0]=150;
+            DefaultTableModel datos;
+            qs= new Query();
+            hp = new Helpers();
+            if (filter.length <= 0){
+                filter = new String[0][0];
+            }
+            String Table = "injustificaciones";
+            datos = qs.getAll(this.campos,Table,filter);
+            tblDatos.setModel(datos);
+            hp.setWidthJtable(tblDatos,witdhcolum);
+            int num = tblDatos.getRowCount();
+            lblcant.setText(String .valueOf(num));
+        }
+        catch(Exception e){
+            System.out.println(_error + "getTableAll: "+e);
+        }
     }
     
    public int save(int idemp,int idtip_reg, String fecha,String motivo,String recibo,Time horas,Time inicio, Time fin){

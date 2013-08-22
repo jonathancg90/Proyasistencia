@@ -831,6 +831,20 @@ public class Query extends ConexionBd{
                 System.out.println(_error+"destroid_report: "+e);
             }
         }
+        //Crear tabla generica
+        public void ExecuteUpdating(String query){
+            try {
+                getConexion();
+                pt = null;
+                pt  = conexion.prepareStatement(query);
+                pt.executeUpdate();
+                pt.close();
+                closeConexion();
+            } catch(Exception e) {
+                System.out.println(_error+"destroid_report: "+e);
+            }
+        }
+        
         //Ejecutar consultas
         public String Execute(String query) {
             String result = "";

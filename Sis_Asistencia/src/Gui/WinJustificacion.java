@@ -686,7 +686,10 @@ public class WinJustificacion extends javax.swing.JInternalFrame {
             qs = new Query();
             hp = new Helpers();
             ut = new UtilQuery();
+            tm = new TimeOPeration();
+            DateFormat sdf = new SimpleDateFormat("HH:mm:ss");
             int dia =0;
+            ut.createTableInjustificaciones();
             String idEmp =lblID.getText();
             String fecha_inicio =  hp.formatFecha(cboIni.getText());
             String fecha_final =  hp.formatFecha(cboFin.getText());
@@ -698,37 +701,60 @@ public class WinJustificacion extends javax.swing.JInternalFrame {
                 try{
                     dia = Integer.parseInt(qs.getDayOfTheWeek(fechActual));
                     if(ut.is_exists_asistent(fechActual,idEmp)){
-                        
+                        String llegeda_dia = ut.arrival_day(idEmp, fechActual);
+                        String llegada_horario = ut.arrival_schedule(idEmp, fechActual, "ingreso", dia);
+                        Date date_ini = sdf.parse(llegeda_dia);
+                        Date date_fin = sdf.parse(llegada_horario);
+                        Time hrs = tm.restarTime(
+                                            Time.valueOf(sdf.format(date_ini)),
+                                            Time.valueOf(sdf.format(date_fin))
+                                            );
+                        String rest_time = String.valueOf(hrs);
+                        if(hp.getConvertTime(rest_time) > 0.5){
+                            
+                            if(!ut.has_permition(idEmp, fechActual, idTardanza)){
+                                //Tardanza no justificada
+                                ut.insert_injustificacion("Tardanza", fechActual, rest_time);
+                                System.out.println("tardanza: "+fechActual+ "minutos tarde: "+rest_time);
+                            }
+                        }
+                                
                     } else {
                         if(ut.is_work_day(idEmp, fechActual, dia)){
                             if(!ut.has_permition(idEmp, fechActual, idFalta)){
+                                //Falta no justificada
+                                ut.insert_injustificacion("Falta",fechActual, "");
                                 System.out.println("falto: "+fechActual);
                             }
                         }
                     }
-
                     fechActual = qs.getDay(fechActual, "+");
                 } catch(Exception e){
                     System.out.println("Error: "+ e);
                     fechActual = qs.getDay(fechActual, "+");
                 }
             } while(!fechActual.equals(fecha_final));
+            
+            objjusti= new justificacionesDAO();
+            objjusti.getTableInjustificaciones(TblJusti, lblcant);
+            //mostrar reporte
            
         } else {
             JOptionPane.showMessageDialog(null,"Seleccione un empleado para poder ingresar sus asistencia");
-        } 
+        }
+       ut.dropTableInjustificaciones();
         
         
         //Recorrer las fechas
             //revisar si tienen registro
-                //de no tenerlo ¿tienen justificaciones?
-                    //¿Es dia laborable?
-                        //de no tener justificacion es falta no justificada
                 //de si tenerlo comparar primer registro con su hora de entrada
                     //de ser mayor de 5 min de su entrada revisar si tiene 
                     //justificacion de tardanza
         
                     //de no tenerlo es tardanza no justificada
+                //de no tenerlo ¿tienen justificaciones?
+                    //¿Es dia laborable?
+                        //de no tener justificacion es falta no justificada
     }//GEN-LAST:event_jButton2ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
