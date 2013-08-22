@@ -110,6 +110,10 @@ public class ConsultaDAO {
             System.out.println(_error + "findAsistencia : "+e);
         }
     }
+    public void delete_total_report(){
+        qs= new Query();
+        qs.Execute("delete from report where salida='Total'");
+    }
     public void destroid_report() {
         qs.destroid_report();
     }

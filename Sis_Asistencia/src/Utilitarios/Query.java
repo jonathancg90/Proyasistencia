@@ -667,6 +667,7 @@ public class Query extends ConexionBd{
                             i++;
                         }
                     }
+                    //System.out.println(query);
                     rs = s.executeQuery(query);
                     rs.next();
                     cant = rs.getInt(1);

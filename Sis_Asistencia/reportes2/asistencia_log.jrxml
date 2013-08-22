@@ -58,7 +58,7 @@
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
 	<queryString>
-		<![CDATA[select e.nombres,apellidos,dni, c.nombre as cargo, p.nombre as empresa
+		<![CDATA[select e.nombres,apellidos,dni, c.nombre as cargo, p.nombre as empresa, p.ruc
 from empleado e, cargo c, empresa p
 where e.idemp = $P{idemp}
 and e.idcar = c.idcar
@@ -69,6 +69,7 @@ and e.idempr = p.idempr]]>
 	<field name="dni" class="java.lang.String"/>
 	<field name="cargo" class="java.lang.String"/>
 	<field name="empresa" class="java.lang.String"/>
+	<field name="ruc" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -82,9 +83,9 @@ and e.idempr = p.idempr]]>
 				<text><![CDATA[Reporte Asistencia Interno]]></text>
 			</staticText>
 			<textField>
-				<reportElement uuid="f67b0b81-f9a5-4ac4-92d0-f7fa98fce59c" x="148" y="20" width="242" height="20"/>
+				<reportElement uuid="f67b0b81-f9a5-4ac4-92d0-f7fa98fce59c" x="93" y="20" width="357" height="20"/>
 				<textElement textAlignment="Center"/>
-				<textFieldExpression><![CDATA[$F{empresa}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{empresa}+'( '+$F{ruc}+' )']]></textFieldExpression>
 			</textField>
 		</band>
 	</title>
@@ -131,7 +132,7 @@ and e.idempr = p.idempr]]>
 	<detail>
 		<band height="75" splitType="Stretch">
 			<componentElement>
-				<reportElement uuid="43d9cd6f-b663-42d4-bd07-199a6d0e4a5d" key="table 1" style="table 1" x="0" y="0" width="555" height="50"/>
+				<reportElement uuid="43d9cd6f-b663-42d4-bd07-199a6d0e4a5d" key="table 1" style="table 1" x="0" y="0" width="555" height="45"/>
 				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
 					<datasetRun subDataset="Table Dataset 1" uuid="4d0986ea-d8b3-49ec-9981-2ff3be7ca598">
 						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>

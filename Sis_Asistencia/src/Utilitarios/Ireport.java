@@ -61,6 +61,7 @@ public class Ireport  extends  ConexionBd{
         File archivo = new  File("reportes/asistencia.jasper");
         consul.setTable("registro");
         consul.findAsistencia(this.args);
+        consul.delete_total_report();
         //crear reporte
         if(archivo == null){
             JOptionPane.showMessageDialog(null,"Reporte desactualizado, consulte con su soporte");
@@ -78,7 +79,7 @@ public class Ireport  extends  ConexionBd{
         JasperViewer jviewer= new JasperViewer(jasperPrint,false);
         jviewer.setTitle("Asistencia Personal");
         jviewer.setVisible(true);
-        //consul.destroid_report();
+        consul.destroid_report();
         closeConexion();
     } catch (Exception j) {
         System.out.println("Mensaje de Error:"+j);
@@ -222,6 +223,7 @@ public class Ireport  extends  ConexionBd{
         File archivo = new  File("reportes/resumen.jasper");
         consul.setTable("registro");
         consul.create_report_resumen(this.args);
+        
         //crear reporte
         System.out.println("Cargando desde: " + archivo);
         if(archivo == null){
@@ -240,7 +242,7 @@ public class Ireport  extends  ConexionBd{
         JasperViewer jviewer= new JasperViewer(jasperPrint,false);
         jviewer.setTitle("Resumen de empleado");
         jviewer.setVisible(true);
-        //consul.destroid_report();
+        consul.destroid_report();
         closeConexion();
     } catch (Exception j) {
         System.out.println("Mensaje de Error:"+j);

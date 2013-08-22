@@ -19,6 +19,7 @@ import java.util.Calendar;
 import java.util.Date;
 import Utilitarios.Helpers;
 import Utilitarios.Validators;
+import Utilitarios.UtilQuery;
 import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
 import javax.swing.JOptionPane;
@@ -48,6 +49,7 @@ public class WinJustificacion extends javax.swing.JInternalFrame {
     private TimeOPeration tm;
     private String _error = "Gui_WinJustificacion_";
     private RegistroDAO reg;
+    private UtilQuery ut;
     
     public WinJustificacion() {
         initComponents();
@@ -98,7 +100,7 @@ public class WinJustificacion extends javax.swing.JInternalFrame {
         }
     }
     public void buscar_justificaciones(){
-                if(!"".equals(lblID.getText())){
+        if(!"".equals(lblID.getText())){
             hp=new Helpers();
             String inicio=hp.getFormatDate(cboIni.getText());
             String fin=hp.getFormatDate(cboFin.getText());
@@ -113,7 +115,7 @@ public class WinJustificacion extends javax.swing.JInternalFrame {
             }
        } else {
             JOptionPane.showMessageDialog(null,"Seleccione un empleado para poder ingresar sus asistencia");
-                }   
+      }   
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -679,10 +681,49 @@ public class WinJustificacion extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnDateSearchActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        
+       if(!"".equals(lblID.getText())){
+            qs = new Query();
+            hp = new Helpers();
+            ut = new UtilQuery();
+            int dia =0;
+            String idEmp =lblID.getText();
+            String fecha_inicio =  hp.formatFecha(cboIni.getText());
+            String fecha_final =  hp.formatFecha(cboFin.getText());
+            String idFalta = qs.Execute("select idtip_jus from tipo_justificaciones where nombre='FALTA JUSTIFICADA'");
+            String idTardanza = qs.Execute("select idtip_jus from tipo_justificaciones where nombre='FALTA JUSTIFICADA'");
+            fecha_final = qs.getDay(fecha_final, "+");
+            String fechActual = fecha_inicio;
+            do{
+                try{
+                    dia = Integer.parseInt(qs.getDayOfTheWeek(fechActual));
+                    if(ut.is_exists_asistent(fechActual,idEmp)){
+                        
+                    } else {
+                        if(ut.is_work_day(idEmp, fechActual, dia)){
+                            if(!ut.has_permition(idEmp, fechActual, idFalta)){
+                                System.out.println("falto: "+fechActual);
+                            }
+                        }
+                    }
+
+                    fechActual = qs.getDay(fechActual, "+");
+                } catch(Exception e){
+                    System.out.println("Error: "+ e);
+                    fechActual = qs.getDay(fechActual, "+");
+                }
+            } while(!fechActual.equals(fecha_final));
+           
+        } else {
+            JOptionPane.showMessageDialog(null,"Seleccione un empleado para poder ingresar sus asistencia");
+        } 
+        
+        
         //Recorrer las fechas
             //revisar si tienen registro
                 //de no tenerlo ¿tienen justificaciones?
-                    //de no tener justificacion es falta no justificada
+                    //¿Es dia laborable?
+                        //de no tener justificacion es falta no justificada
                 //de si tenerlo comparar primer registro con su hora de entrada
                     //de ser mayor de 5 min de su entrada revisar si tiene 
                     //justificacion de tardanza

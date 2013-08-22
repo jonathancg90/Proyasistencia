@@ -18,7 +18,6 @@ public class Validators {
     
     public static void main(String[] args){
         Validators val = new Validators();
-
     }
     
     Data objdato;
@@ -37,6 +36,7 @@ public class Validators {
 
     public Validators() {
     }
+    
     public boolean UserAcces(int Form, int User) {
         boolean vali = true;
         if(User == 0){
@@ -267,7 +267,6 @@ public class Validators {
                        " and '" + args[3] + "'>=e.inicio and '" + args[3] + "'<=e.fin " + "\n" +
                        extra;
         //and d.ingreso < '9:00'
-        System.out.println(query);
         result = qs.Execute(query);
         
         return result;

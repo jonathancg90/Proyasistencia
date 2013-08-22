@@ -125,7 +125,7 @@ and e.idempr = p.idempr]]>
 			<textField>
 				<reportElement uuid="b90cc98e-697f-4e66-b430-c6c7190edb2f" x="137" y="0" width="332" height="20"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$F{nombres}+$F{apellidos}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{nombres}+' '+$F{apellidos}]]></textFieldExpression>
 			</textField>
 		</band>
 	</pageHeader>
