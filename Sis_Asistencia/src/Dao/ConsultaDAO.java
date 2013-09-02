@@ -213,7 +213,12 @@ public class ConsultaDAO {
             }
             //Validacion horas extras (entrada normal)
             if(extra){
+                //hora extra: salida (entrada normal)
                 campReg[1] = qs.Execute("select hora from registro where idemp="+filter[0][1]+"and fecha='"+fechActual+"' and idtip_reg = 1 order by hora asc limit 1");
+                
+                
+                //hora extra: entrada (salida notmal)
+                //campReg[4] = qs.Execute("select hora from registro where idemp="+filter[0][1]+"and fecha='"+fechActual+"' and idtip_reg = 1 order by hora desc limit 1");
             }
             
             //Suma
@@ -226,6 +231,7 @@ public class ConsultaDAO {
                 }
                 Total = tm.SumaHoras(String.valueOf(Total), String.valueOf(campReg[5]));
             }
+            //******************************************************************
             //No existen registros del dia
             if(countReg == false) { 
                 campReg = new String[6];

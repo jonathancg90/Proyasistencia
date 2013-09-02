@@ -694,7 +694,7 @@ public class WinJustificacion extends javax.swing.JInternalFrame {
             String fecha_inicio =  hp.formatFecha(cboIni.getText());
             String fecha_final =  hp.formatFecha(cboFin.getText());
             String idFalta = qs.Execute("select idtip_jus from tipo_justificaciones where nombre='FALTA JUSTIFICADA'");
-            String idTardanza = qs.Execute("select idtip_jus from tipo_justificaciones where nombre='FALTA JUSTIFICADA'");
+            String idTardanza = qs.Execute("select idtip_jus from tipo_justificaciones where nombre='TARDANZA JUSTIFICADA'");
             fecha_final = qs.getDay(fecha_final, "+");
             String fechActual = fecha_inicio;
             do{
@@ -721,10 +721,12 @@ public class WinJustificacion extends javax.swing.JInternalFrame {
                                 
                     } else {
                         if(ut.is_work_day(idEmp, fechActual, dia)){
-                            if(!ut.has_permition(idEmp, fechActual, idFalta)){
-                                //Falta no justificada
-                                ut.insert_injustificacion("Falta",fechActual, "");
-                                System.out.println("falto: "+fechActual);
+                            if(!ut.is_holiday(fechActual)){
+                                if(!ut.has_permition(idEmp, fechActual, idFalta)){
+                                    //Falta no justificada
+                                    ut.insert_injustificacion("Falta",fechActual, "");
+                                    System.out.println("falto: "+fechActual);
+                                }
                             }
                         }
                     }
@@ -753,8 +755,9 @@ public class WinJustificacion extends javax.swing.JInternalFrame {
         
                     //de no tenerlo es tardanza no justificada
                 //de no tenerlo ¿tienen justificaciones?
-                    //¿Es dia laborable?
-                        //de no tener justificacion es falta no justificada
+                    //¿Le toca trabajar ese dia?
+                        //¿Es feriado ?
+                            //de no tener justificacion es falta no justificada
     }//GEN-LAST:event_jButton2ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

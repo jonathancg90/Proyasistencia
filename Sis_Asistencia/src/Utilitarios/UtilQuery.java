@@ -81,6 +81,19 @@ public class UtilQuery {
         }
         return result;
     }
+    public boolean is_holiday(String fecha){
+        boolean result = false;
+        qs = new Query();
+        String args[] = new String[3];
+            args[0]="nolaborables";
+            args[1]="fecha";
+            args[2]=""+fecha;
+        int cant = qs.getCountRegister(args);
+        if(cant>0){
+            result=true;
+        }
+        return result;
+    }
     
     //Hora que llego en un determinado dia
     public String arrival_day(String emp, String fecha){
