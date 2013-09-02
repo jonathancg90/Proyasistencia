@@ -128,6 +128,8 @@ public class ConsultaDAO {
         qs= new Query();
         hp= new Helpers();
         dt = new Data();
+        tm = new TimeOPeration();
+        DateFormat sdf = new SimpleDateFormat("HH:mm:ss");
         //Declaracion
         SimpleDateFormat fhora = new SimpleDateFormat("HH:mm:ss");
         String Consulta = "";
@@ -213,12 +215,26 @@ public class ConsultaDAO {
             }
             //Validacion horas extras (entrada normal)
             if(extra){
-                //hora extra: salida (entrada normal)
-                campReg[1] = qs.Execute("select hora from registro where idemp="+filter[0][1]+"and fecha='"+fechActual+"' and idtip_reg = 1 order by hora asc limit 1");
-                
-                
-                //hora extra: entrada (salida notmal)
-                //campReg[4] = qs.Execute("select hora from registro where idemp="+filter[0][1]+"and fecha='"+fechActual+"' and idtip_reg = 1 order by hora desc limit 1");
+                //Logica
+                try{
+                    System.out.println("entro");
+                    String inicio_extra = qs.Execute("select inicio from justificaciones where idtip_jus=4 and empleado_idemp="+filter[0][1]+" and fecha='"+fechActual+"'");
+                    System.out.println("convertir: "+inicio_extra);
+                    double iextra = hp.getConvertTime(inicio_extra);
+                    System.out.println("convertir: "+campReg[1]);
+                    double itrabajo = hp.getConvertTime(campReg[1]);
+                    //entrada 8:00 extra = 8:00
+                    if(iextra <=itrabajo){
+                        campReg[4] = String.valueOf(qs.Execute("select hora from registro where idemp="+filter[0][1]+"and fecha='"+fechActual+"' and idtip_reg = 1 order by hora desc limit 1"));
+                    } 
+                     // entrada 8:00 extra: 19:00
+                    else if(iextra >itrabajo){
+                        campReg[1] = String.valueOf(qs.Execute("select hora from registro where idemp="+filter[0][1]+"and fecha='"+fechActual+"' and idtip_reg = 1 order by hora asc limit 1"));
+                    }
+                } catch(Exception e){
+                    
+                }
+
             }
             
             //Suma
