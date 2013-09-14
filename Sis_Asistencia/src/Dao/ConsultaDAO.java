@@ -217,11 +217,8 @@ public class ConsultaDAO {
             if(extra){
                 //Logica
                 try{
-                    System.out.println("entro");
                     String inicio_extra = qs.Execute("select inicio from justificaciones where idtip_jus=4 and empleado_idemp="+filter[0][1]+" and fecha='"+fechActual+"'");
-                    System.out.println("convertir: "+inicio_extra);
                     double iextra = hp.getConvertTime(inicio_extra);
-                    System.out.println("convertir: "+campReg[1]);
                     double itrabajo = hp.getConvertTime(campReg[1]);
                     //entrada 8:00 extra = 8:00
                     if(iextra <=itrabajo){

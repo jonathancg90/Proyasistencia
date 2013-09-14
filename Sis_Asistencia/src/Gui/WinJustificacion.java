@@ -710,7 +710,7 @@ public class WinJustificacion extends javax.swing.JInternalFrame {
                                             Time.valueOf(sdf.format(date_fin))
                                             );
                         String rest_time = String.valueOf(hrs);
-                        if(hp.getConvertTime(rest_time) > 0.5){
+                        if(hp.getConvertTime(rest_time) > 0.05){
                             
                             if(!ut.has_permition(idEmp, fechActual, idTardanza)){
                                 //Tardanza no justificada
