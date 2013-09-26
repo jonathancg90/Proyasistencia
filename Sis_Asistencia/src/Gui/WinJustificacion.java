@@ -695,6 +695,7 @@ public class WinJustificacion extends javax.swing.JInternalFrame {
             String fecha_final =  hp.formatFecha(cboFin.getText());
             String idFalta = qs.Execute("select idtip_jus from tipo_justificaciones where nombre='FALTA JUSTIFICADA'");
             String idTardanza = qs.Execute("select idtip_jus from tipo_justificaciones where nombre='TARDANZA JUSTIFICADA'");
+            String idPermiso= qs.Execute("select idtip_jus from tipo_justificaciones where nombre='PERMISO DE ENTRADA'");
             fecha_final = qs.getDay(fecha_final, "+");
             String fechActual = fecha_inicio;
             do{
@@ -714,8 +715,11 @@ public class WinJustificacion extends javax.swing.JInternalFrame {
                             
                             if(!ut.has_permition(idEmp, fechActual, idTardanza)){
                                 //Tardanza no justificada
-                                ut.insert_injustificacion("Tardanza", fechActual, rest_time);
-                                System.out.println("tardanza: "+fechActual+ "minutos tarde: "+rest_time);
+                                if(!ut.has_permition(idEmp, fechActual, idPermiso)){
+                                    ut.insert_injustificacion("Tardanza", fechActual, rest_time);
+                                    System.out.println("tardanza: "+fechActual+ "minutos tarde: "+rest_time);
+                                }
+                                
                             }
                         }
                                 
@@ -745,19 +749,6 @@ public class WinJustificacion extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null,"Seleccione un empleado para poder ingresar sus asistencia");
         }
        ut.dropTableInjustificaciones();
-        
-        
-        //Recorrer las fechas
-            //revisar si tienen registro
-                //de si tenerlo comparar primer registro con su hora de entrada
-                    //de ser mayor de 5 min de su entrada revisar si tiene 
-                    //justificacion de tardanza
-        
-                    //de no tenerlo es tardanza no justificada
-                //de no tenerlo ¿tienen justificaciones?
-                    //¿Le toca trabajar ese dia?
-                        //¿Es feriado ?
-                            //de no tener justificacion es falta no justificada
     }//GEN-LAST:event_jButton2ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

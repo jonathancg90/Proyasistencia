@@ -169,11 +169,12 @@ public class ConsultaDAO {
                 Consulta = qs.getQueryList(camp, this._Table + "/fecha", filter);
                 tmp_table = "";
             } else {
-                if(ext>0){
-                    tmp_table = "registro_backlog";
-                } else {
-                    tmp_table = "registro";
-                }
+                tmp_table = "registro";
+                //if(ext>0){
+                //    tmp_table = "registro_backlog";
+                //} else {
+                //    tmp_table = "registro";
+                //}
 
                 Consulta = qs.getQueryList(camp, tmp_table + "/fecha", filter);
                 if(tar>0){
@@ -222,11 +223,14 @@ public class ConsultaDAO {
                     double itrabajo = hp.getConvertTime(campReg[1]);
                     //entrada 8:00 extra = 8:00
                     if(iextra <=itrabajo){
-                        campReg[4] = String.valueOf(qs.Execute("select hora from registro where idemp="+filter[0][1]+"and fecha='"+fechActual+"' and idtip_reg = 1 order by hora desc limit 1"));
+                        //campReg[1] = String.valueOf(qs.Execute("select hora from registro where idemp="+filter[0][1]+"and fecha='"+fechActual+"' and idtip_reg = 1 order by hora asc limit 1"));
+                        campReg[1]  = inicio_extra;
+                        System.out.println(iextra+"iextra < = extra"+itrabajo+ " - 4 - "+campReg[1]);
                     } 
                      // entrada 8:00 extra: 19:00
                     else if(iextra >itrabajo){
-                        campReg[1] = String.valueOf(qs.Execute("select hora from registro where idemp="+filter[0][1]+"and fecha='"+fechActual+"' and idtip_reg = 1 order by hora asc limit 1"));
+                        String f_final = qs.Execute("select fin from justificaciones where idtip_jus=4 and empleado_idemp="+filter[0][1]+" and fecha='"+fechActual+"'");
+                        campReg[4] = f_final;
                     }
                 } catch(Exception e){
                     
