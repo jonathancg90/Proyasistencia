@@ -231,8 +231,16 @@ public class WinEmpleado_Vacaciones extends javax.swing.JInternalFrame {
         mitemregister.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilitarios/Img/registrar.png"))); // NOI18N
         mitemregister.setText("Registrar");
         mitemregister.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                mitemregisterMouseClicked(evt);
+            }
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 mitemregisterMousePressed(evt);
+            }
+        });
+        mitemregister.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mitemregisterActionPerformed(evt);
             }
         });
         mfile.add(mitemregister);
@@ -326,7 +334,7 @@ public class WinEmpleado_Vacaciones extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6)
                     .addComponent(lblcant, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
         pack();
@@ -381,6 +389,10 @@ public class WinEmpleado_Vacaciones extends javax.swing.JInternalFrame {
 
         String F_inicio=hp.getFormatDate(cboF_inicio.getText());
         String F_final=hp.getFormatDate(cboF_final.getText());
+        if(F_inicio == F_final){
+            System.out.println("Sin validacion");
+        }
+        
         if(val.validarFechasTablas(tblVacaciones, F_inicio,F_final)&&
            val.validarFechas(F_inicio, F_final)){   
                 int idemp=Integer.valueOf(lblIdemp.getText());
@@ -500,6 +512,14 @@ public class WinEmpleado_Vacaciones extends javax.swing.JInternalFrame {
         rep.setargs(args);
         rep.SelectReport(6);
     }//GEN-LAST:event_jMenu1MousePressed
+
+    private void mitemregisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mitemregisterActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mitemregisterActionPerformed
+
+    private void mitemregisterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mitemregisterMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mitemregisterMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private datechooser.beans.DateChooserCombo cboF_final;

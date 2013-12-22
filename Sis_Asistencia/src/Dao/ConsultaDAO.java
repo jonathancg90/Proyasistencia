@@ -280,6 +280,7 @@ public class ConsultaDAO {
                     } 
                     if(cVal == 0){
                         cVal = qs.getcount("vacaciones where idemp='" + DateEmp[1] +"' and '"+fechActual+"'>=f_ini and '"+fechActual+"'<=f_final");
+                        System.out.println("vacaciones: "+ fechActual+ "cantidad: "+cVal);
                         if(cVal > 0) {
                             campReg[1]=String.valueOf("Vacaciones");
                         } 

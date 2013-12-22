@@ -165,7 +165,6 @@ public class Validators {
                date.valueOf(inicio).before(date.valueOf(String.valueOf(tablemodel.getValueAt(i,2))))) ||  
                (date.valueOf(fin).after(date.valueOf(String.valueOf(tablemodel.getValueAt(i,1)))) &&
                date.valueOf(fin).before(date.valueOf(String.valueOf(tablemodel.getValueAt(i,2)))))
-               
                ){
                 return false;
             }
@@ -176,8 +175,7 @@ public class Validators {
     public boolean validarFechas(String inicio,String fin){
     Date date = new Date(0000-00-00);
     
-    if (date.valueOf(fin).before(date.valueOf(inicio))||
-        date.valueOf(inicio).equals(date.valueOf(fin))) {
+    if (date.valueOf(fin).before(date.valueOf(inicio))){
         return false;
     }
     return true;
